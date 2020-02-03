@@ -1,0 +1,246 @@
+building_name: office
+levels:
+  L1:
+    drawing:
+      filename: office.png
+      offset: [0, 0]
+    measurements:
+      - [1, 0, {distance: [3, 9.315]}]
+      - [5, 4, {distance: [3, 8.409000000000001]}]
+      - [2, 3, {distance: [3, 20.089]}]
+    lanes:
+      - [39, 40, {bidirectional: [4, true], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [40, 41, {bidirectional: [4, true], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [42, 43, {bidirectional: [4, false], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [43, 44, {bidirectional: [4, false], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [44, 46, {bidirectional: [4, false], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [44, 45, {bidirectional: [4, true], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [46, 49, {bidirectional: [4, false], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [49, 50, {bidirectional: [4, false], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [50, 41, {bidirectional: [4, false], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [46, 47, {bidirectional: [4, true], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [47, 48, {bidirectional: [4, true], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [41, 51, {bidirectional: [4, false], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [51, 42, {bidirectional: [4, false], graph_idx: [2, 0], orientation: [1, ""]}]
+    walls:
+      - [6, 7, {}]
+      - [7, 12, {}]
+      - [12, 11, {}]
+      - [7, 8, {}]
+      - [8, 9, {}]
+      - [9, 10, {}]
+      - [14, 13, {}]
+      - [14, 15, {}]
+      - [15, 16, {}]
+      - [16, 17, {}]
+      - [20, 21, {}]
+      - [15, 21, {}]
+      - [18, 19, {}]
+      - [19, 20, {}]
+      - [22, 19, {}]
+      - [24, 23, {}]
+      - [23, 22, {}]
+      - [26, 25, {}]
+      - [31, 30, {}]
+      - [30, 29, {}]
+      - [29, 28, {}]
+      - [28, 27, {}]
+      - [35, 34, {}]
+      - [34, 33, {}]
+      - [33, 32, {}]
+      - [36, 33, {}]
+      - [27, 36, {}]
+      - [26, 36, {}]
+      - [25, 38, {}]
+      - [38, 24, {}]
+      - [37, 38, {}]
+    models:
+      - x: 661.371
+        y: 796.2
+        yaw: -2.051
+        name: Table
+        model_name: Table
+      - x: 571.019
+        y: 975.251
+        yaw: -2.0206
+        name: Table
+        model_name: Table
+      - x: 771.3920000000001
+        y: 793.115
+        yaw: 1.1104
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 730.433
+        y: 871.069
+        yaw: 1.0723
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 680.226
+        y: 975.778
+        yaw: 1.0837
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 637.397
+        y: 1066.178
+        yaw: 1.1433
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 457.405
+        y: 976.296
+        yaw: -2.0348
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 500.343
+        y: 889.76
+        yaw: -2.0693
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 543.6849999999999
+        y: 800.4930000000001
+        yaw: -2.0501
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 587.998
+        y: 710.448
+        yaw: -2.0277
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 1702.927
+        y: 622.013
+        yaw: 0.0312
+        name: Table
+        model_name: Table
+      - x: 1407.883
+        y: 626.7809999999999
+        yaw: 0.0115
+        name: Table
+        model_name: Table
+      - x: 1404.884
+        y: 697.433
+        yaw: 0
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 1710.55
+        y: 693.692
+        yaw: 0
+        name: OfficeChair
+        model_name: OfficeChair
+      - x: 2588.007
+        y: 783.525
+        yaw: 0
+        name: Table
+        model_name: Table
+      - x: 2599.099
+        y: 1207.634
+        yaw: -1.6669
+        name: Table
+        model_name: Table
+      - x: 2367.471
+        y: 999.494
+        yaw: -1.5684
+        name: Table
+        model_name: Table
+      - x: 2503.375
+        y: 530.622
+        yaw: 0
+        name: Table
+        model_name: Table
+      - x: 1003.716
+        y: 508.051
+        yaw: -2.0344
+        name: Table
+        model_name: Table
+      - name: Table
+        model_name: Table
+        x: 877.455
+        y: 441.927
+        yaw: -2.012
+      - x: 2004.541
+        y: 972.946
+        yaw: -1.5708
+        name: Table
+        model_name: Table
+      - x: 2005.475
+        y: 1184.021
+        yaw: -1.5578
+        name: Table
+        model_name: Table
+      - x: 1668.822
+        y: 979.229
+        yaw: -1.5405
+        name: Table
+        model_name: Table
+      - x: 1672.968
+        y: 1188.637
+        yaw: -1.5461
+        name: Table
+        model_name: Table
+      - x: 1314.798
+        y: 985.968
+        yaw: -1.5539
+        name: Table
+        model_name: Table
+      - x: 1315.835
+        y: 1195.376
+        yaw: -1.5581
+        name: Table
+        model_name: Table
+      - x: 1876.687
+        y: 665.148
+        yaw: -1.5708
+        name: Fridge
+        model_name: Fridge
+    elevation: 0
+    vertices:
+      - [80.27, 1024.974, 0, ""]
+      - [580.795, 43.396, 0, ""]
+      - [258.725, 1426.884, 0, ""]
+      - [2624.464, 1625.219, 0, ""]
+      - [2809.312, 1349.93, 0, ""]
+      - [2951.32, 368.569, 0, ""]
+      - [1249.786, 556.5700000000001, 0, ""]
+      - [1829.797, 547.502, 0, ""]
+      - [2137.396, 543.5119999999999, 0, ""]
+      - [2139.935, 719.075, 0, ""]
+      - [2056.869, 723.0650000000001, 0, ""]
+      - [1914.314, 725.241, 0, ""]
+      - [1832.337, 726.329, 0, ""]
+      - [1663.159, 302.319, 0, ""]
+      - [2797.635, 340.467, 0, ""]
+      - [2734.609, 712.544, 0, ""]
+      - [2295.082, 722.495, 0, ""]
+      - [2297.846, 1166.445, 0, ""]
+      - [2297.293, 1271.489, 0, ""]
+      - [2298.952, 1363.264, 0, ""]
+      - [2657.208, 1331.751, 0, ""]
+      - [2690.932, 1025.465, 0, ""]
+      - [1619.482, 1417.998, 0, ""]
+      - [1274.496, 1411.916, 0, ""]
+      - [931.72, 1359.394, 0, ""]
+      - [591.037, 1263.173, 0, ""]
+      - [269.05, 1125.229, 0, ""]
+      - [771.683, 135.085, 0, ""]
+      - [1002.591, 229.438, 0, ""]
+      - [1195.809, 279.98, 0, ""]
+      - [1395.345, 308.146, 0, ""]
+      - [1439.306, 307.093, 0, ""]
+      - [1003.149, 357.463, 0, ""]
+      - [887.884, 583.51, 0, ""]
+      - [984.898, 632.497, 0, ""]
+      - [975.293, 648.826, 0, ""]
+      - [612.9690000000001, 445.59, 0, ""]
+      - [933.086, 744.676, 0, ""]
+      - [655.919, 1280.411, 0, ""]
+      - [733.602, 416.281, 0, ""]
+      - [814.828, 239.25, 0, ""]
+      - [1210.544, 365.254, 0, ""]
+      - [1191.588, 813.376, 0, ""]
+      - [1509.088, 809.119, 0, ""]
+      - [1985.757, 800.034, 0, ""]
+      - [1985.316, 642.256, 0, ""]
+      - [2209.208, 811.997, 0, ""]
+      - [2226.912, 1225.417, 0, ""]
+      - [2435.183, 1218.128, 0, ""]
+      - [2213.374, 451.687, 0, ""]
+      - [1551.069, 468.349, 0, ""]
+      - [1144.589, 593.665, 0, ""]
