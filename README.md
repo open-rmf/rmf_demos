@@ -50,6 +50,12 @@ colcon build
 
 An example map/graph configuration generated using the layout of the OSRF Singapore office, has been included in the package `rmf_demo_maps`, it can be found [here](rmf_demo_maps/maps/office/). This configuration file can be read and modified by the [traffic editor](https://github.com/osrf/traffic_editor), and is parsed by the different core packages of `rmf` during launch time.
 
+Below is a screenshot of how the provided demo map will look like, when opened using the `traffic editor`,
+
+<img src="media/office_screenshot.png" width="800px"/>
+
+More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
+
 ## Minimal fleet demo
 
 This minimal demonstration launches a string of core `rmf` programs, which includes the internal map server, the traffic scheduler,  a fake fleet with one robot, its corresponding fleet adapter, as well as the overall schedule visualizer.
@@ -63,5 +69,11 @@ ros2 launch rmf_demo_fleets fake_read_only_fleet.launch.xml
 
 When the launch is done, a seemingly empty`rviz2` will have been opened. Toggle the left panel arrow to open up the scheduler panel and change the field `map_name` to `L1`. Zoom out and the visualizer should show the lanes and robot waypoints corresponding to the example map of OSRF Singapore office.
 
+<img src="media/office_rviz.png" width="800px"/>
+
 The fake robot in the launched fake fleet, can also be seen moving diagonally away from the center of the map, indicated by a small marker.
+
+## Shut Down
+
+
 
