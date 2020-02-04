@@ -30,18 +30,13 @@ sudo apt install ros-eloquent-rviz2 ros-eloquent-launch*
 
 ## Compiling Instructions
 
-Setup a new ROS 2 workspace,
+Setup a new ROS 2 workspace and pull in all the required repositories using `vsc`,
 
 ```bash
 mkdir -p ~/rmf_demos_ws/src
 cd ~/rmf_demos_ws/src
-
-git clone https://github.com/osrf/rmf_core.git
-git clone https://github.com/osrf/traffic_editor.git
-git clone https://github.com/osrf/rmf_schedule_visualizer.git
-git clone https://github.com/osrf/rmf_demos.git
-git clone https://github.com/ros2/launch.git
-git clone https://github.com/ros2/launch_ros.git
+wget https://raw.githubusercontent.com/osrf/rmf_demos/master/rmf_demos.repos
+vcs import src < rmf_demos.repos
 ```
 
 Source ROS 2 Eloquent and build,
