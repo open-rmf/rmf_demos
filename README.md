@@ -19,13 +19,20 @@ Install all non-ROS prerequisites of the packages,
 ```bash
 sudo apt update
 
-sudo apt install git cmake libyaml-cpp-dev qt5-default libeigen3-dev libccd-dev libfcl-dev libyaml-cpp-dev libwebsocketpp-dev libboost-all-dev
+sudo apt install  \
+  git cmake \
+  libyaml-cpp-dev qt5-default \
+  libeigen3-dev libccd-dev libfcl-dev \
+  libyaml-cpp-dev libwebsocketpp-dev \
+  libboost-all-dev
 ```
 
 Ensure all ROS prerequisites are fulfilled,
 
 ```bash
-sudo apt install ros-eloquent-rviz2 ros-eloquent-launch*
+sudo apt install \
+  ros-eloquent-rviz2 \
+  ros-eloquent-launch*
 ```
 
 ## Compiling Instructions
