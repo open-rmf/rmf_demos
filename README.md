@@ -1,8 +1,10 @@
 # RMF Demos
 
-This repository contains documentation and demo packages on running instances of `rmf`. The demos will serve as a starting point, for working and integrating with `rmf`.
+![](https://github.com/osrf/rmf_demos/workflows/build/badge.svg)
 
-Do take note that the entire `rmf` ecosystem is still under active development, which might sometimes cause documentation, API or ABI compatibility to break. 
+This repository contains documentation and demo packages on running instances of RMF. The demos will serve as a starting point, for working and integrating with RMF.
+
+Do take note that the entire RMF ecosystem is still under active development, which might sometimes cause documentation, API or ABI compatibility to break. 
 
 ## System Requirements
 
@@ -18,7 +20,7 @@ Install all non-ROS prerequisites of the packages,
 
 ```bash
 sudo apt update && sudo apt install  \
-  git cmake \
+  git cmake wget python3-vcstool \
   libyaml-cpp-dev qt5-default \
   libeigen3-dev libccd-dev libfcl-dev \
   libyaml-cpp-dev libwebsocketpp-dev \
@@ -54,7 +56,7 @@ colcon build
 
 ## Example Map
 
-An example map/graph configuration generated using the layout of the OSRF Singapore office, has been included in the package `rmf_demo_maps`, it can be found [here](rmf_demo_maps/maps/office/). This configuration file can be read and modified by the [traffic editor](https://github.com/osrf/traffic_editor), and is parsed by the different core packages of `rmf` during launch time.
+An example map/graph configuration generated using the layout of the OSRF Singapore office, has been included in the package `rmf_demo_maps`, and it can be found [here](rmf_demo_maps/maps/office/). This configuration file can be read and modified by the [traffic editor](https://github.com/osrf/traffic_editor), and is parsed by the different core packages of RMF during launch time.
 
 Below is a screenshot of how the provided demo map will look like, when opened using the `traffic editor`,
 
@@ -64,7 +66,7 @@ More instructions on using the `traffic_editor` can be found in the [repository]
 
 ## Minimal fleet demo
 
-This minimal demonstration launches a string of core `rmf` programs, which includes the internal map server, the traffic scheduler,  a fake fleet with one robot, its corresponding fleet adapter, as well as the overall schedule visualizer.
+This minimal demonstration launches a string of core `rmf` programs, which includes the internal map server, the traffic scheduler,  a fake fleet with one robot, its corresponding fleet adapter, as well as the overall schedule visualizer. A read-only fleet will not allow `rmf_core` or any other RMF-related systems to control it in any way. It only reports its status upstream to RMF, where traffic scheduling will ensure other fleets' traffic is diverted away.
 
 Launch the demo using the launch file below,
 
