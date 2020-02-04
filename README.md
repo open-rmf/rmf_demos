@@ -39,7 +39,7 @@ Setup a new ROS 2 workspace and pull in all the required repositories using `vsc
 
 ```bash
 mkdir -p ~/rmf_demos_ws/src
-cd ~/rmf_demos_ws/src
+cd ~/rmf_demos_ws
 wget https://raw.githubusercontent.com/osrf/rmf_demos/master/rmf_demos.repos
 vcs import src < rmf_demos.repos
 ```
