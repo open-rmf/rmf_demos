@@ -14,28 +14,34 @@ These demos were developed and tested on
 
 ## Setup
 
-Install all prerequisites of the packages,
+Install all non-ROS prerequisites of the packages,
 
 ```bash
-sudo apt update
+sudo apt update && sudo apt install  \
+  git cmake \
+  libyaml-cpp-dev qt5-default \
+  libeigen3-dev libccd-dev libfcl-dev \
+  libyaml-cpp-dev libwebsocketpp-dev \
+  libboost-all-dev
+```
 
-sudo apt install git cmake libyaml-cpp-dev qt5-default libeigen3-dev libccd-dev libfcl-dev libyaml-cpp-dev ros-eloquent-rviz2 libwebsocketpp-dev libboost-all-dev -y
+Ensure all ROS prerequisites are fulfilled,
+
+```bash
+sudo apt install \
+  ros-eloquent-rviz2 \
+  ros-eloquent-launch*
 ```
 
 ## Compiling Instructions
 
-Setup a new ROS 2 workspace,
+Setup a new ROS 2 workspace and pull in all the required repositories using `vsc`,
 
 ```bash
 mkdir -p ~/rmf_demos_ws/src
-cd ~/rmf_demos_ws/src
-
-git clone https://github.com/osrf/rmf_core.git
-git clone https://github.com/osrf/traffic_editor.git
-git clone https://github.com/osrf/rmf_schedule_visualizer.git
-git clone https://github.com/osrf/rmf_demos.git
-git clone https://github.com/ros2/launch.git
-git clone https://github.com/ros2/launch_ros.git
+cd ~/rmf_demos_ws
+wget https://raw.githubusercontent.com/osrf/rmf_demos/master/rmf_demos.repos
+vcs import src < rmf_demos.repos
 ```
 
 Source ROS 2 Eloquent and build,
