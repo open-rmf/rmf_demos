@@ -71,9 +71,8 @@ When the launch is done, a seemingly empty`rviz2` will have been opened. Toggle 
 
 <img src="media/office_rviz.png" width="800px"/>
 
-The fake robot in the launched fake fleet, can also be seen moving diagonally away from the center of the map, indicated by a small marker.
+There will be a 180 degree angle offset, which can be fixed by further parameterizing the demo map.
 
-## Shut Down
+The fake robot in the launched fake fleet, can also be seen moving diagonally away from the center of the map, indicated by a small purple marker.
 
-
-
+In order to shut it down, use `Ctrl+C` on the terminal that launched the system via `ros2 launch ...`.
