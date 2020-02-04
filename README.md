@@ -17,9 +17,7 @@ These demos were developed and tested on
 Install all non-ROS prerequisites of the packages,
 
 ```bash
-sudo apt update
-
-sudo apt install  \
+sudo apt update && sudo apt install  \
   git cmake \
   libyaml-cpp-dev qt5-default \
   libeigen3-dev libccd-dev libfcl-dev \
