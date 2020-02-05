@@ -1,0 +1,29 @@
+<?xml version='1.0' ?>
+
+<launch>
+
+  <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
+  <arg name= "config_file" default="$(find-pkg-share rmf_demo_maps)/office/office.traffic-editor.yaml"/>
+  <arg name= "viz_config_file" default="$(find-pkg-share rmf_schedule_visualizer)/config/rmf.rviz"/>
+ 
+  <!-- Traffic Schedule  -->
+  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both">
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+  </node>
+
+  <!-- Building Map  -->
+  <group>
+    <node pkg="building_map_tools" exec="building_map_server"
+          args="$(var config_file)"/>
+  </group>
+
+  <!-- Visualizer -->
+  <group>
+    <node pkg="rmf_schedule_visualizer" exec="rviz2" args="-r 5 -m L1">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
+    <node pkg="fleet_state_visualizer" exec="fleet_state_visualizer"/>
+    <executable cmd="rviz2 -d $(var viz_config_file)" output="both"/>
+  </group>
+
+</launch>

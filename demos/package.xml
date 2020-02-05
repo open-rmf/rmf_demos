@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>demos</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="yadunund@openrobotics.org">yadu</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>rmf_demo_maps</exec_depend>
+
+  <exec_depend>rmf_traffic_ros2</exec_depend>
+  <exec_depend>building_map_tools</exec_depend>
+
+  <exec_depend>rmf_schedule_visualizer</exec_depend>
+  <exec_depend>fleet_state_visualizer</exec_depend>
+  <exec_depend>rviz2_plugin</exec_depend>
+
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>rmf_assets</exec_depend>
+  <exec_depend>rmf_gazebo_plugins</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
