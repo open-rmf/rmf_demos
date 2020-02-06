@@ -18,12 +18,9 @@
   </group>
 
   <!-- Visualizer -->
-  <group>
-    <node pkg="rmf_schedule_visualizer" exec="rviz2" args="-r 5 -m L1">
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-    </node>
-    <node pkg="fleet_state_visualizer" exec="fleet_state_visualizer"/>
-    <executable cmd="rviz2 -d $(var viz_config_file)" output="both"/>
-  </group>
+  <include file="$(find-pkg-share visualizer)/visualizer.xml">
+    <arg name="map_name" value="L1"/>
+    <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/office.rviz"/>"/>
+  </include>
 
 </launch>
