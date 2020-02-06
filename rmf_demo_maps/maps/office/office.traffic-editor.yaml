@@ -29,18 +29,18 @@ levels:
     models:
       - {model_name: Table, name: Table, x: 661.371, y: 796.2, yaw: -2.051}
       - {model_name: Table, name: Table, x: 571.019, y: 975.251, yaw: -2.0206}
-      - {model_name: OfficeChair, name: OfficeChair, x: 771.3920000000001, y: 793.115, yaw: 1.1104}
-      - {model_name: OfficeChair, name: OfficeChair, x: 730.433, y: 871.069, yaw: 1.0723}
-      - {model_name: OfficeChair, name: OfficeChair, x: 680.226, y: 975.778, yaw: 1.0837}
-      - {model_name: OfficeChair, name: OfficeChair, x: 637.397, y: 1066.178, yaw: 1.1433}
-      - {model_name: OfficeChair, name: OfficeChair, x: 457.405, y: 976.296, yaw: -2.0348}
-      - {model_name: OfficeChair, name: OfficeChair, x: 500.343, y: 889.76, yaw: -2.0693}
-      - {model_name: OfficeChair, name: OfficeChair, x: 543.6849999999999, y: 800.4930000000001, yaw: -2.0501}
-      - {model_name: OfficeChair, name: OfficeChair, x: 587.998, y: 710.448, yaw: -2.0277}
-      - {model_name: Table, name: Table, x: 1702.927, y: 622.013, yaw: 0.0312}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 771.3920000000001, y: 793.115, yaw: 1.1104}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 730.433, y: 871.069, yaw: 1.0723}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 680.226, y: 975.778, yaw: 1.0837}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 637.397, y: 1066.178, yaw: 1.1433}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 457.405, y: 976.296, yaw: -2.0348}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 500.343, y: 889.76, yaw: -2.0693}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 543.6849999999999, y: 800.4930000000001, yaw: -2.0501}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 587.998, y: 710.448, yaw: -2.0277}
+      - {model_name: BigCubicle, name: BigCubicle, x: 1702.927, y: 622.013, yaw: 0.0312}
       - {model_name: Table, name: Table, x: 1407.883, y: 626.7809999999999, yaw: 0.0115}
-      - {model_name: OfficeChair, name: OfficeChair, x: 1404.884, y: 697.433, yaw: 0}
-      - {model_name: OfficeChair, name: OfficeChair, x: 1710.55, y: 693.692, yaw: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 1404.884, y: 697.433, yaw: 1.5708}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 1710.55, y: 693.692, yaw: 1.5708}
       - {model_name: Table, name: Table, x: 2588.007, y: 783.525, yaw: 0}
       - {model_name: Table, name: Table, x: 2599.099, y: 1207.634, yaw: -1.6669}
       - {model_name: Table, name: Table, x: 2367.471, y: 999.494, yaw: -1.5684}
