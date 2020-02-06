@@ -5,7 +5,7 @@ project(rmf_demo_assets)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY models media
+  DIRECTORY models
   DESTINATION share/${PROJECT_NAME}
 )
 
