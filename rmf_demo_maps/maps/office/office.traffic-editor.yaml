@@ -37,7 +37,6 @@ levels:
       - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 503.457, y: 884.746, yaw: -0.4495}
       - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 549.605, y: 797.635, yaw: -0.5095}
       - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 592.124, y: 715.71, yaw: -0.4929}
-      - {model_name: Table, name: Table, x: 2503.375, y: 530.622, yaw: 0}
       - {model_name: Fridge, name: Fridge, x: 1888.625, y: 679.327, yaw: 0}
       - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1685.039, y: 630.904, yaw: -1.5542}
       - {model_name: AdjTable, name: AdjTable, x: 1392.53, y: 706.367, yaw: 1.5905}
@@ -90,6 +89,11 @@ levels:
       - {model_name: Drawer, name: Drawer, x: 1508.879, y: 1266.79, yaw: 0}
       - {model_name: Drawer, name: Drawer, x: 1224.595, y: 1275.574, yaw: 0}
       - {model_name: Drawer, name: Drawer, x: 1650.223, y: 893.866, yaw: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 2504.78, y: 532.462, yaw: -1.5708}
+      - {model_name: Drawer, name: Drawer, x: 1916.002, y: 1261.617, yaw: -1.5708}
+      - {model_name: Drawer, name: Drawer, x: 2041.454, y: 1257.083, yaw: -1.5708}
+      - {model_name: Drawer, name: Drawer, x: 2105.132, y: 937.4299999999999, yaw: 0}
+      - {model_name: Drawer, name: Drawer, x: 2625.448, y: 1094.713, yaw: 3.0509}
     vertices:
       - [80.27, 1024.974, 0, ""]
       - [580.795, 43.396, 0, ""]
