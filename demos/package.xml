@@ -3,7 +3,7 @@
 <package format="3">
   <name>demos</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Launch files for RMF demos</description>
   <maintainer email="yadunund@openrobotics.org">yadu</maintainer>
   <license>Apache License 2.0</license>
 
@@ -17,7 +17,7 @@
   <exec_depend>visualizer</exec_depend>
 
   <exec_depend>gazebo_ros</exec_depend>
-  <exec_depend>rmf_assets</exec_depend>
+  <exec_depend>rmf_demo_assets</exec_depend>
   <exec_depend>rmf_gazebo_plugins</exec_depend>
 
   <export>
