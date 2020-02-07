@@ -1,6 +1,8 @@
 building_name: office
 levels:
   L1:
+    doors:
+      - [31, 13, {motion_axis: [1, start], motion_degrees: [3, 100], motion_direction: [2, 1], name: [1, door], type: [1, double_hinged]}]
     drawing:
       filename: office.png
     elevation: 0
