@@ -1,0 +1,183 @@
+building_name: office
+levels:
+  L1:
+    drawing:
+      filename: office.png
+    elevation: 0
+    floors:
+      - vertices: [27, 28, 29, 30, 31, 13, 14, 15, 21, 20, 19, 22, 23, 24, 38, 25, 26, 36]
+    lanes:
+      - [39, 40, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [40, 41, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [42, 43, {bidirectional: [4, false], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [43, 44, {bidirectional: [4, false], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [44, 46, {bidirectional: [4, false], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [44, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [46, 49, {bidirectional: [4, false], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [49, 50, {bidirectional: [4, false], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [50, 41, {bidirectional: [4, false], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [46, 47, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [47, 48, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [41, 51, {bidirectional: [4, false], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [51, 42, {bidirectional: [4, false], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+    layers:
+      {}
+    measurements:
+      - [1, 0, {distance: [3, 9.315]}]
+      - [5, 4, {distance: [3, 8.409000000000001]}]
+      - [2, 3, {distance: [3, 20.089]}]
+    models:
+      - {model_name: Table, name: Table, x: 661.371, y: 796.2, yaw: -2.051}
+      - {model_name: Table, name: Table, x: 571.019, y: 975.251, yaw: -2.0206}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 775.16, y: 794.006, yaw: 2.6795}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 733.678, y: 868.672, yaw: 2.6531}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 680.226, y: 975.778, yaw: 2.6762}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 637.397, y: 1066.178, yaw: 2.675}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 457.405, y: 976.296, yaw: -0.4782}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 503.457, y: 884.746, yaw: -0.4495}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 549.605, y: 797.635, yaw: -0.5095}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 592.124, y: 715.71, yaw: -0.4929}
+      - {model_name: Fridge, name: Fridge, x: 1888.625, y: 679.327, yaw: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1685.039, y: 630.904, yaw: -1.5542}
+      - {model_name: AdjTable, name: AdjTable, x: 1392.53, y: 706.367, yaw: 1.5905}
+      - {model_name: AdjTable, name: AdjTable, x: 991.717, y: 514.345, yaw: -0.4718}
+      - {model_name: AdjTable, name: AdjTable, x: 1682.165, y: 702.773, yaw: 1.5886}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1207.952, y: 1007.22, yaw: -0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1202.918, y: 1168.317, yaw: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1631.416, y: 1161.315, yaw: -0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1109.385, y: 1009.033, yaw: -3.1416}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1106.837, y: 1168.293, yaw: 3.1416}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1529.036, y: 1160.878, yaw: 3.1416}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1530.348, y: 1000.746, yaw: -3.1416}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1631.416, y: 999.433, yaw: -0}
+      - {model_name: AdjTable, name: AdjTable, x: 813.994, y: 1115.278, yaw: -0.483}
+      - {model_name: Drawer, name: Drawer, x: 870.377, y: 987.159, yaw: -0.4727}
+      - {model_name: Drawer, name: Drawer, x: 739.7140000000001, y: 1246.385, yaw: -0.4466}
+      - {model_name: BigCubicle, name: BigCubicle, x: 2026.42, y: 991.689, yaw: 0}
+      - {model_name: BigCubicle, name: BigCubicle, x: 2024.983, y: 1151.958, yaw: 0}
+      - {model_name: BigCubicle, name: BigCubicle, x: 1925.803, y: 1154.114, yaw: -3.1416}
+      - {model_name: BigCubicle, name: BigCubicle, x: 1926.521, y: 994.564, yaw: -3.1416}
+      - {model_name: AdjTable, name: AdjTable, x: 2607.625, y: 1219.095, yaw: 3.038}
+      - {model_name: AdjTable, name: AdjTable, x: 2642.903, y: 899.5839999999999, yaw: 3.0108}
+      - {model_name: AdjTable, name: AdjTable, x: 2360.895, y: 1069.176, yaw: -0}
+      - {model_name: AdjTable, name: AdjTable, x: 2361.843, y: 874.169, yaw: 0.0025}
+      - {model_name: AdjTable, name: AdjTable, x: 883.66, y: 452.85, yaw: 2.6578}
+      - {model_name: AdjTable, name: AdjTable, x: 1537.393, y: 659.537, yaw: 0.0206}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2462.921, y: 445.664, yaw: -1.5708}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2557.991, y: 445.664, yaw: -1.5708}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2630.207, y: 526.1079999999999, yaw: -3.1416}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2556.163, y: 613.864, yaw: 1.5708}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2456.522, y: 613.864, yaw: 1.5708}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2378.954, y: 528.83, yaw: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1697.967, y: 1003.877, yaw: -3.1416}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2577.244, y: 882.035, yaw: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2544.712, y: 1210.454, yaw: -0.1109}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1031.391, y: 995.971, yaw: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1022.25, y: 1152.288, yaw: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1280.661, y: 1004.765, yaw: 3.1416}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1276.222, y: 1163.696, yaw: 3.1416}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1462.401, y: 1005.94, yaw: -0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1701.074, y: 1162.364, yaw: -3.1416}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1853.214, y: 1159.864, yaw: -0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1859.683, y: 1001.032, yaw: -0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 2101.883, y: 1006.781, yaw: -3.1416}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 2100.446, y: 1151.239, yaw: -3.1416}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 1440.48, y: 1164.14, yaw: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1400.436, y: 635.216, yaw: -1.5548}
+      - {model_name: Drawer, name: Drawer, x: 1650.223, y: 1268.387, yaw: 0}
+      - {model_name: Drawer, name: Drawer, x: 1579.95, y: 1273.178, yaw: -1.5708}
+      - {model_name: Drawer, name: Drawer, x: 1508.879, y: 1266.79, yaw: 0}
+      - {model_name: Drawer, name: Drawer, x: 1224.595, y: 1275.574, yaw: 0}
+      - {model_name: Drawer, name: Drawer, x: 1650.223, y: 893.866, yaw: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 2504.78, y: 532.462, yaw: -1.5708}
+      - {model_name: Drawer, name: Drawer, x: 1916.002, y: 1261.617, yaw: -1.5708}
+      - {model_name: Drawer, name: Drawer, x: 2041.454, y: 1257.083, yaw: -1.5708}
+      - {model_name: Drawer, name: Drawer, x: 2105.132, y: 937.4299999999999, yaw: 0}
+      - {model_name: Drawer, name: Drawer, x: 2625.448, y: 1094.713, yaw: 3.0509}
+    vertices:
+      - [80.27, 1024.974, 0, ""]
+      - [580.795, 43.396, 0, ""]
+      - [258.725, 1426.884, 0, ""]
+      - [2624.464, 1625.219, 0, ""]
+      - [2809.312, 1349.93, 0, ""]
+      - [2951.32, 368.569, 0, ""]
+      - [1249.786, 556.5700000000001, 0, ""]
+      - [1829.797, 547.502, 0, ""]
+      - [2137.396, 543.5119999999999, 0, ""]
+      - [2139.935, 719.075, 0, ""]
+      - [2056.869, 723.0650000000001, 0, ""]
+      - [1914.314, 725.241, 0, ""]
+      - [1832.337, 726.329, 0, ""]
+      - [1663.159, 302.319, 0, ""]
+      - [2797.635, 340.467, 0, ""]
+      - [2734.609, 712.544, 0, ""]
+      - [2295.082, 722.495, 0, ""]
+      - [2297.846, 1166.445, 0, ""]
+      - [2297.293, 1271.489, 0, ""]
+      - [2298.952, 1363.264, 0, ""]
+      - [2657.208, 1331.751, 0, ""]
+      - [2690.932, 1025.465, 0, ""]
+      - [1619.482, 1417.998, 0, ""]
+      - [1274.496, 1411.916, 0, ""]
+      - [931.72, 1359.394, 0, ""]
+      - [591.037, 1263.173, 0, ""]
+      - [269.05, 1125.229, 0, ""]
+      - [771.683, 135.085, 0, ""]
+      - [1002.591, 229.438, 0, ""]
+      - [1195.809, 279.98, 0, ""]
+      - [1395.345, 308.146, 0, ""]
+      - [1439.306, 307.093, 0, ""]
+      - [1003.149, 357.463, 0, ""]
+      - [887.884, 583.51, 0, ""]
+      - [984.898, 632.497, 0, ""]
+      - [975.293, 648.826, 0, ""]
+      - [612.9690000000001, 445.59, 0, ""]
+      - [933.086, 744.676, 0, ""]
+      - [655.919, 1280.411, 0, ""]
+      - [733.602, 416.281, 0, ""]
+      - [814.828, 239.25, 0, ""]
+      - [1210.544, 365.254, 0, ""]
+      - [1191.588, 813.376, 0, ""]
+      - [1509.088, 809.119, 0, ""]
+      - [1985.757, 800.034, 0, ""]
+      - [1985.316, 642.256, 0, ""]
+      - [2209.208, 811.997, 0, ""]
+      - [2226.912, 1225.417, 0, ""]
+      - [2435.183, 1218.128, 0, ""]
+      - [2213.374, 451.687, 0, ""]
+      - [1551.069, 468.349, 0, ""]
+      - [1144.589, 593.665, 0, ""]
+    walls:
+      - [6, 7, {}]
+      - [7, 12, {}]
+      - [12, 11, {}]
+      - [7, 8, {}]
+      - [8, 9, {}]
+      - [9, 10, {}]
+      - [14, 13, {}]
+      - [14, 15, {}]
+      - [15, 16, {}]
+      - [16, 17, {}]
+      - [20, 21, {}]
+      - [15, 21, {}]
+      - [18, 19, {}]
+      - [19, 20, {}]
+      - [22, 19, {}]
+      - [24, 23, {}]
+      - [23, 22, {}]
+      - [26, 25, {}]
+      - [31, 30, {}]
+      - [30, 29, {}]
+      - [29, 28, {}]
+      - [28, 27, {}]
+      - [35, 34, {}]
+      - [34, 33, {}]
+      - [33, 32, {}]
+      - [36, 33, {}]
+      - [27, 36, {}]
+      - [26, 36, {}]
+      - [25, 38, {}]
+      - [38, 24, {}]
+      - [37, 38, {}]
+lifts:
+  {}
