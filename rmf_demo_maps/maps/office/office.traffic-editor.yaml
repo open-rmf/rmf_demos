@@ -2,7 +2,9 @@ building_name: office
 levels:
   L1:
     doors:
-      - [31, 13, {motion_axis: [1, start], motion_degrees: [3, 100], motion_direction: [2, 1], name: [1, door], type: [1, double_hinged]}]
+      - [31, 13, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, main_door], type: [1, double_hinged]}]
+      - [35, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, coe_door], type: [1, double_hinged]}]
+      - [17, 18, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, hardware_door], type: [1, double_hinged]}]
     drawing:
       filename: office.png
     elevation: 0
