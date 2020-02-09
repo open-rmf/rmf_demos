@@ -12,7 +12,7 @@
       <arg name="control_type" value="full_control"/>
 
       <!-- The graph that this fleet should use for navigation -->
-      <arg name="nav_graph_file" value="$(find-pkg-share rmf_dp2_maps)/maps/dp2/nav_graphs/2.yaml" />
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/office/nav_graphs/0.yaml" />
 
       <!-- The nominal linear and angular velocity of this fleet's vehicles -->
       <arg name="linear_velocity" value="0.4"/>
