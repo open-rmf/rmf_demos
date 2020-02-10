@@ -22,7 +22,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-          'request_loop = scripts.request_loop:main'
+          'request_loop = rmf_demo_tasks.request_loop:main'
         ],
     },
 )

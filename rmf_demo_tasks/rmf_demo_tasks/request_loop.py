@@ -41,7 +41,8 @@ def main(argv = sys.argv):
     rclpy.shutdown()
 
 
-    print(f'Loop request submitted to {args.robot_type} robot fleet')
+    print(f'Loop request between {args.start} and {args.finish}', \
+        f'submitted to {args.robot_type} robot fleet')
 
 if __name__ == '__main__':
     main(sys.argv)
