@@ -157,7 +157,7 @@ levels:
       - [2213.374, 451.687, 0, lounge, {is_parking_spot: [4, true]}]
       - [1551.069, 468.349, 0, ""]
       - [1052.727, 730.182, 0, ""]
-      - [2474.545, 885.636, 0, hardware_2, {is_parking_spot: [4, true]}]
+      - [2474.545, 885.636, 0, hardware_2, {is_parking_spot: [4, true], workcell_name: [1, beverage_collector]}]
       - [924.545, 917.455, 0, "", {is_parking_spot: [4, false]}]
       - [780, 617.455, 0, coe, {is_parking_spot: [4, true]}]
       - [1366.364, 1087.455, 0, cubicle_1, {is_parking_spot: [4, true]}]
