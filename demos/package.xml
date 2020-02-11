@@ -12,6 +12,7 @@
   <exec_depend>rmf_demo_maps</exec_depend>
 
   <exec_depend>rmf_traffic_ros2</exec_depend>
+  <exec_depend>rmf_fleet_adapter</exec_depend>
   <exec_depend>building_map_tools</exec_depend>
 
   <exec_depend>visualizer</exec_depend>
@@ -19,6 +20,7 @@
   <exec_depend>gazebo_ros</exec_depend>
   <exec_depend>rmf_demo_assets</exec_depend>
   <exec_depend>rmf_gazebo_plugins</exec_depend>
+  <exec_depend>rmf_demo_tasks</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

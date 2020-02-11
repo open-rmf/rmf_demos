@@ -11,7 +11,7 @@
     <let name="world_path" value="$(find-pkg-share rmf_demo_maps)/maps/office/office.world" />
     <let name="model_path" value="$(find-pkg-share rmf_demo_maps)/maps/office/models:$(find-pkg-share rmf_demo_assets)/models:/usr/share/gazebo-9/models" />
     <let name="resource_path" value="$(find-pkg-share rmf_demo_assets):/usr/share/gazebo-9" />
-    <let name="plugin_path" value="" />
+    <let name="plugin_path" value="$(find-pkg-prefix rmf_gazebo_plugins)/lib" />
 
     <executable cmd="gzserver --verbose -s libgazebo_ros_init.so $(var world_path)" output="both">
       <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
@@ -24,6 +24,32 @@
       <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
       <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
     </executable>
+  </group>
+
+  <!-- Magni fleet adapter -->
+  <include file="$(find-pkg-share demos)/include/magni_adapter.launch.xml">
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+  </include>
+
+  <!-- The robot state aggregator needed for the Magni slotcar_plugin -->
+  <group>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="magni"/>
+      <arg name="fleet_name" value="magni"/>
+      <arg name="use_sim_time" value="true"/>
+    </include>
+  </group>
+
+  <!-- Dispenser nodes -->
+  <group>
+    <node pkg="rmf_demo_tasks" exec="dispenser">
+      <param name="dispenser_name" value="beverage_dispenser"/>
+      <param name="use_sim_time" value="true"/>
+    </node>
+    <node pkg="rmf_demo_tasks" exec="dispenser">
+      <param name="dispenser_name" value="beverage_collector"/>
+      <param name="use_sim_time" value="true"/>
+    </node>
   </group>
 
 </launch>

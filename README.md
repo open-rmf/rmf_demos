@@ -14,6 +14,8 @@ These demos were developed and tested on
 
 * [ROS 2 - Eloquent](https://index.ros.org/doc/ros2/Releases/Release-Eloquent-Elusor/)
 
+* [Gazebo](http://gazebosim.org/blog/gazebo9)
+
 ## Setup
 
 Install all non-ROS prerequisites of the packages,
@@ -24,7 +26,11 @@ sudo apt update && sudo apt install  \
   libyaml-cpp-dev qt5-default \
   libeigen3-dev libccd-dev libfcl-dev \
   libyaml-cpp-dev libwebsocketpp-dev \
-  libboost-all-dev
+  libboost-all-dev curl
+```
+Install Gazebo 
+```bash
+curl -sSL http://get.gazebosim.org | sh
 ```
 
 Ensure all ROS prerequisites are fulfilled,
@@ -33,6 +39,7 @@ Ensure all ROS prerequisites are fulfilled,
 sudo apt install \
   ros-eloquent-rviz2 \
   ros-eloquent-launch*
+  ros-eloquent-gazebo-ros-pkgs
 ```
 
 ## Compiling Instructions
@@ -53,6 +60,21 @@ cd ~/rmf_demos_ws
 source /opt/ros/eloquent/setup.bash
 colcon build
 ```
+
+## Office World
+This repo containts a demo world along with tools to examine capabilites of `rmf_core` including traffic_management, conflict resolution, door integration among others. 
+
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 launch demos office.launch.xml
+```
+
+To request each of the Magni robots to loop between two points,
+
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 launch demos office_loop.launch.xml
+``` 
 
 ## Example Map
 

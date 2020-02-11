@@ -23,4 +23,9 @@
     <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/office.rviz"/>"/>
   </include>
 
+  <!-- Door Supervisor -->
+  <group>
+    <node pkg="rmf_fleet_adapter" exec="door_supervisor"/>
+  </group>
+
 </launch>
