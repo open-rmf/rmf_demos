@@ -53,7 +53,7 @@ def main(argv = sys.argv):
     rclpy.shutdown()
 
 
-    print(f'I have submitted a delivery request!')
+    print(f'Delivery request submitted to {args.robot_type}')
 
 if __name__ == '__main__':
     main(sys.argv)
