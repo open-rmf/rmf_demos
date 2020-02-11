@@ -1,0 +1,8 @@
+<?xml version='1.0' ?>
+
+<launch>
+
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s hardware_2 -f coe -r magni -n 2" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s cubicle_1 -f station_2 -r magni -n 10" output="both"/>
+
+</launch>
