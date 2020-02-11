@@ -11,7 +11,7 @@ install(DIRECTORY
 
 ament_package()
 
-file(GLOB_RECURSE traffic_editor_paths "maps/*.traffic-editor.yaml")
+file(GLOB_RECURSE traffic_editor_paths "maps/*.building.yaml")
 
 foreach(path ${traffic_editor_paths})
 
