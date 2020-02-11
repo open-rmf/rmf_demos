@@ -3,7 +3,7 @@
 <launch>
 
   <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
-  <arg name= "config_file" default="$(find-pkg-share rmf_demo_maps)/office/office.traffic-editor.yaml"/>
+  <arg name= "config_file" default="$(find-pkg-share rmf_demo_maps)/office/office.building.yaml"/>
   <arg name= "viz_config_file" default="$(find-pkg-share rmf_schedule_visualizer)/config/rmf.rviz"/>
  
   <!-- Traffic Schedule  -->
