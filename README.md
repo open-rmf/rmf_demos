@@ -74,7 +74,7 @@ To simulate a delivery
 source ~/rmf_demos_ws/install/setup.bash
 ros2 run rmf_demo_tasks request_delivery 
 ``` 
-![](media/request_delivery.gif)
+![](media/delivery_request.gif)
 
 To request each of the Magni robots to loop between two points,
 
@@ -82,7 +82,7 @@ To request each of the Magni robots to loop between two points,
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos office_loop.launch.xml
 ``` 
-![](media/request_loop.gif)
+![](media/loop_request.gif)
 
 ## Example Map
 
