@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<sdf version="1.6">
+  <model name='Coke'>
+    <static>true</static>
+    <link name="body">
+      <pose>0 0 0 0 0 0</pose>
+
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>model://Coke/meshes/coke.obj</uri></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh><uri>model://Coke/meshes/coke.obj</uri></mesh>
+          </geometry>
+        </collision>
+
+    </link>
+
+    <plugin name="teleport" filename="libteleport.so">
+      <name>coke</name>
+      <type>beverage</type>
+      <load_pose>11.816198  -10.386176  0.896362  0.0 0.0 -1.570796</load_pose>
+      <unload_pose>0.0  0.0 0.0 0.0 0.0 -1.570796</unload_pose>
+    </plugin>
+
+  </model>
+</sdf>
