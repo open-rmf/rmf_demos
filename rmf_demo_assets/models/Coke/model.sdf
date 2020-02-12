@@ -21,8 +21,8 @@
     </link>
 
     <plugin name="teleport" filename="libteleport.so">
-      <name>coke</name>
-      <type>beverage</type>
+      <load_guid>beverage_dispenser</load_guid>
+      <unload_guid>beverage_collector</unload_guid>
       <load_pose>11.816198  -10.386176  0.896362  0.0 0.0 -1.570796</load_pose>
       <unload_pose>0.0  0.0 0.0 0.0 0.0 -1.570796</unload_pose>
     </plugin>
