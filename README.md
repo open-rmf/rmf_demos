@@ -69,12 +69,20 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos office.launch.xml
 ```
 
+To simulate a delivery
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 run rmf_demo_tasks request_delivery 
+``` 
+![](media/request_delivery.gif)
+
 To request each of the Magni robots to loop between two points,
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos office_loop.launch.xml
 ``` 
+![](media/request_loop.gif)
 
 ## Example Map
 
