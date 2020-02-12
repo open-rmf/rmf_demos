@@ -18,13 +18,23 @@
           </geometry>
         </collision>
 
+        <!-- TODO: Replace with accurate values of mass and inertia -->
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.003366666666666667</ixx>
+            <iyy>0.0008666666666666667</iyy>
+            <izz>0.0041666666666666675</izz>
+          </inertia>
+        </inertial>
+
     </link>
 
     <plugin name="teleport" filename="libteleport.so">
       <load_guid>beverage_dispenser</load_guid>
       <unload_guid>beverage_collector</unload_guid>
-      <load_pose>11.816198  -10.386176  0.896362  0.0 0.0 -1.570796</load_pose>
-      <unload_pose>0.0  0.0 0.0 0.0 0.0 -1.570796</unload_pose>
+      <load_pose>16.840 -5.400 0.300 0.0 0.0 0</load_pose>
+      <unload_pose>22.373 -7.615 0.810 0.0 0.0 0.0</unload_pose>
     </plugin>
 
   </model>
