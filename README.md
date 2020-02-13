@@ -62,7 +62,8 @@ colcon build
 ```
 
 ## Office World
-This repo containts a demo world along with tools to examine capabilites of `rmf_core` including traffic_management, conflict resolution, door integration among others. 
+
+This repository contains a demo world along with tools to examine capabilites of `rmf_core` including traffic_management, conflict resolution, door integration among others. 
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
@@ -78,7 +79,7 @@ ros2 launch demos office_loop.launch.xml
 
 ## Example Map
 
-An example map/graph configuration generated using the layout of the OSRF Singapore office, has been included in the package `rmf_demo_maps`, and it can be found [here](rmf_demo_maps/maps/office/). This configuration file can be read and modified by the [traffic editor](https://github.com/osrf/traffic_editor), and is parsed by the different core packages of RMF during launch time.
+An example map/graph configuration generated using the layout of the OSRF Singapore office, has been included in the package `rmf_demo_maps`, and it can be found [here](rmf_demo_maps/maps/office/). This configuration file can be read and modified by the [traffic editor](https://github.com/osrf/traffic_editor), and is parsed by the different core packages of RMF during build time.
 
 Below is a screenshot of how the provided demo map will look like, when opened using the `traffic editor`,
 
@@ -88,7 +89,7 @@ More instructions on using the `traffic_editor` can be found in the [repository]
 
 ## Minimal fleet demo
 
-This minimal demonstration launches a string of core `rmf` programs, which includes the internal map server, the traffic scheduler,  a fake fleet with one robot, its corresponding fleet adapter, as well as the overall schedule visualizer. A read-only fleet will not allow `rmf_core` or any other RMF-related systems to control it in any way. It only reports its status upstream to RMF, where traffic scheduling will ensure other fleets' traffic is diverted away.
+This minimal demonstration launches a series of core `rmf` programs, which includes the internal map server, the traffic scheduler,  a fake fleet with one robot, its corresponding fleet adapter, as well as the overall schedule visualizer. A read-only fleet will not allow `rmf_core` or any other RMF-related systems to control it in any way. It only reports its status upstream to RMF, where traffic scheduling will ensure other fleets' traffic is diverted away.
 
 Launch the demo using the launch file below,
 
