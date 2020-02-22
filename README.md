@@ -23,8 +23,8 @@ Install all non-ROS prerequisites of the packages,
 ```bash
 sudo apt update && sudo apt install  \
   git cmake wget python3-vcstool \
-  libyaml-cpp-dev qt5-default \
-  libeigen3-dev libccd-dev libfcl-dev \
+  qt5-default libeigen3-dev \
+  libccd-dev libfcl-dev \
   libyaml-cpp-dev libwebsocketpp-dev \
   libboost-all-dev curl
 ```
