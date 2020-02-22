@@ -21,15 +21,21 @@ These demos were developed and tested on
 Install all non-ROS prerequisites of the packages,
 
 ```bash
-sudo apt update && sudo apt install  \
+sudo apt update && sudo apt install \
   git cmake wget python3-vcstool \
   qt5-default libeigen3-dev \
   libccd-dev libfcl-dev \
   libyaml-cpp-dev libwebsocketpp-dev \
-  libboost-all-dev curl
+  libboost-all-dev curl \
+  python3-shapely python3-yaml
 ```
-Install Gazebo 
+
+Install Gazebo
 ```bash
+# this step is optional, but if you do encounter issues with your already
+# existing gazebo build, you should consider removing it before reinstalling
+sudo apt remove gazebo*
+
 curl -sSL http://get.gazebosim.org | sh
 ```
 
@@ -38,13 +44,13 @@ Ensure all ROS prerequisites are fulfilled,
 ```bash
 sudo apt install \
   ros-eloquent-rviz2 \
-  ros-eloquent-launch*
+  ros-eloquent-launch* \
   ros-eloquent-gazebo-ros-pkgs
 ```
 
 ## Compiling Instructions
 
-Setup a new ROS 2 workspace and pull in all the required repositories using `vsc`,
+Setup a new ROS 2 workspace and pull in all the required repositories using `vcs`,
 
 ```bash
 mkdir -p ~/rmf_demos_ws/src
