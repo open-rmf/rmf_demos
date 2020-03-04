@@ -20,7 +20,7 @@
   <!-- Visualizer -->
   <include file="$(find-pkg-share visualizer)/visualizer.xml">
     <arg name="map_name" value="L1"/>
-    <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/office.rviz"/>"/>
+    <arg name="viz_config_file" value ="$(var viz_config_file)"/>
   </include>
 
   <!-- Door Supervisor -->
