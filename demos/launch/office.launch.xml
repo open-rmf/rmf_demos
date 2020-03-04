@@ -5,6 +5,7 @@
   <!-- Common launch -->
   <include file="$(find-pkg-share demos)/common.launch.xml">
     <arg name="use_sim_time" value="true"/>
+    <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/office.rviz"/>
   </include>
 
   <group>
