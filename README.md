@@ -100,24 +100,3 @@ Below is a screenshot of how the provided demo map will look like, when opened u
 <img src="media/office_screenshot.png" width="800px"/>
 
 More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
-
-## Minimal fleet demo
-
-This minimal demonstration launches a series of core `rmf` programs, which includes the internal map server, the traffic scheduler,  a fake fleet with one robot, its corresponding fleet adapter, as well as the overall schedule visualizer. A read-only fleet will not allow `rmf_core` or any other RMF-related systems to control it in any way. It only reports its status upstream to RMF, where traffic scheduling will ensure other fleets' traffic is diverted away.
-
-Launch the demo using the launch file below,
-
-```bash
-source ~/rmf_demos_ws/install/setup.bash
-ros2 launch rmf_demo_fleets fake_read_only_fleet.launch.xml
-```
-
-When the launch is done, a seemingly empty`rviz2` will have been opened. Toggle the left panel arrow to open up the scheduler panel and change the field `map_name` to `L1`. Zoom out and the visualizer should show the lanes and robot waypoints corresponding to the example map of OSRF Singapore office.
-
-<img src="media/office_rviz.png" width="800px"/>
-
-There will be a 180 degree angle offset, which can be fixed by further parameterizing the demo map.
-
-The fake robot in the launched fake fleet, can also be seen moving diagonally away from the center of the map, indicated by a small purple marker.
-
-In order to shut it down, use `Ctrl+C` on the terminal that launched the system via `ros2 launch ...`.
