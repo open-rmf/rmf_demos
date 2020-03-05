@@ -108,6 +108,6 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos airport_terminal.launch.xml
 ```
 
-<!-- ![](media/airport_terminal_screenshot.png) -->
+![](media/airport_terminal_screenshot.png)
 
 More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
