@@ -2,10 +2,10 @@
 
 <launch>
 
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_s07 -f junction_n12 -r magni -n 10" output="both"/>
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_s10 -f junction_n18 -r magni -n 10" output="both"/>
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_s11 -f junction_n20 -r magni -n 10" output="both"/>
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_s15 -f junction_n26 -r magni -n 10" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_s07 -f junction_n12 -r magni -n 50" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_s10 -f junction_n18 -r magni -n 50" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_s11 -f junction_n20 -r magni -n 50" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_s15 -f junction_n26 -r magni -n 50" output="both"/>
   <executable cmd="ros2 run rmf_demo_tasks request_loop -s junction_north_west -f junction_south_east -r mir100 -n 10" output="both"/>
 
 </launch>
