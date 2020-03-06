@@ -110,4 +110,11 @@ ros2 launch demos airport_terminal.launch.xml
 
 ![](media/airport_terminal_screenshot.png)
 
+To start loops on each of the Magni robots and a single MiR100 robot,
+
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 launch demos airport_terminal_loop.launch.xml
+```
+
 More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
