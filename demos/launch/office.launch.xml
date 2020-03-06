@@ -30,6 +30,7 @@
 
   <!-- Magni fleet adapter -->
   <include file="$(find-pkg-share demos)/include/magni_adapter.launch.xml">
+    <arg name="fleet_name" value="magni"/>
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/office/nav_graphs/0.yaml" />
   </include>
