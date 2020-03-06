@@ -5,6 +5,7 @@
   <!-- Common launch -->
   <include file="$(find-pkg-share demos)/common.launch.xml">
     <arg name="use_sim_time" value="true"/>
+    <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/airport_terminal/airport_terminal.rviz"/>
     <arg name="config_file" value="$(find-pkg-share rmf_demo_maps)/airport_terminal/airport_terminal.building.yaml"/>
   </include>
 
@@ -27,34 +28,32 @@
     </executable>
   </group>
 
-  <!-- Cleaning Magni fleet adapter -->
-  <include file="$(find-pkg-share demos)/include/magni_adapter.launch.xml">
-    <arg name="fleet_name" value="magni"/>
-    <arg name="use_sim_time" value="true"/>
-    <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/nav_graphs/0.yaml" />
-  </include>
-
-  <!-- The robot state aggregator needed for the Magni slotcar_plugin -->
+  <!-- Magni fleet adapter, and robot state aggregator needed for the Magni slotcar_plugin -->
   <group>
+    <let name="fleet_name" value="magni"/>
+    <include file="$(find-pkg-share demos)/include/adapters/magni_adapter.launch.xml">
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/nav_graphs/2.yaml" />
+    </include>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="magni"/>
-      <arg name="fleet_name" value="magni"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="true"/>
     </include>
   </group>
 
-  <!-- Patrol MiR100 fleet adapter -->
-  <include file="$(find-pkg-share demos)/include/mir100_adapter.launch.xml">
-    <arg name="fleet_name" value="mir100"/>
-    <arg name="use_sim_time" value="true"/>
-    <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/nav_graphs/0.yaml" />
-  </include>
-
-  <!-- The robot state aggregator needed for the MiR100 slotcar_plugin -->
+  <!-- MiR100 fleet adapter and robot state aggregator needed for MiR100 slotcar_plugin -->
   <group>
+    <let name="fleet_name" value="mir100"/>
+    <include file="$(find-pkg-share demos)/include/adapters/mir100_adapter.launch.xml">
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/nav_graphs/1.yaml" />
+    </include>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="mir100"/>
-      <arg name="fleet_name" value="mir100"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="true"/>
     </include>
   </group>
