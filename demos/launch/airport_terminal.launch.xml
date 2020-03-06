@@ -13,9 +13,9 @@
     <let name="world_path" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/airport_terminal.world" />
     <let name="model_path" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/models:$(find-pkg-share rmf_demo_assets)/models:/usr/share/gazebo-9/models" />
     <let name="resource_path" value="$(find-pkg-share rmf_demo_assets):/usr/share/gazebo-9" />
-    <let name="plugin_path" value="$(find-pkg-prefix rmf_gazebo_plugins)/lib" />
+    <let name="plugin_path" value="$(find-pkg-prefix rmf_gazebo_plugins)/lib:/usr/share/gazebo-9" />
 
-    <executable cmd="gzserver --verbose -s libgazebo_ros_init.so $(var world_path)" output="both">
+    <executable cmd="gzserver --verbose -s libgazebo_ros_init.so -s libgazebo_ros_factory.so $(var world_path)" output="both">
       <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
       <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
       <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
@@ -58,4 +58,21 @@
     </include>
   </group>
 
+    <!-- Caddy spawner, fleet adapter and robot state aggregator needed for Caddy readonly_plugin -->
+  <group>
+    <let name="fleet_name" value="caddy"/>
+    <let name="caddy_path" value="$(find-pkg-share rmf_demo_assets)/models/Caddy/model.sdf" />
+    <node pkg="gazebo_ros" exec="spawn_entity.py" args="-entity caddy -file $(var caddy_path) -x 64.16 -y -20.47 -Y -1.57">
+        <param name="use_sim_time" value="true"/>
+    </node>
+    <include file="$(find-pkg-share demos)/include/adapters/caddy_adapter.launch.xml">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="fleet_name" value="$(var fleet_name)"/>
+    </include>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="caddy"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="true"/>
+    </include>
+  </group>
 </launch>
