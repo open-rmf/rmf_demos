@@ -1,0 +1,29 @@
+<?xml version='1.0' ?>
+
+<launch>
+
+  <arg name="fleet_name" default="caddy" description="Name of this fleet of magni robots"/>
+
+  <group>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/fleet_adapter.launch.xml">
+
+      <!-- The name and control type of the fleet -->
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="control_type" value="read_only"/>
+
+      <!-- The nominal linear and angular velocity of the caddy -->
+      <arg name="linear_velocity" value="1.0"/>
+      <arg name="angular_velocity" value="2.20"/>
+
+      <!-- The nominal linear and angular acceleration of the caddy -->
+      <arg name="linear_acceleration" value="10.0"/>
+      <arg name="angular_acceleration" value="8.0"/>
+
+      <!-- The radius of the circular footprint of the caddy -->
+      <arg name="profile_radius" value="1.2"/>
+
+      <arg name="delay_threshold" value="1.0"/>
+
+    </include>
+  </group>
+</launch>
