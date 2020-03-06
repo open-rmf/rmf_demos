@@ -5,13 +5,13 @@
   <!-- Common launch -->
   <include file="$(find-pkg-share demos)/common.launch.xml">
     <arg name="use_sim_time" value="true"/>
-    <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/office/office.rviz"/>
-    <arg name="config_file" value="$(find-pkg-share rmf_demo_maps)/office/office.building.yaml"/>
+    <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/airport_terminal/airport_terminal.rviz"/>
+    <arg name="config_file" value="$(find-pkg-share rmf_demo_maps)/airport_terminal/airport_terminal.building.yaml"/>
   </include>
 
   <group>
-    <let name="world_path" value="$(find-pkg-share rmf_demo_maps)/maps/office/office.world" />
-    <let name="model_path" value="$(find-pkg-share rmf_demo_maps)/maps/office/models:$(find-pkg-share rmf_demo_assets)/models:/usr/share/gazebo-9/models" />
+    <let name="world_path" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/airport_terminal.world" />
+    <let name="model_path" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/models:$(find-pkg-share rmf_demo_assets)/models:/usr/share/gazebo-9/models" />
     <let name="resource_path" value="$(find-pkg-share rmf_demo_assets):/usr/share/gazebo-9" />
     <let name="plugin_path" value="$(find-pkg-prefix rmf_gazebo_plugins)/lib" />
 
@@ -28,13 +28,13 @@
     </executable>
   </group>
 
-  <!-- Magni fleet adapter and robot state aggregator needed for the Magni slotcar_plugin -->
+  <!-- Magni fleet adapter, and robot state aggregator needed for the Magni slotcar_plugin -->
   <group>
     <let name="fleet_name" value="magni"/>
     <include file="$(find-pkg-share demos)/include/adapters/magni_adapter.launch.xml">
       <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/office/nav_graphs/0.yaml" />
+      <arg name="use_sim_time" value="true"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/nav_graphs/2.yaml" />
     </include>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="magni"/>
@@ -43,16 +43,19 @@
     </include>
   </group>
 
-  <!-- Dispenser nodes -->
+  <!-- MiR100 fleet adapter and robot state aggregator needed for MiR100 slotcar_plugin -->
   <group>
-    <node pkg="rmf_demo_tasks" exec="dispenser">
-      <param name="dispenser_name" value="beverage_dispenser"/>
-      <param name="use_sim_time" value="true"/>
-    </node>
-    <node pkg="rmf_demo_tasks" exec="dispenser">
-      <param name="dispenser_name" value="beverage_collector"/>
-      <param name="use_sim_time" value="true"/>
-    </node>
+    <let name="fleet_name" value="mir100"/>
+    <include file="$(find-pkg-share demos)/include/adapters/mir100_adapter.launch.xml">
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/airport_terminal/nav_graphs/1.yaml" />
+    </include>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="mir100"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="true"/>
+    </include>
   </group>
 
 </launch>

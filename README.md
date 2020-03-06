@@ -99,4 +99,22 @@ Below is a screenshot of how the provided demo map will look like, when opened u
 
 <img src="media/office_screenshot.png" width="800px"/>
 
+## Airport Terminal World
+
+This demo world shows robot interaction on a much larger map, with a lot more lanes, destinations, robots and possible interactions between robots from different fleets, robots and infrastructure, as well as robots and users.
+
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 launch demos airport_terminal.launch.xml
+```
+
+![](media/airport_terminal_screenshot.png)
+
+To start loops on each of the Magni robots and a single MiR100 robot,
+
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 launch demos airport_terminal_loop.launch.xml
+```
+
 More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
