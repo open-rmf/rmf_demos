@@ -17,7 +17,7 @@
       <arg name="nav_graph_file" value="$(var nav_graph_file)" />
 
       <!-- The nominal linear and angular velocity of this fleet's vehicles -->
-      <arg name="linear_velocity" value="0.4"/>
+      <arg name="linear_velocity" value="0.7"/>
       <arg name="angular_velocity" value="2.2"/>
 
       <!-- The nominal linear and angular acceleration of this fleet's vehicles -->

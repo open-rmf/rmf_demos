@@ -7,39 +7,20 @@
     <plugin name="slotcar" filename="libslotcar.so">
 
       <!-- Forward / Backward -->
-
-      <nominal_drive_speed>
-        0.7
-      </nominal_drive_speed>
-
-      <nominal_drive_acceleration>
-        0.5
-      </nominal_drive_acceleration>
-
+      <nominal_drive_speed>0.7</nominal_drive_speed>
+      <nominal_drive_acceleration>0.5</nominal_drive_acceleration>
       <!-- Theoretical no-slip limit with current suspension: 0.8 -->
-      <max_drive_acceleration>
-        0.75
-      </max_drive_acceleration>
-
+      <max_drive_acceleration>0.75</max_drive_acceleration>
 
       <!-- Turning -->
-
-      <nominal_turn_speed>
-        0.3
-      </nominal_turn_speed>
-
+      <nominal_turn_speed>0.3</nominal_turn_speed>
       <!-- Note: The official maximum turn acceleration value is 0.25, but that
            seems to be too small for the simulated MiR100 to do course
            corrections while driving, so it ends up swaying erratically. Using
            this larger value helps keep MiR100's course stable. -->
-      <nominal_turn_acceleration>
-        1.5
-      </nominal_turn_acceleration>
-
+      <nominal_turn_acceleration>1.5</nominal_turn_acceleration>
       <!-- Theoretical no-slip limit with current suspension: 2.166666... -->
-      <max_turn_acceleration>
-        2.0
-      </max_turn_acceleration>
+      <max_turn_acceleration>2.0</max_turn_acceleration>
 
     </plugin>
 
