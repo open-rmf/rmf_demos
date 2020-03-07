@@ -9,9 +9,13 @@
 
   <model name="caddy">
 
-    <plugin name="readonly" filename="libreadonly.so"/>
+    <plugin name="readonly" filename="libreadonly.so">
+      <level_name>L1</level_name>
+      <graph_index>1</graph_index>
+      <spawn_waypoint>caddy</spawn_waypoint>
+    </plugin>
 
-    <plugin name="polaris_diff_controller" filename="libgazebo_ros_diff_drive.so">
+    <plugin name="caddy_diff_controller" filename="libgazebo_ros_diff_drive.so">
       <always_on>true</always_on>
 
       <!-- Update rate -->
