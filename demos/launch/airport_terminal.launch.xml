@@ -44,7 +44,7 @@
   </group>
 
   <!-- MiR100 fleet adapter and robot state aggregator needed for MiR100 slotcar_plugin -->
-  <group>
+  <!-- <group>
     <let name="fleet_name" value="mir100"/>
     <include file="$(find-pkg-share demos)/include/adapters/mir100_adapter.launch.xml">
       <arg name="fleet_name" value="$(var fleet_name)"/>
@@ -56,13 +56,13 @@
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="true"/>
     </include>
-  </group>
+  </group> -->
 
     <!-- Caddy spawner, fleet adapter and robot state aggregator needed for Caddy readonly_plugin -->
   <group>
     <let name="fleet_name" value="caddy"/>
     <let name="caddy_path" value="$(find-pkg-share rmf_demo_assets)/models/Caddy/model.sdf" />
-    <node pkg="gazebo_ros" exec="spawn_entity.py" args="-entity caddy -file $(var caddy_path) -x 64.16 -y -20.47 -Y -1.57">
+    <node pkg="gazebo_ros" exec="spawn_entity.py" args="-entity caddy -file $(var caddy_path) -x 64.08 -y -23.53 -Y 1.57">
         <param name="use_sim_time" value="true"/>
     </node>
     <include file="$(find-pkg-share demos)/include/adapters/caddy_adapter.launch.xml">
