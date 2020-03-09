@@ -13,51 +13,44 @@
       <level_name>L1</level_name>
       <graph_index>1</graph_index>
       <spawn_waypoint>caddy</spawn_waypoint>
+      <look_ahead>1</look_ahead>
+      <nominal_drive_speed>0.7</nominal_drive_speed>
+      <nominal_drive_acceleration>0.5</nominal_drive_acceleration>
+      <nominal_turn_speed>0.6</nominal_turn_speed>
+      <nominal_turn_acceleration>1.5</nominal_turn_acceleration>
     </plugin>
 
     <plugin name="caddy_diff_controller" filename="libgazebo_ros_diff_drive.so">
       <always_on>true</always_on>
-
       <!-- Update rate -->
       <update_rate>100.0</update_rate>
-
       <!-- Number of wheel pairs -->
       <num_wheel_pairs>2</num_wheel_pairs>
-      
       <!-- wheels -->
       <left_joint>front_left_wheel_joint</left_joint>
       <left_joint>rear_left_wheel_joint</left_joint>
-
       <right_joint>front_right_wheel_joint</right_joint>
       <right_joint>rear_right_wheel_joint</right_joint>
-
       <!-- kinematics -->
       <wheel_separation>1.2</wheel_separation>
       <wheel_separation>1.2</wheel_separation>
-
       <wheel_diameter>0.64</wheel_diameter>
       <wheel_diameter>0.64</wheel_diameter>
-
       <!-- limits -->
       <max_wheel_torque>150</max_wheel_torque>
       <max_wheel_torque>150</max_wheel_torque>
       <max_wheel_torque>150</max_wheel_torque>
       <max_wheel_torque>150</max_wheel_torque>
-
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
-
-
+      <max_wheel_acceleration>0.5</max_wheel_acceleration>
+      <max_wheel_acceleration>0.5</max_wheel_acceleration>
+      <max_wheel_acceleration>0.5</max_wheel_acceleration>
+      <max_wheel_acceleration>0.5</max_wheel_acceleration>
       <!-- output -->
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
       <publish_wheel_tf>true</publish_wheel_tf>
-
       <odometry_frame>odom</odometry_frame>
       <robot_base_frame>chassis</robot_base_frame>
-
     </plugin>
 
     <link name="chassis">
