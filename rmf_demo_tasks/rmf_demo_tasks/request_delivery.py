@@ -10,6 +10,7 @@ from rmf_task_msgs.msg import Delivery
 
 def main(argv = sys.argv):
     rclpy.init(args=argv)
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
 
     '''
     # Example request:
@@ -31,7 +32,7 @@ def main(argv = sys.argv):
     parser.add_argument('-i', '--task-id', help='Task ID', default='', type=str)
     parser.add_argument('-r', '--robot-type', help='Type of robot', default='magni')
 
-    args = parser.parse_args(argv[1:])
+    args = parser.parse_args(args_without_ros[1:])
 
     node = rclpy.create_node('loop_request_publisher')
     publisher = node.create_publisher(Delivery, 'delivery_requests', 10)
@@ -46,10 +47,8 @@ def main(argv = sys.argv):
     request.pickup_place_name = args.pickup
     request.dropoff_place_name = args.dropoff
 
-    for _ in range(5):
-        publisher.publish(request)
-        sleep(0.5)
-
+    publisher.publish(request)
+    sleep(0.5)
     rclpy.shutdown()
 
 
