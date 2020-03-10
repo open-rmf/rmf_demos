@@ -35,8 +35,10 @@ def main(argv = sys.argv):
     else:
         request.task_id = 'loop#' + str(uuid.uuid1())
 
-    publisher.publish(request)
-    sleep(0.5)
+    for _ in range(5):
+        publisher.publish(request)
+        sleep(0.5)
+        
     rclpy.shutdown()
 
     print(f'Loop request between {args.start} and {args.finish}', \
