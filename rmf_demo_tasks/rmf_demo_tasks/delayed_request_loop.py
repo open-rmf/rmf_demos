@@ -39,7 +39,7 @@ class DelayedLoopRequester:
                 default='magni')
         parser.add_argument('--delay',
                 help='Number of secs to wait before sending out the request',
-                default=3, type=int)
+                default=2, type=int)
         args = parser.parse_args(argv[1:])
 
         self.start_wp = args.start
@@ -62,15 +62,16 @@ class DelayedLoopRequester:
         request.task_id = self.task_id if self.task_id \
             else 'loop#' + str(uuid.uuid1())
 
-        self.node.get_logger().info('Starting sleep delay')
         time.sleep(self.num_sec_delay)
         self.publisher.publish(request)
         time.sleep(0.5)
         rclpy.shutdown()
 
-        self.node_get_logger().info(
-                f'Loop request between {self.start_wp} and {self.finish_wp}', \
-                f'submitted to {self.robot_type} robot fleet')
+        self.node.get_logger().info(
+                'Loop request between {} and {}, submitted to {} robot fleet'\
+                        .format(self.start_wp, 
+                                self.finish_wp, 
+                                self.robot_type))
 
 
 def main(argv=sys.argv):
