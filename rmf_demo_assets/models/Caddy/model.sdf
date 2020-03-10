@@ -13,7 +13,7 @@
       <level_name>L1</level_name>
       <graph_index>1</graph_index>
       <spawn_waypoint>caddy</spawn_waypoint>
-      <look_ahead>1</look_ahead>
+      <look_ahead>3</look_ahead>
       <nominal_drive_speed>0.7</nominal_drive_speed>
       <nominal_drive_acceleration>0.5</nominal_drive_acceleration>
       <nominal_turn_speed>0.6</nominal_turn_speed>
