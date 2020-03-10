@@ -107,8 +107,8 @@ This demo world shows robot interaction on a much larger map, with a lot more la
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos airport_terminal.launch.xml
 ```
-
-![](media/airport_terminal_screenshot.png)
+![](media/airport_terminal_traffic_editor_screenshot.png)
+![](media/airport_terminal_demo_screenshot.png)
 
 To start a basic setup where Magni and MiR100 robots are spawned and sent looping jobs,
 

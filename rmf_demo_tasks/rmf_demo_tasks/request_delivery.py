@@ -47,8 +47,10 @@ def main(argv = sys.argv):
     request.pickup_place_name = args.pickup
     request.dropoff_place_name = args.dropoff
 
-    publisher.publish(request)
-    sleep(0.5)
+    for _ in range(5):
+        publisher.publish(request)
+        sleep(0.5)
+        
     rclpy.shutdown()
 
 
