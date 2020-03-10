@@ -22,7 +22,7 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    spawn_targets = [
+    return LaunchDescription([
 
         Node(
             package='gazebo_ros',
@@ -69,7 +69,6 @@ def generate_launch_description():
                 '-entity', 'magni_2',
                 '-z', '0.05']),
 
-        
         Node(
             package='gazebo_ros',
             node_executable='spawn_entity.py',
@@ -79,14 +78,15 @@ def generate_launch_description():
                 '-entity', 'magni_3',
                 '-z', '0.05']),
 
-    ]
+        Node(
+            package='rmf_demo_tasks',
+            node_executable='delayed_request_loop',
+            arguments=[
+                '-s', 'junction_north_west',
+                '-f', 'junction_south_east',
+                '-n', '100',
+                '-r', 'mir100',
+                '--delay', '3']),
 
-    for st in spawn_targets:
-        ld = LaunchDescription([st])
-        ls = LaunchService()
-        ls.include_launch_description(ld)
-        ls.run()
-        time.sleep(5)
-        ls.shutdown()
-        
-    return LaunchDescription([])
+
+    ])

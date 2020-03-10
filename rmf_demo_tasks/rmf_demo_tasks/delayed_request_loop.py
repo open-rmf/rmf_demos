@@ -15,21 +15,19 @@
 # limitations under the License.
 
 import sys
+import uuid
+import time
 import argparse
-from time import sleep
 
 import rclpy
 from rclpy.node import Node
-from rmf_fleet_msgs import FleetState
 from rmf_task_msgs.msg import Loop
+from rmf_fleet_msgs.msg import FleetState
 
 
-
-class DelayedLoopRequester(Node):
+class DelayedLoopRequester:
 
     def __init__(self, argv=sys.argv):
-        super().__init__('delayed_loop_requester_node')
-
         parser = argparse.ArgumentParser()
         parser.add_argument('-s', '--start', help='Start waypoint')
         parser.add_argument('-f', '--finish', help='Finish waypoint')
@@ -42,27 +40,46 @@ class DelayedLoopRequester(Node):
         parser.add_argument('--delay',
                 help='Number of secs to wait before sending out the request',
                 default=3, type=int)
-        parser.add_argument('--timout', 
-                help='Number of secs before this node timesout',
-                default=10, type=int)
-        parser.add_argument('--robot-name', 
-                help='Robot name to wait for in fleet state message', 
-                default='', type=str)
         args = parser.parse_args(argv[1:])
 
-        self.publisher = self.create_publisher(Loop, 'loop_requests', 10)
-        self.subscription = self.create_subscription(FleetState, 
-                'fleet_states', self.callback, 10)
-    
+        self.start_wp = args.start
+        self.finish_wp = args.finish
+        self.num_loops = args.num
+        self.task_id = args.task_id
+        self.robot_type = args.robot_type
+        self.num_sec_delay = args.delay
 
-    def callback(self, msg):
-        raise NotImplementedError
+        self.node = rclpy.create_node('delayed_loop_requester_node')
+        self.publisher = self.node.create_publisher(Loop, 'loop_requests', 10)
 
 
-if __name__ == '__main__':
+    def main(self):
+        request = Loop()
+        request.robot_type = self.robot_type
+        request.start_name = self.start_wp
+        request.finish_name = self.finish_wp
+        request.num_loops = self.num_loops
+        request.task_id = self.task_id if self.task_id \
+            else 'loop#' + str(uuid.uuid1())
+
+        self.node.get_logger().info('Starting sleep delay')
+        time.sleep(self.num_sec_delay)
+        self.publisher.publish(request)
+        time.sleep(0.5)
+        rclpy.shutdown()
+
+        self.node_get_logger().info(
+                f'Loop request between {self.start_wp} and {self.finish_wp}', \
+                f'submitted to {self.robot_type} robot fleet')
+
+
+def main(argv=sys.argv):
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     delayed_loop_requester = DelayedLoopRequester(args_without_ros)
     delayed_loop_requester.main()
-    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main(sys.argv)
