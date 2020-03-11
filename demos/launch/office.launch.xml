@@ -15,7 +15,7 @@
     <let name="resource_path" value="$(find-pkg-share rmf_demo_assets):/usr/share/gazebo-9" />
     <let name="plugin_path" value="$(find-pkg-prefix rmf_gazebo_plugins)/lib" />
 
-    <executable cmd="gzserver --verbose -s libgazebo_ros_init.so $(var world_path)" output="both">
+    <executable cmd="gzserver --verbose -s libgazebo_ros_factory.so -s libgazebo_ros_init.so $(var world_path)" output="both">
       <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
       <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
       <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
