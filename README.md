@@ -124,10 +124,4 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 run demos airport_terminal_loop_scenario.sh
 ```
 
-**Note**, due to certain race conditions, the demo might occasionally fail, most notably when re-launching a new session right after an old session has been closed. When this happens, please kill the `gazebo` process using the command below and try launching again,
-
-```bash
-pkill -9 gzserver && pkill -9 gzclient && pkill -9 gazebo
-```
-
 More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
