@@ -1,8 +1,0 @@
-<?xml version='1.0' ?>
-
-<launch>
-
-  <node pkg="rmf_demo_tasks" exec="request_loop"
-      args="-s junction_south_east -f junction_north_east -r mir100 -n 50"/>
-
-</launch>
