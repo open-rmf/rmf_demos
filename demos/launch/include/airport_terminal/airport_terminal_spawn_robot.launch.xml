@@ -1,8 +1,0 @@
-<?xml version='1.0' ?>
-
-<launch>
-
-  <node pkg="gazebo_ros" exec="spawn_entity.py" 
-      args="-database MiR100 -reference_frame mir100_0_placeholder -entity mir100_0 -z 0.05"/>
-      
-</launch>
