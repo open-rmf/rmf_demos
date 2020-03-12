@@ -66,8 +66,8 @@
         <param name="use_sim_time" value="true"/>
     </node>
     <include file="$(find-pkg-share demos)/include/adapters/caddy_adapter.launch.xml">
-    <arg name="use_sim_time" value="true"/>
-    <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
     </include>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="caddy"/>
