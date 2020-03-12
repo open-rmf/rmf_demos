@@ -2,9 +2,11 @@
 
 ![](https://github.com/osrf/rmf_demos/workflows/build/badge.svg)
 
-This repository contains documentation and demo packages on running instances of RMF. The demos will serve as a starting point, for working and integrating with RMF.
+This repository contains documentation and demo packages which showcase the capabilities of the Robotics Middleware Framework (RMF) including traffic_management, conflict resolution, and door/lift interaction with heterogeneous robot fleets. The demos serve as a starting point for working and integrating with RMF.
 
-Do take note that the entire RMF ecosystem is still under active development, which might sometimes cause documentation, API or ABI compatibility to break. 
+![](media/loop_request.gif)
+
+Note: The entire RMF ecosystem is still under active development, which may cause documentation, API or ABI compatibility to break. 
 
 ## System Requirements
 
@@ -24,15 +26,14 @@ Install all non-ROS prerequisites of the packages,
 sudo apt update && sudo apt install \
   git cmake wget python3-vcstool \
   qt5-default libeigen3-dev \
-  libccd-dev libfcl-dev \
-  libyaml-cpp-dev libwebsocketpp-dev \
+  libwebsocketpp-dev \
   libboost-all-dev curl \
   python3-shapely python3-yaml
 ```
 
 Install Gazebo
 ```bash
-# this step is optional, but if you do encounter issues with your already
+# This step is optional, but if you do encounter issues with your already
 # existing gazebo build, you should consider removing it before reinstalling
 sudo apt remove gazebo*
 
@@ -42,10 +43,8 @@ curl -sSL http://get.gazebosim.org | sh
 Ensure all ROS prerequisites are fulfilled,
 
 ```bash
-sudo apt install \
-  ros-eloquent-rviz2 \
-  ros-eloquent-launch* \
-  ros-eloquent-gazebo-ros-pkgs
+cd ~/rmf_demos_ws
+rosdep install --from-paths src --ignore-src --rosdistro eloquent
 ```
 
 ## Compiling Instructions
@@ -68,8 +67,8 @@ colcon build
 ```
 
 ## Office World
+An indoor office environemnt for robots to navigate around. It includes a beverage dispensing station, controllable doors and laneways which are integrated into RMF.
 
-This repository contains a demo world along with tools to examine capabilites of `rmf_core` including traffic_management, conflict resolution, door integration among others. 
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
@@ -89,7 +88,6 @@ To request each of the Magni robots to loop between two points,
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos office_loop.launch.xml
 ``` 
-![](media/loop_request.gif)
 
 ## Example Map
 
