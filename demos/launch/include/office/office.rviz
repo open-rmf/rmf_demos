@@ -6,7 +6,7 @@ Panels:
       Expanded:
         - /MarkerArray2/Topic1
       Splitter Ratio: 0.5
-    Tree Height: 299
+    Tree Height: 270
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -128,7 +128,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 3.140000104904175
+      Angle: 0
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -138,11 +138,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: -89.50619506835938
+      Scale: 83.6650161743164
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 13.367226600646973
-      Y: -5.915629863739014
+      X: 13.47128677368164
+      Y: -6.756718158721924
     Saved: ~
 Window Geometry:
   Displays:

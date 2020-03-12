@@ -3,6 +3,8 @@ levels:
     drawing:
       filename: airport_terminal.png
     elevation: 0
+    flattened_x_offset: 0
+    flattened_y_offset: 0
     floors:
       - parameters: {texture_name: [1, brown_marble], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [297, 296, 295, 301, 300, 302, 303, 304, 309, 308, 307, 306, 305, 310, 314, 311, 298]
@@ -1102,7 +1104,7 @@ levels:
       - [147.91, 21.692, 0, charger_mir100_0, {is_charger: [4, true], is_parking_spot: [4, true]}]
       - [183.117, 75.67700000000001, 0, charger_mir100_1, {is_charger: [4, true], is_parking_spot: [4, true]}]
       - [179.938, 112.994, 0, charger_mir100_2, {is_charger: [4, true], is_parking_spot: [4, true]}]
-      - [780.329, 286.515, 0, ""]
+      - [780.329, 286.515, 0, caddy]
       - [701.934, 344.833, 0, ""]
       - [886.928, 297.987, 0, ""]
       - [902.702, 358.218, 0, ""]
