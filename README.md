@@ -31,24 +31,6 @@ sudo apt update && sudo apt install \
   python3-shapely python3-yaml
 ```
 
-Install Gazebo
-```bash
-# This step is optional, but if you do encounter issues with your already
-# existing gazebo build, you should consider removing it before reinstalling
-sudo apt remove gazebo*
-
-curl -sSL http://get.gazebosim.org | sh
-```
-
-Ensure all ROS prerequisites are fulfilled,
-
-```bash
-cd ~/rmf_demos_ws
-rosdep install --from-paths src --ignore-src --rosdistro eloquent
-```
-
-## Compiling Instructions
-
 Setup a new ROS 2 workspace and pull in all the required repositories using `vcs`,
 
 ```bash
@@ -57,6 +39,16 @@ cd ~/rmf_demos_ws
 wget https://raw.githubusercontent.com/osrf/rmf_demos/master/rmf_demos.repos
 vcs import src < rmf_demos.repos
 ```
+
+Ensure all ROS prerequisites are fulfilled,
+
+```bash
+cd ~/rmf_demos_ws
+rosdep install --from-paths src --ignore-src --rosdistro eloquent \
+    -y --skip-keys "websocketpp ament_python"
+```
+
+## Compiling Instructions
 
 Source ROS 2 Eloquent and build,
 
@@ -99,14 +91,17 @@ Below is a screenshot of how the provided demo map will look like, when opened u
 
 ## Airport Terminal World
 
-This demo world shows robot interaction on a much larger map, with a lot more lanes, destinations, robots and possible interactions between robots from different fleets, robots and infrastructure, as well as robots and users.
+This demo world shows robot interaction on a much larger map, with a lot more lanes, destinations, robots and possible interactions between robots from different fleets, robots and infrastructure, as well as robots and users. In the illustrations below, from top to bottom we have how the world looks like in `traffic_editor`, the schedule visualizer in `rviz`, and the full simulation in `gazebo`,
+
+![](media/airport_terminal_traffic_editor_screenshot.png)
+![](media/airport_terminal_demo_screenshot.png)
+
+To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos airport_terminal.launch.xml
 ```
-![](media/airport_terminal_traffic_editor_screenshot.png)
-![](media/airport_terminal_demo_screenshot.png)
 
 To start a basic setup where Magni and MiR100 robots are spawned, without sending any requests,
 
@@ -122,4 +117,16 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 run demos airport_terminal_loop_scenario.sh
 ```
 
-More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
+# Notes
+
+* More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
+
+* If you encounter problems launching the demos in `gazebo`, consider removing the local installation and reinstalling using the `rosdep` command listed at the top,
+
+```bash
+sudo apt remove gazebo*
+
+cd ~/rmf_demos_ws
+rosdep install --from-paths src --ignore-src --rosdistro eloquent \
+    -y --skip-keys "websocketpp ament_python"
+```
