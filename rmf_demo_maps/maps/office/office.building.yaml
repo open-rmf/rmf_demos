@@ -2,13 +2,16 @@ levels:
   L1:
     doors:
       - [31, 13, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, main_door], type: [1, double_hinged]}]
-      - [17, 18, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, hardware_door], type: [1, double_hinged]}]
-      - [35, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, coe_door], type: [1, double_hinged]}]
+      - [35, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, coe_door], type: [1, hinged]}]
+      - [18, 17, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, hardware_door], type: [1, hinged]}]
     drawing:
       filename: office.png
     elevation: 0
+    flattened_x_offset: 0
+    flattened_y_offset: 0
     floors:
-      - vertices: [27, 28, 29, 30, 31, 13, 14, 15, 21, 20, 19, 22, 23, 24, 38, 25, 26, 36]
+      - parameters: {texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [27, 28, 29, 30, 31, 13, 14, 15, 21, 20, 19, 22, 23, 24, 38, 25, 26, 36]
     lanes:
       - [39, 40, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
       - [41, 42, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
@@ -44,68 +47,68 @@ levels:
       - [5, 4, {distance: [3, 8.409000000000001]}]
       - [2, 3, {distance: [3, 20.089]}]
     models:
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 775.16, y: 794.006, yaw: 2.6795}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 737, y: 884, yaw: 2.6531}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 680.226, y: 975.778, yaw: 2.6762}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 637.397, y: 1066.178, yaw: 2.675}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 457.405, y: 976.296, yaw: -0.4782}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 503.457, y: 884.746, yaw: -0.4495}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 549.605, y: 797.635, yaw: -0.5095}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 592.124, y: 715.71, yaw: -0.4929}
-      - {model_name: Fridge, name: Fridge, x: 1888.625, y: 679.327, yaw: 0}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1683.984, y: 655.241, yaw: -1.5542}
-      - {model_name: AdjTable, name: AdjTable, x: 1392.53, y: 706.367, yaw: 1.5905}
-      - {model_name: AdjTable, name: AdjTable, x: 991.717, y: 514.345, yaw: -0.4718}
-      - {model_name: AdjTable, name: AdjTable, x: 1682.699, y: 701.847, yaw: 1.5886}
-      - {model_name: SmallCubicle, name: SmallCubicle, x: 1207.952, y: 1007.22, yaw: -0}
-      - {model_name: SmallCubicle, name: SmallCubicle, x: 1202.918, y: 1168.317, yaw: 0}
-      - {model_name: SmallCubicle, name: SmallCubicle, x: 1631.416, y: 1161.315, yaw: -0}
-      - {model_name: SmallCubicle, name: SmallCubicle, x: 1109.385, y: 1009.033, yaw: -3.1416}
-      - {model_name: SmallCubicle, name: SmallCubicle, x: 1106.837, y: 1168.293, yaw: 3.1416}
-      - {model_name: SmallCubicle, name: SmallCubicle, x: 1529.036, y: 1160.878, yaw: 3.1416}
-      - {model_name: SmallCubicle, name: SmallCubicle, x: 1530.348, y: 1000.746, yaw: -3.1416}
-      - {model_name: SmallCubicle, name: SmallCubicle, x: 1631.416, y: 999.433, yaw: -0}
-      - {model_name: AdjTable, name: AdjTable, x: 795.487, y: 1142.915, yaw: -0.483}
-      - {model_name: Drawer, name: Drawer, x: 721.897, y: 1247.935, yaw: -0.4604}
-      - {model_name: BigCubicle, name: BigCubicle, x: 2045.916, y: 985.492, yaw: 0}
-      - {model_name: BigCubicle, name: BigCubicle, x: 2049.535, y: 1147.682, yaw: 0}
-      - {model_name: BigCubicle, name: BigCubicle, x: 1946.8, y: 1149.375, yaw: -3.1416}
-      - {model_name: BigCubicle, name: BigCubicle, x: 1947.365, y: 990.194, yaw: -3.1416}
-      - {model_name: AdjTable, name: AdjTable, x: 2607.625, y: 1219.095, yaw: 3.038}
-      - {model_name: AdjTable, name: AdjTable, x: 2644, y: 896, yaw: 3.0108}
-      - {model_name: AdjTable, name: AdjTable, x: 2355.87, y: 1021.154, yaw: 0.0156}
-      - {model_name: AdjTable, name: AdjTable, x: 2354.629, y: 849.779, yaw: 0.0025}
-      - {model_name: AdjTable, name: AdjTable, x: 883, y: 457, yaw: 2.6578}
-      - {model_name: AdjTable, name: AdjTable, x: 1536.41, y: 657.461, yaw: 0.0206}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2466, y: 469, yaw: -1.5708}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2561, y: 469, yaw: -1.5708}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2621, y: 533, yaw: -3.1416}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2559, y: 599, yaw: 1.5708}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2459, y: 595, yaw: 1.5708}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2393, y: 535, yaw: 0}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1678.061, y: 1006.211, yaw: -3.1416}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2598, y: 888, yaw: -0.1518}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2567.058, y: 1215.851, yaw: -0.1109}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1047.543, y: 989.277, yaw: 0}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1045.85, y: 1155.797, yaw: 0}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1264.301, y: 1004.518, yaw: 3.1416}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1263.737, y: 1165.958, yaw: 3.1416}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1471.463, y: 1000.567, yaw: -0}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1690.479, y: 1161.442, yaw: -3.1416}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1892.611, y: 1154.456, yaw: -0}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1894.869, y: 996.403, yaw: -0}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 2103.16, y: 1009.386, yaw: -3.1416}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 2106.547, y: 1148.811, yaw: -3.1416}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 1464.125, y: 1147.33, yaw: 0}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1398.96, y: 657.332, yaw: -1.5548}
-      - {model_name: Drawer, name: Drawer, x: 1224.595, y: 1275.574, yaw: 0}
-      - {model_name: Drawer, name: Drawer, x: 2119.682, y: 936.998, yaw: 0}
-      - {model_name: Drawer, name: Drawer, x: 2625.448, y: 1094.713, yaw: 3.0509}
-      - {model_name: Coke, name: Coke, x: 2088.014, y: 626.236, yaw: 0}
-      - {model_name: ConfTable, name: ConfTable, x: 620, y: 872, yaw: -0.4691}
-      - {model_name: RecTable, name: RecTable, x: 2508, y: 532, yaw: -1.5708}
-      - {model_name: WhiteCabinet, name: WhiteCabinet, x: 1779.929, y: 344.234, yaw: -1.6}
-      - {model_name: SquareShelf, name: SquareShelf, x: 938.97, y: 352.118, yaw: 1.0932}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 775.16, y: 794.006, yaw: 2.6795, z: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 737, y: 884, yaw: 2.6531, z: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 680.226, y: 975.778, yaw: 2.6762, z: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 637.397, y: 1066.178, yaw: 2.675, z: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 457.405, y: 976.296, yaw: -0.4782, z: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 503.457, y: 884.746, yaw: -0.4495, z: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 549.605, y: 797.635, yaw: -0.5095, z: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 592.124, y: 715.71, yaw: -0.4929, z: 0}
+      - {model_name: Fridge, name: Fridge, x: 1888.625, y: 679.327, yaw: 0, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1683.984, y: 655.241, yaw: -1.5542, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 1392.53, y: 706.367, yaw: 1.5905, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 991.717, y: 514.345, yaw: -0.4718, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 1682.699, y: 701.847, yaw: 1.5886, z: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1207.952, y: 1007.22, yaw: -0, z: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1202.918, y: 1168.317, yaw: 0, z: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1631.416, y: 1161.315, yaw: -0, z: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1109.385, y: 1009.033, yaw: -3.1416, z: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1106.837, y: 1168.293, yaw: 3.1416, z: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1529.036, y: 1160.878, yaw: 3.1416, z: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1530.348, y: 1000.746, yaw: -3.1416, z: 0}
+      - {model_name: SmallCubicle, name: SmallCubicle, x: 1631.416, y: 999.433, yaw: -0, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 795.487, y: 1142.915, yaw: -0.483, z: 0}
+      - {model_name: Drawer, name: Drawer, x: 721.897, y: 1247.935, yaw: -0.4604, z: 0}
+      - {model_name: BigCubicle, name: BigCubicle, x: 2045.916, y: 985.492, yaw: 0, z: 0}
+      - {model_name: BigCubicle, name: BigCubicle, x: 2049.535, y: 1147.682, yaw: 0, z: 0}
+      - {model_name: BigCubicle, name: BigCubicle, x: 1946.8, y: 1149.375, yaw: -3.1416, z: 0}
+      - {model_name: BigCubicle, name: BigCubicle, x: 1947.365, y: 990.194, yaw: -3.1416, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 2607.625, y: 1219.095, yaw: 3.038, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 2644, y: 896, yaw: 3.0108, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 2355.87, y: 1021.154, yaw: 0.0156, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 2354.629, y: 849.779, yaw: 0.0025, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 883, y: 457, yaw: 2.6578, z: 0}
+      - {model_name: AdjTable, name: AdjTable, x: 1536.41, y: 657.461, yaw: 0.0206, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2466, y: 469, yaw: -1.5708, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2561, y: 469, yaw: -1.5708, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2621, y: 533, yaw: -3.1416, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2559, y: 599, yaw: 1.5708, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2459, y: 595, yaw: 1.5708, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2393, y: 535, yaw: 0, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1678.061, y: 1006.211, yaw: -3.1416, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2598, y: 888, yaw: -0.1518, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 2567.058, y: 1215.851, yaw: -0.1109, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1047.543, y: 989.277, yaw: 0, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1045.85, y: 1155.797, yaw: 0, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1264.301, y: 1004.518, yaw: 3.1416, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1263.737, y: 1165.958, yaw: 3.1416, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1471.463, y: 1000.567, yaw: -0, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1690.479, y: 1161.442, yaw: -3.1416, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1892.611, y: 1154.456, yaw: -0, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 1894.869, y: 996.403, yaw: -0, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 2103.16, y: 1009.386, yaw: -3.1416, z: 0}
+      - {model_name: OfficeChairBlue, name: OfficeChairBlue, x: 2106.547, y: 1148.811, yaw: -3.1416, z: 0}
+      - {model_name: OfficeChairBlack, name: OfficeChairBlack, x: 1464.125, y: 1147.33, yaw: 0, z: 0}
+      - {model_name: OfficeChairGrey, name: OfficeChairGrey, x: 1398.96, y: 657.332, yaw: -1.5548, z: 0}
+      - {model_name: Drawer, name: Drawer, x: 1224.595, y: 1275.574, yaw: 0, z: 0}
+      - {model_name: Drawer, name: Drawer, x: 2119.682, y: 936.998, yaw: 0, z: 0}
+      - {model_name: Drawer, name: Drawer, x: 2625.448, y: 1094.713, yaw: 3.0509, z: 0}
+      - {model_name: Coke, name: Coke, x: 2088.014, y: 626.236, yaw: 0, z: 0}
+      - {model_name: ConfTable, name: ConfTable, x: 620, y: 872, yaw: -0.4691, z: 0}
+      - {model_name: RecTable, name: RecTable, x: 2508, y: 532, yaw: -1.5708, z: 0}
+      - {model_name: WhiteCabinet, name: WhiteCabinet, x: 1779.929, y: 344.234, yaw: -1.6, z: 0}
+      - {model_name: SquareShelf, name: SquareShelf, x: 938.97, y: 352.118, yaw: 1.0932, z: 0}
     vertices:
       - [80.27, 1024.974, 0, ""]
       - [580.795, 43.396, 0, ""]

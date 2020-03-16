@@ -1,8 +1,5 @@
 levels:
   L1:
-    doors:
-      - [1197, 276, {motion_axis: [1, start], motion_degrees: [3, 85], motion_direction: [2, -1], name: [1, n01_door], type: [1, double_hinged]}]
-      - [1198, 1199, {motion_axis: [1, start], motion_degrees: [3, 85], motion_direction: [2, 1], name: [1, n02_door], type: [1, double_hinged]}]
     drawing:
       filename: airport_terminal.png
     elevation: 0
@@ -321,9 +318,9 @@ levels:
       - [1188, 1193, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1193, 1189, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [676, 1194, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [714, 1201, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
-      - [1201, 1202, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
-      - [1202, 759, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
+      - [714, 1198, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
+      - [1198, 1199, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
+      - [1199, 759, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
     layers:
       {}
     measurements:
@@ -1526,9 +1523,6 @@ levels:
       - [776.503, 70.027, 0, ""]
       - [468.758, 708.193, 0, ""]
       - [2955.045, 101.395, 0, ""]
-      - [1.576, 452.255, 0, ""]
-      - [339.752, 141.911, 0, ""]
-      - [340.314, 180.169, 0, ""]
       - [340.645, 609.421, 0, ""]
       - [1132.252, 524.857, 0, ""]
       - [1131.675, 587.942, 0, ""]
