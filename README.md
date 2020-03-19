@@ -117,7 +117,7 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 run demos airport_terminal_loop_scenario.sh
 ```
 
-# Notes
+# Notes and known issues
 
 * More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
 

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sdf version="1.3">
-  <model name="polaris_ranger_ev">
+  <model name="caddy">
     <link name="chassis">
       <inertial>
         <!-- subtracted wheel weights from dry weight of 771 kg -->
@@ -17,13 +17,13 @@
         <pose>0 0 0 0 0 -1.570796</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
           </mesh>
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sdf version="1.4">
-  <model name="polaris_ranger_ev">
+  <model name="caddy">
     <link name="chassis">
       <inertial>
         <!-- subtracted wheel weights from dry weight of 771 kg -->
@@ -19,7 +19,7 @@
         <pose>0 0 0 0 0 -1.570796</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Ranger</name>
               <center>false</center>
@@ -28,8 +28,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>
@@ -418,7 +418,7 @@
         <pose>0 0 0 0 -1.570796 0</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Rear_Wheel_Right</name>
               <center>true</center>
@@ -427,8 +427,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>
@@ -476,7 +476,7 @@
         <pose>0 0 0 0 -1.570796 0</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Rear_Wheel_Left</name>
               <center>true</center>
@@ -485,8 +485,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>
@@ -534,7 +534,7 @@
         <pose>0 0 0 0 -1.570796 0</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Front_Wheel_Right</name>
               <center>true</center>
@@ -543,8 +543,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>
@@ -610,7 +610,7 @@
         <pose>0 0 0  3.14159 1.570796 0</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Front_Wheel_Left</name>
               <center>true</center>
@@ -619,8 +619,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>
@@ -674,7 +674,7 @@
         <pose>0 0 0 0 0 -1.5707</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Pedal_Gas</name>
               <center>true</center>
@@ -683,8 +683,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>
@@ -719,7 +719,7 @@
         <pose>0 0 0 0 0 -1.5707</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Pedal_brake</name>
               <center>true</center>
@@ -728,8 +728,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>
@@ -756,7 +756,7 @@
         <pose>0 0 0  -0.69 0 -1.570796</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Steering_Wheel</name>
               <center>true</center>
@@ -777,7 +777,7 @@
         <pose>0 0 0  -0.69 0 -1.570796</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>Steering_Wheel</name>
               <center>true</center>
@@ -786,8 +786,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
         </material>
@@ -823,7 +823,7 @@
         <pose>0 0 0.05  -0.2 0 -1.570796</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>E-Brake</name>
               <center>true</center>
@@ -840,7 +840,7 @@
         <pose>0 0 0.05  -0.2 0 -1.570796</pose>
         <geometry>
           <mesh>
-            <uri>model://polaris_ranger_ev/meshes/polaris.dae</uri>
+            <uri>model://Caddy/meshes/polaris.dae</uri>
             <submesh>
               <name>E-Brake</name>
               <center>true</center>
@@ -853,8 +853,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>Polaris/Diffuse</name>
           </script>
           <!--script>
@@ -898,8 +898,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>FNR_switch_F</name>
           </script>
         </material>
@@ -913,8 +913,8 @@
         </geometry>
         <material>
           <script>
-            <uri>model://polaris_ranger_ev/materials/scripts</uri>
-            <uri>model://polaris_ranger_ev/materials/textures</uri>
+            <uri>model://Caddy/materials/scripts</uri>
+            <uri>model://Caddy/materials/textures</uri>
             <name>FNR_switch_R</name>
           </script>
         </material>
