@@ -16,6 +16,9 @@ spawn_robot MiR100 mir100_0
 echo "Spawning robot mir100_1."
 spawn_robot MiR100 mir100_1
 
+echo "Spawning robot mir100_2."
+spawn_robot MiR100 mir100_2
+
 echo "Spawning robot magni_0."
 spawn_robot Magni magni_0
 
