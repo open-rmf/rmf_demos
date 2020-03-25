@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="StorageRack">
+    <link name="link">
+      <pose>0 0 0 0 0 0</pose>
+
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>model://StorageRack/meshes/StorageRack.obj</uri></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh><uri>model://StorageRack/meshes/StorageRack.obj</uri></mesh>
+          </geometry>
+        </collision>
+
+    </link>
+  </model>
+</sdf>
