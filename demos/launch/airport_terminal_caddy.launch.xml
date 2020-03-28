@@ -1,0 +1,34 @@
+<?xml version='1.0' ?>
+
+<launch>
+
+  <!-- Basic airport_terminal launch -->
+  <include file="$(find-pkg-share demos)/airport_terminal.launch.xml" />
+
+  <!-- Caddy spawner, fleet adapter and robot state aggregator needed for Caddy readonly_plugin -->
+  <group>
+    <let name="fleet_name" value="caddy"/>
+    <let name="caddy_path" value="$(find-pkg-share rmf_demo_assets)/models/Caddy/model.sdf" />
+    <node pkg="gazebo_ros" exec="spawn_entity.py" args="-database Caddy -entity caddy -reference_frame caddy_placeholder -z 0.02 -Y 1.57">
+        <param name="use_sim_time" value="true"/>
+    </node>
+    <include file="$(find-pkg-share demos)/include/adapters/caddy_adapter.launch.xml">
+      <arg name="use_sim_time" value="true"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+    </include>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="caddy"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="true"/>
+    </include>
+
+    <node pkg="joy" exec="joy_node" args="--ros-args --remap _dev:=/dev/input/js0" />
+    <node pkg="teleop_twist_joy" exec="teleop_node">
+      <param name="axis_linear.x" value="1" />
+      <param name="axis_angular.yaw" value="0" />
+      <param name="scale_linear.x" value="1.0" />
+      <param name="scale_angular.yaw" value="1.0" />
+      <param name="enable_button" value="5" />
+    </node>
+  </group>
+</launch>
