@@ -338,39 +338,6 @@ levels:
       {}
     measurements:
       - [0, 1, {distance: [3, 3]}]
-    models:
-      - {model_name: VisitorKidSit, name: VisitorKidSit, static: true, x: 1625.833, y: 439.619, yaw: 0, z: 0}
-      - {model_name: OfficeChairBlack, name: OfficeChairBlack, static: true, x: 1627.71, y: 429.036, yaw: 0, z: 0}
-      - {model_name: OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1641.708, y: 429.548, yaw: 0, z: 0}
-      - {model_name: OfficeChairGrey, name: OfficeChairGrey, static: true, x: 1642.561, y: 441.325, yaw: 0, z: 0}
-      - {model_name: MiniSofa, name: MiniSofa, static: true, x: 1654.36, y: 429.526, yaw: 0, z: 0}
-      - {model_name: MaleVisitorSit, name: MaleVisitorSit, static: true, x: 1653.462, y: 442.608, yaw: 0, z: 0}
-      - {model_name: LampAndStand, name: LampAndStand, static: true, x: 1668.211, y: 429.783, yaw: 0, z: 0}
-      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 1667.057, y: 440.428, yaw: 0, z: 0}
-      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 1681.805, y: 429.783, yaw: 0, z: 0}
-      - {model_name: Chair, name: Chair, static: true, x: 1682.96, y: 440.556, yaw: 0, z: 0}
-      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 1626.602, y: 414.529, yaw: 0, z: 0}
-      - {model_name: StorageRack, name: StorageRack, static: true, x: 1625.281, y: 394.996, yaw: 0, z: 0}
-      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 1652.45, y: 415.263, yaw: 0, z: 0}
-      - {model_name: ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 1644.813, y: 392.206, yaw: 0, z: 0}
-      - {model_name: MainTable, name: MainTable, static: true, x: 1669.486, y: 385.45, yaw: 0, z: 0}
-      - {model_name: ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 1672.129, y: 412.766, yaw: 0, z: 0}
-      - {model_name: cafe_table, name: cafe_table, static: true, x: 1618.966, y: 367.386, yaw: 0, z: 0}
-      - {model_name: pine_tree, name: pine_tree, static: true, x: 1649.605, y: 355.201, yaw: 0, z: 0}
-      - {model_name: person_standing, name: person_standing, static: true, x: 1690.299, y: 404.759, yaw: 0, z: 0}
-      - {model_name: bookshelf, name: bookshelf, static: true, x: 1691.709, y: 419.666, yaw: 0, z: 0}
-      - {model_name: oak_tree, name: oak_tree, static: true, x: 1746.499, y: 381.495, yaw: 0, z: 0}
-      - {model_name: fountain, name: fountain, static: true, x: 1684.894, y: 352.168, yaw: 0, z: 0}
-      - {model_name: postbox, name: postbox, static: true, x: 1615.618, y: 347.347, yaw: 0, z: 0}
-      - {model_name: cafe, name: cafe, static: true, x: 1971.043, y: 285.005, yaw: 0, z: 0}
-      - {model_name: ambulance, name: ambulance, static: true, x: 1650.634, y: 231.765, yaw: 0, z: 0}
-      - {model_name: beer, name: beer, static: true, x: 1632.938, y: 263.787, yaw: 0, z: 0}
-      - {model_name: playground, name: playground, static: true, x: 1722.682, y: 236.4, yaw: 0, z: 0}
-      - {model_name: lamp_post, name: lamp_post, static: true, x: 1598.389, y: 302.971, yaw: 0, z: 0}
-      - {model_name: suv, name: suv, static: true, x: 1794.309, y: 278.112, yaw: 0, z: 0}
-      - {model_name: gazebo, name: gazebo, static: true, x: 1542.479, y: 308.885, yaw: 0, z: 0}
-      - {model_name: construction_barrel, name: construction_barrel, static: true, x: 1561.744, y: 382.093, yaw: 0, z: 0}
-      - {model_name: construction_cone, name: construction_cone, static: true, x: 1582.936, y: 382.735, yaw: 0, z: 0}
     vertices:
       - [1911.731, 141.469, 0, ""]
       - [1911.342, 177.998, 0, ""]
