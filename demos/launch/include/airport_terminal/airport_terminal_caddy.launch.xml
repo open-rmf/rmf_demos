@@ -2,9 +2,6 @@
 
 <launch>
 
-  <!-- Basic airport_terminal launch -->
-  <include file="$(find-pkg-share demos)/airport_terminal.launch.xml" />
-
   <!-- Caddy spawner, fleet adapter and robot state aggregator needed for Caddy readonly_plugin -->
   <group>
     <let name="fleet_name" value="caddy"/>
