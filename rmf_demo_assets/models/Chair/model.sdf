@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<sdf version="1.6">
+  <model name='Chair'>
+    <link name="body">
+      <pose>0 0 0 0 0 1.5708</pose>
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://Chair/meshes/Chair.obj</uri>
+            <scale>0.00817 0.00817 0.00817</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://Chair/meshes/Chair.obj</uri>
+            <scale>0.00817 0.00817 0.00817</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>
+
