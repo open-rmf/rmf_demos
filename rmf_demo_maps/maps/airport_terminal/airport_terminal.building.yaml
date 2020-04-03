@@ -308,7 +308,6 @@ levels:
       - [1053, 711, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [793, 1055, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [1055, 796, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
-      - [719, 1191, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1191, 718, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1191, 1190, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1190, 1189, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
@@ -339,6 +338,8 @@ levels:
       - [1216, 1217, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [961, 1218, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1218, 1219, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [719, 1220, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1220, 1191, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
     layers:
       {}
     measurements:
@@ -1354,7 +1355,7 @@ levels:
       - [147.91, 21.692, 0, charger_mir100_0, {is_charger: [4, true], is_parking_spot: [4, true]}]
       - [183.306, 76.739, 0, charger_mir100_1, {is_charger: [4, true], is_parking_spot: [4, true]}]
       - [179.938, 112.994, 0, charger_mir100_2, {is_charger: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, mir100_2_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
-      - [780.329, 286.515, 0, caddy, {spawn_robot_name: [1, caddy_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [780.329, 286.515, 0, junction_n11]
       - [701.934, 344.833, 0, magni_n09]
       - [898.29, 296.794, 0, magni_n11]
       - [900.34, 346.54, 0, magni_n10]
@@ -1843,6 +1844,7 @@ levels:
       - [351.202, 669.799, 0, s03, {spawn_robot_name: [1, magni_0_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [828.086, 513.383, 0, ""]
       - [827.865, 619.865, 0, s07, {spawn_robot_name: [1, magni_1_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [490.243, 493.246, 0, caddy, {spawn_robot_name: [1, caddy_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
     walls:
       - [6, 10, {}]
       - [10, 9, {}]
