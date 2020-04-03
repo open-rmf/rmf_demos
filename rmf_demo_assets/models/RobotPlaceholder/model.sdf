@@ -9,7 +9,7 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>0.01 0.01 0.01</size>
+            <size>0.1 0.1 0.1</size>
           </box>
         </geometry>
         <material>
