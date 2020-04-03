@@ -349,14 +349,13 @@ levels:
     measurements:
       - [0, 1, {distance: [3, 3]}]
     models:
-      - {model_name: oak_tree, name: oak_tree, static: true, x: 795.155, y: 361.072, yaw: 3.1391, z: 0}
       - {model_name: oak_tree, name: oak_tree, static: true, x: 844.764, y: 166.372, yaw: 0, z: 0}
       - {model_name: fountain, name: fountain, static: true, x: 899.241, y: 422.643, yaw: 0, z: 0}
       - {model_name: pine_tree, name: pine_tree, static: true, x: 951.851, y: 434.84, yaw: 0, z: 0}
       - {model_name: pine_tree, name: pine_tree, static: true, x: 901.41, y: 393.151, yaw: 0, z: 0}
       - {model_name: pine_tree, name: pine_tree, static: true, x: 859.029, y: 436.517, yaw: 0, z: 0}
-      - {model_name: MainTable, name: MainTable, static: true, x: 754.5309999999999, y: 409.501, yaw: -1.3721, z: 0}
-      - {model_name: person_standing, name: person_standing, static: true, x: 744.741, y: 401.669, yaw: -1.258, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 797.97, y: 352.604, yaw: -1.3721, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 791.591, y: 338.571, yaw: -1.258, z: 0}
       - {model_name: person_standing, name: person_standing, static: true, x: 653.474, y: 373.131, yaw: -0.9977, z: 0}
       - {model_name: person_standing, name: person_standing, static: true, x: 663.7670000000001, y: 483.322, yaw: 1.2686, z: 0}
       - {model_name: person_standing, name: person_standing, static: true, x: 555.951, y: 502.483, yaw: 1.2678, z: 0}
@@ -428,7 +427,7 @@ levels:
       - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 808.8390000000001, y: 207.676, yaw: 1.6434, z: 0}
       - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 750.2380000000001, y: 207.542, yaw: -1.588, z: 0}
       - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 750.317, y: 187.196, yaw: -1.5604, z: 0}
-      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 729.461, y: 383.068, yaw: 1.0739, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 722.843, y: 377.552, yaw: 1.1903, z: 0}
       - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 660.603, y: 233.093, yaw: 1.6462, z: 0}
       - {model_name: gazebo, name: gazebo, static: true, x: 700.105, y: 186.305, yaw: 0, z: 0}
       - {model_name: lamp_post, name: lamp_post, static: true, x: 608.64, y: 154.362, yaw: 0.4487, z: 0}
@@ -441,7 +440,7 @@ levels:
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 820.136, y: 206.001, yaw: 0, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 453.865, y: 118.157, yaw: 1.3654, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 584.6609999999999, y: 169.309, yaw: -2.4517, z: 0}
-      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 765.353, y: 422.065, yaw: 1.4028, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 810.869, y: 361.534, yaw: 1.4028, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 991.509, y: 174.705, yaw: 0, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 1053.478, y: 338.644, yaw: -2.4495, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 998.647, y: 386.56, yaw: 0, z: 0}
@@ -461,7 +460,7 @@ levels:
       - {model_name: Table, name: Table, static: true, x: 1006.554, y: 213.467, yaw: 1.5847, z: 0}
       - {model_name: KitchenSink, name: KitchenSink, static: true, x: 1020.171, y: 187.391, yaw: -1.5708, z: 0}
       - {model_name: MiniSofa, name: MiniSofa, static: true, x: 987.61, y: 211.868, yaw: 0, z: 0}
-      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 726.604, y: 381.702, yaw: -2.9663, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 721.001, y: 374.575, yaw: 2.6012, z: 0}
       - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 1017.064, y: 281.369, yaw: -0.0418, z: 0}
       - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 988.102, y: 211.991, yaw: -1.4388, z: 0}
       - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 727.879, y: 68.943, yaw: 1.7264, z: 0}
@@ -514,7 +513,7 @@ levels:
       - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 236.796, y: 510.838, yaw: -2.9266, z: 0}
       - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 317.964, y: 474.377, yaw: -3.1196, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 962.861, y: 311.991, yaw: 1.3118, z: 0}
-      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 729.7089999999999, y: 419.829, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 797.119, y: 363.519, yaw: 0, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 999.756, y: 495.362, yaw: -1.1777, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 1077.957, y: 521.403, yaw: 0, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 942.727, y: 297.693, yaw: 0, z: 0}
