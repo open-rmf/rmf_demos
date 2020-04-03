@@ -3,6 +3,9 @@ levels:
     doors:
       - [1205, 1206, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], type: [1, double_hinged]}]
       - [1207, 1208, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], type: [1, double_hinged]}]
+      - [1222, 1223, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, 1], name: [1, s04_door], type: [1, hinged]}]
+      - [1224, 1225, {motion_axis: [1, start], motion_degrees: [3, 105], motion_direction: [2, 1], name: [1, s07_door], type: [1, hinged]}]
+      - [1227, 1226, {motion_axis: [1, start], motion_degrees: [3, 100], motion_direction: [2, -1], name: [1, s08_door], type: [1, hinged]}]
     drawing:
       filename: airport_terminal.png
     elevation: 0
@@ -839,7 +842,7 @@ levels:
       - [469.488, 552.96, 0, ""]
       - [537.2140000000001, 544.6799999999999, 0, ""]
       - [413.65, 562.09, 0, ""]
-      - [360.148, 572.068, 0, ""]
+      - [358.93, 575.331, 0, ""]
       - [358.874, 609.859, 0, ""]
       - [377.345, 610.496, 0, ""]
       - [376.496, 629.1799999999999, 0, ""]
@@ -1842,12 +1845,18 @@ levels:
       - [179.098, 162.166, 0, ""]
       - [228.367, 161.794, 0, ""]
       - [896.253, 59.851, 0, ""]
-      - [349.074, 566.98, 0, ""]
-      - [351.202, 669.799, 0, s03, {spawn_robot_name: [1, magni_0_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
-      - [828.086, 513.383, 0, ""]
-      - [827.865, 619.865, 0, s07, {spawn_robot_name: [1, magni_1_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [349.547, 567.686, 0, ""]
+      - [349.72, 623.377, 0, s03, {spawn_robot_name: [1, magni_0_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [829.973, 515.119, 0, ""]
+      - [827.6369999999999, 601.074, 0, s07, {spawn_robot_name: [1, magni_1_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [490.243, 493.246, 0, caddy, {spawn_robot_name: [1, caddy_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [897.3440000000001, 121.785, 0, ""]
+      - [342.521, 575.905, 0, ""]
+      - [357.266, 575.412, 0, ""]
+      - [819.441, 532.7430000000001, 0, ""]
+      - [841.385, 528.01, 0, ""]
+      - [1117.794, 537.955, 0, ""]
+      - [1146.838, 542.384, 0, ""]
     walls:
       - [6, 10, {}]
       - [10, 9, {}]
@@ -2302,6 +2311,12 @@ levels:
       - [1200, 1206, {}]
       - [912, 1207, {}]
       - [1208, 277, {}]
+      - [263, 1222, {}]
+      - [213, 1223, {}]
+      - [194, 1224, {}]
+      - [189, 1225, {}]
+      - [181, 1226, {}]
+      - [167, 1227, {}]
 lifts:
   {}
 name: airport_terminal
