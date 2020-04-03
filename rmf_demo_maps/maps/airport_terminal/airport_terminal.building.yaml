@@ -1396,7 +1396,7 @@ levels:
       - [1520.192, 528.463, 0, ""]
       - [1487.795, 528.717, 0, s10, {is_parking_spot: [4, true]}]
       - [1845.116, 522.389, 0, ""]
-      - [1864.594, 521.6130000000001, 0, s11, {is_parking_spot: [4, true], spawn_robot_name: [1, magni_1_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [1864.594, 521.6130000000001, 0, s11, {is_parking_spot: [4, true]}]
       - [2523.327, 467.79, 0, s15_1, {is_parking_spot: [4, true]}]
       - [2537.997, 589.59, 0, s15_0, {is_parking_spot: [4, true], spawn_robot_name: [1, magni_2_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [2522.642, 589.157, 0, ""]
@@ -1842,7 +1842,7 @@ levels:
       - [349.074, 566.98, 0, ""]
       - [351.202, 669.799, 0, s03, {spawn_robot_name: [1, magni_0_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [828.086, 513.383, 0, ""]
-      - [827.865, 619.865, 0, s07]
+      - [827.865, 619.865, 0, s07, {spawn_robot_name: [1, magni_1_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
     walls:
       - [6, 10, {}]
       - [10, 9, {}]
