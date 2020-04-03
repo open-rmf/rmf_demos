@@ -35,9 +35,9 @@ echo "Spawning and sending job to robot magni_1."
 spawn_robot Magni magni_1
 send_loop_job junction_s07 junction_n12 magni
 
-# echo "Spawning and sending job to robot magni_2."
-# spawn_robot Magni magni_2
-# send_loop_job junction_s16 junction_n28 magni
+echo "Spawning and sending job to robot magni_2."
+spawn_robot Magni magni_2
+send_loop_job n13 junction_s07 magni
 
 # echo "Spawning and sending job to robot magni_3."
 # spawn_robot Magni magni_3
