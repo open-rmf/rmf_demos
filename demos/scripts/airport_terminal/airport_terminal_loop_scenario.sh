@@ -33,7 +33,7 @@ send_loop_job s06 koi_pond magni
 
 echo "Spawning and sending job to robot magni_1."
 spawn_robot Magni magni_1
-send_loop_job junction_s07 junction_n12 magni
+send_loop_job junction_s07 junction_n11 magni
 
 echo "Spawning and sending job to robot magni_2."
 spawn_robot Magni magni_2
