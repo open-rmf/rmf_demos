@@ -12,11 +12,11 @@
       <arg name="control_type" value="read_only"/>
 
       <!-- The nominal linear and angular velocity of the caddy -->
-      <arg name="linear_velocity" value="0.7"/>
+      <arg name="linear_velocity" value="1.0"/>
       <arg name="angular_velocity" value="0.6"/>
 
       <!-- The nominal linear and angular acceleration of the caddy -->
-      <arg name="linear_acceleration" value="0.5"/>
+      <arg name="linear_acceleration" value="0.7"/>
       <arg name="angular_acceleration" value="1.5"/>
 
       <!-- The radius of the circular footprint of the caddy -->
