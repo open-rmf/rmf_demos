@@ -349,7 +349,6 @@ levels:
     measurements:
       - [0, 1, {distance: [3, 3]}]
     models:
-      - {model_name: oak_tree, name: oak_tree, static: true, x: 844.764, y: 166.372, yaw: 0, z: 0}
       - {model_name: fountain, name: fountain, static: true, x: 899.241, y: 422.643, yaw: 0, z: 0}
       - {model_name: pine_tree, name: pine_tree, static: true, x: 951.851, y: 434.84, yaw: 0, z: 0}
       - {model_name: pine_tree, name: pine_tree, static: true, x: 901.41, y: 393.151, yaw: 0, z: 0}
@@ -626,6 +625,7 @@ levels:
       - {model_name: construction_cone, name: construction_cone, static: true, x: 848.792, y: 584.984, yaw: 0, z: 0}
       - {model_name: construction_cone, name: construction_cone, static: true, x: 849.12, y: 606.782, yaw: 0, z: 0}
       - {model_name: ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 907.302, y: 593.994, yaw: 0.7995, z: 0}
+      - {model_name: fountain, name: fountain, static: true, x: 847.37, y: 169.463, yaw: 0, z: 0}
     vertices:
       - [1911.731, 141.469, 0, ""]
       - [1911.342, 177.998, 0, ""]
@@ -1477,17 +1477,17 @@ levels:
       - [758.936, 333.845, 0, ""]
       - [795.035, 314.041, 0, ""]
       - [828.4690000000001, 157.868, 0, ""]
-      - [833.78, 150.734, 0, ""]
-      - [843.372, 146.532, 0, ""]
+      - [833.928, 152.125, 0, ""]
+      - [843.8579999999999, 148.514, 0, ""]
       - [854.708, 149.307, 0, ""]
-      - [862.556, 155.173, 0, ""]
-      - [865.41, 165.161, 0, ""]
-      - [865.014, 177.686, 0, ""]
-      - [858.751, 187.516, 0, ""]
+      - [863.58, 154.864, 0, ""]
+      - [868.444, 164.121, 0, ""]
+      - [866.64, 178.006, 0, ""]
+      - [860.2859999999999, 187.89, 0, ""]
       - [850.269, 192.59, 0, ""]
       - [836.713, 189.577, 0, ""]
-      - [830.847, 179.748, 0, ""]
-      - [829.261, 167.222, 0, ""]
+      - [830.162, 181.301, 0, ""]
+      - [826.1609999999999, 169.22, 0, ""]
       - [829.302, 247.299, 0, ""]
       - [832.3099999999999, 238.017, 0, ""]
       - [841.1609999999999, 231.4, 0, ""]
