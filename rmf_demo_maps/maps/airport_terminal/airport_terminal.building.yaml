@@ -14,7 +14,7 @@ levels:
       - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [297, 296, 295, 301, 300, 302, 303, 304, 307, 306, 818, 305, 308, 298]
       - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
-        vertices: [264, 263, 262, 261, 260, 259, 258, 273, 271, 269, 268, 270, 267, 266, 265]
+        vertices: [264, 263, 1197, 1238, 1230, 1237, 1229, 1239, 1228, 1240, 1227, 1241, 1226, 1236, 1235, 261, 260, 259, 258, 273, 271, 269, 268, 270, 267, 266, 265]
       - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [213, 212, 210, 211, 205, 203, 201, 197, 196, 194, 195, 200, 199, 198, 202, 204, 206, 207, 208, 209, 219, 216, 215, 214]
       - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
@@ -157,6 +157,10 @@ levels:
         vertices: [263, 213, 214, 215, 216, 219, 209, 1195, 235, 236, 237, 238, 239, 240, 241, 606, 257, 256, 255, 254, 261, 262]
       - parameters: {texture_name: [1, white_marble], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [483, 1095, 484, 485, 486, 1102, 1103, 487, 1104, 488, 1105, 489, 490, 1106, 491, 1107, 1108, 492, 1109, 493, 1110, 494, 1111, 495, 1112, 1196, 479, 480, 538, 515, 514, 513, 512]
+      - parameters: {texture_name: [1, blue_linoleum_high_contrast], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [1241, 1227, 1240, 1228, 1239, 1229, 1237, 1230, 1238, 1231, 1232, 1233, 1234, 1235, 1236, 1226]
+      - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [1235, 1234, 1233, 1232, 1231, 1238, 1197, 262, 261]
     lanes:
       - [675, 676, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [676, 677, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
@@ -247,9 +251,7 @@ levels:
       - [731, 733, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [718, 717, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [752, 719, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [720, 719, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [721, 725, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [724, 720, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [720, 721, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [723, 673, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [674, 753, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
@@ -344,6 +346,11 @@ levels:
       - [1221, 736, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [733, 1221, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1221, 1215, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [720, 1242, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1242, 719, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1242, 1243, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [724, 1244, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1244, 720, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
     layers:
       {}
     measurements:
@@ -620,12 +627,16 @@ levels:
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 167.491, y: 647.22, yaw: -2.1069, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 267.338, y: 613.0170000000001, yaw: -1.9853, z: 0}
       - {model_name: Fridge, name: Fridge, static: true, x: 1157.048, y: 608.303, yaw: 0, z: 0}
-      - {model_name: construction_cone, name: construction_cone, static: true, x: 302.988, y: 592.193, yaw: 0, z: 0}
-      - {model_name: construction_cone, name: construction_cone, static: true, x: 331.276, y: 585.26, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 303.863, y: 592.592, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 329.388, y: 587.378, yaw: 0, z: 0}
       - {model_name: construction_cone, name: construction_cone, static: true, x: 848.792, y: 584.984, yaw: 0, z: 0}
       - {model_name: construction_cone, name: construction_cone, static: true, x: 849.12, y: 606.782, yaw: 0, z: 0}
       - {model_name: ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 907.302, y: 593.994, yaw: 0.7995, z: 0}
       - {model_name: fountain, name: fountain, static: true, x: 847.37, y: 169.463, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 306.031, y: 612.471, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 329.259, y: 609.5069999999999, yaw: 0, z: 0}
+      - {model_name: RobotPlaceholder, name: RobotPlaceholder, static: true, x: 316.588, y: 588.503, yaw: 0, z: 0}
+      - {model_name: MopCart3, name: MopCart3, static: false, x: 282.841, y: 444.122, yaw: 0, z: 0}
     vertices:
       - [1911.731, 141.469, 0, ""]
       - [1911.342, 177.998, 0, ""]
@@ -1347,11 +1358,11 @@ levels:
       - [796.508, 443.73, 0, junction_s07]
       - [672.628, 448.714, 0, junction_n10]
       - [361.405, 524.174, 0, junction_n05]
-      - [263.762, 541.104, 0, ""]
+      - [268.975, 540.747, 0, ""]
       - [117.107, 560.4059999999999, 0, ""]
       - [18.55, 546.477, 0, junction_n01]
       - [19.54, 396.147, 0, ""]
-      - [249.546, 345.05, 0, n03, {is_parking_spot: [4, true]}]
+      - [265.173, 334.272, 0, n03, {is_parking_spot: [4, true], spawn_robot_name: [1, magni_4_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [194.487, 391.049, 0, ""]
       - [146.307, 113.153, 0, ""]
       - [146.99, 76.544, 0, ""]
@@ -1853,6 +1864,25 @@ levels:
       - [357.266, 575.412, 0, ""]
       - [1117.794, 537.955, 0, ""]
       - [1147.506, 539.38, 0, ""]
+      - [311.221, 600.826, 0, ""]
+      - [311.986, 595.922, 0, ""]
+      - [317.42, 594.6609999999999, 0, ""]
+      - [322.272, 595.728, 0, ""]
+      - [322.855, 599.221, 0, ""]
+      - [324.407, 602.909, 0, ""]
+      - [322.66, 605.2380000000001, 0, ""]
+      - [319.458, 606.111, 0, ""]
+      - [316.45, 605.723, 0, ""]
+      - [313.927, 604.17, 0, ""]
+      - [312.666, 602.133, 0, ""]
+      - [322.272, 597.669, 0, ""]
+      - [324.989, 600.871, 0, ""]
+      - [320.04, 594.467, 0, ""]
+      - [314.412, 594.6609999999999, 0, ""]
+      - [312.219, 598.3869999999999, 0, ""]
+      - [325.963, 530.437, 0, ""]
+      - [321.478, 577.193, 0, spill, {is_parking_spot: [4, true], workcell_name: [1, mopcart_collector]}]
+      - [270.109, 443.861, 0, mopcart_pickup, {is_parking_spot: [4, false], workcell_name: [1, mopcart_dispenser]}]
     walls:
       - [6, 10, {}]
       - [10, 9, {}]

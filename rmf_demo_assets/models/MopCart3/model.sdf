@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="MopCart3">
+    <link name="link">
+      <pose>0 0 0 0 0 0</pose>
+
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>model://MopCart3/meshes/MopCart3.obj</uri></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <geometry>
+            <mesh><uri>model://MopCart3/meshes/MopCart3.obj</uri></mesh>
+          </geometry>
+        </collision>
+
+    </link>
+
+    <plugin name="teleport" filename="libteleport.so">
+      <load_guid>mopcart_dispenser</load_guid>
+      <unload_guid>mopcart_collector</unload_guid>
+      <unload_model_prefix>RobotPlaceholder</unload_model_prefix>
+      <respawn_seconds>30</respawn_seconds>
+    </plugin>
+
+  </model>
+</sdf>

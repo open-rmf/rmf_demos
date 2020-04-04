@@ -34,6 +34,7 @@
       <load_guid>beverage_dispenser</load_guid>
       <unload_guid>beverage_collector</unload_guid>
       <unload_model_prefix>RobotPlaceholder</unload_model_prefix>
+      <respawn_seconds>5</respawn_seconds>
     </plugin>
 
   </model>

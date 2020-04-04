@@ -10,6 +10,7 @@ install(
     scripts/airport_terminal/airport_terminal_loop_scenario_2.sh
     scripts/airport_terminal/airport_terminal_loop_scenario_3.sh
     scripts/airport_terminal/airport_terminal_spawn_robots.sh
+    scripts/airport_terminal/airport_terminal_delivery_scenario.sh
   DESTINATION lib/${PROJECT_NAME}
 )
 
