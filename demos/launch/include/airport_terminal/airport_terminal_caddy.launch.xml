@@ -23,8 +23,8 @@
     <node pkg="teleop_twist_joy" exec="teleop_node">
       <param name="axis_linear.x" value="1" />
       <param name="axis_angular.yaw" value="0" />
-      <param name="scale_linear.x" value="1.0" />
-      <param name="scale_angular.yaw" value="1.0" />
+      <param name="scale_linear.x" value="0.8" />
+      <param name="scale_angular.yaw" value="0.8" />
       <param name="enable_button" value="5" />
     </node>
   </group>
