@@ -13,9 +13,6 @@ function spawn_robot {
 echo "Spawning robot mir100_0."
 spawn_robot MiR100 mir100_0
 
-echo "Spawning robot mir100_1."
-spawn_robot MiR100 mir100_1
-
 echo "Spawning robot mir100_2."
 spawn_robot MiR100 mir100_2
 
@@ -28,5 +25,5 @@ spawn_robot Magni magni_1
 echo "Spawning robot magni_2."
 spawn_robot Magni magni_2
 
-echo "Spawning robot magni_3."
-spawn_robot Magni magni_3
+echo "Spawning robot magni_4."
+spawn_robot Magni magni_4
