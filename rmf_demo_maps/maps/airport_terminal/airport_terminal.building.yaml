@@ -249,9 +249,7 @@ levels:
       - [721, 725, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [724, 720, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [720, 721, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [723, 722, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [723, 673, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [673, 674, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [674, 753, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [674, 781, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [677, 736, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
@@ -270,7 +268,6 @@ levels:
       - [675, 754, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [783, 679, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [726, 784, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
-      - [784, 785, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [785, 786, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [786, 787, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [787, 788, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
@@ -334,10 +331,293 @@ levels:
       - [1209, 1210, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [1210, 1211, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [1211, 1212, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
+      - [673, 1213, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1213, 1214, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1214, 674, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [733, 1215, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
     layers:
       {}
     measurements:
       - [0, 1, {distance: [3, 3]}]
+    models:
+      - {model_name: oak_tree, name: oak_tree, static: true, x: 795.155, y: 361.072, yaw: 3.1391, z: 0}
+      - {model_name: oak_tree, name: oak_tree, static: true, x: 844.764, y: 166.372, yaw: 0, z: 0}
+      - {model_name: fountain, name: fountain, static: true, x: 899.241, y: 422.643, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 951.851, y: 434.84, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 901.41, y: 393.151, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 859.029, y: 436.517, yaw: 0, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 754.5309999999999, y: 409.501, yaw: -1.3721, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 744.741, y: 401.669, yaw: -1.258, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 653.474, y: 373.131, yaw: -0.9977, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 663.7670000000001, y: 483.322, yaw: 1.2686, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 555.951, y: 502.483, yaw: 1.2678, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 553.925, y: 574.338, yaw: 1.4801, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 806.3579999999999, y: 63.963, yaw: -2.8633, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 675.647, y: 50.204, yaw: 0.9601, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 724.328, y: 246.399, yaw: -0.7456, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 611.745, y: 499.101, yaw: -2.3337, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 721.739, y: 119.213, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 719.582, y: 481.333, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 741.306, y: 482.138, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 763.029, y: 483.21, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 910.197, y: 503.552, yaw: -0.0424, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 930.393, y: 503.253, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 950.8869999999999, y: 502.355, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 647.158, y: 412.503, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 1036.018, y: 291.823, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 1017.064, y: 291.817, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 998.961, y: 291.823, yaw: 0, z: 0}
+      - {model_name: ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 976.8049999999999, y: 492.417, yaw: 0, z: 0}
+      - {model_name: ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 651.639, y: 363.752, yaw: 0, z: 0}
+      - {model_name: ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 924.029, y: 260.699, yaw: 0, z: 0}
+      - {model_name: ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 662.526, y: 323.063, yaw: 0, z: 0}
+      - {model_name: ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 623.296, y: 487.549, yaw: 0, z: 0}
+      - {model_name: ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 803.556, y: 229.027, yaw: 0, z: 0}
+      - {model_name: Fridge, name: Fridge, static: true, x: 997.205, y: 238.438, yaw: -1.5714, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 1048.563, y: 257.063, yaw: 3.1287, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 1057.671, y: 254.634, yaw: 3.1285, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 1036.42, y: 254.634, yaw: 0, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 931.379, y: 193.917, yaw: 1.589, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 931.379, y: 233.383, yaw: 1.5986, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 931.986, y: 167.808, yaw: 1.5708, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 1060.099, y: 435.571, yaw: 2.7894, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 1037.027, y: 422.821, yaw: 2.6318, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 1012.133, y: 403.998, yaw: 2.4737, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 748.567, y: 236.22, yaw: 0, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 1027.944, y: 167.13, yaw: -2.8936, z: 0}
+      - {model_name: fountain, name: fountain, static: true, x: 714.8339999999999, y: 274.223, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 686.758, y: 310.876, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 676.58, y: 266.551, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 809.9160000000001, y: 58.166, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 829.302, y: 58.166, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 976.191, y: 74.84099999999999, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 975.475, y: 58.721, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 955.057, y: 59.079, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 810.395, y: 75.158, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 829.302, y: 74.919, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 997.326, y: 75.199, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 996.609, y: 58.721, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 933.564, y: 75.199, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 933.922, y: 59.079, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 954.698, y: 75.199, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 734.05, y: 56.49, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 734.05, y: 72.52500000000001, yaw: 0.0086, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 713.581, y: 56.426, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 714.318, y: 71.901, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 811.283, y: 90.169, yaw: 0, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 832, y: 90.405, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 616.443, y: 59.426, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 477.146, y: 115.846, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 528.466, y: 67.714, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 457.35, y: 64.872, yaw: 0, z: 0}
+      - {model_name: fountain, name: fountain, static: true, x: 594.13, y: 91.93899999999999, yaw: 0, z: 0}
+      - {model_name: fountain, name: fountain, static: true, x: 443.039, y: 92.896, yaw: 0, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 1026.519, y: 322.207, yaw: 0.5485, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 1041.852, y: 348.32, yaw: 0.6877, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 871.699, y: 219.774, yaw: -1.5441, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 806.151, y: 184.086, yaw: 1.6457, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 808.8390000000001, y: 207.676, yaw: 1.6434, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 750.2380000000001, y: 207.542, yaw: -1.588, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 750.317, y: 187.196, yaw: -1.5604, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 729.461, y: 383.068, yaw: 1.0739, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 660.603, y: 233.093, yaw: 1.6462, z: 0}
+      - {model_name: gazebo, name: gazebo, static: true, x: 700.105, y: 186.305, yaw: 0, z: 0}
+      - {model_name: lamp_post, name: lamp_post, static: true, x: 608.64, y: 154.362, yaw: 0.4487, z: 0}
+      - {model_name: lamp_post, name: lamp_post, static: true, x: 558.984, y: 441.356, yaw: -0.4444, z: 0}
+      - {model_name: lamp_post, name: lamp_post, static: true, x: 713.438, y: 420.556, yaw: -2.5066, z: 0}
+      - {model_name: lamp_post, name: lamp_post, static: true, x: 925.884, y: 442.063, yaw: 2.3539, z: 0}
+      - {model_name: playground, name: playground, static: true, x: 302.392, y: 91.654, yaw: -1.5708, z: 0}
+      - {model_name: suv, name: suv, static: true, x: 539.12, y: 194.193, yaw: -1.5708, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 1017.194, y: 323.847, yaw: -0.1141, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 820.136, y: 206.001, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 453.865, y: 118.157, yaw: 1.3654, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 584.6609999999999, y: 169.309, yaw: -2.4517, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 765.353, y: 422.065, yaw: 1.4028, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 991.509, y: 174.705, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 1053.478, y: 338.644, yaw: -2.4495, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 998.647, y: 386.56, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 698.63, y: 482.289, yaw: 0.6109, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 669.681, y: 243.788, yaw: 3.0128, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 747.617, y: 48.44, yaw: -2.1017, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 550.924, y: 64.502, yaw: -1.4811, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 358.808, y: 114.505, yaw: 2.0912, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 237.748, y: 66.476, yaw: 0, z: 0}
+      - {model_name: cafe, name: cafe, static: true, x: 297.82, y: 236.246, yaw: 0.0003, z: 0}
+      - {model_name: VisitorKidSit, name: VisitorKidSit, static: true, x: 549.432, y: 112.696, yaw: 1.1894, z: 0}
+      - {model_name: VisitorKidSit, name: VisitorKidSit, static: true, x: 657.3680000000001, y: 239.879, yaw: -3.064, z: 0}
+      - {model_name: Chair, name: Chair, static: true, x: 999.276, y: 282.494, yaw: -3.1093, z: 0}
+      - {model_name: Chair, name: Chair, static: true, x: 1015.456, y: 281.53, yaw: -1.7316, z: 0}
+      - {model_name: Chair, name: Chair, static: true, x: 1036.228, y: 282.785, yaw: -3.1416, z: 0}
+      - {model_name: KitchenCountertop, name: KitchenCountertop, static: true, x: 1020.316, y: 167.828, yaw: -1.5806, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 1006.554, y: 213.467, yaw: 1.5847, z: 0}
+      - {model_name: KitchenSink, name: KitchenSink, static: true, x: 1020.171, y: 187.391, yaw: -1.5708, z: 0}
+      - {model_name: MiniSofa, name: MiniSofa, static: true, x: 987.61, y: 211.868, yaw: 0, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 726.604, y: 381.702, yaw: -2.9663, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 1017.064, y: 281.369, yaw: -0.0418, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 988.102, y: 211.991, yaw: -1.4388, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 727.879, y: 68.943, yaw: 1.7264, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 753.562, y: 213.691, yaw: -0.3382, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 873.931, y: 212.368, yaw: 0, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 928.597, y: 500.261, yaw: 1.6397, z: 0}
+      - {model_name: Chair, name: Chair, static: true, x: 549.357, y: 112.817, yaw: 0.008999999999999999, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 389.396, y: 333.822, yaw: 0.8803, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 388.685, y: 409.628, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 312.016, y: 334.087, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 312.845, y: 409.32, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 353.461, y: 423.041, yaw: 3.0536, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 362.481, y: 347.815, yaw: 1.2451, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 528.4829999999999, y: 252.659, yaw: 0, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 440.263, y: 345.413, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 470.921, y: 446.039, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 431.762, y: 458.59, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 389.34, y: 470.011, yaw: 0, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 427.483, y: 342.115, yaw: 0, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 516.528, y: 252.659, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 523.8920000000001, y: 286.777, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 554.63, y: 246.701, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 553.2380000000001, y: 287.29, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 578.751, y: 246.469, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 578.519, y: 287.754, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 465.995, y: 375.657, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 544.234, y: 339.667, yaw: 0.6288, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 562.073, y: 367.52, yaw: 0.6172, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 431.684, y: 415.082, yaw: 0, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 509.134, y: 324.282, yaw: -1.5567, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 472.892, y: 324.282, yaw: -1.5708, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 439.02, y: 371.363, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 313.903, y: 233.706, yaw: 0, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 404.474, y: 204.927, yaw: 0, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 461.187, y: 257.407, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 292.314, y: 253.243, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 290.89, y: 217.027, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 356.048, y: 255.774, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 356.364, y: 218.134, yaw: 0, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 166.439, y: 240.295, yaw: 2.5857, z: 0}
+      - {model_name: ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 469.602, y: 419.478, yaw: 0, z: 0}
+      - {model_name: oak_tree, name: oak_tree, static: true, x: 214.636, y: 434.416, yaw: 0, z: 0}
+      - {model_name: fountain, name: fountain, static: true, x: 123.649, y: 405.558, yaw: -0.6327, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 155.331, y: 350.787, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 112.648, y: 377.418, yaw: 0, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 76.53100000000001, y: 441.991, yaw: 0, z: 0}
+      - {model_name: lamp_post, name: lamp_post, static: true, x: 231.611, y: 376.022, yaw: 1.0414, z: 0}
+      - {model_name: lamp_post, name: lamp_post, static: true, x: 94.452, y: 396.731, yaw: -0.3709, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 168.051, y: 520.391, yaw: -3.0916, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 236.796, y: 510.838, yaw: -2.9266, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 317.964, y: 474.377, yaw: -3.1196, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 962.861, y: 311.991, yaw: 1.3118, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 729.7089999999999, y: 419.829, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 999.756, y: 495.362, yaw: -1.1777, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 1077.957, y: 521.403, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 942.727, y: 297.693, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 1085.185, y: 595.066, yaw: 1.5613, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 1060.055, y: 594.691, yaw: 1.5649, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 1095.724, y: 521.466, yaw: 2.7966, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 1052.987, y: 553.968, yaw: -2.4192, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 1028.19, y: 523.019, yaw: -1.7257, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 1005.317, y: 541.492, yaw: 0.95, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 977.126, y: 527.679, yaw: -2.0134, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 964.817, y: 559.059, yaw: 0.1004, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 910.9589999999999, y: 522.331, yaw: -0.5555, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 1062.411, y: 427.421, yaw: 0, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 912.3200000000001, y: 563.752, yaw: 0, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 943.717, y: 559.654, yaw: -1.506, z: 0}
+      - {model_name: MaleVisitorSit, name: MaleVisitorSit, static: true, x: 1065.322, y: 441.075, yaw: -2.0255, z: 0}
+      - {model_name: MaleVisitorSit, name: MaleVisitorSit, static: true, x: 951.785, y: 499.513, yaw: 1.3371, z: 0}
+      - {model_name: MaleVisitorSit, name: MaleVisitorSit, static: true, x: 905.97, y: 558.405, yaw: 1.2292, z: 0}
+      - {model_name: MaleVisitorSit, name: MaleVisitorSit, static: true, x: 947.597, y: 559.614, yaw: 0, z: 0}
+      - {model_name: LampAndStand, name: LampAndStand, static: true, x: 970.35, y: 491.225, yaw: 0, z: 0}
+      - {model_name: VisitorKidSit, name: VisitorKidSit, static: true, x: 1041.476, y: 429.527, yaw: -1.4801, z: 0}
+      - {model_name: VisitorKidSit, name: VisitorKidSit, static: true, x: 918.558, y: 560.076, yaw: 1.4086, z: 0}
+      - {model_name: VisitorKidSit, name: VisitorKidSit, static: true, x: 946.386, y: 552.9589999999999, yaw: 0, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 319.056, y: 476.835, yaw: -1.6626, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 238.988, y: 513.814, yaw: -1.6505, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 552.067, y: 531.664, yaw: 0, z: 0}
+      - {model_name: fountain, name: fountain, static: true, x: 849.9450000000001, y: 248.569, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 765.346, y: 513.7329999999999, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 744.551, y: 536.453, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 788.066, y: 537.223, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 766.116, y: 562.638, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 682.789, y: 529.163, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 682.789, y: 560.1369999999999, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 682.789, y: 596.6420000000001, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 618.688, y: 550.668, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 620.208, y: 579.55, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 653.65, y: 549.148, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 655.822, y: 579.984, yaw: -0.0134, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 682.42, y: 480.859, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 692.282, y: 576.7859999999999, yaw: -2.8887, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 753.933, y: 561.664, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 639.549, y: 579.1130000000001, yaw: -1.5652, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 631.097, y: 618.6420000000001, yaw: 0, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 765.884, y: 603.021, yaw: 1.5682, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 555.946, y: 563.078, yaw: 1.5849, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 766.7430000000001, y: 613.183, yaw: 1.5559, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 692.534, y: 530.188, yaw: 2.9504, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 620.704, y: 623.439, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 554.704, y: 589.462, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 586.814, y: 589.079, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 554.172, y: 625.173, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 589.54, y: 624.89, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 1087.652, y: 541.087, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 1038.67, y: 541.62, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 962.043, y: 590.828, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 1002.216, y: 591.25, yaw: 0, z: 0}
+      - {model_name: playground, name: playground, static: true, x: 1126.779, y: 182.89, yaw: -1.5708, z: 0}
+      - {model_name: pine_tree, name: pine_tree, static: true, x: 1088.337, y: 297.661, yaw: 0, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 878.178, y: 546.1420000000001, yaw: 0, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 862.203, y: 546.7569999999999, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 893.547, y: 544.5309999999999, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 893.962, y: 527.9160000000001, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 506.611, y: 360.296, yaw: 2.0599, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 560.672, y: 326.258, yaw: -2.4067, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 668.665, y: 343.536, yaw: 2.9471, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 516.704, y: 412.366, yaw: -0.6647999999999999, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 395.229, y: 658.476, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 522.881, y: 574.27, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 522.881, y: 610.2140000000001, yaw: 0, z: 0}
+      - {model_name: cafe_table, name: cafe_table, static: true, x: 522.582, y: 644.96, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 484.241, y: 572.473, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 484.84, y: 624.8920000000001, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 449.495, y: 597.933, yaw: 0, z: 0}
+      - {model_name: Table, name: Table, static: true, x: 449.238, y: 640.795, yaw: -3.1416, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 448.297, y: 665.928, yaw: 1.5458, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 440.509, y: 677.61, yaw: 1.1215, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 512.398, y: 609.016, yaw: -2.7588, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 492.029, y: 677.3099999999999, yaw: 0.9784, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 528.787, y: 513.843, yaw: 0.2589, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 504.741, y: 518.215, yaw: 0.2122, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 479.694, y: 523.598, yaw: 0.259, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 306.466, y: 559.423, yaw: 0.201, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 282.139, y: 563.756, yaw: 0.2026, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 257.364, y: 568.492, yaw: 0.199, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 158.968, y: 583.499, yaw: 0, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 132.347, y: 583.9690000000001, yaw: 0, z: 0}
+      - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 105.726, y: 584.282, yaw: 0, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 393.866, y: 613.974, yaw: 1.5815, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 378.697, y: 580.024, yaw: 0, z: 0}
+      - {model_name: StorageRack, name: StorageRack, static: true, x: 396.575, y: 579.302, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 414.273, y: 577.496, yaw: -3.0036, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 392.964, y: 623.9059999999999, yaw: 1.5292, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 405.063, y: 578.579, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 405.195, y: 642.563, yaw: -2.4434, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 485.644, y: 540.155, yaw: -1.2382, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 83.788, y: 662.893, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 133.918, y: 664.028, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 186.944, y: 635.365, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 233.761, y: 634.569, yaw: 0, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 259.913, y: 668.1180000000001, yaw: 1.5491, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 261.211, y: 678.155, yaw: 1.2439, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 185.182, y: 664.5700000000001, yaw: 0, z: 0}
+      - {model_name: bookshelf, name: bookshelf, static: true, x: 233.31, y: 665.278, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 221.215, y: 647.048, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 167.491, y: 647.22, yaw: -2.1069, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 267.338, y: 613.0170000000001, yaw: -1.9853, z: 0}
+      - {model_name: Fridge, name: Fridge, static: true, x: 1157.048, y: 608.303, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 302.988, y: 592.193, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 331.276, y: 585.26, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 848.792, y: 584.984, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 849.12, y: 606.782, yaw: 0, z: 0}
+      - {model_name: ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 907.302, y: 593.994, yaw: 0.7995, z: 0}
     vertices:
       - [1911.731, 141.469, 0, ""]
       - [1911.342, 177.998, 0, ""]
@@ -657,10 +937,10 @@ levels:
       - [726.627, 184.889, 0, ""]
       - [730.02, 289.233, 0, ""]
       - [778.532, 317.919, 0, ""]
-      - [887.872, 400.238, 0, ""]
-      - [920.234, 409.978, 0, ""]
-      - [876.561, 431.972, 0, ""]
-      - [903.896, 445.796, 0, ""]
+      - [888.448, 403.923, 0, ""]
+      - [919.583, 413.703, 0, ""]
+      - [878.8680000000001, 432.164, 0, ""]
+      - [902.02, 441.046, 0, ""]
       - [966.734, 142.913, 0, ""]
       - [1041.827, 142.599, 0, ""]
       - [1041.513, 139.143, 0, ""]
@@ -995,9 +1275,9 @@ levels:
       - [191.415, 470.993, 0, ""]
       - [200.657, 456.69, 0, ""]
       - [202.197, 444.807, 0, ""]
-      - [751.713, 43.889, 0, ""]
+      - [759.48, 44.572, 0, ""]
       - [1844.607, 44.567, 0, ""]
-      - [916.5119999999999, 44.347, 0, ""]
+      - [913.502, 44.381, 0, ""]
       - [1081.439, 44.213, 0, ""]
       - [1315.888, 44.213, 0, ""]
       - [1470.075, 44.635, 0, ""]
@@ -1012,8 +1292,8 @@ levels:
       - [2857.409, 44.629, 0, ""]
       - [940.712, 643.332, 0, ""]
       - [1019.506, 643.332, 0, ""]
-      - [135.884, 162.959, 0, junction_n02]
-      - [416.325, 161.13, 0, ""]
+      - [137.72, 162.056, 0, junction_n02]
+      - [417.566, 163.095, 0, ""]
       - [708.2910000000001, 136.32, 0, ""]
       - [778.491, 131.46, 0, junction_n12]
       - [852.8579999999999, 123.058, 0, ""]
@@ -1061,16 +1341,16 @@ levels:
       - [361.405, 524.174, 0, junction_n05]
       - [263.762, 541.104, 0, ""]
       - [117.107, 560.4059999999999, 0, ""]
-      - [17.777, 546.014, 0, junction_n01]
-      - [19.627, 396.193, 0, ""]
+      - [18.55, 546.477, 0, junction_n01]
+      - [19.54, 396.147, 0, ""]
       - [249.546, 345.05, 0, n03, {is_parking_spot: [4, true]}]
       - [194.487, 391.049, 0, ""]
       - [146.307, 113.153, 0, ""]
       - [146.99, 76.544, 0, ""]
       - [147.91, 21.692, 0, charger_mir100_0, {is_charger: [4, true], is_parking_spot: [4, true]}]
       - [183.306, 76.739, 0, charger_mir100_1, {is_charger: [4, true], is_parking_spot: [4, true]}]
-      - [179.938, 112.994, 0, charger_mir100_2, {is_charger: [4, true], is_parking_spot: [4, true]}]
-      - [780.329, 286.515, 0, caddy]
+      - [179.938, 112.994, 0, charger_mir100_2, {is_charger: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, mir100_2_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [780.329, 286.515, 0, caddy, {spawn_robot_name: [1, caddy_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [701.934, 344.833, 0, magni_n09]
       - [898.29, 296.794, 0, magni_n11]
       - [900.34, 346.54, 0, magni_n10]
@@ -1120,11 +1400,11 @@ levels:
       - [3281.662, 636.129, 0, s23, {is_parking_spot: [4, true]}]
       - [3411.584, 431.529, 0, ""]
       - [3183.151, 405.927, 0, ""]
-      - [466.929, 138.264, 0, ""]
+      - [463.391, 138.65, 0, ""]
       - [1383.27, 73.375, 0, ""]
       - [1421.285, 73.477, 0, ""]
-      - [137.338, 162.974, 0, ""]
-      - [411.899, 161.495, 0, ""]
+      - [138.25, 162.939, 0, ""]
+      - [417.722, 162.003, 0, ""]
       - [463.443, 139.478, 0, ""]
       - [644.1, 139.067, 0, ""]
       - [733.2569999999999, 135.367, 0, ""]
@@ -1155,7 +1435,7 @@ levels:
       - [2416.178, 325.307, 0, n24, {is_parking_spot: [4, true]}]
       - [2246.059, 471.244, 0, ""]
       - [2233.697, 508.932, 0, n23, {is_parking_spot: [4, true]}]
-      - [411.165, 128.856, 0, west_koi_pond, {is_parking_spot: [4, true]}]
+      - [417.951, 123.318, 0, west_koi_pond, {is_parking_spot: [4, true]}]
       - [972.431, 347.198, 0, n14, {is_parking_spot: [4, true]}]
       - [598.149, 161.665, 0, ""]
       - [968.681, 230.146, 0, ""]
@@ -1164,15 +1444,15 @@ levels:
       - [974.582, 273.519, 0, ""]
       - [992.347, 302.062, 0, ""]
       - [728.764, 262.776, 0, ""]
-      - [879.322, 405.424, 0, ""]
-      - [874.0119999999999, 413.619, 0, ""]
+      - [881.263, 408.913, 0, ""]
+      - [876.373, 414.601, 0, ""]
       - [873.4349999999999, 421.93, 0, ""]
-      - [887.401, 439.936, 0, ""]
-      - [918.104, 442.244, 0, ""]
-      - [924.337, 434.165, 0, ""]
+      - [888.348, 439.449, 0, ""]
+      - [916.789, 438.75, 0, ""]
+      - [921.778, 433.861, 0, ""]
       - [924.799, 420.891, 0, ""]
-      - [897.789, 401.153, 0, ""]
-      - [910.14, 404.27, 0, ""]
+      - [900.301, 404.978, 0, ""]
+      - [910.103, 408.214, 0, ""]
       - [809.407, 314.041, 0, ""]
       - [822.761, 318.568, 0, ""]
       - [833.059, 327.961, 0, ""]
@@ -1207,8 +1487,8 @@ levels:
       - [865.3099999999999, 237.588, 0, ""]
       - [870.467, 248.072, 0, ""]
       - [867.974, 258.729, 0, ""]
-      - [856.373, 265.432, 0, ""]
-      - [842.021, 263.112, 0, ""]
+      - [857.431, 266.299, 0, ""]
+      - [840.228, 266.179, 0, ""]
       - [833.083, 256.752, 0, ""]
       - [703.4299999999999, 257.462, 0, ""]
       - [716.647, 254.525, 0, ""]
@@ -1228,122 +1508,122 @@ levels:
       - [687.725, 223.664, 0, ""]
       - [675.932, 211.434, 0, ""]
       - [669.381, 198.768, 0, ""]
-      - [753.545, 97.449, 0, ""]
-      - [758.122, 156.272, 0, ""]
-      - [760.182, 207.543, 0, ""]
-      - [759.2670000000001, 250.345, 0, ""]
-      - [750.34, 277.124, 0, ""]
+      - [760.723, 88.866, 0, ""]
+      - [761.454, 149.157, 0, ""]
+      - [762.598, 203.542, 0, ""]
+      - [762.434, 245.679, 0, ""]
+      - [762.434, 278.995, 0, ""]
       - [715.361, 309.463, 0, ""]
-      - [695.535, 337.598, 0, ""]
-      - [797.72, 43.889, 0, ""]
-      - [797.033, 98.13500000000001, 0, ""]
+      - [686.798, 337.918, 0, ""]
+      - [792.676, 43.998, 0, ""]
+      - [795.068, 99.102, 0, ""]
       - [797.72, 150.321, 0, ""]
-      - [799.78, 201.134, 0, ""]
-      - [802.068, 247.827, 0, ""]
-      - [810.766, 265.68, 0, ""]
-      - [828.8049999999999, 275.476, 0, ""]
-      - [854.518, 279.431, 0, ""]
-      - [911.705, 293.146, 0, ""]
-      - [878.745, 43.889, 0, ""]
+      - [798.343, 202.677, 0, ""]
+      - [798.422, 248.258, 0, ""]
+      - [798.422, 272.323, 0, ""]
+      - [829.303, 275.8, 0, ""]
+      - [857.6799999999999, 277.609, 0, ""]
+      - [914.724, 293.433, 0, ""]
+      - [879.349, 43.903, 0, ""]
       - [879.432, 86.92, 0, ""]
       - [880.119, 137.275, 0, ""]
-      - [880.119, 174.354, 0, ""]
-      - [879.6609999999999, 219.903, 0, ""]
-      - [878.597, 254.611, 0, ""]
+      - [880.273, 175.399, 0, ""]
+      - [881.751, 219.405, 0, ""]
+      - [881.62, 241.171, 0, ""]
       - [634.211, 44.158, 0, ""]
       - [0.39, 487.145, 0, ""]
-      - [723.717, 376.088, 0, ""]
-      - [737.744, 348.572, 0, ""]
-      - [750.178, 326.339, 0, ""]
-      - [774.835, 307.395, 0, ""]
-      - [806.407, 302.885, 0, ""]
-      - [830.763, 311.605, 0, ""]
-      - [856.322, 332.353, 0, ""]
-      - [854.217, 351.597, 0, ""]
-      - [869.819, 273.92, 0, ""]
-      - [917.198, 86.004, 0, ""]
-      - [916.283, 137.504, 0, ""]
-      - [916.5119999999999, 171.15, 0, ""]
-      - [915.367, 210.061, 0, ""]
-      - [914.91, 257.44, 0, ""]
+      - [715.179, 354.38, 0, ""]
+      - [726.48, 345.562, 0, ""]
+      - [751.432, 328.499, 0, ""]
+      - [783.6609999999999, 304.221, 0, ""]
+      - [806.519, 305.215, 0, ""]
+      - [841.446, 307.487, 0, ""]
+      - [881.24, 310.41, 0, ""]
+      - [880.846, 341.623, 0, ""]
+      - [881.36, 278.315, 0, ""]
+      - [913.942, 85.947, 0, ""]
+      - [913.551, 136.646, 0, ""]
+      - [913.421, 171.053, 0, ""]
+      - [913.421, 210.673, 0, ""]
+      - [913.551, 252.77, 0, ""]
       - [915.485, 314.349, 0, ""]
-      - [934.3869999999999, 344.979, 0, ""]
-      - [949.285, 362.005, 0, ""]
-      - [843.264, 368.523, 0, ""]
-      - [823.547, 389.183, 0, ""]
-      - [810.617, 402.414, 0, ""]
-      - [791.974, 417.749, 0, ""]
-      - [771.496, 424.692, 0, ""]
-      - [892.34, 385.439, 0, ""]
-      - [876.718, 391.941, 0, ""]
+      - [918.33, 341.994, 0, ""]
+      - [947.9589999999999, 366.614, 0, ""]
+      - [850.591, 370.036, 0, ""]
+      - [825.462, 392.134, 0, ""]
+      - [810.062, 409.273, 0, ""]
+      - [790.067, 429.516, 0, ""]
+      - [773.798, 430.261, 0, ""]
+      - [901.2859999999999, 366.786, 0, ""]
+      - [874.455, 392.065, 0, ""]
       - [862.456, 405.323, 0, ""]
-      - [852.596, 421.522, 0, ""]
-      - [845.553, 431.382, 0, ""]
-      - [847.314, 439.129, 0, ""]
-      - [857.224, 443.608, 0, ""]
-      - [880.931, 450.998, 0, ""]
-      - [957.798, 447.439, 0, ""]
+      - [847.296, 420.739, 0, ""]
+      - [822.877, 441.375, 0, ""]
+      - [842.825, 456.852, 0, ""]
+      - [865.008, 456.68, 0, ""]
+      - [891.663, 455.304, 0, ""]
+      - [962.557, 452.138, 0, ""]
       - [918.264, 453.23, 0, ""]
-      - [940.772, 449.939, 0, ""]
-      - [912.977, 388.715, 0, ""]
-      - [928.611, 400.618, 0, ""]
-      - [946.853, 418.252, 0, ""]
-      - [964.487, 376.903, 0, ""]
-      - [1003.403, 410.347, 0, ""]
-      - [1019.821, 423.116, 0, ""]
-      - [1043.232, 436.798, 0, ""]
+      - [940.66, 452.138, 0, ""]
+      - [922.961, 388.409, 0, ""]
+      - [939.986, 403.542, 0, ""]
+      - [958.072, 418.632, 0, ""]
+      - [974.991, 390.731, 0, ""]
+      - [1002.553, 415.776, 0, ""]
+      - [1021.635, 432.074, 0, ""]
+      - [1038.728, 445.59, 0, ""]
       - [1069.988, 445.746, 0, ""]
-      - [1073.331, 482.403, 0, ""]
-      - [1041.194, 481.85, 0, ""]
-      - [1009.078, 482.957, 0, ""]
-      - [976.297, 484.507, 0, ""]
-      - [951.933, 486.944, 0, ""]
+      - [1080.587, 475.877, 0, ""]
+      - [1038.55, 477.373, 0, ""]
+      - [1020.449, 479.467, 0, ""]
+      - [989.184, 481.562, 0, ""]
+      - [954.627, 483.357, 0, ""]
       - [908.299, 486.722, 0, ""]
-      - [860.456, 485.836, 0, ""]
+      - [881.325, 488.293, 0, ""]
       - [840.744, 474.762, 0, magni_s07]
-      - [479.502, 478.446, 0, ""]
-      - [489.541, 514.482, 0, ""]
-      - [512.631, 467.932, 0, ""]
-      - [555.877, 456.625, 0, ""]
-      - [666.77, 392.747, 0, ""]
-      - [659.033, 412.982, 0, ""]
-      - [645.9400000000001, 429.249, 0, ""]
-      - [521.756, 506.417, 0, ""]
-      - [560.638, 496.102, 0, ""]
-      - [607.654, 484.397, 0, ""]
-      - [641.179, 477.454, 0, ""]
-      - [669.944, 473.883, 0, ""]
-      - [702.676, 473.685, 0, ""]
-      - [748.7, 474.875, 0, ""]
-      - [787.1849999999999, 480.231, 0, ""]
-      - [822.694, 483.207, 0, ""]
-      - [683.434, 367.355, 0, ""]
-      - [716.364, 396.516, 0, ""]
-      - [700.644, 425.111, 0, ""]
-      - [712.08, 434.133, 0, ""]
-      - [707.04, 411.791, 0, ""]
-      - [726.6799999999999, 432.621, 0, ""]
-      - [749.691, 428.257, 0, ""]
-      - [702.1130000000001, 434.028, 0, ""]
-      - [961.6369999999999, 440.462, 0, ""]
-      - [959.014, 431.933, 0, ""]
-      - [0.893, 563.306, 0, ""]
+      - [475.448, 481.085, 0, ""]
+      - [487.506, 511.465, 0, ""]
+      - [513.5, 471.376, 0, ""]
+      - [551.026, 461.992, 0, ""]
+      - [670.592, 394.976, 0, ""]
+      - [666.038, 413.861, 0, ""]
+      - [660.478, 435.442, 0, ""]
+      - [522.74, 503.165, 0, ""]
+      - [563.298, 492.517, 0, ""]
+      - [604.563, 483.038, 0, ""]
+      - [634.963, 475.284, 0, ""]
+      - [672.501, 465.192, 0, ""]
+      - [699.208, 463.223, 0, ""]
+      - [733.423, 462.115, 0, ""]
+      - [788.807, 460.761, 0, ""]
+      - [834.053, 489.939, 0, ""]
+      - [678.092, 369.393, 0, ""]
+      - [706.112, 389.65, 0, ""]
+      - [697.046, 420.823, 0, ""]
+      - [711.95, 433.242, 0, ""]
+      - [701.766, 406.044, 0, ""]
+      - [732.441, 432.249, 0, ""]
+      - [754.299, 430.882, 0, ""]
+      - [692.7, 434.732, 0, ""]
+      - [996.59, 451.61, 0, ""]
+      - [974.723, 433.293, 0, ""]
+      - [0.65, 559.227, 0, ""]
       - [54.027, 567.86, 0, ""]
-      - [102.67, 573.95, 0, ""]
-      - [168.266, 573.364, 0, ""]
-      - [236.834, 566.023, 0, ""]
-      - [301.602, 553.423, 0, ""]
-      - [373.967, 540.407, 0, ""]
-      - [446.74, 523.1609999999999, 0, ""]
-      - [429.125, 489.987, 0, ""]
-      - [377.75, 499.088, 0, ""]
-      - [326.374, 508.482, 0, ""]
-      - [284.98, 513.473, 0, ""]
-      - [226.852, 525.51, 0, ""]
-      - [179.881, 533.436, 0, ""]
-      - [116.175, 531.675, 0, ""]
-      - [58.634, 527.8579999999999, 0, ""]
-      - [1.093, 523.455, 0, ""]
+      - [114.495, 575.043, 0, ""]
+      - [186.216, 567.8390000000001, 0, ""]
+      - [241.024, 560.949, 0, ""]
+      - [301, 551.24, 0, ""]
+      - [363.795, 540.146, 0, ""]
+      - [446.634, 521.0170000000001, 0, ""]
+      - [429.674, 491.899, 0, ""]
+      - [382.413, 502.73, 0, ""]
+      - [329.244, 513.438, 0, ""]
+      - [286.906, 520.699, 0, ""]
+      - [225.678, 530.413, 0, ""]
+      - [149.103, 538.2430000000001, 0, ""]
+      - [98.05200000000001, 540.592, 0, ""]
+      - [53.109, 533.8579999999999, 0, ""]
+      - [1.276, 527.2809999999999, 0, ""]
       - [3434.382, 526.38, 0, ""]
       - [3397.615, 531.761, 0, ""]
       - [3345.783, 540.728, 0, ""]
@@ -1367,14 +1647,14 @@ levels:
       - [1724.718, 478.883, 0, ""]
       - [1544.331, 466.569, 0, ""]
       - [1462.996, 461.185, 0, ""]
-      - [1389.482, 459.182, 0, ""]
+      - [1353, 455.831, 0, ""]
       - [1144.064, 447.029, 0, ""]
       - [1233.012, 450.029, 0, ""]
-      - [1147.053, 482.101, 0, ""]
-      - [1239.118, 482.699, 0, ""]
-      - [1349.119, 486.485, 0, ""]
-      - [1425.043, 489.474, 0, ""]
-      - [1512.79, 494.654, 0, ""]
+      - [1146.857, 477.971, 0, ""]
+      - [1239.756, 481.562, 0, ""]
+      - [1350.906, 487.097, 0, ""]
+      - [1461.158, 492.632, 0, ""]
+      - [1512.17, 495.773, 0, ""]
       - [1619.965, 510.201, 0, ""]
       - [1699.151, 500.304, 0, ""]
       - [1868.432, 489.674, 0, ""]
@@ -1504,27 +1784,27 @@ levels:
       - [428.328, 82.923, 0, ""]
       - [431.811, 77.7, 0, ""]
       - [439.066, 76.684, 0, ""]
-      - [654.3680000000001, 43.773, 0, ""]
-      - [652.898, 68.209, 0, ""]
-      - [649.9589999999999, 102.199, 0, ""]
-      - [630.73, 145.208, 0, ""]
-      - [617.255, 174.956, 0, ""]
-      - [613.213, 211.334, 0, ""]
-      - [615.831, 268.361, 0, ""]
-      - [612.5549999999999, 310.198, 0, ""]
+      - [665.085, 44.162, 0, ""]
+      - [658.302, 67.32899999999999, 0, ""]
+      - [647.806, 102.656, 0, ""]
+      - [632.447, 146.43, 0, ""]
+      - [620.287, 185.468, 0, ""]
+      - [619.775, 224.379, 0, ""]
+      - [618.751, 272.889, 0, ""]
+      - [618.367, 307.319, 0, ""]
       - [610.539, 355.311, 0, ""]
-      - [601.466, 390.091, 0, ""]
-      - [580.295, 432.936, 0, ""]
-      - [695.86, 43.213, 0, ""]
-      - [693.106, 73.337, 0, ""]
-      - [683.294, 120.159, 0, ""]
-      - [666.941, 160.095, 0, ""]
+      - [600.574, 420.742, 0, ""]
+      - [587.2190000000001, 452.335, 0, ""]
+      - [699.516, 43.778, 0, ""]
+      - [689.404, 76.289, 0, ""]
+      - [679.293, 107.904, 0, ""]
+      - [668.925, 140.542, 0, ""]
       - [653.518, 199.06, 0, ""]
-      - [654.03, 255.977, 0, ""]
-      - [650.784, 343.058, 0, ""]
-      - [647.111, 375.329, 0, ""]
-      - [635.662, 412.619, 0, ""]
-      - [637.141, 424.916, 0, ""]
+      - [651.006, 255.481, 0, ""]
+      - [650.494, 310.775, 0, ""]
+      - [641.4059999999999, 375.028, 0, ""]
+      - [633.145, 428.233, 0, ""]
+      - [627.119, 446.147, 0, ""]
       - [650.607, 215.8, 0, ""]
       - [657.885, 179.955, 0, ""]
       - [653.436, 139.306, 0, ""]
@@ -1533,25 +1813,28 @@ levels:
       - [601.6079999999999, 466.31, 0, ""]
       - [673.8579999999999, 72.735, 0, ""]
       - [635.9109999999999, 187.982, 0, ""]
-      - [776.503, 70.027, 0, ""]
+      - [776.212, 60.447, 0, ""]
       - [468.758, 708.193, 0, ""]
       - [2955.045, 101.395, 0, ""]
       - [340.645, 609.421, 0, ""]
       - [1132.252, 524.857, 0, ""]
       - [1131.675, 587.942, 0, ""]
       - [198.813, 180.124, 0, ""]
-      - [187.1, 162.611, 0, ""]
-      - [221.841, 162.702, 0, ""]
-      - [19.174, 472.777, 0, ""]
-      - [19.046, 502.842, 0, ""]
+      - [179.111, 162.995, 0, ""]
+      - [228.176, 162.572, 0, ""]
+      - [18.874, 469.749, 0, ""]
+      - [19.12, 506.596, 0, ""]
       - [198.896, 144.477, 0, ""]
       - [198.794, 176.729, 0, ""]
       - [4.211, 492.453, 0, ""]
       - [32.893, 492.665, 0, ""]
-      - [20.654, 396.722, 0, ""]
-      - [20.186, 472.75, 0, ""]
-      - [20.398, 502.884, 0, ""]
+      - [20.14, 396.394, 0, ""]
+      - [19.488, 470.118, 0, ""]
+      - [19.734, 506.719, 0, ""]
       - [19.383, 546.11, 0, junction_n01]
+      - [179.098, 162.166, 0, ""]
+      - [228.367, 161.794, 0, ""]
+      - [896.253, 59.851, 0, ""]
     walls:
       - [6, 10, {}]
       - [10, 9, {}]
@@ -1792,9 +2075,7 @@ levels:
       - [12, 13, {}]
       - [13, 14, {}]
       - [13, 311, {}]
-      - [311, 312, {}]
       - [312, 313, {}]
-      - [287, 302, {}]
       - [302, 303, {}]
       - [303, 304, {}]
       - [304, 307, {}]
@@ -1807,7 +2088,6 @@ levels:
       - [288, 290, {}]
       - [290, 289, {}]
       - [289, 294, {}]
-      - [294, 295, {}]
       - [295, 301, {}]
       - [301, 300, {}]
       - [300, 302, {}]
