@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<sdf version="1.6">
+  <model name='MiniSofa'>
+    <link name="body">
+      <pose>0 0 0 0 0 -1.57079632679</pose>
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://MiniSofa/meshes/minisofa.obj</uri>
+            <scale>1.00 1.00 1.00</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://MiniSofa/meshes/minisofa.obj</uri>
+            <scale>1.00 1.00 1.00</scale>
+          </mesh>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>
+

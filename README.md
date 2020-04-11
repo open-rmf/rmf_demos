@@ -48,6 +48,15 @@ rosdep install --from-paths src --ignore-src --rosdistro eloquent \
     -y --skip-keys "websocketpp ament_python"
 ```
 
+Some of the demos might refer to open source gazebo models hosted [here](https://bitbucket.org/osrf/gazebo_models). To avoid any race conditions and errors where `gazebo` downloads all models when launched, optionally, a local copy of all the open source models can be downloaded and saved manually like so,
+
+```bash
+cd ~/.
+hg clone https://bitbucket.org/osrf/gazebo_models
+cd gazebo_models
+cp -r ./* ~/.gazebo/models/.
+```
+
 ## Compiling Instructions
 
 Source ROS 2 Eloquent and build,
