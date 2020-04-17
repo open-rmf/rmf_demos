@@ -19,26 +19,25 @@ function send_loop_job {
     --delay 2
 }
 
-echo "Spawning and sending job to robot mir100_0."
-spawn_robot MiR100 mir100_0
-send_loop_job junction_south_west junction_south_east mir100
-
+# spawn and send loop requests
 echo "Spawning and sending job to robot mir100_1."
-spawn_robot MiR100 mir100_1
+spawn_robot MiR100 mir100_0
 send_loop_job junction_north_west junction_south_west mir100
+
+echo "Spawning and sending job to robot mir100_2."
+spawn_robot MiR100 mir100_2
 
 echo "Spawning and sending job to robot magni_0."
 spawn_robot Magni magni_0
-send_loop_job n08 magni_n09 magni
+send_loop_job magni_n09 magni_s07 magni
 
 echo "Spawning and sending job to robot magni_1."
 spawn_robot Magni magni_1
-send_loop_job n12 n13 magni
+send_loop_job magni_n11 magni_s07 magni
 
+# spawn only
 echo "Spawning and sending job to robot magni_2."
 spawn_robot Magni magni_2
-send_loop_job junction_n18 s10 magni
 
-echo "Spawning and sending job to robot magni_3."
-spawn_robot Magni magni_3
-send_loop_job n24_0 junction_s13 magni
+echo "Spawning and sending job to robot magni_4."
+spawn_robot Magni magni_4
