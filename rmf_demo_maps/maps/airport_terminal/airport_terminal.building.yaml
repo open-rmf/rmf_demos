@@ -3,6 +3,8 @@ levels:
     doors:
       - [1205, 1206, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], type: [1, double_hinged]}]
       - [1207, 1208, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], type: [1, double_hinged]}]
+      - [1222, 1223, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, 1], name: [1, s04_door], type: [1, hinged]}]
+      - [1225, 1224, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, s08_door], type: [1, hinged]}]
     drawing:
       filename: airport_terminal.png
     elevation: 0
@@ -12,7 +14,7 @@ levels:
       - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [297, 296, 295, 301, 300, 302, 303, 304, 307, 306, 818, 305, 308, 298]
       - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
-        vertices: [264, 263, 262, 261, 260, 259, 258, 273, 271, 269, 268, 270, 267, 266, 265]
+        vertices: [264, 263, 1197, 1238, 1230, 1237, 1229, 1239, 1228, 1240, 1227, 1241, 1226, 1236, 1235, 261, 260, 259, 258, 273, 271, 269, 268, 270, 267, 266, 265]
       - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [213, 212, 210, 211, 205, 203, 201, 197, 196, 194, 195, 200, 199, 198, 202, 204, 206, 207, 208, 209, 219, 216, 215, 214]
       - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
@@ -155,6 +157,10 @@ levels:
         vertices: [263, 213, 214, 215, 216, 219, 209, 1195, 235, 236, 237, 238, 239, 240, 241, 606, 257, 256, 255, 254, 261, 262]
       - parameters: {texture_name: [1, white_marble], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [483, 1095, 484, 485, 486, 1102, 1103, 487, 1104, 488, 1105, 489, 490, 1106, 491, 1107, 1108, 492, 1109, 493, 1110, 494, 1111, 495, 1112, 1196, 479, 480, 538, 515, 514, 513, 512]
+      - parameters: {texture_name: [1, blue_linoleum_high_contrast], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [1241, 1227, 1240, 1228, 1239, 1229, 1237, 1230, 1238, 1231, 1232, 1233, 1234, 1235, 1236, 1226]
+      - parameters: {texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [1235, 1234, 1233, 1232, 1231, 1238, 1197, 262, 261]
     lanes:
       - [675, 676, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [676, 677, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
@@ -245,14 +251,11 @@ levels:
       - [731, 733, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [718, 717, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [752, 719, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [720, 719, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [721, 725, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [724, 720, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [720, 721, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [723, 673, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [674, 753, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [674, 781, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [677, 736, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [736, 678, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [678, 782, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [782, 739, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
@@ -308,7 +311,6 @@ levels:
       - [1053, 711, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [793, 1055, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [1055, 796, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
-      - [719, 1191, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1191, 718, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1191, 1190, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1190, 1189, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
@@ -334,20 +336,32 @@ levels:
       - [673, 1213, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1213, 1214, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
       - [1214, 674, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
-      - [733, 1215, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [719, 1216, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1216, 1217, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [961, 1218, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1218, 1219, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [719, 1220, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1220, 1191, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [677, 1221, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1221, 736, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [733, 1221, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1221, 1215, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [720, 1242, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1242, 719, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1242, 1243, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [724, 1244, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
+      - [1244, 720, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 2], orientation: [1, ""]}]
     layers:
       {}
     measurements:
       - [0, 1, {distance: [3, 3]}]
     models:
-      - {model_name: oak_tree, name: oak_tree, static: true, x: 795.155, y: 361.072, yaw: 3.1391, z: 0}
-      - {model_name: oak_tree, name: oak_tree, static: true, x: 844.764, y: 166.372, yaw: 0, z: 0}
       - {model_name: fountain, name: fountain, static: true, x: 899.241, y: 422.643, yaw: 0, z: 0}
       - {model_name: pine_tree, name: pine_tree, static: true, x: 951.851, y: 434.84, yaw: 0, z: 0}
       - {model_name: pine_tree, name: pine_tree, static: true, x: 901.41, y: 393.151, yaw: 0, z: 0}
       - {model_name: pine_tree, name: pine_tree, static: true, x: 859.029, y: 436.517, yaw: 0, z: 0}
-      - {model_name: MainTable, name: MainTable, static: true, x: 754.5309999999999, y: 409.501, yaw: -1.3721, z: 0}
-      - {model_name: person_standing, name: person_standing, static: true, x: 744.741, y: 401.669, yaw: -1.258, z: 0}
+      - {model_name: MainTable, name: MainTable, static: true, x: 797.97, y: 352.604, yaw: -1.3721, z: 0}
+      - {model_name: person_standing, name: person_standing, static: true, x: 791.591, y: 338.571, yaw: -1.258, z: 0}
       - {model_name: person_standing, name: person_standing, static: true, x: 653.474, y: 373.131, yaw: -0.9977, z: 0}
       - {model_name: person_standing, name: person_standing, static: true, x: 663.7670000000001, y: 483.322, yaw: 1.2686, z: 0}
       - {model_name: person_standing, name: person_standing, static: true, x: 555.951, y: 502.483, yaw: 1.2678, z: 0}
@@ -419,7 +433,7 @@ levels:
       - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 808.8390000000001, y: 207.676, yaw: 1.6434, z: 0}
       - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 750.2380000000001, y: 207.542, yaw: -1.588, z: 0}
       - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 750.317, y: 187.196, yaw: -1.5604, z: 0}
-      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 729.461, y: 383.068, yaw: 1.0739, z: 0}
+      - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 722.843, y: 377.552, yaw: 1.1903, z: 0}
       - {model_name: WhiteChipChair, name: WhiteChipChair, static: true, x: 660.603, y: 233.093, yaw: 1.6462, z: 0}
       - {model_name: gazebo, name: gazebo, static: true, x: 700.105, y: 186.305, yaw: 0, z: 0}
       - {model_name: lamp_post, name: lamp_post, static: true, x: 608.64, y: 154.362, yaw: 0.4487, z: 0}
@@ -432,7 +446,7 @@ levels:
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 820.136, y: 206.001, yaw: 0, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 453.865, y: 118.157, yaw: 1.3654, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 584.6609999999999, y: 169.309, yaw: -2.4517, z: 0}
-      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 765.353, y: 422.065, yaw: 1.4028, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 810.869, y: 361.534, yaw: 1.4028, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 991.509, y: 174.705, yaw: 0, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 1053.478, y: 338.644, yaw: -2.4495, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 998.647, y: 386.56, yaw: 0, z: 0}
@@ -452,7 +466,7 @@ levels:
       - {model_name: Table, name: Table, static: true, x: 1006.554, y: 213.467, yaw: 1.5847, z: 0}
       - {model_name: KitchenSink, name: KitchenSink, static: true, x: 1020.171, y: 187.391, yaw: -1.5708, z: 0}
       - {model_name: MiniSofa, name: MiniSofa, static: true, x: 987.61, y: 211.868, yaw: 0, z: 0}
-      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 726.604, y: 381.702, yaw: -2.9663, z: 0}
+      - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 721.001, y: 374.575, yaw: 2.6012, z: 0}
       - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 1017.064, y: 281.369, yaw: -0.0418, z: 0}
       - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 988.102, y: 211.991, yaw: -1.4388, z: 0}
       - {model_name: FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 727.879, y: 68.943, yaw: 1.7264, z: 0}
@@ -505,7 +519,7 @@ levels:
       - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 236.796, y: 510.838, yaw: -2.9266, z: 0}
       - {model_name: PotatoChipChair, name: PotatoChipChair, static: true, x: 317.964, y: 474.377, yaw: -3.1196, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 962.861, y: 311.991, yaw: 1.3118, z: 0}
-      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 729.7089999999999, y: 419.829, yaw: 0, z: 0}
+      - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 797.119, y: 363.519, yaw: 0, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 999.756, y: 495.362, yaw: -1.1777, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 1077.957, y: 521.403, yaw: 0, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 942.727, y: 297.693, yaw: 0, z: 0}
@@ -613,11 +627,16 @@ levels:
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 167.491, y: 647.22, yaw: -2.1069, z: 0}
       - {model_name: FemaleVisitor, name: FemaleVisitor, static: true, x: 267.338, y: 613.0170000000001, yaw: -1.9853, z: 0}
       - {model_name: Fridge, name: Fridge, static: true, x: 1157.048, y: 608.303, yaw: 0, z: 0}
-      - {model_name: construction_cone, name: construction_cone, static: true, x: 302.988, y: 592.193, yaw: 0, z: 0}
-      - {model_name: construction_cone, name: construction_cone, static: true, x: 331.276, y: 585.26, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 303.863, y: 592.592, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 329.388, y: 587.378, yaw: 0, z: 0}
       - {model_name: construction_cone, name: construction_cone, static: true, x: 848.792, y: 584.984, yaw: 0, z: 0}
       - {model_name: construction_cone, name: construction_cone, static: true, x: 849.12, y: 606.782, yaw: 0, z: 0}
       - {model_name: ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 907.302, y: 593.994, yaw: 0.7995, z: 0}
+      - {model_name: fountain, name: fountain, static: true, x: 847.37, y: 169.463, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 306.031, y: 612.471, yaw: 0, z: 0}
+      - {model_name: construction_cone, name: construction_cone, static: true, x: 329.259, y: 609.5069999999999, yaw: 0, z: 0}
+      - {model_name: RobotPlaceholder, name: RobotPlaceholder, static: true, x: 316.588, y: 588.503, yaw: 0, z: 0}
+      - {model_name: MopCart3, name: MopCart3, static: false, x: 282.841, y: 444.122, yaw: 0, z: 0}
     vertices:
       - [1911.731, 141.469, 0, ""]
       - [1911.342, 177.998, 0, ""]
@@ -832,7 +851,7 @@ levels:
       - [469.488, 552.96, 0, ""]
       - [537.2140000000001, 544.6799999999999, 0, ""]
       - [413.65, 562.09, 0, ""]
-      - [360.148, 572.068, 0, ""]
+      - [358.93, 575.331, 0, ""]
       - [358.874, 609.859, 0, ""]
       - [377.345, 610.496, 0, ""]
       - [376.496, 629.1799999999999, 0, ""]
@@ -1339,24 +1358,24 @@ levels:
       - [796.508, 443.73, 0, junction_s07]
       - [672.628, 448.714, 0, junction_n10]
       - [361.405, 524.174, 0, junction_n05]
-      - [263.762, 541.104, 0, ""]
+      - [268.975, 540.747, 0, ""]
       - [117.107, 560.4059999999999, 0, ""]
       - [18.55, 546.477, 0, junction_n01]
       - [19.54, 396.147, 0, ""]
-      - [249.546, 345.05, 0, n03, {is_parking_spot: [4, true]}]
+      - [265.173, 334.272, 0, n03, {is_parking_spot: [4, true], spawn_robot_name: [1, magni_4_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [194.487, 391.049, 0, ""]
       - [146.307, 113.153, 0, ""]
       - [146.99, 76.544, 0, ""]
       - [147.91, 21.692, 0, charger_mir100_0, {is_charger: [4, true], is_parking_spot: [4, true]}]
       - [183.306, 76.739, 0, charger_mir100_1, {is_charger: [4, true], is_parking_spot: [4, true]}]
       - [179.938, 112.994, 0, charger_mir100_2, {is_charger: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, mir100_2_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
-      - [780.329, 286.515, 0, caddy, {spawn_robot_name: [1, caddy_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [780.329, 286.515, 0, junction_n11]
       - [701.934, 344.833, 0, magni_n09]
       - [898.29, 296.794, 0, magni_n11]
       - [900.34, 346.54, 0, magni_n10]
       - [852.112, 60.245, 0, n12, {is_parking_spot: [4, true]}]
       - [1015.012, 117.231, 0, ""]
-      - [1053.278, 117.296, 0, n13, {is_parking_spot: [4, true]}]
+      - [1053.278, 117.296, 0, n13, {is_parking_spot: [4, true], spawn_robot_name: [1, magni_2_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [1423.265, 172.268, 0, n15_1, {is_parking_spot: [4, true]}]
       - [1384.545, 169.4, 0, n15_0, {is_parking_spot: [4, true]}]
       - [1994.913, 166.163, 0, n22, {is_parking_spot: [4, true]}]
@@ -1379,7 +1398,7 @@ levels:
       - [1095.018, 337.539, 0, n14_0, {is_parking_spot: [4, true]}]
       - [1116.553, 337.331, 0, n14_1, {is_parking_spot: [4, true]}]
       - [1132.642, 632.058, 0, ""]
-      - [1176.243, 632.773, 0, s08, {is_parking_spot: [4, true]}]
+      - [1176.243, 632.773, 0, s08, {is_parking_spot: [4, true], spawn_robot_name: [1, mir100_0_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
       - [2259.639, 343.148, 0, n24_1, {is_parking_spot: [4, true]}]
       - [2209.26, 341.64, 0, ""]
       - [2208.958, 250.232, 0, n24_0, {is_parking_spot: [4, true]}]
@@ -1390,11 +1409,11 @@ levels:
       - [2736.946, 230.306, 0, n28, {is_parking_spot: [4, true]}]
       - [3412.49, 397.058, 0, n33, {is_parking_spot: [4, true]}]
       - [1520.192, 528.463, 0, ""]
-      - [1487.795, 528.717, 0, s10, {is_parking_spot: [4, true], spawn_robot_name: [1, magni_0_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [1487.795, 528.717, 0, s10, {is_parking_spot: [4, true]}]
       - [1845.116, 522.389, 0, ""]
-      - [1864.594, 521.6130000000001, 0, s11, {is_parking_spot: [4, true], spawn_robot_name: [1, magni_1_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [1864.594, 521.6130000000001, 0, s11, {is_parking_spot: [4, true]}]
       - [2523.327, 467.79, 0, s15_1, {is_parking_spot: [4, true]}]
-      - [2537.997, 589.59, 0, s15_0, {is_parking_spot: [4, true], spawn_robot_name: [1, magni_2_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [2537.997, 589.59, 0, s15_0, {is_parking_spot: [4, true]}]
       - [2522.642, 589.157, 0, ""]
       - [2830.697, 443.595, 0, n29, {is_parking_spot: [4, true]}]
       - [3281.662, 636.129, 0, s23, {is_parking_spot: [4, true]}]
@@ -1414,7 +1433,7 @@ levels:
       - [1029.672, 460.428, 0, junction_south_west]
       - [1538.448, 480.253, 0, junction_central_west]
       - [1530.005, 555.9400000000001, 0, ""]
-      - [1490.743, 555.491, 0, s10, {is_parking_spot: [4, true], spawn_robot_name: [1, mir100_0_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [1490.743, 555.491, 0, s10, {is_parking_spot: [4, true]}]
       - [1828.635, 475.911, 0, junction_central_east]
       - [1833.676, 540.337, 0, ""]
       - [1863.731, 539.713, 0, s11, {is_parking_spot: [4, true], spawn_robot_name: [1, mir100_1_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
@@ -1469,17 +1488,17 @@ levels:
       - [758.936, 333.845, 0, ""]
       - [795.035, 314.041, 0, ""]
       - [828.4690000000001, 157.868, 0, ""]
-      - [833.78, 150.734, 0, ""]
-      - [843.372, 146.532, 0, ""]
+      - [833.928, 152.125, 0, ""]
+      - [843.8579999999999, 148.514, 0, ""]
       - [854.708, 149.307, 0, ""]
-      - [862.556, 155.173, 0, ""]
-      - [865.41, 165.161, 0, ""]
-      - [865.014, 177.686, 0, ""]
-      - [858.751, 187.516, 0, ""]
+      - [863.58, 154.864, 0, ""]
+      - [868.444, 164.121, 0, ""]
+      - [866.64, 178.006, 0, ""]
+      - [860.2859999999999, 187.89, 0, ""]
       - [850.269, 192.59, 0, ""]
       - [836.713, 189.577, 0, ""]
-      - [830.847, 179.748, 0, ""]
-      - [829.261, 167.222, 0, ""]
+      - [830.162, 181.301, 0, ""]
+      - [826.1609999999999, 169.22, 0, ""]
       - [829.302, 247.299, 0, ""]
       - [832.3099999999999, 238.017, 0, ""]
       - [841.1609999999999, 231.4, 0, ""]
@@ -1810,8 +1829,8 @@ levels:
       - [653.436, 139.306, 0, ""]
       - [633.803, 309.553, 0, ""]
       - [616.728, 424.789, 0, ""]
-      - [601.6079999999999, 466.31, 0, ""]
-      - [673.8579999999999, 72.735, 0, ""]
+      - [601.6079999999999, 466.31, 0, s06]
+      - [673.8579999999999, 72.735, 0, koi_pond]
       - [635.9109999999999, 187.982, 0, ""]
       - [776.212, 60.447, 0, ""]
       - [468.758, 708.193, 0, ""]
@@ -1835,6 +1854,35 @@ levels:
       - [179.098, 162.166, 0, ""]
       - [228.367, 161.794, 0, ""]
       - [896.253, 59.851, 0, ""]
+      - [349.547, 567.686, 0, ""]
+      - [349.72, 623.377, 0, s03, {spawn_robot_name: [1, magni_0_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [829.973, 515.119, 0, ""]
+      - [827.6369999999999, 601.074, 0, s07, {spawn_robot_name: [1, magni_1_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [490.243, 493.246, 0, caddy, {spawn_robot_name: [1, caddy_placeholder], spawn_robot_type: [1, RobotPlaceholder]}]
+      - [897.3440000000001, 121.785, 0, ""]
+      - [342.521, 575.905, 0, ""]
+      - [357.266, 575.412, 0, ""]
+      - [1117.794, 537.955, 0, ""]
+      - [1147.506, 539.38, 0, ""]
+      - [311.221, 600.826, 0, ""]
+      - [311.986, 595.922, 0, ""]
+      - [317.42, 594.6609999999999, 0, ""]
+      - [322.272, 595.728, 0, ""]
+      - [322.855, 599.221, 0, ""]
+      - [324.407, 602.909, 0, ""]
+      - [322.66, 605.2380000000001, 0, ""]
+      - [319.458, 606.111, 0, ""]
+      - [316.45, 605.723, 0, ""]
+      - [313.927, 604.17, 0, ""]
+      - [312.666, 602.133, 0, ""]
+      - [322.272, 597.669, 0, ""]
+      - [324.989, 600.871, 0, ""]
+      - [320.04, 594.467, 0, ""]
+      - [314.412, 594.6609999999999, 0, ""]
+      - [312.219, 598.3869999999999, 0, ""]
+      - [325.963, 530.437, 0, ""]
+      - [321.478, 577.193, 0, spill, {is_parking_spot: [4, true], workcell_name: [1, mopcart_collector]}]
+      - [270.109, 443.861, 0, mopcart_pickup, {is_parking_spot: [4, false], workcell_name: [1, mopcart_dispenser]}]
     walls:
       - [6, 10, {}]
       - [10, 9, {}]
@@ -2289,6 +2337,10 @@ levels:
       - [1200, 1206, {}]
       - [912, 1207, {}]
       - [1208, 277, {}]
+      - [263, 1222, {}]
+      - [213, 1223, {}]
+      - [181, 1224, {}]
+      - [167, 1225, {}]
 lifts:
   {}
 name: airport_terminal

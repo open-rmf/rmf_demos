@@ -13,7 +13,7 @@
       <max_drive_acceleration>0.75</max_drive_acceleration>
 
       <!-- Turning -->
-      <nominal_turn_speed>0.3</nominal_turn_speed>
+      <nominal_turn_speed>0.6</nominal_turn_speed>
       <!-- Note: The official maximum turn acceleration value is 0.25, but that
            seems to be too small for the simulated MiR100 to do course
            corrections while driving, so it ends up swaying erratically. Using
@@ -358,7 +358,6 @@
         <xyz>0 1 0</xyz>
       </axis>
     </joint>
-
 
   </model>
 </sdf>
