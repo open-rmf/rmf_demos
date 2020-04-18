@@ -109,6 +109,7 @@ levels:
       - {model_name: RecTable, name: RecTable, static: true, x: 2508, y: 532, yaw: -1.5708, z: 0}
       - {model_name: WhiteCabinet, name: WhiteCabinet, static: true, x: 1779.929, y: 344.234, yaw: -1.6, z: 0}
       - {model_name: SquareShelf, name: SquareShelf, static: true, x: 938.97, y: 352.118, yaw: 1.0932, z: 0}
+      - {model_name: RobotPlaceholder, name: RobotPlaceholder, static: true, x: 2661.568, y: 896.11, yaw: 0, z: 0.805}
     vertices:
       - [80.27, 1024.974, 0, ""]
       - [580.795, 43.396, 0, ""]

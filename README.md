@@ -4,7 +4,9 @@
 
 This repository contains documentation and demo packages which showcase the capabilities of the Robotics Middleware Framework (RMF) including traffic_management, conflict resolution, and door/lift interaction with heterogeneous robot fleets. The demos serve as a starting point for working and integrating with RMF.
 
-![](media/loop_request.gif)
+[![Robotics Middleware Framework](media/thumbnail.png)](https://vimeo.com/405803151)
+
+(Click to watch video)
 
 Note: The entire RMF ecosystem is still under active development, which may cause documentation, API or ABI compatibility to break. 
 
@@ -67,7 +69,7 @@ source /opt/ros/eloquent/setup.bash
 colcon build
 ```
 
-## Office World
+# Office World
 An indoor office environemnt for robots to navigate around. It includes a beverage dispensing station, controllable doors and laneways which are integrated into RMF.
 
 
@@ -77,34 +79,35 @@ ros2 launch demos office.launch.xml
 ```
 
 To simulate a delivery
+
+Click the `Request Delivery` button in the RViz `RMF Panel` or
+
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
 ros2 run rmf_demo_tasks request_delivery 
 ``` 
+
 ![](media/delivery_request.gif)
 
 To request each of the Magni robots to loop between two points,
+
+Click the `Request Loop` button in the RViz `RMF Panel` or
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos office_loop.launch.xml
 ``` 
 
-## Example Map
+![](media/loop_request.gif)
 
-An example map/graph configuration generated using the layout of the OSRF Singapore office, has been included in the package `rmf_demo_maps`, and it can be found [here](rmf_demo_maps/maps/office/). This configuration file can be read and modified by the [traffic editor](https://github.com/osrf/traffic_editor), and is parsed by the different core packages of RMF during build time.
-
-Below is a screenshot of how the provided demo map will look like, when opened using the `traffic editor`,
-
-<img src="media/office_screenshot.png" width="800px"/>
-
-## Airport Terminal World
+# Airport Terminal World
 
 This demo world shows robot interaction on a much larger map, with a lot more lanes, destinations, robots and possible interactions between robots from different fleets, robots and infrastructure, as well as robots and users. In the illustrations below, from top to bottom we have how the world looks like in `traffic_editor`, the schedule visualizer in `rviz`, and the full simulation in `gazebo`,
 
 ![](media/airport_terminal_traffic_editor_screenshot.png)
 ![](media/airport_terminal_demo_screenshot.png)
 
+## Demo Scenario
 To launch the world and the schedule visualizer,
 
 ```bash
@@ -112,18 +115,30 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos airport_terminal.launch.xml
 ```
 
-To start a basic setup where Magni and MiR100 robots are spawned, without sending any requests,
+To run a scenario where multiple robots are issued task orders,
+
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 run demos airport_terminal_scenario.sh
+```
+This command spawns 2 mir100 and 4 magni robots in the map. Out of these 1 mir100 and 2 magni robots are issued loop request tasks. The other robots are idle and can be issued loop or delivery reqeust tasks via the `RMF Panel`.
+
+Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vechiles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vechile's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `magni` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
+
+To spawn the caddy into the world,
+
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 launch demos airport_terminal_caddy.launch.xml
+```
+
+![](media/caddy.gif)
+
+Alternatively, to spawn all the robots without issuing any task orders,
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
 ros2 run demos airport_terminal_spawn_robots.sh
-```
-
-To spawn the robots as well as sending looping jobs,
-
-```bash
-source ~/rmf_demos_ws/install/setup.bash
-ros2 run demos airport_terminal_loop_scenario.sh
 ```
 
 # Notes and known issues
