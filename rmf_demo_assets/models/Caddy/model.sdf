@@ -23,7 +23,7 @@
       <!-- Waypoint threshold (m). Radius around the waypoint to determine if caddy is at that waypoint   -->
       <waypoint_threshold>2.0</waypoint_threshold>
       <!-- If true, predicted path will merge robot with nearest lane -->
-      <merge_lane>true</merge_lane>
+      <merge_lane>false</merge_lane>
       <!-- Normal distance of robot from its lane, greater than which its path will merge with the lane -->
       <lane_threshold>0.2</lane_threshold>
     </plugin>

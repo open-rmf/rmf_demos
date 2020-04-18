@@ -369,5 +369,6 @@
       </axis>
     </joint>
     <static>0</static>
+
   </model>
 </sdf>

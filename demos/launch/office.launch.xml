@@ -43,16 +43,4 @@
     </include>
   </group>
 
-  <!-- Dispenser nodes -->
-  <group>
-    <node pkg="rmf_demo_tasks" exec="dispenser">
-      <param name="dispenser_name" value="beverage_dispenser"/>
-      <param name="use_sim_time" value="true"/>
-    </node>
-    <node pkg="rmf_demo_tasks" exec="dispenser">
-      <param name="dispenser_name" value="beverage_collector"/>
-      <param name="use_sim_time" value="true"/>
-    </node>
-  </group>
-
 </launch>

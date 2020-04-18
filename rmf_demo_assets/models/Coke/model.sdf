@@ -33,8 +33,8 @@
     <plugin name="teleport" filename="libteleport.so">
       <load_guid>beverage_dispenser</load_guid>
       <unload_guid>beverage_collector</unload_guid>
-      <load_pose>16.840 -5.400 0.300 0.0 0.0 0</load_pose>
-      <unload_pose>22.373 -7.615 0.810 0.0 0.0 0.0</unload_pose>
+      <unload_model_prefix>RobotPlaceholder</unload_model_prefix>
+      <respawn_seconds>5</respawn_seconds>
     </plugin>
 
   </model>
