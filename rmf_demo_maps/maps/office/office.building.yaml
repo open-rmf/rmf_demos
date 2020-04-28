@@ -104,12 +104,13 @@ levels:
       - {model_name: Drawer, name: Drawer, static: true, x: 1224.595, y: 1275.574, yaw: 0, z: 0}
       - {model_name: Drawer, name: Drawer, static: true, x: 2119.682, y: 936.998, yaw: 0, z: 0}
       - {model_name: Drawer, name: Drawer, static: true, x: 2625.448, y: 1094.713, yaw: 3.0509, z: 0}
-      - {model_name: Coke, name: Coke, static: false, x: 2088.014, y: 626.236, yaw: 0, z: 0}
       - {model_name: ConfTable, name: ConfTable, static: true, x: 620, y: 872, yaw: -0.4691, z: 0}
       - {model_name: RecTable, name: RecTable, static: true, x: 2508, y: 532, yaw: -1.5708, z: 0}
       - {model_name: WhiteCabinet, name: WhiteCabinet, static: true, x: 1779.929, y: 344.234, yaw: -1.6, z: 0}
       - {model_name: SquareShelf, name: SquareShelf, static: true, x: 938.97, y: 352.118, yaw: 1.0932, z: 0}
-      - {model_name: RobotPlaceholder, name: RobotPlaceholder, static: true, x: 2661.568, y: 896.11, yaw: 0, z: 0.805}
+      - {model_name: TeleportDispenser, name: coke_dispenser, static: true, x: 2091.359, y: 624.821, yaw: 0, z: 0}
+      - {model_name: Coke, name: Coke, static: false, x: 2091.359, y: 625.071, yaw: 0, z: 0}
+      - {model_name: TeleportIngestor, name: coke_ingestor, static: true, x: 2662.887, y: 898.996, yaw: 0, z: 0.805}
     vertices:
       - [80.27, 1024.974, 0, ""]
       - [580.795, 43.396, 0, ""]
@@ -155,14 +156,14 @@ levels:
       - [1159.091, 825.636, 0, ""]
       - [1376.364, 822.909, 0, station_1, {is_parking_spot: [4, true]}]
       - [1991.121, 812.872, 0, ""]
-      - [1990, 638.364, 0, pantry, {is_parking_spot: [4, false], workcell_name: [1, beverage_dispenser]}]
+      - [1990, 638.364, 0, pantry, {is_parking_spot: [4, false], workcell_name: [1, coke_dispenser]}]
       - [2213.636, 812, 0, "", {is_parking_spot: [4, true]}]
       - [2220.121, 1225.257, 0, ""]
       - [2457.273, 1218.364, 0, hardware_1, {is_parking_spot: [4, true]}]
       - [2213.374, 451.687, 0, lounge, {is_parking_spot: [4, true]}]
       - [1551.069, 468.349, 0, ""]
       - [1052.727, 730.182, 0, ""]
-      - [2474.545, 885.636, 0, hardware_2, {is_parking_spot: [4, true], workcell_name: [1, beverage_collector]}]
+      - [2474.545, 885.636, 0, hardware_2, {is_parking_spot: [4, true], workcell_name: [1, coke_ingestor]}]
       - [924.545, 917.455, 0, "", {is_parking_spot: [4, false]}]
       - [780, 617.455, 0, coe, {is_parking_spot: [4, true]}]
       - [1366.364, 1087.455, 0, cubicle_1, {is_parking_spot: [4, true]}]

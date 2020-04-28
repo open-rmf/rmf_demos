@@ -18,12 +18,5 @@
 
     </link>
 
-    <plugin name="teleport" filename="libteleport.so">
-      <load_guid>mopcart_dispenser</load_guid>
-      <unload_guid>mopcart_collector</unload_guid>
-      <unload_model_prefix>RobotPlaceholder</unload_model_prefix>
-      <respawn_seconds>30</respawn_seconds>
-    </plugin>
-
   </model>
 </sdf>

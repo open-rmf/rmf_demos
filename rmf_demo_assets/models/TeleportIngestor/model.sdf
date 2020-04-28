@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <sdf version="1.6">
-  <model name="RobotPlaceholder">
+  <model name="TeleportIngestor">
     <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
     <static>true</static>
     
@@ -19,6 +19,9 @@
         </material>
       </visual>
     </link>
+
+    <plugin name="teleport_ingestor" filename="libteleport_ingestor.so">
+    </plugin>
 
   </model>
 </sdf>
