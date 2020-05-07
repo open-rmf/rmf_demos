@@ -2,11 +2,13 @@
 
 ![](https://github.com/osrf/rmf_demos/workflows/build/badge.svg)
 
-This repository contains documentation and demo packages which showcase the capabilities of the Robotics Middleware Framework (RMF) including traffic_management, conflict resolution, and door/lift interaction with heterogeneous robot fleets. The demos serve as a starting point for working and integrating with RMF.
+The Robotics Middleware Framework (RMF or RoMi-H) allows for interoperability among heterogeneous robot fleets while managing robot traffic that is sharing resources such as space, building infrastructure systems (lifts, doors, etc) and other automation systems within the same facility. RMF also handles task allocation and conflict resolution (de-conflicting traffic lanes and other resources). These capabilities are provided by various libraries in the [rmf_core](https://github.com/osrf/rmf_core).
 
-[![Robotics Middleware Framework](media/thumbnail.png)](https://vimeo.com/405803151)
+This repository contains demonstrations of the above mentioned capabilities of RMF. It serves as a starting point for working and integrating with RMF.
 
-(Click to watch video)
+[![Robotics Middleware Framework](docs/media/thumbnail.png)](https://vimeo.com/405803151)
+
+####(Click to watch video)
 
 Note: The entire RMF ecosystem is still under active development, which may cause documentation, API or ABI compatibility to break. 
 
@@ -18,7 +20,7 @@ These demos were developed and tested on
 
 * [ROS 2 - Eloquent](https://index.ros.org/doc/ros2/Releases/Release-Eloquent-Elusor/)
 
-* [Gazebo](http://gazebosim.org/blog/gazebo9)
+* [Gazebo 9.12.0](https://osrf-distributions.s3.us-east-1.amazonaws.com/gazebo/releases/gazebo-9.12.0.tar.bz2)
 
 ## Setup
 
@@ -87,7 +89,7 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 run rmf_demo_tasks request_delivery 
 ``` 
 
-![](media/delivery_request.gif)
+![](docs/docs/media/delivery_request.gif)
 
 To request each of the Magni robots to loop between two points,
 
@@ -98,14 +100,14 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos office_loop.launch.xml
 ``` 
 
-![](media/loop_request.gif)
+![](docs/media/loop_request.gif)
 
 # Airport Terminal World
 
 This demo world shows robot interaction on a much larger map, with a lot more lanes, destinations, robots and possible interactions between robots from different fleets, robots and infrastructure, as well as robots and users. In the illustrations below, from top to bottom we have how the world looks like in `traffic_editor`, the schedule visualizer in `rviz`, and the full simulation in `gazebo`,
 
-![](media/airport_terminal_traffic_editor_screenshot.png)
-![](media/airport_terminal_demo_screenshot.png)
+![](docs/media/airport_terminal_traffic_editor_screenshot.png)
+![](docs/media/airport_terminal_demo_screenshot.png)
 
 ## Demo Scenario
 To launch the world and the schedule visualizer,
@@ -132,25 +134,11 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos airport_terminal_caddy.launch.xml
 ```
 
-![](media/caddy.gif)
+![](docs/media/caddy.gif)
 
 Alternatively, to spawn all the robots without issuing any task orders,
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
 ros2 run demos airport_terminal_spawn_robots.sh
-```
-
-# Notes and known issues
-
-* More instructions on using the `traffic_editor` can be found in the [repository](https://github.com/osrf/traffic_editor).
-
-* If you encounter problems launching the demos in `gazebo`, consider removing the local installation and reinstalling using the `rosdep` command listed at the top,
-
-```bash
-sudo apt remove gazebo*
-
-cd ~/rmf_demos_ws
-rosdep install --from-paths src --ignore-src --rosdistro eloquent \
-    -y --skip-keys "websocketpp ament_python"
 ```
