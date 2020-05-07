@@ -8,7 +8,7 @@ This repository contains demonstrations of the above mentioned capabilities of R
 
 [![Robotics Middleware Framework](docs/media/thumbnail.png)](https://vimeo.com/405803151)
 
-####(Click to watch video)
+#### (Click to watch video)
 
 Note: The entire RMF ecosystem is still under active development, which may cause documentation, API or ABI compatibility to break. 
 
@@ -20,7 +20,7 @@ These demos were developed and tested on
 
 * [ROS 2 - Eloquent](https://index.ros.org/doc/ros2/Releases/Release-Eloquent-Elusor/)
 
-* [Gazebo 9.12.0](https://osrf-distributions.s3.us-east-1.amazonaws.com/gazebo/releases/gazebo-9.12.0.tar.bz2)
+* [Gazebo 9.12.0 or 9.13.0](https://osrf-distributions.s3.us-east-1.amazonaws.com/gazebo/releases/gazebo-9.12.0.tar.bz2)
 
 ## Setup
 
@@ -70,6 +70,9 @@ cd ~/rmf_demos_ws
 source /opt/ros/eloquent/setup.bash
 colcon build
 ```
+
+## FAQ
+Answers to frequently asked questions can be found [here](docs/faq.md).
 
 # Office World
 An indoor office environemnt for robots to navigate around. It includes a beverage dispensing station, controllable doors and laneways which are integrated into RMF.
