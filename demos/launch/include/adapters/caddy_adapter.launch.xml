@@ -20,7 +20,9 @@
       <arg name="angular_acceleration" value="1.5"/>
 
       <!-- The radius of the circular footprint of the caddy -->
-      <arg name="profile_radius" value="1.2"/>
+      <arg name="footprint_radius" value="1.5"/>
+      <!-- Other robots are not allowed within this radius --> 
+      <arg name="vicinity_radius" value="5.0"/>
 
       <arg name="delay_threshold" value="1.0"/>
 
