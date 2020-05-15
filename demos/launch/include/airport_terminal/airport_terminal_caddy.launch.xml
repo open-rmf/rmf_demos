@@ -2,22 +2,12 @@
 
 <launch>
 
-  <!-- Caddy spawner, fleet adapter and robot state aggregator needed for Caddy readonly_plugin -->
+  <!-- Spawn caddy at "caddy_placeholder" and start the joystick teleop node -->
   <group>
-    <let name="fleet_name" value="caddy"/>
     <let name="caddy_path" value="$(find-pkg-share rmf_demo_assets)/models/Caddy/model.sdf" />
     <node pkg="gazebo_ros" exec="spawn_entity.py" args="-database Caddy -entity caddy -reference_frame caddy_placeholder -z 0.02 -Y 0.0">
         <param name="use_sim_time" value="true"/>
     </node>
-    <include file="$(find-pkg-share demos)/include/adapters/caddy_adapter.launch.xml">
-      <arg name="use_sim_time" value="true"/>
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-    </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="caddy"/>
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="true"/>
-    </include>
 
     <node pkg="joy" exec="joy_node" args="--ros-args --remap _dev:=/dev/input/js0" />
     <node pkg="teleop_twist_joy" exec="teleop_node">
