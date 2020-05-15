@@ -25,7 +25,8 @@
       <arg name="angular_acceleration" value="1.0"/>
 
       <!-- The radius of the circular footprint of this fleet's vehicles -->
-      <arg name="profile_radius" value="0.6"/>
+      <arg name="footprint_radius" value="0.6"/>
+      <arg name="vicinity_radius" value="0.6"/>
 
       <!-- Whether to use sim time -->
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
