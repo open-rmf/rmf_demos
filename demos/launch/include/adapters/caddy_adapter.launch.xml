@@ -2,7 +2,7 @@
 
 <launch>
 
-  <arg name="fleet_name" default="caddy" description="Name of this fleet of magni robots"/>
+  <arg name="fleet_name" default="caddy" description="Name of this fleet of caddy robots"/>
 
   <group>
     <include file="$(find-pkg-share rmf_fleet_adapter)/fleet_adapter.launch.xml">
