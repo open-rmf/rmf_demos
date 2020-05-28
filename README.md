@@ -32,7 +32,8 @@ sudo apt update && sudo apt install \
   qt5-default libeigen3-dev \
   libwebsocketpp-dev \
   libboost-all-dev curl \
-  python3-shapely python3-yaml
+  python3-shapely python3-yaml \
+  python3-requests
 ```
 
 Setup a new ROS 2 workspace and pull in all the required repositories using `vcs`,
