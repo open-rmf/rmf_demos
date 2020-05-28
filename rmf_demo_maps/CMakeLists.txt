@@ -30,7 +30,7 @@ foreach(path ${traffic_editor_paths})
   # first, generate the world
   add_custom_command(
     OUTPUT ${output_world_path}
-    COMMAND ros2 run building_map_tools building_map_gazebo ${map_path} ${output_world_path} ${output_model_dir}
+    COMMAND ros2 run building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
     DEPENDS ${map_path}
   )
 
@@ -43,7 +43,7 @@ foreach(path ${traffic_editor_paths})
   set(output_nav_graphs_phony ${output_nav_graphs_dir}/phony)
   add_custom_command(
     OUTPUT ${output_nav_graphs_phony}
-    COMMAND ros2 run building_map_tools building_map_nav ${map_path} ${output_nav_graphs_dir}
+    COMMAND ros2 run building_map_tools building_map_generator nav ${map_path} ${output_nav_graphs_dir}
     DEPENDS ${map_path}
   )
 
