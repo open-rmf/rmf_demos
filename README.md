@@ -1,6 +1,7 @@
 # RMF Demos
 
 ![](https://github.com/osrf/rmf_demos/workflows/build/badge.svg)
+![](https://github.com/osrf/rmf_demos/workflows/style/badge.svg)
 
 The Robotics Middleware Framework (RMF or RoMi-H) allows for interoperability among heterogeneous robot fleets while managing robot traffic that is sharing resources such as space, building infrastructure systems (lifts, doors, etc) and other automation systems within the same facility. RMF also handles task allocation and conflict resolution (de-conflicting traffic lanes and other resources). These capabilities are provided by various libraries in the [rmf_core](https://github.com/osrf/rmf_core).
 
