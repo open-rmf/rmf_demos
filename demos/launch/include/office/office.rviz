@@ -22,6 +22,7 @@ Panels:
     Splitter Ratio: 0.5
   - Class: RMF Panel
     Name: RMF Panel
+    delivery_task_id: task#42
   - Class: rviz2_plugin/SchedulePanel
     Finish: 600
     Map: L1

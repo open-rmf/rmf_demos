@@ -32,6 +32,14 @@ Panels:
     Topic: /rviz_node/param
   - Class: RMF Panel
     Name: RMF Panel
+    delivery_dropoff: spill
+    delivery_robot: magni
+    delivery_task_id: task#42
+    loop_finish: koi_pond
+    loop_num: 1
+    loop_robot: magni
+    loop_start: junction_n10
+    loop_task_id: task#24
   - Class: rviz2_plugin/DoorPanel
     Name: DoorPanel
 Visualization Manager:
@@ -71,7 +79,7 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        {}
+        fleet_markers: true
       Topic:
         Depth: 10
         Durability Policy: Volatile
@@ -188,5 +196,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1920
-  X: 67
-  Y: 27
+  X: 0
+  Y: 0
