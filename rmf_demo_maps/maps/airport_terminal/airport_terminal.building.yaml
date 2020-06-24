@@ -1882,8 +1882,8 @@ levels:
       - [314.412, 594.6609999999999, 0, ""]
       - [312.219, 598.3869999999999, 0, ""]
       - [325.963, 530.437, 0, ""]
-      - [321.478, 577.193, 0, spill, {is_parking_spot: [4, true], workcell_name: [1, mopcart_collector]}]
-      - [270.109, 443.861, 0, mopcart_pickup, {is_parking_spot: [4, false], workcell_name: [1, mopcart_dispenser]}]
+      - [321.478, 577.193, 0, spill, {is_parking_spot: [4, true]}]
+      - [270.109, 443.861, 0, mopcart_pickup, {is_parking_spot: [4, false]}]
     walls:
       - [6, 10, {}]
       - [10, 9, {}]
