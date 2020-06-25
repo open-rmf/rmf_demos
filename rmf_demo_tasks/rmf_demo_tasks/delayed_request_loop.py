@@ -31,15 +31,16 @@ class DelayedLoopRequester:
         parser = argparse.ArgumentParser()
         parser.add_argument('-s', '--start', help='Start waypoint')
         parser.add_argument('-f', '--finish', help='Finish waypoint')
-        parser.add_argument('-n', '--num', help='Number of loops to perform', 
-                type=int, default=1)
-        parser.add_argument('-i', '--task-id', help='Task ID', default='', 
-                type=str)
-        parser.add_argument('-r', '--robot-type', help='Type of robot', 
-                default='magni')
-        parser.add_argument('--delay',
-                help='Number of secs to wait before sending out the request',
-                default=2, type=int)
+        parser.add_argument('-n', '--num', help='Number of loops to perform',
+                            type=int, default=1)
+        parser.add_argument('-i', '--task-id', help='Task ID', default='',
+                            type=str)
+        parser.add_argument('-r', '--robot-type', help='Type of robot',
+                            default='magni')
+        parser.add_argument(
+            '--delay',
+            help='Number of secs to wait before sending out the request',
+            default=2, type=int)
         args = parser.parse_args(argv[1:])
 
         self.start_wp = args.start
@@ -51,7 +52,6 @@ class DelayedLoopRequester:
 
         self.node = rclpy.create_node('delayed_loop_requester_node')
         self.publisher = self.node.create_publisher(Loop, 'loop_requests', 10)
-
 
     def main(self):
         request = Loop()
@@ -68,10 +68,8 @@ class DelayedLoopRequester:
         rclpy.shutdown()
 
         self.node.get_logger().info(
-                'Loop request between {} and {}, submitted to {} robot fleet'\
-                        .format(self.start_wp, 
-                                self.finish_wp, 
-                                self.robot_type))
+          'Loop request between {} and {}, submitted to {} robot fleet'
+          .format(self.start_wp, self.finish_wp, self.robot_type))
 
 
 def main(argv=sys.argv):
