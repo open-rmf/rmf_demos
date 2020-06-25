@@ -28,7 +28,6 @@ foreach(path ${traffic_editor_paths})
   set(output_model_dir ${output_dir}/models)
 
   # first, generate the world
-
   set(no_download_flag "")
   if (NO_DOWNLOAD_MODELS)
     set(no_download_flag "--no_download")
