@@ -5,6 +5,7 @@
   <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="viz_config_file" default="$(find-pkg-share rmf_schedule_visualizer)/config/rmf.rviz"/>
   <arg name="config_file" description="Building description file required by building_map_tools"/>
+  <arg name="headless" description="do not launch rviz; launch gazebo in headless mode" default="false" />
  
   <!-- Traffic Schedule  -->
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both">
@@ -18,10 +19,12 @@
   </group>
 
   <!-- Visualizer -->
-  <include file="$(find-pkg-share visualizer)/visualizer.xml">
-    <arg name="map_name" value="L1"/>
-    <arg name="viz_config_file" value ="$(var viz_config_file)"/>
-  </include>
+  <group unless="$(var headless)">
+    <include file="$(find-pkg-share visualizer)/visualizer.xml">
+      <arg name="map_name" value="L1"/>
+      <arg name="viz_config_file" value ="$(var viz_config_file)"/>
+    </include>
+  </group>
 
   <!-- Door Supervisor -->
   <group>
