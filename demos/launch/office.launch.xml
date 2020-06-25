@@ -21,11 +21,13 @@
       <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
       <env name="GAZEBO_MODEL_DATABASE_URI" value="" />
     </executable>
-    <executable cmd="gzclient --verbose $(var world_path)" output="both">
-      <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
-      <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
-      <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
-    </executable>
+    <group unless="$(var headless)">
+      <executable cmd="gzclient --verbose $(var world_path)" output="both">
+        <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
+        <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
+        <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
+      </executable>
+    </group>
   </group>
 
   <!-- Magni fleet adapter and robot state aggregator needed for the Magni slotcar_plugin -->
