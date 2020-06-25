@@ -9,6 +9,8 @@ Panels:
         - /MarkerArray2/Topic1
         - /MarkerArray3
         - /MarkerArray3/Topic1
+        - /MarkerArray4
+        - /MarkerArray4/Topic1
       Splitter Ratio: 0.5
     Tree Height: 270
   - Class: rviz_common/Selection
@@ -91,6 +93,19 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /map_markers
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        s04_door: true
+        s04_door_text: true
+      Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /building_systems_markers
       Value: true
     - Alpha: 0.20000000298023224
       Class: rviz_default_plugins/Map

@@ -5,8 +5,9 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /MarkerArray3/Topic1
+        - /MarkerArray4/Topic1
       Splitter Ratio: 0.5
-    Tree Height: 270
+    Tree Height: 1083
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -29,6 +30,8 @@ Panels:
     Map: L1
     Name: SchedulePanel
     Topic: /rviz_node/param
+  - Class: rviz2_plugin/DoorPanel
+    Name: DoorPanel
 Visualization Manager:
   Class: ""
   Displays:
@@ -86,6 +89,19 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /map_markers
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        hardware_door: true
+        hardware_door_text: true
+      Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /building_systems_markers
       Value: true
   Enabled: true
   Global Options:
