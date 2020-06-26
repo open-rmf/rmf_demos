@@ -356,288 +356,288 @@ levels:
     measurements:
       - [0, 1, {distance: [3, 3]}]
     models:
-      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 899.241, y: 422.643, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 951.851, y: 434.84, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 901.41, y: 393.151, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 859.029, y: 436.517, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 797.97, y: 352.604, yaw: -1.3721, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 791.591, y: 338.571, yaw: -1.258, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 653.474, y: 373.131, yaw: -0.9977, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 663.7670000000001, y: 483.322, yaw: 1.2686, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 555.951, y: 502.483, yaw: 1.2678, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 553.925, y: 574.338, yaw: 1.4801, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 806.3579999999999, y: 63.963, yaw: -2.8633, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 675.647, y: 50.204, yaw: 0.9601, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 724.328, y: 246.399, yaw: -0.7456, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 611.745, y: 499.101, yaw: -2.3337, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 721.739, y: 119.213, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 719.582, y: 481.333, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 741.306, y: 482.138, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 763.029, y: 483.21, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 910.197, y: 503.552, yaw: -0.0424, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 930.393, y: 503.253, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 950.8869999999999, y: 502.355, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 647.158, y: 412.503, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 1036.018, y: 291.823, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 1017.064, y: 291.817, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 998.961, y: 291.823, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 976.8049999999999, y: 492.417, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 651.639, y: 363.752, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 924.029, y: 260.699, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 662.526, y: 323.063, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 623.296, y: 487.549, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 803.556, y: 229.027, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Fridge, name: Fridge, static: true, x: 997.205, y: 238.438, yaw: -1.5714, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 1048.563, y: 257.063, yaw: 3.1287, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1057.671, y: 254.634, yaw: 3.1285, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1036.42, y: 254.634, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 931.379, y: 193.917, yaw: 1.589, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 931.379, y: 233.383, yaw: 1.5986, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 931.986, y: 167.808, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 1060.099, y: 435.571, yaw: 2.7894, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 1037.027, y: 422.821, yaw: 2.6318, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 1012.133, y: 403.998, yaw: 2.4737, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 748.567, y: 236.22, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1027.944, y: 167.13, yaw: -2.8936, z: 0}
-      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 714.8339999999999, y: 274.223, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 686.758, y: 310.876, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 676.58, y: 266.551, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 809.9160000000001, y: 58.166, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 829.302, y: 58.166, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 976.191, y: 74.84099999999999, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 975.475, y: 58.721, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 955.057, y: 59.079, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 810.395, y: 75.158, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 829.302, y: 74.919, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 997.326, y: 75.199, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 996.609, y: 58.721, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 933.564, y: 75.199, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 933.922, y: 59.079, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 954.698, y: 75.199, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 734.05, y: 56.49, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 734.05, y: 72.52500000000001, yaw: 0.0086, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 713.581, y: 56.426, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 714.318, y: 71.901, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 811.283, y: 90.169, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 832, y: 90.405, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 616.443, y: 59.426, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 477.146, y: 115.846, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 528.466, y: 67.714, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 457.35, y: 64.872, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 594.13, y: 91.93899999999999, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 443.039, y: 92.896, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 1026.519, y: 322.207, yaw: 0.5485, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 1041.852, y: 348.32, yaw: 0.6877, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 871.699, y: 219.774, yaw: -1.5441, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 806.151, y: 184.086, yaw: 1.6457, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 808.8390000000001, y: 207.676, yaw: 1.6434, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 750.2380000000001, y: 207.542, yaw: -1.588, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 750.317, y: 187.196, yaw: -1.5604, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 722.843, y: 377.552, yaw: 1.1903, z: 0}
-      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 660.603, y: 233.093, yaw: 1.6462, z: 0}
-      - {model_name: OpenRobotics/Gazebo, name: Gazebo, static: true, x: 700.105, y: 186.305, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 608.64, y: 154.362, yaw: 0.4487, z: 0}
-      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 558.984, y: 441.356, yaw: -0.4444, z: 0}
-      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 713.438, y: 420.556, yaw: -2.5066, z: 0}
-      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 925.884, y: 442.063, yaw: 2.3539, z: 0}
-      - {model_name: OpenRobotics/Playground, name: Playground, static: true, x: 302.392, y: 91.654, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/SUV, name: SUV, static: true, x: 539.12, y: 194.193, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 1017.194, y: 323.847, yaw: -0.1141, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 820.136, y: 206.001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 453.865, y: 118.157, yaw: 1.3654, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 584.6609999999999, y: 169.309, yaw: -2.4517, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 810.869, y: 361.534, yaw: 1.4028, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 991.509, y: 174.705, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 1053.478, y: 338.644, yaw: -2.4495, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 998.647, y: 386.56, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 698.63, y: 482.289, yaw: 0.6109, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 669.681, y: 243.788, yaw: 3.0128, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 747.617, y: 48.44, yaw: -2.1017, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 550.924, y: 64.502, yaw: -1.4811, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 358.808, y: 114.505, yaw: 2.0912, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 237.748, y: 66.476, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe, name: Cafe, static: true, x: 297.82, y: 236.246, yaw: 0.0003, z: 0}
-      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 549.432, y: 112.696, yaw: 1.1894, z: 0}
-      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 657.3680000000001, y: 239.879, yaw: -3.064, z: 0}
-      - {model_name: OpenRobotics/Chair, name: Chair, static: true, x: 999.276, y: 282.494, yaw: -3.1093, z: 0}
-      - {model_name: OpenRobotics/Chair, name: Chair, static: true, x: 1015.456, y: 281.53, yaw: -1.7316, z: 0}
-      - {model_name: OpenRobotics/Chair, name: Chair, static: true, x: 1036.228, y: 282.785, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/KitchenCountertop, name: KitchenCountertop, static: true, x: 1020.316, y: 167.828, yaw: -1.5806, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 1006.554, y: 213.467, yaw: 1.5847, z: 0}
-      - {model_name: OpenRobotics/KitchenSink, name: KitchenSink, static: true, x: 1020.171, y: 187.391, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/MiniSofa, name: MiniSofa, static: true, x: 987.61, y: 211.868, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 721.001, y: 374.575, yaw: 2.6012, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 1017.064, y: 281.369, yaw: -0.0418, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 988.102, y: 211.991, yaw: -1.4388, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 727.879, y: 68.943, yaw: 1.7264, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 753.562, y: 213.691, yaw: -0.3382, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 873.931, y: 212.368, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 928.597, y: 500.261, yaw: 1.6397, z: 0}
-      - {model_name: OpenRobotics/Chair, name: Chair, static: true, x: 549.357, y: 112.817, yaw: 0.008999999999999999, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 389.396, y: 333.822, yaw: 0.8803, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 388.685, y: 409.628, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 312.016, y: 334.087, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 312.845, y: 409.32, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 353.461, y: 423.041, yaw: 3.0536, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 362.481, y: 347.815, yaw: 1.2451, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 528.4829999999999, y: 252.659, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 440.263, y: 345.413, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 470.921, y: 446.039, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 431.762, y: 458.59, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 389.34, y: 470.011, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 427.483, y: 342.115, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 516.528, y: 252.659, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 523.8920000000001, y: 286.777, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 554.63, y: 246.701, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 553.2380000000001, y: 287.29, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 578.751, y: 246.469, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 578.519, y: 287.754, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 465.995, y: 375.657, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 544.234, y: 339.667, yaw: 0.6288, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 562.073, y: 367.52, yaw: 0.6172, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 431.684, y: 415.082, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 509.134, y: 324.282, yaw: -1.5567, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 472.892, y: 324.282, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 439.02, y: 371.363, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 313.903, y: 233.706, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 404.474, y: 204.927, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 461.187, y: 257.407, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 292.314, y: 253.243, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 290.89, y: 217.027, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 356.048, y: 255.774, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 356.364, y: 218.134, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 166.439, y: 240.295, yaw: 2.5857, z: 0}
-      - {model_name: OpenRobotics/ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 469.602, y: 419.478, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Oak tree, name: Oak tree, static: true, x: 214.636, y: 434.416, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 123.649, y: 405.558, yaw: -0.6327, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 155.331, y: 350.787, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 112.648, y: 377.418, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 76.53100000000001, y: 441.991, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 231.611, y: 376.022, yaw: 1.0414, z: 0}
-      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 94.452, y: 396.731, yaw: -0.3709, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 168.051, y: 520.391, yaw: -3.0916, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 236.796, y: 510.838, yaw: -2.9266, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 317.964, y: 474.377, yaw: -3.1196, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 962.861, y: 311.991, yaw: 1.3118, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 797.119, y: 363.519, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 999.756, y: 495.362, yaw: -1.1777, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 1077.957, y: 521.403, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 942.727, y: 297.693, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 1085.185, y: 595.066, yaw: 1.5613, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 1060.055, y: 594.691, yaw: 1.5649, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1095.724, y: 521.466, yaw: 2.7966, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1052.987, y: 553.968, yaw: -2.4192, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1028.19, y: 523.019, yaw: -1.7257, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1005.317, y: 541.492, yaw: 0.95, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 977.126, y: 527.679, yaw: -2.0134, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 964.817, y: 559.059, yaw: 0.1004, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 910.9589999999999, y: 522.331, yaw: -0.5555, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1062.411, y: 427.421, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 912.3200000000001, y: 563.752, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 943.717, y: 559.654, yaw: -1.506, z: 0}
-      - {model_name: OpenRobotics/MaleVisitorSit, name: MaleVisitorSit, static: true, x: 1065.322, y: 441.075, yaw: -2.0255, z: 0}
-      - {model_name: OpenRobotics/MaleVisitorSit, name: MaleVisitorSit, static: true, x: 951.785, y: 499.513, yaw: 1.3371, z: 0}
-      - {model_name: OpenRobotics/MaleVisitorSit, name: MaleVisitorSit, static: true, x: 905.97, y: 558.405, yaw: 1.2292, z: 0}
-      - {model_name: OpenRobotics/MaleVisitorSit, name: MaleVisitorSit, static: true, x: 947.597, y: 559.614, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/LampAndStand, name: LampAndStand, static: true, x: 970.35, y: 491.225, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 1041.476, y: 429.527, yaw: -1.4801, z: 0}
-      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 918.558, y: 560.076, yaw: 1.4086, z: 0}
-      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 946.386, y: 552.9589999999999, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 319.056, y: 476.835, yaw: -1.6626, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 238.988, y: 513.814, yaw: -1.6505, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 552.067, y: 531.664, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 849.9450000000001, y: 248.569, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 765.346, y: 513.7329999999999, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 744.551, y: 536.453, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 788.066, y: 537.223, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 766.116, y: 562.638, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 682.789, y: 529.163, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 682.789, y: 560.1369999999999, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 682.789, y: 596.6420000000001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 618.688, y: 550.668, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 620.208, y: 579.55, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 653.65, y: 549.148, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 655.822, y: 579.984, yaw: -0.0134, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 682.42, y: 480.859, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 692.282, y: 576.7859999999999, yaw: -2.8887, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 753.933, y: 561.664, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 639.549, y: 579.1130000000001, yaw: -1.5652, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 631.097, y: 618.6420000000001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 765.884, y: 603.021, yaw: 1.5682, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 555.946, y: 563.078, yaw: 1.5849, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 766.7430000000001, y: 613.183, yaw: 1.5559, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 692.534, y: 530.188, yaw: 2.9504, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 620.704, y: 623.439, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 554.704, y: 589.462, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 586.814, y: 589.079, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 554.172, y: 625.173, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 589.54, y: 624.89, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 1087.652, y: 541.087, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 1038.67, y: 541.62, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 962.043, y: 590.828, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 1002.216, y: 591.25, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Playground, name: Playground, static: true, x: 1126.779, y: 182.89, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 1088.337, y: 297.661, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 878.178, y: 546.1420000000001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 862.203, y: 546.7569999999999, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 893.547, y: 544.5309999999999, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 893.962, y: 527.9160000000001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 506.611, y: 360.296, yaw: 2.0599, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 560.672, y: 326.258, yaw: -2.4067, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 668.665, y: 343.536, yaw: 2.9471, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 516.704, y: 412.366, yaw: -0.6647999999999999, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 395.229, y: 658.476, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 522.881, y: 574.27, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 522.881, y: 610.2140000000001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 522.582, y: 644.96, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 484.241, y: 572.473, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 484.84, y: 624.8920000000001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 449.495, y: 597.933, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 449.238, y: 640.795, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 448.297, y: 665.928, yaw: 1.5458, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 440.509, y: 677.61, yaw: 1.1215, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 512.398, y: 609.016, yaw: -2.7588, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 492.029, y: 677.3099999999999, yaw: 0.9784, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 528.787, y: 513.843, yaw: 0.2589, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 504.741, y: 518.215, yaw: 0.2122, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 479.694, y: 523.598, yaw: 0.259, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 306.466, y: 559.423, yaw: 0.201, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 282.139, y: 563.756, yaw: 0.2026, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 257.364, y: 568.492, yaw: 0.199, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 158.968, y: 583.499, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 132.347, y: 583.9690000000001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 105.726, y: 584.282, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 393.866, y: 613.974, yaw: 1.5815, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 378.697, y: 580.024, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 396.575, y: 579.302, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 414.273, y: 577.496, yaw: -3.0036, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 392.964, y: 623.9059999999999, yaw: 1.5292, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 405.063, y: 578.579, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 405.195, y: 642.563, yaw: -2.4434, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 485.644, y: 540.155, yaw: -1.2382, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 83.788, y: 662.893, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 133.918, y: 664.028, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 186.944, y: 635.365, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 233.761, y: 634.569, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 259.913, y: 668.1180000000001, yaw: 1.5491, z: 0}
-      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 261.211, y: 678.155, yaw: 1.2439, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 185.182, y: 664.5700000000001, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 233.31, y: 665.278, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 221.215, y: 647.048, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 167.491, y: 647.22, yaw: -2.1069, z: 0}
-      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 267.338, y: 613.0170000000001, yaw: -1.9853, z: 0}
-      - {model_name: OpenRobotics/Fridge, name: Fridge, static: true, x: 1157.048, y: 608.303, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 303.863, y: 592.592, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 329.388, y: 587.378, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 848.792, y: 584.984, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 849.12, y: 606.782, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 907.302, y: 593.994, yaw: 0.7995, z: 0}
-      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 847.37, y: 169.463, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 306.031, y: 612.471, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 329.259, y: 609.5069999999999, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/MopCart3, name: MopCart3, static: false, x: 283.704, y: 443.583, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/TeleportDispenser, name: mopcart_dispenser, static: true, x: 284.29, y: 443.7, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/TeleportIngestor, name: mopcart_collector, static: true, x: 317.372, y: 589.088, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 899.241, y: 422.643, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 951.851, y: 434.84, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 901.41, y: 393.151, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 859.029, y: 436.517, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 797.97, y: 352.604, yaw: 0.1987, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 791.591, y: 338.571, yaw: 0.3128, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 653.474, y: 373.131, yaw: 0.5731000000000001, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 663.7670000000001, y: 483.322, yaw: 2.8394, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 555.951, y: 502.483, yaw: 2.8386, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 553.925, y: 574.338, yaw: 3.0509, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 806.3579999999999, y: 63.963, yaw: -1.2925, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 675.647, y: 50.204, yaw: 2.5309, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 724.328, y: 246.399, yaw: 0.8252, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 611.745, y: 499.101, yaw: -0.7629, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 721.739, y: 119.213, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 719.582, y: 481.333, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 741.306, y: 482.138, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 763.029, y: 483.21, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 910.197, y: 503.552, yaw: 1.5284, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 930.393, y: 503.253, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 950.8869999999999, y: 502.355, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 647.158, y: 412.503, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 1036.018, y: 291.823, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 1017.064, y: 291.817, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 998.961, y: 291.823, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 976.8049999999999, y: 492.417, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 651.639, y: 363.752, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 924.029, y: 260.699, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 662.526, y: 323.063, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 623.296, y: 487.549, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/ElectronicsRecycling, name: ElectronicsRecycling, static: true, x: 803.556, y: 229.027, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Fridge, name: Fridge, static: true, x: 997.205, y: 238.438, yaw: -0.0005999999999999999, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 1048.563, y: 257.063, yaw: 4.6995, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1057.671, y: 254.634, yaw: 4.6993, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1036.42, y: 254.634, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 931.379, y: 193.917, yaw: 3.1598, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 931.379, y: 233.383, yaw: 3.1694, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 931.986, y: 167.808, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 1060.099, y: 435.571, yaw: 4.3602, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 1037.027, y: 422.821, yaw: 4.2026, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 1012.133, y: 403.998, yaw: 4.0445, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 748.567, y: 236.22, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1027.944, y: 167.13, yaw: -1.3228, z: 0}
+      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 714.8339999999999, y: 274.223, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 686.758, y: 310.876, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 676.58, y: 266.551, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 809.9160000000001, y: 58.166, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 829.302, y: 58.166, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 976.191, y: 74.84099999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 975.475, y: 58.721, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 955.057, y: 59.079, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 810.395, y: 75.158, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 829.302, y: 74.919, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 997.326, y: 75.199, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 996.609, y: 58.721, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 933.564, y: 75.199, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 933.922, y: 59.079, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 954.698, y: 75.199, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 734.05, y: 56.49, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 734.05, y: 72.52500000000001, yaw: 1.5794, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 713.581, y: 56.426, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 714.318, y: 71.901, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 811.283, y: 90.169, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 832, y: 90.405, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 616.443, y: 59.426, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 477.146, y: 115.846, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 528.466, y: 67.714, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 457.35, y: 64.872, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 594.13, y: 91.93899999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 443.039, y: 92.896, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 1026.519, y: 322.207, yaw: 2.1193, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 1041.852, y: 348.32, yaw: 2.2585, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 871.699, y: 219.774, yaw: 0.0267, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 806.151, y: 184.086, yaw: 3.2165, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 808.8390000000001, y: 207.676, yaw: 3.2142, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 750.2380000000001, y: 207.542, yaw: -0.0172, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 750.317, y: 187.196, yaw: 0.0104, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 722.843, y: 377.552, yaw: 2.7611, z: 0}
+      - {model_name: OpenRobotics/WhiteChipChair, name: WhiteChipChair, static: true, x: 660.603, y: 233.093, yaw: 3.217, z: 0}
+      - {model_name: OpenRobotics/Gazebo, name: Gazebo, static: true, x: 700.105, y: 186.305, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 608.64, y: 154.362, yaw: 2.0195, z: 0}
+      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 558.984, y: 441.356, yaw: 1.1264, z: 0}
+      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 713.438, y: 420.556, yaw: -0.9358, z: 0}
+      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 925.884, y: 442.063, yaw: 3.9247, z: 0}
+      - {model_name: OpenRobotics/Playground, name: Playground, static: true, x: 302.392, y: 91.654, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/SUV, name: SUV, static: true, x: 539.12, y: 194.193, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 1017.194, y: 323.847, yaw: 1.4567, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 820.136, y: 206.001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 453.865, y: 118.157, yaw: 2.9362, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 584.6609999999999, y: 169.309, yaw: -0.8809, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 810.869, y: 361.534, yaw: 2.9736, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 991.509, y: 174.705, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 1053.478, y: 338.644, yaw: -0.8787, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 998.647, y: 386.56, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 698.63, y: 482.289, yaw: 2.1817, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 669.681, y: 243.788, yaw: 4.5836, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 747.617, y: 48.44, yaw: -0.5309, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 550.924, y: 64.502, yaw: 0.0897, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 358.808, y: 114.505, yaw: 3.662, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 237.748, y: 66.476, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe, name: Cafe, static: true, x: 297.82, y: 236.246, yaw: 1.5711, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 549.432, y: 112.696, yaw: 2.7602, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 657.3680000000001, y: 239.879, yaw: -1.4932, z: 0}
+      - {model_name: OpenRobotics/Chair, name: Chair, static: true, x: 999.276, y: 282.494, yaw: -1.5385, z: 0}
+      - {model_name: OpenRobotics/Chair, name: Chair, static: true, x: 1015.456, y: 281.53, yaw: -0.1608, z: 0}
+      - {model_name: OpenRobotics/Chair, name: Chair, static: true, x: 1036.228, y: 282.785, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/KitchenCountertop, name: KitchenCountertop, static: true, x: 1020.316, y: 167.828, yaw: -0.0098, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 1006.554, y: 213.467, yaw: 3.1555, z: 0}
+      - {model_name: OpenRobotics/KitchenSink, name: KitchenSink, static: true, x: 1020.171, y: 187.391, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/MiniSofa, name: MiniSofa, static: true, x: 987.61, y: 211.868, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 721.001, y: 374.575, yaw: 4.172, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 1017.064, y: 281.369, yaw: 1.529, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 988.102, y: 211.991, yaw: 0.132, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 727.879, y: 68.943, yaw: 3.2972, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 753.562, y: 213.691, yaw: 1.2326, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 873.931, y: 212.368, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 928.597, y: 500.261, yaw: 3.2105, z: 0}
+      - {model_name: OpenRobotics/Chair, name: Chair, static: true, x: 549.357, y: 112.817, yaw: 1.5798, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 389.396, y: 333.822, yaw: 2.4511, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 388.685, y: 409.628, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 312.016, y: 334.087, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 312.845, y: 409.32, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 353.461, y: 423.041, yaw: 4.6244, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 362.481, y: 347.815, yaw: 2.8159, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 528.4829999999999, y: 252.659, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 440.263, y: 345.413, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 470.921, y: 446.039, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 431.762, y: 458.59, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 389.34, y: 470.011, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 427.483, y: 342.115, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 516.528, y: 252.659, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 523.8920000000001, y: 286.777, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 554.63, y: 246.701, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 553.2380000000001, y: 287.29, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 578.751, y: 246.469, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 578.519, y: 287.754, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 465.995, y: 375.657, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 544.234, y: 339.667, yaw: 2.1996, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 562.073, y: 367.52, yaw: 2.188, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 431.684, y: 415.082, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 509.134, y: 324.282, yaw: 0.0141, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 472.892, y: 324.282, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 439.02, y: 371.363, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 313.903, y: 233.706, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 404.474, y: 204.927, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 461.187, y: 257.407, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 292.314, y: 253.243, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 290.89, y: 217.027, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 356.048, y: 255.774, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 356.364, y: 218.134, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 166.439, y: 240.295, yaw: 4.1565, z: 0}
+      - {model_name: OpenRobotics/ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 469.602, y: 419.478, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Oak tree, name: Oak tree, static: true, x: 214.636, y: 434.416, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 123.649, y: 405.558, yaw: 0.9381, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 155.331, y: 350.787, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 112.648, y: 377.418, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 76.53100000000001, y: 441.991, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 231.611, y: 376.022, yaw: 2.6122, z: 0}
+      - {model_name: OpenRobotics/Lamp Post, name: Lamp Post, static: true, x: 94.452, y: 396.731, yaw: 1.1999, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 168.051, y: 520.391, yaw: -1.5208, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 236.796, y: 510.838, yaw: -1.3558, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 317.964, y: 474.377, yaw: -1.5488, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 962.861, y: 311.991, yaw: 2.8826, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 797.119, y: 363.519, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 999.756, y: 495.362, yaw: 0.3931, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 1077.957, y: 521.403, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 942.727, y: 297.693, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 1085.185, y: 595.066, yaw: 3.1321, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 1060.055, y: 594.691, yaw: 3.1357, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1095.724, y: 521.466, yaw: 4.3674, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1052.987, y: 553.968, yaw: -0.8484, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1028.19, y: 523.019, yaw: -0.1549, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1005.317, y: 541.492, yaw: 2.5208, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 977.126, y: 527.679, yaw: -0.4426, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 964.817, y: 559.059, yaw: 1.6712, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 910.9589999999999, y: 522.331, yaw: 1.0153, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 1062.411, y: 427.421, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 912.3200000000001, y: 563.752, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 943.717, y: 559.654, yaw: 0.0648, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: MaleVisitorSit, static: true, x: 1065.322, y: 441.075, yaw: -0.4547, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: MaleVisitorSit, static: true, x: 951.785, y: 499.513, yaw: 2.9079, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: MaleVisitorSit, static: true, x: 905.97, y: 558.405, yaw: 2.8, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: MaleVisitorSit, static: true, x: 947.597, y: 559.614, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LampAndStand, name: LampAndStand, static: true, x: 970.35, y: 491.225, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 1041.476, y: 429.527, yaw: 0.0907, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 918.558, y: 560.076, yaw: 2.9794, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: VisitorKidSit, static: true, x: 946.386, y: 552.9589999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 319.056, y: 476.835, yaw: -0.09180000000000001, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: FemaleVisitorSit, static: true, x: 238.988, y: 513.814, yaw: -0.07969999999999999, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 552.067, y: 531.664, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 849.9450000000001, y: 248.569, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 765.346, y: 513.7329999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 744.551, y: 536.453, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 788.066, y: 537.223, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 766.116, y: 562.638, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 682.789, y: 529.163, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 682.789, y: 560.1369999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 682.789, y: 596.6420000000001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 618.688, y: 550.668, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 620.208, y: 579.55, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 653.65, y: 549.148, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 655.822, y: 579.984, yaw: 1.5574, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 682.42, y: 480.859, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 692.282, y: 576.7859999999999, yaw: -1.3179, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 753.933, y: 561.664, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 639.549, y: 579.1130000000001, yaw: 0.0056, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 631.097, y: 618.6420000000001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 765.884, y: 603.021, yaw: 3.139, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 555.946, y: 563.078, yaw: 3.1557, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 766.7430000000001, y: 613.183, yaw: 3.1267, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 692.534, y: 530.188, yaw: 4.5212, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 620.704, y: 623.439, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 554.704, y: 589.462, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 586.814, y: 589.079, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 554.172, y: 625.173, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 589.54, y: 624.89, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 1087.652, y: 541.087, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 1038.67, y: 541.62, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 962.043, y: 590.828, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 1002.216, y: 591.25, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Playground, name: Playground, static: true, x: 1126.779, y: 182.89, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: Pine Tree, static: true, x: 1088.337, y: 297.661, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 878.178, y: 546.1420000000001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 862.203, y: 546.7569999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 893.547, y: 544.5309999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 893.962, y: 527.9160000000001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 506.611, y: 360.296, yaw: 3.6307, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 560.672, y: 326.258, yaw: -0.8359, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 668.665, y: 343.536, yaw: 4.5179, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 516.704, y: 412.366, yaw: 0.906, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 395.229, y: 658.476, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 522.881, y: 574.27, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 522.881, y: 610.2140000000001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Cafe table, name: Cafe table, static: true, x: 522.582, y: 644.96, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 484.241, y: 572.473, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 484.84, y: 624.8920000000001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 449.495, y: 597.933, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Table, name: Table, static: true, x: 449.238, y: 640.795, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 448.297, y: 665.928, yaw: 3.1166, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 440.509, y: 677.61, yaw: 2.6923, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 512.398, y: 609.016, yaw: -1.188, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 492.029, y: 677.3099999999999, yaw: 2.5492, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 528.787, y: 513.843, yaw: 1.8297, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 504.741, y: 518.215, yaw: 1.783, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 479.694, y: 523.598, yaw: 1.8298, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 306.466, y: 559.423, yaw: 1.7718, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 282.139, y: 563.756, yaw: 1.7734, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 257.364, y: 568.492, yaw: 1.7698, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 158.968, y: 583.499, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 132.347, y: 583.9690000000001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: PotatoChipChair, static: true, x: 105.726, y: 584.282, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 393.866, y: 613.974, yaw: 3.1523, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 378.697, y: 580.024, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/StorageRack, name: StorageRack, static: true, x: 396.575, y: 579.302, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 414.273, y: 577.496, yaw: -1.4328, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 392.964, y: 623.9059999999999, yaw: 3.1, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 405.063, y: 578.579, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 405.195, y: 642.563, yaw: -0.8726, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 485.644, y: 540.155, yaw: 0.3326, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 83.788, y: 662.893, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 133.918, y: 664.028, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 186.944, y: 635.365, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 233.761, y: 634.569, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MainTable, name: MainTable, static: true, x: 259.913, y: 668.1180000000001, yaw: 3.1199, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: Standing person, static: true, x: 261.211, y: 678.155, yaw: 2.8147, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 185.182, y: 664.5700000000001, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Bookshelf, name: Bookshelf, static: true, x: 233.31, y: 665.278, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 221.215, y: 647.048, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 167.491, y: 647.22, yaw: -0.5361, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: FemaleVisitor, static: true, x: 267.338, y: 613.0170000000001, yaw: -0.4145, z: 0}
+      - {model_name: OpenRobotics/Fridge, name: Fridge, static: true, x: 1157.048, y: 608.303, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 303.863, y: 592.592, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 329.388, y: 587.378, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 848.792, y: 584.984, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 849.12, y: 606.782, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/ParkingTrolleyMax, name: ParkingTrolleyMax, static: true, x: 907.302, y: 593.994, yaw: 2.3703, z: 0}
+      - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: 847.37, y: 169.463, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 306.031, y: 612.471, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 329.259, y: 609.5069999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MopCart3, name: MopCart3, static: false, x: 283.704, y: 443.583, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/TeleportDispenser, name: mopcart_dispenser, static: true, x: 284.29, y: 443.7, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/TeleportIngestor, name: mopcart_collector, static: true, x: 317.372, y: 589.088, yaw: 1.5708, z: 0}
     vertices:
       - [1911.731, 141.469, 0, ""]
       - [1911.342, 177.998, 0, ""]
