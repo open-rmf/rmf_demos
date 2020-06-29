@@ -8,8 +8,6 @@
   <maintainer email="yadunund@openrobotics.org">yadu</maintainer>
   <license>Apache Licence 2.0</license>
 
-  <buildtool_depend>ament_python</buildtool_depend>
-
   <depend>rmf_fleet_msgs</depend>
   <depend>rmf_task_msgs</depend>
   <depend>rmf_dispenser_msgs</depend>
