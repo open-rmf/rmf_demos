@@ -9,6 +9,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>building_map_tools</buildtool_depend>
+  <buildtool_depend>ros2run</buildtool_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

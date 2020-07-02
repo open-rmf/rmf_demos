@@ -16,10 +16,8 @@ file(GLOB_RECURSE traffic_editor_paths "maps/*.building.yaml")
 foreach(path ${traffic_editor_paths})
 
   # Get the output world name
-  string(REPLACE "." ";" list1 ${path})
-  list(GET list1 0 name)
-  string(REPLACE "/" ";" list2 ${name})
-  list(GET list2 -1 world_name)
+  string(REGEX REPLACE "\\.[^.]*\.[^.]*$" "" no_extension_path ${path})
+  string(REGEX MATCH "[^\/]+$" world_name  ${no_extension_path})
 
   set(map_path ${path})
   set(output_world_name ${world_name})
