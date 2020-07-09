@@ -23,6 +23,7 @@
   <exec_depend>rmf_gazebo_plugins</exec_depend>
   <exec_depend>rmf_demo_tasks</exec_depend>
   <exec_depend>rmf_rviz_plugin</exec_depend>
+  <exec_depend>rviz2</exec_depend>
 
   <exec_depend>joy</exec_depend>
   <exec_depend>teleop_twist_joy</exec_depend>
