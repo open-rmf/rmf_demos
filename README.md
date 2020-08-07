@@ -60,16 +60,7 @@ cd ~/rmf_demos_ws
 rosdep install --from-paths src --ignore-src --rosdistro eloquent -yr
 ```
 
-The models required for each of the demo worlds will be automatically downloaded into `~/.gazebo/models` from Ignition [Fuel](https://app.ignitionrobotics.org/fuel) when building the package `rmf_demo_maps`. If you notice something wrong with the models in the simulation, your `~/.gazebo/models` path might contain deprecated models not from `Fuel`. An easy way to solve this is to remove all models except for `sun` and `ground_plane` from `~/.gazebo/models`, and rebuild the package `rmf_demo_maps`.
-
-```bash
-# A full package rebuild will be required to trigger the downloads
-cd ~/rmf_demo_ws
-rm -rf build/rmf_demo_maps install/rmf_demo_maps
-
-source /opt/ros/eloquent/setup.bash
-CXX=g++-8 colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE --packages-up-to rmf_demo_maps
-```
+The models required for each of the demo worlds will be automatically downloaded into `~/.gazebo/models` from Ignition [Fuel](https://app.ignitionrobotics.org/fuel) when building the package `rmf_demo_maps`. If you notice something wrong with the models in the simulation, your `~/.gazebo/models` path might contain deprecated models not from `Fuel`. An easy way to solve this is to remove all models except for `sun` and `ground_plane` from `~/.gazebo/models`, and perform a clean rebuild of the package `rmf_demo_maps`.
 
 ## Compiling Instructions
 
