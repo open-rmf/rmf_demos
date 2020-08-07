@@ -60,13 +60,15 @@ cd ~/rmf_demos_ws
 rosdep install --from-paths src --ignore-src --rosdistro eloquent -yr
 ```
 
-The `Airport Terminal` world requires certain open source gazebo models hosted [here](https://github.com/osrf/gazebo_models). If any model related errors are observed at launch, the missing models can be manually downloaded and added into `~/.gazebo/models/`. Optionally, all the open source models can be downloaded and copied into the default model directory.
+The models required for each of the demo worlds will be automatically downloaded into `~/.gazebo/models` from Ignition [Fuel](https://app.ignitionrobotics.org/fuel). If you notice something wrong with the models in the simulation, your `~/.gazebo/models` path might contain deprecated models not from `Fuel`. An easy way to solve this is to remove all models except for `sun` and `ground_plane` from `~/.gazebo/models`, and rebuild the package `rmf_demo_maps`.
 
 ```bash
-cd ~/.
-git clone https://github.com/osrf/gazebo_models
-cd gazebo_models
-cp -r ./* ~/.gazebo/models/.
+# A full package rebuild will be required to trigger the downloads
+cd ~/rmf_demo_ws
+rm -rf build/rmf_demo_maps install/rmf_demo_maps
+
+source /opt/ros/eloquent/setup.bash
+CXX=g++-8 colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE --packages-up-to rmf_demo_maps
 ```
 
 ## Compiling Instructions
