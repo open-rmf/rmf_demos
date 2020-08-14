@@ -2,7 +2,7 @@
 
 <launch>
 
-  <arg name="fleet_name" default="magni" description="Name of this fleet of magni robots"/>
+  <arg name="fleet_name" default="tinyRobot" description="Name of this fleet of tinyRobot robots"/>
   <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="nav_graph_file" description="Nav graph required by fleet adapter"/>
 
@@ -35,7 +35,7 @@
       <!-- How long it can be delayed before we give up and start over -->
       <arg name="delay_threshold" value="15.0"/>
 
-      <!-- Don't make the mir wait long to retry -->
+      <!-- Don't make the tinyRobot wait long to retry -->
       <arg name="retry_wait" value="10.0"/>
 
       <!-- Give everything time to discover -->

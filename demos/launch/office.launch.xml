@@ -30,16 +30,16 @@
     </group>
   </group>
 
-  <!-- Magni fleet adapter and robot state aggregator needed for the Magni slotcar_plugin -->
+  <!-- TinyRobot fleet adapter and robot state aggregator needed for the TinyRobot slotcar_plugin -->
   <group>
-    <let name="fleet_name" value="magni"/>
-    <include file="$(find-pkg-share demos)/include/adapters/magni_adapter.launch.xml">
+    <let name="fleet_name" value="tinyRobot"/>
+    <include file="$(find-pkg-share demos)/include/adapters/tinyRobot_adapter.launch.xml">
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/office/nav_graphs/0.yaml" />
     </include>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="magni"/>
+      <arg name="robot_prefix" value="tinyRobot"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="true"/>
     </include>
