@@ -34,7 +34,7 @@ Panels:
     Topic: /rviz_node/param
   - Class: RMF Panel
     Name: RMF Panel
-    dropoff_dispenser: mopcart_collector
+    dropoff_ingestor: mopcart_collector
     pickup_dispenser: mopcart_dispenser
 Visualization Manager:
   Class: ""
