@@ -1,0 +1,8 @@
+{
+    "deliveryRobot":{
+        "icons":{
+            "deliveryRobot": "/robots/deliveryRobot/deliveryRobot.png"
+        }, 
+        "places":{}
+    }
+}
