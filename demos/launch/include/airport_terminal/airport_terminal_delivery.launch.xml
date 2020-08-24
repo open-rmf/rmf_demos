@@ -1,4 +1,4 @@
 <?xml version='1.0' ?>
 <launch>
-  <executable cmd="ros2 run rmf_demo_tasks request_delivery -p mopcart_pickup -pd mopcart_dispenser -d spill -dd mopcart_collector -r magni" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_delivery -p mopcart_pickup -pd mopcart_dispenser -d spill -dd mopcart_collector -r tinyRobot" output="both"/>
 </launch>

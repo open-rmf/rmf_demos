@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <sdf version='1.6'>
-  <model name='Magni'>
+  <model name='TinyRobot'>
     <plugin name="slotcar" filename="libslotcar.so">
 
       <nominal_drive_speed>0.5</nominal_drive_speed>
@@ -203,7 +203,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://Magni/meshes/magni_body.dae</uri>
+            <uri>model://TinyRobot/meshes/tinyRobot_body.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -212,7 +212,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://Magni/meshes/caster_wheel.dae</uri>
+            <uri>model://TinyRobot/meshes/caster_wheel.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -221,7 +221,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://Magni/meshes/caster_wheel.dae</uri>
+            <uri>model://TinyRobot/meshes/caster_wheel.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -276,7 +276,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://Magni/meshes/front_wheel.dae</uri>
+            <uri>model://TinyRobot/meshes/front_wheel.dae</uri>
           </mesh>
         </geometry>
       </visual>
@@ -345,7 +345,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://Magni/meshes/front_wheel.dae</uri>
+            <uri>model://TinyRobot/meshes/front_wheel.dae</uri>
           </mesh>
         </geometry>
       </visual>

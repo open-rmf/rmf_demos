@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
 <sdf version="1.6">
-  <model name='MiR100'>
+  <model name='DeliveryRobot'>
 
-    <!-- TODO(MXG): Find actual physical properties for MiR100 -->
+    <!-- TODO(MXG): Find actual physical properties for DeliveryRobot -->
     <plugin name="slotcar" filename="libslotcar.so">
 
       <!-- Forward / Backward -->
@@ -15,9 +15,9 @@
       <!-- Turning -->
       <nominal_turn_speed>0.6</nominal_turn_speed>
       <!-- Note: The official maximum turn acceleration value is 0.25, but that
-           seems to be too small for the simulated MiR100 to do course
+           seems to be too small for the simulated DeliveryRobot to do course
            corrections while driving, so it ends up swaying erratically. Using
-           this larger value helps keep MiR100's course stable. -->
+           this larger value helps keep DeliveryRobot's course stable. -->
       <nominal_turn_acceleration>1.5</nominal_turn_acceleration>
       <!-- Theoretical no-slip limit with current suspension: 2.166666... -->
       <max_turn_acceleration>2.0</max_turn_acceleration>
@@ -39,12 +39,12 @@
 
       <visual name="body">
         <geometry>
-          <mesh><uri>model://MiR100/meshes/body.obj</uri></mesh>
+          <mesh><uri>model://DeliveryRobot/meshes/body.obj</uri></mesh>
         </geometry>
       </visual>
       <collision name="body">
         <geometry>
-          <mesh><uri>model://MiR100/meshes/body.obj</uri></mesh>
+          <mesh><uri>model://DeliveryRobot/meshes/body.obj</uri></mesh>
         </geometry>
       </collision>
 
@@ -52,7 +52,7 @@
         <pose>-0.220 -0.262 0.061 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://MiR100/meshes/WheelMain.obj</uri>
+            <uri>model://DeliveryRobot/meshes/WheelMain.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -83,7 +83,7 @@
         <pose>-0.220 0.334 0.061 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://MiR100/meshes/WheelMain.obj</uri>
+            <uri>model://DeliveryRobot/meshes/WheelMain.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -114,7 +114,7 @@
         <pose>0.217 -0.262 0.061 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://MiR100/meshes/WheelMain.obj</uri>
+            <uri>model://DeliveryRobot/meshes/WheelMain.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -145,7 +145,7 @@
         <pose>0.217 0.334 0.061 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://MiR100/meshes/WheelMain.obj</uri>
+            <uri>model://DeliveryRobot/meshes/WheelMain.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -239,7 +239,7 @@
         <pose>0 0.0 0.0 0 0 -1.57</pose>
         <geometry>
           <mesh>
-            <uri>model://MiR100/meshes/WheelSide.obj</uri>
+            <uri>model://DeliveryRobot/meshes/WheelSide.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -332,7 +332,7 @@
         <pose>0 0.0 0.0 0 0 -1.57</pose>
         <geometry>
           <mesh>
-            <uri>model://MiR100/meshes/WheelSide.obj</uri>
+            <uri>model://DeliveryRobot/meshes/WheelSide.obj</uri>
           </mesh>
         </geometry>
       </visual>

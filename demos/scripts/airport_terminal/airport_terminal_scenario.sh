@@ -20,24 +20,24 @@ function send_loop_job {
 }
 
 # spawn and send loop requests
-echo "Spawning and sending job to robot mir100_1."
-spawn_robot MiR100 mir100_0
-send_loop_job junction_north_west junction_south_west mir100
+echo "Spawning and sending job to robot deliveryRobot_1."
+spawn_robot DeliveryRobot deliveryRobot_0
+send_loop_job junction_north_west junction_south_west deliveryRobot
 
-echo "Spawning and sending job to robot mir100_2."
-spawn_robot MiR100 mir100_2
+echo "Spawning and sending job to robot deliveryRobot_2."
+spawn_robot DeliveryRobot deliveryRobot_2
 
-echo "Spawning and sending job to robot magni_0."
-spawn_robot Magni magni_0
-send_loop_job magni_n09 magni_s07 magni
+echo "Spawning and sending job to robot tinyRobot_0."
+spawn_robot TinyRobot tinyRobot_0
+send_loop_job tinyRobot_n09 tinyRobot_s07 tinyRobot
 
-echo "Spawning and sending job to robot magni_1."
-spawn_robot Magni magni_1
-send_loop_job magni_n11 magni_s07 magni
+echo "Spawning and sending job to robot tinyRobot_1."
+spawn_robot TinyRobot tinyRobot_1
+send_loop_job tinyRobot_n11 tinyRobot_s07 tinyRobot
 
 # spawn only
-echo "Spawning and sending job to robot magni_2."
-spawn_robot Magni magni_2
+echo "Spawning and sending job to robot tinyRobot_2."
+spawn_robot TinyRobot tinyRobot_2
 
-echo "Spawning and sending job to robot magni_4."
-spawn_robot Magni magni_4
+echo "Spawning and sending job to robot tinyRobot_4."
+spawn_robot TinyRobot tinyRobot_4

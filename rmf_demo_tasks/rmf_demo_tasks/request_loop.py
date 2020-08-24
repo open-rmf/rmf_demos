@@ -20,7 +20,8 @@ def main(argv=sys.argv):
     parser.add_argument('-i',
                         '--task-id', help='Task ID', default='', type=str)
     parser.add_argument('-r',
-                        '--robot-type', help='Type of robot', default='magni')
+                        '--robot-type',
+                        help='Type of robot', default='tinyRobot')
 
     args = parser.parse_args(args_without_ros[1:])
 
