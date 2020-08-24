@@ -10,20 +10,20 @@ function spawn_robot {
     -z 0.05
 }
 
-echo "Spawning robot mir100_0."
-spawn_robot MiR100 mir100_0
+echo "Spawning robot deliveryRobot_0."
+spawn_robot DeliveryRobot deliveryRobot_0
 
-echo "Spawning robot mir100_2."
-spawn_robot MiR100 mir100_2
+echo "Spawning robot deliveryRobot_2."
+spawn_robot DeliveryRobot deliveryRobot_2
 
-echo "Spawning robot magni_0."
-spawn_robot Magni magni_0
+echo "Spawning robot tinyRobot_0."
+spawn_robot TinyRobot tinyRobot_0
 
-echo "Spawning robot magni_1."
-spawn_robot Magni magni_1
+echo "Spawning robot tinyRobot_1."
+spawn_robot TinyRobot tinyRobot_1
 
-echo "Spawning robot magni_2."
-spawn_robot Magni magni_2
+echo "Spawning robot tinyRobot_2."
+spawn_robot TinyRobot tinyRobot_2
 
-echo "Spawning robot magni_4."
-spawn_robot Magni magni_4
+echo "Spawning robot tinyRobot_4."
+spawn_robot TinyRobot tinyRobot_4

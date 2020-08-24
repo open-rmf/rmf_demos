@@ -36,7 +36,7 @@ class DelayedLoopRequester:
         parser.add_argument('-i', '--task-id', help='Task ID', default='',
                             type=str)
         parser.add_argument('-r', '--robot-type', help='Type of robot',
-                            default='magni')
+                            default='tinyRobot')
         parser.add_argument(
             '--delay',
             help='Number of secs to wait before sending out the request',

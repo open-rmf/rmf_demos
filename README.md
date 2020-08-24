@@ -97,7 +97,7 @@ ros2 launch demos office_delivery.launch.xml
 
 ![](docs/docs/media/delivery_request.gif)
 
-To request each of the Magni robots to loop between two points,
+To request each of the TinyRobot to loop between two points,
 Select desired `Start` and `End` waypoints using the `RMF Panel` and click the `Send Loop Request` button. Alternatively,
 
 ```bash
@@ -128,7 +128,7 @@ To spawn robots into the world and issue tasks to the same,
 source ~/rmf_demos_ws/install/setup.bash
 ros2 run demos airport_terminal_scenario.sh
 ```
-This command spawns two MiR100 and four Magni robots in the map. Out of these one MiR100 and two magni robots are issued loop request tasks. The other robots are idle and can be issued loop or delivery request tasks via the `RMF Panel`.
+This command spawns two DeliveryRobots and four TinyRobots in the map. Out of these one DeliveryRobot and two TinyRobots are issued loop request tasks. The other robots are idle and can be issued loop or delivery request tasks via the `RMF Panel`.
 
 Alternatively, to spawn all the robots without issuing any task orders,
 
@@ -143,7 +143,7 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos airport_terminal_delivery.launch.xml
 ```
 
-Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vechiles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vechile's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `magni` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
+Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vechiles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vechile's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot`s. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
 
 To spawn the caddy into the world,
 
