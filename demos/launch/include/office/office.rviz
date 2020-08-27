@@ -23,7 +23,7 @@ Panels:
     Splitter Ratio: 0.5
   - Class: RMF Panel
     Name: RMF Panel
-    dropoff_dispenser: coke_ingestor
+    dropoff_ingestor: coke_ingestor
     pickup_dispenser: coke_dispenser
   - Class: rviz2_plugin/SchedulePanel
     Finish: 600
