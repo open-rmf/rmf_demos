@@ -1,4 +1,5 @@
-import glob, os
+import glob
+import os
 import json
 from pathlib import Path
 
@@ -7,8 +8,8 @@ worlds = next(os.walk('.'))[1]
 
 for world in worlds:
     app_config = {
-        "dispensers":{},
-        "robots":{}
+        "dispensers": {},
+        "robots": {}
     }
     for topic in app_config.keys():
         # Get all JSON files inside the folder of each world

@@ -15,11 +15,11 @@ This repository contains demonstrations of the above mentioned capabilities of R
 
 These demos were developed and tested on
 
-* [Ubuntu 18.04 LTS](https://releases.ubuntu.com/18.04/)
+* [Ubuntu 18.04 LTS](https://releases.ubuntu.com/18.04/) & [Ubuntu 20.04 LTS](https://releases.ubuntu.com/20.04/)
 
-* [ROS 2 - Eloquent](https://index.ros.org/doc/ros2/Releases/Release-Eloquent-Elusor/)
+* [ROS 2 - Eloquent](https://index.ros.org/doc/ros2/Releases/Release-Eloquent-Elusor/) & [ROS 2 - Foxy](https://index.ros.org/doc/ros2/Releases/Release-Foxy-Fitzroy/)
 
-* [Gazebo 9.12.0 or 9.13.0](https://osrf-distributions.s3.us-east-1.amazonaws.com/gazebo/releases/gazebo-9.12.0.tar.bz2)
+* [Gazebo 9.13.0 & Gazebo 11.1.0](http://gazebosim.org/)
 
 ## Setup
 
@@ -28,8 +28,8 @@ Setup your computer to accept Gazebo packages from packages.osrfoundation.org.
 ```bash
 sudo apt update
 sudo apt install -y wget
-echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable bionic main" > /etc/apt/sources.list.d/gazebo-stable.list
-wget https://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+wget https://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 ```
 Install all non-ROS dependencies of RMF packages,
 
@@ -57,14 +57,22 @@ Ensure all ROS 2 prerequisites are fulfilled,
 
 ```bash
 cd ~/rmf_demos_ws
-rosdep install --from-paths src --ignore-src --rosdistro eloquent -yr
+rosdep install --from-paths src --ignore-src --rosdistro <ROS_DISTRO> -yr
 ```
 
 The models required for each of the demo worlds will be automatically downloaded into `~/.gazebo/models` from Ignition [Fuel](https://app.ignitionrobotics.org/fuel) when building the package `rmf_demo_maps`. If you notice something wrong with the models in the simulation, your `~/.gazebo/models` path might contain deprecated models not from `Fuel`. An easy way to solve this is to remove all models except for `sun` and `ground_plane` from `~/.gazebo/models`, and perform a clean rebuild of the package `rmf_demo_maps`.
 
 ## Compiling Instructions
 
-Source ROS 2 Eloquent and build,
+#### Ubuntu 20.04 and ROS 2 Foxy:
+
+```bash
+cd ~/rmf_demos_ws
+source /opt/ros/foxy/setup.bash
+colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE
+```
+
+#### Ubuntu 18.04 and ROS 2 Eloquent:
 
 ```bash
 cd ~/rmf_demos_ws
@@ -72,10 +80,16 @@ source /opt/ros/eloquent/setup.bash
 CXX=g++-8 colcon build --cmake-args -DCMAKE_BUILD_TYPE=RELEASE
 ```
 > Note: The build will fail if the compiler is not set to g++ version 8 or above.
+
 ## FAQ
 Answers to frequently asked questions can be found [here](docs/faq.md).
 
-# Office World
+# Demo Worlds
+
+> Note: When running the demos on Ubuntu 18.04 + ROS2 Eloquent, you are required to explicitly supply gazebo_version launch argument. Eg:
+ros2 launch demos office.launch.xml gazebo_version:=9
+
+## Office World
 An indoor office environment for robots to navigate around. It includes a beverage dispensing station, controllable doors and laneways which are integrated into RMF.
 
 
@@ -107,14 +121,14 @@ ros2 launch demos office_loop.launch.xml
 
 ![](docs/media/loop_request.gif)
 
-# Airport Terminal World
+## Airport Terminal World
 
 This demo world shows robot interaction on a much larger map, with a lot more lanes, destinations, robots and possible interactions between robots from different fleets, robots and infrastructure, as well as robots and users. In the illustrations below, from top to bottom we have how the world looks like in `traffic_editor`, the schedule visualizer in `rviz`, and the full simulation in `gazebo`,
 
 ![](docs/media/airport_terminal_traffic_editor_screenshot.png)
 ![](docs/media/airport_terminal_demo_screenshot.png)
 
-## Demo Scenario
+### Demo Scenario
 To launch the world and the schedule visualizer,
 
 ```bash
@@ -143,7 +157,7 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos airport_terminal_delivery.launch.xml
 ```
 
-Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vechiles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vechile's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot`s. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
+Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vechiles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vechile's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
 
 To spawn the caddy into the world,
 
@@ -153,5 +167,4 @@ ros2 launch demos airport_terminal_caddy.launch.xml
 ```
 
 ![](docs/media/caddy.gif)
-
 
