@@ -1,0 +1,6 @@
+{  
+  "coke_dispenser": {
+    "icons": { "coke_dispenser": "" },
+    "location": { "x": 16.85, "y": -4.8, "yaw": 0, "level_name": "L1" }
+  }
+}

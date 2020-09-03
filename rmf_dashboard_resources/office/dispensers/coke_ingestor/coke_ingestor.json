@@ -1,0 +1,6 @@
+{
+    "coke_ingestor": {
+        "icons": { "coke_ingestor": "" },
+        "location": { "x": 20.95, "y": -6.95, "yaw": 0, "level_name": "L1" }
+      } 
+}
