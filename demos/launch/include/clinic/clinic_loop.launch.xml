@@ -1,0 +1,9 @@
+<?xml version='1.0' ?>
+
+<launch>
+
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s L1_counter2 -f L3_conf_room1 -r deliveryRobot -n 5" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s L1_pantry -f L2_ward6 -r tinyRobot -n 5" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s L3_nurse_station -f L2_dispensary1 -r hospitalRobot -n 5" output="both"/>
+
+</launch>
