@@ -1,0 +1,6 @@
+building:
+  filename: clinic.building.yaml
+name: clinic
+traffic_maps:
+  {}
+version: 1

@@ -1,0 +1,292 @@
+Panels:
+  - Class: rviz_common/Displays
+    Help Height: 0
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Status1
+        - /MarkerArray1
+        - /MarkerArray2
+        - /MarkerArray2/Topic1
+        - /MarkerArray3
+        - /MarkerArray3/Topic1
+        - /MarkerArray4
+        - /MarkerArray4/Topic1
+      Splitter Ratio: 0.5
+    Tree Height: 1800
+  - Class: rviz_common/Selection
+    Name: Selection
+  - Class: rviz_common/Tool Properties
+    Expanded:
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.5886790156364441
+  - Class: rviz_common/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz_common/Selection
+    Name: Selection
+  - Class: rviz2_plugin/SchedulePanel
+    Finish: 600
+    Map: L1
+    Name: SchedulePanel
+    Topic: /rviz_node/param
+  - Class: RMF Panel
+    Name: RMF Panel
+    dropoff_ingestor: ""
+    pickup_dispenser: ""
+  - Class: rviz2_plugin/LiftPanel
+    Name: LiftPanel
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 160; 160; 164
+      Enabled: false
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: false
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /schedule_markers
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        fleet_markers: true
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /fleet_markers
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        labels: true
+        map: true
+      Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map_markers
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        Lift1: true
+        Lift1_text: true
+        Lift3: true
+        Lift3_text: true
+        closet1_door: true
+        closet1_door_text: true
+        dining_1: true
+        dining_1_text: true
+        dining_2: true
+        dining_2_text: true
+        dining_3: true
+        dining_3_text: true
+        dining_4: true
+        dining_4_text: true
+        door9: true
+        door9_text: true
+        entrance_1: true
+        entrance_1_text: true
+        entrance_2: true
+        entrance_2_text: true
+        l1_door10: true
+        l1_door10_text: true
+        l1_door15: true
+        l1_door15_text: true
+        l1_door16: true
+        l1_door16_text: true
+        l1_door17: true
+        l1_door17_text: true
+        l1_door3: true
+        l1_door3_text: true
+        l1_door5: true
+        l1_door5_text: true
+        l1_door6: true
+        l1_door6_text: true
+        l1_door7: true
+        l1_door7_text: true
+        l1_door8: true
+        l1_door8_text: true
+        restroom_cleaning_door: true
+        restroom_cleaning_door_text: true
+        room10_door: true
+        room10_door_text: true
+        room12_door: true
+        room12_door_text: true
+        room13_door: true
+        room13_door_text: true
+        room14_door: true
+        room14_door_text: true
+        room15_door: true
+        room15_door_text: true
+        room17_door: true
+        room17_door_text: true
+        room18_door: true
+        room18_door_text: true
+        room1_door: true
+        room1_door_text: true
+        room20_door2: true
+        room20_door2_text: true
+        room21_door: true
+        room21_door_text: true
+        room22_door: true
+        room22_door_text: true
+        room24_door: true
+        room24_door_text: true
+        room27_door: true
+        room27_door_text: true
+        room28_door: true
+        room28_door_text: true
+        room29_door: true
+        room29_door_text: true
+        room2_door: true
+        room2_door_text: true
+        room30_door: true
+        room30_door_text: true
+        room32_door: true
+        room32_door_text: true
+        room33_door: true
+        room33_door_text: true
+        room34_door: true
+        room34_door_text: true
+        room35_door: true
+        room35_door_text: true
+        room36_door: true
+        room36_door_text: true
+        room38_door: true
+        room38_door2: true
+        room38_door2_text: true
+        room38_door_text: true
+        room39_door: true
+        room39_door_text: true
+        room40_door: true
+        room40_door_text: true
+        room4_door: true
+        room4_door_text: true
+        room7_door: true
+        room7_door_text: true
+        room8_door: true
+        room8_door_text: true
+        room9_door: true
+        room9_door_text: true
+        stair1_door: true
+        stair1_door_text: true
+        stair2_door: true
+        stair2_door_text: true
+      Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /building_systems_markers
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
+    - Class: rviz_default_plugins/SetInitialPose
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /initialpose
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /move_base_simple/goal
+    - Class: rviz_default_plugins/PublishPoint
+      Single click: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /clicked_point
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Angle: 9.685754776000977e-8
+      Class: rviz_default_plugins/TopDownOrtho
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Scale: 17.58987808227539
+      Target Frame: <Fixed Frame>
+      Value: TopDownOrtho (rviz_default_plugins)
+      X: 69.99948120117188
+      Y: -8.599288940429688
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1726
+  Hide Left Dock: false
+  Hide Right Dock: true
+  LiftPanel:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd00000004000000000000033400000622fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b000000b000fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed0000039500000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afc0000006e000006220000062201000039fa000000010100000004fb000000100044006900730070006c0061007900730000000000ffffffff000001f700fffffffb0000001a005300630068006500640075006c006500500061006e0065006c0100000000ffffffff0000028300fffffffb00000012004c00690066007400500061006e0065006c0100000000ffffffff0000029300fffffffb000000120052004d0046002000500061006e0065006c0100000000000003340000033400fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001200530065006c0065006300740069006f006e0000000337000000ad000000b000ffffff000000010000015f000003d7fc0200000002fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000027000003d70000013200ffffff0000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007340000014cfc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d006501000000000000045000000000000000000000056d0000062200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  RMF Panel:
+    collapsed: false
+  SchedulePanel:
+    collapsed: false
+  Selection:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: true
+  Width: 2221
+  X: 4129
+  Y: 123
