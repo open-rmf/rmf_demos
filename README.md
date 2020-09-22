@@ -15,11 +15,11 @@ This repository contains demonstrations of the above mentioned capabilities of R
 
 These demos were developed and tested on
 
-* [Ubuntu 18.04 LTS](https://releases.ubuntu.com/18.04/) & [Ubuntu 20.04 LTS](https://releases.ubuntu.com/20.04/)
+* [Ubuntu 20.04 LTS](https://releases.ubuntu.com/20.04/)
 
-* [ROS 2 - Eloquent](https://index.ros.org/doc/ros2/Releases/Release-Eloquent-Elusor/) & [ROS 2 - Foxy](https://index.ros.org/doc/ros2/Releases/Release-Foxy-Fitzroy/)
+* [ROS 2 - Foxy](https://index.ros.org/doc/ros2/Releases/Release-Foxy-Fitzroy/)
 
-* [Gazebo 9.13.0 & Gazebo 11.1.0](http://gazebosim.org/)
+* [Gazebo 11.1.0](http://gazebosim.org/)
 
 ## Installation
 Instructions can be found [here](docs/installation.md).
@@ -34,7 +34,7 @@ Answers to frequently asked questions can be found [here](docs/faq.md).
 * [Clinic World](#Clinic-World)
 * [Hotel World](#Hotel-World)
 
-> Note: When running the demos on Ubuntu 18.04 + ROS2 Eloquent, you are required to explicitly supply gazebo_version launch argument. Eg:
+> Note: When running the demos on Ubuntu 18.04 (not officially supported), you are required to explicitly supply gazebo_version launch argument. Eg:
 ros2 launch demos office.launch.xml gazebo_version:=9
 
 ---
