@@ -10,6 +10,7 @@ Forthcoming
 * Update dependency. [#101](https://github.com/osrf/rmf_demos/pull/101)
 * Support demos on ROS 2 Foxy and Eloquent. [#103](https://github.com/osrf/rmf_demos/pull/103)
 * Add subscription to floorplan topic published by rmf_schedule_visualizer. [#133](https://github.com/osrf/rmf_demos/pull/133)
+* Added `Triple H` scenario and `The Pedigree` conflict launch file: [#139](https://github.com/osrf/rmf_demos/pull/139)
 
 1.0.0 (2020-06-24)
 ------------------

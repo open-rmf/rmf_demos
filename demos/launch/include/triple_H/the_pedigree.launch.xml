@@ -1,0 +1,7 @@
+<?xml version='1.0' ?>
+<launch>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s TopCenterLeft -f TopRight -r tinyRobot -n 5" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks delayed_request_loop -s BottomCenterLeft -f BottomRight -r tinyRobot -n 5 --delay 2" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks delayed_request_loop -s TopCenterRight -f TopLeft -r tinyRobot -n 5 --delay 4" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks delayed_request_loop -s BottomCenterRight -f BottomLeft -r tinyRobot -n 5 --delay 6" output="both"/>
+</launch>
