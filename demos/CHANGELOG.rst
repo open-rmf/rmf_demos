@@ -5,6 +5,12 @@ Changelog for package demos
 Forthcoming
 -----------
 
+1.1.0 (2020-09-23)
+------------------
+* Update dependency. [#101](https://github.com/osrf/rmf_demos/pull/101)
+* Support demos on ROS 2 Foxy and Eloquent. [#103](https://github.com/osrf/rmf_demos/pull/103)
+* Add subscription to floorplan topic published by rmf_schedule_visualizer. [#133](https://github.com/osrf/rmf_demos/pull/133)
+
 1.0.0 (2020-06-24)
 ------------------
 * Provides launch files to launch the `Office` and `Airport Terminal` simulations worlds along with the necessary RMF backend services.
