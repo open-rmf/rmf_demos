@@ -1,0 +1,6 @@
+building:
+  filename: triple_H.building.yaml
+name: triple_H
+traffic_maps:
+  {}
+version: 1
