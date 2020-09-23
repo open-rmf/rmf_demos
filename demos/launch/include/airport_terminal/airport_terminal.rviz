@@ -107,7 +107,7 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /building_systems_markers
       Value: true
-    - Alpha: 0.20000000298023224
+    - Alpha: 0.7
       Class: rviz_default_plugins/Map
       Color Scheme: map
       Draw Behind: true
@@ -115,16 +115,16 @@ Visualization Manager:
       Name: Map
       Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /floor_plan
+        Value: /floorplan
       Update Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /floor_plan_updates
+        Value: /floorplan_updates
       Use Timestamp: false
       Value: true
   Enabled: true
