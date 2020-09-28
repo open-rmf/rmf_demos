@@ -2,12 +2,10 @@
 Changelog for package rmf_demo_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
-
-1.0.1 (2020-09-23)
+1.0.1 (2020-09-24)
 ------------------
 * Remove ament_python dependency. [#92](https://github.com/osrf/rmf_demos/pull/92)
+* Contributors: Aaron Chong, Kevin_Skywalker, Michael X. Grey, Yadu, kevinskwk, mrushyendra
 
 1.0.0 (2020-06-24)
 ------------------
