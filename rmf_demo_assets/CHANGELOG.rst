@@ -2,6 +2,10 @@
 Changelog for package rmf_demo_assets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Changed DeliveryRobot texture name to avoid Ignition rendering issue. [#142](https://github.com/osrf/rmf_demos/pull/142)
+
 1.1.0 (2020-09-24)
 ------------------
 * Moved majority of models to Ignition Fuel collections. [#89](https://github.com/osrf/rmf_demos/pull/89)
