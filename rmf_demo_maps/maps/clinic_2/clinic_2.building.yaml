@@ -11,7 +11,97 @@ levels:
     layers:
       {}
     measurements:
-      - [0, 1, {distance: [3, 0.5]}]
+      - [0, 1, {distance: [3, 0.6]}]
+    models:
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 992.989, y: 1539.645, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1084.49, y: 1539.645, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1175.725, y: 1539.645, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1267.226, y: 1541.241, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1039.005, y: 1490.436, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1128.644, y: 1490.436, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1221.209, y: 1489.904, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1083.426, y: 1429.524, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1175.725, y: 1429.524, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1927.091, y: 1509.158, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 2024.263, y: 1509.451, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 2023.971, y: 1456.767, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 2023.385, y: 1404.083, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1927.383, y: 1404.083, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1927.383, y: 1456.767, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1641.097, y: 1587.555, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1671.445, y: 1536.787, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1656.216, y: 1659.9, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1312.368, y: 332.465, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1216.237, y: 332.465, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1216.237, y: 278.23, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1311.507, y: 278.804, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1312.942, y: 226.577, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1216.523, y: 226.577, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 693.569, y: 269.117, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 627.307, y: 268.773, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 627.307, y: 377.028, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 693.569, y: 375.996, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 747.438, y: 376.856, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 747.783, y: 269.461, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 801.136, y: 300.613, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 854.662, y: 378.405, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 249.597, y: 1123.073, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 301.538, y: 1120.924, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 354.554, y: 1120.207, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 790.548, y: 1319.123, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 1880.212, y: 1316.989, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 1521.207, y: 1318.269, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 317.336, y: 1326.845, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 416.766, y: 1397.904, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 1488.272, y: 307.98, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 1468.093, y: 358.679, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1747.463, y: 1535.753, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1719.912, y: 1588.188, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 989.02, y: 858.817, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 988.09, y: 985.917, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 989.33, y: 1113.637, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 973.2910000000001, y: 1240.785, yaw: 2.7818, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1319.79, y: 919.2670000000001, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1319.48, y: 1046.677, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1324.13, y: 1172.537, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1361.709, y: 1298.328, yaw: 0.3823, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1704.914, y: 1241.607, yaw: 2.7684, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1723.099, y: 1111.777, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1722.479, y: 986.847, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1721.266, y: 855.997, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1717.056, y: 730.849, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1682.307, y: 606.986, yaw: -2.7959, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 2002.944, y: 600.726, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 2000.648, y: 686.454, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1945.537, y: 998.367, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1945.92, y: 1131.169, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1982.604, y: 458.444, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 665.297, y: 549.123, yaw: -0.7084, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 605.927, y: 665.579, yaw: -0.369, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 589.109, y: 793.1079999999999, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 588.164, y: 919.735, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 987.889, y: 732.63, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 986.471, y: 602.223, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 587.691, y: 1048.252, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 593.8339999999999, y: 1174.879, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 627.62, y: 1297.917, yaw: 0.3826, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 379.324, y: 1046.362, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 300.891, y: 647.11, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 265.343, y: 682.918, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 302.4, y: 682.918, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 1509.808, y: 1158.716, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 1532.324, y: 1158.043, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 1532.15, y: 1103.952, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 1509.089, y: 1103.674, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 778.227, y: 1104.273, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 801.403, y: 1104.273, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 800.75, y: 1158.785, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 777.574, y: 1158.458, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1320.195, y: 664.529, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1318.962, y: 791.946, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1330.013, y: 525.164, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/ConfTable, name: OpenRobotics/ConfTable, static: true, x: 903.17, y: 1381.498, yaw: 0.7854, z: 0}
+      - {model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 311.804, y: 925.019, yaw: 3.1416, z: 0}
     vertices:
       - [1229.032, 1518.047, 0, ""]
       - [1255.033, 1518.047, 0, ""]
@@ -416,6 +506,7 @@ levels:
       - [1443.257, 632.7329999999999, 0, ""]
       - [1443.257, 590.49, 0, ""]
       - [1443.257, 556.6079999999999, 0, ""]
+      - [1951.11, 714.718, 0, ""]
     walls:
       - [2, 4, {alpha: [3, 1], texture_name: [1, default]}]
       - [4, 5, {alpha: [3, 1], texture_name: [1, default]}]
@@ -799,6 +890,7 @@ levels:
       - [366, 391, {alpha: [3, 1], texture_name: [1, default]}]
       - [369, 388, {alpha: [3, 1], texture_name: [1, default]}]
       - [372, 386, {alpha: [3, 1], texture_name: [1, default]}]
+      - [168, 403, {alpha: [3, 1], texture_name: [1, default]}]
 lifts:
   {}
 name: clinic_2
