@@ -1,5 +1,52 @@
 levels:
   L1:
+    doors:
+      - [24, 35, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, clinic_a], type: [1, double_sliding]}]
+      - [241, 240, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_cat_a], type: [1, sliding]}]
+      - [247, 248, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_13], type: [1, sliding]}]
+      - [253, 254, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_12], type: [1, sliding]}]
+      - [237, 238, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_inner], type: [1, sliding]}]
+      - [209, 214, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_5], type: [1, sliding]}]
+      - [207, 208, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_4], type: [1, sliding]}]
+      - [205, 206, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_3], type: [1, sliding]}]
+      - [203, 204, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_2], type: [1, sliding]}]
+      - [202, 201, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_1], type: [1, sliding]}]
+      - [269, 268, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_7], type: [1, sliding]}]
+      - [266, 265, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_8], type: [1, sliding]}]
+      - [263, 262, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_9], type: [1, sliding]}]
+      - [260, 259, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_10], type: [1, sliding]}]
+      - [257, 256, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_11], type: [1, sliding]}]
+      - [374, 373, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_7], type: [1, sliding]}]
+      - [371, 370, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_8], type: [1, sliding]}]
+      - [368, 367, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_9], type: [1, sliding]}]
+      - [365, 364, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_10], type: [1, sliding]}]
+      - [362, 361, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_11], type: [1, sliding]}]
+      - [359, 358, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_12], type: [1, sliding]}]
+      - [356, 355, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_13], type: [1, sliding]}]
+      - [311, 312, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_inner], type: [1, sliding]}]
+      - [315, 314, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_cat_a], type: [1, sliding]}]
+      - [317, 318, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_1], type: [1, sliding]}]
+      - [320, 321, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_2], type: [1, sliding]}]
+      - [323, 324, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_3], type: [1, sliding]}]
+      - [326, 327, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_4], type: [1, sliding]}]
+      - [329, 330, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_5], type: [1, sliding]}]
+      - [332, 333, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult_rm_6], type: [1, sliding]}]
+      - [404, 405, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, clinic_b], type: [1, double_sliding]}]
+      - [216, 217, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_consult_rm_6], type: [1, sliding]}]
+      - [127, 128, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_treatment_1], type: [1, sliding]}]
+      - [154, 148, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_negative_air_pressure], type: [1, sliding]}]
+      - [135, 130, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_treatment_2], type: [1, sliding]}]
+      - [137, 138, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_counsel_1], type: [1, sliding]}]
+      - [150, 151, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_counsel_4], type: [1, sliding]}]
+      - [144, 143, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_counsel_3], type: [1, sliding]}]
+      - [140, 143, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, left_counsel_2], type: [1, sliding]}]
+      - [163, 164, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_procedure], type: [1, sliding]}]
+      - [192, 191, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_treatment], type: [1, sliding]}]
+      - [190, 196, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_counsel], type: [1, sliding]}]
+      - [184, 175, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_consult], type: [1, sliding]}]
+      - [174, 176, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, right_negative_air_pressure], type: [1, sliding]}]
+      - [126, 125, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, existing_ahu], type: [1, double_hinged]}]
+      - [122, 123, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, existing_single_ahu], type: [1, double_hinged]}]
     drawing:
       filename: clinic_2.png
     elevation: 0
@@ -57,36 +104,24 @@ levels:
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 1468.093, y: 358.679, yaw: 3.1416, z: 0}
       - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1747.463, y: 1535.753, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1719.912, y: 1588.188, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 997.322, y: 862.147, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 998.586, y: 989.083, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 998.901, y: 1118.546, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 981.534, y: 1250.219, yaw: 2.7818, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1311.664, y: 915.972, yaw: -0, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1310.864, y: 1042.756, yaw: -0, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1312.864, y: 1169.141, yaw: -0, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1348.46, y: 1298.725, yaw: 0.3823, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1712.015, y: 1250.731, yaw: 2.7684, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1730.813, y: 1116.747, yaw: 3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1731.613, y: 991.163, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1730.413, y: 861.179, yaw: -0.0029, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1728.413, y: 735.994, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1692.818, y: 607.61, yaw: -2.7959, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 2012.778, y: 596.4109999999999, yaw: 0.0092, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 2012.378, y: 688.8, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1937.188, y: 992.763, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1935.988, y: 1126.746, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1982.604, y: 458.444, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 664.2809999999999, y: 539.458, yaw: -0.7084, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 598.4640000000001, y: 656.715, yaw: -0.369, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 579.9, y: 787.204, yaw: 3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 580.446, y: 913.597, yaw: -0, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 998.169, y: 734.663, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 996.927, y: 606.718, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 579.354, y: 1041.083, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 581.811, y: 1169.933, yaw: -0, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 617.46, y: 1298.847, yaw: 0.3826, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 389.017, y: 1051.213, yaw: 3.1416, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 289.298, y: 651.378, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 998.586, y: 989.083, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 998.901, y: 1118.546, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1311.664, y: 915.972, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1310.864, y: 1042.756, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1348.46, y: 1298.725, yaw: 0.3823, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1712.015, y: 1250.731, yaw: 2.7684, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1730.813, y: 1116.747, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1730.413, y: 861.179, yaw: -0.0029, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1728.413, y: 735.994, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1692.818, y: 607.61, yaw: -2.7959, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 2012.778, y: 596.4109999999999, yaw: 0.0092, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1982.604, y: 458.444, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 664.2809999999999, y: 539.458, yaw: -0.7084, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 998.169, y: 734.663, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 996.927, y: 606.718, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 579.354, y: 1041.083, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 617.46, y: 1298.847, yaw: 0.3826, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 289.298, y: 651.378, yaw: 0, z: 0}
       - {model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 261.376, y: 685.87, yaw: 3.1416, z: 0}
       - {model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 292.912, y: 685.87, yaw: -3.1416, z: 0}
       - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 1509.808, y: 1158.716, yaw: 1.5708, z: 0}
@@ -97,9 +132,8 @@ levels:
       - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 801.403, y: 1104.273, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 800.75, y: 1158.785, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/SurgicalTrolleyMed, name: OpenRobotics/SurgicalTrolleyMed, static: true, x: 777.574, y: 1158.458, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1311.681, y: 659.345, yaw: -0, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1310.877, y: 786.747, yaw: -0, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: OpenRobotics/CGMClassic, static: true, x: 1323.738, y: 519.485, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1311.681, y: 659.345, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/CGMVanguard, name: OpenRobotics/CGMVanguard, static: true, x: 1323.738, y: 519.485, yaw: -0, z: 0}
       - {model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 315.249, y: 926.985, yaw: 3.1416, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 334.631, y: 425.702, yaw: 0, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 964.6079999999999, y: 1363.777, yaw: -2.1716, z: 0}
@@ -112,7 +146,7 @@ levels:
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1688.151, y: 775.326, yaw: 0.0053, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1687.403, y: 901.347, yaw: 0.0072, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1689.648, y: 1029.365, yaw: 0.0098, z: 0}
-      - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1687.403, y: 1156.884, yaw: 0.0034, z: 0}
+      - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1686.841, y: 1156.705, yaw: 0.0034, z: 0}
       - {model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 283.96, y: 926.865, yaw: 3.1416, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 255.181, y: 749.039, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 255.258, y: 891.125, yaw: 1.5708, z: 0}
@@ -126,8 +160,8 @@ levels:
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 651.91, y: 635.8680000000001, yaw: 2.7367, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 955.961, y: 500.577, yaw: -0.0073, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 957.571, y: 646.797, yaw: 0.0011, z: 0}
-      - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 959.133, y: 776.568, yaw: -0.0008, z: 0}
-      - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 957.5359999999999, y: 901.933, yaw: 0.0073, z: 0}
+      - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 959.285, y: 775.492, yaw: -0.0008, z: 0}
+      - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 959.12, y: 902.229, yaw: 0.0073, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1355.125, y: 618.985, yaw: -3.1416, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1354.684, y: 746.9589999999999, yaw: -3.1416, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1353.077, y: 875.165, yaw: 3.1416, z: 0}
@@ -139,7 +173,7 @@ levels:
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 1965.108, y: 1087.705, yaw: 3.1416, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 2048.673, y: 916.732, yaw: -1.5708, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 697.478, y: 1347.126, yaw: -2.37, z: 0}
-      - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 729.872, y: 1450.413, yaw: -3.1113, z: 0}
+      - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 729.872, y: 1450.413, yaw: -3.1416, z: 0}
       - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 445.716, y: 1102.832, yaw: -0, z: 0}
       - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 445.32, y: 933.817, yaw: 0, z: 0}
       - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 446.507, y: 693.951, yaw: 0, z: 0}
@@ -206,13 +240,13 @@ levels:
       - {model_name: OpenRobotics/Table, name: OpenRobotics/Table, static: true, x: 260.878, y: 508.562, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Table, name: OpenRobotics/Table, static: true, x: 2029.903, y: 733.548, yaw: -3.1416, z: 0}
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 723.689, y: 1471.127, yaw: -3.1182, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 838.652, y: 1445.991, yaw: -2.6428, z: 0}
+      - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 838.205, y: 1446.178, yaw: -2.6428, z: 0}
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 870.381, y: 1423.328, yaw: -2.3511, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 969.274, y: 1392.424, yaw: -2.0404, z: 0}
+      - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 969.274, y: 1392.424, yaw: -2.1035, z: 0}
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 992.761, y: 1359.46, yaw: -1.8657, z: 0}
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 1464.976, y: 1466.594, yaw: -3.0604, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 1561.809, y: 1449.7, yaw: -2.7868, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 1603.426, y: 1434.866, yaw: -2.5948, z: 0}
+      - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 1561.809, y: 1449.7, yaw: -2.8514, z: 0}
+      - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 1603.467, y: 1436.249, yaw: -2.5536, z: 0}
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 1691.606, y: 1381.711, yaw: -2.4327, z: 0}
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 1726.631, y: 1352.455, yaw: -2.3371, z: 0}
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 1987.05, y: 891.777, yaw: 1.5708, z: 0}
@@ -257,59 +291,199 @@ levels:
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 562.9880000000001, y: 739.317, yaw: 3.1056, z: 0}
       - {model_name: OpenRobotics/OfficeChairGrey, name: OpenRobotics/OfficeChairGrey, static: true, x: 562.9880000000001, y: 864.994, yaw: -3.1369, z: 0}
       - {model_name: OpenRobotics/Table, name: OpenRobotics/Table, static: true, x: 1985.004, y: 934.641, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1458.08, y: 1441.818, yaw: -1.5494, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1552.119, y: 1425.981, yaw: -1.3046, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1595.13, y: 1410.927, yaw: -1.3255, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1670.205, y: 1368.893, yaw: -0.8439, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1708.916, y: 1336.048, yaw: -0.922, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1970.942, y: 1217.413, yaw: -1.498, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 947.965, y: 1381.811, yaw: -0.5974, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 970.611, y: 1347.632, yaw: -0.6149, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 825.717, y: 1426.055, yaw: -0.9838, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 856.961, y: 1403.828, yaw: -0.9674, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 725.068, y: 1446.814, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 337.293, y: 960.058, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 258.855, y: 898.306, yaw: -3.0596, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 259.655, y: 736.686, yaw: 3.1083, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 365.919, y: 696.783, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 373.798, y: 590.05, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 260.848, y: 508.565, yaw: -3.0738, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 312.18, y: 429.322, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 358.828, y: 429.712, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 652.898, y: 631.15, yaw: -1.9526, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 618.956, y: 740.36, yaw: -1.5544, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 617.756, y: 870.678, yaw: -1.5565, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 619.371, y: 996.917, yaw: -1.5981, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 958.638, y: 504.759, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 962.15, y: 651.126, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 958.838, y: 780.696, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 960.606, y: 905.852, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 959.691, y: 1034.214, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 958.755, y: 1162.132, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 632.729, y: 1243.669, yaw: -1.0917, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 617.316, y: 1126.972, yaw: -1.5318, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 690.8630000000001, y: 1347.567, yaw: -0.8187, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1352.31, y: 1126.073, yaw: -1.5637, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1365.409, y: 1241.813, yaw: -1.2791, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1423.475, y: 1344.65, yaw: -0.783, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1686.649, y: 1160.732, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1686.988, y: 1033.755, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1349.377, y: 998.4059999999999, yaw: -1.5641, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1345.976, y: 870.955, yaw: -1.4799, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1688.259, y: 906.417, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1687.603, y: 779.746, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1347.735, y: 743.914, yaw: -1.5616, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1348.967, y: 615.29, yaw: -1.5427, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1621.29, y: 566.74, yaw: 2.255, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1673.62, y: 663.222, yaw: 1.9445, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 2022.385, y: 549.86, yaw: -1.5706, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1931.154, y: 946.936, yaw: -1.5242, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1959.769, y: 1083.804, yaw: -1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1529.354, y: 1019.795, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1529.805, y: 827.1900000000001, yaw: 1.5708, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 786.451, y: 808.246, yaw: -0, z: 1.1}
-      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 784.647, y: 1020.246, yaw: 0.0351, z: 1.1}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1457.238, y: 1446.059, yaw: -1.5494, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1554.839, y: 1429.945, yaw: -1.2654, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1596.043, y: 1415.673, yaw: -1.3255, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1674.538, y: 1369.405, yaw: -0.8439, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1712.059, y: 1338.559, yaw: -0.922, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1969.386, y: 1222.096, yaw: -1.498, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 951.967, y: 1382.164, yaw: -0.5974, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 974.418, y: 1349.428, yaw: -0.6149, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 827.6079999999999, y: 1428.47, yaw: -0.9838, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 858.119, y: 1406.825, yaw: -0.9674, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 723.033, y: 1449.594, yaw: -1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 337.456, y: 956.799, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 256.221, y: 895.7619999999999, yaw: -3.0596, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 255.229, y: 734.063, yaw: 3.1083, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 366.583, y: 693.143, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 371.791, y: 587.4930000000001, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 257.213, y: 509.867, yaw: -3.0738, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 312.766, y: 425.794, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 358.151, y: 426.042, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 649.673, y: 633.419, yaw: -1.9526, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 618.227, y: 746.009, yaw: -1.5544, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 615.808, y: 873.991, yaw: -1.5565, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 619.106, y: 999.995, yaw: -1.5981, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 960.201, y: 501.472, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 959.972, y: 647.982, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 959.514, y: 776.865, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 960.654, y: 902.741, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 958.6079999999999, y: 1031.093, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 959.8869999999999, y: 1158.934, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 632.801, y: 1248.006, yaw: -1.0917, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 616.342, y: 1129.294, yaw: -1.5318, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 688.609, y: 1354.407, yaw: -0.8187, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1349.812, y: 1129.047, yaw: -1.5637, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1363.939, y: 1246.406, yaw: -1.2791, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1421.328, y: 1351.91, yaw: -0.783, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1687.131, y: 1157.285, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1688.001, y: 1029.661, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1348.454, y: 1001.907, yaw: -1.5641, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1347.132, y: 874.8819999999999, yaw: -1.4799, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1688.653, y: 901.802, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1687.402, y: 775.694, yaw: 1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1348.575, y: 746.2329999999999, yaw: -1.5616, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1349.423, y: 618.546, yaw: -1.5427, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1618.246, y: 563.688, yaw: 2.255, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1671.755, y: 659.2859999999999, yaw: 1.9445, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 2022.562, y: 553.36, yaw: -1.5706, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1931.154, y: 946.936, yaw: -1.5242, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1959.073, y: 1087.059, yaw: -1.5708, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1529.354, y: 1019.795, yaw: 0, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 1529.805, y: 827.1900000000001, yaw: 0, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 786.451, y: 808.246, yaw: -0, z: 0.86}
+      - {model_name: OpenRobotics/MonitorAndKeyboard, name: OpenRobotics/MonitorAndKeyboard, static: true, x: 784.647, y: 1020.246, yaw: 0.0351, z: 0.86}
       - {model_name: OpenRobotics/DeskChair, name: OpenRobotics/DeskChair, static: true, x: 1349.078, y: 590.2809999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/ElderMalePatient, name: OpenRobotics/ElderMalePatient, static: true, x: 396.614, y: 1050.797, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/ElderMalePatient, name: OpenRobotics/ElderMalePatient, static: true, x: 573.009, y: 914.015, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/ElderMalePatient, name: OpenRobotics/ElderMalePatient, static: true, x: 592.842, y: 653.701, yaw: -0.3822, z: 0}
+      - {model_name: OpenRobotics/ElderMalePatient, name: OpenRobotics/ElderMalePatient, static: true, x: 1737.692, y: 990.865, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/ElderMalePatient, name: OpenRobotics/ElderMalePatient, static: true, x: 1937.403, y: 991.726, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/ElderLadyPatient, name: OpenRobotics/ElderLadyPatient, static: true, x: 573.009, y: 787.577, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/ElderLadyPatient, name: OpenRobotics/ElderLadyPatient, static: true, x: 575.4880000000001, y: 1169.372, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/ElderLadyPatient, name: OpenRobotics/ElderLadyPatient, static: true, x: 986.537, y: 1253.168, yaw: 2.7245, z: 0}
+      - {model_name: OpenRobotics/ElderLadyPatient, name: OpenRobotics/ElderLadyPatient, static: true, x: 1005.251, y: 862.422, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/ElderLadyPatient, name: OpenRobotics/ElderLadyPatient, static: true, x: 1304.053, y: 786.707, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/ElderLadyPatient, name: OpenRobotics/ElderLadyPatient, static: true, x: 1305.217, y: 1169.176, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/ElderLadyPatient, name: OpenRobotics/ElderLadyPatient, static: true, x: 2012.079, y: 688.369, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/ElderLadyPatient, name: OpenRobotics/ElderLadyPatient, static: true, x: 1932.252, y: 1127.096, yaw: 0, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 329.727, y: 1051.021, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 657.957, y: 693.532, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 577.096, y: 828.122, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 665.405, y: 930.794, yaw: -2.3833, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 655.297, y: 1187.207, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 922.349, y: 1233.489, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 937.245, y: 863.2329999999999, yaw: -0.3436, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1366.55, y: 821.207, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1368.146, y: 1195.718, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1936.83, y: 1171.779, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1667.649, y: 928.134, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1956.047, y: 695.208, yaw: 0.2102, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1990.345, y: 528.828, yaw: 2.6285, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1473.943, y: 1423.424, yaw: -0.3588, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1561.269, y: 1380.997, yaw: -1.3217, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 626.218, y: 1603.843, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 867.602, y: 1374.36, yaw: -0.7854, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 920.693, y: 1346.899, yaw: -0.7854, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 759.13, y: 813.696, yaw: 0.2119, z: 0}
+      - {model_name: OpenRobotics/Nurse, name: OpenRobotics/Nurse, static: true, x: 1487.765, y: 1111.649, yaw: 0.17, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: OpenRobotics/FemaleVisitor, static: true, x: 558.004, y: 1640.815, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: OpenRobotics/FemaleVisitor, static: true, x: 738.078, y: 1517.261, yaw: 2.2598, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: OpenRobotics/FemaleVisitor, static: true, x: 1103.483, y: 1380.563, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: OpenRobotics/FemaleVisitor, static: true, x: 1298.558, y: 1504.073, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: OpenRobotics/FemaleVisitor, static: true, x: 1559.582, y: 1607.955, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: OpenRobotics/FemaleVisitor, static: true, x: 1840.208, y: 771.9930000000001, yaw: 2.5114, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: OpenRobotics/FemaleVisitor, static: true, x: 1962.447, y: 1347.046, yaw: -2.4574, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitor, name: OpenRobotics/FemaleVisitor, static: true, x: 1781.524, y: 1497.636, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 1908.343, y: 1392.154, yaw: -3.0094, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 1561.503, y: 1453.896, yaw: -2.8854, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 1622.093, y: 1576.017, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 1148.467, y: 1480.444, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 872.888, y: 1425.736, yaw: -2.3047, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 363.928, y: 1120.727, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 310.062, y: 1139.58, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 454.601, y: 913.794, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/FemaleVisitorSit, name: OpenRobotics/FemaleVisitorSit, static: true, x: 1851.26, y: 821.794, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorOnPhone, name: OpenRobotics/MaleVisitorOnPhone, static: true, x: 586.471, y: 1581.171, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorOnPhone, name: OpenRobotics/MaleVisitorOnPhone, static: true, x: 973.828, y: 1508.379, yaw: 2.2996, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorOnPhone, name: OpenRobotics/MaleVisitorOnPhone, static: true, x: 1630.69, y: 1619.3, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorOnPhone, name: OpenRobotics/MaleVisitorOnPhone, static: true, x: 2022.381, y: 1367.994, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorOnPhone, name: OpenRobotics/MaleVisitorOnPhone, static: true, x: 576.072, y: 253.582, yaw: 0.7956, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorOnPhone, name: OpenRobotics/MaleVisitorOnPhone, static: true, x: 580.405, y: 333.307, yaw: -2.3562, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorOnPhone, name: OpenRobotics/MaleVisitorOnPhone, static: true, x: 793.581, y: 395.7, yaw: -2.3562, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorOnPhone, name: OpenRobotics/MaleVisitorOnPhone, static: true, x: 1207.242, y: 367.734, yaw: -0.9067, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 615.845, y: 268.192, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 616.2, y: 395.848, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 790.083, y: 319.752, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 1331.434, y: 342.194, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 1849.642, y: 841.13, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 1926.917, y: 1445.288, yaw: 3.0639, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 1660.856, y: 1577.258, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 1156.089, y: 1418.64, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 1084.006, y: 1418.883, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 1059.399, y: 1479.943, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 310.902, y: 1121.062, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 258.44, y: 1103.667, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 362.805, y: 1139.327, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 454.385, y: 1083.851, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 454.905, y: 933.698, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1175.991, y: 1531.013, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1109.247, y: 1481.258, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1202.203, y: 1481.744, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1195.408, y: 1422.281, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1747.78, y: 1527.3, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1727.617, y: 1527.972, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1927.563, y: 1395.145, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1216.256, y: 340.442, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1313.657, y: 340.442, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 686.251, y: 356.556, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 619.578, y: 287.927, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 687.851, y: 287.749, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 619.934, y: 377.002, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/VendingMachine, name: OpenRobotics/VendingMachine, static: true, x: 851.8200000000001, y: 287.097, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/VendingMachine, name: OpenRobotics/VendingMachine, static: true, x: 502.31, y: 1534.687, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/VendingMachine, name: OpenRobotics/VendingMachine, static: true, x: 910.246, y: 1534.687, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/VendingMachine, name: OpenRobotics/VendingMachine, static: true, x: 1600.196, y: 1653.769, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/VendingMachine, name: OpenRobotics/VendingMachine, static: true, x: 2046.169, y: 1285.213, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/IVStand, name: OpenRobotics/IVStand, static: true, x: 1903.086, y: 1158.086, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/IVStand, name: OpenRobotics/IVStand, static: true, x: 1912.026, y: 1022.644, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/IVStand, name: OpenRobotics/IVStand, static: true, x: 1752.695, y: 960.7809999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/IVStand, name: OpenRobotics/IVStand, static: true, x: 414.253, y: 1019.751, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 532.1559999999999, y: 1537.54, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 879.4400000000001, y: 1536.901, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 1361.228, y: 1536.581, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 1566.979, y: 1655.431, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 2049.087, y: 1313.259, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 1184.05, y: 387.12, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 852.923, y: 316.241, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 455.787, y: 1270.846, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/LitterBin, name: OpenRobotics/LitterBin, static: true, x: 752.1660000000001, y: 1336.975, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/OpScrubs, name: OpenRobotics/OpScrubs, static: true, x: 1969.896, y: 504.127, yaw: -1.5513, z: 0}
+      - {model_name: OpenRobotics/OpScrubs, name: OpenRobotics/OpScrubs, static: true, x: 1994.604, y: 659.725, yaw: -1.1219, z: 0}
+      - {model_name: OpenRobotics/OpScrubs, name: OpenRobotics/OpScrubs, static: true, x: 2022.979, y: 659.049, yaw: -1.3103, z: 0}
+      - {model_name: OpenRobotics/OpScrubs, name: OpenRobotics/OpScrubs, static: true, x: 397.226, y: 480.476, yaw: 2.9547, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 684.473, y: 375.757, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 739.4109999999999, y: 396.204, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 1128.664, y: 1482.229, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 1103.665, y: 1419.854, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 1175.663, y: 1421.664, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 971.6559999999999, y: 1395.416, yaw: 2.5917, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 1640.959, y: 1580.083, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 1605.404, y: 1439.692, yaw: 1.9601, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 2003.776, y: 1448.018, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 1947.348, y: 1446.578, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 1851.987, y: 860.737, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/PatientFSit, name: OpenRobotics/PatientFSit, static: true, x: 1236.538, y: 340.943, yaw: -1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientWheelChair, name: OpenRobotics/PatientWheelChair, static: true, x: 900.611, y: 1420.365, yaw: 1.9049, z: 0}
+      - {model_name: OpenRobotics/PatientWheelChair, name: OpenRobotics/PatientWheelChair, static: true, x: 1324.284, y: 1496.063, yaw: 1.9552, z: 0}
+      - {model_name: OpenRobotics/PatientWheelChair, name: OpenRobotics/PatientWheelChair, static: true, x: 570.37, y: 1519.617, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientWheelChair, name: OpenRobotics/PatientWheelChair, static: true, x: 1781.428, y: 1471.274, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/PatientWheelChair, name: OpenRobotics/PatientWheelChair, static: true, x: 1913.59, y: 1311.388, yaw: -3.0041, z: 0}
+      - {model_name: OpenRobotics/PatientWheelChair, name: OpenRobotics/PatientWheelChair, static: true, x: 1361.231, y: 352.961, yaw: -2.2818, z: 0}
+      - {model_name: OpenRobotics/PatientWheelChair, name: OpenRobotics/PatientWheelChair, static: true, x: 791.908, y: 368.471, yaw: -0.7854, z: 0}
+      - {model_name: OpenRobotics/Scrubs, name: OpenRobotics/Scrubs, static: true, x: 1957.309, y: 671.032, yaw: -0.0141, z: 0}
+      - {model_name: OpenRobotics/Scrubs, name: OpenRobotics/Scrubs, static: true, x: 362.88, y: 484.164, yaw: 0.3851, z: 0}
+      - {model_name: OpenRobotics/Scrubs, name: OpenRobotics/Scrubs, static: true, x: 1959.316, y: 526.564, yaw: 0.1185, z: 0}
+      - {model_name: OpenRobotics/Scrubs, name: OpenRobotics/Scrubs, static: true, x: 759.457, y: 1005.382, yaw: -0.4618, z: 0}
+      - {model_name: OpenRobotics/Scrubs, name: OpenRobotics/Scrubs, static: true, x: 760.563, y: 1027.501, yaw: 0.2369, z: 0}
+      - {model_name: OpenRobotics/Scrubs, name: OpenRobotics/Scrubs, static: true, x: 1503.34, y: 828.663, yaw: -0, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: OpenRobotics/Pine Tree, static: true, x: 760.381, y: 1611.75, yaw: -3.0821, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: OpenRobotics/Pine Tree, static: true, x: 870.325, y: 1614.064, yaw: -0.9918, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: OpenRobotics/Pine Tree, static: true, x: 982.005, y: 1615.222, yaw: 2.3909, z: 0}
+      - {model_name: OpenRobotics/Pine Tree, name: OpenRobotics/Pine Tree, static: true, x: 1100.049, y: 1615.8, yaw: -1.2635, z: 0}
+      - {model_name: OpenRobotics/MopCart2, name: OpenRobotics/MopCart2, static: true, x: 1475.763, y: 238.614, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MopCart2, name: OpenRobotics/MopCart2, static: true, x: 1440.365, y: 239.488, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MopCart2, name: OpenRobotics/MopCart2, static: true, x: 416.333, y: 1103.001, yaw: 1.5708, z: 0}
     vertices:
       - [1229.032, 1518.047, 0, ""]
       - [1255.033, 1518.047, 0, ""]
@@ -715,6 +889,8 @@ levels:
       - [1443.257, 590.49, 0, ""]
       - [1443.257, 556.6079999999999, 0, ""]
       - [1951.11, 714.718, 0, ""]
+      - [1382.909, 1580.118, 0, ""]
+      - [1382.909, 1641.559, 0, ""]
     walls:
       - [2, 4, {alpha: [3, 1], texture_name: [1, default]}]
       - [4, 5, {alpha: [3, 1], texture_name: [1, default]}]
@@ -1097,6 +1273,8 @@ levels:
       - [369, 388, {alpha: [3, 1], texture_name: [1, default]}]
       - [372, 386, {alpha: [3, 1], texture_name: [1, default]}]
       - [168, 403, {alpha: [3, 1], texture_name: [1, default]}]
+      - [37, 404, {alpha: [3, 1], texture_name: [1, default]}]
+      - [405, 38, {alpha: [3, 1], texture_name: [1, default]}]
 lifts:
   {}
 name: clinic_2
