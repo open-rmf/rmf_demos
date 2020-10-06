@@ -110,12 +110,12 @@ levels:
       - [4, 3, {distance: [3, 30]}]
     models:
       - {model_name: OpenRobotics/Fountain, name: Fountain, static: true, x: -80.114, y: 389.374, yaw: 1.571, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 67.27, y: 52.151, yaw: 1.56, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 319.864, y: 88.41, yaw: -1.5609, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 319.684, y: 201.697, yaw: -1.5678, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 319.892, y: 309.091, yaw: -1.571, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 320.1, y: 441.479, yaw: -1.5738, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 320.208, y: 550.309, yaw: -1.5747, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 67.27, y: 52.151, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 319.864, y: 88.41, yaw: 3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 319.684, y: 201.697, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 319.892, y: 309.091, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 320.1, y: 441.479, yaw: -3.1416, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 320.208, y: 550.309, yaw: 3.1416, z: 0}
       - {model_name: OpenRobotics/BloodPressureMonitor, name: BloodPressureMonitor, static: true, x: 49.978, y: 556.29, yaw: 1.571, z: 0}
       - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 163.448, y: 356.826, yaw: -1.591, z: 0}
       - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 163.613, y: 384.611, yaw: -1.5679, z: 0}
@@ -173,7 +173,7 @@ levels:
       - {model_name: OpenRobotics/WhiteCabinet, name: WhiteCabinet, static: true, x: 184.697, y: 30.074, yaw: 0.0002, z: 0}
       - {model_name: OpenRobotics/WhiteCabinet, name: WhiteCabinet, static: true, x: 212.47, y: 30.427, yaw: 0.0051, z: 0}
       - {model_name: OpenRobotics/VendingMachine, name: VendingMachine, static: true, x: 148.139, y: 49.594, yaw: -0.0005, z: 0}
-      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 321.043, y: 633.11, yaw: -1.5765, z: 0}
+      - {model_name: OpenRobotics/CGMClassic, name: CGMClassic, static: true, x: 321.043, y: 633.11, yaw: -3.1416, z: 0}
       - {model_name: OpenRobotics/KitchenCountertop, name: KitchenCountertop, static: true, x: 307.425, y: 788.3, yaw: 1.571, z: 0}
       - {model_name: OpenRobotics/KitchenSink, name: KitchenSink, static: true, x: 341.194, y: 755.056, yaw: 3.1418, z: 0}
       - {model_name: OpenRobotics/VendingMachine, name: VendingMachine, static: true, x: 342.106, y: 727.288, yaw: -3.1416, z: 0}
@@ -197,8 +197,8 @@ levels:
       - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 322.411, y: 654.816, yaw: 1.5267, z: 0}
       - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 319.715, y: 575.061, yaw: 1.571, z: 0}
       - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 325.109, y: 467.806, yaw: 1.571, z: 0}
-      - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 323.312, y: 333.046, yaw: 1.571, z: 0}
-      - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 325.126, y: 225.447, yaw: 1.5644, z: 0}
+      - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 323.312, y: 333.046, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 325.126, y: 225.447, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 321.778, y: 112.306, yaw: 1.5576, z: 0}
       - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 63.918, y: 30.345, yaw: 1.571, z: 0}
       - {model_name: OpenRobotics/TrashBin, name: TrashBin, static: true, x: 59.682, y: 160.657, yaw: 1.571, z: 0}
