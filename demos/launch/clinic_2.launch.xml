@@ -3,11 +3,11 @@
 <launch>
 
   <!-- Common launch -->
-  <!-- <include file="$(find-pkg-share demos)/common.launch.xml">
+  <include file="$(find-pkg-share demos)/common.launch.xml">
     <arg name="use_sim_time" value="true"/>
     <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/clinic_2/clinic_2.rviz"/>
-    <arg name="config_file" value="$(find-pkg-share rmf_demo_maps)/clinic/clinic_2.building.yaml"/>
-  </include> -->
+    <arg name="config_file" value="$(find-pkg-share rmf_demo_maps)/clinic_2/clinic_2.building.yaml"/>
+  </include>
 
   <group>
     <arg name="gazebo_version" default="11"/>
