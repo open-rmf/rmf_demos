@@ -1,10 +1,10 @@
 levels:
   L1:
     doors:
-      - [1205, 1206, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], type: [1, double_hinged]}]
-      - [1207, 1208, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], type: [1, double_hinged]}]
-      - [1222, 1223, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, 1], name: [1, s04_door], type: [1, hinged]}]
-      - [1225, 1224, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, s08_door], type: [1, hinged]}]
+      - [1205, 1206, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], type: [1, double_hinged], plugin: [1, normal]}]
+      - [1207, 1208, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], type: [1, double_hinged], plugin: [1, normal]}]
+      - [1222, 1223, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, 1], name: [1, s04_door], type: [1, hinged], plugin: [1, normal]}]
+      - [1225, 1224, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, s08_door], type: [1, hinged], plugin: [1, normal]}]
     drawing:
       filename: airport_terminal.png
     elevation: 0
