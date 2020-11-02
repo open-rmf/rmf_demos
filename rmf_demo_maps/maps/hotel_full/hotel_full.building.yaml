@@ -1,38 +1,38 @@
 levels:
   L1:
     doors:
-      - [33, 32, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door17], type: [1, double_hinged]}]
-      - [39, 40, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door16], type: [1, double_hinged]}]
-      - [41, 42, {motion_axis: [1, end], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door14], type: [1, hinged]}]
-      - [48, 49, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door13], type: [1, hinged]}]
-      - [51, 52, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door11], type: [1, hinged]}]
-      - [53, 54, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door15], type: [1, double_hinged]}]
-      - [59, 60, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, dining_4], type: [1, hinged]}]
-      - [62, 61, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, dining_3], type: [1, hinged]}]
-      - [67, 68, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, dining_2], type: [1, hinged]}]
-      - [70, 69, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, dining_1], type: [1, hinged]}]
-      - [55, 71, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door12], type: [1, hinged]}]
-      - [95, 94, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door10], type: [1, hinged]}]
-      - [100, 99, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door9], type: [1, hinged]}]
-      - [104, 105, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door8], type: [1, hinged]}]
-      - [108, 109, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door6], type: [1, hinged]}]
-      - [112, 113, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door7], type: [1, double_hinged]}]
-      - [148, 149, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door4], type: [1, hinged]}]
-      - [153, 154, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door1], type: [1, hinged]}]
-      - [159, 160, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door2], type: [1, hinged]}]
-      - [187, 188, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, terrace], type: [1, hinged]}]
-      - [191, 190, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, exit_2], type: [1, hinged]}]
-      - [152, 151, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door3], type: [1, hinged]}]
-      - [205, 206, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, entrance_2], type: [1, double_sliding]}]
-      - [207, 208, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, entrance_1], type: [1, double_sliding]}]
-      - [194, 195, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, exit_1], type: [1, hinged]}]
-      - [21, 24, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door19], type: [1, double_hinged]}]
-      - [215, 214, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door18], type: [1, double_hinged]}]
-      - [219, 218, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, restroom_2], type: [1, hinged]}]
-      - [223, 222, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, restroom_3], type: [1, hinged]}]
-      - [227, 228, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, restroom_1], type: [1, hinged]}]
-      - [142, 141, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door5], type: [1, hinged]}]
-      - [30, 31, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door20], type: [1, hinged]}]
+      - [33, 32, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door17], type: [1, double_hinged], plugin: [1, normal]}]
+      - [39, 40, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door16], type: [1, double_hinged], plugin: [1, normal]}]
+      - [41, 42, {motion_axis: [1, end], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door14], type: [1, hinged], plugin: [1, normal]}]
+      - [48, 49, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door13], type: [1, hinged], plugin: [1, normal]}]
+      - [51, 52, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door11], type: [1, hinged], plugin: [1, normal]}]
+      - [53, 54, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door15], type: [1, double_hinged], plugin: [1, normal]}]
+      - [59, 60, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, dining_4], type: [1, hinged], plugin: [1, normal]}]
+      - [62, 61, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, dining_3], type: [1, hinged], plugin: [1, normal]}]
+      - [67, 68, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, dining_2], type: [1, hinged], plugin: [1, normal]}]
+      - [70, 69, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, dining_1], type: [1, hinged], plugin: [1, normal]}]
+      - [55, 71, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door12], type: [1, hinged], plugin: [1, normal]}]
+      - [95, 94, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door10], type: [1, hinged], plugin: [1, normal]}]
+      - [100, 99, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door9], type: [1, hinged], plugin: [1, normal]}]
+      - [104, 105, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door8], type: [1, hinged], plugin: [1, normal]}]
+      - [108, 109, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door6], type: [1, hinged], plugin: [1, normal]}]
+      - [112, 113, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door7], type: [1, double_hinged], plugin: [1, normal]}]
+      - [148, 149, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door4], type: [1, hinged], plugin: [1, normal]}]
+      - [153, 154, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door1], type: [1, hinged], plugin: [1, normal]}]
+      - [159, 160, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door2], type: [1, hinged], plugin: [1, normal]}]
+      - [187, 188, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, terrace], type: [1, hinged], plugin: [1, normal]}]
+      - [191, 190, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, exit_2], type: [1, hinged], plugin: [1, normal]}]
+      - [152, 151, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door3], type: [1, hinged], plugin: [1, normal]}]
+      - [205, 206, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, entrance_2], type: [1, double_sliding], plugin: [1, normal]}]
+      - [207, 208, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, entrance_1], type: [1, double_sliding], plugin: [1, normal]}]
+      - [194, 195, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, exit_1], type: [1, hinged], plugin: [1, normal]}]
+      - [21, 24, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door19], type: [1, double_hinged], plugin: [1, normal]}]
+      - [215, 214, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door18], type: [1, double_hinged], plugin: [1, normal]}]
+      - [219, 218, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, restroom_2], type: [1, hinged], plugin: [1, normal]}]
+      - [223, 222, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, restroom_3], type: [1, hinged], plugin: [1, normal]}]
+      - [227, 228, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, restroom_1], type: [1, hinged], plugin: [1, normal]}]
+      - [142, 141, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, l1_door5], type: [1, hinged], plugin: [1, normal]}]
+      - [30, 31, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, l1_door20], type: [1, hinged], plugin: [1, normal]}]
     elevation: 0
     fiducials:
       - [1204, 40, ref1]
@@ -1055,50 +1055,50 @@ levels:
     y_meters: 40
   L2:
     doors:
-      - [17, 18, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door1], type: [1, hinged]}]
-      - [19, 21, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door2], type: [1, hinged]}]
-      - [24, 25, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door3], type: [1, hinged]}]
-      - [28, 29, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_kitchen_door1], type: [1, double_hinged]}]
-      - [30, 31, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_kitchen_door2], type: [1, double_hinged]}]
-      - [7, 32, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door0], type: [1, hinged]}]
-      - [45, 42, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_back1], type: [1, hinged]}]
-      - [46, 40, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, ballroom_back2], type: [1, hinged]}]
-      - [54, 53, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, ballroom_back3], type: [1, hinged]}]
-      - [68, 69, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_back0], type: [1, hinged]}]
-      - [76, 77, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, ballroom_side0], type: [1, hinged]}]
-      - [82, 83, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_door3], type: [1, double_hinged]}]
-      - [84, 85, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_door2], type: [1, double_hinged]}]
-      - [89, 87, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, ballroom_door0], type: [1, double_hinged]}]
-      - [90, 88, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_door1], type: [1, double_hinged]}]
-      - [96, 95, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_side1], type: [1, double_hinged]}]
-      - [100, 103, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door7], type: [1, double_hinged]}]
-      - [121, 122, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door4], type: [1, double_hinged]}]
-      - [124, 125, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door5], type: [1, double_hinged]}]
-      - [133, 134, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door6], type: [1, hinged]}]
-      - [155, 156, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_restroom_door0], type: [1, hinged]}]
-      - [165, 166, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf0_door0], type: [1, double_hinged]}]
-      - [168, 169, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf0_door1], type: [1, double_hinged]}]
-      - [175, 176, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, meeting1_side], type: [1, hinged]}]
-      - [189, 188, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf0_back0], type: [1, hinged]}]
-      - [185, 184, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf0_back1], type: [1, hinged]}]
-      - [195, 196, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf1_side], type: [1, hinged]}]
-      - [206, 207, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf1_door0], type: [1, double_hinged]}]
-      - [208, 209, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf1_door1], type: [1, double_hinged]}]
-      - [218, 217, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf1_back0], type: [1, hinged]}]
-      - [224, 223, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf1_back1], type: [1, hinged]}]
-      - [231, 232, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door9], type: [1, hinged]}]
-      - [237, 235, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door8], type: [1, hinged]}]
-      - [244, 243, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_meeting0_door0], type: [1, hinged]}]
-      - [246, 245, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_meeting0_door1], type: [1, hinged]}]
-      - [248, 247, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_meeting1_door0], type: [1, hinged]}]
-      - [250, 249, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_meeting1_door1], type: [1, hinged]}]
-      - [254, 255, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_kitchen_door0], type: [1, hinged]}]
-      - [259, 258, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door10], type: [1, hinged]}]
-      - [263, 264, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door11], type: [1, hinged]}]
-      - [272, 273, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door12], type: [1, hinged]}]
-      - [284, 285, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_restroom_door1], type: [1, hinged]}]
-      - [291, 292, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_restroom_door2], type: [1, hinged]}]
-      - [294, 295, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_restroom_door3], type: [1, hinged]}]
+      - [17, 18, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door1], type: [1, hinged], plugin: [1, normal]}]
+      - [19, 21, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door2], type: [1, hinged], plugin: [1, normal]}]
+      - [24, 25, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door3], type: [1, hinged], plugin: [1, normal]}]
+      - [28, 29, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_kitchen_door1], type: [1, double_hinged], plugin: [1, normal]}]
+      - [30, 31, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_kitchen_door2], type: [1, double_hinged], plugin: [1, normal]}]
+      - [7, 32, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door0], type: [1, hinged], plugin: [1, normal]}]
+      - [45, 42, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_back1], type: [1, hinged], plugin: [1, normal]}]
+      - [46, 40, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, ballroom_back2], type: [1, hinged], plugin: [1, normal]}]
+      - [54, 53, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, ballroom_back3], type: [1, hinged], plugin: [1, normal]}]
+      - [68, 69, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_back0], type: [1, hinged], plugin: [1, normal]}]
+      - [76, 77, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, ballroom_side0], type: [1, hinged], plugin: [1, normal]}]
+      - [82, 83, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_door3], type: [1, double_hinged], plugin: [1, normal]}]
+      - [84, 85, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_door2], type: [1, double_hinged], plugin: [1, normal]}]
+      - [89, 87, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, ballroom_door0], type: [1, double_hinged], plugin: [1, normal]}]
+      - [90, 88, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_door1], type: [1, double_hinged], plugin: [1, normal]}]
+      - [96, 95, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, ballroom_side1], type: [1, double_hinged], plugin: [1, normal]}]
+      - [100, 103, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door7], type: [1, double_hinged], plugin: [1, normal]}]
+      - [121, 122, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door4], type: [1, double_hinged], plugin: [1, normal]}]
+      - [124, 125, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door5], type: [1, double_hinged], plugin: [1, normal]}]
+      - [133, 134, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door6], type: [1, hinged], plugin: [1, normal]}]
+      - [155, 156, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_restroom_door0], type: [1, hinged], plugin: [1, normal]}]
+      - [165, 166, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf0_door0], type: [1, double_hinged], plugin: [1, normal]}]
+      - [168, 169, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf0_door1], type: [1, double_hinged], plugin: [1, normal]}]
+      - [175, 176, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, meeting1_side], type: [1, hinged], plugin: [1, normal]}]
+      - [189, 188, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf0_back0], type: [1, hinged], plugin: [1, normal]}]
+      - [185, 184, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf0_back1], type: [1, hinged], plugin: [1, normal]}]
+      - [195, 196, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf1_side], type: [1, hinged], plugin: [1, normal]}]
+      - [206, 207, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf1_door0], type: [1, double_hinged], plugin: [1, normal]}]
+      - [208, 209, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf1_door1], type: [1, double_hinged], plugin: [1, normal]}]
+      - [218, 217, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf1_back0], type: [1, hinged], plugin: [1, normal]}]
+      - [224, 223, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf1_back1], type: [1, hinged], plugin: [1, normal]}]
+      - [231, 232, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door9], type: [1, hinged], plugin: [1, normal]}]
+      - [237, 235, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door8], type: [1, hinged], plugin: [1, normal]}]
+      - [244, 243, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_meeting0_door0], type: [1, hinged], plugin: [1, normal]}]
+      - [246, 245, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_meeting0_door1], type: [1, hinged], plugin: [1, normal]}]
+      - [248, 247, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_meeting1_door0], type: [1, hinged], plugin: [1, normal]}]
+      - [250, 249, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_meeting1_door1], type: [1, hinged], plugin: [1, normal]}]
+      - [254, 255, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_kitchen_door0], type: [1, hinged], plugin: [1, normal]}]
+      - [259, 258, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door10], type: [1, hinged], plugin: [1, normal]}]
+      - [263, 264, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, conf_door11], type: [1, hinged], plugin: [1, normal]}]
+      - [272, 273, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_door12], type: [1, hinged], plugin: [1, normal]}]
+      - [284, 285, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_restroom_door1], type: [1, hinged], plugin: [1, normal]}]
+      - [291, 292, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_restroom_door2], type: [1, hinged], plugin: [1, normal]}]
+      - [294, 295, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, conf_restroom_door3], type: [1, hinged], plugin: [1, normal]}]
     elevation: 10
     fiducials:
       - [1237, 40, ref1]
@@ -1943,61 +1943,61 @@ levels:
     y_meters: 40
   L3:
     doors:
-      - [229, 193, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room1_door], type: [1, hinged]}]
-      - [230, 188, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room2_door], type: [1, hinged]}]
-      - [227, 189, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room3_door], type: [1, hinged]}]
-      - [228, 190, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room4_door], type: [1, hinged]}]
-      - [226, 191, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room5_door], type: [1, hinged]}]
-      - [225, 192, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room6_door], type: [1, hinged]}]
-      - [219, 195, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room7_door], type: [1, hinged]}]
-      - [218, 196, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room8_door], type: [1, hinged]}]
-      - [224, 223, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room9_door], type: [1, hinged]}]
-      - [221, 222, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door2], type: [1, hinged]}]
-      - [220, 216, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room10_door], type: [1, hinged]}]
-      - [231, 232, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door1], type: [1, double_hinged]}]
-      - [235, 176, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room9_door2], type: [1, hinged]}]
-      - [237, 239, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room11_door], type: [1, hinged]}]
-      - [256, 254, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, stair1_door], type: [1, hinged]}]
-      - [273, 274, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room12_door], type: [1, hinged]}]
-      - [288, 285, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room13_door], type: [1, hinged]}]
-      - [289, 290, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room14_door], type: [1, hinged]}]
-      - [304, 303, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room15_door], type: [1, hinged]}]
-      - [311, 312, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room16_door], type: [1, hinged]}]
-      - [334, 331, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room17_door], type: [1, hinged]}]
-      - [355, 354, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, door6], type: [1, hinged]}]
-      - [340, 338, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door5], type: [1, hinged]}]
-      - [339, 341, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door4], type: [1, double_hinged]}]
-      - [395, 396, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room18_door], type: [1, hinged]}]
-      - [422, 421, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room19_door], type: [1, hinged]}]
-      - [441, 442, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, door7], type: [1, hinged]}]
-      - [439, 416, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room20_door2], type: [1, hinged]}]
-      - [443, 444, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room20_door], type: [1, hinged]}]
-      - [453, 454, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room23_door], type: [1, hinged]}]
-      - [490, 476, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room21_door], type: [1, hinged]}]
-      - [507, 506, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room24_door], type: [1, hinged]}]
-      - [516, 515, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room25_door], type: [1, hinged]}]
-      - [523, 524, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room26_door], type: [1, hinged]}]
-      - [544, 537, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room27_door], type: [1, hinged]}]
-      - [545, 546, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room28_door], type: [1, hinged]}]
-      - [566, 565, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room29_door], type: [1, hinged]}]
-      - [598, 599, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, stair2_door], type: [1, hinged]}]
-      - [604, 602, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, door9], type: [1, hinged]}]
-      - [580, 579, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room30_door], type: [1, hinged]}]
-      - [613, 614, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room31_door], type: [1, hinged]}]
-      - [612, 611, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door8], type: [1, double_hinged]}]
-      - [632, 631, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room32_door], type: [1, hinged]}]
-      - [641, 642, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room33_door], type: [1, hinged]}]
-      - [660, 659, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room34_door], type: [1, hinged]}]
-      - [669, 670, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room35_door], type: [1, hinged]}]
-      - [692, 693, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room40_door], type: [1, hinged]}]
-      - [711, 712, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room22_door], type: [1, hinged]}]
-      - [719, 718, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room36_door], type: [1, hinged]}]
-      - [737, 738, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, door10], type: [1, hinged]}]
-      - [742, 741, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room39_door], type: [1, hinged]}]
-      - [749, 723, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room37_door], type: [1, hinged]}]
-      - [759, 760, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room38_door], type: [1, hinged]}]
-      - [765, 764, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room38_door2], type: [1, hinged]}]
-      - [787, 250, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door3], type: [1, hinged]}]
+      - [229, 193, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [230, 188, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [227, 189, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room3_door], type: [1, hinged], plugin: [1, normal]}]
+      - [228, 190, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room4_door], type: [1, hinged], plugin: [1, normal]}]
+      - [226, 191, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room5_door], type: [1, hinged], plugin: [1, normal]}]
+      - [225, 192, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room6_door], type: [1, hinged], plugin: [1, normal]}]
+      - [219, 195, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room7_door], type: [1, hinged], plugin: [1, normal]}]
+      - [218, 196, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room8_door], type: [1, hinged], plugin: [1, normal]}]
+      - [224, 223, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room9_door], type: [1, hinged], plugin: [1, normal]}]
+      - [221, 222, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door2], type: [1, hinged], plugin: [1, normal]}]
+      - [220, 216, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room10_door], type: [1, hinged], plugin: [1, normal]}]
+      - [231, 232, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door1], type: [1, double_hinged], plugin: [1, normal]}]
+      - [235, 176, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room9_door2], type: [1, hinged], plugin: [1, normal]}]
+      - [237, 239, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room11_door], type: [1, hinged], plugin: [1, normal]}]
+      - [256, 254, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, stair1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [273, 274, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room12_door], type: [1, hinged], plugin: [1, normal]}]
+      - [288, 285, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room13_door], type: [1, hinged], plugin: [1, normal]}]
+      - [289, 290, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room14_door], type: [1, hinged], plugin: [1, normal]}]
+      - [304, 303, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room15_door], type: [1, hinged], plugin: [1, normal]}]
+      - [311, 312, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room16_door], type: [1, hinged], plugin: [1, normal]}]
+      - [334, 331, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room17_door], type: [1, hinged], plugin: [1, normal]}]
+      - [355, 354, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, door6], type: [1, hinged], plugin: [1, normal]}]
+      - [340, 338, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door5], type: [1, hinged], plugin: [1, normal]}]
+      - [339, 341, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door4], type: [1, double_hinged], plugin: [1, normal]}]
+      - [395, 396, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room18_door], type: [1, hinged], plugin: [1, normal]}]
+      - [422, 421, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room19_door], type: [1, hinged], plugin: [1, normal]}]
+      - [441, 442, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, door7], type: [1, hinged], plugin: [1, normal]}]
+      - [439, 416, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room20_door2], type: [1, hinged], plugin: [1, normal]}]
+      - [443, 444, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room20_door], type: [1, hinged], plugin: [1, normal]}]
+      - [453, 454, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room23_door], type: [1, hinged], plugin: [1, normal]}]
+      - [490, 476, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room21_door], type: [1, hinged], plugin: [1, normal]}]
+      - [507, 506, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room24_door], type: [1, hinged], plugin: [1, normal]}]
+      - [516, 515, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room25_door], type: [1, hinged], plugin: [1, normal]}]
+      - [523, 524, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room26_door], type: [1, hinged], plugin: [1, normal]}]
+      - [544, 537, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room27_door], type: [1, hinged], plugin: [1, normal]}]
+      - [545, 546, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room28_door], type: [1, hinged], plugin: [1, normal]}]
+      - [566, 565, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room29_door], type: [1, hinged], plugin: [1, normal]}]
+      - [598, 599, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, stair2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [604, 602, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, door9], type: [1, hinged], plugin: [1, normal]}]
+      - [580, 579, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room30_door], type: [1, hinged], plugin: [1, normal]}]
+      - [613, 614, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room31_door], type: [1, hinged], plugin: [1, normal]}]
+      - [612, 611, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door8], type: [1, double_hinged], plugin: [1, normal]}]
+      - [632, 631, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room32_door], type: [1, hinged], plugin: [1, normal]}]
+      - [641, 642, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room33_door], type: [1, hinged], plugin: [1, normal]}]
+      - [660, 659, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room34_door], type: [1, hinged], plugin: [1, normal]}]
+      - [669, 670, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room35_door], type: [1, hinged], plugin: [1, normal]}]
+      - [692, 693, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room40_door], type: [1, hinged], plugin: [1, normal]}]
+      - [711, 712, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room22_door], type: [1, hinged], plugin: [1, normal]}]
+      - [719, 718, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room36_door], type: [1, hinged], plugin: [1, normal]}]
+      - [737, 738, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, door10], type: [1, hinged], plugin: [1, normal]}]
+      - [742, 741, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room39_door], type: [1, hinged], plugin: [1, normal]}]
+      - [749, 723, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room37_door], type: [1, hinged], plugin: [1, normal]}]
+      - [759, 760, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, room38_door], type: [1, hinged], plugin: [1, normal]}]
+      - [765, 764, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, room38_door2], type: [1, hinged], plugin: [1, normal]}]
+      - [787, 250, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, door3], type: [1, hinged], plugin: [1, normal]}]
     elevation: 20
     fiducials:
       - [1150, 40, ref1]
@@ -4575,6 +4575,7 @@ lifts:
     x: 1236.5
     y: 70
     yaw: 0
+    plugins: true
   Lift3:
     depth: 2
     doors:
@@ -4592,6 +4593,7 @@ lifts:
     x: 1272
     y: 237.5
     yaw: 0
+    plugins: true
   cargo_lift1:
     depth: 2.25
     doors:
@@ -4610,6 +4612,7 @@ lifts:
     x: 1236.5
     y: 70
     yaw: 0
+    plugins: true
   cargo_lift2:
     depth: 2.25
     doors:
@@ -4628,6 +4631,7 @@ lifts:
     x: 1301.25
     y: 70
     yaw: 0
+    plugins: true
   guest_lift1:
     depth: 2
     doors:
@@ -4646,6 +4650,7 @@ lifts:
     x: 1271.5
     y: 237.5
     yaw: 0
+    plugins: true
   guest_lift2:
     depth: 2
     doors:
@@ -4664,6 +4669,7 @@ lifts:
     x: 1271.5
     y: 302.5
     yaw: 0
+    plugins: true
   guest_lift3:
     depth: 2
     doors:
@@ -4682,6 +4688,7 @@ lifts:
     x: 1396.5
     y: 237.5
     yaw: 0
+    plugins: true
   guest_lift4:
     depth: 2
     doors:
@@ -4700,6 +4707,7 @@ lifts:
     x: 1396.5
     y: 302.5
     yaw: 0
+    plugins: true
   guest_lift5:
     depth: 2.5
     doors:
@@ -4717,6 +4725,7 @@ lifts:
     x: 1271.5
     y: 526.5
     yaw: 0
+    plugins: true
   guest_lift6:
     depth: 2.5
     doors:
@@ -4734,6 +4743,7 @@ lifts:
     x: 1334.3
     y: 526.5
     yaw: 0
+    plugins: true
   guest_lift7:
     depth: 2.5
     doors:
@@ -4751,4 +4761,5 @@ lifts:
     x: 1396.5
     y: 526.5
     yaw: 0
+    plugins: true
 name: hotel_full
