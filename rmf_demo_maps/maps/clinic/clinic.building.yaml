@@ -1,22 +1,22 @@
 levels:
   L1:
     doors:
-      - [5, 6, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_entrance_door], type: [1, double_hinged]}]
-      - [8, 17, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_lobby_left_door], type: [1, double_hinged]}]
-      - [10, 18, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_lobby_right_door], type: [1, double_hinged]}]
-      - [20, 21, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_toilet1_door], type: [1, hinged]}]
-      - [23, 22, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_ward1_door], type: [1, hinged]}]
-      - [26, 25, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_nurseroom2_door], type: [1, hinged]}]
-      - [15, 27, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_nurseroom1_door], type: [1, hinged]}]
-      - [31, 32, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_toilet2_door], type: [1, hinged]}]
-      - [33, 34, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_storage_door], type: [1, hinged]}]
-      - [51, 52, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_ward2_door], type: [1, hinged]}]
-      - [53, 54, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_ward3_door], type: [1, hinged]}]
-      - [55, 56, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_ward4_door], type: [1, hinged]}]
-      - [57, 58, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_ward5_door], type: [1, hinged]}]
-      - [59, 60, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_ward6_door], type: [1, hinged]}]
-      - [61, 62, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_ward7_door], type: [1, hinged]}]
-      - [64, 63, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_pantry_door], type: [1, hinged]}]
+      - [5, 6, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_entrance_door], type: [1, double_hinged], plugin: [1, normal]}]
+      - [8, 17, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_lobby_left_door], type: [1, double_hinged], plugin: [1, normal]}]
+      - [10, 18, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_lobby_right_door], type: [1, double_hinged], plugin: [1, normal]}]
+      - [20, 21, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_toilet1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [23, 22, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_ward1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [26, 25, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_nurseroom2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [15, 27, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_nurseroom1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [31, 32, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_toilet2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [33, 34, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_storage_door], type: [1, hinged], plugin: [1, normal]}]
+      - [51, 52, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_ward2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [53, 54, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_ward3_door], type: [1, hinged], plugin: [1, normal]}]
+      - [55, 56, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_ward4_door], type: [1, hinged], plugin: [1, normal]}]
+      - [57, 58, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_ward5_door], type: [1, hinged], plugin: [1, normal]}]
+      - [59, 60, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_ward6_door], type: [1, hinged], plugin: [1, normal]}]
+      - [61, 62, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_ward7_door], type: [1, hinged], plugin: [1, normal]}]
+      - [64, 63, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_pantry_door], type: [1, hinged], plugin: [1, normal]}]
     drawing:
       filename: clinic.png
     elevation: 0.05
@@ -413,21 +413,21 @@ levels:
       - [72, 38, {alpha: [3, 0.7], texture_name: [1, default]}]
   L2:
     doors:
-      - [36, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_toilet1_door], type: [1, hinged]}]
-      - [38, 39, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward1_door], type: [1, hinged]}]
-      - [18, 40, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_office1_door], type: [1, hinged]}]
-      - [42, 41, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L2_dispensary_door2], type: [1, hinged]}]
-      - [43, 44, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_dispensary_door1], type: [1, hinged]}]
-      - [45, 46, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward6_door], type: [1, hinged]}]
-      - [47, 48, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward5_door], type: [1, hinged]}]
-      - [49, 50, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward4_door], type: [1, hinged]}]
-      - [51, 12, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_office2_door], type: [1, hinged]}]
-      - [52, 53, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_toilet_door], type: [1, hinged]}]
-      - [54, 55, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_storage_door], type: [1, hinged]}]
-      - [57, 56, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L2_pantry_door], type: [1, hinged]}]
-      - [58, 59, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward7_door], type: [1, hinged]}]
-      - [60, 61, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward3_door], type: [1, hinged]}]
-      - [62, 63, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward2_door], type: [1, hinged]}]
+      - [36, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_toilet1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [38, 39, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [18, 40, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_office1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [42, 41, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L2_dispensary_door2], type: [1, hinged], plugin: [1, normal]}]
+      - [43, 44, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_dispensary_door1], type: [1, hinged], plugin: [1, normal]}]
+      - [45, 46, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward6_door], type: [1, hinged], plugin: [1, normal]}]
+      - [47, 48, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward5_door], type: [1, hinged], plugin: [1, normal]}]
+      - [49, 50, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward4_door], type: [1, hinged], plugin: [1, normal]}]
+      - [51, 12, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_office2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [52, 53, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_toilet_door], type: [1, hinged], plugin: [1, normal]}]
+      - [54, 55, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_storage_door], type: [1, hinged], plugin: [1, normal]}]
+      - [57, 56, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L2_pantry_door], type: [1, hinged], plugin: [1, normal]}]
+      - [58, 59, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward7_door], type: [1, hinged], plugin: [1, normal]}]
+      - [60, 61, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward3_door], type: [1, hinged], plugin: [1, normal]}]
+      - [62, 63, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_ward2_door], type: [1, hinged], plugin: [1, normal]}]
     drawing:
       filename: clinic.png
     elevation: 10
@@ -796,21 +796,21 @@ levels:
       - [8, 67, {alpha: [3, 0.7], texture_name: [1, default]}]
   L3:
     doors:
-      - [17, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_conf_room_door1], type: [1, double_hinged]}]
-      - [38, 20, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_office2_door], type: [1, hinged]}]
-      - [39, 40, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_toilet2_door], type: [1, hinged]}]
-      - [41, 42, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward6_door], type: [1, hinged]}]
-      - [43, 44, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward5_door], type: [1, hinged]}]
-      - [45, 46, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_storage_door], type: [1, hinged]}]
-      - [48, 47, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L3_pantry_door], type: [1, hinged]}]
-      - [49, 50, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_xray_door], type: [1, hinged]}]
-      - [51, 52, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward4_door], type: [1, hinged]}]
-      - [53, 54, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward3_door], type: [1, hinged]}]
-      - [55, 56, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward2_door], type: [1, hinged]}]
-      - [57, 58, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward1_door], type: [1, hinged]}]
-      - [59, 60, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_toilet1_door], type: [1, hinged]}]
-      - [61, 62, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_office1_door], type: [1, hinged]}]
-      - [11, 9, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_conf_room_door2], type: [1, double_hinged]}]
+      - [17, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_conf_room_door1], type: [1, double_hinged], plugin: [1, normal]}]
+      - [38, 20, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_office2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [39, 40, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_toilet2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [41, 42, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward6_door], type: [1, hinged], plugin: [1, normal]}]
+      - [43, 44, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward5_door], type: [1, hinged], plugin: [1, normal]}]
+      - [45, 46, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_storage_door], type: [1, hinged], plugin: [1, normal]}]
+      - [48, 47, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L3_pantry_door], type: [1, hinged], plugin: [1, normal]}]
+      - [49, 50, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_xray_door], type: [1, hinged], plugin: [1, normal]}]
+      - [51, 52, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward4_door], type: [1, hinged], plugin: [1, normal]}]
+      - [53, 54, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward3_door], type: [1, hinged], plugin: [1, normal]}]
+      - [55, 56, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward2_door], type: [1, hinged], plugin: [1, normal]}]
+      - [57, 58, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_ward1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [59, 60, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_toilet1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [61, 62, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_office1_door], type: [1, hinged], plugin: [1, normal]}]
+      - [11, 9, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L3_conf_room_door2], type: [1, double_hinged], plugin: [1, normal]}]
     drawing:
       filename: clinic.png
     elevation: 20
@@ -1189,6 +1189,7 @@ lifts:
     x: 167
     y: 761
     yaw: 0
+    plugins: true
   Lift2:
     depth: 2.3
     doors:
@@ -1210,4 +1211,5 @@ lifts:
     x: 226
     y: 761
     yaw: 0
+    plugins: true
 name: building
