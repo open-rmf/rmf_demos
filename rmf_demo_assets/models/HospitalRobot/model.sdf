@@ -21,6 +21,8 @@
       <!-- Theoretical no-slip limit with current suspension: 2.166666... -->
       <max_turn_acceleration>2.0</max_turn_acceleration>
 
+      <stop_distance>0.75</stop_distance>
+      <stop_radius>0.75</stop_radius>
     </plugin>
 
     <link name="body">
