@@ -143,9 +143,11 @@ ros2 launch demos clinic_loop.launch.xml
 ```
 
 Robots taking lift:
+
 ![](docs/media/robot_taking_lift.gif)
 
 Multi-fleet demo:
+
 ![](docs/media/clinic.gif)
 
 ---
