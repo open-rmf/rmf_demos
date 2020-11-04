@@ -123,7 +123,7 @@ ros2 launch demos airport_terminal_caddy.launch.xml
 
 ### Clinic World
 
-This is an imaginary clinic building with three levels and two lifts. Three different robot fleets with different roles navigate across all three levels by lifts. In the illustrations below, we have the view of all three levels in `traffic_editor` (top left), the schedule visualizer in `rviz` (right), and the full simulation in `gazebo` (bottom left).
+This is a clinic world with two levels and two lifts for the robots. Two different robot fleets with different roles navigate across two levels by lifts. In the illustrations below, we have the view of level 1 in `traffic_editor` (top left), the schedule visualizer in `rviz` (right), and the full simulation in `gazebo` (bottom left).
 
 ![](docs/media/clinic.png)
 
@@ -135,26 +135,15 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch demos clinic.launch.xml
 ```
 
-To simulate a delivery
-
-Select fleet `tinyRobot`, set `L1_pantry` and `L3_ward4` as `Start` and `End` waypoints. Ensure `Pickup` and `Dropoff` dispensers are set to `coke_dispenser` and `coke_ingestor` respectively. Finally, click the `Send Delivery Request` button in the RViz `RMF Panel`.
-
-Alternatively, a launch file is configured to achieve the same result.
+To request different robots perform loop requests, a launch file has been configured,
 
 ```bash
-source ~/rmf_demos_ws/install/setup.bash
-ros2 launch demos clinic_delivery.launch.xml 
-``` 
-
-To request each of the robots to loop between two points, select desired robot fleet, `Start` and `End` waypoints using the `RMF Panel` and click the `Send Loop Request` button. Alternatively,
-
-```bash
-source ~/rmf_demos_ws/install/setup.bash
+source ~/rmf_demo_ws/install/setup.bash
 ros2 launch demos clinic_loop.launch.xml
-``` 
+```
 
 Robots taking lift:
-![](docs/media/robots_taking_lift.gif)
+![](docs/media/robot_taking_lift.gif)
 
 Multi-fleet demo:
 ![](docs/media/clinic.gif)
