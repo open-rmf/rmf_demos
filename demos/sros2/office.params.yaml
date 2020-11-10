@@ -1,0 +1,65 @@
+building_map_server:
+  ros__parameters:
+    use_sim_time: false
+building_systems_visualizer:
+  ros__parameters:
+    use_sim_time: true
+door:
+  ros__parameters:
+    use_sim_time: true
+door_panel_requester_node:
+  ros__parameters:
+    use_sim_time: false
+door_supervisor:
+  ros__parameters:
+    use_sim_time: false
+fleet_state_visualizer:
+  ros__parameters:
+    display_names: true
+    use_sim_time: false
+gazebo:
+  ros__parameters:
+    publish_rate: 10.0
+    use_sim_time: true
+rmf_panel:
+  ros__parameters:
+    use_sim_time: false
+rmf_traffic_schedule_node:
+  ros__parameters:
+    use_sim_time: true
+rviz:
+  ros__parameters:
+    use_sim_time: false
+rviz_node:
+  ros__parameters:
+    use_sim_time: true
+teleport_dispenser:
+  ros__parameters:
+    use_sim_time: true
+teleport_ingestor:
+  ros__parameters:
+    use_sim_time: true
+tinyRobot_fleet_adapter:
+  ros__parameters:
+    angular_acceleration: 2.0
+    angular_velocity: 0.6
+    delay_threshold: 15.0
+    disable_delay_threshold: false
+    discovery_timeout: 60.0
+    fleet_name: tinyRobot
+    footprint_radius: 0.3
+    linear_acceleration: 0.75
+    linear_velocity: 0.5
+    nav_graph_file: ./install/rmf_demo_maps/share/rmf_demo_maps/maps/office/nav_graphs/0.yaml
+    perform_deliveries: true
+    reversible: true
+    use_sim_time: true
+    vicinity_radius: 1.5
+tinyRobot_state_aggregator:
+  ros__parameters:
+    fleet_name: tinyRobot
+    robot_prefix: tinyRobot
+    use_sim_time: true
+viz:
+  ros__parameters:
+    use_sim_time: true

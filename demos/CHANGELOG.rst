@@ -2,6 +2,10 @@
 Changelog for package demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Secured Ros2 office demo. [#135](https://github.com/osrf/rmf_demos/pull/135)
+
 1.1.0 (2020-09-23)
 ------------------
 * Update dependency. [#101](https://github.com/osrf/rmf_demos/pull/101)

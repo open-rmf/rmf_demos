@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy version="0.2.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+  <enclaves>
+    <enclave path="/office/building_map_server">
+      <profiles>
+        <profile node="building_map_server" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <services reply="ALLOW">
+            <service>get_building_map</service>
+          </services>
+          <topics publish="ALLOW">
+            <topic>map</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/rmf_traffic_schedule_node">
+      <profiles>
+        <profile node="rmf_traffic_schedule_node" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <services reply="ALLOW">
+            <service>/rmf_traffic/mirror_update</service>
+            <service>/rmf_traffic/register_participant</service>
+            <service>/rmf_traffic/register_query</service>
+            <service>/rmf_traffic/unregister_participant</service>
+            <service>/rmf_traffic/unregister_query</service>
+          </services>
+          <topics subscribe="ALLOW">
+            <topic>/rmf_traffic/itinerary_clear</topic>
+            <topic>/rmf_traffic/itinerary_delay</topic>
+            <topic>/rmf_traffic/itinerary_erase</topic>
+            <topic>/rmf_traffic/itinerary_extend</topic>
+            <topic>/rmf_traffic/itinerary_set</topic>
+            <topic>/rmf_traffic/negotiation_ack</topic>
+            <topic>/rmf_traffic/negotiation_forfeit</topic>
+            <topic>/rmf_traffic/negotiation_proposal</topic>
+            <topic>/rmf_traffic/negotiation_refusal</topic>
+            <topic>/rmf_traffic/negotiation_rejection</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>/rmf_traffic/mirror_wakeup</topic>
+            <topic>/rmf_traffic/negotiation_conclusion</topic>
+            <topic>/rmf_traffic/negotiation_notice</topic>
+            <topic>/rmf_traffic/schedule_inconsistency</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/rviz2_node">
+      <profiles>
+        <profile node="rviz_node" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>map</topic>
+            <topic>~/param</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>map_markers</topic>
+            <topic>schedule_markers</topic>
+            <topic>floorplan</topic>
+          </topics>
+        </profile>
+        <profile node="viz" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <services request="ALLOW">
+            <service>/rmf_traffic/mirror_update</service>
+            <service>/rmf_traffic/unregister_query</service>
+            <service>/rmf_traffic/register_query</service>
+          </services>
+          <topics subscribe="ALLOW">
+            <topic>/rmf_traffic/mirror_wakeup</topic>
+            <topic>/rmf_traffic/negotiation_conclusion</topic>
+            <topic>/rmf_traffic/negotiation_notice</topic>
+            <topic>/rmf_traffic/negotiation_repeat</topic>
+            <topic>/rmf_traffic/negotiation_proposal</topic>
+            <topic>/rmf_traffic/negotiation_rejection</topic>
+            <topic>/rmf_traffic/negotiation_forfeit</topic>
+            <topic>~/debug</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>/rmf_traffic/negotiation_repeat</topic>
+            <topic>/rmf_traffic/negotiation_notice</topic>
+            <topic>/rmf_traffic/negotiation_refusal</topic>
+            <topic>/rmf_traffic/negotiation_proposal</topic>
+            <topic>/rmf_traffic/negotiation_rejection</topic>
+            <topic>/rmf_traffic/negotiation_forfeit</topic>
+            <topic>/rmf_traffic/negotiation_ack</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/fleet_state_visualizer">
+      <profiles>
+        <profile node="fleet_state_visualizer" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>/rviz_node/param</topic>
+            <topic>fleet_states</topic>
+            <topic>map</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>fleet_markers</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/building_systems_visualizer">
+      <profiles>
+        <profile node="building_systems_visualizer" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>/rviz_node/param</topic>
+            <topic>door_states</topic>
+            <topic>lift_states</topic>
+            <topic>map</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>building_systems_markers</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/rviz2">
+      <profiles>
+        <profile node="rmf_panel" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>fleet_states</topic>
+            <topic>task_summaries</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>delivery_requests</topic>
+            <topic>fire_alarm_trigger</topic>
+            <topic>loop_requests</topic>
+          </topics>
+        </profile>
+        <profile node="rviz_plugin_node" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics publish="ALLOW">
+            <topic>/rviz_node/param</topic>
+          </topics>
+        </profile>
+        <profile node="door_panel_requester_node" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>door_states</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>adapter_door_requests</topic>
+            <topic>door_requests</topic>
+          </topics>
+        </profile>
+        <profile node="rviz" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>building_systems_markers</topic>
+            <topic>visualization_marker_array</topic>
+            <topic>fleet_markers</topic>
+            <topic>map_markers</topic>
+            <topic>schedule_markers</topic>
+            <topic>tf</topic>
+            <topic>tf_static</topic>
+            <topic>floorplan_updates</topic>
+            <topic>floorplan</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>clicked_point</topic>
+            <topic>goal_pose</topic>
+            <topic>initialpose</topic>
+            <topic>goal</topic>
+          </topics>
+        </profile>
+        <profile node="nav_graph_param_loader" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <services request="ALLOW">
+            <service>/tinyRobot_fleet_adapter/describe_parameters</service>
+            <service>/tinyRobot_fleet_adapter/get_parameters</service>
+            <service>/tinyRobot_fleet_adapter/get_parameter_types</service>
+            <service>/tinyRobot_fleet_adapter/list_parameters</service>
+            <service>/tinyRobot_fleet_adapter/set_parameters</service>
+            <service>/tinyRobot_fleet_adapter/set_parameters_atomically</service>
+          </services>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/door_supervisor">
+      <profiles>
+        <profile node="door_supervisor" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>adapter_door_requests</topic>
+            <topic>door_states</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>door_requests</topic>
+            <topic>door_supervisor_heartbeat</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/gzclient">
+      <profiles>
+        <profile node="toggle_floors" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>fleet_states</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/gzserver">
+      <profiles>
+        <profile node="gazebo" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <services reply="ALLOW">
+            <service>delete_entity</service>
+            <service>get_model_list</service>
+            <service>pause_physics</service>
+            <service>reset_simulation</service>
+            <service>reset_world</service>
+            <service>spawn_entity</service>
+            <service>unpause_physics</service>
+          </services>
+          <topics publish="ALLOW">
+            <topic>clock</topic>
+          </topics>
+        </profile>
+        <profile node="teleport_dispenser" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>dispenser_requests</topic>
+            <topic>fleet_states</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>dispenser_results</topic>
+            <topic>dispenser_states</topic>
+          </topics>
+        </profile>
+        <profile node="teleport_ingestor" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>dispenser_requests</topic>
+            <topic>fleet_states</topic>
+            <topic>ingestor_requests</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>dispenser_results</topic>
+            <topic>dispenser_states</topic>
+            <topic>ingestor_states</topic>
+            <topic>ingestor_results</topic>
+          </topics>
+        </profile>
+        <profile node="slotcar" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>map</topic>
+            <topic>robot_mode_requests</topic>
+            <topic>robot_path_requests</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>robot_state</topic>
+            <topic>tf</topic>
+          </topics>
+        </profile>
+        <profile node="door" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>door_requests</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>door_states</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/tinyRobot_fleet_adapter">
+      <profiles>
+        <profile node="tinyRobot_fleet_adapter" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <services request="ALLOW">
+            <service>/rmf_traffic/mirror_update</service>
+            <service>/rmf_traffic/register_participant</service>
+            <service>/rmf_traffic/register_query</service>
+            <service>/rmf_traffic/unregister_participant</service>
+            <service>/rmf_traffic/unregister_query</service>
+          </services>
+          <topics subscribe="ALLOW">
+            <topic>/rmf_traffic/mirror_wakeup</topic>
+            <topic>/rmf_traffic/negotiation_conclusion</topic>
+            <topic>/rmf_traffic/negotiation_forfeit</topic>
+            <topic>/rmf_traffic/negotiation_notice</topic>
+            <topic>/rmf_traffic/negotiation_proposal</topic>
+            <topic>/rmf_traffic/negotiation_rejection</topic>
+            <topic>/rmf_traffic/negotiation_repeat</topic>
+            <topic>/rmf_traffic/schedule_inconsistency</topic>
+            <topic>delivery_requests</topic>
+            <topic>fleet_states</topic>
+            <topic>loop_requests</topic>
+            <topic>door_states</topic>
+            <topic>door_supervisor_heartbeat</topic>
+            <topic>dispenser_results</topic>
+            <topic>fire_alarm_trigger</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>/rmf_traffic/itinerary_clear</topic>
+            <topic>/rmf_traffic/itinerary_delay</topic>
+            <topic>/rmf_traffic/itinerary_erase</topic>
+            <topic>/rmf_traffic/itinerary_extend</topic>
+            <topic>/rmf_traffic/itinerary_set</topic>
+            <topic>/rmf_traffic/negotiation_ack</topic>
+            <topic>/rmf_traffic/negotiation_forfeit</topic>
+            <topic>/rmf_traffic/negotiation_notice</topic>
+            <topic>/rmf_traffic/negotiation_proposal</topic>
+            <topic>/rmf_traffic/negotiation_refusal</topic>
+            <topic>/rmf_traffic/negotiation_rejection</topic>
+            <topic>/rmf_traffic/negotiation_repeat</topic>
+            <topic>adapter_door_requests</topic>
+            <topic>adapter_lift_requests</topic>
+            <topic>dispenser_requests</topic>
+            <topic>robot_mode_requests</topic>
+            <topic>robot_path_requests</topic>
+            <topic>task_summaries</topic>
+            <topic>ingestor_requests</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/tinyRobot_state_aggregator">
+      <profiles>
+        <profile node="tinyRobot_state_aggregator" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics subscribe="ALLOW">
+            <topic>robot_state</topic>
+          </topics>
+          <topics publish="ALLOW">
+            <topic>fleet_states</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+    <enclave path="/office/loop_request_publisher">
+      <profiles>
+        <profile node="loop_request_publisher" ns="/">
+          <xi:include href="node.xml"
+            xpointer="xpointer(/profile/*)"/>
+          <topics publish="ALLOW">
+            <topic>loop_requests</topic>
+          </topics>
+        </profile>
+      </profiles>
+    </enclave>
+  </enclaves>
+</policy>

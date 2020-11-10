@@ -13,6 +13,7 @@ install(
 
 install(DIRECTORY
   launch/
+  sros2
   DESTINATION share/${PROJECT_NAME}
 )
 

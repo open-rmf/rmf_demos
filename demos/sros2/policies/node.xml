@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile xmlns:xi="http://www.w3.org/2003/XInclude">
+  <xi:include href="node/logging.xml"
+    xpointer="xpointer(/profile/*)"/>
+  <xi:include href="node/time.xml"
+    xpointer="xpointer(/profile/*)"/>
+  <xi:include href="node/parameters.xml"
+    xpointer="xpointer(/profile/*)"/>
+</profile>
