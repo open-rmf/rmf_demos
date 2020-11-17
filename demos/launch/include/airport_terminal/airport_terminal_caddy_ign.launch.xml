@@ -1,0 +1,14 @@
+<?xml version='1.0' ?>
+
+<launch>
+
+  <!-- Opens a new terminal and starts the teleop keyboard node to control the "Caddy" -->
+  <group>
+    <!-- Launch keyboard control for Caddy -->
+    <node pkg="teleop_twist_keyboard" exec="teleop_twist_keyboard" output="screen" launch-prefix="gnome-terminal --">
+      <remap from="/cmd_vel" to="/model/caddy/cmd_vel"/> <!-- remap topic name for the diff_drive ignition plugin -->
+    </node>
+    <!-- Let diff drive ignition plugin read from /model/caddy/cmd_vel topic published to by the teleop_twist_keyboard -->
+    <node pkg="ros_ign_bridge" exec="parameter_bridge" args="/model/caddy/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist"></node>
+  </group>
+</launch>
