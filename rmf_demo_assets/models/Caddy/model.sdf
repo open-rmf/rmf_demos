@@ -28,6 +28,9 @@
       <lane_threshold>0.2</lane_threshold>
     </plugin>
 
+    <!-- Hack: we currently include both Ignition and Gazebo diff drive plugins in the same sdf file, avoiding
+    the need to modify it each time we switch simulators. This may result in an error when a simulation engine
+    cannot locate the second (unused) plugin, but is ignored for now. -->
     <plugin name="caddy_diff_controller" filename="libgazebo_ros_diff_drive.so">
       <always_on>true</always_on>
       <!-- Update rate -->
@@ -61,6 +64,36 @@
       <robot_base_frame>chassis</robot_base_frame>
     </plugin>
 
+    <!-- Causes protobuf crashes when launching gazebo, TODO find a way to launch the system only in ignition -->
+    <!--
+    <plugin name="ignition::gazebo::systems::DiffDrive" filename="libignition-gazebo4-diff-drive-system.so">
+      <always_on>true</always_on>
+      <update_rate>100.0</update_rate>
+      <num_wheel_pairs>2</num_wheel_pairs>
+      <left_joint>front_left_wheel_joint</left_joint>
+      <left_joint>rear_left_wheel_joint</left_joint>
+      <right_joint>front_right_wheel_joint</right_joint>
+      <right_joint>rear_right_wheel_joint</right_joint>
+      <wheel_separation>1.2</wheel_separation>
+      <wheel_separation>1.2</wheel_separation>
+      <wheel_diameter>0.64</wheel_diameter>
+      <wheel_diameter>0.64</wheel_diameter>
+      <max_wheel_torque>150</max_wheel_torque>
+      <max_wheel_torque>150</max_wheel_torque>
+      <max_wheel_torque>150</max_wheel_torque>
+      <max_wheel_torque>150</max_wheel_torque>
+      <max_wheel_acceleration>0.5</max_wheel_acceleration>
+      <max_wheel_acceleration>0.5</max_wheel_acceleration>
+      <max_wheel_acceleration>0.5</max_wheel_acceleration>
+      <max_wheel_acceleration>0.5</max_wheel_acceleration>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>chassis</robot_base_frame>
+    </plugin>
+    -->
+
     <link name="chassis">
       <inertial>
         <!-- subtracted wheel weights from dry weight of 771 kg -->
@@ -90,6 +123,12 @@
           </mesh>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -492,6 +531,12 @@
           </mesh>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -552,6 +597,12 @@
           </mesh>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -611,6 +662,12 @@
           </mesh>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -692,6 +749,12 @@
           </mesh>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -759,6 +822,12 @@
           </mesh>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -803,6 +872,12 @@
           </mesh>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -858,6 +933,12 @@
           </mesh>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -924,6 +1005,12 @@
           </cylinder-->
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/Ranger_Diffuse.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -968,6 +1055,12 @@
           </box>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/FNR_switch_F.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
@@ -983,6 +1076,12 @@
           </box>
         </geometry>
         <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://Caddy/materials/textures/FNR_switch_R.png</albedo_map>
+            </metal>
+          </pbr>
           <script>
             <uri>model://Caddy/materials/scripts</uri>
             <uri>model://Caddy/materials/textures</uri>
