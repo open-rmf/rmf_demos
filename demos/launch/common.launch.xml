@@ -12,6 +12,12 @@
     <param name="use_sim_time" value="$(var use_sim_time)"/>
   </node>
 
+  <!-- Blockade Moderator -->
+  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_blockade" output="both">
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+  </node>
+
+
   <!-- Building Map  -->
   <group>
     <node pkg="building_map_tools" exec="building_map_server"

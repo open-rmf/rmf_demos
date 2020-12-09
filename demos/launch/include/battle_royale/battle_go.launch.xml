@@ -1,0 +1,7 @@
+<?xml version='1.0' ?>
+<launch>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s start_A -f goal_A -r tinyRobot -n 500" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s start_B -f goal_B -r tinyRobot -n 500" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s start_C -f goal_C -r tinyRobot -n 500" output="both"/>
+  <executable cmd="ros2 run rmf_demo_tasks request_loop -s start_D -f goal_D -r tinyRobot -n 500" output="both"/>
+</launch>

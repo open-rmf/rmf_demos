@@ -20,15 +20,25 @@
 
   <!-- TinyRobot fleet adapter and robot state aggregator needed for the TinyRobot slotcar_plugin -->
   <group>
-    <let name="fleet_name" value="tinyRobot"/>
     <include file="$(find-pkg-share demos)/include/adapters/tinyRobot_adapter.launch.xml">
-      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="fleet_name" value="tinyRobot1"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/office/nav_graphs/0.yaml" />
     </include>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="tinyRobot"/>
-      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="robot_prefix" value="tinyRobot1"/>
+      <arg name="fleet_name" value="tinyRobot1"/>
+      <arg name="use_sim_time" value="true"/>
+    </include>
+
+    <include file="$(find-pkg-share demos)/include/adapters/tinyRobot_mock_traffic_light.launch.xml">
+      <arg name="fleet_name" value="tinyRobot2"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demo_maps)/maps/office/nav_graphs/0.yaml" />
+    </include>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="tinyRobot2"/>
+      <arg name="fleet_name" value="tinyRobot2"/>
       <arg name="use_sim_time" value="true"/>
     </include>
   </group>

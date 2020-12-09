@@ -34,7 +34,7 @@ levels:
     layers:
       {}
     measurements:
-      - [40, 39, {distance: [3, 4]}]
+      - [40, 39, {distance: [3, 3]}]
     vertices:
       - [46.368, 40.342, 0, TopLeft, {is_parking_spot: [4, true]}]
       - [46.368, 109.223, 0, ""]
