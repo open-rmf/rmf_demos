@@ -1,0 +1,57 @@
+<?xml version='1.0' ?>
+
+<launch>
+  <arg name="map_name" help="Name of the rmf_demos map to simulate" />
+  <arg name="use_ignition" default="0" />
+
+  <!-- Gazebo classic was chosen-->
+  <group unless="$(var use_ignition)">
+    <arg name="gazebo_version" default="11"/>
+    <let name="world_path" value="$(find-pkg-share rmf_demo_maps)/maps/$(var map_name)/$(var map_name).world" />
+    <let name="model_path" value="$(find-pkg-share rmf_demo_maps)/maps/$(var map_name)/models:$(find-pkg-share rmf_demo_assets)/models:/usr/share/gazebo-$(var gazebo_version)/models" />
+    <let name="resource_path" value="$(find-pkg-share rmf_demo_assets):/usr/share/gazebo-$(var gazebo_version)" />
+    <let name="plugin_path" value="$(find-pkg-prefix rmf_gazebo_plugins)/lib:$(find-pkg-prefix building_gazebo_plugins)/lib:/usr/share/gazebo-$(var gazebo_version)" />
+
+    <executable cmd="gzserver --verbose -s libgazebo_ros_factory.so -s libgazebo_ros_init.so $(var world_path)" output="both">
+      <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
+      <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
+      <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
+      <env name="GAZEBO_MODEL_DATABASE_URI" value="" />
+    </executable>
+    <group unless="$(var headless)">
+      <executable cmd="gzclient --verbose $(var world_path)" output="both">
+        <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
+        <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
+        <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
+      </executable>
+    </group>
+  </group>
+
+  <!-- Ignition was chosen-->
+  <group if="$(var use_ignition)">
+    <let name="world_path" value="$(find-pkg-share rmf_demo_maps)/maps/$(var map_name)_ign/$(var map_name).world" />
+    <let name="model_path" value="$(find-pkg-share rmf_demo_maps)/maps/$(var map_name)_ign/models:$(find-pkg-share rmf_demo_assets)/models:$(env HOME)/.gazebo/models" />
+    <let name="plugin_path" value="$(find-pkg-prefix rmf_ignition_plugins)/lib:$(find-pkg-prefix building_ignition_plugins)/lib" />
+    <executable cmd="ign gazebo -r -v 4 $(var world_path)" output="both">
+
+      <env
+        name="IGN_GAZEBO_RESOURCE_PATH"
+        value="$(var model_path):$(var world_path)" />
+
+      <env
+        name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH"
+        value="$(var plugin_path)"/>
+
+     <env
+        name="IGN_GUI_PLUGIN_PATH"
+        value="$(var plugin_path)"/>
+
+    </executable>
+
+    <!-- ros_ign bridge for simulation clock -->
+    <node pkg="ros_ign_bridge" exec="parameter_bridge"
+      args="/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock"
+      />
+  </group>
+
+</launch>
