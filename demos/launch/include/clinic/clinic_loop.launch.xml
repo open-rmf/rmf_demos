@@ -1,7 +1,0 @@
-<?xml version='1.0' ?>
-<launch>
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s L1_left_negative_air_pressure -f L2_left_nurse_center -r deliveryRobot -n 5 -i 0" output="both" />
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s L1_left_nurse_center -f L2_south_couter -r deliveryRobot -n 5 -i 1" output="both" />
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s L2_right_nurse_center -f L2_sub_waiting_area_1 -r tinyRobot -n 5 -i 2" output="both" />
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s L2_north_counter -f L1_right_nurse_center -r tinyRobot -n 5 -i 3" output="both" />
-</launch>

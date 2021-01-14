@@ -2,13 +2,8 @@
 
 <launch>
 
-  <!-- Spawn caddy at "caddy_placeholder" and start the joystick teleop node -->
+  <!-- Start the joystick teleop node -->
   <group>
-    <let name="caddy_path" value="$(find-pkg-share rmf_demo_assets)/models/Caddy/model.sdf" />
-    <node pkg="gazebo_ros" exec="spawn_entity.py" args="-database Caddy -entity caddy -reference_frame caddy_placeholder -z 0.02 -Y 0.0">
-        <param name="use_sim_time" value="true"/>
-    </node>
-
     <node pkg="joy" exec="joy_node" args="--ros-args --remap _dev:=/dev/input/js0" />
     <node pkg="teleop_twist_joy" exec="teleop_node">
       <param name="axis_linear.x" value="1" />

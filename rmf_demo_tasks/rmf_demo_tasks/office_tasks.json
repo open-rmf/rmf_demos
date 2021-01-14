@@ -1,0 +1,5 @@
+[
+{"task_type":"Loop", "start_time":0, "description": {"num_loops":5, "start_name":"coe", "finish_name":"lounge"}},
+{"task_type":"Delivery", "start_time":0, "description": {"option": "coke"}},
+{"task_type":"Loop", "start_time":0, "description": {"num_loops":5, "start_name":"cubicle_2", "finish_name":"supplies"}}
+]

@@ -21,10 +21,6 @@ Panels:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
-  - Class: RMF Panel
-    Name: RMF Panel
-    dropoff_ingestor: coke_ingestor
-    pickup_dispenser: coke_dispenser
   - Class: rviz2_plugin/SchedulePanel
     Finish: 600
     Map: L1
@@ -162,8 +158,6 @@ Visualization Manager:
     Saved: ~
 Window Geometry:
   "&DoorPanel":
-    collapsed: true
-  "&RMF Panel":
     collapsed: true
   "&SchedulePanel":
     collapsed: true

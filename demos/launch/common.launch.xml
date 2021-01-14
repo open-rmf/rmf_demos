@@ -5,8 +5,9 @@
   <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="viz_config_file" default="$(find-pkg-share rmf_schedule_visualizer)/config/rmf.rviz"/>
   <arg name="config_file" description="Building description file required by building_map_tools"/>
-  <arg name="headless" description="do not launch rviz; launch gazebo in headless mode" default="false" />
- 
+  <arg name="headless" description="do not launch rviz; launch gazebo in headless mode" default="false"/>
+  <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
+
   <!-- Traffic Schedule  -->
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both">
     <param name="use_sim_time" value="$(var use_sim_time)"/>
@@ -41,5 +42,17 @@
   <group>
     <node pkg="rmf_fleet_adapter" exec="lift_supervisor"/>
   </group>
+
+  <!-- Dispatcher Node -->
+  <group>
+    <node pkg="rmf_task_ros2" exec="rmf_task_dispatcher"  output="screen">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+      <param name="bidding_time_window" value="$(var bidding_time_window)"/>
+    </node>
+  </group>
+
+  <include file="$(find-pkg-share demos)/dashboard.launch.xml">
+    <arg name="use_sim_time" value="true"/>
+  </include>
 
 </launch>

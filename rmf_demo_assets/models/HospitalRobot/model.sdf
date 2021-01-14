@@ -23,6 +23,20 @@
 
       <stop_distance>0.75</stop_distance>
       <stop_radius>0.75</stop_radius>
+
+      <!-- Battery params -->
+      <nominal_voltage>24.0</nominal_voltage>
+      <nominal_capacity>24.0</nominal_capacity>
+      <charging_current>5.0</charging_current>
+
+      <!-- Physical params -->
+      <mass>70.0</mass>
+      <inertia>40.0</inertia>
+      <friction_coefficient>0.22</friction_coefficient>
+
+      <!-- Power systems -->
+      <nominal_power>20.0</nominal_power>
+
     </plugin>
 
     <link name="body">

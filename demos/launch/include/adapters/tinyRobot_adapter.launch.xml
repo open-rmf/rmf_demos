@@ -43,6 +43,31 @@
 
       <!-- Whether it can perform deliveries -->
       <arg name="perform_deliveries" value="true"/>
+      <!-- Whether it can perform loop -->
+      <arg name="perform_loop" value="true"/>
+      <!-- Whether it can perform cleaning -->
+      <arg name="perform_cleaning" value="false"/>
+
+      <!-- TODO Update these values with actual specs -->
+      <!-- Battery parameters -->
+      <arg name="battery_voltage" value="12.0"/>
+      <arg name="battery_capacity" value="24.0"/>
+      <arg name="battery_charging_current" value="5.0"/>
+
+      <!-- Physical parameters -->
+      <arg name="mass" value="20.0"/>
+      <arg name="inertia" value="10.0"/>
+      <arg name="friction_coefficient" value="0.22"/>
+      
+      <!-- Power systems -->
+      <arg name="ambient_power_drain" value="20.0"/>
+      <arg name="tool_power_drain" value="0.0"/>
+      
+      <!-- Whether to consider battery drain for task planning -->
+      <arg name="drain_battery" value="true"/>
+
+      <!-- Battery level at which the robot ceases to operate -->
+      <arg name="recharge_threshold" value="0.1"/>
 
     </include>
   </group>

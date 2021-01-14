@@ -1,0 +1,37 @@
+{ 
+  "valid_task" : ["Delivery", "Clean", "Loop"],
+  "task": {
+    "Delivery": {
+      "option": {
+        "mop": {
+          "pickup_place_name": "mopcart_pickup",
+          "pickup_dispenser": "mopcart_dispenser",
+          "dropoff_place_name": "spill",
+          "dropoff_ingestor": "mopcart_collector"
+        }
+      }
+    },
+    "Loop": {
+      "places": [
+        "koi_pond",
+        "west_koi_pond",
+        "n01",
+        "n08",
+        "n23",
+        "n24",
+        "n25"
+      ]
+    },
+    "Clean": {
+      "option": [
+        "zone_1",
+        "zone_2",
+        "zone_3",
+        "zone_4"
+      ]
+    },
+    "Station": {},
+    "Patrol": {},
+    "Charging": {}
+  }
+}
