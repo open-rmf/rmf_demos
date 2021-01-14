@@ -1,0 +1,27 @@
+{ 
+  "valid_task" : ["Clean", "Loop"],
+  "task": {
+    "Delivery": {},
+    "Loop": {
+      "places": [
+        "L1_left_nurse_center",
+        "L1_right_nurse_center",
+        "L2_left_nurse_center",
+        "L2_right_nurse_center",
+        "L2_sub_waiting_area_2",
+        "L2_west_counter",
+        "L2_north_counter",
+        "L2_south_counter"
+      ]
+    },
+    "Clean": {
+      "option": [
+        "zone_1",
+        "zone_2"
+      ]
+    },
+    "Station": {},
+    "Patrol": {},
+    "Charging": {}
+  }
+}

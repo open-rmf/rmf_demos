@@ -1,0 +1,77 @@
+{
+  "valid_task": [
+    "Delivery",
+    "Loop"
+  ],
+  "task": {
+    "Delivery": {
+      "option": {
+        "coke": {
+          "pickup_place_name": "pantry",
+          "pickup_dispenser": "coke_dispenser",
+          "dropoff_place_name": "hardware_2",
+          "dropoff_ingestor": "coke_ingestor"
+        }
+      }
+    },
+    "Loop": {
+      "places": [
+        "coe",
+        "pantry",
+        "lounge",
+        "cubicle_1",
+        "cubicle_2",
+        "station_1",
+        "hardware_2"
+      ]
+    },
+    "Clean": {
+      
+    },
+    "Station": {
+      
+    },
+    "Patrol": {
+      
+    },
+    "Charging": {
+      
+    }
+  },
+  "dispensers": {
+    "coke_dispenser": {
+      "icons": {
+        "coke_dispenser": ""
+      },
+      "location": {
+        "x": 16.85,
+        "y": -4.8,
+        "yaw": 0,
+        "level_name": "L1"
+      }
+    },
+    "coke_ingestor": {
+      "icons": {
+        "coke_ingestor": "/dispensers/coke_ingestor/humanIcon.png"
+      },
+      "location": {
+        "x": 20.95,
+        "y": -6.95,
+        "yaw": 0,
+        "level_name": "L1"
+      }
+    }
+  },
+  "robots": {
+    "tinyRobot": {
+      "icons": {
+        "tinyRobot": "/robots/tinyRobot/tinyRobot.png"
+      }
+    },
+    "deliveryRobot": {
+      "icons": {
+        "deliveryRobot": "/robots/deliveryRobot/deliveryRobot.png"
+      }
+    }
+  }
+}

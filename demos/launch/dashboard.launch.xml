@@ -1,0 +1,23 @@
+<?xml version='1.0' ?>
+<!-- Launch file to run dispatcher node and dispatcher api and gui server -->
+
+<launch>
+  <arg name="use_sim_time" default="true" description="Use the /clock topic for time to sync with simulation"/>
+  <arg name="server_ip" default="0.0.0.0" description="GUI IP address"/>
+
+  <!-- Dispatcher API Server -->
+  <group>
+    <node pkg="rmf_demo_panel" exec="api_server"  output="screen">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+      <env name="WEB_SERVER_IP_ADDRESS" value="$(var server_ip)" />
+    </node>
+  </group>
+
+  <!-- Dashboard GUI Server -->
+  <group>
+    <node pkg="rmf_demo_panel" exec="gui_server"  output="screen">
+      <env name="WEB_SERVER_IP_ADDRESS" value="$(var server_ip)" />
+    </node>
+  </group>
+
+</launch>

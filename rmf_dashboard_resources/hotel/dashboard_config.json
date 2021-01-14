@@ -1,0 +1,31 @@
+{ 
+  "valid_task" : ["Loop"],
+  "task": {
+    "Delivery": {},
+    "Loop": {
+      "places": [
+        "load1",
+        "kitchen1",
+        "kitchen2",
+        "cafe",
+        "dining",
+        "dining2",
+        "check_in",
+        "guest1",
+        "guest2",
+        "guest3",
+        "guest4",
+        "guest5",
+        "guest6",
+        "guest7",
+        "closet1",
+        "closet2",
+        "cleaning"
+      ]
+    },
+    "Clean": {},
+    "Station": {},
+    "Patrol": {},
+    "Charging": {}
+  }
+}

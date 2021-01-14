@@ -1,0 +1,5 @@
+node_modules
+dist
+web_server.log
+package-lock.json
+coverage

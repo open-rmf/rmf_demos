@@ -1,4 +1,0 @@
-<?xml version='1.0' ?>
-<launch>
-  <executable cmd="ros2 run rmf_demo_tasks request_delivery -p pantry -pd coke_dispenser -d hardware_2 -dd coke_ingestor -r tinyRobot" output="both"/>
-</launch>
