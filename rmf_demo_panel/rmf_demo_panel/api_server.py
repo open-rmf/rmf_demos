@@ -64,8 +64,9 @@ class DispatcherClient(Node):
             FleetState, 'fleet_states', self.fleet_state_cb,
             qos_profile=qos_profile)
         self.fleet_states_dict = {}
-        self.tasks_assignments = {}
-        self.tasks_cache = []
+
+        self.active_tasks_cache = []
+        self.terminated_tasks_cache = []
 
         # just check one srv endpoint
         while not self.submit_task_srv.wait_for_service(timeout_sec=1.0):
@@ -123,7 +124,6 @@ class DispatcherClient(Node):
             self.get_logger().error('Error! Cancel Srv failed %r' % (e,))
         return False
 
-    # either from DB or via srv call
     def get_task_status(self):
         """
         Get all task status - This fn will trigger a ros srv call to acquire
@@ -135,8 +135,8 @@ class DispatcherClient(Node):
             rclpy.spin_until_future_complete(self, future, timeout_sec=0.4)
             response = future.result()
             if response is None:
-                self.get_logger().warn('/get_tasks srv call failed')
-                return self.tasks_cache
+                # self.get_logger().debug('/get_tasks srv call failed')
+                return self.active_tasks_cache + self.terminated_tasks_cache
             else:
                 # self.get_logger().info(f'Get Task, success? \
                 #   {response.success}')
@@ -144,9 +144,9 @@ class DispatcherClient(Node):
                     response.active_tasks, False)
                 terminated_tasks = self.__convert_task_status_msg(
                     response.terminated_tasks, True)
-                self.__generate_assignments_list(active_tasks)
-                self.tasks_cache = active_tasks + terminated_tasks
-                return self.tasks_cache
+                self.active_tasks_cache = active_tasks
+                self.terminated_tasks_cache = terminated_tasks
+                return active_tasks + terminated_tasks
         except Exception as e:
             self.get_logger().error('Error! GetTasks Srv failed %r' % (e,))
         return []  # empty list
@@ -215,22 +215,16 @@ class DispatcherClient(Node):
             status_list.insert(0, status)  # insert front
         return status_list
 
-    def __generate_assignments_list(self, active_task_list):
-        """
-        Input as active task list, which is in the form of jsonified format
-        The assignment here is a format of {bot_name: "string of task IDs"}
-        """
-        self.tasks_assignments.clear()
-        temp_assignments = {}
-        for task in active_task_list:
-            temp_assignments.setdefault(task["robot_name"], []).append(task)
-        for bot_name, tasks in temp_assignments.items():
-            # sort with start time
-            tasks.sort(key=lambda x: x.get('start_time'))
-            string_list = ""
-            for task in tasks:
-                string_list = string_list + task["task_id"] + "  "
-            self.tasks_assignments[bot_name] = string_list
+    def __get_robot_assignment(self, robot_name):
+        assigned_tasks = []
+        assigned_task_ids = ""
+        for task in self.active_tasks_cache:
+            if task["robot_name"] == robot_name:
+                assigned_tasks.append(task)
+        assigned_tasks.sort(key=lambda x: x.get('start_time'))
+        for task in assigned_tasks:
+            assigned_task_ids += (task["task_id"] + "  ")
+        return assigned_task_ids   # TODO: return list
 
     def __convert_robot_states_msg(self, fleet_name, robot_states):
         """
@@ -246,18 +240,11 @@ class DispatcherClient(Node):
             state["fleet_name"] = fleet_name
             state["mode"] = mode_enum[bot.mode.mode]
             state["battery_percent"] = bot.battery_percent
-            # time is missing here
             state["location_x"] = bot.location.x
             state["location_y"] = bot.location.y
             state["location_yaw"] = bot.location.yaw
             state["level_name"] = bot.location.level_name
-
-            # task assingments, result is updated from "get_tasks"
-            if bot.name in self.tasks_assignments:
-                state["assignments"] = self.tasks_assignments[bot.name]
-            else:
-                state["assignments"] = ""
-
+            state["assignments"] = self.__get_robot_assignment(bot.name)
             bots.append(state)
         return bots
 
@@ -315,7 +302,7 @@ class DispatcherClient(Node):
                 print("ERROR! Invalid TaskType")
                 return None
 
-            # Calc start time, convert min to sec: TODO better represenation
+            # Calc start time, convert min to sec: TODO better representation
             rclpy.spin_once(self, timeout_sec=0.0)
             ros_start_time = self.get_clock().now().to_msg()
             ros_start_time.sec += int(task_json["start_time"]*60)
@@ -409,9 +396,12 @@ def broadcast_states():
             socketio.emit('task_status', tasks, broadcast=True, namespace=ns)
             socketio.emit('robot_states', robots, broadcast=True, namespace=ns)
             socketio.emit('ros_time', ros_time, broadcast=True, namespace=ns)
-
-            logging.debug(f" ROS Time: {ros_time} | tasks num: {len(tasks)} \
-                active robots: {len(robots)}")
+            logging.debug(f" ROS Time: {ros_time} | "
+                          f"active tasks: "
+                          "{len(dispatcher_client.active_tasks_cache)}"
+                          " | terminated tasks: "
+                          f"{len(dispatcher_client.terminated_tasks_cache)}"
+                          f" | active robots: {len(robots)}")
         time.sleep(2)
 
 ###############################################################################

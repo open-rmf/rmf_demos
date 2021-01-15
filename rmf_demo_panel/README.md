@@ -1,18 +1,21 @@
 ## RMF Demo Panel Installation
 
 Setup `rmf_demo_panel`
-- Ensure you have node v12 installed (see: [node](https://nodejs.org/en/download/package-manager/) or [nvm](https://github.com/nvm-sh/nvm))
 
-Install Flask and other dependencies
+Install npm, Flask and other dependencies
 ```bash
+sudo apt install npm
 python3 -m pip install Flask flask-socketio flask-cors
 ```
 
 Compilation
 ```bash
-cd $ROS2_WS
-npm install --prefix src/rmf_demos/rmf_demo_panel/rmf_demo_panel/static/
-npm run build --prefix src/rmf_demos/rmf_demo_panel/rmf_demo_panel/static/
+cd ~/rmf_demos_ws
+
+# change the npm prefix according to the path to "rmf_demo_panel/static/"
+npm install --prefix src/rmf/rmf_demos/rmf_demo_panel/rmf_demo_panel/static/
+npm run build --prefix src/rmf/rmf_demos/rmf_demo_panel/rmf_demo_panel/static/
+
 colcon build --packages-select rmf_demo_panel
 ```
 
