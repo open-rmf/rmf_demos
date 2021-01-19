@@ -100,7 +100,7 @@ class DispatcherClient(Node):
                 return response.task_id
         except Exception as e:
             self.get_logger().error('Error! Submit Srv failed %r' % (e,))
-        return None
+        return ""
 
     def cancel_task_request(self, task_id) -> bool:
         """
@@ -112,7 +112,7 @@ class DispatcherClient(Node):
         req.task_id = task_id
         try:
             future = self.cancel_task_srv.call_async(req)
-            rclpy.spin_until_future_complete(self, future, timeout_sec=0.4)
+            rclpy.spin_until_future_complete(self, future, timeout_sec=0.5)
             response = future.result()
             if response is None:
                 self.get_logger().warn('/cancel_task srv call failed')
@@ -132,7 +132,7 @@ class DispatcherClient(Node):
         req = GetTaskList.Request()
         try:
             future = self.get_tasks_srv.call_async(req)
-            rclpy.spin_until_future_complete(self, future, timeout_sec=0.4)
+            rclpy.spin_until_future_complete(self, future, timeout_sec=0.5)
             response = future.result()
             if response is None:
                 # self.get_logger().debug('/get_tasks srv call failed')
@@ -343,10 +343,11 @@ def submit():
             Task Submission: {json.dumps(request.json)}")
         req_msg = dispatcher_client.convert_task_request(request.json)
         if req_msg is not None:
-            return dispatcher_client.submit_task_request(req_msg)
-        else:
-            logging.error(f" Failed to Submit task: req_msg: {request.json}")
-    return None
+            id = dispatcher_client.submit_task_request(req_msg)
+            if id:
+                return id
+    logging.error(f" Failed to Submit task: req_msg: {request.json}")
+    return ""
 
 
 @app.route('/cancel_task', methods=['POST'])
@@ -397,8 +398,8 @@ def broadcast_states():
             socketio.emit('robot_states', robots, broadcast=True, namespace=ns)
             socketio.emit('ros_time', ros_time, broadcast=True, namespace=ns)
             logging.debug(f" ROS Time: {ros_time} | "
-                          f"active tasks: "
-                          "{len(dispatcher_client.active_tasks_cache)}"
+                          "active tasks: "
+                          f"{len(dispatcher_client.active_tasks_cache)}"
                           " | terminated tasks: "
                           f"{len(dispatcher_client.terminated_tasks_cache)}"
                           f" | active robots: {len(robots)}")
