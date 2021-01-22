@@ -1,7 +1,7 @@
 <?xml version='1.0' ?>
 
 <launch>
-  <arg name="map_name" help="Name of the rmf_demos map to simulate" />
+  <arg name="map_name" description="Name of the rmf_demos map to simulate" />
   <arg name="use_ignition" default="0" />
 
   <!-- Gazebo classic was chosen-->
