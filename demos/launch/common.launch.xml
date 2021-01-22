@@ -32,6 +32,8 @@
       <arg name="viz_config_file" value ="$(var viz_config_file)"/>
     </include>
   </group>
+  <include file="$(find-pkg-share visualizer)/server.xml">
+  </include>
 
   <!-- Door Supervisor -->
   <group>
