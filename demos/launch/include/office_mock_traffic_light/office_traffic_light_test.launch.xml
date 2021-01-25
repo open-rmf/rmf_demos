@@ -1,5 +1,4 @@
 <?xml version='1.0' ?>
 <launch>
-  <executable cmd="ros2 run rmf_demo_tasks request_loop -s cubicle_1 -f lounge -r tinyRobot1 -n 500" output="both"/>
   <executable cmd="ros2 run rmf_demo_tasks request_loop -s supplies -f pantry -r tinyRobot2 -n 500" output="both"/>
 </launch>
