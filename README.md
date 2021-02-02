@@ -27,6 +27,10 @@ Instructions can be found [here](docs/installation.md).
 ## FAQ
 Answers to frequently asked questions can be found [here](docs/faq.md).
 
+## Roadmap
+
+A near-term roadmap of the RMF project can be found in the user manual [here](https://osrf.github.io/ros2multirobotbook/roadmap.html).
+
 ## RMF Panel
 ![](docs/media/RMF_Panel.png)
 
