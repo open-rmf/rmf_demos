@@ -94,6 +94,9 @@ class DispatcherClient(Node):
             response = future.result()
             if response is None:
                 self.get_logger().warn('/submit_task srv call failed')
+            elif not response.success:
+                self.node.get_logger().error(
+                    'Dispatcher node failed to accept task')
             else:
                 self.get_logger().info(
                     f'New Dispatch task_id {response.task_id}')
@@ -167,7 +170,7 @@ class DispatcherClient(Node):
         convert task summary msg and return a jsonify-able task status obj
         """
         states_enum = {0: "Queued", 1: "Active/Executing", 2: "Completed",
-                       3: "Failed", 4: "Canceled", 5: "Pending"}
+                       3: "Failed", 4: "Cancelled", 5: "Pending"}
         type_enum = {0: "Station", 1: "Loop", 2: "Delivery",
                      3: "Charging", 4: "Clean", 5: "Patrol"}
 
@@ -200,16 +203,18 @@ class DispatcherClient(Node):
 
             # Current hack to generate a progress percentage
             duration = abs(task.end_time.sec - task.start_time.sec)
-            if is_done and states_enum[task.state] == "Completed":
+            # check if is completed
+            if is_done or task.state == 3:
                 status["progress"] = "100%"
-            elif duration == 0 or status["state"] == "Queued":
+            # check if it state is queued/cancelled
+            elif duration == 0 or (task.state in [0, 4]):
                 status["progress"] = "0%"
             else:
                 percent = int(100*(now - task.start_time.sec)/float(duration))
                 if (percent < 0):
-                    status["progress"] = "queued"
+                    status["progress"] = "0%"
                 elif (percent > 100):
-                    status["progress"] = "in-progress"
+                    status["progress"] = "Delayed"
                 else:
                     status["progress"] = f"{percent}%"
             status_list.insert(0, status)  # insert front
@@ -345,18 +350,21 @@ def submit():
         if req_msg is not None:
             id = dispatcher_client.submit_task_request(req_msg)
             if id:
-                return id
+                return jsonify({"task_id": id})
     logging.error(f" Failed to Submit task: req_msg: {request.json}")
-    return ""
+    return jsonify({"task_id": ""})
 
 
 @app.route('/cancel_task', methods=['POST'])
 def cancel():
     if request.method == "POST":
         cancel_id = request.json['task_id']
-        if (dispatcher_client.cancel_task_request(cancel_id)):
-            return True
-    return False
+        cancel_success = dispatcher_client.cancel_task_request(cancel_id)
+        logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
+            Cancel Task: {cancel_id}, success: {cancel_success}")
+        if cancel_success:
+            return jsonify({"success": True})
+    return jsonify({"success": False})
 
 
 @app.route('/get_task', methods=['GET'])
@@ -371,7 +379,7 @@ def status():
 def robots():
     robot_status = jsonify(dispatcher_client.get_robot_states())
     logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
-        Robot Status: {json.dumps(robot_status.json)}")
+        Robot Status: {robot_status}")
     return robot_status
 
 

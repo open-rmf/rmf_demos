@@ -41,8 +41,15 @@ export const submitRequest = (request: {}, type: string) => {
             }
         })
         .then(res => res.json())
-        .then(data => JSON.stringify(data));
-        showSuccessMessage(`${type} Request submitted successfully!`);
+        .then(data => {
+            JSON.stringify(data);
+            let task_id = data["task_id"];
+            if (task_id === "")
+                showErrorMessage(`${type} Request Failed!`);
+            else
+                showSuccessMessage(
+                    `${type} Request submitted successfully! Task ID: [${task_id}]`);
+        });
       } catch (err) {
         console.log(err);
         showErrorMessage(`Unable to submit ${type} Request`);
@@ -59,8 +66,14 @@ export const cancelTask = (id: string) => {
             }
         })
         .then(res => res.json())
-        .then(data => JSON.stringify(data));
-        showSuccessMessage(`Task ${id} has been cancelled`);
+        .then(data => {
+            JSON.stringify(data);
+            let is_success = data["success"];
+            if (is_success)
+                showSuccessMessage(`Task ${id} has been cancelled`);
+            else
+                showErrorMessage(`Unable to cancel Task ${id}`);
+        });
     } catch (err) {
         console.log(err);
         showErrorMessage(`Unable to cancel Task ${id}`);
