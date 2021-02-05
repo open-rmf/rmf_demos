@@ -9,6 +9,7 @@
     <arg name="use_sim_time" value="true"/>
     <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/clinic/clinic.rviz"/>
     <arg name="config_file" value="$(find-pkg-share rmf_demo_maps)/clinic/clinic.building.yaml"/>
+    <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/clinic/dashboard_config.json"/>
   </include>
 
   <!-- Simulation launch -->

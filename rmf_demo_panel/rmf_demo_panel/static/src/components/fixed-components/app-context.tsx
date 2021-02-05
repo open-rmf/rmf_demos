@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO: Rethink if different world tabs are necessary (Office)
 export const Worlds = {
     0: "Office",
     1: "Airport",

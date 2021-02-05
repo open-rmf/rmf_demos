@@ -1,4 +1,5 @@
 { 
+  "world_name" : "Clinic World",
   "valid_task" : ["Clean", "Loop"],
   "task": {
     "Delivery": {},

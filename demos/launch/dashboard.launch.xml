@@ -4,6 +4,7 @@
 <launch>
   <arg name="use_sim_time" default="true" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="server_ip" default="0.0.0.0" description="GUI IP address"/>
+  <arg name="dashboard_config_file" default="" description="Path to dashboard config for web rmf panel file"/>
 
   <!-- Dispatcher API Server -->
   <group>
@@ -17,6 +18,7 @@
   <group>
     <node pkg="rmf_demo_panel" exec="gui_server"  output="screen">
       <env name="WEB_SERVER_IP_ADDRESS" value="$(var server_ip)" />
+      <env name="DASHBOARD_CONFIG_PATH" value="$(var dashboard_config_file)" />
     </node>
   </group>
 

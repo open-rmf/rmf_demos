@@ -1,4 +1,5 @@
 { 
+  "world_name" : "Airport Terminal World",
   "valid_task" : ["Delivery", "Clean", "Loop"],
   "task": {
     "Delivery": {
@@ -15,8 +16,13 @@
       "places": [
         "koi_pond",
         "west_koi_pond",
+        "east_koi_pond",
+        "s03",
+        "s07",
+        "s08",
         "n01",
         "n08",
+        "n13",
         "n23",
         "n24",
         "n25"

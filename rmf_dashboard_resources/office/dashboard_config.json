@@ -1,8 +1,6 @@
 {
-  "valid_task": [
-    "Delivery",
-    "Loop"
-  ],
+  "world_name" : "Office World",  
+  "valid_task": ["Delivery", "Loop"],
   "task": {
     "Delivery": {
       "option": {
