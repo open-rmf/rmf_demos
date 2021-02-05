@@ -9,6 +9,7 @@
     <arg name="use_sim_time" value="true"/>
     <arg name="viz_config_file" value ="$(find-pkg-share demos)/include/airport_terminal/airport_terminal.rviz"/>
     <arg name="config_file" value="$(find-pkg-share rmf_demo_maps)/airport_terminal/airport_terminal.building.yaml"/>
+    <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/airport_terminal/dashboard_config.json"/>
   </include>
 
   <!-- Simulation launch -->
@@ -63,4 +64,3 @@
   </group>
 
 </launch>
-

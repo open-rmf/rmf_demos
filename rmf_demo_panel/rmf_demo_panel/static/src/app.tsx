@@ -5,14 +5,14 @@ import PanelsContainer from './components/panels-container';
 import Footer from './components/fixed-components/footer';
 import NavTabs from './components/fixed-components/tabs';
 import { WorldContext, World } from './components/fixed-components/app-context';
-import { getDefaultConfig } from './components/services';
+import { getDashboardConfig } from './components/services';
 
 export default function App(): React.ReactElement {
     const currWorld = React.useContext(WorldContext);
     const [currentWorld, setCurrentWorld] = React.useState(currWorld);
     
     const setDefaultConfig = async () => {
-        const defaultConfig = await getDefaultConfig();
+        const defaultConfig = await getDashboardConfig();
         setCurrentWorld({map: World.Office, config: defaultConfig});
     };
 

@@ -4,11 +4,12 @@
   <name>rmf_demo_panel</name>
   <version>1.0.0</version>
   <description>Web based RMF Demo Panel</description>
-  <maintainer email="youliang@openrobotics.org">yadu</maintainer>
+  <maintainer email="youliang@openrobotics.org">youliang</maintainer>
   <license>Apache License 2.0</license>
 
-  <exec_depend>building_map_msgs</exec_depend>
   <exec_depend>rmf_fleet_msgs</exec_depend>
+  <exec_depend>rmf_task_msgs</exec_depend>
+  <exec_depend>rmf_demos_dashboard_resources</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>
