@@ -1,0 +1,4 @@
+<?xml version='1.0' ?>
+<launch>
+  <executable cmd="ros2 topic pub -1 /experimental_lift_permission std_msgs/Bool '{data: true}'" output="both"/>
+</launch>
