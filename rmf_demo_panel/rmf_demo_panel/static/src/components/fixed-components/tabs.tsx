@@ -2,8 +2,6 @@ import * as React from 'react';
 import { makeStyles, withStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { WorldContextType, World } from './app-context';
-import { getDashboardConfig } from '../services';
 
 interface StyledTabsProps {
   value: number;
@@ -59,32 +57,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 })); 
 
 interface NavTabsProps {
-  handleWorldChange: React.Dispatch<React.SetStateAction<WorldContextType>>
+  worldName: string;
 }
 
 const NavTabs: React.FC<NavTabsProps> = (props: NavTabsProps) => {
-  const { handleWorldChange } = props;
+  const { worldName } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
+  
+   
   const handleChange = async (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
-    // const config = await getConfigFile(World[newValue]);
-    const config = await getDashboardConfig();
-    handleWorldChange({ map: newValue, config: config });
   };
-
-  // TODO: should reflect the current "world name" to the GUI
 
   return (
     <div className={classes.root} role="nav-tabs">
       <div className={classes.tabs}>
         <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
-          <StyledTab label="RMF World" />
-          {/* <StyledTab label="Office" />
-          <StyledTab label="Airport" />
-          <StyledTab label="Clinic" />
-          <StyledTab label="Hotel" /> */}
+          <StyledTab label={`RMF: ${worldName}`} />
         </StyledTabs>
       </div>
     </div>

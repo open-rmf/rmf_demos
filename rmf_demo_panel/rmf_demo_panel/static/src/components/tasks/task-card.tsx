@@ -44,6 +44,7 @@ export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
               <Grid container>
                   <Grid item xs={12}>
                     <Progress type="dashboard" gapDegree={120} percent={lastKnownProgress} />
+                    { isDelayed && <Typography variant="h6" align="center" color="textPrimary" gutterBottom>Delayed</Typography> }
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="subtitle2" align="left" color="textSecondary" gutterBottom>
@@ -75,8 +76,7 @@ export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    { !isDelayed && <StyledChip state={taskState.state}/> }
-                    { isDelayed && <StyledChip state="Delayed"/> }
+                    <StyledChip state={taskState.state}/>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="subtitle2" align="left" color="textSecondary" gutterBottom>
