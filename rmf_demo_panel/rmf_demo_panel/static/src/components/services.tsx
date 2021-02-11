@@ -95,8 +95,7 @@ export const submitTaskList = (taskList: any[]) => {
                 "Content-type": "application/json; charset=UTF-8"
             }
           })
-          .then(res => res.json())
-          .then(data => JSON.stringify(data));
+          .then(res => res.text());
         } catch (err) {
           res = "ERROR! " + err;
           showErrorMessage(res);
