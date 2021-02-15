@@ -16,7 +16,7 @@ const RostimeClock = () => {
                 setTime(timeData);
             }
         });
-        return () => (isSubscribed = false)
+        return () => {isSubscribed = false}
     }, []);
 
     return (

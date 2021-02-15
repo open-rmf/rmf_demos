@@ -26,7 +26,7 @@ const TasksContainer = () : React.ReactElement => {
                 setTaskStates(taskData);
             }
         });
-        return () => (isSubscribed = false);
+        return () => {isSubscribed = false};
     });
 
     const allTasks = taskStates.map(taskState => {
