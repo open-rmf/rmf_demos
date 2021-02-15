@@ -26,7 +26,7 @@ const RobotContainer = () : React.ReactElement => {
                 setRobotStates(robotData);
             }
         });
-        return () => (isSubscribed = false);
+        return () => {isSubscribed = false};
     });
 
     const allRobots = robotStates.map(robotState => {
