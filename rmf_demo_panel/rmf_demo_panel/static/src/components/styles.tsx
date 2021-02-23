@@ -64,6 +64,16 @@ export const useFormStyles = makeStyles({
     width: '100%',
     marginTop: '1em',
   },
+  label: {
+    width: '100%',
+  },
+  fileInput: {
+    width: '100%',
+    display: 'none'
+  },
+  selectButton: {
+    width: '50%'
+  },
   button: {
     width: '70%',
   },

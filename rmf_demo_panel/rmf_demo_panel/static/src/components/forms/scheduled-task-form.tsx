@@ -20,6 +20,7 @@ interface ScheduledTaskFormProps {
 const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement => {
   const { config } = React.useContext(WorldContext);
   const { submitTaskList } = props;
+  const [uploadedFile, setUploadedFile] = React.useState(null);
   const [taskList, setTaskList] = React.useState<string | ArrayBuffer>('');
   const [deliveryOptions, setDeliveryOptions] = React.useState({});
   const placeholder = `eg. [
@@ -74,17 +75,24 @@ const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement =>
       let globalList = convertTaskList();
       submitTaskList(globalList);
       setTaskList('');
+      setUploadedFile(null);
     }
   }
   
   const readTaskFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     let file = e.target.files[0];
+    setUploadedFile(file);
     const reader = new FileReader();
     reader.onload = function(event) {
       let result = event.target.result;
       setTaskList(result);
     };
     reader.readAsText(file);
+    e.target.value = '';
+  }
+
+  const onInputClick = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    (e.target as HTMLInputElement).value = '';
   }
   
   const classes = useFormStyles();
@@ -95,8 +103,9 @@ const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement =>
           <Typography variant="h6">Submit a List of Tasks</Typography>
           </div>
         <div className={classes.buttonContainer}>
-          <Button variant="contained" color="primary" className={classes.button}>
-            <input type="file" id="task_file" name="task_file" onChange={readTaskFile} />
+          <Button variant="contained" color="primary" className={classes.selectButton}>
+            <label id="fileLabel" htmlFor="task_file" className={classes.label}>{uploadedFile ? uploadedFile.name : 'Select File'}</label>
+            <input className={classes.fileInput} type="file" id="task_file" name="task_file" onChange={readTaskFile} onClick={onInputClick}/>
           </Button>
         </div>
         <div className={classes.divForm}>
