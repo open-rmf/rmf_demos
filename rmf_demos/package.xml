@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>demos</name>
+  <name>rmf_demos</name>
   <version>1.2.0</version>
   <description>Launch files for RMF demos</description>
   <maintainer email="yadunund@openrobotics.org">yadu</maintainer>
