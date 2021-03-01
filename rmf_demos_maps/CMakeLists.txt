@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(rmf_demo_maps)
+project(rmf_demos_maps)
 
 find_package(ament_cmake REQUIRED)
 

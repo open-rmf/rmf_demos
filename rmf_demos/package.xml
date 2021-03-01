@@ -9,7 +9,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>rmf_demo_maps</exec_depend>
+  <exec_depend>rmf_demos_maps</exec_depend>
 
   <exec_depend>rmf_traffic_ros2</exec_depend>
   <exec_depend>rmf_task_ros2</exec_depend>
@@ -20,11 +20,11 @@
   <exec_depend>visualizer</exec_depend>
 
   <exec_depend>gazebo_ros_pkgs</exec_depend>
-  <exec_depend>rmf_demo_assets</exec_depend>
+  <exec_depend>rmf_demos_assets</exec_depend>
   <exec_depend>rmf_gazebo_plugins</exec_depend>
-  <exec_depend>rmf_demo_tasks</exec_depend>
+  <exec_depend>rmf_demos_tasks</exec_depend>
   <exec_depend>rmf_rviz_plugin</exec_depend>
-  <exec_depend>rmf_demo_panel</exec_depend>
+  <exec_depend>rmf_demos_panel</exec_depend>
   <exec_depend>rviz2</exec_depend>
 
   <exec_depend>joy</exec_depend>
