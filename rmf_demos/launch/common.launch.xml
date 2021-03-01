@@ -55,7 +55,7 @@
     </node>
   </group>
 
-  <include file="$(find-pkg-share demos)/dashboard.launch.xml">
+  <include file="$(find-pkg-share rmf_demos)/dashboard.launch.xml">
     <arg name="use_sim_time" value="true"/>
     <arg name="dashboard_config_file" value ="$(var dashboard_config_file)"/>
     <arg name="bidding_time_window" value="$(var bidding_time_window)"/>

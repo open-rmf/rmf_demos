@@ -8,7 +8,7 @@
 
   <!-- Dispatcher API Server -->
   <group>
-    <node pkg="rmf_demo_panel" exec="api_server"  output="screen">
+    <node pkg="rmf_demos_panel" exec="api_server"  output="screen">
       <param name="use_sim_time" value="$(var use_sim_time)"/>
       <env name="WEB_SERVER_IP_ADDRESS" value="$(var server_ip)" />
     </node>
@@ -16,7 +16,7 @@
 
   <!-- Dashboard GUI Server -->
   <group>
-    <node pkg="rmf_demo_panel" exec="gui_server"  output="screen">
+    <node pkg="rmf_demos_panel" exec="gui_server"  output="screen">
       <env name="WEB_SERVER_IP_ADDRESS" value="$(var server_ip)" />
       <env name="DASHBOARD_CONFIG_PATH" value="$(var dashboard_config_file)" />
     </node>

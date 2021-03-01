@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>rmf_demo_panel</name>
+  <name>rmf_demos_panel</name>
   <version>1.0.0</version>
   <description>Web based RMF Demo Panel</description>
   <maintainer email="youliang@openrobotics.org">youliang</maintainer>

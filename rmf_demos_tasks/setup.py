@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'rmf_demo_tasks'
+package_name = 'rmf_demos_tasks'
 
 setup(
     name=package_name,
@@ -22,11 +22,11 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-          'request_loop = rmf_demo_tasks.request_loop:main',
-          'request_lift = rmf_demo_tasks.request_lift:main',
-          'dispatch_loop = rmf_demo_tasks.dispatch_loop:main',
-          'dispatch_delivery = rmf_demo_tasks.dispatch_delivery:main',
-          'dispatch_clean = rmf_demo_tasks.dispatch_clean:main'
+          'request_loop = rmf_demos_tasks.request_loop:main',
+          'request_lift = rmf_demos_tasks.request_lift:main',
+          'dispatch_loop = rmf_demos_tasks.dispatch_loop:main',
+          'dispatch_delivery = rmf_demos_tasks.dispatch_delivery:main',
+          'dispatch_clean = rmf_demos_tasks.dispatch_clean:main'
         ],
     },
 )
