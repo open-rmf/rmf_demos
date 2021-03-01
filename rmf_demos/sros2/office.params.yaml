@@ -50,7 +50,7 @@ tinyRobot_fleet_adapter:
     footprint_radius: 0.3
     linear_acceleration: 0.75
     linear_velocity: 0.5
-    nav_graph_file: ./install/rmf_demo_maps/share/rmf_demo_maps/maps/office/nav_graphs/0.yaml
+    nav_graph_file: ./install/rmf_demos_maps/share/rmf_demos_maps/maps/office/nav_graphs/0.yaml
     perform_deliveries: true
     reversible: true
     use_sim_time: true

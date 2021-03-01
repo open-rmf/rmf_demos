@@ -2,9 +2,9 @@ from setuptools import setup
 from glob import glob
 import sys
 
-package_name = 'rmf_demo_panel'
+package_name = 'rmf_demos_panel'
 py_version = ".".join(map(str, sys.version_info[:2]))
-site_pkgs_path = 'lib/python' + py_version + '/site-packages/rmf_demo_panel'
+site_pkgs_path = 'lib/python' + py_version + '/site-packages/rmf_demos_panel'
 
 setup(
     name=package_name,
@@ -32,8 +32,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'api_server=rmf_demo_panel.api_server:main',
-            'gui_server=rmf_demo_panel.gui_server:main'
+            'api_server=rmf_demos_panel.api_server:main',
+            'gui_server=rmf_demos_panel.gui_server:main'
         ],
     },
 )
