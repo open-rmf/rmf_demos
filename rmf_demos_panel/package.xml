@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rmf_demos_panel</name>
+  <version>1.0.0</version>
+  <description>Web based RMF Demo Panel</description>
+  <maintainer email="youliang@openrobotics.org">youliang</maintainer>
+  <license>Apache License 2.0</license>
+
+  <build_depend>npm</build_depend>
+
+  <exec_depend>python3-flask</exec_depend>
+  <exec_depend>python3-flask-cors</exec_depend>
+
+  <exec_depend>rmf_fleet_msgs</exec_depend>
+  <exec_depend>rmf_task_msgs</exec_depend>
+  <exec_depend>rmf_demos_dashboard_resources</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

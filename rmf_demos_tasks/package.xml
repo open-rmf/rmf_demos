@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rmf_demos_tasks</name>
+  <version>1.2.0</version>
+  <description>A package containing scripts for demos</description>
+  <author email= "grey@openrobotics.org">Grey</author>
+  <maintainer email="yadunund@openrobotics.org">yadu</maintainer>
+  <license>Apache Licence 2.0</license>
+
+  <depend>rmf_fleet_msgs</depend>
+  <depend>rmf_task_msgs</depend>
+  <depend>rmf_dispenser_msgs</depend>
+  <depend>rmf_lift_msgs</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

@@ -38,9 +38,9 @@ The RMF panel is a web based dashboard for interacting with RMF. It allows users
 There are two main modes of submitting tasks to RMF via the Panel:
 
 1. Submit a Task: Used to submit a single task. The user is required to first select a request type from the drop down menu. Depending on the type selected, additional fields specify to the type will need to be populated. The user can then specify the `start time` for the task before clicking `Submit Request`. 
-2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demo_tasks/rmf_demo_tasks`. Once loaded, clicking the `Submit Task List` button will automatically assign the various tasks to available robots.
+2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_tasks/rmf_demos_tasks`. Once loaded, clicking the `Submit Task List` button will automatically assign the various tasks to available robots.
 
-Users may switch between different tabs on the top-left corner of the Panel when running the relevant demo world. More information on configuring the panel can be found [here](rmf_demo_panel/README.md)
+Users may switch between different tabs on the top-left corner of the Panel when running the relevant demo world. More information on configuring the panel can be found [here](rmf_demos_panel/README.md)
 
 
 ## Demo Worlds
@@ -51,7 +51,7 @@ Users may switch between different tabs on the top-left corner of the Panel when
 * [Hotel World](#Hotel-World)
 
 > Note: When running the demos on Ubuntu 18.04 (not officially supported), you are required to explicitly supply gazebo_version launch argument. Eg:
-ros2 launch demos office.launch.xml gazebo_version:=9
+ros2 launch rmf_demos office.launch.xml gazebo_version:=9
 
 ---
 
@@ -60,7 +60,7 @@ An indoor office environment for robots to navigate around. It includes a bevera
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
-ros2 launch demos office.launch.xml
+ros2 launch rmf_demos office.launch.xml
 ```
 
 To send task requests, open RMF Panel from a browser
@@ -72,14 +72,14 @@ To submit a delivery task, select `Delivery` from the `Select a request type` dr
 
 Or, submit a task via CLI:
 ```bash
-ros2 run rmf_demo_tasks dispatch_loop -s coe -f lounge -n 3 --use_sim_time
-ros2 run rmf_demo_tasks dispatch_delivery -p pantry -pd coke_dispenser -d hardware_2 -di coke_ingestor --use_sim_time
+ros2 run rmf_demos_tasks dispatch_loop -s coe -f lounge -n 3 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_delivery -p pantry -pd coke_dispenser -d hardware_2 -di coke_ingestor --use_sim_time
 ```
 
 ![](docs/media/delivery_request.gif)
 
 To send loop requests, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
-To run a scenario with multiple task requests, load `office_tasks.json` from `rmf_demo_tasks/rmf_demos_tasks` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
+To run a scenario with multiple task requests, load `office_tasks.json` from `rmf_demos_tasks/rmf_demos_tasks` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
 
 ![](docs/media/loop_request.gif)
 
@@ -99,15 +99,15 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
-ros2 launch demos airport_terminal.launch.xml
+ros2 launch rmf_demos airport_terminal.launch.xml
 ```
 
 Select the `airport` tab on RMF Panel. Load the `airport_terminal_tasks.json` list and click submit to begin a collection of loop, delivery and cleaning tasks.
 
 Or, submit a task via CLI:
 ```bash
-ros2 run rmf_demo_tasks dispatch_loop -s s07 -f n12 -n 3 --use_sim_time
-ros2 run rmf_demo_tasks dispatch_delivery -p mopcart_pickup -pd mopcart_dispenser -d spill -di mopcart_collector --use_sim_time
+ros2 run rmf_demos_tasks dispatch_loop -s s07 -f n12 -n 3 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_delivery -p mopcart_pickup -pd mopcart_dispenser -d spill -di mopcart_collector --use_sim_time
 ```
 
 Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
@@ -129,15 +129,15 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
-ros2 launch demos clinic.launch.xml
+ros2 launch rmf_demos clinic.launch.xml
 ```
 
 Select the `clinic` tab on RMF Panel. Load the `clinic_tasks.json` list and click submit to begin a collection of loop and delivery tasks.
 
 Or, submit a task via CLI:
 ```bash
-ros2 run rmf_demo_tasks dispatch_loop -s L1_left_nurse_center -f L2_right_nurse_center -n 5 --use_sim_time
-ros2 run rmf_demo_tasks dispatch_loop -s L2_north_counter -f L1_right_nurse_center -n 5 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_loop -s L1_left_nurse_center -f L2_right_nurse_center -n 5 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_loop -s L2_north_counter -f L1_right_nurse_center -n 5 --use_sim_time
 ```
 
 Robots taking lift:
@@ -168,7 +168,7 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
-ros2 launch demos hotel.launch.xml
+ros2 launch rmf_demos hotel.launch.xml
 ```
 
 Select the `hotel` tab on RMF Panel. Loop requests can be submitted via "Submit a Task" form.
@@ -185,21 +185,21 @@ RMF can also manage fleets whose API or fleet managers only offer pause and resu
 
 #### Triple-H scenario:
 ```bash
-$ ros2 launch demos triple_H.launch.xml
-(new terminal) $ ros2 launch demos the_pedigree.launch.xml
+$ ros2 launch rmf_demos triple_H.launch.xml
+(new terminal) $ ros2 launch rmf_demos the_pedigree.launch.xml
 ```
 #### Battle Royale Scenario:
 
 ```bash
-$ ros2 launch demos battle_royale.launch.xml
-(new terminal) $ ros2 launch demos battle_go.launch.xml
+$ ros2 launch rmf_demos battle_royale.launch.xml
+(new terminal) $ ros2 launch rmf_demos battle_go.launch.xml
 ```
 
 #### Office Scenario:
 Note that `tinyRobot1` is a standard "full control" robot, while `tinyRobot2` "traffic light" robot.
 ```bash
-$ ros2 launch demos office_mock_traffic_light.launch.xml
-(new terminal) $ ros2 launch demos office_traffic_light_test.launch.xml
+$ ros2 launch rmf_demos office_mock_traffic_light.launch.xml
+(new terminal) $ ros2 launch rmf_demos office_traffic_light_test.launch.xml
 ```
 
 ## Task Dispatching in RMF
