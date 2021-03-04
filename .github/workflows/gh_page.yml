@@ -15,12 +15,12 @@ jobs:
           check-latest: true
       - name: "Install and Build"
         run: |
-          cd rmf_demos/rmf_demo_panel/rmf_demo_panel/static
+          cd rmf_demos/rmf_demos_panel/rmf_demos_panel/static
           npm install
           npm run build
       - name: deploy_page
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: rmf_demos/rmf_demo_panel/rmf_demo_panel/static/dist
+          publish_dir: rmf_demos/rmf_demos_panel/rmf_demos_panel/static/dist
           destination_dir: v1.0.0 # Change the version of webpack: "app.bundle.js"
