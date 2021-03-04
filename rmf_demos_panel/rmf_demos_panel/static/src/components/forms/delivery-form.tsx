@@ -9,12 +9,17 @@ import { useFormStyles } from '../styles';
 interface DeliveryFormProps {
   deliveryOptions: {}
   submitRequest: (request: {}, type: string) => void;
-  timeAndEvaluator: { minsFromNow: number, evaluator: string, setTimeError: React.Dispatch<React.SetStateAction<string>>, setMinsFromNow: React.Dispatch<React.SetStateAction<number>> }
+  timeAndPriority: {
+    minsFromNow: number,
+    priority: number,
+    setTimeError: React.Dispatch<React.SetStateAction<string>>,
+    setMinsFromNow: React.Dispatch<React.SetStateAction<number>>
+  }
 }
 
 const DeliveryForm = (props: DeliveryFormProps): React.ReactElement => {
-  const { deliveryOptions, submitRequest, timeAndEvaluator } = props;
-  const { minsFromNow, evaluator, setTimeError, setMinsFromNow } = timeAndEvaluator;
+  const { deliveryOptions, submitRequest, timeAndPriority } = props;
+  const { minsFromNow, priority, setTimeError, setMinsFromNow } = timeAndPriority;
   const classes = useFormStyles();
   const [deliveryTask, setDeliveryTask] = React.useState("");
   const [deliveryOptionKeys, setDeliveryOptionKeys] = React.useState([]);
@@ -58,17 +63,11 @@ const DeliveryForm = (props: DeliveryFormProps): React.ReactElement => {
      let start_time = minsFromNow;
       let description = createTaskDescription(deliveryTask);
       let request = {};
-      if (evaluator.length > 0 ){
-        let evaluator_option = evaluator;
-        request = { task_type: "Delivery",
-                    start_time: start_time,
-                    evaluator: evaluator_option,
-                    description: description }
-      } else {
-        request = { task_type: "Delivery",
-                    start_time: start_time,
-                    description: description }
-      }
+      let priority_option = priority;
+      request = { task_type: "Delivery",
+                  start_time: start_time,
+                  priority: priority_option,
+                  description: description }
       return request;
   }
   

@@ -10,6 +10,7 @@ import { useFormStyles } from "../styles";
 interface TaskRequest {
   task_type: string,
   start_time: number,
+  priority: number,
   description: any
 }
 
@@ -24,9 +25,9 @@ const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement =>
   const [taskList, setTaskList] = React.useState<string | ArrayBuffer>('');
   const [deliveryOptions, setDeliveryOptions] = React.useState({});
   const placeholder = `eg. [
-{"task_type":"Loop", "start_time":0, "description": {"num_loops":5, "start_name":"coe", "finish_name":"lounge"}},
-{"task_type":"Delivery", "start_time":0, "description": {"option": "coke"}},
-{"task_type":"Loop", "start_time":0, "description": {"num_loops":5, "start_name":"cubicle_2", "finish_name":"supplies"}}
+{"task_type":"Loop", "start_time":0, "priority": 0, "description": {"num_loops":5, "start_name":"coe", "finish_name":"lounge"}},
+{"task_type":"Delivery", "start_time":0, "priority": 0,"description": {"option": "coke"}},
+{"task_type":"Loop", "start_time":0, "priority": 0,"description": {"num_loops":5, "start_name":"cubicle_2", "finish_name":"supplies"}}
 ]`
 
   React.useEffect(() => {
@@ -52,6 +53,7 @@ const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement =>
         return {
           task_type: task.task_type,
           start_time: task.start_time,
+          priority: task.priority,
           description: taskDesc
         }
       } else {

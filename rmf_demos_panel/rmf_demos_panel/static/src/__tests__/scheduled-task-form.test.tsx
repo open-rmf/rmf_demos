@@ -32,7 +32,7 @@ describe('Scheduled Task Form', () => {
     });
 
     test("should show the file name and text content when a file is uploaded", async () => {
-        const tasks = new File([`[{"task_type":"Clean", "start_time":0, "description": {"cleaning_zone":"zone_1"}}]`], 'tasks.json', {
+        const tasks = new File([`[{"task_type":"Clean", "start_time":0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}]`], 'tasks.json', {
             type: 'json',
         });
         
@@ -43,14 +43,14 @@ describe('Scheduled Task Form', () => {
 
         await waitFor(() => {
             fireEvent.change(inputEl);
-            expect(root.getByText('[{"task_type":"Clean", "start_time":0, "description": {"cleaning_zone":"zone_1"}}]')).toBeTruthy();
+            expect(root.getByText('[{"task_type":"Clean", "start_time":0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}]')).toBeTruthy();
             expect(root.queryByLabelText('Select File')).toBeNull();
             expect(root.getByLabelText('tasks.json')).toBeTruthy();
         });
     });
 
     test("should submit a valid form", () => {
-        const tasks = `[ {"task_type":"Clean", "start_time":0, "description": {"cleaning_zone":"zone_1"}}, {"task_type":"Clean", "start_time":10, "description": {"cleaning_zone":"zone_2"}}, {"task_type":"Clean", "start_time":5, "description": {"cleaning_zone":"zone_3"}} ]`
+        const tasks = `[ {"task_type":"Clean", "start_time":0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}, {"task_type":"Clean", "start_time":10, "priority": 0, "description": {"cleaning_zone":"zone_2"}}, {"task_type":"Clean", "start_time":5, "priority": 0, "description": {"cleaning_zone":"zone_3"}} ]`
         const submitButton = screen.getByText('Submit Task List');
         const taskListBox = root.getByPlaceholderText(/eg.*/);
         userEvent.type(taskListBox, tasks);
@@ -59,7 +59,7 @@ describe('Scheduled Task Form', () => {
     });
 
     test("should render text content when the same file is uploaded again after first submission", async () => {
-        const list = `[{"task_type":"Clean", "start_time":0, "description": {"cleaning_zone":"zone_1"}}]`
+        const list = `[{"task_type":"Clean", "start_time":0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}]`
         const tasks = new File([list], 'tasks.json', {
             type: 'json',
         });

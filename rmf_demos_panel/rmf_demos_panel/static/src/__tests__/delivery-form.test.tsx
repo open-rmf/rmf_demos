@@ -9,8 +9,8 @@ describe('Delivery Form', () => {
     let setTimeError = jest.fn();
     let setMinsFromNow = jest.fn();
     let minsFromNow = 0;
-    let evaluator = "";
-    let timeAndEvaluator = { minsFromNow, evaluator, setTimeError, setMinsFromNow}
+    let priority = 0;
+    let timeAndPriority = { minsFromNow, priority, setTimeError, setMinsFromNow}
     
     function renderForm() {
         const deliveryOptions = {
@@ -21,7 +21,7 @@ describe('Delivery Form', () => {
               "dropoff_ingestor": "mopcart_collector"
             }
         }
-        return render(<DeliveryForm deliveryOptions={deliveryOptions} submitRequest={submitRequest} timeAndEvaluator={timeAndEvaluator}/>);
+        return render(<DeliveryForm deliveryOptions={deliveryOptions} submitRequest={submitRequest} timeAndPriority={timeAndPriority}/>);
     }
 
     beforeEach(() => {
