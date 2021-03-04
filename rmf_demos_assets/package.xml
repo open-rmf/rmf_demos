@@ -9,7 +9,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>rmf_gazebo_plugins</exec_depend>
+  <exec_depend>rmf_robot_sim_gazebo_plugins</exec_depend>
   <exec_depend>building_gazebo_plugins</exec_depend>
 
   <export>
