@@ -38,7 +38,7 @@ The RMF panel is a web based dashboard for interacting with RMF. It allows users
 There are two main modes of submitting tasks to RMF via the Panel:
 
 1. Submit a Task: Used to submit a single task. The user is required to first select a request type from the drop down menu. Depending on the type selected, additional fields specify to the type will need to be populated. The user can then specify the `start time` for the task before clicking `Submit Request`. 
-2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_tasks/rmf_demos_tasks`. Once loaded, clicking the `Submit Task List` button will automatically assign the various tasks to available robots.
+2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_panel/task_lists`. Once loaded, clicking the `Submit Task List` button will automatically assign the various tasks to available robots.
 
 Users may switch between different tabs on the top-left corner of the Panel when running the relevant demo world. More information on configuring the panel can be found [here](rmf_demos_panel/README.md)
 
@@ -79,7 +79,7 @@ ros2 run rmf_demos_tasks dispatch_delivery -p pantry -pd coke_dispenser -d hardw
 ![](docs/media/delivery_request.gif)
 
 To send loop requests, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
-To run a scenario with multiple task requests, load `office_tasks.json` from `rmf_demos_tasks/rmf_demos_tasks` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
+To run a scenario with multiple task requests, load `office_tasks.json` from `rmf_demos_panel/task_lists` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
 
 ![](docs/media/loop_request.gif)
 

@@ -16,7 +16,7 @@
 
 """
 The main API Interfaces (with port 8080):
-1) HTTP interfaces are:  /submit_task, /cancel_task, /get_task, /get_robots
+1) HTTP interfaces are:  /submit_task, /cancel_task, /task_list, /robot_list
 2) socketIO broadcast states: /task_status, /robot_states, /ros_time
 """
 
@@ -256,8 +256,8 @@ class DispatcherClient(Node):
 
     def convert_task_request(self, task_json):
         """
-        :param obj task_json:
-        :return rmf submit task req_msgs
+        :param (obj) task_json:
+        :return req_msgs, error_msg
         This is to convert a json task req format to a rmf_task_msgs
         task_profile format. add this accordingly when a new msg field
         is introduced.
@@ -266,18 +266,16 @@ class DispatcherClient(Node):
         req_msg = SubmitTask.Request()
         print(task_json)
 
-        if (("task_type" not in task_json) or
-            ("start_time" not in task_json) or
-                ("description" not in task_json)):
-            print("Error!! Key value is invalid!")
-            return None
-
         try:
+            if (("task_type" not in task_json) or
+                ("start_time" not in task_json) or
+                    ("description" not in task_json)):
+                raise Exception("Key value is incomplete")
+
             if ("priority" in task_json):
                 priority = int(task_json["priority"])
                 if (priority < 0):
-                    print("ERROR! priority value is less than 0")
-                    return None
+                    raise Exception("Priority value is less than 0")
                 req_msg.description.priority.value = priority
             else:
                 req_msg.description.priority.value = 0
@@ -303,21 +301,18 @@ class DispatcherClient(Node):
                 delivery.dropoff_place_name = desc["dropoff_place_name"]
                 req_msg.description.delivery = delivery
             else:
-                print("ERROR! Invalid TaskType")
-                return None
+                raise Exception("Invalid TaskType")
 
             # Calc start time, convert min to sec: TODO better representation
             rclpy.spin_once(self, timeout_sec=0.0)
             ros_start_time = self.get_clock().now().to_msg()
             ros_start_time.sec += int(task_json["start_time"]*60)
             req_msg.description.start_time = ros_start_time
-
-        except Exception as e:
-            print('Error!! Task Req description is invalid: ', e)
-            return None
-
-        print("PRINOT ", req_msg)
-        return req_msg
+        except KeyError as ex:
+            return None, f"Missing Key value in json body: {ex}"
+        except Exception as ex:
+            return None, str(ex)
+        return req_msg, ""
 
 ###############################################################################
 
@@ -343,16 +338,20 @@ logging.basicConfig(level=logging.DEBUG,
 
 @app.route('/submit_task', methods=['POST'])
 def submit():
+    err_msg = "Failed to submit task via POST"
+
     if request.method == "POST":
         logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
             Task Submission: {json.dumps(request.json)}")
-        req_msg = dispatcher_client.convert_task_request(request.json)
+        req_msg, err_msg = dispatcher_client.convert_task_request(request.json)
         if req_msg is not None:
             id = dispatcher_client.submit_task_request(req_msg)
             if id:
-                return jsonify({"task_id": id})
+                return jsonify({"task_id": id, "error_msg": ""})
+
+    print(err_msg)
     logging.error(f" Failed to Submit task: req_msg: {request.json}")
-    return jsonify({"task_id": ""})
+    return jsonify({"task_id": "", "error_msg": err_msg})
 
 
 @app.route('/cancel_task', methods=['POST'])
@@ -367,7 +366,7 @@ def cancel():
     return jsonify({"success": False})
 
 
-@app.route('/get_task', methods=['GET'])
+@app.route('/task_list', methods=['GET'])
 def status():
     task_status = jsonify(dispatcher_client.get_task_status())
     logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
@@ -375,7 +374,7 @@ def status():
     return task_status
 
 
-@app.route('/get_robots', methods=['GET'])
+@app.route('/robot_list', methods=['GET'])
 def robots():
     robot_status = jsonify(dispatcher_client.get_robot_states())
     logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
