@@ -1,0 +1,47 @@
+name: build
+on: [push, pull_request]
+jobs:
+
+  ros2:
+    runs-on: ubuntu-20.04
+    container:
+      image: docker://ros:foxy-ros-base-focal
+    steps:
+    - name: non-ros-deps
+      run: |
+        sudo apt update
+        sudo apt install -y wget
+        sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+        wget https://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
+        
+        sudo apt update && sudo apt install \
+          git cmake python3-vcstool curl \
+          qt5-default \
+          python3-shapely python3-yaml python3-requests \
+          ignition-dome \
+          -y
+
+    - name: workspace
+      run: |
+        mkdir -p rmf_demos_ws/src
+        cd rmf_demos_ws/src
+        git clone https://github.com/osrf/rmf_core.git
+        git clone https://github.com/osrf/traffic_editor.git
+        git clone https://github.com/osrf/rmf_schedule_visualizer.git
+
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        path: rmf_demos_ws/src/rmf_demos
+
+    - name: ros-deps
+      run: |
+        cd rmf_demos_ws
+        rosdep update
+        rosdep install --from-paths src --ignore-src --rosdistro foxy -yr
+    - name: build
+      shell: bash
+      run: |
+        cd rmf_demos_ws
+        source /opt/ros/foxy/setup.bash
+        colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release -DNO_DOWNLOAD_MODELS=True

@@ -1,0 +1,24 @@
+name: style
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    container:
+      image: docker://ros:eloquent-ros-base-bionic
+    steps:
+    - uses: actions/checkout@v1
+    - name: deps
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install wget pycodestyle
+    - name: rmf_uncrustify
+      shell: bash
+      run: |
+        wget https://raw.githubusercontent.com/osrf/rmf_core/master/rmf_utils/test/format/rmf_code_style.cfg
+        source /opt/ros/eloquent/setup.bash
+        ament_uncrustify -c rmf_code_style.cfg
+    - name: pycodestyle
+      shell: bash
+      run: |
+        pycodestyle .
