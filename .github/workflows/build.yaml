@@ -20,20 +20,18 @@ jobs:
           python3-shapely python3-yaml python3-requests \
           ignition-dome \
           -y
-
-    - name: workspace
+    - name: create-ws
       run: |
         mkdir -p rmf_demos_ws/src
-        cd rmf_demos_ws/src
-        git clone https://github.com/osrf/rmf_core.git
-        git clone https://github.com/osrf/traffic_editor.git
-        git clone https://github.com/osrf/rmf_schedule_visualizer.git
-
     - name: checkout
       uses: actions/checkout@v2
       with:
-        path: rmf_demos_ws/src/rmf_demos
-
+        path: rmf_demos_ws/src/rmf/rmf_demos
+    - name: workspace
+      run: |
+        cd ~/rmf_demos_ws
+        wget https://raw.githubusercontent.com/open-rmf/rmf/main/rmf.repos
+        vcs import src < rmf.repos --skip-existing
     - name: ros-deps
       run: |
         cd rmf_demos_ws
