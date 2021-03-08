@@ -29,7 +29,7 @@ jobs:
         path: rmf_demos_ws/src/rmf/rmf_demos
     - name: workspace
       run: |
-        cd ~/rmf_demos_ws
+        cd rmf_demos_ws
         wget https://raw.githubusercontent.com/open-rmf/rmf/main/rmf.repos
         vcs import src < rmf.repos --skip-existing
     - name: ros-deps
