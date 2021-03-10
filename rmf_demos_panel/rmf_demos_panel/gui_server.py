@@ -23,19 +23,38 @@ import json
 ###############################################################################
 
 app = Flask(__name__, static_url_path="/static")
-dashboard_config = {"world_name": ""}
+dashboard_config = {"world_name": "EMPTY_DASHBOARD_CONFIG",
+                    "task": {"Delivery": {}, "Loop": {}, "Clean": {}}}
 
 
-# This will use the webpack gui hosted on github page
+# Download bundle from gh page, This will download the webpack bundle if the
+# bundle is not available locally, thus internet is required during download
+def download_webpack():
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    bundle_path = f"{script_dir}/static/dist/app.bundle.js"
+
+    # source_url is deployed during a push sequence within git page action,
+    # it is advice to update the version (in '.github/workflows/gh_page.yml')
+    # whenever a new feature is introduced
+    source_url = "https://open-rmf.github.io/rmf_demos/v1.0.0/app.bundle.js"
+
+    if os.path.isfile(bundle_path):
+        print("BundleJS File exists, SKIP!")
+    else:
+        print("BundleJS File not exist, so download!")
+        response = requests.get(source_url)
+        if response.status_code == 200:
+            open(bundle_path, 'wb').write(response.content)
+            print(f"Bundle Download completed: {bundle_path}")
+        else:
+            raise UserWarning(f"Failed to download bundle from: {source_url}")
+
+###############################################################################
+
+
 @app.route("/")
 def home():
     return render_template("index.html")
-
-
-# This will use local compiled webpack gui
-@app.route("/test")
-def home_test():
-    return render_template("index_test.html")
 
 
 # Dashboard Config for each "World"
@@ -51,6 +70,8 @@ def main(args=None):
     server_ip = "0.0.0.0"
     port_num = 5000
 
+    download_webpack()
+
     if "WEB_SERVER_IP_ADDRESS" in os.environ:
         server_ip = os.environ['WEB_SERVER_IP_ADDRESS']
         print(f"Set Server IP to: {server_ip}:{port_num}")
@@ -61,8 +82,7 @@ def main(args=None):
         if not config_path:
             print(f"WARN! env DASHBOARD_CONFIG_PATH is empty...")
         elif not os.path.exists(config_path):
-            print(f"File [{config_path}] doesnt exist")
-            raise FileNotFoundError
+            raise FileNotFoundError(f"\n File [{config_path}] doesnt exist")
         else:
             try:
                 f = open(config_path, 'r')

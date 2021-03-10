@@ -27,8 +27,8 @@ Launch the dashboard
 firefox localhost:5000
 ```
 
-> Note that this will page use the latest gui hosted on `rmf_demos` github page. Thus internet is
-required when running this. Do check the compatability.
+> Note that this will download the latest webpack "GUI" hosted on `rmf_demos` github page. Thus internet is
+required when you are running the `gui_server` for the first time.
 
 ---
 
@@ -50,8 +50,6 @@ npm run build --prefix src/rmf/rmf_demos/rmf_demos_panel/rmf_demos_panel/static/
 
 colcon build --packages-select rmf_demos_panel
 ```
-
-Once Done, Run `office.launch.xml` and access link: `http://localhost:5000/test` instead.
 
 ### API Endpoints
 
