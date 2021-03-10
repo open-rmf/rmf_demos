@@ -18,8 +18,7 @@ const RequestForm = (): React.ReactElement => {
     const [deliveryOptions, setDeliveryOptions] = React.useState({});
     const [cleaningZones, setCleaningZones] = React.useState([]);
     const [minsFromNow, setMinsFromNow] = React.useState(0);
-    const [evaluator, setEvaluator] = React.useState('');
-    
+    const [priority, setPriority] = React.useState(0);
     const [timeError, setTimeError] = React.useState("");
 
     React.useEffect(() => {
@@ -38,19 +37,18 @@ const RequestForm = (): React.ReactElement => {
     }, [config]);
 
     const returnFormType = (formType: string) => {
-        const timeAndEvaluator = { minsFromNow, evaluator, setTimeError, setMinsFromNow };
+        const timeAndPriority = { minsFromNow, priority, setTimeError, setMinsFromNow };
         switch (formType) {
             case "Loop":
-                return <LoopRequestForm availablePlaces={loopPlaces} submitRequest={submitRequest} timeAndEvaluator={timeAndEvaluator}/>
+                return <LoopRequestForm availablePlaces={loopPlaces} submitRequest={submitRequest} timeAndPriority={timeAndPriority}/>
             case "Delivery": 
-                return <DeliveryForm deliveryOptions={deliveryOptions} submitRequest={submitRequest} timeAndEvaluator={timeAndEvaluator}/>
+                return <DeliveryForm deliveryOptions={deliveryOptions} submitRequest={submitRequest} timeAndPriority={timeAndPriority}/>
             case "Clean":
-                return <CleaningForm cleaningZones={cleaningZones} submitRequest={submitRequest} timeAndEvaluator={timeAndEvaluator}/>
+                return <CleaningForm cleaningZones={cleaningZones} submitRequest={submitRequest} timeAndPriority={timeAndPriority}/>
         }
     }
 
-    const evaluators:string[] = ["lowest_delta_cost", "lowest_cost", "quickest_time"];
-  
+    const priorities:string[] = ["0", "1"];
     const classes = useFormStyles();
     
     return (
@@ -84,12 +82,13 @@ const RequestForm = (): React.ReactElement => {
                 />
             </div>
             <div className={classes.divForm}>
-                <Autocomplete id="set-evaluator"
+                <Autocomplete id="set-priority"
                 openOnFocus
-                options={evaluators}
-                getOptionLabel={(evaluator) => evaluator}
-                onChange={(_, value) => setEvaluator(value)}
-                renderInput={(params: AutocompleteRenderInputParams) => <TextField {...params} label="Choose an evaluator (optional)" variant="outlined" margin="normal" />}
+                options={priorities}
+                getOptionLabel={(priority) => priority}
+                onChange={(_, value) => setPriority(value ? parseInt(value) : 0)}
+                renderInput={(params: AutocompleteRenderInputParams) => <TextField {...params} 
+                label="Choose a priority (Default: 0)" variant="outlined" margin="normal" />}
                 />
             </div>
             <div className={classes.divForm}>

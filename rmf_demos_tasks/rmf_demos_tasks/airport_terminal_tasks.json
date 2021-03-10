@@ -1,6 +1,0 @@
-[
-{"task_type":"Delivery", "start_time":0, "description": {"option": "mop"}},
-{"task_type":"Loop", "start_time":0, "description": {"num_loops":10, "start_name":"junction_north_west", "finish_name":"n14"}},
-{"task_type":"Loop", "start_time":0, "description": {"num_loops":10, "start_name":"tinyRobot_n09", "finish_name":"s07"}},
-{"task_type":"Loop", "start_time":0, "description": {"num_loops":10, "start_name":"tinyRobot_s07", "finish_name":"n12"}}
-]

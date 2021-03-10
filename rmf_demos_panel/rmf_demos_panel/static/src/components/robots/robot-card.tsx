@@ -12,7 +12,7 @@ interface RobotCardProps {
   robotState: {
     robot_name: string;
     fleet_name: string;
-    assignments: string;
+    assignments: string[];
     mode: string;
     battery_percent: string;
     level_name: string;
@@ -52,7 +52,7 @@ export const RobotCard = (props: RobotCardProps) : React.ReactElement => {
                       Task ID
                     </Typography>
                   </Grid>
-                  <Grid item xs={7}><Typography>{robotState.assignments}</Typography></Grid>
+                  <Grid item xs={7}><Typography>{robotState.assignments.join(" -> ")}</Typography></Grid>
                   <Grid item xs={5}>
                     <Typography variant="subtitle2" color="textSecondary" gutterBottom>
                       Status

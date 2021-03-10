@@ -9,12 +9,12 @@ describe('Loop Request Form', () => {
      let setTimeError = jest.fn();
     let setMinsFromNow = jest.fn();
     let minsFromNow = 0;
-    let evaluator = "";
-    let timeAndEvaluator = { minsFromNow, evaluator, setTimeError, setMinsFromNow}
+    let priority = 0;
+    let timeAndPriority = { minsFromNow, priority, setTimeError, setMinsFromNow}
     
     function renderForm() {
         const availablePlaces = ['place1', 'place2'];
-        return render(<LoopRequestForm availablePlaces={availablePlaces} submitRequest={submitRequest} timeAndEvaluator={timeAndEvaluator}/>);
+        return render(<LoopRequestForm availablePlaces={availablePlaces} submitRequest={submitRequest} timeAndPriority={timeAndPriority}/>);
     }
     
     beforeEach(() => {

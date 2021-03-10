@@ -42,6 +42,9 @@ class TaskRequester:
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
+        parser.add_argument('-pt', '--priority',
+                            help='Priority value for this request',
+                            type=int, default=0)
         parser.add_argument("--use_sim_time", action="store_true",
                             help='Use sim time, default: false')
 
@@ -69,6 +72,8 @@ class TaskRequester:
         ros_start_time = self.node.get_clock().now().to_msg()
         ros_start_time.sec += self.args.start_time
         req_msg.description.start_time = ros_start_time
+
+        req_msg.description.priority.value = self.args.priority
         return req_msg
 
     def main(self):

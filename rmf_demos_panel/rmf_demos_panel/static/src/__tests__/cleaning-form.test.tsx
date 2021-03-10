@@ -9,12 +9,12 @@ describe('Cleaning Form', () => {
     let setTimeError = jest.fn();
     let setMinsFromNow = jest.fn();
     let minsFromNow = 0;
-    let evaluator = "";
-    let timeAndEvaluator = { minsFromNow, evaluator, setTimeError, setMinsFromNow}
+    let priority = 0;
+    let timeAndPriority = { minsFromNow, priority, setTimeError, setMinsFromNow}
 
     function renderForm() {
         const cleaningZones = ['zone1', 'zone2'];
-        return render(<CleaningForm cleaningZones={cleaningZones} submitRequest={submitRequest} timeAndEvaluator={timeAndEvaluator} />);
+        return render(<CleaningForm cleaningZones={cleaningZones} submitRequest={submitRequest} timeAndPriority={timeAndPriority} />);
     }
 
     beforeEach(() => {

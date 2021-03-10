@@ -9,12 +9,17 @@ import { useFormStyles } from "../styles";
 interface CleaningFormProps {
   cleaningZones: string[],
   submitRequest: (request: {}, type: string) => void;
-  timeAndEvaluator: { minsFromNow: number, evaluator: string, setTimeError: React.Dispatch<React.SetStateAction<string>>, setMinsFromNow: React.Dispatch<React.SetStateAction<number>>}
+  timeAndPriority: {
+    minsFromNow: number,
+    priority: number,
+    setTimeError: React.Dispatch<React.SetStateAction<string>>,
+    setMinsFromNow: React.Dispatch<React.SetStateAction<number>>
+  }
 }
 
 export const CleaningForm = (props: CleaningFormProps): React.ReactElement => {
-  const { cleaningZones, submitRequest, timeAndEvaluator } = props;
-  const { minsFromNow, evaluator, setTimeError, setMinsFromNow } = timeAndEvaluator;
+  const { cleaningZones, submitRequest, timeAndPriority } = props;
+  const { minsFromNow, priority, setTimeError, setMinsFromNow } = timeAndPriority;
   const [allZones, setZones] = React.useState(cleaningZones);
   const [targetZone, setTargetZone] = React.useState('');
 
@@ -48,17 +53,11 @@ export const CleaningForm = (props: CleaningFormProps): React.ReactElement => {
     let start_time = minsFromNow;
     let cleaning_zone = targetZone;
     let request = {};
-    if (evaluator.length > 0 ){
-      let evaluator_option = evaluator;
-      request = { task_type: "Clean",
-                  start_time: start_time,
-                  evaluator: evaluator_option,
-                  description: {'cleaning_zone': cleaning_zone} }
-    } else {
-      request = { task_type: "Clean",
-                  start_time: start_time,
-                  description: {'cleaning_zone': cleaning_zone} }
-      }
+    let priority_option = priority;
+    request = { task_type: "Clean",
+                start_time: start_time,
+                priority: priority_option,
+                description: {'cleaning_zone': cleaning_zone} }
     return request;
   }
 

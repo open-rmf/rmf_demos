@@ -16,6 +16,7 @@ interface TaskCardProps {
         robot_name: string,
         state: 	string,
         task_type: string,
+        priority: number,
         start_time: number,
         end_time: number,
         progress: string,
@@ -70,6 +71,12 @@ export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
                     </Typography>
                   </Grid>
                   <Grid item xs={6}><Typography>{taskState.task_type}</Typography></Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="subtitle2" align="left" color="textSecondary" gutterBottom>
+                    Priority
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}><Typography>{taskState.priority}</Typography></Grid>
                   <Grid item xs={6}>
                     <Typography variant="subtitle2" align="left" color="textSecondary" gutterBottom>
                       Task State

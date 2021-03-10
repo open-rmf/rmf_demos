@@ -6,7 +6,7 @@ describe('Robot Card', () => {
      const exampleState  = {
             robot_name: "magnus",
             fleet_name: "fleet1",
-            assignments: "1003",
+            assignments: ["1003", "task2", "Loop3"],
             mode: "Idle-0",
             battery_percent: "99.99998474121094",
             level_name: "Level 2"
