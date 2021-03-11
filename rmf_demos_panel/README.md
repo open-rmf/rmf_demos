@@ -32,10 +32,10 @@ required when you are running the `gui_server` for the first time.
 
 ---
 
-## Development Mode (local)
+## Development Mode (local npm compilation)
 
-This development mode is useful for personel who are interested to compile a local React Gui 
-Bundle. **Else you can skip this portion.**.
+Currently the webpack bundle is located here `https://open-rmf.github.io/rmf_demos/VERSION/app.bundle.js`. Thus this is useful
+for personnel who would like to compile a local react webpack bundle (for testing). **Else you can skip this portion.**
 
 ### Dependencies: 
  - npm (node version > 12, see: [node](https://nodejs.org/en/download/package-manager/))
@@ -53,22 +53,23 @@ colcon build --packages-select rmf_demos_panel
 
 ### API Endpoints
 
-Endpoints | Method | body | Description
+Endpoints | Type | Parameters | Description
 --- | --- | --- | ---
-/submit_task | POST | task description json | This supports submission of task
-/cancel_task | POST | task_id string | Cancel a existing task
-/task_list | GET | NULL | Get list of task status in RMF
-/robot_list | GET | NULL | Get list of Robot states in RMF
-/task_status | SocketIO | NULL | Constant broadcast task list
-/robot_states | SocketIO | NULL | Constant broadcast robot list
+/submit_task | POST | task description json | This supports submission of task. This response with an assigned task_id is the task is accepted
+/cancel_task | POST | task_id string | Cancel an existing task in rmf.
+/task_list | GET | NA | Get list of task status in RMF (include active and terminated tasks)
+/robot_list | GET | NA | Get list of Robot states in RMF
+/task_status | SocketIO | NA | Constant broadcast of task list
+/robot_states | SocketIO | NA | Constant broadcast of robot list
 
-#### Simple CURL Test on a seperate terminal
+#### Simple CURL Test
 
 ```bash
 # Submit Task (POST)
 curl -X POST http://localhost:8080/submit_task \
 -d '{"task_type":"Loop", "start_time":0, "description": {"start_name": "coe", "finish_name": "pantry", "num_loops":1}}' \
 -H "Content-Type: application/json" 
+
 # Get Task List (GET)
 curl http://localhost:8080/task_list
 ```
@@ -79,7 +80,7 @@ curl http://localhost:8080/task_list
 
 **Submit a list of tasks***
 On the right side column of the web UI, users are able to select a file which consists of a list of  
-tasks. Example. for office world, load `rmf_demos_tasks/rmf_demo_tasks/office_tasks.json`. 
+tasks. Example. for office world, load `rmf_demos_tasks/rmf_demos_tasks/office_tasks.json`. 
 Once the tasks are populated in the box, hit submit!
 
 More details on the format for the `.json` file is presented below.
@@ -93,7 +94,7 @@ For delivery requests:
 ```json
 {"task_type":"Delivery", "start_time":0, "priority":0, "description": {"option": "coke"}}
 ```
-Internally, the option `coke` is mapped to a set of parameters required for a delivery request. This mapping can be seen in the `rmf_dashboard_resources/office/dashboard_config.json` file.
+Internally, the option `coke` is mapped to a set of parameters required for a delivery request. This mapping can be seen in the `rmf_demos_dashboard_resources/office/dashboard_config.json` file.
 
 For clean requests:
 ```json
