@@ -15,12 +15,17 @@ interface LoopDescription {
 interface LoopFormProps {
   availablePlaces: string[]
   submitRequest: (request: {}, type: string) => void;
-  timeAndEvaluator: { minsFromNow: number, evaluator: string, setTimeError: React.Dispatch<React.SetStateAction<string>>, setMinsFromNow: React.Dispatch<React.SetStateAction<number>>}
+  timeAndPriority: {
+    minsFromNow: number,
+    priority: number,
+    setTimeError: React.Dispatch<React.SetStateAction<string>>,
+    setMinsFromNow: React.Dispatch<React.SetStateAction<number>>
+  }
 }
 
 const LoopRequestForm = (props: LoopFormProps): React.ReactElement => {
-  const { availablePlaces, submitRequest, timeAndEvaluator } = props;
-   const { minsFromNow, evaluator, setTimeError, setMinsFromNow } = timeAndEvaluator;
+  const { availablePlaces, submitRequest, timeAndPriority } = props;
+  const { minsFromNow, priority, setTimeError, setMinsFromNow } = timeAndPriority;
   const classes = useFormStyles();
   const [startLocation, setStartLocation] = React.useState("");
   const [endLocation, setEndLocation] = React.useState("");
@@ -78,17 +83,11 @@ const LoopRequestForm = (props: LoopFormProps): React.ReactElement => {
     }
     let start_time = minsFromNow;
     let request = {};
-    if (evaluator.length > 0 ) {
-        let evaluator_option = evaluator;
-        request = { task_type: "Loop",
-                    start_time: start_time,
-                    evaluator: evaluator_option,
-                    description: description }
-    } else {
-      request = { task_type: "Loop",
-                  start_time: start_time,
-                  description: description }
-    }
+    let priority_option = priority;
+    request = { task_type: "Loop",
+                start_time: start_time,
+                priority: priority_option,
+                description: description }
     return request;
   }
     

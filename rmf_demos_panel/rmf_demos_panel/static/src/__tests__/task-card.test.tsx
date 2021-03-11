@@ -9,6 +9,7 @@ describe('Task Card', () => {
         robot_name: "magnus",
         state: "Active/Executing",
         task_type: "Clean",
+        priority: 1,
         start_time: 1500,
         end_time: 1540,
         progress: "42"

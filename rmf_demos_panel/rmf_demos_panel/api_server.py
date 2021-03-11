@@ -16,7 +16,7 @@
 
 """
 The main API Interfaces (with port 8080):
-1) HTTP interfaces are:  /submit_task, /cancel_task, /get_task, /get_robots
+1) HTTP interfaces are:  /submit_task, /cancel_task, /task_list, /robot_list
 2) socketIO broadcast states: /task_status, /robot_states, /ros_time
 """
 
@@ -186,6 +186,7 @@ class DispatcherClient(Node):
             status["fleet_name"] = task.fleet_name
             status["robot_name"] = task.robot_name
             status["task_type"] = type_enum[desc.task_type.type]
+            status["priority"] = desc.priority.value
             status["submited_start_time"] = desc.start_time.sec
             status["start_time"] = task.start_time.sec     # only use sec
             status["end_time"] = task.end_time.sec         # only use sec
@@ -222,14 +223,14 @@ class DispatcherClient(Node):
 
     def __get_robot_assignment(self, robot_name):
         assigned_tasks = []
-        assigned_task_ids = ""
+        assigned_task_ids = []
         for task in self.active_tasks_cache:
             if task["robot_name"] == robot_name:
                 assigned_tasks.append(task)
         assigned_tasks.sort(key=lambda x: x.get('start_time'))
         for task in assigned_tasks:
-            assigned_task_ids += (task["task_id"] + "  ")
-        return assigned_task_ids   # TODO: return list
+            assigned_task_ids.append(task["task_id"])
+        return assigned_task_ids
 
     def __convert_robot_states_msg(self, fleet_name, robot_states):
         """
@@ -255,34 +256,30 @@ class DispatcherClient(Node):
 
     def convert_task_request(self, task_json):
         """
-        :param obj task_json:
-        :return rmf submit task req_msgs
+        :param (obj) task_json:
+        :return req_msgs, error_msg
         This is to convert a json task req format to a rmf_task_msgs
         task_profile format. add this accordingly when a new msg field
         is introduced.
         The 'start time' here is refered to the "Duration" from now.
         """
         req_msg = SubmitTask.Request()
-
-        if (("task_type" not in task_json) or
-            ("start_time" not in task_json) or
-                ("description" not in task_json)):
-            print("Error!! Key value is invalid!")
-            return None
-
-        if ("evaluator" in task_json):
-            evaluator = task_json["evaluator"]
-            if (evaluator == "lowest_delta_cost"):
-                req_msg.evaluator = req_msg.LOWEST_DIFF_COST_EVAL
-            elif (evaluator == "lowest_cost"):
-                req_msg.evaluator = req_msg.LOWEST_COST_EVAL
-            elif (evaluator == "quickest_time"):
-                req_msg.evaluator = req_msg.QUICKEST_FINISH_EVAL
-            else:
-                print("Error!! INVALID evaluator, pls check!")
-                return None
+        print(task_json)
 
         try:
+            if (("task_type" not in task_json) or
+                ("start_time" not in task_json) or
+                    ("description" not in task_json)):
+                raise Exception("Key value is incomplete")
+
+            if ("priority" in task_json):
+                priority = int(task_json["priority"])
+                if (priority < 0):
+                    raise Exception("Priority value is less than 0")
+                req_msg.description.priority.value = priority
+            else:
+                req_msg.description.priority.value = 0
+
             desc = task_json["description"]
             if task_json["task_type"] == "Clean":
                 req_msg.description.task_type.type = TaskType.TYPE_CLEAN
@@ -304,20 +301,18 @@ class DispatcherClient(Node):
                 delivery.dropoff_place_name = desc["dropoff_place_name"]
                 req_msg.description.delivery = delivery
             else:
-                print("ERROR! Invalid TaskType")
-                return None
+                raise Exception("Invalid TaskType")
 
             # Calc start time, convert min to sec: TODO better representation
             rclpy.spin_once(self, timeout_sec=0.0)
             ros_start_time = self.get_clock().now().to_msg()
             ros_start_time.sec += int(task_json["start_time"]*60)
             req_msg.description.start_time = ros_start_time
-
-        except Exception as e:
-            print('Error!! Task Req description is invalid: ', e)
-            return None
-
-        return req_msg
+        except KeyError as ex:
+            return None, f"Missing Key value in json body: {ex}"
+        except Exception as ex:
+            return None, str(ex)
+        return req_msg, ""
 
 ###############################################################################
 
@@ -343,16 +338,20 @@ logging.basicConfig(level=logging.DEBUG,
 
 @app.route('/submit_task', methods=['POST'])
 def submit():
+    err_msg = "Failed to submit task via POST"
+
     if request.method == "POST":
         logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
             Task Submission: {json.dumps(request.json)}")
-        req_msg = dispatcher_client.convert_task_request(request.json)
+        req_msg, err_msg = dispatcher_client.convert_task_request(request.json)
         if req_msg is not None:
             id = dispatcher_client.submit_task_request(req_msg)
             if id:
-                return jsonify({"task_id": id})
+                return jsonify({"task_id": id, "error_msg": ""})
+
+    print(err_msg)
     logging.error(f" Failed to Submit task: req_msg: {request.json}")
-    return jsonify({"task_id": ""})
+    return jsonify({"task_id": "", "error_msg": err_msg})
 
 
 @app.route('/cancel_task', methods=['POST'])
@@ -367,7 +366,7 @@ def cancel():
     return jsonify({"success": False})
 
 
-@app.route('/get_task', methods=['GET'])
+@app.route('/task_list', methods=['GET'])
 def status():
     task_status = jsonify(dispatcher_client.get_task_status())
     logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
@@ -375,7 +374,7 @@ def status():
     return task_status
 
 
-@app.route('/get_robots', methods=['GET'])
+@app.route('/robot_list', methods=['GET'])
 def robots():
     robot_status = jsonify(dispatcher_client.get_robot_states())
     logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
