@@ -6,7 +6,7 @@ const GUI_SERVER_ADD = "http://" + location.hostname + ":5000"
 //API endpoints
 export const getRobots = async () => {
     try {
-        let response = await fetch(API_SERVER_ADD + '/get_robots');
+        let response = await fetch(API_SERVER_ADD + '/robot_list');
         if(response) {
             let data = await response.json()
             console.log("Populate robots: ", data);
@@ -21,7 +21,7 @@ export const getRobots = async () => {
 
 export const getTasks = async () => {
     try {
-        let response = await fetch(API_SERVER_ADD + '/get_task');
+        let response = await fetch(API_SERVER_ADD + '/task_list');
         if(response) {
             let data = await response.json()
             console.log("Populate tasks: ", data);

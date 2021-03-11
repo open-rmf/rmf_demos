@@ -7,8 +7,6 @@
   <maintainer email="youliang@openrobotics.org">youliang</maintainer>
   <license>Apache License 2.0</license>
 
-  <build_depend>npm</build_depend>
-
   <exec_depend>python3-flask</exec_depend>
   <exec_depend>python3-flask-cors</exec_depend>
 

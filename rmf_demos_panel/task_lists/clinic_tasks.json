@@ -1,0 +1,6 @@
+[
+{"task_type":"Loop", "start_time":0, "priority":0, "description": {"num_loops":2, "start_name":"L1_left_negative_air_pressure", "finish_name":"L2_left_nurse_center"}},
+{"task_type":"Loop", "start_time":0, "priority":0, "description": {"num_loops":2, "start_name":"L1_left_nurse_center", "finish_name":"L2_south_counter"}},
+{"task_type":"Loop", "start_time":1, "priority":0, "description": {"num_loops":2, "start_name":"L2_right_nurse_center", "finish_name":"L2_sub_waiting_area_1"}},
+{"task_type":"Loop", "start_time":2, "priority":0, "description": {"num_loops":2, "start_name":"L2_north_counter", "finish_name":"L1_right_nurse_center"}}
+]
