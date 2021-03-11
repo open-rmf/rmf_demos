@@ -1,7 +1,7 @@
 ## RMF Demos Panel
-This will describes more about the details of `rmf_demos_panel`. In short, this package uses a simple web server
-to expose the essential rmf topics/services to the user as web endpoints. Currently, this lite implementation is 
-useful for task submission and observe on-going tasks/robots in RMF.
+Here we describe additional details of `rmf_demos_panel`. This package uses a simple web server
+to expose the essential RMF topics/services to users as web endpoints. Currently, this lite implementation is 
+useful for task submission and observing status of on-going tasks and robots in RMF.
 
 ### RMF Dependencies
  - `rmf_task_ros2`
@@ -79,7 +79,7 @@ curl http://localhost:8080/task_list
 ## Run Sample Tasks
 
 **Submit a list of tasks***
-On the right side column of the web UI, users are able to select a file which consists of a list of  
+On the right side column of the panel, users are able to select a file which consists of a list of  
 tasks. Example. for office world, load `rmf_demos_tasks/rmf_demos_tasks/office_tasks.json`. 
 Once the tasks are populated in the box, hit submit!
 
@@ -113,14 +113,14 @@ There are 2 web-based server running behind the scene, namely:
 1. `gui_server` (port `5000`): Providing the static gui to the web client. Non RMF dependent
 2. `api_server` (port `8080`): Hosting all endpoints for gui clients to interact with RMF
 
-To create your own customize GUI, you will only require to replace the current `gui_server` package with your 
-own custom implementation, while still interact with the existing `api_server`.
+To create your own custom GUI, you will only require to replace the current `gui_server` package with your 
+own custom implementation, . The `api_server` remains the same.
 
 ---
 
 ## Note
 - Edit the `dashboard_config.json` to configure the input of the Demo World GUI Task Submission.
-The dashboard config file is located here: `rmf_dashboard_resources/$WORLD/dashboard_config.json`.
+The dashboard config file is located here: `rmf_demos_dashboard_resources/$WORLD/dashboard_config.json`.
 - server ip is configurable via `WEB_SERVER_IP_ADDRESS` in the `dashboard.launch.xml`
 - The `api_server` outputs and stores a summarized log: `web_server.log`.
 - cancel task will not be working. A fully functional cancel will be introduced in a future PR.

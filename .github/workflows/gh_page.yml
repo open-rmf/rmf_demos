@@ -1,4 +1,4 @@
-name: Deploy rmf_panel gh_page
+name: deploy-gh_page
 on:
   push:
     branches:
