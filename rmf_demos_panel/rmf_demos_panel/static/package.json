@@ -8,6 +8,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "build": "webpack --progress --config webpack.config.js",
+    "build-dev": "webpack --mode development --progress --config webpack.config.js",
     "dev-build": "webpack --progress --config webpack.config.js",
     "watch": "webpack --progress --config webpack.config.js --watch"
   },

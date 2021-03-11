@@ -1,0 +1,27 @@
+name: Deploy rmf_panel gh_page
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: rmf_demos
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          check-latest: true
+      - name: "Install and Build"
+        run: |
+          cd rmf_demos/rmf_demos_panel/rmf_demos_panel/static
+          npm install
+          npm run build
+      - name: deploy_page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: rmf_demos/rmf_demos_panel/rmf_demos_panel/static/dist
+          destination_dir: v1.0.0 # Change the version of webpack: "app.bundle.js"
