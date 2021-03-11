@@ -1,0 +1,25 @@
+name: style
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    container:
+      image: docker://ros:foxy-ros-base-focal
+    steps:
+    - uses: actions/checkout@v2
+    - name: deps
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install wget pycodestyle
+    #  Note: Enable this if only cpp files are available for style check
+    # - name: rmf_uncrustify
+    #   shell: bash
+    #   run: |
+    #     wget https://raw.githubusercontent.com/open-rmf/rmf_utils/master/rmf_utils/test/format/rmf_code_style.cfg
+    #     source /opt/ros/foxy/setup.bash
+    #     ament_uncrustify -c rmf_code_style.cfg
+    - name: pycodestyle
+      shell: bash
+      run: |
+        pycodestyle .
