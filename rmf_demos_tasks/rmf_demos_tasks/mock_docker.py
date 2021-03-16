@@ -46,14 +46,21 @@ def close(l0: Location, l1: Location):
     dist = math.sqrt(x_2 + y_2)
     if dist > 0.2:
         return False
-
-    # if abs(l1.yaw - l0.yaw) > 10.0*math.pi/180.0:
-    #     return False
-
     return True
 
 
 class MockDocker(Node):
+    """
+    This Mock Docker provides the fleet adapter a series of prerecorded docking
+    path for the robot to follow during "Dock Mode". Internally, a dock_summary
+    will get sent to the fleet adapter for initial clean task estimation.
+    Also, during the docking process. The mock_docker will response to a valid
+    Docking Mode Request from the fleet adapter, followed by sending a
+    fix dock path request to the underlying fleet driver or slotcar.
+
+    Althought this is named as Docking. this process can also be used to mimic
+    a cleaning robot, which is following a known path during cleaning.
+    """
 
     def __init__(self, config_yaml):
         super().__init__('mock_docker')
@@ -79,18 +86,7 @@ class MockDocker(Node):
         self.dock_summary_publisher = self.create_publisher(
             DockSummary, 'dock_summary', qos_profile=transient_qos)
 
-        # self.level_name = "B2"
-
-        # self.dock_map = {}
-        # # TODO dock_map should contain a nested dict for
-        # # each fleet's docking points
-        # for key, p_array in self.config_yaml["ecobot"].items():
-        #     location_list = []
-        #     for p in p_array:
-        #         p_loc = make_location(p, self.level_name)
-        #         location_list.append(p_loc)
-        #     self.dock_map[key] = location_list
-
+        # This is a dict of robots which are in docking mode
         self.watching = {}
 
         # Populate the dock_map and dock_summary msg
@@ -103,12 +99,13 @@ class MockDocker(Node):
             for dock_name, dock_waypoints in docking_info.items():
                 param = DockParameter()
                 param.start = dock_name
-                # This is a hack. The cleaning task will ensure the robot ends
-                # up at the finish waypoint. The graph already containts these
-                # waypoints
+                # TODO This is a hack. The cleaning task will ensure the
+                # robot ends up at the finish waypoint. The graph already
+                # containts these waypoints
                 param.finish = param.start + "_start"
                 for point in dock_waypoints["path"]:
-                    location = make_location(point, dock_waypoints["level_name"])
+                    location = make_location(
+                        point, dock_waypoints["level_name"])
                     param.path.append(location)
                 dock.params.append(param)
                 dock_sub_map[dock_name] = param.path
@@ -133,38 +130,40 @@ class MockDocker(Node):
             print(f'Unknown dock name requested [{msg.parameters[0].value}]')
             return
 
-        self.watching[msg.robot_name] = dock[-1]
-
         path_request = PathRequest()
         path_request.fleet_name = msg.fleet_name
         path_request.robot_name = msg.robot_name
         path_request.task_id = msg.task_id
         path_request.path = dock
+        self.watching[msg.robot_name] = path_request
 
         self.path_request_publisher.publish(path_request)
 
     def robot_state_cb(self, msg: RobotState):
-        # self.level_name = msg.location.level_name
-        remove_from_watching = []
-        for robot_name, finish_location in self.watching.items():
-            if robot_name != msg.name:
-                continue
+        robot_name = msg.name
+        if robot_name not in self.watching:
+            return
 
-            if not close(finish_location, msg.location):
-                continue
+        requested_path = self.watching[msg.name]
+        finish_location = requested_path.path[-1]
+        if not close(finish_location, msg.location):
+            return
 
-            mode_request = ModeRequest()
-            # TODO(MXG): Getting fleet name like this is a hack
-            mode_request.fleet_name = msg.name[:-2]
-            mode_request.robot_name = msg.name
-            mode_request.task_id = msg.task_id
-            mode_request.mode.mode = RobotMode.MODE_MOVING
-            for i in range(5):
-                self.mode_request_publisher.publish(mode_request)
-            remove_from_watching.append(robot_name)
+        # This is needed to acknowledge the slot car that a Docking Mode
+        # is completed. Subsequently, this will update the robot_state and
+        # inform the Fleet adapter that the robot has fnished docking
+        mode_request = ModeRequest()
+        mode_request.fleet_name = requested_path.fleet_name
+        mode_request.robot_name = requested_path.robot_name
+        mode_request.task_id = requested_path.task_id
+        mode_request.mode.mode = RobotMode.MODE_PAUSED
+        for i in range(5):
+            self.mode_request_publisher.publish(mode_request)
+        self.get_logger().info(
+            f'{robot_name} done with docking at {finish_location}')
 
-        for robot in remove_from_watching:
-            self.watching.pop(robot)
+        # Remove from watching
+        self.watching.pop(robot_name)
 
 
 def main(argv=sys.argv):
