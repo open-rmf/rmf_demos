@@ -47,7 +47,7 @@
       <!-- Whether it can perform deliveries -->
       <arg name="perform_deliveries" value="false"/>
       <!-- Whether it can perform loop -->
-      <arg name="perform_loop" value="true"/>
+      <arg name="perform_loop" value="false"/>
       <!-- Whether it can perform cleaning -->
       <arg name="perform_cleaning" value="true"/>
 
