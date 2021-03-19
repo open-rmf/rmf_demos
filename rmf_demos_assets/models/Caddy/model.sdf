@@ -13,7 +13,7 @@
       <!-- Map name where the robot is spawned -->
       <level_name>L1</level_name>
       <!-- Index of navigation graph for the robot as stored in BuildingMap msg -->
-      <graph_index>1</graph_index>
+      <graph_index>2</graph_index>
       <!-- Name of waypoint where caddy is spawned in the map -->
       <spawn_waypoint>caddy</spawn_waypoint>
       <!-- Number of waypoints to include in predicted path -->
