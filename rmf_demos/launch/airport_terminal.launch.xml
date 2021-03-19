@@ -84,7 +84,7 @@
     <include file="$(find-pkg-share rmf_demos)/include/adapters/cleanerBotE_adapter.launch.xml">
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/0.yaml" />
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/4.yaml" />
     </include>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="$(var fleet_name)"/>

@@ -62,7 +62,7 @@
       <arg name="friction_coefficient" value="0.22"/>
       
       <!-- Power systems -->
-      <arg name="ambient_power_drain" value="20.0"/>
+      <arg name="ambient_power_drain" value="100.0"/>
       <arg name="tool_power_drain" value="0.0"/>
       
       <!-- Whether to consider battery drain for task planning -->
