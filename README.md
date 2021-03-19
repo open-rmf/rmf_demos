@@ -1,9 +1,9 @@
 # RMF Demos
 
-![](https://github.com/osrf/rmf_demos/workflows/build/badge.svg)
-![](https://github.com/osrf/rmf_demos/workflows/style/badge.svg)
+![](https://github.com/open-rmf/rmf_demos/workflows/build/badge.svg)
+![](https://github.com/open-rmf/rmf_demos/workflows/style/badge.svg)
 
-The Robotics Middleware Framework (RMF) enables interoperability among heterogeneous robot fleets while managing robot traffic that share resources such as space, building infrastructure systems (lifts, doors, etc) and other automation systems within the same facility. RMF also handles task allocation and conflict resolution  among its participants (de-conflicting traffic lanes and other resources). These capabilities are provided by various libraries in [rmf_core](https://github.com/osrf/rmf_core).
+The Robotics Middleware Framework (RMF) enables interoperability among heterogeneous robot fleets while managing robot traffic that share resources such as space, building infrastructure systems (lifts, doors, etc) and other automation systems within the same facility. RMF also handles task allocation and conflict resolution  among its participants (de-conflicting traffic lanes and other resources). These capabilities are provided by various libraries in [rmf_core](https://github.com/open-rmf/rmf_ros2).
 
 This repository contains demonstrations of the above mentioned capabilities of RMF. It serves as a starting point for working and integrating with RMF.
 
@@ -104,10 +104,11 @@ ros2 launch rmf_demos airport_terminal.launch.xml
 
 Select the `airport` tab on RMF Panel. Load the `airport_terminal_tasks.json` list and click submit to begin a collection of loop, delivery and cleaning tasks.
 
-Or, submit a task via CLI:
+Or, submit `loop`, `delivery` or `clean` task via CLI:
 ```bash
 ros2 run rmf_demos_tasks dispatch_loop -s s07 -f n12 -n 3 --use_sim_time
 ros2 run rmf_demos_tasks dispatch_delivery -p mopcart_pickup -pd mopcart_dispenser -d spill -di mopcart_collector --use_sim_time
+ros2 run rmf_demos_tasks dispatch_clean -cs zone_3 --use_sim_time
 ```
 
 Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
@@ -181,7 +182,7 @@ Robot taking lift:
 
 ### Traffic Light Robot Demos
 
-RMF can also manage fleets whose API or fleet managers only offer pause and resume commands to control their robots. Such fleets are classified as `traffic_light`. To integrate a `traffic_light` fleet, users are expected to implement a `traffic_light` fleet adapter based on this [API](https://github.com/osrf/rmf_core/blob/master/rmf_fleet_adapter/include/rmf_fleet_adapter/agv/EasyTrafficLight.hpp). The `rmf_demos` repository contains demonstrations of `traffic_light` fleets in various scenarios. A simplistic `mock_traffic_light` adapter is used in these demonstrations.
+RMF can also manage fleets whose API or fleet managers only offer pause and resume commands to control their robots. Such fleets are classified as `traffic_light`. To integrate a `traffic_light` fleet, users are expected to implement a `traffic_light` fleet adapter based on this [API](https://github.com/open-rmf/rmf_ros2/blob/main/rmf_fleet_adapter/include/rmf_fleet_adapter/agv/EasyTrafficLight.hpp). The `rmf_demos` repository contains demonstrations of `traffic_light` fleets in various scenarios. A simplistic `mock_traffic_light` adapter is used in these demonstrations.
 
 #### Triple-H scenario:
 ```bash

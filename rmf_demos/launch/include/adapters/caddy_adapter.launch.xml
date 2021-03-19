@@ -26,11 +26,10 @@
 
       <arg name="delay_threshold" value="1.0"/>
 
-      <!-- TODO Update these values with actual specs -->
       <!-- Battery parameters -->
       <arg name="battery_voltage" value="24.0"/>
-      <arg name="battery_capacity" value="2.0"/>
-      <arg name="battery_charging_current" value="24.0"/>
+      <arg name="battery_capacity" value="20.0"/>
+      <arg name="battery_charging_current" value="10.0"/>
 
       <!-- Physical parameters -->
       <arg name="mass" value="70.0"/>
