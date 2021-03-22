@@ -32,7 +32,7 @@
       <friction_coefficient>0.22</friction_coefficient>
 
       <!-- Power systems -->
-      <nominal_power>20.0</nominal_power>
+      <nominal_power>100.0</nominal_power>
     </plugin>
 
     <!-- ====================================================== -->
