@@ -1,0 +1,29 @@
+<sdf version="1.6">
+    <actor name="actor">
+      <skin>
+        <filename>model://MaleVisitorPhone/meshes/MaleVisitorPhoneWalk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <pose>0 0 0 0 0 0</pose>
+      <animation name="walk">
+        <filename>model://MaleVisitorPhone/meshes/MaleVisitorPhoneWalk.dae</filename>
+        <scale>1.000000</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <animation name="idle">
+        <filename>model://MaleVisitorPhone/meshes/MaleVisitorPhoneIdle.dae</filename>
+        <scale>1.000000</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <animation name="walk_to_idle">
+        <filename>model://MaleVisitorPhone/meshes/MaleVisitorPhoneWalkToIdle.dae</filename>
+        <scale>1.000000</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <animation name="idle_to_walk">
+        <filename>model://MaleVisitorPhone/meshes/MaleVisitorPhoneIdleToWalk.dae</filename>
+        <scale>1.000000</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+    </actor>
+</sdf>
