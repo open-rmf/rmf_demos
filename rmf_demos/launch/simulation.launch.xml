@@ -44,7 +44,11 @@
     <let name="menge_resource_path" if="$(var use_crowdsim)" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/config_resource"/>
     <let name="menge_resource_path" unless="$(var use_crowdsim)" value="" />
 
-    <executable cmd="ign gazebo -r -v 4 $(var world_path)" output="both">
+    <let name="ign_headless" if="$(var headless)" value="-s"/>
+    <let name="ign_headless" unless="$(var headless)" value="" />
+
+    <!-- TODO: headelss in ignitition -->
+    <executable cmd="ign gazebo $(var ign_headless) -r -v 4 $(var world_path)" output="both">
       <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
       <env name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
       <env name="IGN_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>

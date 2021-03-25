@@ -46,8 +46,8 @@ def download_webpack():
         if response.status_code == 200:
             dir_path = os.path.dirname(bundle_path)
             if not os.path.isdir(dir_path):
-              print(f"Dir path: {dir_path} doesnt exist, create dir")
-              os.mkdir(dir_path)
+                print(f"Dir path: {dir_path} doesnt exist, create dir")
+                os.mkdir(dir_path)
             open(bundle_path, 'wb').write(response.content)
             print(f"Bundle Download completed: {bundle_path}")
         else:
