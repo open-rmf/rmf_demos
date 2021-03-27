@@ -23,10 +23,6 @@ jobs:
     - name: create-ws
       run: |
         mkdir -p rmf_demos_ws/src
-    - name: checkout
-      uses: actions/checkout@v2
-      with:
-        path: rmf_demos_ws/src/rmf/rmf_demos
     - name: workspace
       run: |
         cd rmf_demos_ws
