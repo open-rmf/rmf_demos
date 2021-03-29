@@ -23,6 +23,10 @@ jobs:
     - name: create-ws
       run: |
         mkdir -p rmf_demos_ws/src
+    - name: checkout # This will check out the current rmf_demos branch for build tests
+      uses: actions/checkout@v2
+      with:
+        path: rmf_demos_ws/src/demonstrations/rmf_demos/
     - name: workspace
       run: |
         cd rmf_demos_ws
