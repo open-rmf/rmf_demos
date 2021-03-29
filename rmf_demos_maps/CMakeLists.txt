@@ -54,7 +54,7 @@ foreach(path ${traffic_editor_paths})
 
   add_custom_command(
     OUTPUT ${world_name}_crowdsim
-    COMMAND ros2 run building_map_tools building_crowdsim ${map_path} ${crowd_sim_config_resource} ${output_world_path}
+    COMMAND ros2 run rmf_building_map_tools building_crowdsim ${map_path} ${crowd_sim_config_resource} ${output_world_path}
     DEPENDS ${output_world_path}
   )
   add_custom_target(generate_${world_name}_crowdsim ALL
@@ -83,7 +83,7 @@ foreach(path ${traffic_editor_paths})
   # generate the navmesh and required files for crowd simulation
   add_custom_command(
     OUTPUT ${world_name}_crowdsim_ign
-    COMMAND ros2 run building_map_tools building_crowdsim ${map_path} ${crowd_sim_config_resource} ${ign_output_world_path}
+    COMMAND ros2 run rmf_building_map_tools building_crowdsim ${map_path} ${crowd_sim_config_resource} ${ign_output_world_path}
     DEPENDS ${ign_output_world_path}
   )
   add_custom_target(generate_${world_name}_crowdsim_ign ALL
