@@ -27,19 +27,19 @@ foreach(path ${traffic_editor_paths})
 
   ##############################################################################
   # first, generate the world
-  message("BUILDING WORLDFILE WITH COMMAND: ros2 run building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}")
+  message("BUILDING WORLDFILE WITH COMMAND: ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}")
   if (NO_DOWNLOAD_MODELS)
     add_custom_command(
       DEPENDS ${map_path}
-      COMMAND ros2 run building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
+      COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
       OUTPUT ${output_world_path}
     )
   else()
-    message("DOWNLOADING MODELS WITH COMMAND: ros2 run building_map_tools building_map_model_downloader ${map_path}")
+    message("DOWNLOADING MODELS WITH COMMAND: ros2 run rmf_building_map_tools building_map_model_downloader ${map_path}")
     add_custom_command(
       DEPENDS ${map_path}
-      COMMAND ros2 run building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
-      COMMAND ros2 run building_map_tools building_map_model_downloader ${map_path}
+      COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
+      COMMAND ros2 run rmf_building_map_tools building_map_model_downloader ${map_path}
       OUTPUT ${output_world_path}
     )
   endif()
@@ -71,7 +71,7 @@ foreach(path ${traffic_editor_paths})
 
   add_custom_command(
     OUTPUT ${ign_output_world_path}
-    COMMAND ros2 run building_map_tools building_map_generator ignition ${map_path} ${ign_output_world_path} ${ign_output_model_dir}
+    COMMAND ros2 run rmf_building_map_tools building_map_generator ignition ${map_path} ${ign_output_world_path} ${ign_output_model_dir}
     DEPENDS ${map_path}
   )
 
@@ -101,7 +101,7 @@ foreach(path ${traffic_editor_paths})
   set(output_nav_graphs_phony ${output_nav_graphs_dir}/phony)
   add_custom_command(
     OUTPUT ${output_nav_graphs_phony}
-    COMMAND ros2 run building_map_tools building_map_generator nav ${map_path} ${output_nav_graphs_dir}
+    COMMAND ros2 run rmf_building_map_tools building_map_generator nav ${map_path} ${output_nav_graphs_dir}
     DEPENDS ${map_path}
   )
 

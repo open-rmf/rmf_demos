@@ -45,8 +45,8 @@ for personnel who would like to compile a local react webpack bundle (for testin
 cd ~/rmf_ws
 
 # change the npm prefix according to the path to "rmf_demos_panel/static/"
-npm install --prefix src/rmf/rmf_demos/rmf_demos_panel/rmf_demos_panel/static/
-npm run build --prefix src/rmf/rmf_demos/rmf_demos_panel/rmf_demos_panel/static/
+npm install --prefix src/demonstrations/rmf_demos/rmf_demos_panel/rmf_demos_panel/static
+npm run build --prefix src/demonstrations/rmf_demos/rmf_demos_panel/rmf_demos_panel/static
 
 colcon build --packages-select rmf_demos_panel
 ```
