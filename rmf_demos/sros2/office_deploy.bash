@@ -47,7 +47,7 @@ sleep 2
 ## Pane 2 ##
 
 tmux send-keys -t 2 "source $WORKSPACE/sros2_environment.bash" Enter
-tmux send-keys -t 2 "ros2 run building_map_tools building_map_server $WORKSPACE/install/rmf_demos_maps/share/rmf_demos_maps/office/office.building.yaml --ros-args --enclave /office/building_map_server" Enter
+tmux send-keys -t 2 "ros2 run rmf_building_map_tools building_map_server $WORKSPACE/install/rmf_demos_maps/share/rmf_demos_maps/office/office.building.yaml --ros-args --enclave /office/building_map_server" Enter
 sleep 2
 
 ## Pane 3 ##
