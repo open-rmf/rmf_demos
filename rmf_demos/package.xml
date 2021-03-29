@@ -15,6 +15,7 @@
   <exec_depend>rmf_task_ros2</exec_depend>
   <exec_depend>rmf_fleet_adapter</exec_depend>
   <exec_depend>rmf_building_map_tools</exec_depend>
+
   <exec_depend>rmf_building_sim_gazebo_plugins</exec_depend>
 
   <exec_depend>visualizer</exec_depend>
