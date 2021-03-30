@@ -18,13 +18,13 @@ crowd_sim:
     - {ORCA_tau: 1, ORCA_tauObst: 0.4, class: 1, max_accel: 5, max_angle_vel: 360, max_neighbors: 10, max_speed: 4, name: human, neighbor_dist: 5, obstacle_set: 1, pref_speed: 2, r: 0.25}
   enable: 1
   goal_sets:
-    - {capacity: 5, set_area: [crowd_goal1], set_id: 0}
-    - {capacity: 5, set_area: [crowd_goal2], set_id: 1}
-    - {capacity: 5, set_area: [crowd_goal3], set_id: 2}
-    - {capacity: 5, set_area: [crowd_goal4], set_id: 3}
-    - {capacity: 5, set_area: [crowd_goal5], set_id: 4}
-    - {capacity: 5, set_area: [crowd_goal6], set_id: 5}
-    - {capacity: 5, set_area: [crowd_goal7], set_id: 6}
+    - {capacity: 10, set_area: [crowd_goal1], set_id: 0}
+    - {capacity: 10, set_area: [crowd_goal2], set_id: 1}
+    - {capacity: 10, set_area: [crowd_goal3], set_id: 2}
+    - {capacity: 10, set_area: [crowd_goal4], set_id: 3}
+    - {capacity: 10, set_area: [crowd_goal5], set_id: 4}
+    - {capacity: 10, set_area: [crowd_goal6], set_id: 5}
+    - {capacity: 10, set_area: [crowd_goal7], set_id: 6}
   model_types:
     - {animation: walk, animation_speed: 1, init_pose: [0, 0, 0, 0, 0, 0], model_uri: model://MaleVisitorPhone, typename: human}
   obstacle_set: {class: 1, file_name: L1_navmesh.nav, type: nav_mesh}
