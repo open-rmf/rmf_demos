@@ -23,10 +23,10 @@ jobs:
     - name: create-ws
       run: |
         mkdir -p rmf_demos_ws/src
-    - name: checkout
+    - name: checkout # This will check out the current rmf_demos branch for build tests
       uses: actions/checkout@v2
       with:
-        path: rmf_demos_ws/src/rmf/rmf_demos
+        path: rmf_demos_ws/src/demonstrations/rmf_demos/
     - name: workspace
       run: |
         cd rmf_demos_ws
@@ -50,6 +50,6 @@ jobs:
         check-latest: true
     - name: build-panel
       run: |
-        cd rmf_demos_ws/src/rmf/rmf_demos/rmf_demos_panel/rmf_demos_panel/static
+        cd rmf_demos_ws/src/demonstrations/rmf_demos/rmf_demos_panel/rmf_demos_panel/static
         npm install
         npm run build
