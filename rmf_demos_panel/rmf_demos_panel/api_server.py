@@ -52,7 +52,7 @@ from flask_socketio import SocketIO, emit, disconnect
 
 class DispatcherClient(Node):
     def __init__(self):
-        super().__init__('api_server')
+        super().__init__('dispatcher_client')
         self.submit_task_srv = self.create_client(SubmitTask, '/submit_task')
         self.cancel_task_srv = self.create_client(CancelTask, '/cancel_task')
         self.get_tasks_srv = self.create_client(GetTaskList, '/get_tasks')
