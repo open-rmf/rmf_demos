@@ -37,6 +37,7 @@ def download_webpack():
     # it is advice to update the version (in '.github/workflows/gh_page.yml')
     # whenever a new feature is introduced
     source_url = "https://open-rmf.github.io/rmf_demos/v1.0.0/app.bundle.js"
+
     if os.path.isfile(bundle_path):
         print("BundleJS File exists, SKIP!")
     else:
