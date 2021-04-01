@@ -22,7 +22,7 @@ These demos were developed and tested on
 * [Gazebo 11.1.0](http://gazebosim.org/)
 
 ## Installation
-Instructions can be found [here](docs/installation.md).
+Instructions can be found [here](https://github.com/open-rmf/rmf).
 
 ## FAQ
 Answers to frequently asked questions can be found [here](docs/faq.md).
