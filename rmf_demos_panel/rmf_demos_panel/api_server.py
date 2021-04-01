@@ -40,7 +40,7 @@ from rclpy.qos import qos_profile_system_default
 from rclpy.qos import QoSProfile
 
 from rmf_task_msgs.srv import SubmitTask, GetTaskList, CancelTask
-from rmf_task_msgs.msg import TaskType, Delivery, Loop
+from rmf_task_msgs.msg import TaskType, TaskSummary, Delivery, Loop
 from rmf_fleet_msgs.msg import FleetState
 
 from flask import Flask, request, jsonify
@@ -169,10 +169,22 @@ class DispatcherClient(Node):
         """
         convert task summary msg and return a jsonify-able task status obj
         """
-        states_enum = {0: "Queued", 1: "Active/Executing", 2: "Completed",
-                       3: "Failed", 4: "Cancelled", 5: "Pending"}
-        type_enum = {0: "Station", 1: "Loop", 2: "Delivery",
-                     3: "Charging", 4: "Clean", 5: "Patrol"}
+        states_enum = {
+            TaskSummary.STATE_QUEUED: "Queued",
+            TaskSummary.STATE_ACTIVE: "Active/Executing",
+            TaskSummary.STATE_COMPLETED: "Completed",
+            TaskSummary.STATE_FAILED: "Failed",
+            TaskSummary.STATE_CANCELED: "Cancelled",
+            TaskSummary.STATE_PENDING: "Pending",
+        }
+        type_enum = {
+            TaskType.TYPE_STATION: "Station",
+            TaskType.TYPE_LOOP: "Loop",
+            TaskType.TYPE_DELIVERY: "Delivery",
+            TaskType.TYPE_CHARGE_BATTERY: "Charging",
+            TaskType.TYPE_CLEAN: "Clean",
+            TaskType.TYPE_PATROL: "Patrol",
+        }
 
         status_list = []
         rclpy.spin_once(self, timeout_sec=0.0)
@@ -205,10 +217,11 @@ class DispatcherClient(Node):
             # Current hack to generate a progress percentage
             duration = abs(task.end_time.sec - task.start_time.sec)
             # check if is completed
-            if is_done or task.state == 3:
+            if is_done or task.state == TaskSummary.STATE_COMPLETED:
                 status["progress"] = "100%"
-            # check if it state is queued/cancelled
-            elif duration == 0 or (task.state in [0, 4]):
+            elif (duration == 0 or
+                  task.state == TaskSummary.STATE_QUEUED or
+                  task.state == TaskSummary.STATE_CANCELED):
                 status["progress"] = "0%"
             else:
                 percent = int(100*(now - task.start_time.sec)/float(duration))
