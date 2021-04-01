@@ -7,7 +7,7 @@
   <arg name="config_file" description="Building description file required by rmf_building_map_tools"/>
   <arg name="dashboard_config_file" default="" description="Path to dashboard config for web rmf panel file"/>
   <arg name="initial_map" default="L1" description="Initial map name for the visualizer"/>
-  <arg name="headless" description="do not launch rviz; launch gazebo in headless mode" default="false"/>
+  <arg name="headless" default="false" description="do not launch rviz; launch gazebo in headless mode"/>
   <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
 
   <!-- Traffic Schedule  -->
@@ -28,14 +28,13 @@
   </group>
 
   <!-- Visualizer -->
-  <group unless="$(var headless)">
-    <include file="$(find-pkg-share visualizer)/visualizer.xml">
+  <group>
+    <include file="$(find-pkg-share visualizer)/visualizer.launch.xml">
       <arg name="map_name" value="$(var initial_map)"/>
       <arg name="viz_config_file" value ="$(var viz_config_file)"/>
+      <arg name="headless" value="$(var headless)"/>
     </include>
   </group>
-  <include file="$(find-pkg-share visualizer)/server.xml">
-  </include>
 
   <!-- Door Supervisor -->
   <group>
