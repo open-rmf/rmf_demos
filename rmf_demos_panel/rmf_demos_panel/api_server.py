@@ -41,7 +41,7 @@ from rclpy.qos import QoSProfile
 
 from rmf_task_msgs.srv import SubmitTask, GetTaskList, CancelTask
 from rmf_task_msgs.msg import TaskType, TaskSummary, Delivery, Loop
-from rmf_fleet_msgs.msg import FleetState
+from rmf_fleet_msgs.msg import FleetState, RobotMode
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -216,7 +216,7 @@ class DispatcherClient(Node):
 
             # Current hack to generate a progress percentage
             duration = abs(task.end_time.sec - task.start_time.sec)
-            # check if is completed
+            # TOD0: is done shouldnt be indicative at all
             if is_done or task.state == TaskSummary.STATE_COMPLETED:
                 status["progress"] = "100%"
             elif (duration == 0 or
@@ -250,9 +250,17 @@ class DispatcherClient(Node):
         convert robot states msg to a jsonify-able robot_states
         """
         bots = []
-        mode_enum = {0: "Idle-0", 1: "Charging-1", 2: "Moving-2",
-                     3: "Paused-3", 4: "Waiting-4", 5: "Emengency-5",
-                     6: "GoingHome-6", 7: "Dock/Clean-7", 8: "AdpterError-8"}
+        mode_enum = {
+            RobotMode.MODE_IDLE: "Idle-0",
+            RobotMode.MODE_CHARGING: "Charging-1",
+            RobotMode.MODE_MOVING: "Moving-2",
+            RobotMode.MODE_PAUSED: "Paused-3",
+            RobotMode.MODE_WAITING: "Waiting-4",
+            RobotMode.MODE_EMERGENCY: "Emengency-5",
+            RobotMode.MODE_GOING_HOME: "GoingHome-6",
+            RobotMode.MODE_DOCKING: "Dock/Clean-7",
+            RobotMode.MODE_ADAPTER_ERROR: "AdpterError-8"
+        }
         for bot in robot_states:
             state = {}
             state["robot_name"] = bot.name
