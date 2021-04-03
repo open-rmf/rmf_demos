@@ -111,6 +111,11 @@ ros2 run rmf_demos_tasks dispatch_delivery -p mopcart_pickup -pd mopcart_dispens
 ros2 run rmf_demos_tasks dispatch_clean -cs zone_3 --use_sim_time
 ```
 
+To see crowd simulation in action, enable crowd sim by:
+```bash
+ros2 launch rmf_demos airport_terminal.launch.xml use_crowdsim:=1
+```
+
 Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
 
 In the airport terminal map, a `Caddy` is spawned in the far right corner and can be controlled with `geometry_msgs/Twist` messages published over the `cmd_vel` topic. 

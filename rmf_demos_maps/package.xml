@@ -8,7 +8,7 @@
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <buildtool_depend>building_map_tools</buildtool_depend>
+  <buildtool_depend>rmf_building_map_tools</buildtool_depend>
   <buildtool_depend>ros2run</buildtool_depend>
 
   <export>
