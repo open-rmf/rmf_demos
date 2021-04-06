@@ -1,4 +1,3 @@
-
 # Copyright 2020 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,32 +58,20 @@ logging.basicConfig(level=logging.DEBUG,
 
 @app.route('/submit_task', methods=['POST'])
 def submit():
-    err_msg = "Failed to submit task via POST"
-
-    if request.method == "POST":
-        logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
-            Task Submission: {json.dumps(request.json)}")
-        req_msg, err_msg = dispatcher_client.convert_task_request(request.json)
-        if req_msg is not None:
-            id = dispatcher_client.submit_task_request(req_msg)
-            if id:
-                return jsonify({"task_id": id, "error_msg": ""})
-
-    print(err_msg)
-    logging.error(f" Failed to Submit task: req_msg: {request.json}")
-    return jsonify({"task_id": "", "error_msg": err_msg})
+    """REST Call to submit task"""
+    task_id, err_msg = dispatcher_client.submit_task_request(request.json)
+    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
+        Task Submission: {json.dumps(request.json)}, error: {err_msg}")
+    return jsonify({"task_id": task_id, "error_msg": err_msg})
 
 
 @app.route('/cancel_task', methods=['POST'])
 def cancel():
-    if request.method == "POST":
-        cancel_id = request.json['task_id']
-        cancel_success = dispatcher_client.cancel_task_request(cancel_id)
-        logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
-            Cancel Task: {cancel_id}, success: {cancel_success}")
-        if cancel_success:
-            return jsonify({"success": True})
-    return jsonify({"success": False})
+    cancel_id = request.json['task_id']
+    cancel_success = dispatcher_client.cancel_task_request(cancel_id)
+    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
+        Cancel Task: {cancel_id}, success: {cancel_success}")
+    return jsonify({"success": cancel_success})
 
 
 @app.route('/task_list', methods=['GET'])

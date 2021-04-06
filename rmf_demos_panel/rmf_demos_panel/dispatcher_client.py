@@ -25,7 +25,8 @@ from rclpy.qos import qos_profile_system_default
 from rclpy.qos import QoSProfile
 
 from rmf_task_msgs.srv import SubmitTask, GetTaskList, CancelTask
-from rmf_task_msgs.msg import TaskType, TaskSummary, Delivery, Loop
+from rmf_task_msgs.msg import TaskDescription, TaskSummary
+from rmf_task_msgs.msg import TaskType, Delivery, Loop
 from rmf_fleet_msgs.msg import FleetState, RobotMode
 
 
@@ -64,12 +65,27 @@ class DispatcherClient(Node):
     def ros_time(self) -> int:
         return self.get_clock().now().to_msg().sec
 
-    def submit_task_request(self, req_msg) -> str:
+    def submit_task_request(self, req_json) -> (str, str):
         """
         Task Submission - This function will trigger a ros srv call to the
         dispatcher node, and return a response. Function will return a Task ID
+
+        Args:
+            req_json: task description in json format
+        Returns:
+            task_id, error_msg: if submission failed
         """
+
+        # Convert a task json to rmf_task_msg form
         print("Submit Task Request!")
+        desc_msg, err_msg = self.__convert_task_description(req_json)
+        if desc_msg is None:
+            return "", err_msg
+
+        req_msg = SubmitTask.Request()
+        req_msg.description = desc_msg
+        req_msg.requester = "api-server"
+
         try:
             future = self.submit_task_srv.call_async(req_msg)
             rclpy.spin_until_future_complete(self, future, timeout_sec=0.5)
@@ -82,10 +98,11 @@ class DispatcherClient(Node):
             else:
                 self.get_logger().info(
                     f'New Dispatch task_id {response.task_id}')
-                return response.task_id
+                if response.task_id:
+                    return response.task_id, ""
         except Exception as e:
             self.get_logger().error('Error! Submit Srv failed %r' % (e,))
-        return ""
+        return "", "Dispatcher server failed in accepting the task"
 
     def cancel_task_request(self, task_id) -> bool:
         """
@@ -146,6 +163,8 @@ class DispatcherClient(Node):
             robots = self.__convert_robot_states_msg(fleet_name, robot_states)
             agg_robot_states = agg_robot_states + robots
         return agg_robot_states
+
+###############################################################################
 
     def __convert_task_status_msg(self, task_summaries, is_done=True):
         """
@@ -257,16 +276,12 @@ class DispatcherClient(Node):
             bots.append(state)
         return bots
 
-    def convert_task_request(self, task_json):
+    def __convert_task_description(self, task_json):
         """
-        :param (obj) task_json:
-        :return req_msgs, error_msg
-        This is to convert a json task req format to a rmf_task_msgs
-        task_profile format. add this accordingly when a new msg field
-        is introduced.
-        The 'start time' here is refered to the "Duration" from now.
+        Convert a json task req format to rmf_task_msgs/TaskDescription.
+        :note: The 'start time' here is the "Duration" from now.
         """
-        req_msg = SubmitTask.Request()
+        task_desc = TaskDescription()
         print(task_json)
 
         try:
@@ -279,30 +294,29 @@ class DispatcherClient(Node):
                 priority = int(task_json["priority"])
                 if (priority < 0):
                     raise Exception("Priority value is less than 0")
-                req_msg.description.priority.value = priority
+                task_desc.priority.value = priority
             else:
-                req_msg.description.priority.value = 0
+                task_desc.priority.value = 0
 
             desc = task_json["description"]
             if task_json["task_type"] == "Clean":
-                req_msg.description.task_type.type = TaskType.TYPE_CLEAN
-                req_msg.description.clean.start_waypoint = desc[
-                    "cleaning_zone"]
+                task_desc.task_type.type = TaskType.TYPE_CLEAN
+                task_desc.clean.start_waypoint = desc["cleaning_zone"]
             elif task_json["task_type"] == "Loop":
-                req_msg.description.task_type.type = TaskType.TYPE_LOOP
+                task_desc.task_type.type = TaskType.TYPE_LOOP
                 loop = Loop()
                 loop.num_loops = int(desc["num_loops"])
                 loop.start_name = desc["start_name"]
                 loop.finish_name = desc["finish_name"]
-                req_msg.description.loop = loop
+                task_desc.loop = loop
             elif task_json["task_type"] == "Delivery":
-                req_msg.description.task_type.type = TaskType.TYPE_DELIVERY
+                task_desc.task_type.type = TaskType.TYPE_DELIVERY
                 delivery = Delivery()
                 delivery.pickup_place_name = desc["pickup_place_name"]
                 delivery.pickup_dispenser = desc["pickup_dispenser"]
                 delivery.dropoff_ingestor = desc["dropoff_ingestor"]
                 delivery.dropoff_place_name = desc["dropoff_place_name"]
-                req_msg.description.delivery = delivery
+                task_desc.delivery = delivery
             else:
                 raise Exception("Invalid TaskType")
 
@@ -310,9 +324,9 @@ class DispatcherClient(Node):
             rclpy.spin_once(self, timeout_sec=0.0)
             ros_start_time = self.get_clock().now().to_msg()
             ros_start_time.sec += int(task_json["start_time"]*60)
-            req_msg.description.start_time = ros_start_time
+            task_desc.start_time = ros_start_time
         except KeyError as ex:
             return None, f"Missing Key value in json body: {ex}"
         except Exception as ex:
             return None, str(ex)
-        return req_msg, ""
+        return task_desc, ""
