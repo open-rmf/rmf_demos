@@ -1,4 +1,4 @@
-Note, ROS2 Foxy on Ubuntu 20.04 with Ignition Dome is the only supported setup.
+Note, ROS2 Foxy on Ubuntu 20.04 with Ignition Edifice is the only supported setup.
 
 1. Start by setting up your system dependencies:
 
@@ -18,25 +18,25 @@ Note, ROS2 Foxy on Ubuntu 20.04 with Ignition Dome is the only supported setup.
 The easiest way to setup ignition is to install from binaries:
 
     ```
-    sudo apt install ignition-dome
+    sudo apt install ignition-edifice
     ```
 
 Alternatively you can install it from source.
 
 # Source installation
 
-1. Install `ignition-dome` from source. The branches in the official guide can be used
+1. Install `ignition-edifice` from source. The branches in the official guide can be used
 
     ```
-    mkdir ws_dome/src -p
-    cd ws_dome
+    mkdir ws_edifice/src -p
+    cd ws_edifice
     ```
 
-1. Use the provided `ign-dome.yaml` file and initialise the sources:
+1. Use the provided `ign-edifice.yaml` file and initialise the sources:
 
     ```
-    wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-dome.yaml
-    vcs import src < collection-dome.yaml
+    wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-edifice.yaml
+    vcs import src < collection-edifice.yaml
 
     ```
 
@@ -47,7 +47,7 @@ Alternatively you can install it from source.
     
     colcon build --merge-install --symlink-install --cmake-args -DBUILD_TESTING=false
     
-    echo "source ~/ws_dome/install/setup.bash" >> ~/.bashrc
+    echo "source ~/ws_edifice/install/setup.bash" >> ~/.bashrc
     ```
     
 # Launch
