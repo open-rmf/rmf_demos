@@ -33,7 +33,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, disconnect
 
-from dispatcher_client import DispatcherClient
+from rmf_demos_panel.dispatcher_client import DispatcherClient
 
 ###############################################################################
 
