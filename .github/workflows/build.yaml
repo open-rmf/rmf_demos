@@ -18,7 +18,7 @@ jobs:
           git cmake python3-vcstool curl \
           qt5-default \
           python3-shapely python3-yaml python3-requests \
-          ignition-dome \
+          ignition-edifice \
           -y
     - name: create-ws
       run: |
