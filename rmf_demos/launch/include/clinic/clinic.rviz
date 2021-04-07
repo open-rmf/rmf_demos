@@ -21,14 +21,14 @@ Panels:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
-  - Class: rviz2_plugin/SchedulePanel
+  - Class: rmf_visualization_rviz2_plugins/SchedulePanel
     Finish: 600
     Map: L1
     Name: SchedulePanel
     Topic: /rviz_node/param
-  - Class: rviz2_plugin/DoorPanel
+  - Class: rmf_visualization_rviz2_plugins/DoorPanel
     Name: DoorPanel
-  - Class: rviz2_plugin/LiftPanel
+  - Class: rmf_visualization_rviz2_plugins/LiftPanel
     Name: LiftPanel
 Visualization Manager:
   Class: ""
