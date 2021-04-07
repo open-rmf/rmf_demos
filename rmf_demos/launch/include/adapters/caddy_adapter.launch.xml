@@ -24,6 +24,8 @@
       <!-- Other robots are not allowed within this radius --> 
       <arg name="vicinity_radius" value="5.0"/>
 
+      <!-- Give everything time to discover -->
+      <arg name="discovery_timeout" value="60.0"/>
       <arg name="delay_threshold" value="1.0"/>
 
       <!-- Battery parameters -->
