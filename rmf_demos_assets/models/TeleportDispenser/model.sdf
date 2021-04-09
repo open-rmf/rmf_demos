@@ -14,8 +14,8 @@
           </box>
         </geometry>
         <material>
-          <ambient>128 192 210 0.1</ambient>
-          <diffuse>128 192 210 0.1</diffuse>
+          <ambient>0.8 0.8 0.8 0.1</ambient>
+          <diffuse>0.8 0.8 0.8 0.1</diffuse>
         </material>
       </visual>
     </link>
