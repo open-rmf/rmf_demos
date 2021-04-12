@@ -18,13 +18,12 @@
 
   <exec_depend>rmf_building_sim_gazebo_plugins</exec_depend>
 
-  <exec_depend>visualizer</exec_depend>
+  <exec_depend>rmf_visualization</exec_depend>
 
   <exec_depend>gazebo_ros_pkgs</exec_depend>
   <exec_depend>rmf_demos_assets</exec_depend>
   <exec_depend>rmf_robot_sim_gazebo_plugins</exec_depend>
   <exec_depend>rmf_demos_tasks</exec_depend>
-  <exec_depend>rmf_rviz_plugin</exec_depend>
   <exec_depend>rmf_demos_panel</exec_depend>
   <exec_depend>rviz2</exec_depend>
 
