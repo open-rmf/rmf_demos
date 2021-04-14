@@ -3,10 +3,11 @@
 <launch>
   <arg name="use_ignition" default="0"/>
   <arg name="gazebo_version" default="11"/>
+  <arg name="use_sim_time" default="true"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
-    <arg name="use_sim_time" value="true"/>
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="viz_config_file" value ="$(find-pkg-share rmf_demos)/include/hotel/hotel.rviz"/>
     <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/hotel/hotel.building.yaml"/>
     <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/hotel/dashboard_config.json"/>
@@ -30,7 +31,7 @@
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="TinyRobot"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="true"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
     </include>
   </group>
 
@@ -45,7 +46,7 @@
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="DeliveryRobot"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="true"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
     </include>
   </group>
 
