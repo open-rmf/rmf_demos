@@ -57,10 +57,12 @@ Endpoints | Type | Parameters | Description
 --- | --- | --- | ---
 /submit_task | POST | task description json | This supports submission of task. This response with an assigned task_id is the task is accepted
 /cancel_task | POST | task_id string | Cancel an existing task in rmf.
+/revive_task | POST | task_id string | Revive a previously failed/canceled task in rmf.
 /task_list | GET | NA | Get list of task status in RMF (include active and terminated tasks)
 /robot_list | GET | NA | Get list of Robot states in RMF
 /task_status | SocketIO | NA | Constant broadcast of task list
 /robot_states | SocketIO | NA | Constant broadcast of robot list
+/ros_time | SocketIO | NA | Constant broadcast of rmf clock
 
 #### Simple CURL Test
 
@@ -72,6 +74,12 @@ curl -X POST http://localhost:8080/submit_task \
 
 # Get Task List (GET)
 curl http://localhost:8080/task_list
+
+# Cancel Task (POST)
+curl -X POST http://localhost:8080/cancel_task -d '{"task_id": "Loop2"}' -H "Content-Type: application/json"
+
+# Revive Task (POST)
+curl -X POST http://localhost:8080/revive_task -d '{"task_id": "Loop2"}' -H "Content-Type: application/json"
 ```
 
 ---

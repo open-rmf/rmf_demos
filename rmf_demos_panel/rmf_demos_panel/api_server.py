@@ -74,6 +74,15 @@ def cancel():
     return jsonify({"success": cancel_success})
 
 
+@app.route('/revive_task', methods=['POST'])
+def revive():
+    id = request.json['task_id']
+    is_success = dispatcher_client.revive_task_request(id)
+    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
+        Cancel Task: {id}, success: {is_success}")
+    return jsonify({"success": is_success})
+
+
 @app.route('/task_list', methods=['GET'])
 def status():
     task_status = jsonify(dispatcher_client.get_task_status())
