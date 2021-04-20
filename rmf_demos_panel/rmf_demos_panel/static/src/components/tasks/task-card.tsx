@@ -99,7 +99,7 @@ export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
                      </Grid>
                   }
                   { taskCancelled && !taskFailed && !taskDelayed && <Grid item xs={12}>
-                    <Progress type="dashboard" gapDegree={120} percent={lastKnownProgress} status="exception"/>
+                    <Progress type="dashboard" gapDegree={120} showInfo={false}/>
                     </Grid>
                   }
                 <Grid item xs={6}>
