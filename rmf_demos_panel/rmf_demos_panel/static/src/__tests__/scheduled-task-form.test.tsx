@@ -5,33 +5,37 @@ import ScheduledTaskForm from '../components/forms/scheduled-task-form';
 
 describe('Scheduled Task Form', () => {
     let root: ReturnType<typeof renderForm>;
-    let submitRequest = jest.fn();
+    const expectedTimeoutId = 42;
+    jest.useFakeTimers();
+    const submitRequest = (setTimeout as unknown as jest.Mock);
+    submitRequest.mockImplementation(() => expectedTimeoutId);
 
     function renderForm() {
         return render(<ScheduledTaskForm submitTaskList={submitRequest} />);
     }
 
     beforeEach(() => {
+        jest.useFakeTimers();
         root = renderForm();
     });
 
     afterEach(() => {
         root.unmount();
         cleanup();
-    })
+    });
 
-    test("should render", () => {
+    it("should render", () => {
         expect(screen.getByRole('scheduled-task-form')).toBeInTheDocument();
     });
 
-    test("should render error messages when empty form is submitted", () => {
+    it("should render error messages when empty form is submitted", () => {
         const submitButton = screen.getByText('Submit Task List');
         fireEvent.click(submitButton);
         expect(root.getByText("Unable to submit an empty task list")).toBeTruthy();
         expect(submitRequest).not.toHaveBeenCalled();
     });
 
-    test("should show the file name and text content when a file is uploaded", async () => {
+    it("should show the file name and text content when a file is uploaded", async () => {
         const tasks = new File([`[{"task_type":"Clean", "start_time":0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}]`], 'tasks.json', {
             type: 'json',
         });
@@ -49,8 +53,8 @@ describe('Scheduled Task Form', () => {
         });
     });
 
-    test("should submit a valid form", () => {
-        const tasks = `[ {"task_type":"Clean", "start_time":0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}, {"task_type":"Clean", "start_time":10, "priority": 0, "description": {"cleaning_zone":"zone_2"}}, {"task_type":"Clean", "start_time":5, "priority": 0, "description": {"cleaning_zone":"zone_3"}} ]`
+    it("should submit a valid form", () => {
+        const tasks = `[ {"task_type":"Clean", "start_time": 0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}, {"task_type":"Clean", "start_time": 10, "priority": 0, "description": {"cleaning_zone":"zone_2"}}, {"task_type":"Clean", "start_time": 5, "priority": 0, "description": {"cleaning_zone":"zone_3"}} ]`
         const submitButton = screen.getByText('Submit Task List');
         const taskListBox = root.getByPlaceholderText(/eg.*/);
         userEvent.type(taskListBox, tasks);
@@ -58,8 +62,8 @@ describe('Scheduled Task Form', () => {
         expect(submitRequest).toHaveBeenCalled();
     });
 
-    test("should render text content when the same file is uploaded again after first submission", async () => {
-        const list = `[{"task_type":"Clean", "start_time":0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}]`
+    it("should render text content when the same file is uploaded again after first submission", async () => {
+        const list = `[{"task_type":"Clean", "start_time": 0, "priority": 0, "description": {"cleaning_zone":"zone_1"}}]`
         const tasks = new File([list], 'tasks.json', {
             type: 'json',
         });
@@ -78,7 +82,7 @@ describe('Scheduled Task Form', () => {
         const submitButton = root.getByText('Submit Task List');
         fireEvent.click(submitButton);
         expect(submitRequest).toHaveBeenCalled();
-        
+
         await waitFor(() => {
             expect(root.queryByText(list)).toBeNull();
         });

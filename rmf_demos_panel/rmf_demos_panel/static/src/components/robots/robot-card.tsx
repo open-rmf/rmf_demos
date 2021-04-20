@@ -33,26 +33,43 @@ export const RobotCard = (props: RobotCardProps) : React.ReactElement => {
       }
     }
 
+    const joinAssignments = (assignments: string[]) => {
+      if(assignments.length > 1) {
+        let joinedAssignments = assignments.map((value, index) => {
+          if(index === (assignments.length - 1)){
+            return value;
+          } else {
+            return value.concat(" ➜")
+          }
+        });
+        return joinedAssignments.join("");
+      } else if (assignments.length == 1) {
+        return assignments[0];
+      } else {
+        return '';
+      }
+    }
+
     return (
         <Card className={classes.root} variant="outlined" role="robot-details">
             <CardContent>
               <Grid container>
                 <Grid item xs={12}>
-                    <Typography variant="subtitle1" color="textSecondary" className={classes.text}>
+                    <Typography variant="h6" color="textSecondary" className={classes.text}>
                       {robotState.robot_name}
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography variant="subtitle2" color="textSecondary" className={classes.text}>
+                    <Typography variant="subtitle1" color="textSecondary" className={classes.text}>
                       {robotState.fleet_name}
                     </Typography>
                   </Grid>
                   <Grid item xs={5}>
                     <Typography variant="subtitle2" color="textSecondary" gutterBottom>
-                      Task ID
+                      Assigned Tasks
                     </Typography>
                   </Grid>
-                  <Grid item xs={7}><Typography>{robotState.assignments.join(" -> ")}</Typography></Grid>
+                  <Grid item xs={7}><Typography>{joinAssignments(robotState.assignments)}</Typography></Grid>
                   <Grid item xs={5}>
                     <Typography variant="subtitle2" color="textSecondary" gutterBottom>
                       Status

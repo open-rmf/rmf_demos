@@ -20,6 +20,7 @@ const RequestForm = (): React.ReactElement => {
     const [minsFromNow, setMinsFromNow] = React.useState(0);
     const [priority, setPriority] = React.useState(0);
     const [timeError, setTimeError] = React.useState("");
+    const [priorityError, setPriorityError] = React.useState("");
 
     React.useEffect(() => {
         if(Object.keys(config).length > 0) {
@@ -37,7 +38,7 @@ const RequestForm = (): React.ReactElement => {
     }, [config]);
 
     const returnFormType = (formType: string) => {
-        const timeAndPriority = { minsFromNow, priority, setTimeError, setMinsFromNow };
+        const timeAndPriority = { minsFromNow, priority, setTimeError, setMinsFromNow, setPriority, setPriorityError };
         switch (formType) {
             case "Loop":
                 return <LoopRequestForm availablePlaces={loopPlaces} submitRequest={submitRequest} timeAndPriority={timeAndPriority}/>
@@ -48,7 +49,6 @@ const RequestForm = (): React.ReactElement => {
         }
     }
 
-    const priorities:string[] = ["0", "1"];
     const classes = useFormStyles();
     
     return (
@@ -82,14 +82,22 @@ const RequestForm = (): React.ReactElement => {
                 />
             </div>
             <div className={classes.divForm}>
-                <Autocomplete id="set-priority"
-                openOnFocus
-                options={priorities}
-                getOptionLabel={(priority) => priority}
-                onChange={(_, value) => setPriority(value ? parseInt(value) : 0)}
-                renderInput={(params: AutocompleteRenderInputParams) => <TextField {...params} 
-                label="Choose a priority (Default: 0)" variant="outlined" margin="normal" />}
-                />
+                <TextField
+                className={classes.input}
+                onChange={(e) => {
+                setPriority(e.target.value ? parseInt(e.target.value) : 0);
+                }}
+                placeholder="0"
+                type="number"
+                value={priority}
+                label="Choose a priority (Default: 0)"
+                variant="outlined"
+                id="set-priority"
+                error={!!priorityError}
+                helperText={priorityError}
+                InputProps={{ inputProps: { max: 1, min: 0 } }}
+                >
+                </TextField>
             </div>
             <div className={classes.divForm}>
                 {formType && returnFormType(formType)}

@@ -96,8 +96,8 @@ export const useTaskCardStyles = makeStyles({
 
 export const useRobotCardStyles = makeStyles({
   root: {
-    maxWidth: 200,
-    maxHeight: 240,
+    maxWidth: 240,
+    maxHeight: 280,
     overflow: "auto",
     margin: "0.5em"
   },
