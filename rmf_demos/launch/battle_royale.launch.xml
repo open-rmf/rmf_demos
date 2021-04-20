@@ -4,6 +4,7 @@
   <arg name="use_ignition" default="0"/>
   <arg name="gazebo_version" default="11"/>
   <arg name="use_sim_time" default="true"/>
+  <arg name="real_time_update_rate" default="1.0"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -17,6 +18,7 @@
     <arg name="map_name" value="battle_royale" />
     <arg name="use_ignition" value="$(var use_ignition)" />
     <arg name="gazebo_version" value="$(var gazebo_version)" />
+    <arg name="real_time_update_rate" value="$(var real_time_update_rate)"/>
   </include>
 
   <!-- TinyRobot fleet adapter and robot state aggregator needed for the TinyRobot slotcar_plugin -->

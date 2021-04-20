@@ -5,6 +5,7 @@
   <arg name="map_name" description="Name of the rmf_demos map to simulate" />
   <arg name="use_ignition" default="0" />
   <arg name="use_crowdsim" default='0'/>
+  <arg name="real_time_update_rate" default="1.0"/>
 
   <!-- Gazebo classic was chosen-->
   <group unless="$(var use_ignition)">
@@ -24,6 +25,9 @@
       <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
       <env name="GAZEBO_MODEL_DATABASE_URI" value="" />
       <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
+    </executable>
+    <executable cmd="bash -c &quot;sleep 10; gz physics -u $GAZEBO_REAL_TIME_UPDATE_RATE&quot;" output="both">
+      <env name="GAZEBO_REAL_TIME_UPDATE_RATE" value="$(var real_time_update_rate)" />
     </executable>
     <group unless="$(var headless)">
       <executable cmd="gzclient --verbose $(var world_path)" output="both">
