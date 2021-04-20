@@ -4,7 +4,7 @@
   <arg name="use_ignition" default="0"/>
   <arg name="gazebo_version" default="11"/>
   <arg name="use_sim_time" default="true"/>
-  <arg name="real_time_update_rate" default="1.0"/>
+  <arg name="real_time_update_rate" default="1000.0"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
