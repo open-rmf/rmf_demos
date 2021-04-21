@@ -1,6 +1,9 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package rmf_dashboard_resources
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+## Changelog for package rmf_dashboard_resources
+
+1.2.0 (2021-04-XX)
+------------------
+* Move rmf_dashboard_resources to rmf_demos_dashboard_resources
+* update all namings with rmf_demos as prefix [#1](https://github.com/open-rmf/rmf_demos/pull/1)
 
 1.X.X (2021-01-14)
 ------------------
