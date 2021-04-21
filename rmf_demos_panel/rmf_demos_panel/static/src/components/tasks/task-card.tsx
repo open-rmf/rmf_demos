@@ -28,38 +28,37 @@ interface TaskCardProps {
 export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
   const { taskState } = props;
   const [lastKnownProgress, setLastKnownProgress] = React.useState(0);
-  const [taskDelayed, setTaskDelayed] = React.useState(false);
-  const [taskFailed, setTaskFailed] = React.useState(false);
-  const [taskCancelled, setTaskCancelled] = React.useState(false);
+  const [currentTaskStatus, setCurrentTaskStatus] = React.useState(taskState.state);
   const [snackbarMessage, setSnackbarMessage] = React.useState('');
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
   const [messageType, setMessageType] = React.useState(NotificationTypes.Success);
   const classes = useTaskCardStyles();
 
+  const returnProgressBar = (type: string) => {
+    switch (type) {
+      case 'Cancelled':
+        return (<Progress type="dashboard" gapDegree={120} showInfo={false}/>);
+
+      case 'Delayed':
+        return (<Progress type="dashboard" strokeColor={orange[50]} gapDegree={120} percent={lastKnownProgress}/>);
+
+      case 'Failed':
+        return (<Progress type="dashboard" gapDegree={120} percent={lastKnownProgress} status="exception" />);
+
+      default:
+        return (<Progress type="dashboard" gapDegree={120} percent={lastKnownProgress} />);
+    }
+  }
+
   React.useEffect(() => {
     let progValue = parseInt(taskState.progress);
     if(isNaN(parseInt(taskState.progress))) {
-      setTaskDelayed(true);
-      setTaskCancelled(false);
-      setTaskFailed(false);
+      setCurrentTaskStatus('Delayed');
     } else {
-      setTaskDelayed(false);
+      setCurrentTaskStatus(taskState.state);
       setLastKnownProgress(progValue);
     }
-  }, [taskState.progress]);
-
-  React.useEffect(() => {
-    if(taskState.state === "Failed") {
-      setTaskFailed(true);
-      setTaskDelayed(false);
-      setTaskCancelled(false);
-    }
-    if(taskState.state === "Cancelled") {
-      setTaskFailed(false);
-      setTaskDelayed(false);
-      setTaskCancelled(true);
-    }
-  }, [taskState.state]);
+  }, [taskState.progress, taskState.state]);
 
   const showErrorSnackbar = (message: string): void => {
     setSnackbarMessage(message);
@@ -78,6 +77,7 @@ export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
     if (response["success"] === false) {
       showErrorSnackbar(`Failed to cancel Task ID [${id}]`);
     } else {
+      setCurrentTaskStatus('Cancelled');
       showSuccessSnackbar(`Task ID [${id}] cancelled successfully`);
     }
   }
@@ -86,22 +86,9 @@ export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
       <Card className={classes.root} variant="outlined" role="task-details">
           <CardContent>
             <Grid container>
-                  { !taskDelayed && !taskFailed && !taskCancelled && <Grid item xs={12}>
-                      <Progress type="dashboard" gapDegree={120} percent={lastKnownProgress} />
-                    </Grid>
-                  }
-                  { taskDelayed && !taskFailed && !taskCancelled && <Grid item xs={12}>
-                      <Progress type="dashboard" strokeColor={orange[50]} gapDegree={120} percent={lastKnownProgress}/>
-                    </Grid>
-                  }
-                  { taskFailed && !taskDelayed && !taskCancelled && <Grid item xs={12}>
-                    <Progress type="dashboard" gapDegree={120} percent={lastKnownProgress} status="exception" />
-                     </Grid>
-                  }
-                  { taskCancelled && !taskFailed && !taskDelayed && <Grid item xs={12}>
-                    <Progress type="dashboard" gapDegree={120} showInfo={false}/>
-                    </Grid>
-                  }
+              <Grid item xs={12}>
+                {returnProgressBar(currentTaskStatus)}
+              </Grid>
                 <Grid item xs={6}>
                   <Typography variant="subtitle2" align="left" color="textSecondary" gutterBottom>
                     Task ID
@@ -152,7 +139,7 @@ export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
                   </Typography>
                 </Grid>
                 <Grid item xs={3}><Typography>{taskState.end_time}</Typography></Grid>
-                <Grid item xs={12}><Button variant="outlined" onClick={() => handleCancel(taskState.task_id)} disabled={taskCancelled}>Cancel Task</Button></Grid>
+                <Grid item xs={12}><Button variant="outlined" onClick={() => handleCancel(taskState.task_id)} disabled={ currentTaskStatus === 'Cancelled' ? true : false }>Cancel Task</Button></Grid>
             </Grid>
           </CardContent>
           {openSnackbar && <NotificationSnackbar type={messageType} message={snackbarMessage} closeSnackbarCallback={() => setOpenSnackbar(false)} />}
