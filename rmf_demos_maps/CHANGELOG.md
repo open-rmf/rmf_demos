@@ -1,6 +1,12 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package rmf_demos_maps
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+## Changelog for package rmf_demos_maps
+
+1.2.0 (2020-04-XX)
+------------------
+* update all namings with rmf_demos as prefix [#1](https://github.com/open-rmf/rmf_demos/pull/1)
+* Cleaning task demo in Airport terminal [#8](https://github.com/open-rmf/rmf_demos/pull/8)
+* Separate nav graphs for CleanerBotA and CleanerBotE [#10](https://github.com/open-rmf/rmf_demos/pull/10)
+* rename dependency following recent refactor [#17](https://github.com/open-rmf/rmf_demos/pull/17)
+* Feature/add crowdsim example [#14](https://github.com/open-rmf/rmf_demos/pull/14)
 
 1.1.0 (2020-09-24)
 ------------------

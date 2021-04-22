@@ -100,7 +100,7 @@
           <xi:include href="node.xml"
             xpointer="xpointer(/profile/*)"/>
           <topics subscribe="ALLOW">
-            <topic>/rviz_node/param</topic>
+            <topic>/rmf_visualization/parameters</topic>
             <topic>fleet_states</topic>
             <topic>map</topic>
           </topics>
@@ -116,7 +116,7 @@
           <xi:include href="node.xml"
             xpointer="xpointer(/profile/*)"/>
           <topics subscribe="ALLOW">
-            <topic>/rviz_node/param</topic>
+            <topic>/rmf_visualization/parameters</topic>
             <topic>door_states</topic>
             <topic>lift_states</topic>
             <topic>map</topic>
@@ -146,7 +146,7 @@
           <xi:include href="node.xml"
             xpointer="xpointer(/profile/*)"/>
           <topics publish="ALLOW">
-            <topic>/rviz_node/param</topic>
+            <topic>/rmf_visualization/parameters</topic>
           </topics>
         </profile>
         <profile node="door_panel_requester_node" ns="/">

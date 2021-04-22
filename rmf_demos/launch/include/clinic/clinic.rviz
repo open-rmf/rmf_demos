@@ -25,7 +25,7 @@ Panels:
     Finish: 600
     Map: L1
     Name: SchedulePanel
-    Topic: /rviz_node/param
+    Topic: /rmf_visualization/parameters
   - Class: rmf_visualization_rviz2_plugins/DoorPanel
     Name: DoorPanel
   - Class: rmf_visualization_rviz2_plugins/LiftPanel
