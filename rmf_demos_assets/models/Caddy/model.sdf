@@ -64,10 +64,10 @@
       <robot_base_frame>chassis</robot_base_frame>
     </plugin>
 
-    <!-- Note: The forward slash before `libignition-gazebo4-diff-drive-system.so` is necessary so that
+    <!-- Note: The forward slash before `libignition-gazebo-diff-drive-system.so` is necessary so that
     `dlopen` in Gazebo Classic interprets it as a pathname and avoids searching LD_LIBRARY_PATH for the
     plugin. If omitted, Gazebo Classic will locate the ignition plugin and crash while attempting to load it. -->
-    <plugin name="ignition::gazebo::systems::DiffDrive" filename="/libignition-gazebo4-diff-drive-system.so">
+    <plugin name="ignition::gazebo::systems::DiffDrive" filename="/libignition-gazebo-diff-drive-system.so">
       <always_on>true</always_on>
       <update_rate>100.0</update_rate>
       <num_wheel_pairs>2</num_wheel_pairs>
