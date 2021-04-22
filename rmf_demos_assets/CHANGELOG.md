@@ -1,10 +1,13 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package rmf_demos_assets
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+## Changelog for package rmf_demos_assets
 
-1.2.0 (2021-01-06)
+1.2.0 (2021-04-XX)
 ------------------
 * Changed DeliveryRobot texture name to avoid Ignition rendering issue. [#142](https://github.com/osrf/rmf_demos/pull/142)
+* Match renamed packages [#4](https://github.com/open-rmf/rmf_demos/pull/4)
+* Cleaning task demo in Airport terminal [#8](https://github.com/open-rmf/rmf_demos/pull/8)
+* Separate nav graphs for CleanerBotA and CleanerBotE [#10](https://github.com/open-rmf/rmf_demos/pull/10)
+* account for refactor from building_gazebo_plugins to rmf_building_sim [#15](https://github.com/open-rmf/rmf_demos/pull/15)
+* Fix out of range values for sdf compliance [#22](https://github.com/open-rmf/rmf_demos/pull/22)
 
 1.1.0 (2020-09-24)
 ------------------

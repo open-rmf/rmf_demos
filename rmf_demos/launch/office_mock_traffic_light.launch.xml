@@ -3,10 +3,11 @@
 <launch>
   <arg name="use_ignition" default="0"/>
   <arg name="gazebo_version" default="11"/>
+  <arg name="use_sim_time" default="true"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
-    <arg name="use_sim_time" value="true"/>
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="viz_config_file" value ="$(find-pkg-share rmf_demos)/include/office/office.rviz"/>
     <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/office/office.building.yaml"/>
     <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/office/dashboard_config.json"/>
@@ -29,7 +30,7 @@
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="tinyRobot1"/>
       <arg name="fleet_name" value="tinyRobot1"/>
-      <arg name="use_sim_time" value="true"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
     </include>
 
     <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_mock_traffic_light.launch.xml">
@@ -40,7 +41,7 @@
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="tinyRobot2"/>
       <arg name="fleet_name" value="tinyRobot2"/>
-      <arg name="use_sim_time" value="true"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
     </include>
   </group>
 
