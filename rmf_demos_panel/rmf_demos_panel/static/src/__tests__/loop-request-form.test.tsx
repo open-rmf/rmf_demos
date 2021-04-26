@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, within } from '@testing-library/react';
+import { cleanup, render, screen, fireEvent, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LoopRequestForm from '../components/forms/loop-request-form';
 
@@ -8,9 +8,11 @@ describe('Loop Request Form', () => {
     let submitRequest = jest.fn();
      let setTimeError = jest.fn();
     let setMinsFromNow = jest.fn();
+    let setPriority = jest.fn();
+    let setPriorityError = jest.fn();
     let minsFromNow = 0;
     let priority = 0;
-    let timeAndPriority = { minsFromNow, priority, setTimeError, setMinsFromNow}
+    let timeAndPriority = { minsFromNow, priority, setTimeError, setMinsFromNow, setPriority, setPriorityError }
     
     function renderForm() {
         const availablePlaces = ['place1', 'place2'];
@@ -20,18 +22,23 @@ describe('Loop Request Form', () => {
     beforeEach(() => {
         root = renderForm();
     });
+
+    afterEach(() => {
+        root.unmount();
+        cleanup();
+    });
     
-    test("should render", () => {
+    it("should render", () => {
         expect(screen.getByRole('loop-request-form')).toBeInTheDocument();
     });
 
-    test("should render error messages when invalid form is submitted", () => {
+    it("should render error messages when invalid form is submitted", () => {
         const submitButton = screen.getByText('Submit Request');
         fireEvent.click(submitButton);
         expect(root.container.querySelector('.MuiFormHelperText-root.Mui-error')).toBeTruthy();
     });
 
-    test("should submit a valid form", () => {
+    it("should submit a valid form", () => {
         const submitButton = screen.getByText('Submit Request');
         userEvent.click(root.getByLabelText('Select start location'));
         userEvent.click(within(screen.getAllByRole('listbox')[0]).getByText('place1'));

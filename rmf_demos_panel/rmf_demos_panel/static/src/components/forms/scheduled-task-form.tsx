@@ -4,8 +4,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { WorldContext } from '../fixed-components/app-context';
-import { showErrorMessage } from "../fixed-components/messages";
 import { useFormStyles } from "../styles";
+import { NotificationTypes, NotificationSnackbar } from "../fixed-components/notification-snackbar";
 
 interface TaskRequest {
   task_type: string,
@@ -15,7 +15,7 @@ interface TaskRequest {
 }
 
 interface ScheduledTaskFormProps {
-  submitTaskList: (taskList: any[]) => void;
+  submitTaskList: (taskList: any[]) => NodeJS.Timeout[];
 }
 
 const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement => {
@@ -24,6 +24,9 @@ const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement =>
   const [uploadedFile, setUploadedFile] = React.useState(null);
   const [taskList, setTaskList] = React.useState<string | ArrayBuffer>('');
   const [deliveryOptions, setDeliveryOptions] = React.useState({});
+  const [snackbarMessage, setSnackbarMessage] = React.useState('');
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [messageType, setMessageType] = React.useState(NotificationTypes.Success);
   const placeholder = `eg. [
 {"task_type":"Loop", "start_time":0, "priority": 0, "description": {"num_loops":5, "start_name":"coe", "finish_name":"lounge"}},
 {"task_type":"Delivery", "start_time":0, "priority": 0,"description": {"option": "coke"}},
@@ -37,10 +40,10 @@ const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement =>
       setDeliveryOptions({});
     }
   }, [config]);
-  
-  const createTaskDescription = (deliveryTask: string): {} => {
+
+  const createTaskDescription = (deliveryTask: string) => {
     let newDesc = deliveryOptions[deliveryTask];
-    return newDesc;
+      return newDesc;
   }
 
   const convertTaskList = () => {
@@ -57,27 +60,49 @@ const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement =>
           description: taskDesc
         }
       } else {
-        return task
+        return task;
       }
     });
     return globalTaskList;
   }
+
+  const showErrorSnackbar = (message: string): void => {
+    setSnackbarMessage(message);
+    setMessageType(NotificationTypes.Error);
+    setOpenSnackbar(true);
+  }
+
+  const showSuccessSnackbar = (message: string): void => {
+    setSnackbarMessage(message);
+    setMessageType(NotificationTypes.Success);
+    setOpenSnackbar(true);
+  }
   
   const isFormValid = () => {
     if(taskList === "" || taskList === `[]` || taskList === `{}`) {
-      showErrorMessage("Unable to submit an empty task list");
+      showErrorSnackbar("Unable to submit an empty task list");
       return false;
     }
+    //including handling of incomplete forms (eg. missing closing ])
     return true;
   }
   
-  const handleSubmit = (ev: React.FormEvent): void => {
-    ev.preventDefault();
-    if(isFormValid()) {
-      let globalList = convertTaskList();
-      submitTaskList(globalList);
-      setTaskList('');
-      setUploadedFile(null);
+  const handleSubmit = (ev: React.FormEvent) => {
+    try {
+      ev.preventDefault();
+      if(isFormValid()) {
+        let globalList = convertTaskList();
+        let responseList = submitTaskList(globalList);
+        if(responseList.length === globalList.length) {
+          showSuccessSnackbar("Task List submitted successfully!");
+        } else {
+          showErrorSnackbar("Error: Unable to submit task list");
+        }
+        setTaskList('');
+        setUploadedFile(null);
+      }
+    } catch (err) {
+      console.log(err);
     }
   }
   
@@ -123,6 +148,7 @@ const ScheduledTaskForm = (props: ScheduledTaskFormProps): React.ReactElement =>
         </div>
         <div className={classes.buttonContainer}>
           <Button variant="contained" color="primary" onClick={handleSubmit} className={classes.button}>Submit Task List</Button>
+          {openSnackbar && <NotificationSnackbar type={messageType} message={snackbarMessage} closeSnackbarCallback={() => setOpenSnackbar(false)} />}
         </div>
     </Box>
   )

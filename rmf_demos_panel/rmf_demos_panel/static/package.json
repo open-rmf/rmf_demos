@@ -30,7 +30,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.1",
     "@material-ui/icons": "^4.11.2",
-    "antd": "^4.9.4",
+    "antd": "^4.13.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "socket.io-client": "^3.0.4",

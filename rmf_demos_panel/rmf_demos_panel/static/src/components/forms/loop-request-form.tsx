@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Autocomplete, { AutocompleteRenderInputParams } from '@material-ui/lab/Autocomplete';
 import { useFormStyles } from '../styles';
+import { NotificationSnackbar, NotificationTypes } from '../fixed-components/notification-snackbar';
 
 interface LoopDescription {
   num_loops: number,
@@ -14,23 +15,30 @@ interface LoopDescription {
 
 interface LoopFormProps {
   availablePlaces: string[]
-  submitRequest: (request: {}, type: string) => void;
+  submitRequest: (request: {}) => Promise<any>;
   timeAndPriority: {
     minsFromNow: number,
     priority: number,
     setTimeError: React.Dispatch<React.SetStateAction<string>>,
-    setMinsFromNow: React.Dispatch<React.SetStateAction<number>>
+    setMinsFromNow: React.Dispatch<React.SetStateAction<number>>,
+    setPriority: React.Dispatch<React.SetStateAction<number>>,
+    setPriorityError: React.Dispatch<React.SetStateAction<string>>
   }
 }
 
 const LoopRequestForm = (props: LoopFormProps): React.ReactElement => {
   const { availablePlaces, submitRequest, timeAndPriority } = props;
-  const { minsFromNow, priority, setTimeError, setMinsFromNow } = timeAndPriority;
+  const { minsFromNow, priority, setTimeError, setMinsFromNow, setPriority, setPriorityError } = timeAndPriority;
   const classes = useFormStyles();
   const [startLocation, setStartLocation] = React.useState("");
   const [endLocation, setEndLocation] = React.useState("");
   const [places, setPlaces] = React.useState(availablePlaces);
   const [numLoops, setNumLoops] = React.useState(1);
+
+  //snackbar
+  const [snackbarMessage, setSnackbarMessage] = React.useState('');
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+  const [messageType, setMessageType] = React.useState(NotificationTypes.Success);
 
   //errors
   const [numLoopsError, setNumLoopsError] = React.useState("");
@@ -42,6 +50,10 @@ const LoopRequestForm = (props: LoopFormProps): React.ReactElement => {
 
   const isFormValid = (): boolean => {
     let isValid = true;
+    if(priority < 0 || priority > 1) {
+      setPriorityError("Priority can only be 0 or 1");
+      isValid = false;
+    }
     if(startLocation == endLocation) {
       setLocationError("Start and end locations cannot be the same");
       isValid = false;
@@ -61,11 +73,24 @@ const LoopRequestForm = (props: LoopFormProps): React.ReactElement => {
     return isValid;
   }
 
+  const showErrorSnackbar = (message: string): void => {
+    setSnackbarMessage(message);
+    setMessageType(NotificationTypes.Error);
+    setOpenSnackbar(true);
+  }
+
+  const showSuccessSnackbar = (message: string): void => {
+    setSnackbarMessage(message);
+    setMessageType(NotificationTypes.Success);
+    setOpenSnackbar(true);
+  }
+
   const cleanUpForm = () => {
     setStartLocation("");
     setEndLocation("");
     setNumLoops(1);
     setMinsFromNow(0);
+    setPriority(0);
     cleanUpError();
   }
 
@@ -73,6 +98,7 @@ const LoopRequestForm = (props: LoopFormProps): React.ReactElement => {
       setLocationError('');
       setNumLoopsError('');
       setTimeError('');
+      setPriorityError('');
   };
 
   const createRequest = () => {
@@ -91,12 +117,21 @@ const LoopRequestForm = (props: LoopFormProps): React.ReactElement => {
     return request;
   }
     
-  const handleSubmit = (ev: React.FormEvent): void => {
-    ev.preventDefault();
-    if(isFormValid()) {
-      let request = createRequest();
-      submitRequest(request, "Loop");
-      cleanUpForm();
+  const handleSubmit = async (ev: React.FormEvent) => {
+    try {
+      ev.preventDefault();
+      if(isFormValid()) {
+        let request = createRequest();
+        let response = await submitRequest(request);
+        if (response && response["task_id"] === '') {
+          showErrorSnackbar(`Loop Request failed! ${response["error_msg"]}`);
+        } else {
+          showSuccessSnackbar(`Request submitted successfully! Task ID: [${response["task_id"]}]`)
+        }
+          cleanUpForm();
+        }
+    } catch(err) {
+        return;
     }
   }
 
@@ -149,6 +184,7 @@ const LoopRequestForm = (props: LoopFormProps): React.ReactElement => {
             </div>
             <div className={classes.buttonContainer}>
                 <Button variant="contained" color="primary" onClick={handleSubmit} className={classes.button}>Submit Request</Button>
+                {openSnackbar && <NotificationSnackbar type={messageType} message={snackbarMessage} closeSnackbarCallback={() => setOpenSnackbar(false)} />}
             </div>
         </Box>
     );
