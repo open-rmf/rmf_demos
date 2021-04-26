@@ -139,7 +139,7 @@ export const TaskCard = (props: TaskCardProps) : React.ReactElement => {
                   </Typography>
                 </Grid>
                 <Grid item xs={3}><Typography>{taskState.end_time}</Typography></Grid>
-                <Grid item xs={12}><Button variant="outlined" onClick={() => handleCancel(taskState.task_id)} disabled={ currentTaskStatus === 'Cancelled' ? true : false }>Cancel Task</Button></Grid>
+                <Grid item xs={12}><Button variant="outlined" onClick={() => handleCancel(taskState.task_id)} disabled={ currentTaskStatus === ('Cancelled' || 'Completed') ? true : false }>Cancel Task</Button></Grid>
             </Grid>
           </CardContent>
           {openSnackbar && <NotificationSnackbar type={messageType} message={snackbarMessage} closeSnackbarCallback={() => setOpenSnackbar(false)} />}
