@@ -4,6 +4,7 @@
   <arg name="use_ignition" default="0"/>
   <arg name="gazebo_version" default="11"/>
   <arg name="use_sim_time" default="true"/>
+  <arg name="failover_mode" default="false"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -32,6 +33,7 @@
       <arg name="robot_prefix" value="$(var fleet_name)"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
@@ -47,6 +49,7 @@
       <arg name="robot_prefix" value="$(var fleet_name)"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
@@ -61,6 +64,7 @@
       <arg name="robot_prefix" value="$(var fleet_name)"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
@@ -76,6 +80,7 @@
       <arg name="robot_prefix" value="$(var fleet_name)"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
@@ -91,6 +96,7 @@
       <arg name="robot_prefix" value="$(var fleet_name)"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
