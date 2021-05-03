@@ -26,7 +26,9 @@ foreach(path ${traffic_editor_paths})
   set(output_model_dir ${output_dir}/models)
 
   ##############################################################################
-  # first, generate the world
+  # Generate Gz world and download Models
+  ##############################################################################
+
   message("BUILDING WORLDFILE WITH COMMAND: ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}")
   if (NO_DOWNLOAD_MODELS)
     add_custom_command(
@@ -41,12 +43,8 @@ foreach(path ${traffic_editor_paths})
       COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
       COMMAND ros2 run rmf_building_map_tools building_map_model_downloader ${map_path}
       OUTPUT ${output_world_path}
-    )
+      )
   endif()
-
-  add_custom_target(generate_${output_world_name} ALL
-    DEPENDS ${output_world_path}
-  )
 
   ##############################################################################
   # generate the navmesh and required files for crowd simulation for gz
@@ -57,12 +55,15 @@ foreach(path ${traffic_editor_paths})
     COMMAND ros2 run rmf_building_map_tools building_crowdsim ${map_path} ${crowd_sim_config_resource} ${output_world_path}
     DEPENDS ${output_world_path}
   )
+
+  # This will initiate both custom commands: ${output_world_path} and ${world_name}_crowdsim
   add_custom_target(generate_${world_name}_crowdsim ALL
     DEPENDS ${world_name}_crowdsim
   )  
 
   ##############################################################################
   ## Ign worlds
+  ##############################################################################
 
   # generate Ignition simulation world
   set(ign_output_dir ${CMAKE_CURRENT_BINARY_DIR}/maps/${output_world_name}_ign)
@@ -75,17 +76,16 @@ foreach(path ${traffic_editor_paths})
     DEPENDS ${map_path}
   )
 
-  add_custom_target(generate_${output_world_name}_ign ALL
-    DEPENDS ${ign_output_world_path}
-  )
 
   ##############################################################################
-  # generate the navmesh and required files for crowd simulation
+  # generate the navmesh and required files for crowd simulation for ign
   add_custom_command(
     OUTPUT ${world_name}_crowdsim_ign
     COMMAND ros2 run rmf_building_map_tools building_crowdsim ${map_path} ${crowd_sim_config_resource} ${ign_output_world_path}
     DEPENDS ${ign_output_world_path}
   )
+
+  # This will initiate both custom commands: ${ign_output_world_path} and  ${world_name}_crowdsim_ign
   add_custom_target(generate_${world_name}_crowdsim_ign ALL
     DEPENDS ${world_name}_crowdsim_ign
   )
@@ -96,7 +96,9 @@ foreach(path ${traffic_editor_paths})
   )
 
   ##############################################################################
-  # now, generate the nav graphs
+  # Generate the nav graphs
+  ##############################################################################
+
   set(output_nav_graphs_dir ${output_dir}/nav_graphs/)
   set(output_nav_graphs_phony ${output_nav_graphs_dir}/phony)
   add_custom_command(
