@@ -33,7 +33,8 @@ setup(
     entry_points={
         'console_scripts': [
             'api_server=rmf_demos_panel.api_server:main',
-            'gui_server=rmf_demos_panel.gui_server:main'
+            'gui_server=rmf_demos_panel.gui_server:main',
+            'integration_test=rmf_demos_panel.integration_test:main'
         ],
     },
 )
