@@ -162,13 +162,13 @@ class MockDocker(Node):
         mode_request.robot_name = requested_path.robot_name
         mode_request.task_id = requested_path.task_id
         mode_request.mode.mode = RobotMode.MODE_PAUSED
-        for i in range(5):
-            self.mode_request_publisher.publish(mode_request)
-        self.get_logger().info(
-            f'{robot_name} done with docking at {finish_location}')
+        self.mode_request_publisher.publish(mode_request)
 
-        # Remove from watching
-        self.watching.pop(robot_name)
+        # Remove from watching, when it is no longer in Docking
+        if msg.mode.mode != RobotMode.MODE_DOCKING:
+            self.watching.pop(robot_name)
+            self.get_logger().info(
+                f'{robot_name} done with docking at {finish_location}')
 
 
 def main(argv=sys.argv):
