@@ -37,13 +37,18 @@ office_tasks = [
 ]
 
 airport_terminal_tasks = [
-    # TODO: fix CleanerBotE Fleet Adapter dies
-    # {"task_type": "Clean", "start_time": 0, "priority": 0,
-    #  "description": {"cleaning_zone": "zone_1"}},
-    # {"task_type": "Clean", "start_time": 0, "priority": 0,
-    #  "description": {"cleaning_zone": "zone_3"}},
     {"task_type": "Clean", "start_time": 0, "priority": 0,
-     "description": {"cleaning_zone": "zone_4"}}
+     "description": {"cleaning_zone": "zone_1"}},
+    {"task_type": "Clean", "start_time": 0, "priority": 0,
+     "description": {"cleaning_zone": "zone_4"}},
+    {"task_type": "Loop", "start_time": 0, "priority": 1, "description":
+        {"num_loops": 2, "start_name": "n23", "finish_name": "n24"}}
+    # TODO: mop cart will drop when step size is high, thus wont test this
+    # {"task_type": "Delivery", "start_time": 0, "description":
+    #     {"pickup_place_name": "mopcart_pickup",
+    #      "pickup_dispenser": "mopcart_dispenser",
+    #      "dropoff_place_name": "spill",
+    #      "dropoff_ingestor": "mopcart_collector"}}
 ]
 
 clinic_tasks = [
@@ -74,19 +79,20 @@ class RMFSenarioTest:
             total_robots: int,
             timeout_sec=50):
         """
-        world_name arg:     Launch file world name 
+        world_name arg:     Launch file world name
         total_robots arg:   number of robots in the world
+        timeout_sec arg:    Time out for init
         """
-        launch_cmd = f"ros2 launch rmf_demos {world_name}.launch.xml headless:=1"
+        launch_cmd = (f"ros2 launch rmf_demos {world_name}.launch.xml"
+                      " headless:=1")
         print(f" Initialize command [{launch_cmd}]")
         self.proc1 = subprocess.Popen(launch_cmd,
                                       stdout=subprocess.PIPE,
                                       shell=True, preexec_fn=os.setsid)
-        # proc1 = subprocess.Popen("echo 'run' && sleep 2 && echo 'Done'", shell=True)
 
-        # Here we will check if the robot state is avail to determine whether the
-        # if the rmf world is ready.
-        # Periodically Checks the tasks
+        # Here we will check if the robot state is avail to determine whether
+        # the rmf world has launched successfully.
+        # Periodically Checks the tasks till timeout
         start = time.time()
         while True:
             time.sleep(2)
@@ -127,13 +133,17 @@ class RMFSenarioTest:
         self.proc2.kill()
         self.proc1.poll()
         self.proc2.poll()
-        print(f"AfterKill: {self.proc1.returncode} {self.proc2.returncode}\n")
 
     def start(
             self,
             task_requests: list,
             timeout_sec: int):
-        # should use ros_time as timeout
+        """
+        This will start the intergration test by sending multiple task
+        requests to rmf. Return True if all tasks passed, else false.
+
+        TODO: should use ros_time as timeout
+        """
         print(f"Start senario with {len(task_requests)} requests")
         for req in task_requests:
             print(" - request a task: ", req)
@@ -162,12 +172,10 @@ class RMFSenarioTest:
                     success_count += 1
             print("------------"*4)
             if success_count == len(task_requests):
-                print("All Tasks passed!")
+                print(f"--------- All {success_count} Tasks passed! ---------")
                 return True
         return False
 
-    def printout(self):
-        print(" <+> printout from world!  <+> ")
 
 ###############################################################################
 
@@ -179,13 +187,9 @@ def main(args=None):
 
     office = RMFSenarioTest("office", 2)
     success = office.start(office_tasks, 100)
-    office.printout()
     print("call destructor")
-    # del office
-    # office = None
     office.__del__()
     print("Done call destructor")
-    # office.printout()
 
     if not success:
         raise RuntimeError
