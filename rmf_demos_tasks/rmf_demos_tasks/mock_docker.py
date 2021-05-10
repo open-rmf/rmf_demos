@@ -76,7 +76,7 @@ class MockDocker(Node):
             ModeRequest, 'robot_mode_requests', self.mode_request_cb, 1)
 
         self.robot_state_subscription = self.create_subscription(
-            RobotState, 'robot_state', self.robot_state_cb, 1)
+            RobotState, 'robot_state', self.robot_state_cb, 10)
 
         transient_qos = QoSProfile(
             history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
