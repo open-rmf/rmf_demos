@@ -125,7 +125,12 @@ class MockDocker(Node):
             print(f'Unexpected docking parameter [{msg.parameters[0]}]')
             return
 
-        dock = self.dock_map.get(msg.fleet_name).get(msg.parameters[0].value)
+        fleet_name = self.dock_map.get(msg.fleet_name)
+        if fleet_name is None:
+            print('Unknown fleet name reuested [{msg.fleet_name}].')
+            return
+
+        dock = fleet_name.get(msg.parameters[0].value)
         if not dock:
             print(f'Unknown dock name requested [{msg.parameters[0].value}]')
             return
