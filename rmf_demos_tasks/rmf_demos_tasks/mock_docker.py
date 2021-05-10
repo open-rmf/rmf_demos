@@ -73,7 +73,7 @@ class MockDocker(Node):
             ModeRequest, 'robot_mode_requests', 1)
 
         self.mode_request_subscription = self.create_subscription(
-            ModeRequest, 'robot_mode_requests', self.mode_request_cb, 1)
+            ModeRequest, 'robot_mode_requests', self.mode_request_cb, 10)
 
         self.robot_state_subscription = self.create_subscription(
             RobotState, 'robot_state', self.robot_state_cb, 10)
