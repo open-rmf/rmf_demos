@@ -1,4 +1,4 @@
-name: build-rmf-panel
+name: build-panel
 on:
   push:
     branches: [ main ]
@@ -20,7 +20,7 @@ jobs:
           cd rmf_demos/rmf_demos_panel/rmf_demos_panel/static
           npm install
           npm run build
-      # This will run only on merging to main
+      # This will run only during merge to main
       - name: deploy_page
         if: github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v3

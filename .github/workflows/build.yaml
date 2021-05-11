@@ -43,9 +43,3 @@ jobs:
         cd rmf_demos_ws
         source /opt/ros/foxy/setup.bash
         colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release -DNO_DOWNLOAD_MODELS=True
-    - name: integration-test
-      shell: bash
-      run: |
-        cd rmf_demos_ws
-        source install/setup.bash
-        ros2 run rmf_demos_panel integration_test
