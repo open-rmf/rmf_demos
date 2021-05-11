@@ -73,10 +73,10 @@ class MockDocker(Node):
             ModeRequest, 'robot_mode_requests', 1)
 
         self.mode_request_subscription = self.create_subscription(
-            ModeRequest, 'robot_mode_requests', self.mode_request_cb, 1)
+            ModeRequest, 'robot_mode_requests', self.mode_request_cb, 10)
 
         self.robot_state_subscription = self.create_subscription(
-            RobotState, 'robot_state', self.robot_state_cb, 1)
+            RobotState, 'robot_state', self.robot_state_cb, 10)
 
         transient_qos = QoSProfile(
             history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
@@ -125,7 +125,12 @@ class MockDocker(Node):
             print(f'Unexpected docking parameter [{msg.parameters[0]}]')
             return
 
-        dock = self.dock_map.get(msg.fleet_name).get(msg.parameters[0].value)
+        fleet_name = self.dock_map.get(msg.fleet_name)
+        if fleet_name is None:
+            print('Unknown fleet name reuested [{msg.fleet_name}].')
+            return
+
+        dock = fleet_name.get(msg.parameters[0].value)
         if not dock:
             print(f'Unknown dock name requested [{msg.parameters[0].value}]')
             return
@@ -157,13 +162,13 @@ class MockDocker(Node):
         mode_request.robot_name = requested_path.robot_name
         mode_request.task_id = requested_path.task_id
         mode_request.mode.mode = RobotMode.MODE_PAUSED
-        for i in range(5):
-            self.mode_request_publisher.publish(mode_request)
-        self.get_logger().info(
-            f'{robot_name} done with docking at {finish_location}')
+        self.mode_request_publisher.publish(mode_request)
 
-        # Remove from watching
-        self.watching.pop(robot_name)
+        # Remove from watching, when it is no longer in Docking
+        if msg.mode.mode != RobotMode.MODE_DOCKING:
+            self.watching.pop(robot_name)
+            self.get_logger().info(
+                f'{robot_name} done with docking at {finish_location}')
 
 
 def main(argv=sys.argv):
