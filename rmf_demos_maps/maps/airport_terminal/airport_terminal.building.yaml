@@ -48,8 +48,6 @@ crowd_sim:
   update_time_step: 0.1
 levels:
   L1:
-    correspondence_point_sets:
-      - ~
     doors:
       - [1201, 1202, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], plugin: [1, normal], type: [1, double_hinged]}]
       - [1203, 1204, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], plugin: [1, normal], type: [1, double_hinged]}]
@@ -1991,10 +1989,10 @@ levels:
       - [1813.811, 355.792, 0, zone_2_start]
       - [1813.842, 330.119, 0, zone_2, {dock_name: [1, zone_2]}]
       - [1914.686, 675.55, 0, ""]
-      - [1944.653, 676.5700000000001, 0, charger_cleanerBotE_0, {is_charger: [4, false], is_parking_spot: [4, false], is_passthrough_point: [4, false], spawn_robot_name: [1, cleanerBotE_0], spawn_robot_type: [1, CleanerBotE]}]
+      - [1944.653, 676.5700000000001, 0, charger_cleanerBotE_0, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotE_0], spawn_robot_type: [1, CleanerBotE]}]
       - [1944.648, 645.399, 0, ""]
       - [1976.269, 646.121, 0, ""]
-      - [1976.009, 676.758, 0, charger_cleanerBotE_1, {is_charger: [4, false], is_parking_spot: [4, false], is_passthrough_point: [4, false], spawn_robot_name: [1, cleanerBotE_1], spawn_robot_type: [1, CleanerBotE]}]
+      - [1976.009, 676.758, 0, charger_cleanerBotE_1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotE_1], spawn_robot_type: [1, CleanerBotE]}]
       - [1850.375, 734.322, 0, zone_4, {dock_name: [1, zone_4]}]
       - [1429.736, 602.524, 0, charger_cleanerBotA_0, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_0], spawn_robot_type: [1, CleanerBotA]}]
       - [2068.856, 362.446, 0, ""]
