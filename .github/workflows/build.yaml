@@ -18,8 +18,8 @@ jobs:
           git cmake python3-vcstool curl \
           qt5-default \
           python3-shapely python3-yaml python3-requests \
-          ignition-edifice \
-          -y
+          ignition-edifice  python3-pip -y
+        pip3 install flask-socketio
     - name: create-ws
       run: |
         mkdir -p rmf_demos_ws/src
