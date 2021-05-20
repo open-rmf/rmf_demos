@@ -120,6 +120,11 @@ Non-autonomous vehicles can also be integrated with RMF provided their positions
 
 In the airport terminal map, a `Caddy` is spawned in the far right corner and can be controlled with `geometry_msgs/Twist` messages published over the `cmd_vel` topic. 
 
+Run `teleop_twist_keyboard` to control the `caddy` with your keyboard:
+```bash
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+
 ![](../media/caddy.gif)
 
 ---
