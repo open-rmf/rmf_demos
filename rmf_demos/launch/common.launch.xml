@@ -11,15 +11,12 @@
   <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
 
   <!-- Traffic Schedule  -->
-  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_a">
+  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_primary">
     <param name="use_sim_time" value="$(var use_sim_time)"/>
-    <param name="is_primary" value="true"/>
   </node>
-  <!-- Traffic Schedule redundant backup -->
-  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_b">
+  <!-- Traffic Schedule monitor and replacement node -->
+  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule_monitor" output="both" name="rmf_traffic_schedule_backup">
     <param name="use_sim_time" value="$(var use_sim_time)"/>
-    <param name="is_primary" value="false"/>
-    <param name="primary_namespace" value="rmf_traffic_schedule_a"/>
   </node>
 
   <!-- Blockade Moderator -->
