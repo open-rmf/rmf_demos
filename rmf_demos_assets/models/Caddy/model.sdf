@@ -1261,9 +1261,6 @@
           <lower>-0.3</lower>
           <upper>0.3</upper>
         </limit>
-        <dynamics>
-          <damping>0.01</damping>
-        </dynamics>
         <use_parent_model_frame>true</use_parent_model_frame>
       </axis>
       <physics>
