@@ -1,0 +1,31 @@
+<?xml version='1.0' ?>
+
+<!-- 
+  Converts one of our ignition .world files to dae format.
+  The output dae will be found in ./sim_world/sim_world.dae
+  Usage: ros2 launch rmf_demos ign_generate_dae.launch.xml map_name:=office/clinic/airport/etc/...
+-->
+<launch>
+  <arg name="map_package" default="rmf_demos_maps" description="Name of the map package" />
+  <arg name="map_name" description="Name of the rmf_demos map to generate the dae from" />
+
+  <!-- Ignition only -->
+  <group>
+    <let name="world_path" value="$(find-pkg-share $(var map_package))/maps_dae_export/$(var map_name).world" />
+    <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)_ign/models:$(find-pkg-share rmf_demos_assets)/models:$(env HOME)/.gazebo/models" />
+    <let name="plugin_path" value="$(find-pkg-prefix rmf_robot_sim_ignition_plugins)/lib:$(find-pkg-prefix rmf_building_sim_ignition_plugins)/lib" />
+
+    <!-- TODO: headless in ignitition -->
+    <executable cmd="ign gazebo --iterations 1 -r -v 4 -s $(var world_path)" output="both">
+      <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
+      <env name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
+      <env name="IGN_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
+    </executable>
+
+    <!-- ros_ign bridge for simulation clock -->
+    <node pkg="ros_ign_bridge" exec="parameter_bridge"
+      args="/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock"
+      />
+  </group>
+
+</launch>
