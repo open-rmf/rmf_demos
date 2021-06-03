@@ -76,6 +76,25 @@ foreach(path ${traffic_editor_paths})
     DEPENDS ${map_path}
   )
 
+  ##############################################################################
+  # Generate worlds with the export dae plugin
+  ##############################################################################
+  set(dae_ign_output_dir ${CMAKE_CURRENT_BINARY_DIR}/maps_dae_export/${output_world_name}_ign)
+  set(dae_ign_output_world_path ${dae_ign_output_dir}/${output_world_name}.world)
+  set(dae_ign_output_model_dir ${dae_ign_output_dir}/models)
+
+  add_custom_command(
+    OUTPUT ${dae_ign_output_world_path}
+    COMMAND ros2 run rmf_building_map_tools building_map_generator ignition_dae_export ${map_path} ${dae_ign_output_world_path} ${dae_ign_output_model_dir}
+    DEPENDS ${map_path}
+  )
+  add_custom_target(generate_${world_name}_dae ALL
+    DEPENDS ${dae_ign_output_world_path}
+  )
+  install(
+    DIRECTORY ${dae_ign_output_world_path}
+    DESTINATION share/${PROJECT_NAME}/maps_dae_export
+  )
 
   ##############################################################################
   # generate the navmesh and required files for crowd simulation for ign
