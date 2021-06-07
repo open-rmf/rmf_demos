@@ -2900,10 +2900,10 @@ lifts:
       L1: [door]
       L2: [door]
     lowest_floor: L1
-    plugins: true
     reference_floor_name: L1
     width: 2.5
     x: 1272
     y: 237.5
     yaw: 0
+    plugins: true
 name: hotel
