@@ -1,7 +1,13 @@
 crowd_sim:
   agent_groups:
-    - {agents_name: [caddy, tinyRobot_4, deliveryRobot_2, tinyRobot_2, deliveryRobot_0, deliveryRobot_1, tinyRobot_0, tinyRobot_1, cleanerBotE_0, cleanerBotE_1, cleanerBotA_0], agents_number: 11, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
-    - {agents_name: [caddy], agents_number: 1, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0.2, y: 0.2}
+    - agents_name: [tinyRobot_4, deliveryRobot_2, tinyRobot_2, deliveryRobot_0, deliveryRobot_1, tinyRobot_0, tinyRobot_1, cleanerBotE_0, cleanerBotE_1, cleanerBotA_0]
+      agents_number: 10 # TODO: cant add caddy (>10 agents), issue due to external agents are all spawn at the same postion.
+      group_id: 0
+      profile_selector: external_agent
+      state_selector: external_static
+      x: 0
+      y: 0
+    - {agents_name: [caddy], agents_number: 1, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0.2, y: 0.2} # add a caddy at a different position
     - {agents_name: [], agents_number: 2, group_id: 1, profile_selector: human, state_selector: crowd_goal1_state, x: 131.5, y: -32.31}
     - {agents_name: [], agents_number: 2, group_id: 2, profile_selector: human, state_selector: crowd_goal2_state, x: 144.6, y: -32.01}
     - {agents_name: [], agents_number: 2, group_id: 3, profile_selector: human, state_selector: crowd_goal3_state, x: 145.3, y: -45.35}
@@ -32,7 +38,7 @@ crowd_sim:
     - {final: 0, goal_set: 5, name: crowd_goal6_state, navmesh_file_name: L1_navmesh.nav}
     - {final: 0, goal_set: 6, name: crowd_goal7_state, navmesh_file_name: L1_navmesh.nav}
   transitions:
-    - {Condition: {condition1: {distance: 1, type: goal_reached}, condition2: {dist: c, per_agent: true, type: timer, value: 5}, type: or}, Target: [{name: crowd_goal2_state, weight: 0.4}, {name: crowd_goal3_state, weight: 0.4}, {name: crowd_goal4_state, weight: 0.2}], from: crowd_goal1_state, to: ""}
+    - {Condition: {condition1: {distance: 1, type: goal_reached}, condition2: {dist: c, per_agent: true, type: timer, value: 5}, type: or}, Target: [{name: crowd_goal4_state, weight: 0.2}, {name: crowd_goal2_state, weight: 0.4}, {name: crowd_goal3_state, weight: 0.4}], from: crowd_goal1_state, to: ""}
     - {Condition: {condition1: {distance: 1, type: goal_reached}, condition2: {dist: c, per_agent: true, type: timer, value: 5}, type: or}, Target: [{name: crowd_goal1_state, weight: 0.4}, {name: crowd_goal2_state, weight: 0.4}, {name: crowd_goal5_state, weight: 0.2}], from: crowd_goal2_state, to: ""}
     - {Condition: {condition1: {distance: 1, type: goal_reached}, condition2: {dist: c, per_agent: true, type: timer, value: 5}, type: or}, Target: [{name: crowd_goal2_state, weight: 0.3}, {name: crowd_goal4_state, weight: 0.3}, {name: crowd_goal6_state, weight: 0.4}], from: crowd_goal3_state, to: ""}
     - {Condition: {condition1: {distance: 1, type: goal_reached}, condition2: {dist: c, per_agent: true, type: timer, value: 5}, type: or}, Target: [{name: crowd_goal1_state, weight: 0.2}, {name: crowd_goal2_state, weight: 0.4}, {name: crowd_goal3_state, weight: 0.4}], from: crowd_goal4_state, to: ""}
@@ -43,11 +49,11 @@ crowd_sim:
 levels:
   L1:
     doors:
-      - [1201, 1202, {left_right_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], plugin: [1, normal], type: [1, double_hinged]}]
-      - [1203, 1204, {left_right_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], plugin: [1, normal], type: [1, double_hinged]}]
-      - [1218, 1219, {left_right_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, 1], name: [1, s04_door], plugin: [1, normal], type: [1, hinged]}]
-      - [1221, 1220, {left_right_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, s08_door], plugin: [1, normal], type: [1, hinged]}]
-      - [138, 1289, {left_right_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, zone_4_door], plugin: [1, normal], type: [1, double_hinged]}]
+      - [1201, 1202, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], plugin: [1, normal], type: [1, double_hinged]}]
+      - [1203, 1204, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], plugin: [1, normal], type: [1, double_hinged]}]
+      - [1218, 1219, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, 1], name: [1, s04_door], plugin: [1, normal], type: [1, hinged]}]
+      - [1221, 1220, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, s08_door], plugin: [1, normal], type: [1, hinged]}]
+      - [138, 1289, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, zone_4_door], plugin: [1, normal], type: [1, double_hinged]}]
     drawing:
       filename: airport_terminal.png
     elevation: 0
