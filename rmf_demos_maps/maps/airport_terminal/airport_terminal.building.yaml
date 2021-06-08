@@ -49,11 +49,11 @@ crowd_sim:
 levels:
   L1:
     doors:
-      - [1201, 1202, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], plugin: [1, normal], type: [1, double_hinged]}]
-      - [1203, 1204, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], plugin: [1, normal], type: [1, double_hinged]}]
-      - [1218, 1219, {motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, 1], name: [1, s04_door], plugin: [1, normal], type: [1, hinged]}]
-      - [1221, 1220, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, s08_door], plugin: [1, normal], type: [1, hinged]}]
-      - [138, 1289, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, zone_4_door], plugin: [1, normal], type: [1, double_hinged]}]
+      - [1201, 1202, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n02_door], plugin: [1, normal], type: [1, double_hinged]}]
+      - [1203, 1204, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, -1], name: [1, n01_door], plugin: [1, normal], type: [1, double_hinged]}]
+      - [1218, 1219, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 95], motion_direction: [2, 1], name: [1, s04_door], plugin: [1, normal], type: [1, hinged]}]
+      - [1221, 1220, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, s08_door], plugin: [1, normal], type: [1, hinged]}]
+      - [138, 1289, {right_left_ratio: [3, 1], motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, zone_4_door], plugin: [1, normal], type: [1, double_hinged]}]
     drawing:
       filename: airport_terminal.png
     elevation: 0
