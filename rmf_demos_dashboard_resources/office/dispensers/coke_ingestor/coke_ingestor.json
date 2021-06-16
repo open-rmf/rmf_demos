@@ -1,6 +1,0 @@
-{
-    "coke_ingestor": {
-        "icons": { "coke_ingestor": "/dispensers/coke_ingestor/humanIcon.png" },
-        "location": { "x": 20.95, "y": -6.95, "yaw": 0, "level_name": "L1" }
-      }
-}
