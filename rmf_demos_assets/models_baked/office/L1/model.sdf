@@ -1,0 +1,1344 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <model name="test">
+    <link name="testlink">
+      <visual name="node_0">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_0</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_1">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_1</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_2">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_2</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_3">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_3</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_4">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_4</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_5">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_5</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_6">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_6</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_7">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_7</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_8">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_8</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>Fridge_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_9">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_9</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_10">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_10</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_11">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_11</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_12">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_12</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_13">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_13</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SmallCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_14">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_14</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SmallCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_15">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_15</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SmallCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_16">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_16</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SmallCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_17">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_17</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SmallCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_18">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_18</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SmallCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_19">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_19</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SmallCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_20">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_20</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SmallCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_21">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_21</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_22">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_22</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>Drawer.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_23">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_23</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>BigCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_24">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_24</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>BigCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_25">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_25</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>BigCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_26">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_26</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>BigCubicle_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_27">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_27</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_28">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_28</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_29">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_29</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_30">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_30</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_31">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_31</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_32">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_32</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>texture.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_33">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_33</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_34">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_34</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_35">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_35</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_36">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_36</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_37">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_37</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_38">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_38</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_39">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_39</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_40">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_40</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_41">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_41</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_42">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_42</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_43">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_43</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_44">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_44</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_45">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_45</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_46">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_46</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_47">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_47</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_48">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_48</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_49">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_49</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_50">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_50</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_51">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_51</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlue.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_52">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_52</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairBlack.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_53">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_53</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>OfficeChairGrey.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_54">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_54</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>Drawer.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_55">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_55</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>Drawer.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_56">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_56</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>ConfTable_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_57">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_57</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>rectable.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_58">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_58</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>WhiteCabinet.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_59">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_59</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>SquareShelf_Diffuse.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_60">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_60</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>LightmapBaked</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_61">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_61</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>coke.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_62">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_62</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>coke.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_63">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_63</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>LightmapBaked</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_64">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_64</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>blue_linoleum.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <visual name="node_65">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+            <submesh>
+              <name>node_65</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.0 0.0 0.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>default.png</albedo_map>
+              <light_map uv_set="1">LightmapBaked.png</light_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <light name="Light" type="directional">
+        <diffuse>1.0 1.0 1.0 1.0</diffuse>
+        <direction>0.5080170035362244 -0.31860893964767456 0.8002544045448303</direction>
+        <cast_shadows>true</cast_shadows>
+        <intensity>1.0</intensity>
+      </light>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>postbake.dae</uri>
+          </mesh>
+        </geometry>
+        <surface/>
+        <contact/>
+        <collide_bitmask>0x01</collide_bitmask>
+      </collision>
+    </link>
+  </model>
+  <static>true</static>
+</sdf>
