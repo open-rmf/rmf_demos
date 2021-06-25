@@ -3,6 +3,7 @@
   <model name="test">
     <link name="testlink">
       <visual name="node_0">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -23,6 +24,7 @@
         </material>
       </visual>
       <visual name="node_1">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -43,6 +45,7 @@
         </material>
       </visual>
       <visual name="node_2">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -63,6 +66,7 @@
         </material>
       </visual>
       <visual name="node_3">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -83,6 +87,7 @@
         </material>
       </visual>
       <visual name="node_4">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -103,6 +108,7 @@
         </material>
       </visual>
       <visual name="node_5">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -123,6 +129,7 @@
         </material>
       </visual>
       <visual name="node_6">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -143,6 +150,7 @@
         </material>
       </visual>
       <visual name="node_7">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -163,6 +171,7 @@
         </material>
       </visual>
       <visual name="node_8">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -183,6 +192,7 @@
         </material>
       </visual>
       <visual name="node_9">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -203,6 +213,7 @@
         </material>
       </visual>
       <visual name="node_10">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -223,6 +234,7 @@
         </material>
       </visual>
       <visual name="node_11">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -243,6 +255,7 @@
         </material>
       </visual>
       <visual name="node_12">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -263,6 +276,7 @@
         </material>
       </visual>
       <visual name="node_13">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -283,6 +297,7 @@
         </material>
       </visual>
       <visual name="node_14">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -303,6 +318,7 @@
         </material>
       </visual>
       <visual name="node_15">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -323,6 +339,7 @@
         </material>
       </visual>
       <visual name="node_16">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -343,6 +360,7 @@
         </material>
       </visual>
       <visual name="node_17">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -363,6 +381,7 @@
         </material>
       </visual>
       <visual name="node_18">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -383,6 +402,7 @@
         </material>
       </visual>
       <visual name="node_19">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -403,6 +423,7 @@
         </material>
       </visual>
       <visual name="node_20">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -423,6 +444,7 @@
         </material>
       </visual>
       <visual name="node_21">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -443,6 +465,7 @@
         </material>
       </visual>
       <visual name="node_22">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -463,6 +486,7 @@
         </material>
       </visual>
       <visual name="node_23">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -483,6 +507,7 @@
         </material>
       </visual>
       <visual name="node_24">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -503,6 +528,7 @@
         </material>
       </visual>
       <visual name="node_25">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -523,6 +549,7 @@
         </material>
       </visual>
       <visual name="node_26">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -543,6 +570,7 @@
         </material>
       </visual>
       <visual name="node_27">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -563,6 +591,7 @@
         </material>
       </visual>
       <visual name="node_28">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -583,6 +612,7 @@
         </material>
       </visual>
       <visual name="node_29">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -603,6 +633,7 @@
         </material>
       </visual>
       <visual name="node_30">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -623,6 +654,7 @@
         </material>
       </visual>
       <visual name="node_31">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -643,6 +675,7 @@
         </material>
       </visual>
       <visual name="node_32">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -663,6 +696,7 @@
         </material>
       </visual>
       <visual name="node_33">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -683,6 +717,7 @@
         </material>
       </visual>
       <visual name="node_34">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -703,6 +738,7 @@
         </material>
       </visual>
       <visual name="node_35">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -723,6 +759,7 @@
         </material>
       </visual>
       <visual name="node_36">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -743,6 +780,7 @@
         </material>
       </visual>
       <visual name="node_37">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -763,6 +801,7 @@
         </material>
       </visual>
       <visual name="node_38">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -783,6 +822,7 @@
         </material>
       </visual>
       <visual name="node_39">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -803,6 +843,7 @@
         </material>
       </visual>
       <visual name="node_40">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -823,6 +864,7 @@
         </material>
       </visual>
       <visual name="node_41">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -843,6 +885,7 @@
         </material>
       </visual>
       <visual name="node_42">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -863,6 +906,7 @@
         </material>
       </visual>
       <visual name="node_43">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -883,6 +927,7 @@
         </material>
       </visual>
       <visual name="node_44">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -903,6 +948,7 @@
         </material>
       </visual>
       <visual name="node_45">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -923,6 +969,7 @@
         </material>
       </visual>
       <visual name="node_46">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -943,6 +990,7 @@
         </material>
       </visual>
       <visual name="node_47">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -963,6 +1011,7 @@
         </material>
       </visual>
       <visual name="node_48">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -983,6 +1032,7 @@
         </material>
       </visual>
       <visual name="node_49">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1003,6 +1053,7 @@
         </material>
       </visual>
       <visual name="node_50">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1023,6 +1074,7 @@
         </material>
       </visual>
       <visual name="node_51">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1043,6 +1095,7 @@
         </material>
       </visual>
       <visual name="node_52">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1063,6 +1116,7 @@
         </material>
       </visual>
       <visual name="node_53">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1083,6 +1137,7 @@
         </material>
       </visual>
       <visual name="node_54">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1103,6 +1158,7 @@
         </material>
       </visual>
       <visual name="node_55">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1123,6 +1179,7 @@
         </material>
       </visual>
       <visual name="node_56">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1143,6 +1200,7 @@
         </material>
       </visual>
       <visual name="node_57">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1163,6 +1221,7 @@
         </material>
       </visual>
       <visual name="node_58">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1183,6 +1242,7 @@
         </material>
       </visual>
       <visual name="node_59">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1203,6 +1263,7 @@
         </material>
       </visual>
       <visual name="node_60">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1223,6 +1284,7 @@
         </material>
       </visual>
       <visual name="node_61">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1243,6 +1305,7 @@
         </material>
       </visual>
       <visual name="node_62">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1263,6 +1326,7 @@
         </material>
       </visual>
       <visual name="node_63">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1283,6 +1347,7 @@
         </material>
       </visual>
       <visual name="node_64">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
@@ -1303,6 +1368,7 @@
         </material>
       </visual>
       <visual name="node_65">
+        <cast_shadows>0</cast_shadows>
         <geometry>
           <mesh>
             <uri>postbake.dae</uri>
