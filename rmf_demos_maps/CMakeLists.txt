@@ -41,7 +41,7 @@ foreach(path ${traffic_editor_paths})
     add_custom_command(
       DEPENDS ${map_path}
       COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
-      COMMAND ros2 run rmf_building_map_tools building_map_model_downloader ${map_path}
+      COMMAND ros2 run rmf_building_map_tools building_map_model_downloader ${map_path} -f -e ~/.gazebo/models
       OUTPUT ${output_world_path}
       )
   endif()
