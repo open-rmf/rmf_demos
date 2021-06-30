@@ -24,7 +24,7 @@ from rclpy.parameter import Parameter
 from rclpy.qos import qos_profile_system_default
 from rclpy.qos import QoSProfile
 
-from rmf_task_msgs.srv import SubmitTask, GetTaskList, CancelTask
+from rmf_task_msgs.srv import SubmitTask, GetTaskList, CancelTask, ReviveTask
 from rmf_task_msgs.msg import TaskDescription, TaskSummary
 from rmf_task_msgs.msg import TaskType, Delivery, Loop
 from rmf_fleet_msgs.msg import FleetState, RobotMode
@@ -35,9 +35,12 @@ from rmf_fleet_msgs.msg import FleetState, RobotMode
 
 class DispatcherClient(Node):
     def __init__(self):
-        super().__init__('api_client')
+        self.requester_name = "api_server"
+
+        super().__init__(self.requester_name)
         self.submit_task_srv = self.create_client(SubmitTask, '/submit_task')
         self.cancel_task_srv = self.create_client(CancelTask, '/cancel_task')
+        self.revive_task_srv = self.create_client(ReviveTask, '/revive_task')
         self.get_tasks_srv = self.create_client(GetTaskList, '/get_tasks')
 
         qos_profile = QoSProfile(depth=20)
@@ -84,7 +87,7 @@ class DispatcherClient(Node):
 
         req_msg = SubmitTask.Request()
         req_msg.description = desc_msg
-        req_msg.requester = "api-server"
+        req_msg.requester = self.requester_name
 
         try:
             future = self.submit_task_srv.call_async(req_msg)
@@ -111,6 +114,7 @@ class DispatcherClient(Node):
         """
         print("Canceling Task Request!")
         req = CancelTask.Request()
+        req.requester = self.requester_name
         req.task_id = task_id
         try:
             future = self.cancel_task_srv.call_async(req)
@@ -124,6 +128,29 @@ class DispatcherClient(Node):
                 return response.success
         except Exception as e:
             self.get_logger().error('Error! Cancel Srv failed %r' % (e,))
+        return False
+
+    def revive_task_request(self, task_id) -> bool:
+        """
+        Revive Task - This function will trigger a ros srv call to the
+        dispatcher node, and return a response.
+        """
+        print("Reviving Task Request!")
+        req = ReviveTask.Request()
+        req.requester = self.requester_name
+        req.task_id = task_id
+        try:
+            future = self.revive_task_srv.call_async(req)
+            rclpy.spin_until_future_complete(self, future, timeout_sec=0.5)
+            response = future.result()
+            if response is None:
+                self.get_logger().warn('/revive_task srv call failed')
+            else:
+                self.get_logger().info(
+                    f'Revive Task, success? {response.success}')
+                return response.success
+        except Exception as e:
+            self.get_logger().error('Error! Revive Srv failed %r' % (e,))
         return False
 
     def get_task_status(self):
