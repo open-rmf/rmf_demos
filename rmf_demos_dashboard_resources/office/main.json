@@ -40,6 +40,11 @@
             "icons":{
                 "headerLogo":"/icons/headerLogo.png"
             }
+        },
+        "darkThemeLogo": {
+            "icons":{
+                "darkThemeLogo": "/icons/roshealth-logo-blue.png"
+            }
         }
     }
 }
