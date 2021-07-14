@@ -1,1 +1,37 @@
-{"dispensers": {}, "robots": {}}
+{
+    "dispensers":{},
+    "robots":{
+        "cleanerBotA":{
+            "icons":{
+                "cleanerBotA":"/icons/cleanerBotA.png"
+            }
+        },
+        "cleanerBotE":{
+            "icons":{
+                "cleanerBotE":"/icons/cleanerBotE.png"
+            }
+        },
+        "caddy":{
+            "icons":{
+                "caddy":"/icons/caddy.png"
+            }
+        },
+        "deliveryRobot":{
+            "icons":{
+                "deliveryRobot":"/icons/deliveryRobot.png"
+            }
+        },
+        "tinyRobot":{
+            "icons":{
+                "tinyRobot":"/icons/tinyRobot.png"
+            }
+        }
+    },
+    "logos":{
+        "headerLogo":{
+            "icons":{
+                "headerLogo":"/icons/headerLogo.png"
+            }
+        }
+    }
+}

@@ -1,1 +1,22 @@
-{"dispensers": {}, "robots": {}}
+{
+    "dispensers":{},
+    "robots":{
+        "deliveryRobot":{
+            "icons":{
+                "deliveryRobot":"/robots/deliveryRobot/deliveryRobot.png"
+            }
+        },
+        "tinyRobot":{
+            "icons":{
+                "tinyRobot":"/robots/tinyRobot/tinyRobot.png"
+            }
+        }
+    },
+    "logos":{
+        "headerLogo":{
+            "icons":{
+                "headerLogo":"/logos/header/headerLogo.png"
+            }
+        }
+    }
+}

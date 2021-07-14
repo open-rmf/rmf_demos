@@ -9,6 +9,7 @@
   <arg name="initial_map" default="L1" description="Initial map name for the visualizer"/>
   <arg name="headless" default="false" description="do not launch rviz; launch gazebo in headless mode"/>
   <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
+  <arg name="use_rmf_panel" default="true" description="launch web and api server for rmf_demos_panel"/>
 
   <!-- Traffic Schedule  -->
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_primary">
@@ -23,7 +24,6 @@
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_blockade" output="both">
     <param name="use_sim_time" value="$(var use_sim_time)"/>
   </node>
-
 
   <!-- Building Map  -->
   <group>
@@ -59,9 +59,11 @@
     </node>
   </group>
 
-  <include file="$(find-pkg-share rmf_demos)/dashboard.launch.xml">
-    <arg name="use_sim_time" value="$(var use_sim_time)"/>
-    <arg name="dashboard_config_file" value ="$(var dashboard_config_file)"/>
-  </include>
+  <group if="$(var use_rmf_panel)">
+    <include file="$(find-pkg-share rmf_demos)/dashboard.launch.xml">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="dashboard_config_file" value ="$(var dashboard_config_file)"/>
+    </include>
+  </group>
 
 </launch>
