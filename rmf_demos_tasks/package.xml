@@ -6,6 +6,7 @@
   <description>A package containing scripts for demos</description>
   <author email= "grey@openrobotics.org">Grey</author>
   <maintainer email="yadunund@openrobotics.org">yadu</maintainer>
+  <maintainer email="marco@openrobotics.org">Marco A. Gutiérrez</maintainer>
   <license>Apache Licence 2.0</license>
 
   <depend>rmf_fleet_msgs</depend>

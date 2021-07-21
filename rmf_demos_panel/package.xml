@@ -5,6 +5,7 @@
   <version>1.0.0</version>
   <description>Web based RMF Demo Panel</description>
   <maintainer email="youliang@openrobotics.org">youliang</maintainer>
+  <maintainer email="marco@openrobotics.org">Marco A. Gutiérrez</maintainer>
   <license>Apache License 2.0</license>
 
   <exec_depend>python3-flask</exec_depend>
