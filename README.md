@@ -98,7 +98,7 @@ This demo world shows robot interaction on a much larger map, with a lot more la
 To launch the world and the schedule visualizer,
 
 ```bash
-source ~/rmf_demos_ws/install/setup.bash
+source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos airport_terminal.launch.xml
 ```
 
@@ -143,7 +143,7 @@ This is a clinic world with two levels and two lifts for the robots. Two differe
 To launch the world and the schedule visualizer,
 
 ```bash
-source ~/rmf_demos_ws/install/setup.bash
+source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos clinic.launch.xml
 ```
 
@@ -183,7 +183,7 @@ Full hotel floor plan in `traffic_editor`:
 To launch the world and the schedule visualizer,
 
 ```bash
-source ~/rmf_demos_ws/install/setup.bash
+source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos hotel.launch.xml
 ```
 
