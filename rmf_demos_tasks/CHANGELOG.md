@@ -1,7 +1,7 @@
 ## Changelog for package rmf_demos_tasks
 
 
-1.2.0 (2021-04-XX)
+1.2.0 (2021-07-21)
 ------------------
 * update all namings with rmf_demos as prefix [#1](https://github.com/open-rmf/rmf_demos/pull/1)
 * Add priority selection in dispatch scripts and react ui [#5](https://github.com/open-rmf/rmf_demos/pull/5)
