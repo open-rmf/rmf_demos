@@ -1,6 +1,6 @@
 ## Changelog for package rmf_demos
 
-1.2.0 (2021-04-XX)
+1.2.0 (2021-07-21)
 ------------------
 * Secured Ros2 office demo. [#135](https://github.com/osrf/rmf_demos/pull/135)
 * Traffic Light Scenarios. [#168](https://github.com/osrf/rmf_demos/pull/168)

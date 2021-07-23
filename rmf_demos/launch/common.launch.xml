@@ -12,7 +12,11 @@
   <arg name="use_rmf_panel" default="true" description="launch web and api server for rmf_demos_panel"/>
 
   <!-- Traffic Schedule  -->
-  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both">
+  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_primary">
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+  </node>
+  <!-- Traffic Schedule monitor and replacement node -->
+  <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule_monitor" output="both" name="rmf_traffic_schedule_backup">
     <param name="use_sim_time" value="$(var use_sim_time)"/>
   </node>
 
