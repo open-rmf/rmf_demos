@@ -47,12 +47,8 @@ class AckmannPathRequester:
         self.publisher = self.node.create_publisher(PathRequest, 'ackmann_path_requests', 10)
 
     def main(self):
-        # $(find-pkg-share rmf_demos_maps)/maps/test_ackman/nav_graphs/0.yaml
-        print("============")
-        print(self.package_share_dir)
-        print(self.nav_graph_file)
-        print("============")
         nav_graph_filename = self.package_share_dir + '/' + self.nav_graph_file
+        print("Loading nav_graph_filename: " + nav_graph_filename)
 
         nav_graph_yaml = None
         with open(nav_graph_filename) as f:
@@ -61,13 +57,12 @@ class AckmannPathRequester:
         levels_yaml = nav_graph_yaml['levels']
         L1_yaml = levels_yaml['L1']
         lanes_yaml = L1_yaml['lanes']
-        print("lane count: {} ".format(len(lanes_yaml)))
 
         vertices_yaml = L1_yaml['vertices']
         start_vertex_index = -1
         end_vertex_index = -1
         index = 0
-        #len(vertices_yaml)
+
         for vertex in vertices_yaml:
             vertex_metadata = vertex[2]
             if vertex_metadata['name'] is not None:
@@ -94,7 +89,7 @@ class AckmannPathRequester:
             for lane in lanes_yaml:
                 if lane[0] == route_last_wp_idx:
                     candidate_wp = lane[1]
-                    print("considering: {} {}".format(lane[0], lane[1]))
+                    #print("considering: {} {}".format(lane[0], lane[1]))
                     if candidate_wp == end_vertex_index:
                         route.append(candidate_wp)
                         complete_routes.append(route)
@@ -103,7 +98,7 @@ class AckmannPathRequester:
                         next_wp_backtracks = False
                         for wp in route:
                             if wp == candidate_wp:
-                                print("hit backtrack!")
+                                #print("hit backtrack!")
                                 next_wp_backtracks = True
                                 break
                         if next_wp_backtracks is False:
@@ -124,8 +119,6 @@ class AckmannPathRequester:
             return
         final_route = complete_routes[0]
 
-        time.sleep(0.5)
-
         path_request = PathRequest()
         path_request.fleet_name = ""
         path_request.robot_name = "ambulance"
@@ -139,8 +132,9 @@ class AckmannPathRequester:
             location.yaw = 0.0
             location.level_name = "L1"
             path_request.path.append(location)
-        self.publisher.publish(path_request)
 
+        time.sleep(0.5)
+        self.publisher.publish(path_request)
         time.sleep(0.5)
         rclpy.shutdown()
 
