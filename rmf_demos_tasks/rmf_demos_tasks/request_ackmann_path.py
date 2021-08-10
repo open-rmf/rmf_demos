@@ -29,13 +29,14 @@ class AckmannPathRequester:
 
     def __init__(self, argv=sys.argv):
         parser = argparse.ArgumentParser()
-        parser.add_argument('-p', '--package_name', help='Name of the package to look for navgraph yaml files')
-        parser.add_argument('-n', '--nav_graph_file', help='Navgraph yaml file')
-        parser.add_argument('-s', '--start', help='Starting waypoint (name label)')
-        parser.add_argument('-e', '--end', help='Ending waypoint (name label)')
+        parser.add_argument('-p', '--package_name',
+                            help='Name of package to look for navgraph files')
+        parser.add_argument('-n', '--nav_graph_file', help='Navgraph yaml')
+        parser.add_argument('-s', '--start', help='Starting waypoint (label)')
+        parser.add_argument('-e', '--end', help='Ending waypoint (label)')
         parser.add_argument('-i', '--task-id', help='Task ID', default='',
                             type=str)
-        
+
         args = parser.parse_args(argv[1:])
         self.start_wp = args.start
         self.end_wp = args.end
@@ -44,7 +45,8 @@ class AckmannPathRequester:
         self.nav_graph_file = args.nav_graph_file
 
         self.node = rclpy.create_node('ackmann_path_requester_node')
-        self.publisher = self.node.create_publisher(PathRequest, 'ackmann_path_requests', 10)
+        self.publisher = self.node.create_publisher(
+            PathRequest, 'ackmann_path_requests', 10)
 
     def main(self):
         nav_graph_filename = self.package_share_dir + '/' + self.nav_graph_file
@@ -67,12 +69,13 @@ class AckmannPathRequester:
             vertex_metadata = vertex[2]
             if vertex_metadata['name'] is not None:
                 if vertex_metadata['name'] == self.start_wp:
-                     start_vertex_index = index
+                    start_vertex_index = index
                 if vertex_metadata['name'] == self.end_wp:
-                     end_vertex_index = index
+                    end_vertex_index = index
             index = index + 1
-        
-        print("searching path from {} to {}".format(start_vertex_index, end_vertex_index))
+
+        print("searching path from {} to {}".format(
+            start_vertex_index, end_vertex_index))
         # do an exhaustive search
         routes = []
         for lane in lanes_yaml:
@@ -89,7 +92,7 @@ class AckmannPathRequester:
             for lane in lanes_yaml:
                 if lane[0] == route_last_wp_idx:
                     candidate_wp = lane[1]
-                    #print("considering: {} {}".format(lane[0], lane[1]))
+                    # print("considering: {} {}".format(lane[0], lane[1]))
                     if candidate_wp == end_vertex_index:
                         route.append(candidate_wp)
                         complete_routes.append(route)
@@ -98,19 +101,18 @@ class AckmannPathRequester:
                         next_wp_backtracks = False
                         for wp in route:
                             if wp == candidate_wp:
-                                #print("hit backtrack!")
+                                # print("hit backtrack!")
                                 next_wp_backtracks = True
                                 break
                         if next_wp_backtracks is False:
                             new_route = route.copy()
                             new_route.append(candidate_wp)
-                            
+
                             print("new route: ")
                             print(new_route)
                             routes.append(new_route)
                             print(len(routes))
-            
-        #path_request.path.append()
+
         print("full route:")
         print(complete_routes)
 
@@ -123,7 +125,7 @@ class AckmannPathRequester:
         path_request.fleet_name = ""
         path_request.robot_name = "ambulance"
         path_request.task_id = self.task_id
-        
+
         for wp in final_route:
             print(vertices_yaml[wp][2]['name'])
             location = Location()
@@ -141,8 +143,8 @@ class AckmannPathRequester:
         self.node.get_logger().info(
           'Ackmann path request between {} (#{}) and {} (#{}), submitted to {}'
           .format(self.start_wp, start_vertex_index,
-                self.end_wp, end_vertex_index,
-                path_request.robot_name))
+                  self.end_wp, end_vertex_index,
+                  path_request.robot_name))
 
 
 def main(argv=sys.argv):
