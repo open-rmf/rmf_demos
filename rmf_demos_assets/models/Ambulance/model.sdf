@@ -4,15 +4,17 @@
     
     <plugin name="slotcar" filename="libslotcar.so">
 
+      <holonomic>0</holonomic>
+
       <!-- Forward / Backward -->
-      <nominal_drive_speed>100</nominal_drive_speed>
-      <nominal_drive_acceleration>75</nominal_drive_acceleration>
-      <max_drive_acceleration>88</max_drive_acceleration>
+      <nominal_drive_speed>160</nominal_drive_speed>
+      <nominal_drive_acceleration>150</nominal_drive_acceleration>
+      <max_drive_acceleration>128</max_drive_acceleration>
 
       <!-- Turning -->
-      <nominal_turn_speed>0.8</nominal_turn_speed>
-      <nominal_turn_acceleration>314.0</nominal_turn_acceleration>
-      <max_turn_acceleration>314.0</max_turn_acceleration>
+      <nominal_turn_speed>0.375</nominal_turn_speed>
+      <nominal_turn_acceleration>98.75</nominal_turn_acceleration>
+      <max_turn_acceleration>187.5</max_turn_acceleration>
 
       <tire_radius>0.1</tire_radius>
       <base_width>0.3206</base_width>
@@ -54,18 +56,12 @@
       </inertial>
 
       <collision name="collision">
-        <pose frame=''>0 0.35 0 0 -0 0</pose>
+        <pose frame=''>0 0.375 0 0 -0 0</pose>
         <geometry>
           <box>
             <size>0.65 1.5 1.0</size>
           </box>
         </geometry>
-        <!--<geometry>
-          <mesh>
-            <scale>0.00554 0.00554 0.00554</scale>
-            <uri>model://Ambulance/meshes/ambulance.obj</uri>
-          </mesh>
-        </geometry>-->
       </collision>
       <visual name="visual">
         <pose frame=''>0 0.4 -0.5 0 -0 0</pose>
@@ -76,7 +72,8 @@
           </mesh>
         </geometry>
       </visual>
-      <visual name="visual2">
+      <!--
+        <visual name="visual2">
         <pose frame=''>0 0.35 0 0 -0 0</pose>
         <geometry>
           <box>
@@ -89,6 +86,7 @@
           <specular>0.0 0.0 1.0 1</specular>
         </material>
       </visual>
+      -->
     </link>
   </model>
 </sdf>
