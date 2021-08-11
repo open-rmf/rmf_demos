@@ -14,7 +14,7 @@
       <!-- Turning -->
       <nominal_turn_speed>0.375</nominal_turn_speed>
       <nominal_turn_acceleration>98.75</nominal_turn_acceleration>
-      <max_turn_acceleration>187.5</max_turn_acceleration>
+      <max_turn_acceleration>999</max_turn_acceleration>
 
       <tire_radius>0.1</tire_radius>
       <base_width>0.3206</base_width>
@@ -40,7 +40,7 @@
     
     <static>false</static>
     <link name="body">
-      <pose>0 0 0.5 0 0 1.57</pose>
+      <pose>0 0 0.7 0 0 1.57</pose>
 
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -64,16 +64,16 @@
         </geometry>
       </collision>
       <visual name="visual">
-        <pose frame=''>0 0.4 -0.5 0 -0 0</pose>
+        <pose frame=''>0 0.7 -0.5 0 -0 0</pose>
         <geometry>
           <mesh>
-            <scale>0.00554 0.00554 0.00554</scale>
+            <scale>0.0225 0.0225 0.0225</scale>
             <uri>model://Ambulance/meshes/ambulance.obj</uri>
           </mesh>
         </geometry>
       </visual>
-      <!--
-        <visual name="visual2">
+      
+      <!-- <visual name="visual2">
         <pose frame=''>0 0.35 0 0 -0 0</pose>
         <geometry>
           <box>
@@ -85,8 +85,8 @@
           <diffuse>0.0 0.0 1.0 1</diffuse>
           <specular>0.0 0.0 1.0 1</specular>
         </material>
-      </visual>
-      -->
+      </visual>-->
+      
     </link>
   </model>
 </sdf>
