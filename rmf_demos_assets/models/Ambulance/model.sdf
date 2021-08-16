@@ -16,6 +16,8 @@
       <nominal_turn_acceleration>98.75</nominal_turn_acceleration>
       <max_turn_acceleration>999</max_turn_acceleration>
 
+      <min_turning_radius>2.3</min_turning_radius>
+
       <tire_radius>0.1</tire_radius>
       <base_width>0.3206</base_width>
 
