@@ -7,19 +7,19 @@
       <holonomic>0</holonomic>
 
       <!-- Forward / Backward -->
-      <nominal_drive_speed>650</nominal_drive_speed>
-      <nominal_drive_acceleration>250</nominal_drive_acceleration>
-      <max_drive_acceleration>256</max_drive_acceleration>
+      <nominal_drive_speed>6.50</nominal_drive_speed>
+      <nominal_drive_acceleration>2.50</nominal_drive_acceleration>
+      <max_drive_acceleration>2.56</max_drive_acceleration>
 
       <!-- Turning -->
       <nominal_turn_speed>0.375</nominal_turn_speed>
-      <nominal_turn_acceleration>98.75</nominal_turn_acceleration>
-      <max_turn_acceleration>999</max_turn_acceleration>
+      <nominal_turn_acceleration>1</nominal_turn_acceleration>
+      <max_turn_acceleration>1</max_turn_acceleration>
 
       <min_turning_radius>2.3</min_turning_radius>
 
-      <tire_radius>0.1</tire_radius>
-      <base_width>0.3206</base_width>
+      <tire_radius>0.2</tire_radius>
+      <base_width>1.3206</base_width>
 
       <!-- Stop distance and radius  -->
       <stop_distance>1.5</stop_distance>
