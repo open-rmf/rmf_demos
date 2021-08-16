@@ -1,6 +1,0 @@
-building:
-  filename: test_ackman.building.yaml
-name: test_ackman
-traffic_maps:
-  {}
-version: 1
