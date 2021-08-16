@@ -32,12 +32,14 @@ class AckmannPathRequester:
         parser.add_argument('-p', '--package_name',
                             help='Name of package to look for navgraph files')
         parser.add_argument('-n', '--nav_graph_file', help='Navgraph yaml')
+        parser.add_argument('-r', '--robot_name', help='Name of robot')
         parser.add_argument('-s', '--start', help='Starting waypoint (label)')
         parser.add_argument('-e', '--end', help='Ending waypoint (label)')
         parser.add_argument('-i', '--task-id', help='Task ID', default='',
                             type=str)
 
         args = parser.parse_args(argv[1:])
+        self.robot_name = args.robot_name
         self.start_wp = args.start
         self.end_wp = args.end
         self.task_id = args.task_id
@@ -123,7 +125,7 @@ class AckmannPathRequester:
 
         path_request = PathRequest()
         path_request.fleet_name = ""
-        path_request.robot_name = "ambulance"
+        path_request.robot_name = self.robot_name
         path_request.task_id = self.task_id
 
         for wp in final_route:

@@ -7,9 +7,9 @@
       <holonomic>0</holonomic>
 
       <!-- Forward / Backward -->
-      <nominal_drive_speed>160</nominal_drive_speed>
-      <nominal_drive_acceleration>150</nominal_drive_acceleration>
-      <max_drive_acceleration>128</max_drive_acceleration>
+      <nominal_drive_speed>650</nominal_drive_speed>
+      <nominal_drive_acceleration>250</nominal_drive_acceleration>
+      <max_drive_acceleration>256</max_drive_acceleration>
 
       <!-- Turning -->
       <nominal_turn_speed>0.375</nominal_turn_speed>
@@ -30,7 +30,7 @@
 
       <!-- Physical params -->
       <mass>7.0</mass>
-      <inertia>10.0</inertia>
+      <inertia>5.0</inertia>
       <friction_coefficient>0.0</friction_coefficient>
 
       <!-- Power systems -->
@@ -40,7 +40,7 @@
     
     <static>false</static>
     <link name="body">
-      <pose>0 0 0.75 0 0 1.57</pose>
+      <pose>0 0 0.875 0 0 1.57</pose>
 
       <inertial>
         <pose frame=''>0 0 0.1 0 -0 0</pose>
