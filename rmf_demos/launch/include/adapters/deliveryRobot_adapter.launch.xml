@@ -41,6 +41,9 @@
       <!-- Give everything time to discover -->
       <arg name="discovery_timeout" value="60.0"/>
 
+      <!-- Can the robot drive backwards -->
+      <arg name="reversible" value="true"/>
+
       <!-- Whether it can perform deliveries -->
       <arg name="perform_deliveries" value="true"/>
       <!-- Whether it can perform loop -->
