@@ -1,0 +1,17 @@
+<?xml version='1.0' ?>
+
+<launch>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="failover_mode" default="false"/>
+
+  <!-- Common launch -->
+  <include file="$(find-pkg-share rmf_demos_base)/hotel.launch.xml">
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+    <arg name="failover_mode" value="$(var failover_mode)"/>
+  </include>
+
+  <!-- Simulation launch -->
+  <include file="$(find-pkg-share rmf_demos_ignition)/simulation.launch.xml">
+    <arg name="map_name" value="hotel" />
+  </include>
+</launch>
