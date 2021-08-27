@@ -1,8 +1,8 @@
-This document is a declaration of software quality for the `rmf_demos_gazebo` package, based on the guidelines in [REP-2004](https://www.ros.org/reps/rep-2004.html).
+This document is a declaration of software quality for the `rmf_demos_ignition` package, based on the guidelines in [REP-2004](https://www.ros.org/reps/rep-2004.html).
 
-# `rmf_demos_gazebo` Quality Declaration
+# `rmf_demos_ignition` Quality Declaration
 
-The package `rmf_demos_gazebo` claims to be in the **Quality Level 4** category.
+The package `rmf_demos_ignition` claims to be in the **Quality Level 4** category.
 The main rationale for this claim its its status as a collection of demonstration launch files.
 
 Below are the detailed rationales, notes, and caveats for this claim, organized by each requirement listed in the [Package Requirements for Quality Level 3 in REP-2004](https://www.ros.org/reps/rep-2004.html).
@@ -11,40 +11,40 @@ Below are the detailed rationales, notes, and caveats for this claim, organized 
 
 ### Version Scheme [1.i]
 
-`rmf_demos_gazebo` uses `semver` according to the recommendation for ROS Core packages in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#versioning).
+`rmf_demos_ignition` uses `semver` according to the recommendation for ROS Core packages in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#versioning).
 
 ### Version Stability [1.ii]
 
-`rmf_demos_gazebo` is at a stable version, i.e. `>= 1.0.0`.
+`rmf_demos_ignition` is at a stable version, i.e. `>= 1.0.0`.
 The current version can be found in its [package.xml](package.xml), and its change history can be found in its [CHANGELOG](CHANGELOG.rst).
 
 ### Public API Declaration [1.iii]
 
-`rmf_demos_gazebo` does not have a public API.
+`rmf_demos_ignition` does not have a public API.
 
 ### API Stability Policy [1.iv]
 
-`rmf_demos_gazebo` does not have a public API.
+`rmf_demos_ignition` does not have a public API.
 
 ### ABI Stability Policy [1.v]
 
-`rmf_demos_gazebo` does not have a public API.
+`rmf_demos_ignition` does not have a public API.
 
 ### API and ABI Stability Within a Released ROS Distribution [1.vi]
 
-`rmf_demos_gazebo` does not have a public API.
+`rmf_demos_ignition` does not have a public API.
 
 ## Change Control Process [2]
 
-`rmf_demos_gazebo` follows the recommended guidelines for ROS Core packages in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#package-requirements).
+`rmf_demos_ignition` follows the recommended guidelines for ROS Core packages in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#package-requirements).
 
 ### Change Requests [2.i]
 
-`rmf_demos_gazebo` requires that all changes occur through a pull request.
+`rmf_demos_ignition` requires that all changes occur through a pull request.
 
 ### Contributor Origin [2.ii]
 
-`rmf_demos_gazebo` uses DCO as its confirmation of contributor origin policy. More information can be found in [CONTRIBUTING](../CONTRIBUTING.md).
+`rmf_demos_ignition` uses DCO as its confirmation of contributor origin policy. More information can be found in [CONTRIBUTING](../CONTRIBUTING.md).
 
 ### Peer Review Policy [2.iii]
 
@@ -64,15 +64,15 @@ All pull requests must resolve related documentation changes before merging.
 
 ### Feature Documentation [3.i]
 
-`rmf_demos_gazebo` is documented in the [parent repository's README.md file](../README.md).
+`rmf_demos_ignition` is documented in the [parent repository's README.md file](../README.md).
 
 ### Public API Documentation [3.ii]
 
-`rmf_demos_gazebo` does not have a public API.
+`rmf_demos_ignition` does not have a public API.
 
 ### License [3.iii]
 
-The license for `rmf_demos_gazebo` is Apache 2.0, the type is declared in the [package.xml](package.xml) manifest file, and a full copy of the license is in the repository level [LICENSE](../LICENSE) file.
+The license for `rmf_demos_ignition` is Apache 2.0, the type is declared in the [package.xml](package.xml) manifest file, and a full copy of the license is in the repository level [LICENSE](../LICENSE) file.
 
 There are no source files that are currently copyrighted in this package so files are not checked for abbreviated license statements.
 
@@ -90,51 +90,41 @@ This quality declaration has not been externally peer-reviewed and is not regist
 
 ### Feature Testing [4.i]
 
-`rmf_demos_gazebo` is a package providing strictly launch files and therefore does not require associated tests.
+`rmf_demos_ignition` is a package providing strictly launch files and therefore does not require associated tests.
 
 ### Public API Testing [4.ii]
 
-`rmf_demos_gazebo` is a package providing strictly launch files and therefore does not require associated tests.
+`rmf_demos_ignition` is a package providing strictly launch files and therefore does not require associated tests.
 
 ### Coverage [4.iii]
 
-`rmf_demos_gazebo` is a package providing strictly launch files and therefore does not require associated tests.
+`rmf_demos_ignition` is a package providing strictly launch files and therefore does not require associated tests.
 
 ### Performance [4.iv]
 
-`rmf_demos_gazebo` is a package providing strictly launch files and therefore does not require associated tests.
+`rmf_demos_ignition` is a package providing strictly launch files and therefore does not require associated tests.
 
 ### Linters and Static Analysis [4.v]
 
-`rmf_demos_gazebo` does not use the [standard linters and static analysis tools](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#linters).
+`rmf_demos_ignition` does not use the [standard linters and static analysis tools](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#linters).
 
 ## Dependencies [5]
 
 ### Direct Runtime ROS Dependencies [5.i]
 
-`rmf_demos_gazebo` has the following runtime ROS dependencies.
+`rmf_demos_ignition` has the following runtime ROS dependencies.
 
-#### rmf_building_sim_gazebo_plugins
+#### rmf_building_sim_ignition_plugins
 
-`rmf_building_sim_gazebo_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_building_sim_gazebo_plugins/QUALITY_DECLARATION.md).
+`rmf_building_sim_ignition_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_building_sim_ignition_plugins/QUALITY_DECLARATION.md).
 
-#### rmf_robot_sim_gazebo_plugins
+#### rmf_robot_sim_ignition_plugins
 
-`rmf_robot_sim_gazebo_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_robot_sim_gazebo_plugins/QUALITY_DECLARATION.md).
+`rmf_robot_sim_ignition_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_robot_sim_ignition_plugins/QUALITY_DECLARATION.md).
 
-#### gazebo_ros_pkgs
+#### teleop_twist_keyboard
 
-`gazebo_ros_pkgs` does not declare a Quality Level.
-It is assumed to be at least **Quality Level 4** based on its widespread use.
-
-#### joy
-
-`joy` does not declare a Quality Level.
-It is assumed tobe at **Quality Level 4** based on its widespread use.
-
-#### teleop_twist_joy
-
-`teleop_twist_joy` does not declare a Quality Level.
+`teleop_twist_keyboard` does not declare a Quality Level.
 It is assumed tobe at **Quality Level 4** based on its widespread use.
 
 #### launch_xml
@@ -142,17 +132,22 @@ It is assumed tobe at **Quality Level 4** based on its widespread use.
 `launch_xml` does not declare a Quality Level.
 It is assumed tobe at **Quality Level 4** based on its widespread use.
 
+#### ros_ign_bridge
+
+`ros_ign_bridge` does not declare a Quality Level.
+It is assumed tobe at **Quality Level 4** based on its widespread use.
+
 ### Optional Direct Runtime ROS Dependencies [5.ii]
 
-`rmf_demos_gazebo` does not have any optional direct runtime ROS dependencies.
+`rmf_demos_ignition` does not have any optional direct runtime ROS dependencies.
 
 ### Direct Runtime non-ROS Dependency [5.iii]
 
-`rmf_demos_gazebo` does not have any runtime non-ROS dependencies.
+`rmf_demos_ignition` does not have any runtime non-ROS dependencies.
 
 ## Platform Support [6]
 
-As a pure message and service definitions package, `rmf_demos_gazebo` supports all of the tier 1 platforms as described in [REP-2000](https://www.ros.org/reps/rep-2000.html#support-tiers), but does not currently test each change against all of them.
+As a pure message and service definitions package, `rmf_demos_ignition` supports all of the tier 1 platforms as described in [REP-2000](https://www.ros.org/reps/rep-2000.html#support-tiers), but does not currently test each change against all of them.
 
 ## Security [7]
 
