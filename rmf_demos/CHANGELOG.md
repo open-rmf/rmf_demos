@@ -1,4 +1,4 @@
-## Changelog for package rmf_demos_base
+## Changelog for package rmf_demos
 
 1.2.0 (2021-07-21)
 ------------------

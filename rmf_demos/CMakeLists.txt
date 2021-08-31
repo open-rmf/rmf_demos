@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(rmf_demos_base)
+project(rmf_demos)
 
 find_package(ament_cmake REQUIRED)
 

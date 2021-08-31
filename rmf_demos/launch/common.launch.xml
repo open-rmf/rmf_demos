@@ -60,7 +60,7 @@
   </group>
 
   <group if="$(var use_rmf_panel)">
-    <include file="$(find-pkg-share rmf_demos_base)/dashboard.launch.xml">
+    <include file="$(find-pkg-share rmf_demos)/dashboard.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="dashboard_config_file" value ="$(var dashboard_config_file)"/>
     </include>
