@@ -16,7 +16,7 @@
       <nominal_turn_acceleration>2</nominal_turn_acceleration>
       <max_turn_acceleration>2</max_turn_acceleration>
 
-      <computed_turning_multiplier>1.5</computed_turning_multiplier>
+      <turning_right_angle_mul_offset>0.35</turning_right_angle_mul_offset>
 
       <tire_radius>0.2</tire_radius>
       <base_width>1.3206</base_width>
@@ -45,7 +45,7 @@
       <pose>0 0 0.875 0 0 1.57</pose>
 
       <inertial>
-        <pose frame=''>0 0 0.0 0 -0 0</pose>
+        <pose frame=''>0 1.0 0 0 -0 0</pose>
         <mass>7</mass> <!-- A higher mass causes wheels to spin while attempting to turn when using DART -->
         <inertia>
           <ixx>0.5</ixx>
