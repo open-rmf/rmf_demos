@@ -6,7 +6,7 @@
   <arg name="use_tpe" default="false"/>
 
   <!-- Common launch -->
-  <include file="$(find-pkg-share rmf_demos_base)/office.launch.xml">
+  <include file="$(find-pkg-share rmf_demos)/office.launch.xml">
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="failover_mode" value="$(var failover_mode)"/>
     <arg name="use_tpe" value="$(var use_tpe)"/>

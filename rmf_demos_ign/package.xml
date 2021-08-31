@@ -11,7 +11,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>rmf_demos_base</exec_depend>
+  <exec_depend>rmf_demos</exec_depend>
   <exec_depend>rmf_building_sim_ignition_plugins</exec_depend>
   <exec_depend>rmf_robot_sim_ignition_plugins</exec_depend>
 

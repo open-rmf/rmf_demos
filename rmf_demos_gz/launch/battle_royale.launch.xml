@@ -5,7 +5,7 @@
   <arg name="use_sim_time" default="true"/>
 
   <!-- Common launch -->
-  <include file="$(find-pkg-share rmf_demos_base)/battle_royale.launch.xml">
+  <include file="$(find-pkg-share rmf_demos)/battle_royale.launch.xml">
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
   </include>
 
