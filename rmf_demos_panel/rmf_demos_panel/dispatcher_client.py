@@ -41,8 +41,8 @@ class DispatcherClient(Node):
         self.cancel_task_srv = self.create_client(CancelTask, '/cancel_task')
         self.get_tasks_srv = self.create_client(GetTaskList, '/get_tasks')
 
-        self.get_building_map_srv = self.create_client(GetBuildingMap, '/get_building_map')
-
+        self.get_building_map_srv = self.create_client(
+            GetBuildingMap, '/get_building_map')
 
         qos_profile = QoSProfile(depth=20)
 
@@ -182,10 +182,12 @@ class DispatcherClient(Node):
                 self.get_logger().warn('/get_building_map srv call failed')
             else:
                 # Return building map
-                map_data = self.__convert_building_map_msg(response.building_map)
+                map_data = self.__convert_building_map_msg(
+                    response.building_map)
                 return map_data
         except Exception as e:
-            self.get_logger().error('Error! GetBuildingMap Srv failed %r' % (e,))
+            self.get_logger().error(
+                'Error! GetBuildingMap Srv failed %r' % (e,))
         return {}  # empty dict
 
 ###############################################################################
@@ -369,41 +371,46 @@ class DispatcherClient(Node):
             level_data["elevation"] = level.elevation
 
             # TODO: Images, places, doors?
-            level_data["nav_graphs"] = [self.__convert_graph_msg(msg) for msg in level.nav_graphs]
-            level_data["wall_graph"] = self.__convert_graph_msg(level.wall_graph)
+            level_data["nav_graphs"] = \
+                [self.__convert_graph_msg(msg) for msg in level.nav_graphs]
+            level_data["wall_graph"] = \
+                self.__convert_graph_msg(level.wall_graph)
 
             map_data["levels"].append(level_data)
 
         return map_data
-                    
+
     def __convert_graph_msg(self, graph_msg):
         graph_data = {}
         graph_data["name"] = graph_msg.name
         graph_data["vertices"] = []
         graph_data["edges"] = []
-        
+
         for vertex in graph_msg.vertices:
             vertex_data = {}
             vertex_data["x"] = vertex.x
             vertex_data["y"] = vertex.y
-            vertex_data["name"] = vertex.name
+            vertex_data["name"] = \
+                vertex.name
 
-            vertex_data["params"] = [self.__convert_param_msg(msg) for msg in vertex.params]
+            vertex_data["params"] = \
+                [self.__convert_param_msg(msg) for msg in vertex.params]
 
             graph_data["vertices"].append(vertex_data)
-        
+
         for edge in graph_msg.edges:
             edge_data = {}
             edge_data["v1_idx"] = edge.v1_idx
             edge_data["v2_idx"] = edge.v2_idx
             edge_data["edge_type"] = edge.edge_type
 
-            edge_data["params"] = [self.__convert_param_msg(msg) for msg in edge.params]
+            edge_data["params"] = \
+                [self.__convert_param_msg(msg) for msg in edge.params]
 
             graph_data["edges"].append(edge_data)
 
         return graph_data
-    
+
     def __convert_param_msg(self, param_msg):
         param_data = {}
         param_data["name"] = param_msg.name
@@ -425,4 +432,3 @@ class DispatcherClient(Node):
             param_data["value"] = None
 
         return param_data
-        

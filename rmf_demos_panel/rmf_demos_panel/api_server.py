@@ -99,6 +99,7 @@ def building_map():
 
 ###############################################################################
 
+
 def web_server_spin():
     while rclpy.ok():
         dispatcher_client.spin_once()
