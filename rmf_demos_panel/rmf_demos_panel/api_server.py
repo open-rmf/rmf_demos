@@ -90,7 +90,15 @@ def robots():
     return robot_status
 
 
+@app.route('/building_map', methods=['GET'])
+def building_map():
+    building_map_data = jsonify(dispatcher_client.get_building_map_data())
+    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
+        building_map_data: {building_map_data}")
+    return building_map_data
+
 ###############################################################################
+
 
 def web_server_spin():
     while rclpy.ok():
