@@ -27,8 +27,9 @@
 
   <!-- Building Map  -->
   <group>
-    <node pkg="rmf_building_map_tools" exec="building_map_server"
-          args="$(var config_file)"/>
+    <node pkg="rmf_building_map_tools" exec="building_map_server" args="$(var config_file)">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
   </group>
 
   <!-- Visualizer -->
@@ -43,12 +44,16 @@
 
   <!-- Door Supervisor -->
   <group>
-    <node pkg="rmf_fleet_adapter" exec="door_supervisor"/>
+    <node pkg="rmf_fleet_adapter" exec="door_supervisor">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
   </group>
 
   <!-- Lift Supervisor -->
   <group>
-    <node pkg="rmf_fleet_adapter" exec="lift_supervisor"/>
+    <node pkg="rmf_fleet_adapter" exec="lift_supervisor">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
   </group>
 
   <!-- Dispatcher Node -->

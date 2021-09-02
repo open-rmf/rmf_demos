@@ -204,20 +204,20 @@ RMF can also manage fleets whose API or fleet managers only offer pause and resu
 #### Triple-H scenario:
 ```bash
 $ ros2 launch rmf_demos_gz triple_H.launch.xml
-(new terminal) $ ros2 launch rmf_demos_base the_pedigree.launch.xml
+(new terminal) $ ros2 launch rmf_demos the_pedigree.launch.xml
 ```
 #### Battle Royale Scenario:
 
 ```bash
 $ ros2 launch rmf_demos_gz battle_royale.launch.xml
-(new terminal) $ ros2 launch rmf_demos_base battle_go.launch.xml
+(new terminal) $ ros2 launch rmf_demos battle_go.launch.xml
 ```
 
 #### Office Scenario:
 Note that `tinyRobot1` is a standard "full control" robot, while `tinyRobot2` "traffic light" robot.
 ```bash
 $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
-(new terminal) $ ros2 launch rmf_demos_base office_traffic_light_test.launch.xml
+(new terminal) $ ros2 launch rmf_demos office_traffic_light_test.launch.xml
 ```
 
 ## Task Dispatching in RMF
