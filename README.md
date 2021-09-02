@@ -51,7 +51,9 @@ Users may switch between different tabs on the top-left corner of the Panel when
 * [Hotel World](#Hotel-World)
 
 > Note: When running the demos on Ubuntu 18.04 (not officially supported), you are required to explicitly supply gazebo_version launch argument. Eg:
-ros2 launch rmf_demos office.launch.xml gazebo_version:=9
+ros2 launch rmf_demos_gz office.launch.xml gazebo_version:=9
+
+> To run the demos using Ignition instead of Gazebo, change the commands from `ros2 launch rmf_demos_gz [...]` to `ros2 launch rmf_demos_ign [...]`
 
 ---
 
@@ -60,7 +62,7 @@ An indoor office environment for robots to navigate around. It includes a bevera
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
-ros2 launch rmf_demos office.launch.xml
+ros2 launch rmf_demos_gz office.launch.xml
 ```
 
 To send task requests, open RMF Panel from a browser
@@ -99,7 +101,7 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos airport_terminal.launch.xml
+ros2 launch rmf_demos_gz airport_terminal.launch.xml
 ```
 
 Select the `airport` tab on RMF Panel. Load the `airport_terminal_tasks.json` list and click submit to begin a collection of loop, delivery and cleaning tasks.
@@ -113,7 +115,7 @@ ros2 run rmf_demos_tasks dispatch_clean -cs zone_3 --use_sim_time
 
 To see crowd simulation in action, enable crowd sim by:
 ```bash
-ros2 launch rmf_demos airport_terminal.launch.xml use_crowdsim:=1
+ros2 launch rmf_demos_gz airport_terminal.launch.xml use_crowdsim:=1
 ```
 
 Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
@@ -125,8 +127,8 @@ Run `teleop_twist_keyboard` to control the `caddy` with your keyboard:
 # Default launch with gazebo
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
-# if launch with use_ignition:=1
-ros2 launch rmf_demos airport_terminal_caddy_ign.launch.xml
+# if launched with the Ignition simulator
+ros2 launch rmf_demos_ign airport_terminal_caddy.launch.xml
 ```
 
 ![](../media/caddy.gif)
@@ -144,7 +146,7 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos clinic.launch.xml
+ros2 launch rmf_demos_gz clinic.launch.xml
 ```
 
 Select the `clinic` tab on RMF Panel. Load the `clinic_tasks.json` list and click submit to begin a collection of loop and delivery tasks.
@@ -184,7 +186,7 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos hotel.launch.xml
+ros2 launch rmf_demos_gz hotel.launch.xml
 ```
 
 Select the `hotel` tab on RMF Panel. Loop requests can be submitted via "Submit a Task" form.
@@ -201,20 +203,20 @@ RMF can also manage fleets whose API or fleet managers only offer pause and resu
 
 #### Triple-H scenario:
 ```bash
-$ ros2 launch rmf_demos triple_H.launch.xml
+$ ros2 launch rmf_demos_gz triple_H.launch.xml
 (new terminal) $ ros2 launch rmf_demos the_pedigree.launch.xml
 ```
 #### Battle Royale Scenario:
 
 ```bash
-$ ros2 launch rmf_demos battle_royale.launch.xml
+$ ros2 launch rmf_demos_gz battle_royale.launch.xml
 (new terminal) $ ros2 launch rmf_demos battle_go.launch.xml
 ```
 
 #### Office Scenario:
 Note that `tinyRobot1` is a standard "full control" robot, while `tinyRobot2` "traffic light" robot.
 ```bash
-$ ros2 launch rmf_demos office_mock_traffic_light.launch.xml
+$ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
 (new terminal) $ ros2 launch rmf_demos office_traffic_light_test.launch.xml
 ```
 
