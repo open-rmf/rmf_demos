@@ -1,0 +1,84 @@
+<?xml version='1.0' ?>
+
+<launch>
+  <arg name="map_package" default="rmf_demos_maps" description="Name of the map package" />
+  <arg name="map_name" description="Name of the rmf_demos map to simulate" />
+  <arg name="use_crowdsim" default='0'/>
+  <arg name="use_baked" default='0'/>
+  <arg name="baked_assets_package" default='rmf_demos_assets' description="Location of baked assets package"/>
+
+  <arg name="gazebo_version" default="11"/>
+  <let name="world_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/$(var map_name).world" />
+  <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/models:$(find-pkg-share rmf_demos_assets)/models:/usr/share/gazebo-$(var gazebo_version)/models" />
+  <let name="resource_path" value="$(find-pkg-share rmf_demos_assets):/usr/share/gazebo-$(var gazebo_version)" />
+  <let name="plugin_path" value="$(find-pkg-prefix rmf_robot_sim_gazebo_plugins)/lib:$(find-pkg-prefix rmf_building_sim_gazebo_plugins)/lib:/usr/share/gazebo-$(var gazebo_version)" />
+
+  <!-- Use crowd sim if `use_crowdsim` is true-->
+  <let name="menge_resource_path" if="$(var use_crowdsim)" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/config_resource"/>
+  <let name="menge_resource_path" unless="$(var use_crowdsim)" value="" />
+
+  <executable cmd="gzserver --verbose -s libgazebo_ros_factory.so -s libgazebo_ros_init.so $(var world_path)" output="both">
+    <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
+    <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
+    <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
+    <env name="GAZEBO_MODEL_DATABASE_URI" value="" />
+    <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
+  </executable>
+  <group unless="$(var headless)">
+    <executable cmd="gzclient --verbose $(var world_path)" output="both">
+      <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
+      <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
+      <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
+    </executable>
+<<<<<<< HEAD:rmf_demos/launch/simulation.launch.xml
+    <group unless="$(var headless)">
+      <executable cmd="gzclient --verbose $(var world_path)" output="both">
+        <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
+        <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
+        <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
+      </executable>
+    </group>
+  </group>
+
+  <!-- Ignition was chosen-->
+  <group if="$(var use_ignition)">
+    <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)_ign/models:$(find-pkg-share rmf_demos_assets)/models:$(env HOME)/.gazebo/models" />
+    <let name="plugin_path" value="$(find-pkg-prefix rmf_robot_sim_ignition_plugins)/lib:$(find-pkg-prefix rmf_building_sim_ignition_plugins)/lib" />
+
+    <!-- Use crowd sim if `use_crowdsim` is true-->
+    <let name="menge_resource_path" if="$(var use_crowdsim)" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/config_resource"/>
+    <let name="menge_resource_path" unless="$(var use_crowdsim)" value="" />
+
+    <let name="ign_headless" if="$(var headless)" value="-s"/>
+    <let name="ign_headless" unless="$(var headless)" value="" />
+
+    <group if="$(var use_baked)">
+      <let name="world_path" value="$(find-pkg-share $(var map_package))/maps_baked/$(var map_name).world"/>
+      <let name="baked_models_path" value="$(find-pkg-share $(var baked_assets_package))/models_baked/$(var map_name)"/>
+
+      <set_env name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
+      <set_env name="IGN_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
+      <set_env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
+
+      <executable cmd="ign gazebo $(var ign_headless) -r -v 4 $(var world_path)" output="both">
+        <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(var model_path):$(var world_path):$(var baked_models_path)" />
+      </executable>
+    </group>
+
+    <group unless="$(var use_baked)">
+      <let name="world_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)_ign/$(var map_name).world"/>
+
+      <executable cmd="ign gazebo $(var ign_headless) -r -v 4 $(var world_path)" output="both">
+        <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
+      </executable>
+    </group>
+
+    <!-- ros_ign bridge for simulation clock -->
+    <node pkg="ros_ign_bridge" exec="parameter_bridge"
+      args="/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock"
+      />
+=======
+>>>>>>> main:rmf_demos_gazebo/launch/simulation.launch.xml
+  </group>
+
+</launch>

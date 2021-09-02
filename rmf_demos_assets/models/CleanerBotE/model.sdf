@@ -21,6 +21,9 @@
       <stop_distance>1.5</stop_distance>
       <stop_radius>1.5</stop_radius>
 
+      <!-- Can the robot drive backwards -->
+      <reversible>false</reversible>
+      
       <!-- Battery params -->
       <nominal_voltage>24.0</nominal_voltage>
       <nominal_capacity>30.0</nominal_capacity>
