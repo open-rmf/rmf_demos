@@ -27,7 +27,7 @@
       <!-- The radius of the circular footprint of this fleet's vehicles -->
       <arg name="footprint_radius" value="1.0"/>
       <!-- Other robots are not allowed within this radius --> 
-      <arg name="vicinity_radius" value="1.5"/>
+      <arg name="vicinity_radius" value="1.2"/>
 
       <!-- Whether to use sim time -->
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
@@ -50,6 +50,8 @@
       <arg name="perform_loop" value="false"/>
       <!-- Whether it can perform cleaning -->
       <arg name="perform_cleaning" value="true"/>
+      <!-- What the robot should do once it finishes its tasks -->
+      <arg name="finishing_request" value="charge"/>
 
       <!-- Battery parameters -->
       <arg name="battery_voltage" value="24.0"/>
