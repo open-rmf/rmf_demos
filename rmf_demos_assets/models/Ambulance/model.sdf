@@ -4,7 +4,7 @@
     
     <plugin name="slotcar" filename="libslotcar.so">
 
-      <holonomic>0</holonomic>
+      <steering>ackermann</steering>
 
       <!-- Forward / Backward -->
       <nominal_drive_speed>6.50</nominal_drive_speed>
