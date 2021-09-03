@@ -2,5 +2,5 @@
 
 1.3.0 (2021-09-03)
 ------------------
-* Provides launch files for running various demonstration in gazebo
+* Provides launch files for running various demonstrations in gazebo
 

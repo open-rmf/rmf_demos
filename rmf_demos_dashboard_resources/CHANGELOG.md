@@ -1,4 +1,4 @@
-## Changelog for package rmf_dashboard_resources
+## Changelog for package rmf_demos_dashboard_resources
 
 1.3.0 (2021-09-03)
 ------------------
