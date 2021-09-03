@@ -1,5 +1,9 @@
 ## Changelog for package rmf_demos_panel
 
+1.3.0 (2021-09-03)
+------------------
+* Add API endpoint to get the building map: [#75]( https://github.com/open-rmf/rmf_demos/pull/75/)
+
 1.2.0 (2021-07-21)
 ------------------
 * update all namings with rmf_demos as prefix [#1](https://github.com/open-rmf/rmf_demos/pull/1)
