@@ -48,7 +48,7 @@ class AckmannPathRequester:
 
         self.node = rclpy.create_node('ackmann_path_requester_node')
         self.publisher = self.node.create_publisher(
-            PathRequest, 'ackmann_path_requests', 10)
+            PathRequest, 'robot_path_requests', 10)
 
     def main(self):
         nav_graph_filename = self.package_share_dir + '/' + self.nav_graph_file
