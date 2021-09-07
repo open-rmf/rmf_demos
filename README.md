@@ -226,3 +226,12 @@ $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
 In RMF version `21.04` and above, tasks are awarded to robot fleets based on the outcome of a bidding process that is orchestrated by a Dispatcher node, `rmf_dispatcher_node`. When the Dispatcher receives a new task request from a UI, it sends out a `rmf_task_msgs/BidNotice` message to all the fleet adapters. If a fleet adapter is able to process that request, it submits a `rmf_task_msgs/BidProposal` message back to the Dispatcher with a cost to accommodate the task. An instance of `rmf_task::agv::TaskPlanner` is used by the fleet adapters to determine how best to accommodate the new request. The Dispatcher compares all the `BidProposals` received and then submits a `rmf_task_msgs/DispatchRequest` message with the fleet name of the robot that the bid is awarded to. There are a couple different ways the Dispatcher evaluates the proposals such as fastest to finish, lowest cost, etc which can be configured.
 
 Battery recharging is tightly integrated with the new task planner. `ChargeBattery` tasks are optimally injected into a robot's schedule when the robot has insufficient charge to fulfill a series of tasks. Currently we assume each robot in the map has a dedicated charging location as annotated with the `is_charger` option in the traffic editor map.
+
+#### Ackermann test Scenario:
+
+This scenario has a simple demo to show trajectory following for ackermann steering vehicles (such as ambulances). The feature is currently only supported in Ignition, to test the feature:
+
+```bash
+$ ros2 launch rmf_demos_ign test_ackman.launch.xml
+(new terminal) $ ros2 run rmf_demos_tasks request_ackmann_path -p rmf_demos_maps -n maps/test_ackman/nav_graphs/0.yaml -s a1 -e c1 -i task11 -r ambulance
+```
