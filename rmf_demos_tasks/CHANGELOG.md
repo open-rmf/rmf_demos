@@ -1,8 +1,5 @@
 ## Changelog for package rmf_demos_tasks
 
-1.3.0 (2021-09-03)
-------------------
-  
 1.2.0 (2021-07-21)
 ------------------
 * update all namings with rmf_demos as prefix [#1](https://github.com/open-rmf/rmf_demos/pull/1)
