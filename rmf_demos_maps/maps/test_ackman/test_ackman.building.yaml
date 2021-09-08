@@ -1,6 +1,6 @@
 crowd_sim:
   agent_groups:
-    - {agents_name: [], agents_number: 0, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
+    - {agents_name: [ambulance23], agents_number: 1, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
   agent_profiles:
     - {ORCA_tau: 1, ORCA_tauObst: 0.4, class: 1, max_accel: 0, max_angle_vel: 0, max_neighbors: 10, max_speed: 0, name: external_agent, neighbor_dist: 5, obstacle_set: 1, pref_speed: 0, r: 0.25}
   enable: 0
@@ -63,11 +63,9 @@ levels:
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 462.186, y: 613.734, yaw: 1.5708, z: 3}
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 430.37, y: 613.734, yaw: 1.5708, z: 3}
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 396.156, y: 614.213, yaw: 1.5708, z: 3}
-      - {model_name: OpenRobotics/Ambulance, name: ambulance2, static: false, x: 257.07, y: 722.423, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 211.891, y: 654.0650000000001, yaw: 1.5708, z: 3}
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 278.816, y: 690.5700000000001, yaw: 1.5708, z: 3}
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 256.442, y: 625.019, yaw: 1.5708, z: 3}
-      - {model_name: OpenRobotics/Ambulance, name: ambulance, static: false, x: 398.797, y: 687.655, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 226.218, y: 690.766, yaw: 1.5708, z: 3}
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 279.208, y: 640.523, yaw: 1.5708, z: 3}
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 226.807, y: 639.346, yaw: 1.5708, z: 3}
@@ -75,7 +73,7 @@ levels:
       - {model_name: OpenRobotics/Construction Cone, name: OpenRobotics/Construction Cone, static: true, x: 252.757, y: 665.271, yaw: 1.5708, z: 3}
     vertices:
       - [380.889, 702.755, 0, ""]
-      - [397.211, 687.554, 0, a1]
+      - [397.211, 687.554, 0, a1, {spawn_robot_name: [1, ambulance], spawn_robot_type: [1, AmbulanceSlotcar]}]
       - [397.413, 654.328, 0, b1]
       - [429.966, 654.784, 0, b2]
       - [430.271, 613.713, 0, c2]
@@ -107,7 +105,7 @@ levels:
       - [185.114, 666.453, 0, ""]
       - [309.324, 663.384, 0, ""]
       - [240.01, 696.333, 0, ""]
-      - [252.5, 705, 0, d1]
+      - [252.5, 705, 0, d1, {spawn_robot_name: [1, ambulance23], spawn_robot_type: [1, AmbulanceSlotcar]}]
       - [252.5, 665, 0, d2]
       - [278.5, 640, 0, d4_45]
       - [227.5, 640, 0, d3_45]
