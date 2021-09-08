@@ -1,6 +1,6 @@
 ## Changelog for package rmf_demos_dashboard_resources
 
-1.3.0 (2021-09-03)
+1.3.0 (2021-09-08)
 ------------------
 * Update icon for deliveryRobot: [#79](https://github.com/open-rmf/rmf_demos/pull/79)
 

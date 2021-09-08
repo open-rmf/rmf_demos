@@ -1,11 +1,10 @@
 ## Changelog for package rmf_demos
 
-1.3.0 (2021-09-03)
+1.3.0 (2021-09-08)
 ------------------
 * Add finishing_request parameter to fleet adapters: [#83](https://github.com/open-rmf/rmf_demos/pull/83)
 * Split launch files for ignition and gazebo simulators: [#78, #80](https://github.com/open-rmf/rmf_demos/pull/77/files, https://github.com/open-rmf/rmf_demos/pull/80)
 * Add reversible parameter to deliveryRobot and tinyRobot adapters: [#74](https://github.com/open-rmf/rmf_demos/pull/74)
-* Launch file for testing ackermann steering: [#70](https://github.com/open-rmf/rmf_demos/pull/70/files)
 * Fix crash in airport terminal world due to required attribute: [#69](https://github.com/open-rmf/rmf_demos/pull/69)
 
 1.2.0 (2021-07-21)
