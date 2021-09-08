@@ -1,6 +1,6 @@
 ## Changelog for package rmf_demos_assets
 
-1.3.0 (2021-09-03)
+1.3.0 (2021-09-08)
 ------------------
 * Removed gazebo related dependencies: [#81](https://github.com/open-rmf/rmf_demos/pull/81)
 * Added reversible parameter to specify whether a robot can drive backwards: [#77](https://github.com/open-rmf/rmf_demos/pull/77/files)
