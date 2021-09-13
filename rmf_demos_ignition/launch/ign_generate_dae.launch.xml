@@ -8,11 +8,12 @@
 <launch>
   <arg name="map_package" default="rmf_demos_maps" description="Name of the map package" />
   <arg name="map_name" description="Name of the rmf_demos map to generate the dae from" />
+  <arg name="submap_name" default="default" description="Name of the world file to generate the dae from" />
 
   <!-- Ignition only -->
   <group>
-    <let name="world_path" value="$(find-pkg-share $(var map_package))/maps_dae_export/$(var map_name).world" />
-    <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)_ign/models:$(find-pkg-share rmf_demos_assets)/models:$(env HOME)/.gazebo/models" />
+    <let name="world_path" value="$(find-pkg-share $(var map_package))/maps_dae_export/$(var map_name)_ign/$(var submap_name).world" />
+    <let name="model_path" value="$(find-pkg-share $(var map_package))/maps_dae_export/$(var map_name)_ign/models:$(find-pkg-share rmf_demos_assets)/models:$(env HOME)/.gazebo/models" />
     <let name="plugin_path" value="$(find-pkg-prefix rmf_robot_sim_ignition_plugins)/lib:$(find-pkg-prefix rmf_building_sim_ignition_plugins)/lib" />
 
     <!-- TODO: headless in ignitition -->
