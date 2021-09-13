@@ -1,6 +1,6 @@
 ## Changelog for package rmf_demos_maps
 
-1.2.0 (2020-07-21)
+1.2.0 (2021-07-21)
 ------------------
 * update all namings with rmf_demos as prefix [#1](https://github.com/open-rmf/rmf_demos/pull/1)
 * Cleaning task demo in Airport terminal [#8](https://github.com/open-rmf/rmf_demos/pull/8)

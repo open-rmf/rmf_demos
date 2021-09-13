@@ -1,0 +1,20 @@
+<?xml version='1.0' ?>
+
+<launch>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="failover_mode" default="false"/>
+  <arg name="use_tpe" default="false"/>
+
+  <!-- Common launch -->
+  <include file="$(find-pkg-share rmf_demos)/clinic.launch.xml">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="failover_mode" value="$(var failover_mode)"/>
+    <arg name="use_tpe" value="$(var use_tpe)"/>
+  </include>
+
+  <!-- Simulation launch -->
+  <include file="$(find-pkg-share rmf_demos_ign)/simulation.launch.xml">
+    <arg name="map_name" value="clinic" />
+  </include>
+
+</launch>

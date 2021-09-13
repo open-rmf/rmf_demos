@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rmf_demos</name>
+  <version>1.3.0</version>
+  <description>Common launch files for RMF demos</description>
+  <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
+  <maintainer email="marco@openrobotics.org">Marco A. Gutiérrez</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>rmf_demos_maps</exec_depend>
+
+  <exec_depend>rmf_traffic_ros2</exec_depend>
+  <exec_depend>rmf_task_ros2</exec_depend>
+  <exec_depend>rmf_fleet_adapter</exec_depend>
+  <exec_depend>rmf_building_map_tools</exec_depend>
+
+  <exec_depend>rmf_visualization</exec_depend>
+
+  <exec_depend>rmf_demos_assets</exec_depend>
+  <exec_depend>rmf_demos_tasks</exec_depend>
+  <exec_depend>rmf_demos_panel</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+
+  <exec_depend>launch_xml</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
