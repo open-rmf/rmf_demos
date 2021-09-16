@@ -4,6 +4,8 @@
   <arg name="use_sim_time" default="true"/>
   <arg name="failover_mode" default="false"/>
   <arg name="use_tpe" default="false"/>
+  <arg name="use_baked" default='0'/>
+  <arg name="baked_assets_package" default='rmf_demos_assets' description="Location of baked assets package"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/office.launch.xml">
@@ -15,6 +17,8 @@
   <!-- Simulation launch -->
   <include file="$(find-pkg-share rmf_demos_ign)/simulation.launch.xml">
     <arg name="map_name" value="office" />
+    <arg name="use_baked" value="$(var use_baked)" />
+    <arg name="baked_assets_package" value="$(var baked_assets_package)" />
   </include>
 
 </launch>
