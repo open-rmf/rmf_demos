@@ -101,7 +101,8 @@ def building_map():
         building_map_data: {building_map_data}")
     return building_map_data
 
-## Dashboard Config for each "World", this is specific to rmf_demos
+
+# Note: Get Dashboard Config for each "World", specific to rmf_demos impl
 @app.route("/dashboard_config", methods=['GET'])
 def config():
     config = jsonify(dashboard_config)
