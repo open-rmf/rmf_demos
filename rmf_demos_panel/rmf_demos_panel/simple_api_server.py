@@ -14,7 +14,7 @@
 
 
 """
-The main API Interfaces (with port 8080):
+The main API Interfaces (default port 8083):
 1) HTTP interfaces are:  /submit_task, /cancel_task, /task_list, /robot_list
 2) socketIO broadcast states: /task_status, /robot_states, /ros_time
 """
@@ -38,7 +38,7 @@ from rmf_demos_panel.dispatcher_client import DispatcherClient
 
 
 app = Flask(__name__)
-cors = CORS(app, origins=r"/*")
+CORS(app, origins=r"/*")
 
 socketio = SocketIO(app, async_mode='threading')
 socketio.init_app(app, cors_allowed_origins="*")
@@ -52,6 +52,10 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(message)s',
                     filename='web_server.log',
                     filemode='w')
+
+# default dashboard
+dashboard_config = {"world_name": "EMPTY_DASHBOARD_CONFIG",
+                    "task": {"Delivery": {}, "Loop": {}, "Clean": {}}}
 
 ###############################################################################
 
@@ -97,6 +101,13 @@ def building_map():
         building_map_data: {building_map_data}")
     return building_map_data
 
+
+# Note: Get Dashboard Config for each "World", specific to rmf_demos impl
+@app.route("/dashboard_config", methods=['GET'])
+def config():
+    config = jsonify(dashboard_config)
+    return config
+
 ###############################################################################
 
 
@@ -133,11 +144,33 @@ def broadcast_states():
 
 def main(args=None):
     server_ip = "0.0.0.0"
-    port_num = 8080
+    port_num = 8083
 
-    if "WEB_SERVER_IP_ADDRESS" in os.environ:
-        server_ip = os.environ['WEB_SERVER_IP_ADDRESS']
-        print(f"Set Server IP to: {server_ip}:{port_num}")
+    if "RMF_DEMOS_API_SERVER_IP" in os.environ:
+        server_ip = os.environ['RMF_DEMOS_API_SERVER_IP']
+        print(f"Set Server IP to: {server_ip}")
+
+    if "RMF_DEMOS_API_SERVER_PORT" in os.environ:
+        port_num = os.environ['RMF_DEMOS_API_SERVER_PORT']
+        print(f"Set Server port to: {server_ip}:{port_num}")
+
+    if "DASHBOARD_CONFIG_PATH" in os.environ:
+        config_path = os.environ['DASHBOARD_CONFIG_PATH']
+
+        if not config_path:
+            print(f"WARN! env DASHBOARD_CONFIG_PATH is empty...")
+        elif not os.path.exists(config_path):
+            raise FileNotFoundError(f"\n File [{config_path}] doesnt exist")
+        else:
+            try:
+                f = open(config_path, 'r')
+                global dashboard_config
+                dashboard_config = json.load(f)
+            except Exception as err:
+                print(f"Failed to read [{config_path}] dashboard config file")
+                raise err
+    else:
+        print(f"WARN! env DASHBOARD_CONFIG_PATH is not specified...")
 
     spin_thread = Thread(target=web_server_spin, args=())
     spin_thread.start()
@@ -145,7 +178,7 @@ def main(args=None):
     broadcast_thread = Thread(target=broadcast_states, args=())
     broadcast_thread.start()
 
-    print("Starting Dispatcher API Server")
+    print(f"Starting RMF_Demos API Server: {server_ip}:{port_num}")
     app.run(host=server_ip, port=port_num, debug=False)
     dispatcher_client.destroy_node()
     rclpy.shutdown()

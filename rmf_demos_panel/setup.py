@@ -32,8 +32,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'api_server=rmf_demos_panel.api_server:main',
-            'gui_server=rmf_demos_panel.gui_server:main'
+            'simple_api_server=rmf_demos_panel.simple_api_server:main',
         ],
     },
 )
