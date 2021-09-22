@@ -108,9 +108,9 @@
         <pose>0 0 0 0 0 0</pose>
         <mass>3.0</mass>
         <inertia>
-          <ixx>0.757897446874</ixx>
-          <iyy>1.302975553365</iyy>
-          <izz>0.757897446874</izz>
+          <ixx>0.02</ixx>
+          <iyy>0.02</iyy>
+          <izz>0.02</izz>
         </inertia>
       </inertial>
 
@@ -158,9 +158,9 @@
         <pose>0 0 0 0 0 0</pose>
         <mass>3.0</mass>
         <inertia>
-          <ixx>0.657897446874</ixx>
-          <iyy>1.102975553365</iyy>
-          <izz>0.657897446874</izz>
+          <ixx>0.02</ixx>
+          <iyy>0.02</iyy>
+          <izz>0.02</izz>
         </inertia>
       </inertial>
 
