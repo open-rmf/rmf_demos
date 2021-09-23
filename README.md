@@ -4,6 +4,7 @@
 ![](https://github.com/open-rmf/rmf_demos/workflows/style/badge.svg)
 
 The Robotics Middleware Framework (RMF) enables interoperability among heterogeneous robot fleets while managing robot traffic that share resources such as space, building infrastructure systems (lifts, doors, etc) and other automation systems within the same facility. RMF also handles task allocation and conflict resolution  among its participants (de-conflicting traffic lanes and other resources). These capabilities are provided by various libraries in [RMF](https://github.com/open-rmf/rmf).
+More details about RMF, refer to the comprehensive documentation provided [here](https://osrf.github.io/ros2multirobotbook/intro.html).
 
 This repository contains demonstrations of the above mentioned capabilities of RMF. It serves as a starting point for working and integrating with RMF.
 
@@ -31,17 +32,9 @@ Answers to frequently asked questions can be found [here](docs/faq.md).
 
 A near-term roadmap of the RMF project can be found in the user manual [here](https://osrf.github.io/ros2multirobotbook/roadmap.html).
 
-## RMF Panel
-![](../media/RMF_Panel.png?raw=true)
+## RMF-Web
 
-The RMF panel is a web based dashboard for interacting with RMF. It allows users to send task requests to RMF and monitor the status of robots and submitted tasks.
-There are two main modes of submitting tasks to RMF via the Panel:
-
-1. Submit a Task: Used to submit a single task. The user is required to first select a request type from the drop down menu. Depending on the type selected, additional fields specify to the type will need to be populated. The user can then specify the `start time` for the task before clicking `Submit Request`. 
-2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_panel/task_lists`. Once loaded, clicking the `Submit Task List` button will automatically assign the various tasks to available robots.
-
-Users may switch between different tabs on the top-left corner of the Panel when running the relevant demo world. More information on configuring the panel can be found [here](rmf_demos_panel/README.md)
-
+Full web application of RMF: [rmf-web](https://github.com/open-rmf/rmf-web).
 
 ## Demo Worlds
 
@@ -55,6 +48,20 @@ ros2 launch rmf_demos_gz office.launch.xml gazebo_version:=9
 
 > To run the demos using Ignition instead of Gazebo, change the commands from `ros2 launch rmf_demos_gz [...]` to `ros2 launch rmf_demos_ign [...]`
 
+**RMF Panel**
+![](../media/RMF_Panel.png?raw=true)
+
+Click this link: https://open-rmf.github.io/rmf-panel-js/
+
+> For a full-proof web application of RMF, please refer to [rmf-web](https://github.com/open-rmf/rmf-web).
+
+The [RMF panel](https://github.com/open-rmf/rmf-panel-js) is a web based dashboard for interacting with rmf_demos. It allows users to send task requests to RMF and monitor the status of robots and submitted tasks. For more [details](rmf_demos_panel/README.md).
+
+There are two main modes of submitting tasks to RMF via the Panel:
+
+1. Submit a Task: Used to submit a single task.
+2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_panel/task_lists`.
+
 ---
 
 ### Office World
@@ -63,14 +70,18 @@ An indoor office environment for robots to navigate around. It includes a bevera
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch rmf_demos_gz office.launch.xml
+
+# Or, run with ignition simulator
+ros2 launch rmf_demos_ign office.launch.xml
 ```
 
-To send task requests, open RMF Panel from a browser
-```bash
-firefox localhost:5000
-```
+Now we will showcase 2 types of Tasks: **Delivery** and **Loop**
 
-To submit a delivery task, select `Delivery` from the `Select a request type` dropdown list. Next, select `coke` from the `Select delivery task` list. Choose an desired start time for task and click submit.
+To send task requests, open rmf_demos web panel: https://open-rmf.github.io/rmf-panel-js/
+
+![](../media/delivery_request.gif?raw=true)
+
+To submit a **delivery task**, select `Delivery` from the `Select a request type` dropdown list. Next, select `coke` from the `Select delivery task` list. Choose an desired start time for task and click submit.
 
 Or, submit a task via CLI:
 ```bash
@@ -78,9 +89,7 @@ ros2 run rmf_demos_tasks dispatch_loop -s coe -f lounge -n 3 --use_sim_time
 ros2 run rmf_demos_tasks dispatch_delivery -p pantry -pd coke_dispenser -d hardware_2 -di coke_ingestor --use_sim_time
 ```
 
-![](../media/delivery_request.gif?raw=true)
-
-To send loop requests, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
+To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
 To run a scenario with multiple task requests, load `office_tasks.json` from `rmf_demos_panel/task_lists` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
 
 ![](../media/loop_request.gif)
@@ -97,14 +106,14 @@ This demo world shows robot interaction on a much larger map, with a lot more la
 ![](../media/airport_terminal_demo_screenshot.png)
 
 #### Demo Scenario
-To launch the world and the schedule visualizer,
+In the airport world, we introduce a new task type to rmf: `Clean`. To launch the world:
 
 ```bash
 source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz airport_terminal.launch.xml
 ```
 
-Select the `airport` tab on RMF Panel. Load the `airport_terminal_tasks.json` list and click submit to begin a collection of loop, delivery and cleaning tasks.
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the `airport_terminal_tasks.json` list and click submit to begin a collection of loop, delivery and cleaning tasks.
 
 Or, submit `loop`, `delivery` or `clean` task via CLI:
 ```bash

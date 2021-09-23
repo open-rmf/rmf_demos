@@ -3,6 +3,10 @@ Here we describe additional details of `rmf_demos_panel`. This package uses a si
 to expose the essential RMF topics/services to users as web endpoints. Currently, this lite implementation is 
 useful for task submission and observing status of on-going tasks and robots in RMF.
 
+**For a full-proof web application of RMF, please refer to [rmf-web](https://github.com/open-rmf/rmf-web).**
+
+> Note: not to be confused with the `simple-api-server` in rmf_demos and "prod version" of `api-server` in `rmf-web`
+
 ### RMF Dependencies
  - `rmf_task_ros2`
  - `rmf_fleet_msgs`
@@ -20,36 +24,30 @@ Test Run with office world
 
 1. Start Office World
 ```bash
-ros2 launch rmf_demos office.launch.xml
-```
-Launch the dashboard
-```
-firefox localhost:5000
+ros2 launch rmf_demos_gz office.launch.xml
 ```
 
-> Note that this will download the latest webpack "GUI" hosted on `rmf_demos` github page. Thus internet is
-required when you are running the `gui_server` for the first time.
+#### Simple CURL Test
+
+```bash
+# Submit Task (POST)
+curl -X POST http://localhost:8083/submit_task \
+-d '{"task_type":"Loop", "start_time":0, "description": {"start_name": "coe", "finish_name": "pantry", "num_loops":1}}' \
+-H "Content-Type: application/json" 
+
+# Get Task List (GET)
+curl http://localhost:8083/task_list
+```
+
+
+#### rmf-panel-js
+ 
+A front end dashboard, [rmf-panel-js](https://github.com/open-rmf/rmf-panel-js) is also provided.
+This will will be the client for the rmf_demos's api server.
+
+Launch the a web dashboard: https://open-rmf.github.io/rmf-panel-js/
 
 ---
-
-## Development Mode (local npm compilation)
-
-Currently the webpack bundle is located here `https://open-rmf.github.io/rmf_demos/VERSION/app.bundle.js`. Thus this is useful
-for personnel who would like to compile a local react webpack bundle (for testing). **Else you can skip this portion.**
-
-### Dependencies: 
- - npm (node version > 12, see: [node](https://nodejs.org/en/download/package-manager/))
-
-### Compilation
-```bash
-cd ~/rmf_ws
-
-# change the npm prefix according to the path to "rmf_demos_panel/static/"
-npm install --prefix src/demonstrations/rmf_demos/rmf_demos_panel/rmf_demos_panel/static
-npm run build --prefix src/demonstrations/rmf_demos/rmf_demos_panel/rmf_demos_panel/static
-
-colcon build --packages-select rmf_demos_panel
-```
 
 ### API Endpoints
 
@@ -62,17 +60,6 @@ Endpoints | Type | Parameters | Description
 /task_status | SocketIO | NA | Constant broadcast of task list
 /robot_states | SocketIO | NA | Constant broadcast of robot list
 
-#### Simple CURL Test
-
-```bash
-# Submit Task (POST)
-curl -X POST http://localhost:8080/submit_task \
--d '{"task_type":"Loop", "start_time":0, "description": {"start_name": "coe", "finish_name": "pantry", "num_loops":1}}' \
--H "Content-Type: application/json" 
-
-# Get Task List (GET)
-curl http://localhost:8080/task_list
-```
 
 ---
 
@@ -106,28 +93,12 @@ User can also submit a single task request via the request form on the top-left 
 
 The latest robot states and task summaries will be reflected at the bottom portion of the GUI.
 
-## Create your own GUI
-
-There are 2 web-based server running behind the scene, namely:
-
-1. `gui_server` (port `5000`): Providing the static gui to the web client. Non RMF dependent
-2. `api_server` (port `8080`): Hosting all endpoints for gui clients to interact with RMF
-
-To create your own custom GUI, you will only require to replace the current `gui_server` package with your 
-own custom implementation, . The `api_server` remains the same.
-
 ---
 
 ## Note
 - Edit the `dashboard_config.json` to configure the input of the Demo World GUI Task Submission.
 The dashboard config file is located here: `rmf_demos_dashboard_resources/$WORLD/dashboard_config.json`.
-- server ip is configurable via `WEB_SERVER_IP_ADDRESS` in the `dashboard.launch.xml`
-- The `api_server` outputs and stores a summarized log: `web_server.log`.
+- server ip is configurable via `RMF_DEMOS_API_SERVER_IP` in the `dashboard.launch.xml`
+- The `simple_api_server` outputs and stores a summarized log: `web_server.log`.
 - cancel task will not be working. A fully functional cancel will be introduced in a future PR.
 - Rosdep will automatically install system version of `python3-flask` and `python3-flask-cors`. Yet we will download `flask-socketio` (5.x) separately via pip since the ubutuntu packaged version is too old.
-- To purely run GUI server (without ros for testing), run :
-  ```bash
-  export DASHBOARD_CONFIG_PATH=src/rmf/rmf_demos/rmf_demos_dashboard_resources/office/dashboard_config.json
-  python src/rmf/rmf_demos/rmf_demos_panel/rmf_demos_panel/gui_server.py
-  # Then, access localhost:5000 on browser
-  ```
