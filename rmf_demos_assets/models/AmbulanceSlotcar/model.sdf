@@ -8,8 +8,8 @@
 
       <!-- Forward / Backward -->
       <nominal_drive_speed>6.50</nominal_drive_speed>
-      <nominal_drive_acceleration>2.50</nominal_drive_acceleration>
-      <max_drive_acceleration>2.56</max_drive_acceleration>
+      <nominal_drive_acceleration>8.50</nominal_drive_acceleration>
+      <max_drive_acceleration>10.56</max_drive_acceleration>
 
       <!-- Turning -->
       <nominal_turn_speed>0.785</nominal_turn_speed>
@@ -37,6 +37,8 @@
 
       <!-- Power systems -->
       <nominal_power>100.0</nominal_power>
+      
+      <obey_target_yaw_ackermann>True</obey_target_yaw_ackermann>
 
     </plugin>
     
