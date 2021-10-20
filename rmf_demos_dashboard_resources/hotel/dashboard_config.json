@@ -1,6 +1,6 @@
 { 
   "world_name" : "Hotel World",
-  "valid_task" : ["Loop", "Delivery", "Clean"],
+  "valid_task" : ["Loop", "Clean"],
   "task": {
     "Delivery": {},
     "Loop": {

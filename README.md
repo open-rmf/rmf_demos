@@ -142,6 +142,8 @@ ros2 launch rmf_demos_ign airport_terminal_caddy.launch.xml
 
 ![](../media/caddy.gif)
 
+> Tip: To speedup simulation on gazebo, user can run `gz physics -s 0.01` on a separate terminal after launching the world. Use with care!
+
 ---
 
 ### Clinic World
@@ -158,7 +160,7 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz clinic.launch.xml
 ```
 
-Select the `clinic` tab on RMF Panel. Load the `clinic_tasks.json` list and click submit to begin a collection of loop and delivery tasks.
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the `clinic_tasks.json` list and click submit to begin a collection of loop and delivery tasks.
 
 Or, submit a task via CLI:
 ```bash
@@ -179,15 +181,10 @@ Multi-fleet demo:
 
 ### Hotel World
 
-This is a hotel with a lobby and a guest level. The hotel has two lifts and two robot fleets. The tiny robots are supposed to guide the guests and the delivery robots are used to load and deliver cargo.
+This hotel world consists of a lobby and 2 guest levels. The hotel has two lifts, multiple doors and 3 robot fleets (4 robots).
+This is a good demonstration of multiple branded robots with various capability working together in a building with multiple floors setting.
 
-The hotel map is truncated due to the high memory usage. The full map can be accessed [here](https://github.com/MakinoharaShouko/hotel).
-
-Hotel floor plan in `traffic_editor`:
-![](../media/hotel.png)
-
-Full hotel floor plan in `traffic_editor`:
-![](../media/hotel_full.png)
+![](../media/hotel_world.png)
 
 #### Demo Scenario
 
@@ -198,17 +195,17 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz hotel.launch.xml
 ```
 
-Select the `hotel` tab on RMF Panel. Loop requests can be submitted via "Submit a Task" form.
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/) to submit clean or loop requests.
 
-Dispatch robot via CLI
+Or, dispatch robot via CLI
 ```bash
 ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
-ros2 run rmf_demos_tasks restaurant -s L1_left_nurse_center -f L3_master_suite -n 1 --use_sim_time
+ros2 run rmf_demos_tasks restaurant -s restaurant -f L3_master_suite -n 1 --use_sim_time
 ```
 
-Robot taking lift:
+Robots running Clean and Loop Task:
 
-![](../media/robot_taking_lift_hotel.gif)
+![](../media/hotel_scenarios.gif)
 
 ---
 
