@@ -72,7 +72,7 @@
         <geometry>
           <mesh>
             <scale>0.0225 0.0225 0.0225</scale>
-            <uri>model://Ambulance/meshes/ambulance.obj</uri>
+            <uri>model://AmbulanceSlotcar/meshes/ambulance.obj</uri>
           </mesh>
         </geometry>
       </visual>
