@@ -64,7 +64,7 @@ class MockDocker(Node):
 
     def __init__(self, config_yaml):
         super().__init__('mock_docker')
-        print(f"Greetings, I am mock docker")
+        self.get_logger().info(f"Greetings, I am mock docker")
         self.config_yaml = config_yaml
         self.path_request_publisher = self.create_publisher(
             PathRequest, 'robot_path_requests', 1)
@@ -118,23 +118,29 @@ class MockDocker(Node):
             return
 
         if not msg.parameters:
-            print(f'Missing docking name for docking request!')
+            self.get_logger().warn(
+                f'Missing docking name for docking request!')
             return
 
         if msg.parameters[0].name != 'docking':
-            print(f'Unexpected docking parameter [{msg.parameters[0]}]')
+            self.get_logger().warn(
+                f'Unexpected docking parameter [{msg.parameters[0]}]')
             return
 
         fleet_name = self.dock_map.get(msg.fleet_name)
         if fleet_name is None:
-            print('Unknown fleet name reuested [{msg.fleet_name}].')
+            self.get_logger().warn(
+                'Unknown fleet name reuested [{msg.fleet_name}].')
             return
 
         dock = fleet_name.get(msg.parameters[0].value)
         if not dock:
-            print(f'Unknown dock name requested [{msg.parameters[0].value}]')
+            self.get_logger().warn(
+                f'Unknown dock name requested [{msg.parameters[0].value}]')
             return
 
+        self.get_logger().info(
+            f'Received Docking Mode Request from [{msg.robot_name}]')
         path_request = PathRequest()
         path_request.fleet_name = msg.fleet_name
         path_request.robot_name = msg.robot_name

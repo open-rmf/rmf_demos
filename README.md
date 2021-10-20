@@ -200,6 +200,12 @@ ros2 launch rmf_demos_gz hotel.launch.xml
 
 Select the `hotel` tab on RMF Panel. Loop requests can be submitted via "Submit a Task" form.
 
+Dispatch robot via CLI
+```bash
+ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
+ros2 run rmf_demos_tasks restaurant -s L1_left_nurse_center -f L3_master_suite -n 1 --use_sim_time
+```
+
 Robot taking lift:
 
 ![](../media/robot_taking_lift_hotel.gif)
