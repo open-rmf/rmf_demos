@@ -51,15 +51,19 @@ def close(l0: Location, l1: Location):
 
 class MockDocker(Node):
     """
-    This Mock Docker provides the fleet adapter a series of prerecorded docking
-    path for the robot to follow during "Dock Mode". Internally, a dock_summary
-    will get sent to the fleet adapter for initial clean task estimation.
-    Also, during the docking process. The mock_docker will response to a valid
-    Docking Mode Request from the fleet adapter, followed by sending a
-    fix dock path request to the underlying fleet driver or slotcar.
-
-    Althought this is named as Docking. this process can also be used to mimic
-    a cleaning robot, which is following a known path during cleaning.
+    The MockDocker has two objectices
+    1) Publish a DockSummary message with information on all the docking
+    processes in a building. The fleet adapters rely on this message for
+    task planning.
+    2) [deprecated] To coordinate the docking motion of robots in simulation
+    which are controlled by the deprecated full_control fleet adapter and the
+    slotcar plugin. This is achieved by listening to the deprecated ModeRequest
+    message published by the full_control adapter and publihsing the relevant
+    PathRequest with waypoints from the configuration file. The node also
+    monitors whether the robot has completed docking and informs the
+    full_control adapter of the same. This approach is not reflective of how
+    docking processes should be triggered on real robots. The relevant API
+    call to the robot's fleet manager should be made to coordinate docking.
     """
 
     def __init__(self, config_yaml):
@@ -99,10 +103,10 @@ class MockDocker(Node):
             for dock_name, dock_waypoints in docking_info.items():
                 param = DockParameter()
                 param.start = dock_name
-                # TODO This is a hack. The cleaning task will ensure the
-                # robot ends up at the finish waypoint. The graph already
-                # containts these waypoints
-                param.finish = param.start + "_start"
+                finish_waypoint = dock_waypoints.get("finish_waypoint")
+                if finish_waypoint == None:
+                    finish_waypoint = dock_name # for backwards compatibility
+                param.finish = finish_waypoint
                 for point in dock_waypoints["path"]:
                     location = make_location(
                         point, dock_waypoints["level_name"])
@@ -156,7 +160,7 @@ class MockDocker(Node):
 
         # This is needed to acknowledge the slot car that a Docking Mode
         # is completed. Subsequently, this will update the robot_state and
-        # inform the Fleet adapter that the robot has fnished docking
+        # inform the Fleet adapter that the robot has finished docking
         mode_request = ModeRequest()
         mode_request.fleet_name = requested_path.fleet_name
         mode_request.robot_name = requested_path.robot_name
