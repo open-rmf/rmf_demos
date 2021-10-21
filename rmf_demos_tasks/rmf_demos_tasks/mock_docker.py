@@ -104,8 +104,9 @@ class MockDocker(Node):
                 param = DockParameter()
                 param.start = dock_name
                 finish_waypoint = dock_waypoints.get("finish_waypoint")
-                if finish_waypoint == None:
-                    finish_waypoint = dock_name # for backwards compatibility
+                if finish_waypoint is None:
+                    # for backwards compatibility
+                    finish_waypoint = dock_name + '_start'
                 param.finish = finish_waypoint
                 for point in dock_waypoints["path"]:
                     location = make_location(
