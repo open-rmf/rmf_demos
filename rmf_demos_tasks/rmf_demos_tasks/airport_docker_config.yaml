@@ -19,7 +19,7 @@ cleanerBotA:
             [105.9, -32.1, 0.0],
             [121.5, -30.35, -1.57],
             [121.3, -28.3, 0.0] ]
-    finish_waypoint: "zone_1_start"
+    finish_waypoint: "zone_1"
   zone_2:
     level_name: "L1"
     path: [ [149.00, -29.22, 0.0],
@@ -27,7 +27,7 @@ cleanerBotA:
             [129.4, -24.76, -1.57],
             [149.0, -24.76, 3.14],
             [149.0, -27.11, 0.0] ]
-    finish_waypoint: "zone_2_start"
+    finish_waypoint: "zone_2"
   zone_3:
     level_name: "L1"
     path: [ [154.4, -29.51, -1.57],
@@ -39,7 +39,7 @@ cleanerBotA:
             [168.5, -25.00, 3.14],
             [168.5, -27.60, 1.57],
             [154.4, -27.60, 0.0]]
-    finish_waypoint: "zone_3_start"
+    finish_waypoint: "zone_3"
   zone_4:
     level_name: "L1"
     path: [ [152.0, -55.6, 0.0],
@@ -51,7 +51,7 @@ cleanerBotA:
             [123.0, -59.06, 0.0],
             [123.0, -60.8, 0.0],
             [152.0, -60.3, 0.0] ]
-    finish_waypoint: "zone_4_start"
+    finish_waypoint: "zone_4"
 cleanerBotE:
   zone_2:
     level_name: "L1"
@@ -60,7 +60,7 @@ cleanerBotE:
             [129.4, -24.76, -1.57],
             [149.0, -24.76, 3.14],
             [149.0, -27.11, 0.0] ]
-    finish_waypoint: "zone_2_start"
+    finish_waypoint: "zone_2"
   zone_3:
     level_name: "L1"
     path: [ [154.4, -29.51, -1.57],
@@ -72,7 +72,7 @@ cleanerBotE:
             [168.5, -25.00, 3.14],
             [168.5, -27.60, 1.57],
             [154.4, -27.60, 0.0]]
-    finish_waypoint: "zone_3_start"
+    finish_waypoint: "zone_3"
   zone_4:
     level_name: "L1"
     path: [ [152.0, -55.6, 0.0],
@@ -84,4 +84,4 @@ cleanerBotE:
             [123.0, -59.06, 0.0],
             [123.0, -60.8, 0.0],
             [152.0, -60.3, 0.0] ]
-    finish_waypoint: "zone_4_start"
+    finish_waypoint: "zone_4"
