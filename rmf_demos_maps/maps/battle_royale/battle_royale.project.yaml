@@ -1,6 +1,0 @@
-building:
-  filename: battle_royale.building.yaml
-name: battle_royale
-traffic_maps:
-  {}
-version: 1
