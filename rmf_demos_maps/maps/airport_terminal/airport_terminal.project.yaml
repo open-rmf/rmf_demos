@@ -1,6 +1,0 @@
-building:
-  filename: airport_terminal.building.yaml
-name: airport_terminal
-traffic_maps:
-  {}
-version: 1

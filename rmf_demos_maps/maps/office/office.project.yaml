@@ -1,6 +1,0 @@
-building:
-  filename: office.building.yaml
-name: office
-traffic_maps:
-  {}
-version: 1
