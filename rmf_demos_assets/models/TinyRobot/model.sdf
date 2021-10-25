@@ -21,6 +21,12 @@
       <!-- Can the robot drive backwards -->
       <reversible>true</reversible>
 
+      <!-- Coordinate systems -->
+      <crs>
+        <cartesian_crs>EPSG:3414</cartesian_crs> <!-- cartesian coordinate robot is operating in -->
+        <robot_state_crs>EPSG:4326</robot_state_crs> <!-- coordinates published in /gps_robot_state -->
+      </crs>
+
       <!-- Battery params -->
       <nominal_voltage>12.0</nominal_voltage>
       <nominal_capacity>24.0</nominal_capacity>
