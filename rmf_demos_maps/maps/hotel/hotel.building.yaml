@@ -20,7 +20,7 @@ levels:
       - [10, 9, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_door2], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_hinged]}]
       - [35, 34, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_door3], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_sliding]}]
       - [49, 52, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, -1], name: [1, L1_door4], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
-      - [47, 45, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_door5], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_hinged]}]
+      - [47, 45, {motion_axis: [1, start], motion_degrees: [3, -90], motion_direction: [2, 1], name: [1, L1_door5], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_sliding]}]
     drawing:
       filename: hotel_L1.png
     elevation: 0
@@ -56,7 +56,6 @@ levels:
       - [70, 72, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [72, 73, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [73, 74, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
-      - [76, 77, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [77, 69, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [74, 79, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [79, 80, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
@@ -70,9 +69,11 @@ levels:
       - [75, 87, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
       - [85, 98, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
       - [63, 99, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
-      - [78, 77, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
-      - [82, 100, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
       - [100, 59, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [76, 102, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
+      - [100, 82, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [78, 77, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
+      - [69, 102, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 1], orientation: [1, ""]}]
     layers:
       {}
     measurements:
@@ -97,7 +98,6 @@ levels:
       - {model_name: OpenRobotics/FoodCourtBenchShort, name: OpenRobotics/FoodCourtBenchShort, static: true, x: 186.563, y: 219.503, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/FoodCourtBenchShort, name: OpenRobotics/FoodCourtBenchShort, static: true, x: 187.545, y: 178.66, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/FoodCourtBenchShort, name: OpenRobotics/FoodCourtBenchShort, static: true, x: 220.92, y: 151.475, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/FoodCourtBenchShort, name: OpenRobotics/FoodCourtBenchShort, static: true, x: 221.194, y: 177.483, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/FoodCourtBenchShort, name: OpenRobotics/FoodCourtBenchShort, static: true, x: 150.825, y: 264.078, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/FoodCourtBenchShort, name: OpenRobotics/FoodCourtBenchShort, static: true, x: 186.17, y: 195.351, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/FoodCourtBenchShort, name: OpenRobotics/FoodCourtBenchShort, static: true, x: 186.973, y: 151.475, yaw: 1.5708, z: 0}
@@ -114,10 +114,10 @@ levels:
       - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 151.684, y: 319.073, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 152.51, y: 290.968, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 183.162, y: 250.798, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 259.35, y: 174.209, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 259.876, y: 172.707, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 259.557, y: 147.551, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 289.935, y: 146.724, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 290.142, y: 174.829, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 291.574, y: 172.241, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/StorageRack, name: OpenRobotics/StorageRack, static: true, x: 61.962, y: 599.249, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/StorageRack, name: OpenRobotics/StorageRack, static: true, x: 61.962, y: 627.16, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/StorageRack, name: OpenRobotics/StorageRack, static: true, x: 62.792, y: 659.889, yaw: 1.5708, z: 0}
@@ -141,6 +141,8 @@ levels:
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 512.076, y: 712.3680000000001, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 537.609, y: 712.199, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 559.9299999999999, y: 712.876, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CleaningSection, name: OpenRobotics/CleaningSection, static: true, x: 544.242, y: 532.876, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MopCart4, name: OpenRobotics/MopCart4, static: true, x: 465.899, y: 532.922, yaw: 1.7798, z: 0}
     vertices:
       - [127.862, 550.573, 0, ""]
       - [127.1, 350.915, 0, ""]
@@ -167,11 +169,11 @@ levels:
       - [274.441, 469.922, 0, ""]
       - [343.431, 469.922, 0, ""]
       - [383.346, 469.182, 0, ""]
-      - [479.843, 469.605, 0, ""]
-      - [550.903, 469.146, 0, ""]
+      - [453.951, 469.196, 0, ""]
+      - [554.394, 468.888, 0, ""]
       - [589.26, 468.993, 0, ""]
-      - [589.958, 594.979, 0, ""]
-      - [479.85, 594.129, 0, ""]
+      - [589.85, 601.265, 0, ""]
+      - [479.906, 601.021, 0, ""]
       - [479.85, 657.985, 0, ""]
       - [589.1369999999999, 657.124, 0, ""]
       - [589.6849999999999, 722.0069999999999, 0, ""]
@@ -187,9 +189,9 @@ levels:
       - [147.304, 559.115, 0, ""]
       - [41.849, 726.907, 0, ""]
       - [41.602, 582.276, 0, ""]
-      - [501.849, 544.485, 0, ""]
-      - [551.357, 544.058, 0, ""]
-      - [479.843, 519.423, 0, ""]
+      - [479.489, 546.412, 0, ""]
+      - [554.394, 547.643, 0, ""]
+      - [527.814, 547.127, 0, ""]
       - [384.145, 199.73, 0, ""]
       - [365.469, 199.658, 0, ""]
       - [319.945, 128.368, 0, ""]
@@ -199,9 +201,9 @@ levels:
       - [403.379, 469.32, 0, ""]
       - [204.538, 392.279, 0, ""]
       - [232.475, 458.563, 0, ""]
-      - [232.794, 581.826, 0, ""]
+      - [238.679, 574.425, 0, ""]
       - [172.436, 628.8440000000001, 0, ""]
-      - [349.99, 581.5069999999999, 0, ""]
+      - [349.432, 565.895, 0, ""]
       - [349.99, 530.7329999999999, 0, lobby]
       - [172.189, 669.991, 0, shop, {is_holding_point: [4, true]}]
       - [254.507, 391.764, 0, ""]
@@ -211,20 +213,20 @@ levels:
       - [342.473, 282.336, 0, restaurant, {is_holding_point: [4, true]}]
       - [351.869, 171.799, 0, kitchen, {is_holding_point: [4, true]}]
       - [267.187, 243.188, 0, ""]
-      - [452.948, 558.697, 0, ""]
-      - [446.138, 597.404, 0, ""]
+      - [504.668, 571.9450000000001, 0, ""]
+      - [449.728, 584.881, 0, ""]
       - [428.186, 637.526, 0, clean_lobby, {dock_name: [1, clean_lobby], is_cleaning_zone: [4, true]}]
-      - [271.336, 599.295, 0, staging]
+      - [270.46, 594.237, 0, ""]
       - [252.278, 441.23, 0, ""]
       - [203.735, 403.318, 0, ""]
       - [153.759, 417.897, 0, clean_waiting_area, {dock_name: [1, clean_waiting_area], is_cleaning_zone: [4, true]}]
-      - [530.4450000000001, 521.772, 0, cleanerbot_charger2, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_2], spawn_robot_type: [1, CleanerBotA]}]
-      - [501.238, 522.479, 0, ""]
-      - [501.171, 490.295, 0, cleanerbot_charger1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_1], spawn_robot_type: [1, CleanerBotA]}]
+      - [527.8339999999999, 493.098, 0, cleanerbot_charger2, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_2], spawn_robot_type: [1, CleanerBotA]}]
+      - [483.556, 520.207, 0, ""]
+      - [481.081, 494.394, 0, cleanerbot_charger1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_1], spawn_robot_type: [1, CleanerBotA]}]
       - [200.278, 321.594, 0, ""]
       - [254.959, 203.925, 0, ""]
       - [230.964, 204.483, 0, clean_restaurant, {dock_name: [1, clean_restaurant], is_cleaning_zone: [4, true]}]
-      - [436.91, 490.03, 0, tinybot_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyBot_1], spawn_robot_type: [1, TinyRobot]}]
+      - [430.631, 489.53, 0, tinybot_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyBot_1], spawn_robot_type: [1, TinyRobot]}]
       - [261.124, 652.61, 0, ""]
       - [261.443, 700.003, 0, deliverybot_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, deliveryBot_1], spawn_robot_type: [1, DeliveryRobot]}]
       - [354.274, 388.677, 0, ""]
@@ -242,7 +244,9 @@ levels:
       - [251.133, 417.478, 0, ""]
       - [355, 340, 0, "", {lift_cabin: [1, Lift1]}]
       - [305, 435, 0, "", {lift_cabin: [1, Lift2]}]
-      - [436.574, 523.963, 0, ""]
+      - [430.631, 525.173, 0, ""]
+      - [453.182, 546.566, 0, ""]
+      - [522.412, 520.809, 0, ""]
     walls:
       - [0, 1, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [1, 2, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
@@ -250,22 +254,22 @@ levels:
       - [3, 4, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [6, 7, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [7, 8, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [8, 9, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [10, 1, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [8, 9, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [10, 1, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [8, 11, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_beige_tiles], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [11, 12, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_beige_tiles], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [13, 14, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_beige_tiles], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [15, 16, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_beige_tiles], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [16, 6, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [16, 6, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [16, 17, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [17, 18, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_beige_tiles], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [18, 19, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_beige_tiles], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [20, 21, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [20, 21, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [21, 22, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_beige_tiles], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [22, 23, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [23, 18, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [23, 24, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [24, 17, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [22, 23, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [23, 18, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [23, 24, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [24, 17, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [24, 25, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [25, 26, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [26, 27, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
@@ -277,20 +281,18 @@ levels:
       - [31, 32, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [32, 33, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [33, 30, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [33, 34, {alpha: [3, 0.3], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [35, 36, {alpha: [3, 0.3], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [36, 37, {alpha: [3, 0.3], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [37, 38, {alpha: [3, 0.3], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [40, 41, {alpha: [3, 0.3], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [41, 42, {alpha: [3, 0.3], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [42, 0, {alpha: [3, 0.3], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [39, 38, {alpha: [3, 0.3], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [33, 34, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [35, 36, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [36, 37, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [37, 38, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [40, 41, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [41, 42, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [42, 0, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [39, 38, {alpha: [3, 0.6], texture_height: [3, 2.5], texture_name: [1, blue_linoleum], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [43, 36, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [43, 44, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [44, 0, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [45, 46, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [46, 26, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [47, 25, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [46, 26, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [5, 48, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [48, 49, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [6, 48, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
@@ -299,6 +301,9 @@ levels:
       - [51, 52, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [4, 50, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [12, 13, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, black_concrete], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [25, 101, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [47, 46, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [45, 101, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
   L2:
     doors:
       - [52, 49, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L2_door2], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_hinged]}]
