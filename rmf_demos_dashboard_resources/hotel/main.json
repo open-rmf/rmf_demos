@@ -1,21 +1,26 @@
 {
     "dispensers":{},
     "robots":{
-        "deliveryRobot":{
+        "cleanerBotA":{
             "icons":{
-                "deliveryRobot":"/robots/deliveryRobot/deliveryRobot.png"
+                "cleanerBotA":"/icons/cleanerBotA.png"
             }
         },
-        "tinyRobot":{
+        "deliveryBot":{
             "icons":{
-                "tinyRobot":"/robots/tinyRobot/tinyRobot.png"
+                "deliveryBot":"/icons/deliveryRobot.png"
+            }
+        },
+        "tinyBot":{
+            "icons":{
+                "tinyBot":"/icons/tinyRobot.png"
             }
         }
     },
     "logos":{
         "headerLogo":{
             "icons":{
-                "headerLogo":"/logos/header/headerLogo.png"
+                "headerLogo":"/icons/headerLogo.png"
             }
         }
     }
