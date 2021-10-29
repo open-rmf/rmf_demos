@@ -56,12 +56,12 @@
         </inertia>
       </inertial>
 
-      <visual name="body">
+      <visual name="body_visual">
         <geometry>
           <mesh><uri>model://DeliveryRobot/meshes/body.obj</uri></mesh>
         </geometry>
       </visual>
-      <collision name="body">
+      <collision name="body_collision">
         <geometry>
           <mesh><uri>model://DeliveryRobot/meshes/body.obj</uri></mesh>
         </geometry>
