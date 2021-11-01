@@ -6,7 +6,7 @@
   <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="nav_graph_file" description="Nav graph required by fleet adapter"/>
   <arg name="perform_loop" default="false" description="Whether to allow cleanerBotA to accept any Loop Task"/>
-  <arg name="finishing_request" default="charge"
+  <arg name="finishing_request" default="nothing"
        description="What the robot should do once it finishes its tasks: [charge, park, nothing]"/>
 
   <group>

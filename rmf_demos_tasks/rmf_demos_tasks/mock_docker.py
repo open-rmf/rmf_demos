@@ -68,7 +68,7 @@ class MockDocker(Node):
 
     def __init__(self, config_yaml):
         super().__init__('mock_docker')
-        self.get_logger().info(f"Greetings, I am mock docker")
+        self.get_logger().info(f'Greetings, I am mock docker')
         self.config_yaml = config_yaml
         self.path_request_publisher = self.create_publisher(
             PathRequest, 'robot_path_requests', 1)

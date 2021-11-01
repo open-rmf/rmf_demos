@@ -90,7 +90,7 @@ ros2 run rmf_demos_tasks dispatch_delivery -p pantry -pd coke_dispenser -d hardw
 ```
 
 To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
-To run a scenario with multiple task requests, load `office_tasks.json` from `rmf_demos_panel/task_lists` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
+To run a scenario with multiple task requests, load [office_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/office_tasks.json) from `rmf_demos_panel/task_lists` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
 
 ![](../media/loop_request.gif)
 
@@ -113,7 +113,7 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz airport_terminal.launch.xml
 ```
 
-Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the `airport_terminal_tasks.json` list and click submit to begin a collection of loop, delivery and cleaning tasks.
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [airport_terminal_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/airport_terminal_tasks.json) list and click submit to begin a collection of loop, delivery and cleaning tasks.
 
 Or, submit `loop`, `delivery` or `clean` task via CLI:
 ```bash
@@ -160,7 +160,7 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz clinic.launch.xml
 ```
 
-Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the `clinic_tasks.json` list and click submit to begin a collection of loop and delivery tasks.
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [clinic_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/clinic_tasks.json) list and click submit to begin a collection of loop and delivery tasks.
 
 Or, submit a task via CLI:
 ```bash

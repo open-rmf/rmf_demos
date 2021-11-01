@@ -141,8 +141,8 @@ levels:
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 512.076, y: 712.3680000000001, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 537.609, y: 712.199, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 559.9299999999999, y: 712.876, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CleaningSection, name: OpenRobotics/CleaningSection, static: true, x: 544.242, y: 532.876, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/MopCart4, name: OpenRobotics/MopCart4, static: true, x: 465.899, y: 532.922, yaw: 1.7798, z: 0}
+      - {model_name: OpenRobotics/CleaningSection, name: OpenRobotics/CleaningSection, static: true, x: 546.207, y: 534.1609999999999, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/MopCart4, name: OpenRobotics/MopCart4, static: true, x: 458.269, y: 534.4450000000001, yaw: 1.7524, z: 0}
     vertices:
       - [127.862, 550.573, 0, ""]
       - [127.1, 350.915, 0, ""]
@@ -169,8 +169,8 @@ levels:
       - [274.441, 469.922, 0, ""]
       - [343.431, 469.922, 0, ""]
       - [383.346, 469.182, 0, ""]
-      - [453.951, 469.196, 0, ""]
-      - [554.394, 468.888, 0, ""]
+      - [451.461, 469.204, 0, ""]
+      - [555.309, 468.997, 0, ""]
       - [589.26, 468.993, 0, ""]
       - [589.85, 601.265, 0, ""]
       - [479.906, 601.021, 0, ""]
@@ -189,9 +189,9 @@ levels:
       - [147.304, 559.115, 0, ""]
       - [41.849, 726.907, 0, ""]
       - [41.602, 582.276, 0, ""]
-      - [479.489, 546.412, 0, ""]
-      - [554.394, 547.643, 0, ""]
-      - [527.814, 547.127, 0, ""]
+      - [477.378, 546.582, 0, ""]
+      - [555.309, 547.6079999999999, 0, ""]
+      - [531.221, 546.711, 0, ""]
       - [384.145, 199.73, 0, ""]
       - [365.469, 199.658, 0, ""]
       - [319.945, 128.368, 0, ""]
@@ -213,7 +213,7 @@ levels:
       - [342.473, 282.336, 0, restaurant, {is_holding_point: [4, true]}]
       - [351.869, 171.799, 0, kitchen, {is_holding_point: [4, true]}]
       - [267.187, 243.188, 0, ""]
-      - [504.668, 571.9450000000001, 0, ""]
+      - [505.139, 573.1799999999999, 0, ""]
       - [449.728, 584.881, 0, ""]
       - [428.186, 637.526, 0, clean_lobby, {dock_name: [1, clean_lobby], is_cleaning_zone: [4, true]}]
       - [270.46, 594.237, 0, ""]
@@ -221,8 +221,8 @@ levels:
       - [203.735, 403.318, 0, ""]
       - [153.759, 417.897, 0, clean_waiting_area, {dock_name: [1, clean_waiting_area], is_cleaning_zone: [4, true]}]
       - [527.8339999999999, 493.098, 0, cleanerbot_charger2, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_2], spawn_robot_type: [1, CleanerBotA]}]
-      - [483.556, 520.207, 0, ""]
-      - [481.081, 494.394, 0, cleanerbot_charger1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_1], spawn_robot_type: [1, CleanerBotA]}]
+      - [485.384, 520.629, 0, ""]
+      - [479.703, 493.643, 0, cleanerbot_charger1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_1], spawn_robot_type: [1, CleanerBotA]}]
       - [200.278, 321.594, 0, ""]
       - [254.959, 203.925, 0, ""]
       - [230.964, 204.483, 0, clean_restaurant, {dock_name: [1, clean_restaurant], is_cleaning_zone: [4, true]}]
@@ -245,8 +245,8 @@ levels:
       - [355, 340, 0, "", {lift_cabin: [1, Lift1]}]
       - [305, 435, 0, "", {lift_cabin: [1, Lift2]}]
       - [430.631, 525.173, 0, ""]
-      - [453.182, 546.566, 0, ""]
-      - [522.412, 520.809, 0, ""]
+      - [450.393, 546.582, 0, ""]
+      - [522.5700000000001, 520.758, 0, ""]
     walls:
       - [0, 1, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [1, 2, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, white_brick], texture_scale: [3, 1], texture_width: [3, 1]}]
