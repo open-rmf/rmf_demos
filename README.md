@@ -38,10 +38,10 @@ Full web application of RMF: [rmf-web](https://github.com/open-rmf/rmf-web).
 
 ## Demo Worlds
 
+* [Hotel World](#Hotel-World)
 * [Office World](#Office-World)
 * [Airport Terminal World](#Airport-Terminal-World)
 * [Clinic World](#Clinic-World)
-* [Hotel World](#Hotel-World)
 
 > Note: When running the demos on Ubuntu 18.04 (not officially supported), you are required to explicitly supply gazebo_version launch argument. Eg:
 ros2 launch rmf_demos_gz office.launch.xml gazebo_version:=9
@@ -98,6 +98,11 @@ Robots running Clean and Loop Task:
 
 ![](../media/hotel_scenarios.gif)
 
+
+To submit a list of scheduled tasks via rmf web panel, load [hotel_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/hotel_tasks.json), 
+or paste the json list to the _Submit a List of Tasks_ section. Next, click on submit.
+
+> Tip: To speedup simulation on gazebo, user can run `gz physics -s 0.01` on a separate terminal after launching the world. Use with care!
 
 ---
 
