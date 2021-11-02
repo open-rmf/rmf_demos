@@ -1,6 +1,6 @@
 { 
   "world_name" : "Clinic World",
-  "valid_task" : ["Clean", "Loop"],
+  "valid_task" : ["Loop"],
   "task": {
     "Delivery": {},
     "Loop": {
@@ -15,12 +15,7 @@
         "L2_south_counter"
       ]
     },
-    "Clean": {
-      "option": [
-        "zone_1",
-        "zone_2"
-      ]
-    },
+    "Clean": {},
     "Station": {},
     "Patrol": {},
     "Charging": {}

@@ -5,6 +5,9 @@
   <arg name="fleet_name" default="cleanerBotA" description="Name of this fleet of CleanerBotA robots"/>
   <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="nav_graph_file" description="Nav graph required by fleet adapter"/>
+  <arg name="perform_loop" default="false" description="Whether to allow cleanerBotA to accept any Loop Task"/>
+  <arg name="finishing_request" default="nothing"
+       description="What the robot should do once it finishes its tasks: [charge, park, nothing]"/>
 
   <group>
     <include file="$(find-pkg-share rmf_fleet_adapter)/fleet_adapter.launch.xml">
@@ -47,11 +50,11 @@
       <!-- Whether it can perform deliveries -->
       <arg name="perform_deliveries" value="false"/>
       <!-- Whether it can perform loop -->
-      <arg name="perform_loop" value="false"/>
+      <arg name="perform_loop" value="$(var perform_loop)"/>
       <!-- Whether it can perform cleaning -->
       <arg name="perform_cleaning" value="true"/>
       <!-- What the robot should do once it finishes its tasks -->
-      <arg name="finishing_request" value="charge"/>
+      <arg name="finishing_request" value="$(var finishing_request)"/>
 
       <!-- Battery parameters -->
       <arg name="battery_voltage" value="24.0"/>

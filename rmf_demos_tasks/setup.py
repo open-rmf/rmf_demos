@@ -11,6 +11,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/'+package_name, [package_name+'/airport_docker_config.yaml']),
+        ('share/'+package_name, [package_name+'/hotel_cleaner_config.yaml']),
     ],
     install_requires=['setuptools'],
     author='Grey',
