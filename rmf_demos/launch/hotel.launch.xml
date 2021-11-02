@@ -3,6 +3,7 @@
 <launch>
   <arg name="use_sim_time" default="false"/>
   <arg name="failover_mode" default="false"/>
+  <arg name="enable_experimental_lift_watchdog" default="false" description="experimental lift watchdog"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -11,6 +12,18 @@
     <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/hotel/hotel.building.yaml"/>
     <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/hotel/dashboard_config.json"/>
   </include>
+
+  <!-- Experimental Lift watchdog service launch, default disable -->
+  <group if="$(var enable_experimental_lift_watchdog)">
+    <node pkg="rmf_fleet_adapter"
+          exec="experimental_lift_watchdog"
+          name="experimental_lift_watchdog"
+          output="both" />
+    <set_env name="EXPT_LIFT_WATCHDOG_SRV" value="experimental_lift_watchdog_service"/>
+  </group>
+  <group unless="$(var enable_experimental_lift_watchdog)">
+    <set_env name="EXPT_LIFT_WATCHDOG_SRV" value=""/>
+  </group>
 
   <!-- cleanerBotA fleet adapter and robot state aggregator needed for the slotcar_plugin -->
   <group>
@@ -54,6 +67,7 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
       <arg name="finishing_request" value="park"/>
+      <arg name="experimental_lift_watchdog_service" value="$(env EXPT_LIFT_WATCHDOG_SRV)"/>
     </include>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="$(var fleet_name)"/>

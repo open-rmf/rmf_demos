@@ -64,6 +64,43 @@ There are two main modes of submitting tasks to RMF via the Panel:
 
 ---
 
+### Hotel World
+
+This hotel world consists of a lobby and 2 guest levels. The hotel has two lifts, multiple doors and 3 robot fleets (4 robots).
+This demonstrates an integration of multiple fleets of robots with varying capabilities working together in a multi-level building.
+
+![](../media/hotel_world.png)
+
+#### Demo Scenario
+
+To launch the world and the schedule visualizer,
+
+```bash
+source ~/rmf_ws/install/setup.bash
+ros2 launch rmf_demos_gz hotel.launch.xml
+
+# Or, run with ignition simulator
+ros2 launch rmf_demos_ign hotel.launch.xml
+```
+
+Here, we will showcase 2 types of Tasks: **Loop** and **Clean**
+
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/) to submit clean or loop requests.
+To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit. Similarly for **Clean task**, select `Clean`, then choose the desired `cleaning zone` from the dropdown list.
+
+Or, dispatch robot via CLI
+```bash
+ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
+ros2 run rmf_demos_tasks restaurant -s restaurant -f L3_master_suite -n 1 --use_sim_time
+```
+
+Robots running Clean and Loop Task:
+
+![](../media/hotel_scenarios.gif)
+
+
+---
+
 ### Office World
 An indoor office environment for robots to navigate around. It includes a beverage dispensing station, controllable doors and laneways which are integrated into RMF.
 
@@ -177,35 +214,6 @@ Multi-fleet demo:
 
 ![](../media/clinic.gif)
 
----
-
-### Hotel World
-
-This hotel world consists of a lobby and 2 guest levels. The hotel has two lifts, multiple doors and 3 robot fleets (4 robots).
-This is a good demonstration of multiple branded robots with various capability working together in a building with multiple floors setting.
-
-![](../media/hotel_world.png)
-
-#### Demo Scenario
-
-To launch the world and the schedule visualizer,
-
-```bash
-source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_gz hotel.launch.xml
-```
-
-Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/) to submit clean or loop requests.
-
-Or, dispatch robot via CLI
-```bash
-ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
-ros2 run rmf_demos_tasks restaurant -s restaurant -f L3_master_suite -n 1 --use_sim_time
-```
-
-Robots running Clean and Loop Task:
-
-![](../media/hotel_scenarios.gif)
 
 ---
 
