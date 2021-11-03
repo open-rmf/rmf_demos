@@ -245,6 +245,39 @@ $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
 (new terminal) $ ros2 launch rmf_demos office_traffic_light_test.launch.xml
 ```
 
+### Additional Features
+
+ - **lift watchdog**
+   - The robot can query an external `lift_watchdog_server` for the permission to enter the lift cabin during the `LiftSession` Phase.
+   - Command lines:
+    ```bash
+    # run hotel world with lift_watch_dog enabled
+    ros2 launch rmf_demos_gz hotel.launch.xml enable_experimental_lift_watchdog:=1
+
+    ## On a separate terminal, set lift as crowded
+    ros2 launch rmf_demos experimental_crowded_lift.launch.xml
+
+    # Dispatch robot from level1 to level3, robot will wait in front of the lift cabin
+    ros2 run rmf_demos_tasks dispatch_loop -s L3_room1 -f L3_room1 -n 1 --use_sim_time
+
+    # Lift is cleared. Give robot the permission to enter the lift
+    ros2 launch rmf_demos experimental_clear_lift.launch.xml
+    ```
+ - **Custom Docking Sequence**
+    - Fleet adapter will notify the robot (via `dock()` api/ModeRequest) to execute its custom dock sequence when the robot reaches a "dock" waypoint.
+    - Implementation is similar to Clean task, refer to docs [here](https://osrf.github.io/ros2multirobotbook/task_types.html?highlight=docking#step-1-defining-waypoints-for-cleaning-in-traffic-editor)
+
+ - **Emergency Alarm**
+   - All robots will get directed to the nearest parking spot when the emergency alarm is triggered.
+   - Command lines:
+    ```bash
+    # toggle alarm ON
+    ros2 topic pub -1 /fire_alarm_trigger std_msgs/Bool '{data: true}'
+
+    # toggle alarm OFF
+    ros2 topic pub -1 /fire_alarm_trigger std_msgs/Bool '{data: false}'
+    ```
+
 ## Task Dispatching in RMF
 ![](../media/RMF_Bidding.png)
 
