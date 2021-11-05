@@ -19,7 +19,7 @@
           exec="experimental_lift_watchdog"
           name="experimental_lift_watchdog"
           output="both" />
-    <set_env name="EXPT_LIFT_WATCHDOG_SRV" value="experimental_lift_watchdog_service"/>
+    <set_env name="EXPT_LIFT_WATCHDOG_SRV" value="experimental_lift_watchdog"/>
   </group>
   <group unless="$(var enable_experimental_lift_watchdog)">
     <set_env name="EXPT_LIFT_WATCHDOG_SRV" value=""/>
