@@ -186,7 +186,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.node.get_logger().info("Requesting robot to stop...")
             if self.api.stop():
                 break
-            time.sleep(1.0)
+            time.sleep(0.5)
         if self._follow_path_thread is not None:
             self._quit_path_event.set()
             if self._follow_path_thread.is_alive():
@@ -247,10 +247,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                             f"Robot {self.name} failed to navigate to "
                             f"[{x:.0f}, {y:.0f}, {theta:.0f}] coordinates. "
                             f"Retrying...")
-                        time.sleep(1.0)
+                        time.sleep(0.5)
 
                 elif self.state == RobotState.WAITING:
-                    time.sleep(1.0)
+                    time.sleep(0.5)
                     time_now = self.adapter.now()
                     with self._lock:
                         if self.target_waypoint is not None:
@@ -266,7 +266,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                         self.path_index, timedelta(seconds=0.0))
 
                 elif self.state == RobotState.MOVING:
-                    time.sleep(1.0)
+                    time.sleep(0.5)
                     # Check if we have reached the target
                     with self._lock:
                         if (self.api.navigation_completed()):
@@ -354,7 +354,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             with self._lock:
                 self.on_waypoint = None
                 self.on_lane = None
-            time.sleep(1.0)
+            time.sleep(0.5)
             # ------------------------ #
             # IMPLEMENT YOUR CODE HERE #
             # With whatever logic you need for docking #
@@ -365,7 +365,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.node.get_logger().info("Aborting docking")
                     return
                 self.node.get_logger().info("Robot is docking...")
-                time.sleep(1.0)
+                time.sleep(0.5)
 
             with self._lock:
                 self.on_waypoint = self.dock_waypoint_index
