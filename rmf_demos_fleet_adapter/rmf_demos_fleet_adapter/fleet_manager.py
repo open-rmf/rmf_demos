@@ -111,6 +111,8 @@ class FleetManager(Node):
 
         self.state = {}
         self.destination = {} # stores destination waypoints and time for each robot: {"position":[x,y,yaw],"t":Time}}
+        for robot in self.robot_names:
+            self.destination[robot] = None
         self.task_id = -1
 
         @app.get('/open-rmf/rmf_demos_fm/status/')
@@ -136,8 +138,7 @@ class FleetManager(Node):
                 destination = self.destination[robot_name]
                 data['data']['destination'] = {'x':destination.x,'y':destination.y,'yaw':destination.yaw}
                 data['data']['destination_arrival_duration'] = destination.t.sec - self.state[robot_name].location.t.sec
-                if ((self.state[robot_name].mode.mode == 0 or self.state[robot_name].mode.mode == 1)) and\
-                    ((abs(position[0]-data['data']['destination']['x']) < 0.5) and\
+                if ((abs(position[0]-data['data']['destination']['x']) < 0.5) and\
                     (abs(position[1]-data['data']['destination']['y']) < 0.5) and\
                     (abs(angle-data['data']['destination']['yaw']) < 0.1)):
                     data['data']['completed_request'] = True
