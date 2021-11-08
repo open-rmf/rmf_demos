@@ -30,7 +30,7 @@ rmf_fleet:
     loop: True
     delivery: True
     clean: False
-    finishing_request: "nothing" # [park, charge, nothing]
+    finishing_request: "park" # [park, charge, nothing]
 
 # DeliveryBot CONFIG =================================================================
 
@@ -44,6 +44,7 @@ robots:
       user: "some_user"
       password: "some_password"
       max_delay: 10.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+      filter_waypoints: True
     rmf_config:
       robot_state_update_frequency: 1.0
       start:
@@ -59,6 +60,7 @@ robots:
       user: "some_user"
       password: "some_password"
       max_delay: 10.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+      filter_waypoints: True
     rmf_config:
       robot_state_update_frequency: 1.0
       start:
