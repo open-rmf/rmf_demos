@@ -2,7 +2,7 @@
 
 <launch>
 
-  <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
+  <arg name="use_sim_time" default="true" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="fleet_name" description="Name of the fleet that this adapter will interface with"/>
   <arg name="nav_graph_file" default="" description="The file path of this fleet's navigation graph"/>
   <arg name="config_file" default="" description="The path of this fleet's config file"/>
@@ -14,21 +14,15 @@
         args="--config_file $(var config_file) --nav_graph $(var nav_graph_file)"
         output="both">
 
-    <param name="fleet_name" value="$(var fleet_name)"/>
-    <param name="config_file" value="$(var config_file)"/>
-    <param name="nav_graph_file" value="$(var nav_graph_file)"/>
     <param name="use_sim_time" value="$(var use_sim_time)"/>
   </node>
 
   <node pkg="rmf_demos_fleet_adapter"
         exec="fleet_adapter"
         name="$(var fleet_name)_fleet_adapter"
-        args="--config_file $(var config_file) --nav_graph $(var nav_graph_file)"
+        args="--config_file $(var config_file) --nav_graph $(var nav_graph_file) --use_sim_time"
         output="both">
 
-    <param name="fleet_name" value="$(var fleet_name)"/>
-    <param name="config_file" value="$(var config_file)"/>
-    <param name="nav_graph_file" value="$(var nav_graph_file)"/>
     <param name="use_sim_time" value="$(var use_sim_time)"/>
   </node>
 
