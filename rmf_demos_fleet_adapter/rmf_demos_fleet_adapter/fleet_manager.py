@@ -151,7 +151,7 @@ class FleetManager(Node):
                 data['data']['destination_arrival_duration'] = duration
             else:
               data['data']['destination_arrival_duration'] = 0.0
-              data['completed_request'] = True
+              data['data']['completed_request'] = True
             return data
 
         @app.post('/open-rmf/rmf_demos_fm/navigate/')

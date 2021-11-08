@@ -117,7 +117,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # assert len(
         #     self.position) > 2, "Unable to get current location of the robot"
         retry_count = 0
-        while (self.position is None and retry_count < 10):
+        while (self.position is None and retry_count < 20):
             self.position = self.get_position()
             retry_count = retry_count + 1
             time.sleep(0.5)
