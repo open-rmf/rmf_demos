@@ -53,20 +53,20 @@ robots:
       charger:
         waypoint: "tinyRobot1_charger"
   # Configuration for the second robot in this fleet if there is a second robot
-  tinyRobot2:
-    robot_config:
-      base_url: "http://127.0.0.1:8001" # API endpoint for the robot
-      user: "some_user"
-      password: "some_password"
-      # max_delay: 10.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
-    rmf_config:
-      robot_state_update_frequency: 0.5
-      start:
-        map_name: "L1"
-        waypoint: "tinyRobot2_charger"
-        orientation: 0.0 # radians
-      charger:
-        waypoint: "tinyRobot2_charger"
+  # tinyRobot2:
+  #   robot_config:
+  #     base_url: "http://127.0.0.1:8001" # API endpoint for the robot
+  #     user: "some_user"
+  #     password: "some_password"
+  #     # max_delay: 10.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+  #   rmf_config:
+  #     robot_state_update_frequency: 0.5
+  #     start:
+  #       map_name: "L1"
+  #       waypoint: "tinyRobot2_charger"
+  #       orientation: 0.0 # radians
+  #     charger:
+  #       waypoint: "tinyRobot2_charger"
 
 # TRANSFORM CONFIG =============================================================
 # For computing transforms between Robot and RMF coordinate systems

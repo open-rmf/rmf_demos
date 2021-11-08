@@ -117,10 +117,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # assert len(
         #     self.position) > 2, "Unable to get current location of the robot"
         retry_count = 0
-        while (self.position is not None and retry_count < 10):
+        while (self.position is None and retry_count < 10):
             self.position = self.get_position()
             retry_count = retry_count + 1
-            time.sleep(1)
+            time.sleep(0.5)
+        if retry_count > 19:
+            assert False, "Unable to get current location of the robot"
         self.node.get_logger().info(
             f"The robot is starting at: [{self.position[0]:.2f}, "
             f"{self.position[1]:.2f}, {self.position[2]:.2f}]")
