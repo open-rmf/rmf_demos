@@ -383,8 +383,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         if position is not None:
             x, y = self.transforms['robot_to_rmf'].transform(
                 [position[0], position[1]])
-            theta = math.radians(position[2]) - \
-                self.transforms['orientation_offset']
+            theta = position[2] - self.transforms['orientation_offset']
             # ------------------------ #
             # IMPLEMENT YOUR CODE HERE #
             # Ensure x, y are in meters and theta in radians #

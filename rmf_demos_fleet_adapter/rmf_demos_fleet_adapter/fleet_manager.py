@@ -237,7 +237,7 @@ class FleetManager(Node):
             if state.destination is None:
                 return
             destination = state.destination
-            if ((msg.mode.mode == 0 or msg.mode.mode ==1) and len(msg.path) == 0) and self.disp([msg.location.x, msg.location.y], [destination.x, destination.y]) < 0.5:
+            if ((msg.mode.mode == 0 or msg.mode.mode ==1) and len(msg.path) == 0):
                 self.robots[msg.name].destination = None
 
     def disp(self, A, B):
