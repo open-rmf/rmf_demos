@@ -43,9 +43,9 @@ robots:
       base_url: "http://127.0.0.1:8001" # API endpoint for the robot
       user: "some_user"
       password: "some_password"
-      # max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
     rmf_config:
-      robot_state_update_frequency: 0.5
+      robot_state_update_frequency: 1.0
       start:
         map_name: "L1"
         waypoint: "tinyRobot1_charger"
@@ -60,7 +60,7 @@ robots:
   #     password: "some_password"
   #     # max_delay: 10.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
   #   rmf_config:
-  #     robot_state_update_frequency: 0.5
+  #     robot_state_update_frequency: 1.0
   #     start:
   #       map_name: "L1"
   #       waypoint: "tinyRobot2_charger"
