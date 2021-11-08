@@ -63,7 +63,8 @@ class RobotAPI:
             data = response.json()
             if self.debug:
                 print(f'Response: {data}')
-            # if data['success']:
+            if not data['success']:
+                return None
             x = data['data']['position']['x']
             y = data['data']['position']['y']
             angle = data['data']['position']['yaw']
@@ -144,7 +145,7 @@ class RobotAPI:
         ''' Return True if the robot has successfully completed its previous
             navigation request. Else False.'''
         response = self.data()
-        if response is not None:
+        if response is not None and response.get('data') is not None:
             return response['data']['completed_request']
         else:
             return False

@@ -69,6 +69,11 @@ class Request(BaseModel):
 # Fleet Manager
 # ------------------------------------------------------------------------------
 class FleetManager(Node):
+    class State:
+        def __init__(self, state:RobotState=None, destination:Location=None):
+            self.state = state
+            self.destination = destination
+
     def __init__(self, config_path, nav_path, port):
         super().__init__('rmf_demos_fleet_manager')
         self.port = port
@@ -77,14 +82,16 @@ class FleetManager(Node):
         with open(config_path, "r") as f:
             self.config = yaml.safe_load(f)
         self.fleet_name = self.config["rmf_fleet"]["name"]
-        self.robot_names = []
+        self.robots= {} # Map robot name to state
+        # self.robot_names = []
         self.prefix = ''
 
         for robot_name, robot_config in self.config["robots"].items():
-            self.robot_names.append(robot_name)
-            self.map_name = robot_config["rmf_config"]["start"]["map_name"]
+            self.robots[robot_name] = State()
+            # self.robot_names.append(robot_name)
+            # self.map_name = robot_config["rmf_config"]["start"]["map_name"]
             self.prefix = robot_config['robot_config']['base_url']
-        assert(len(self.robot_names) > 0)
+        assert(len(self.robots) > 0)
 
         profile = traits.Profile(geometry.make_final_convex_circle(
             self.config['rmf_fleet']['profile']['footprint']),
@@ -109,48 +116,49 @@ class FleetManager(Node):
             'robot_path_requests',
             qos_profile=qos_profile_system_default)
 
-        self.state = {}
-        self.destination = {} # stores destination waypoints and time for each robot: {"position":[x,y,yaw],"t":Time}}
-        for robot in self.robot_names:
-            self.destination[robot] = None
+        # self.state = {}
+        # self.destination = {} # stores destination waypoints and time for each robot: {"position":[x,y,yaw],"t":Time}}
+        # for robot in self.robot_names:
+        #     self.destination[robot] = None
         self.task_id = -1
 
         @app.get('/open-rmf/rmf_demos_fm/status/')
         async def position(robot_name: Optional[str] = None):
-            data = {'data': {'robot_name':robot_name, 
-                             'map_name':'',
-                             'position':{'x':0.0,'y':0.0,'yaw':0.0},
-                             'battery':0.0,
-                             'destination':{'x':0.0,'y':0.0,'yaw':0.0},
-                             'destination_arrival_duration':0.0,
-                             'completed_request':False},
+            data = {'data': {},
                     'success':False,
                     'msg':''}
-            if robot_name not in self.state:
+            state = self.robots.get(robot_name)
+            if state is None or state.state is None:
                 return data
-            position = [self.state[robot_name].location.x, self.state[robot_name].location.y]
-            angle = self.state[robot_name].location.yaw
+            position = [state.state.location.x, state.state.location.y]
+            angle = state.state.location.yaw
+            data['success'] = True
             data['data']['robot_name'] = robot_name
             data['data']['map_name'] = self.map_name
             data['data']['position'] = {'x':position[0],'y':position[1],'yaw':angle}
-            data['data']['battery'] = self.state[robot_name].battery_percent
-            if self.destination[robot_name] is not None:
-                destination = self.destination[robot_name]
-                data['data']['destination'] = {'x':destination.x,'y':destination.y,'yaw':destination.yaw}
-                data['data']['destination_arrival_duration'] = destination.t.sec - self.state[robot_name].location.t.sec
-                if ((abs(position[0]-data['data']['destination']['x']) < 0.5) and\
-                    (abs(position[1]-data['data']['destination']['y']) < 0.5) and\
-                    (abs(angle-data['data']['destination']['yaw']) < 0.1)):
-                    data['data']['completed_request'] = True
-                    self.destination[robot_name] = None
-            data['success'] = True
+            data['data']['battery'] = state.state.battery_percent
+            data['data']['completed_request'] = False
+            if state.destination is not None:
+                destination = state.destination
+                # calculate arrival estiamte
+                dist_to_target = self.disp(position, [destination.x, destination.y])
+                ori_delta = abs(abs(angle) - abs(destination.yaw))
+                if ori_delta > np.pi:
+                    ori_delta = ori_delta - (2 * np.pi)
+                if ori_delta < -np.pi:
+                    ori_delta =  (2 * np.pi) + ori_delta
+                duration = dist_to_target/self.vehicle_traits.linear.nominal_velocity +\
+                  ori_delta/self.vehicle_traits.rotational.nominal_velocity
+                data['data']['destination_arrival_duration'] = duration
+            else:
+              data['data']['destination_arrival_duration'] = 0.0
+              data['completed_request'] = True
             return data
 
         @app.post('/open-rmf/rmf_demos_fm/navigate/')
         async def navigate(robot_name: str, dest: Request):
             data = {'success': False, 'msg': ''}
-            if (robot_name not in self.robot_names or\
-                dest.map_name != self.map_name or\
+            if (robot_name not in self.robots or\
                 len(dest.destination) < 1):
                 return data
 
@@ -180,7 +188,7 @@ class FleetManager(Node):
             target_loc.y = target_y
             target_loc.yaw = target_yaw
             target_loc.level_name = self.map_name
-            
+
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
             path_request.path.append(target_loc)
@@ -196,7 +204,7 @@ class FleetManager(Node):
         @app.get('/open-rmf/rmf_demos_fm/stop_robot/')
         async def stop(robot_name: str):
             data = {'success': False, 'msg': ''}
-            if robot_name not in self.robot_names:
+            if robot_name not in self.robots:
                 return data
             path_request = PathRequest()
             path_request.fleet_name = self.fleet_name
@@ -212,7 +220,7 @@ class FleetManager(Node):
         async def start_process(robot_name: str, task: Request):
             data = {'success': False, 'msg': ''}
             # print(f"Request data: {task}")
-            if (robot_name not in self.robot_names or\
+            if (robot_name not in self.robots or\
                 task.map_name != self.map_name or\
                 len(task.task) < 1):
                 return data
@@ -223,8 +231,15 @@ class FleetManager(Node):
             return data
 
     def robot_state_cb(self, msg):
-        if (msg.name in self.robot_names):
-            self.state[msg.name] = msg
+        if (msg.name in self.robots):
+            self.robots[msg.name].state = msg
+            # Check if robot has reached destination
+            state = self.robots[msg.name]
+            if state.destination is None:
+                return
+            destination = state.destination
+            if ((msg.mode.mode == 0 or msg.mode.mode ==1) and len(msg.path) == 0) and disp([msg.location.x, msg.location.y], [destination.x, destination.y]) < 0.5:
+                self.robots[msg.name].destination = None
 
     def disp(self, A, B):
         return math.sqrt((A[0]-B[0])**2 + (A[1]-B[1])**2)
