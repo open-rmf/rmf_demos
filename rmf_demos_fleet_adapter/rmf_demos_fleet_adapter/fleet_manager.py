@@ -68,12 +68,11 @@ class Request(BaseModel):
 # ------------------------------------------------------------------------------
 # Fleet Manager
 # ------------------------------------------------------------------------------
+class State:
+    def __init__(self, state:RobotState=None, destination:Location=None):
+        self.state = state
+        self.destination = destination
 class FleetManager(Node):
-    class State:
-        def __init__(self, state:RobotState=None, destination:Location=None):
-            self.state = state
-            self.destination = destination
-
     def __init__(self, config_path, nav_path, port):
         super().__init__('rmf_demos_fleet_manager')
         self.port = port
@@ -134,7 +133,7 @@ class FleetManager(Node):
             angle = state.state.location.yaw
             data['success'] = True
             data['data']['robot_name'] = robot_name
-            data['data']['map_name'] = self.map_name
+            data['data']['map_name'] = state.state.location.level_name
             data['data']['position'] = {'x':position[0],'y':position[1],'yaw':angle}
             data['data']['battery'] = state.state.battery_percent
             data['data']['completed_request'] = False
@@ -173,21 +172,22 @@ class FleetManager(Node):
             t = self.get_clock().now().to_msg()
 
             path_request = PathRequest()
-            cur_x = self.state[robot_name].location.x
-            cur_y = self.state[robot_name].location.y
-            cur_yaw = self.state[robot_name].location.yaw
-            cur_loc = self.state[robot_name].location
+            state = self.robots[robot_name]
+            cur_x = state.state.location.x
+            cur_y = state.state.location.y
+            cur_yaw = state.state.location.yaw
+            cur_loc = state.state.location
             path_request.path.append(cur_loc)
 
             disp = self.disp([target_x, target_y], [cur_x, cur_y])
-            duration = int(disp/self.vehicle_traits.linear.nominal_velocity)
+            duration = int(disp/self.vehicle_traits.linear.nominal_velocity) + int(abs(abs(cur_yaw) - abs(target_yaw))/self.vehicle_traits.rotational.nominal_velocity)
             t.sec = t.sec + duration
             target_loc = Location()
             target_loc.t = t
             target_loc.x = target_x
             target_loc.y = target_y
             target_loc.yaw = target_yaw
-            target_loc.level_name = self.map_name
+            target_loc.level_name = state.state.location.level_name
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
@@ -196,7 +196,7 @@ class FleetManager(Node):
             path_request.task_id = str(self.task_id)
             self.path_pub.publish(path_request)
 
-            self.destination[robot_name] = target_loc
+            self.robots[robot_name].destination = target_loc
 
             data['success'] = True
             return data
@@ -221,7 +221,6 @@ class FleetManager(Node):
             data = {'success': False, 'msg': ''}
             # print(f"Request data: {task}")
             if (robot_name not in self.robots or\
-                task.map_name != self.map_name or\
                 len(task.task) < 1):
                 return data
             # ------------------------ #
@@ -238,7 +237,7 @@ class FleetManager(Node):
             if state.destination is None:
                 return
             destination = state.destination
-            if ((msg.mode.mode == 0 or msg.mode.mode ==1) and len(msg.path) == 0) and disp([msg.location.x, msg.location.y], [destination.x, destination.y]) < 0.5:
+            if ((msg.mode.mode == 0 or msg.mode.mode ==1) and len(msg.path) == 0) and self.disp([msg.location.x, msg.location.y], [destination.x, destination.y]) < 0.5:
                 self.robots[msg.name].destination = None
 
     def disp(self, A, B):

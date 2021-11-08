@@ -74,7 +74,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.update_handle = None  # RobotUpdateHandle
         self.battery_soc = 1.0
         self.api = None
-        self.position = []  # (x,y,theta) in RMF coordinates (meters, radians)
+        self.position = None  # (x,y,theta) in RMF coordinates (meters, radians)
         self.initialized = False
         self.state = RobotState.IDLE
         self.dock_name = ""
