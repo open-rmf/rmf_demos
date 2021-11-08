@@ -18,9 +18,10 @@ These demos were developed and tested on
 
 * [Ubuntu 20.04 LTS](https://releases.ubuntu.com/20.04/)
 
-* [ROS 2 - Foxy](https://index.ros.org/doc/ros2/Releases/Release-Foxy-Fitzroy/)
+* [ROS 2 - Galactic](https://docs.ros.org/en/foxy/Releases/Release-Galactic-Geochelone.html)
 
 * [Gazebo 11.1.0](http://gazebosim.org/)
+> Note: RMF is fully supported on ROS 2 Foxy as well
 
 ## Installation
 Instructions can be found [here](https://github.com/open-rmf/rmf).
@@ -99,7 +100,7 @@ Robots running Clean and Loop Task:
 ![](../media/hotel_scenarios.gif)
 
 
-To submit a list of scheduled tasks via rmf web panel, load [hotel_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/hotel_tasks.json), 
+To submit a list of scheduled tasks via rmf web panel, load [hotel_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/hotel_tasks.json),
 or paste the json list to the _Submit a List of Tasks_ section. Next, click on submit.
 
 > Tip: To speedup simulation on gazebo, user can run `gz physics -s 0.01` on a separate terminal after launching the world. Use with care!
@@ -171,7 +172,7 @@ ros2 launch rmf_demos_gz airport_terminal.launch.xml use_crowdsim:=1
 
 Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
 
-In the airport terminal map, a `Caddy` is spawned in the far right corner and can be controlled with `geometry_msgs/Twist` messages published over the `cmd_vel` topic. 
+In the airport terminal map, a `Caddy` is spawned in the far right corner and can be controlled with `geometry_msgs/Twist` messages published over the `cmd_vel` topic.
 
 Run `teleop_twist_keyboard` to control the `caddy` with your keyboard:
 ```bash
