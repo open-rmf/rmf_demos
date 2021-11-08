@@ -109,7 +109,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.api = RobotAPI(
             self.config['base_url'],
             self.config['user'],
-            self.config['password'])
+            self.config['password'],
+            self.name)
         assert self.api.connected, "Unable to connect to Robot API server"
 
         self.position = self.get_position()  # RMF coordinates

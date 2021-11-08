@@ -6,6 +6,7 @@ find_package(ament_cmake REQUIRED)
 
 install(DIRECTORY
   launch/
+  config
   sros2
   DESTINATION share/${PROJECT_NAME}
 )
