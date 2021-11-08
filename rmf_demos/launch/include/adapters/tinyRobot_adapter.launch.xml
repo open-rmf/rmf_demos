@@ -9,7 +9,8 @@
        description="What the robot should do once it finishes its tasks: [charge, park, nothing]"/>
 
   <group>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/fleet_adapter.launch.xml">
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
+    <!-- <include file="$(find-pkg-share rmf_fleet_adapter)/fleet_adapter.launch.xml"> -->
 
       <!-- The name and control type of the fleet -->
       <arg name="fleet_name" value="$(var fleet_name)"/>
@@ -18,9 +19,8 @@
       <!-- The graph that this fleet should use for navigation -->
       <arg name="nav_graph_file" value="$(var nav_graph_file)" />
 
-      <!-- The nominal linear and angular velocity of this fleet's vehicles -->
-      <arg name="linear_velocity" value="0.5"/>
-      <arg name="angular_velocity" value="0.6"/>
+      <!-- The config file that provides important parameters for setting up the adapter -->
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/office/config.yaml"/>
 
       <!-- The nominal linear and angular acceleration of this fleet's vehicles -->
       <arg name="linear_acceleration" value="0.75"/>

@@ -21,37 +21,57 @@
     these functions.
 '''
 
+import requests
+from urllib.error import HTTPError
 
 class RobotAPI:
     # The constructor below accepts parameters typically required to submit
     # http requests. Users should modify the constructor as per the
     # requirements of their robot's API
-    def __init__(self, prefix: str, user: str, password: str):
+    def __init__(self, prefix: str, user: str, password: str, robot_name: str):
         self.prefix = prefix
         self.user = user
         self.password = password
+        self.timeout = 5.0
+        self.robot_name = robot_name
+        self.debug = False
         self.connected = False
         # Test connectivity
         connected = self.check_connection()
         if connected:
-            print("Successfully able to query API server")
+            print('Successfully able to query API server')
             self.connected = True
         else:
-            print("Unable to query API server")
+            print('Unable to query API server')
 
     def check_connection(self):
         ''' Return True if connection to the robot API server is successful'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
+        if self.data() == None:
+            return False
         return True
 
     def position(self):
         ''' Return [x, y, theta] expressed in the robot's coordinate frame or
             None if any errors are encountered'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
+        if self.robot_name is not None:
+            url = self.prefix + f'/open-rmf/rmf_demos_fm/status/?robot_name={self.robot_name}'
+        else:
+            url = self.prefix + f'/open-rmf/rmf_demos_fm/status'
+        try:
+            response = requests.get(url, self.timeout)
+            response.raise_for_status()
+            data = response.json()
+            if self.debug:
+                print(f'Response: {data}')
+            # if data['success']:
+            x = data['data']['position']['x']
+            y = data['data']['position']['y']
+            angle = data['data']['position']['yaw']
+            return [x, y, angle]
+        except HTTPError as http_err:
+            print(f'HTTP error: {http_err}')
+        except Exception as err:
+            print(f'Other error: {err}')
         return None
 
     def navigate(self, pose, map_name: str):
@@ -59,9 +79,21 @@ class RobotAPI:
             and theta are in the robot's coordinate convention. This function
             should return True if the robot has accepted the request,
             else False'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
+        assert(len(pose) > 2)
+        url = self.prefix + f'/open-rmf/rmf_demos_fm/navigate/?robot_name={self.robot_name}'
+        data = {} # fields: task, map_name, destination{}, data{}
+        data['map_name'] = map_name
+        data['destination'] = {'x':pose[0],'y':pose[1],'yaw':pose[2]}
+        try:
+            response = requests.post(url, timeout=self.timeout, json=data)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()['success']
+        except HTTPError as http_err:
+            print(f'HTTP error: {http_err}')
+        except Exception as err:
+            print(f'Other error: {err}')
         return False
 
     def start_process(self, process: str, map_name: str):
@@ -69,47 +101,82 @@ class RobotAPI:
             and the use case. For example, load/unload a cart for Deliverybot
             or begin cleaning a zone for a cleaning robot.
             Return True if the robot has accepted the request, else False'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
+        url = self.prefix + f"/open-rmf/rmf_demos_fm/start_task?robot_name={self.robot_name}"
+        data = {'task': process,'map_name': map_name} # fields: task, map_name, destination{}, data{}
+        try:
+            response = requests.post(url, timeout=self.timeout, json=data)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()['success']
+        except HTTPError as http_err:
+            print(f'HTTP error: {http_err}')
+        except Exception as err:
+            print(f'Other error: {err}')
         return False
 
     def stop(self):
         ''' Command the robot to stop.
             Return True if robot has successfully stopped. Else False'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
+        url = self.prefix + f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={self.robot_name}'
+        try:
+            response = requests.get(url, self.timeout)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()['success']
+        except HTTPError as http_err:
+            print(f'HTTP error: {http_err}')
+        except Exception as err:
+            print(f'Other error: {err}')
         return False
 
     def navigation_remaining_duration(self):
         ''' Return the number of seconds remaining for the robot to reach its
             destination'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
-        return 0.0
+        response = self.data()
+        if response is not None:
+            return response['data']['destination_arrival_duration']
+        else:
+            return 0.0
 
     def navigation_completed(self):
         ''' Return True if the robot has successfully completed its previous
             navigation request. Else False.'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
-        return False
+        response = self.data()
+        if response is not None:
+            return response['data']['completed_request']
+        else:
+            return False
 
     def process_completed(self):
         ''' Return True if the robot has successfully completed its previous
             process request. Else False.'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
-        return False
+        response = self.data()
+        if response is not None:
+            return response['data']['completed_request']
+        else:
+            return False
 
     def battery_soc(self):
         ''' Return the state of charge of the robot as a value between 0.0
             and 1.0. Else return None if any errors are encountered'''
-        # ------------------------ #
-        # IMPLEMENT YOUR CODE HERE #
-        # ------------------------ #
+        response = self.data()
+        if response is not None:
+            return response['data']['battery']/100.0
+        else:
+            return None
+
+    def data(self):
+        url = self.prefix + f'/open-rmf/rmf_demos_fm/status?robot_name={self.robot_name}'
+        try:
+            response = requests.get(url, timeout=self.timeout)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()
+        except HTTPError as http_err:
+            print(f'HTTP error: {http_err}')
+        except Exception as err:
+            print(f'Other error: {err}')
         return None

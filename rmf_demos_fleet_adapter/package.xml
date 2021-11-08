@@ -9,6 +9,10 @@
 
   <exec_depend>rmf_fleet_adapter_python</exec_depend>
 
+  <depend>rclpy</depend>
+  <depend>rmf_fleet_msgs</depend>
+  <depend>rmf_task_msgs</depend>
+
   <export>
     <build_type>ament_python</build_type>
   </export>
