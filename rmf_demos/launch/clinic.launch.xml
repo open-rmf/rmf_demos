@@ -20,12 +20,7 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="finishing_request" value="park"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/clinic/nav_graphs/0.yaml" />
-    </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="deliveryRobot"/>
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="failover_mode" value="$(var failover_mode)"/>
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/clinic/deliveryRobot_config.yaml"/>
     </include>
   </group>
 
@@ -36,12 +31,7 @@
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/clinic/nav_graphs/1.yaml" />
-    </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="tinyRobot"/>
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="failover_mode" value="$(var failover_mode)"/>
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/clinic/tinyRobot_config.yaml"/>
     </include>
   </group>
 

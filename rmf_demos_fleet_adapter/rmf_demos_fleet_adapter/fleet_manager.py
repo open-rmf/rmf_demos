@@ -21,43 +21,22 @@ import argparse
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_system_default
-from rclpy.parameter import Parameter
 
-from rmf_fleet_msgs.msg import RobotState, FleetState, Location, PathRequest
+from rmf_fleet_msgs.msg import RobotState, Location, PathRequest
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
 import rmf_adapter.geometry as geometry
-import rmf_adapter.graph as graph
-import rmf_adapter.plan as plan
 
 import numpy as np
 
 from fastapi import FastAPI
 import uvicorn
-import contextlib
-import time
-from typing import Optional, Dict
+from typing import Optional
 from pydantic import BaseModel
 
 import threading
 app = FastAPI()
-
-class Server(uvicorn.Server):
-    def install_signal_handlers(self):
-        pass
-
-    @contextlib.contextmanager
-    def run_in_thread(self):
-        thread = threading.Thread(target=self.run)
-        thread.start()
-        try:
-            while not self.started:
-                time.sleep(1e-3)
-            yield
-        finally:
-            self.should_exit = True
-            thread.join()
 
 class Request(BaseModel):
     map_name: str
@@ -82,13 +61,10 @@ class FleetManager(Node):
             self.config = yaml.safe_load(f)
         self.fleet_name = self.config["rmf_fleet"]["name"]
         self.robots= {} # Map robot name to state
-        # self.robot_names = []
         self.prefix = ''
 
         for robot_name, robot_config in self.config["robots"].items():
             self.robots[robot_name] = State()
-            # self.robot_names.append(robot_name)
-            # self.map_name = robot_config["rmf_config"]["start"]["map_name"]
             self.prefix = robot_config['robot_config']['base_url']
         assert(len(self.robots) > 0)
 
@@ -100,9 +76,6 @@ class FleetManager(Node):
             angular=traits.Limits(*self.config['rmf_fleet']['limits']['angular']),
             profile=profile)
         self.vehicle_traits.differential.reversible = self.config['rmf_fleet']['reversible']
-        # nav_graph = graph.parse_graph(nav_path, self.vehicle_traits)
-        # config = plan.Configuration(nav_graph, self.vehicle_traits)
-        # self.planner = plan.Planner(config)
 
         self.create_subscription(
             RobotState,
@@ -115,10 +88,6 @@ class FleetManager(Node):
             'robot_path_requests',
             qos_profile=qos_profile_system_default)
 
-        # self.state = {}
-        # self.destination = {} # stores destination waypoints and time for each robot: {"position":[x,y,yaw],"t":Time}}
-        # for robot in self.robot_names:
-        #     self.destination[robot] = None
         self.task_id = -1
 
         @app.get('/open-rmf/rmf_demos_fm/status/')
@@ -164,10 +133,6 @@ class FleetManager(Node):
             target_x = dest.destination['x']
             target_y = dest.destination['y']
             target_yaw = dest.destination['yaw']
-
-            # # Add some noise to the actual location the robot will navigate to
-            # target_x = target_x + np.random.uniform(-0.5, 0.5)
-            # target_y = target_y + np.random.uniform(-0.5, 0.5)
 
             t = self.get_clock().now().to_msg()
 
@@ -219,7 +184,6 @@ class FleetManager(Node):
         @app.post('/open-rmf/rmf_demos_fm/start_task/')
         async def start_process(robot_name: str, task: Request):
             data = {'success': False, 'msg': ''}
-            # print(f"Request data: {task}")
             if (robot_name not in self.robots or\
                 len(task.task) < 1):
                 return data
@@ -268,7 +232,7 @@ def main(argv=sys.argv):
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()
 
-    uvicorn.run(app, host='127.0.0.1', port=8001, log_level='warning')
+    uvicorn.run(app, host='127.0.0.1', port=int(args.port), log_level='warning')
 
 if __name__ == '__main__':
     main(sys.argv)
