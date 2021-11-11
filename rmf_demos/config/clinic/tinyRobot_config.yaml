@@ -37,8 +37,8 @@ rmf_fleet:
 robots:
   # Here the user is expected to append the configuration for each robot in the
   # fleet.
-  # Configuration for tinyRobot1
-  tinyRobot1:
+  # Configuration for tinyRobot_1
+  tinyRobot_1:
     robot_config:
       base_url: "http://127.0.0.1:8001" # API endpoint for the robot
       user: "some_user"
@@ -48,13 +48,13 @@ robots:
     rmf_config:
       robot_state_update_frequency: 1.0
       start:
-        map_name: "L1"
-        waypoint: "tinyRobot1_charger"
+        map_name: "L2"
+        waypoint: "tinyRobot_1_charger"
         orientation: 0.0 # radians
       charger:
-        waypoint: "tinyRobot1_charger"
-  # Configuration for tinyRobot2
-  tinyRobot2:
+        waypoint: "tinyRobot_1_charger"
+  # Configuration for tinyRobot_2
+  tinyRobot_2:
     robot_config:
       base_url: "http://127.0.0.1:8001" # API endpoint for the robot
       user: "some_user"
@@ -64,11 +64,11 @@ robots:
     rmf_config:
       robot_state_update_frequency: 1.0
       start:
-        map_name: "L1"
-        waypoint: "tinyRobot2_charger"
+        map_name: "L2"
+        waypoint: "tinyRobot_2_charger"
         orientation: 0.0 # radians
       charger:
-        waypoint: "tinyRobot2_charger"
+        waypoint: "tinyRobot_2_charger"
 
 # TRANSFORM CONFIG =============================================================
 # For computing transforms between Robot and RMF coordinate systems

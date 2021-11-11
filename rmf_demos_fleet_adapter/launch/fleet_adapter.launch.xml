@@ -6,12 +6,13 @@
   <arg name="fleet_name" description="Name of the fleet that this adapter will interface with"/>
   <arg name="nav_graph_file" default="" description="The file path of this fleet's navigation graph"/>
   <arg name="config_file" default="" description="The path of this fleet's config file"/>
+  <arg name="port" description="The port number for the fleet manager server"/>
   <arg name="output" default="screen"/>
 
   <node pkg="rmf_demos_fleet_adapter"
         exec="fleet_manager"
         name="$(var fleet_name)_fleet_manager"
-        args="--config_file $(var config_file) --nav_graph $(var nav_graph_file)"
+        args="--config_file $(var config_file) --nav_graph $(var nav_graph_file) --port $(var port)"
         output="both">
 
     <param name="use_sim_time" value="$(var use_sim_time)"/>
