@@ -40,11 +40,12 @@ class RobotState(enum.IntEnum):
     MOVING = 2
 
 
-# Custom wrapper for Plan::Waypoint. We use this to modify position of waypoints
-# to prevent backtracking
+# Custom wrapper for Plan::Waypoint. We use this to modify position of
+# waypoints to prevent backtracking
 class PlanWaypoint:
-    def __init__(self, index, wp:plan.Waypoint):
-        self.index = index # this is the index of the Plan::Waypoint in the waypoints in follow_new_path
+    def __init__(self, index, wp: plan.Waypoint):
+        # the index of the Plan::Waypoint in the waypoints in follow_new_path
+        self.index = index
         self.position = wp.position
         self.time = wp.time
         self.graph_index = wp.graph_index
@@ -85,7 +86,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.update_handle = None  # RobotUpdateHandle
         self.battery_soc = 1.0
         self.api = None
-        self.position = None  # (x,y,theta) in RMF coordinates (meters, radians)
+        self.position = None  # (x,y,theta) in RMF coordinates (meters,radians)
         self.initialized = False
         self.state = RobotState.IDLE
         self.dock_name = ""
@@ -204,10 +205,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.clear()
 
     def follow_new_path(
-        self,
-        waypoints,
-        next_arrival_estimator,
-        path_finished_callback):
+            self,
+            waypoints,
+            next_arrival_estimator,
+            path_finished_callback):
 
         self.stop()
         self._quit_path_event.clear()
@@ -230,15 +231,15 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 if (self.target_waypoint.graph_index is not None):
                     self.on_waypoint = self.target_waypoint.graph_index
                 else:
-                    self.on_waypoint = None # we are still on a lane
+                    self.on_waypoint = None  # we are still on a lane
                 self.last_known_waypoint_index = self.on_waypoint
 
         def _follow_path():
             target_pose = []
             while (
-                self.remaining_waypoints or
-                self.state == RobotState.MOVING or
-                self.state == RobotState.WAITING):
+                    self.remaining_waypoints or
+                    self.state == RobotState.MOVING or
+                    self.state == RobotState.WAITING):
                 # Check if we need to abort
                 if self._quit_path_event.is_set():
                     self.node.get_logger().info("Aborting previously followed "
@@ -281,11 +282,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                 self.state = RobotState.IDLE
                             else:
                                 if self.path_index is not None:
+                                    d = (waypoint_wait_time - time_now).seconds
                                     self.node.get_logger().info(
-                                        f"Waiting for "
-                                        f"{(waypoint_wait_time - time_now).seconds}s")
+                                        f"Waiting for {d}s")
                                     self.next_arrival_estimator(
-                                        self.path_index, timedelta(seconds=0.0))
+                                        self.path_index,
+                                        timedelta(seconds=0.0))
 
                 elif self.state == RobotState.MOVING:
                     time.sleep(0.5)
@@ -313,13 +315,17 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                 # The robot may either be on the previous
                                 # waypoint or the target one
                                 if self.target_waypoint.graph_index is not \
-                                    None and self.dist(self.position, target_pose) < 0.5:
-                                    self.on_waypoint = self.target_waypoint.graph_index
+                                        None and self.dist(self.position,
+                                        target_pose) < 0.5:
+                                    self.on_waypoint =\
+                                        self.target_waypoint.graph_index
                                 elif self.last_known_waypoint_index is not \
-                                    None and self.dist(
-                                    self.position, self.graph.get_waypoint(
-                                      self.last_known_waypoint_index).location) < 0.5:
-                                    self.on_waypoint = self.last_known_waypoint_index
+                                        None and self.dist(
+                                        self.position, self.graph.get_waypoint(
+                                        self.last_known_waypoint_index\
+                                        ).location) < 0.5:
+                                    self.on_waypoint =\
+                                        self.last_known_waypoint_index
                                 else:
                                     self.on_lane = None  # update_off_grid()
                                     self.on_waypoint = None
@@ -477,8 +483,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 self.update_handle.update_off_grid_position(
                     self.position, self.dock_waypoint_index)
             # if robot is merging into a waypoint
-            elif (self.target_waypoint is not None and \
-                self.target_waypoint.graph_index is not None):
+            elif (self.target_waypoint is not None and
+                    self.target_waypoint.graph_index is not None):
                 self.update_handle.update_off_grid_position(
                     self.position, self.target_waypoint.graph_index)
             else:  # if robot is lost
@@ -521,7 +527,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         assert(len(B) > 1)
         return math.sqrt((A[0] - B[0])**2 + (A[1] - B[1])**2)
 
-    def filter_waypoints(self, wps:list, threshold = 1.0):
+    def filter_waypoints(self, wps: list, threshold=1.0):
         ''' Return filtered PlanWaypoints'''
 
         assert(len(wps) > 0)
@@ -536,7 +542,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # We assume the robot will backtack if the first waypoint in the plan
         # is behind the current position of the robot
         first_position = waypoints[0].position
-        if len(waypoints) > 2 and self.dist(first_position, last_pose) > threshold:
+        if len(waypoints) > 2 and\
+                self.dist(first_position, last_pose) > threshold:
             changed = False
             index = 0
             while (not changed):
@@ -553,7 +560,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # Find the first waypoint
         index = 0
         while (not changed and index < len(waypoints)):
-            if (self.dist(last_pose,waypoints[index].position) < threshold):
+            if (self.dist(last_pose, waypoints[index].position) < threshold):
                 first = waypoints[index]
                 last_pose = waypoints[index].position
             else:
@@ -568,24 +575,28 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 while (not changed):
                     next_index = index + 1
                     if (next_index < len(waypoints)):
-                        if (self.dist(waypoints[next_index].position, waypoints[index].position) < threshold):
+                        if (self.dist(waypoints[next_index].position,
+                                waypoints[index].position) < threshold):
                             if (next_index == len(waypoints) - 1):
                                 # append last waypoint
                                 changed = True
                                 wp = waypoints[next_index]
-                                wp.approach_lanes = waypoints[parent_index].approach_lanes
+                                wp.approach_lanes =\
+                                    waypoints[parent_index].approach_lanes
                                 second.append(wp)
                         else:
                             # append if next waypoint changes
                             changed = True
                             wp = waypoints[index]
-                            wp.approach_lanes = waypoints[parent_index].approach_lanes
+                            wp.approach_lanes =\
+                                waypoints[parent_index].approach_lanes
                             second.append(wp)
                     else:
                         # we add the current index to second
                         changed = True
                         wp = waypoints[index]
-                        wp.approach_lanes = waypoints[parent_index].approach_lanes
+                        wp.approach_lanes =\
+                            waypoints[parent_index].approach_lanes
                         second.append(wp)
                     last_pose = waypoints[index].position
                     index = next_index
@@ -596,9 +607,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
     # def get_remaining_waypoints(self, waypoints: list):
     #     '''
-    #     The function returns a list where each element is a tuple of the index
-    #     of the waypoint and the waypoint present in waypoints. This function
-    #     may be modified if waypoints in a path need to be filtered.
+    #     The function returns a list where each element is a tuple of the
+    #     index of the waypoint and the waypoint present in waypoints.
+    #     This function may be modified if waypoints in a path need to be
+    #     filtered.
     #     '''
     #     assert(len(waypoints) > 0)
     #     remaining_waypoints = []

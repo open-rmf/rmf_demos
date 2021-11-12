@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 import sys
 import math
 import yaml
@@ -38,19 +38,23 @@ from pydantic import BaseModel
 import threading
 app = FastAPI()
 
+
 class Request(BaseModel):
     map_name: str
     task: Optional[str] = None
     destination: Optional[dict] = None
     data: Optional[dict] = None
 
+
 # ------------------------------------------------------------------------------
 # Fleet Manager
 # ------------------------------------------------------------------------------
 class State:
-    def __init__(self, state:RobotState=None, destination:Location=None):
+    def __init__(self, state: RobotState = None, destination: Location = None):
         self.state = state
         self.destination = destination
+
+
 class FleetManager(Node):
     def __init__(self, config_path, nav_path, port):
         super().__init__('rmf_demos_fleet_manager')
@@ -60,7 +64,7 @@ class FleetManager(Node):
         with open(config_path, "r") as f:
             self.config = yaml.safe_load(f)
         self.fleet_name = self.config["rmf_fleet"]["name"]
-        self.robots= {} # Map robot name to state
+        self.robots = {}  # Map robot name to state
         self.prefix = ''
 
         for robot_name, robot_config in self.config["robots"].items():
@@ -70,12 +74,16 @@ class FleetManager(Node):
 
         profile = traits.Profile(geometry.make_final_convex_circle(
             self.config['rmf_fleet']['profile']['footprint']),
-            geometry.make_final_convex_circle(self.config['rmf_fleet']['profile']['vicinity']))
+            geometry.make_final_convex_circle(
+                self.config['rmf_fleet']['profile']['vicinity']))
         self.vehicle_traits = traits.VehicleTraits(
-            linear=traits.Limits(*self.config['rmf_fleet']['limits']['linear']),
-            angular=traits.Limits(*self.config['rmf_fleet']['limits']['angular']),
-            profile=profile)
-        self.vehicle_traits.differential.reversible = self.config['rmf_fleet']['reversible']
+            linear=traits.Limits(
+                *self.config['rmf_fleet']['limits']['linear']),
+            angular=traits.Limits(
+                *self.config['rmf_fleet']['limits']['angular']),
+                profile=profile)
+        self.vehicle_traits.differential.reversible =\
+            self.config['rmf_fleet']['reversible']
 
         self.create_subscription(
             RobotState,
@@ -93,8 +101,8 @@ class FleetManager(Node):
         @app.get('/open-rmf/rmf_demos_fm/status/')
         async def position(robot_name: Optional[str] = None):
             data = {'data': {},
-                    'success':False,
-                    'msg':''}
+                    'success': False,
+                    'msg': ''}
             state = self.robots.get(robot_name)
             if state is None or state.state is None:
                 return data
@@ -103,31 +111,34 @@ class FleetManager(Node):
             data['success'] = True
             data['data']['robot_name'] = robot_name
             data['data']['map_name'] = state.state.location.level_name
-            data['data']['position'] = {'x':position[0],'y':position[1],'yaw':angle}
+            data['data']['position'] =\
+                {'x': position[0], 'y': position[1], 'yaw': angle}
             data['data']['battery'] = state.state.battery_percent
             data['data']['completed_request'] = False
             if state.destination is not None:
                 destination = state.destination
-                # calculate arrival estiamte
-                dist_to_target = self.disp(position, [destination.x, destination.y])
+                # calculate arrival estimate
+                dist_to_target =\
+                    self.disp(position, [destination.x, destination.y])
                 ori_delta = abs(abs(angle) - abs(destination.yaw))
                 if ori_delta > np.pi:
                     ori_delta = ori_delta - (2 * np.pi)
                 if ori_delta < -np.pi:
-                    ori_delta =  (2 * np.pi) + ori_delta
-                duration = dist_to_target/self.vehicle_traits.linear.nominal_velocity +\
-                  ori_delta/self.vehicle_traits.rotational.nominal_velocity
+                    ori_delta = (2 * np.pi) + ori_delta
+                duration = (dist_to_target/
+                    self.vehicle_traits.linear.nominal_velocity +
+                    ori_delta/self.vehicle_traits.rotational.nominal_velocity)
                 data['data']['destination_arrival_duration'] = duration
             else:
-              data['data']['destination_arrival_duration'] = 0.0
-              data['data']['completed_request'] = True
+                data['data']['destination_arrival_duration'] = 0.0
+                data['data']['completed_request'] = True
             return data
 
         @app.post('/open-rmf/rmf_demos_fm/navigate/')
         async def navigate(robot_name: str, dest: Request):
             data = {'success': False, 'msg': ''}
-            if (robot_name not in self.robots or\
-                len(dest.destination) < 1):
+            if (robot_name not in self.robots or
+                    len(dest.destination) < 1):
                 return data
 
             target_x = dest.destination['x']
@@ -145,7 +156,9 @@ class FleetManager(Node):
             path_request.path.append(cur_loc)
 
             disp = self.disp([target_x, target_y], [cur_x, cur_y])
-            duration = int(disp/self.vehicle_traits.linear.nominal_velocity) + int(abs(abs(cur_yaw) - abs(target_yaw))/self.vehicle_traits.rotational.nominal_velocity)
+            duration = int(disp/self.vehicle_traits.linear.nominal_velocity) +\
+                int(abs(abs(cur_yaw) - abs(target_yaw))/
+                self.vehicle_traits.rotational.nominal_velocity)
             t.sec = t.sec + duration
             target_loc = Location()
             target_loc.t = t
@@ -184,8 +197,8 @@ class FleetManager(Node):
         @app.post('/open-rmf/rmf_demos_fm/start_task/')
         async def start_process(robot_name: str, task: Request):
             data = {'success': False, 'msg': ''}
-            if (robot_name not in self.robots or\
-                len(task.task) < 1):
+            if (robot_name not in self.robots or
+                    len(task.task) < 1):
                 return data
             # ------------------------ #
             # TODO START PROCESS HERE
@@ -201,11 +214,13 @@ class FleetManager(Node):
             if state.destination is None:
                 return
             destination = state.destination
-            if ((msg.mode.mode == 0 or msg.mode.mode ==1) and len(msg.path) == 0):
+            if ((msg.mode.mode == 0 or msg.mode.mode == 1) and
+                    len(msg.path) == 0):
                 self.robots[msg.name].destination = None
 
     def disp(self, A, B):
         return math.sqrt((A[0]-B[0])**2 + (A[1]-B[1])**2)
+
 
 # ------------------------------------------------------------------------------
 # Main
@@ -232,7 +247,11 @@ def main(argv=sys.argv):
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()
 
-    uvicorn.run(app, host='127.0.0.1', port=int(args.port), log_level='warning')
+    uvicorn.run(app,
+        host='127.0.0.1',
+        port=int(args.port),
+        log_level='warning')
+
 
 if __name__ == '__main__':
     main(sys.argv)

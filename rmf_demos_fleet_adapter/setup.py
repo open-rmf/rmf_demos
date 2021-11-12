@@ -12,15 +12,17 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name,['config.yaml']),
-        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.xml')),
+        ('share/' + package_name, ['config.yaml']),
+        (os.path.join('share', package_name, 'launch'),
+            glob('launch/*.launch.xml')),
 
     ],
     install_requires=['setuptools', 'fastapi', 'uvicorn'],
     zip_safe=True,
     maintainer='Yadunund',
     maintainer_email='yadunund@openrobotics.org',
-    description='A fleet adapter for interfacing with robots with a fleet manager via REST API' ,
+    description='A fleet adapter for interfacing with robots with a'
+                'fleet manager via REST API',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={

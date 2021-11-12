@@ -24,6 +24,7 @@
 import requests
 from urllib.error import HTTPError
 
+
 class RobotAPI:
     # The constructor below accepts parameters typically required to submit
     # http requests. Users should modify the constructor as per the
@@ -46,7 +47,7 @@ class RobotAPI:
 
     def check_connection(self):
         ''' Return True if connection to the robot API server is successful'''
-        if self.data() == None:
+        if self.data() is None:
             return False
         return True
 
@@ -54,7 +55,8 @@ class RobotAPI:
         ''' Return [x, y, theta] expressed in the robot's coordinate frame or
             None if any errors are encountered'''
         if self.robot_name is not None:
-            url = self.prefix + f'/open-rmf/rmf_demos_fm/status/?robot_name={self.robot_name}'
+            url = self.prefix +\
+                f'/open-rmf/rmf_demos_fm/status/?robot_name={self.robot_name}'
         else:
             url = self.prefix + f'/open-rmf/rmf_demos_fm/status'
         try:
@@ -81,10 +83,11 @@ class RobotAPI:
             should return True if the robot has accepted the request,
             else False'''
         assert(len(pose) > 2)
-        url = self.prefix + f'/open-rmf/rmf_demos_fm/navigate/?robot_name={self.robot_name}'
-        data = {} # fields: task, map_name, destination{}, data{}
+        url = self.prefix +\
+            f'/open-rmf/rmf_demos_fm/navigate/?robot_name={self.robot_name}'
+        data = {}  # data fields: task, map_name, destination{}, data{}
         data['map_name'] = map_name
-        data['destination'] = {'x':pose[0],'y':pose[1],'yaw':pose[2]}
+        data['destination'] = {'x': pose[0], 'y': pose[1], 'yaw': pose[2]}
         try:
             response = requests.post(url, timeout=self.timeout, json=data)
             response.raise_for_status()
@@ -102,8 +105,10 @@ class RobotAPI:
             and the use case. For example, load/unload a cart for Deliverybot
             or begin cleaning a zone for a cleaning robot.
             Return True if the robot has accepted the request, else False'''
-        url = self.prefix + f"/open-rmf/rmf_demos_fm/start_task?robot_name={self.robot_name}"
-        data = {'task': process,'map_name': map_name} # fields: task, map_name, destination{}, data{}
+        url = self.prefix +\
+            f"/open-rmf/rmf_demos_fm/start_task?robot_name={self.robot_name}"
+        # data fields: task, map_name, destination{}, data{}
+        data = {'task': process, 'map_name': map_name}
         try:
             response = requests.post(url, timeout=self.timeout, json=data)
             response.raise_for_status()
@@ -119,7 +124,8 @@ class RobotAPI:
     def stop(self):
         ''' Command the robot to stop.
             Return True if robot has successfully stopped. Else False'''
-        url = self.prefix + f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={self.robot_name}'
+        url = self.prefix +\
+            f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={self.robot_name}'
         try:
             response = requests.get(url, self.timeout)
             response.raise_for_status()
@@ -169,7 +175,8 @@ class RobotAPI:
             return None
 
     def data(self):
-        url = self.prefix + f'/open-rmf/rmf_demos_fm/status?robot_name={self.robot_name}'
+        url = self.prefix +\
+            f'/open-rmf/rmf_demos_fm/status?robot_name={self.robot_name}'
         try:
             response = requests.get(url, timeout=self.timeout)
             response.raise_for_status()
