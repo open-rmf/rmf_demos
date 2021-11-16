@@ -1,0 +1,6 @@
+[
+    {"task_type":"Clean", "start_time":0, "priority": 0, "description":{"cleaning_zone":"clean_lobby"}},
+    {"task_type":"Clean", "start_time":0, "priority": 0, "description":{"cleaning_zone":"clean_waiting_area"}},
+    {"task_type":"Loop", "start_time":1, "priority":0, "description": {"num_loops":1, "start_name":"shop", "finish_name":"L2_room15"}},
+    {"task_type":"Loop", "start_time":2, "priority":0, "description": {"num_loops":2, "start_name":"kitchen", "finish_name":"L3_master_suite"}}
+]

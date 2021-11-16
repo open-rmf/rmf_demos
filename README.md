@@ -18,9 +18,10 @@ These demos were developed and tested on
 
 * [Ubuntu 20.04 LTS](https://releases.ubuntu.com/20.04/)
 
-* [ROS 2 - Foxy](https://index.ros.org/doc/ros2/Releases/Release-Foxy-Fitzroy/)
+* [ROS 2 - Galactic](https://docs.ros.org/en/foxy/Releases/Release-Galactic-Geochelone.html)
 
 * [Gazebo 11.1.0](http://gazebosim.org/)
+> Note: RMF is fully supported on ROS 2 Foxy as well
 
 ## Installation
 Instructions can be found [here](https://github.com/open-rmf/rmf).
@@ -38,10 +39,10 @@ Full web application of RMF: [rmf-web](https://github.com/open-rmf/rmf-web).
 
 ## Demo Worlds
 
+* [Hotel World](#Hotel-World)
 * [Office World](#Office-World)
 * [Airport Terminal World](#Airport-Terminal-World)
 * [Clinic World](#Clinic-World)
-* [Hotel World](#Hotel-World)
 
 > Note: When running the demos on Ubuntu 18.04 (not officially supported), you are required to explicitly supply gazebo_version launch argument. Eg:
 ros2 launch rmf_demos_gz office.launch.xml gazebo_version:=9
@@ -61,6 +62,48 @@ There are two main modes of submitting tasks to RMF via the Panel:
 
 1. Submit a Task: Used to submit a single task.
 2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_panel/task_lists`.
+
+---
+
+### Hotel World
+
+This hotel world consists of a lobby and 2 guest levels. The hotel has two lifts, multiple doors and 3 robot fleets (4 robots).
+This demonstrates an integration of multiple fleets of robots with varying capabilities working together in a multi-level building.
+
+![](../media/hotel_world.png)
+
+#### Demo Scenario
+
+To launch the world and the schedule visualizer,
+
+```bash
+source ~/rmf_ws/install/setup.bash
+ros2 launch rmf_demos_gz hotel.launch.xml
+
+# Or, run with ignition simulator
+ros2 launch rmf_demos_ign hotel.launch.xml
+```
+
+Here, we will showcase 2 types of Tasks: **Loop** and **Clean**
+
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/) to submit clean or loop requests.
+To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit. Similarly for **Clean task**, select `Clean`, then choose the desired `cleaning zone` from the dropdown list.
+
+Or, dispatch robot via CLI
+```bash
+ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
+ros2 run rmf_demos_tasks dispatch_loop -s restaurant -f L3_master_suite -n 1 --use_sim_time
+```
+
+Robots running Clean and Loop Task:
+
+![](../media/hotel_scenarios.gif)
+
+
+To submit a list of scheduled tasks via rmf web panel, load [hotel_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/hotel_tasks.json),
+or paste the json list to the _Submit a List of Tasks_ section. Next, click on submit.
+
+> Tip: To speedup simulation on gazebo, user can run `gz physics -s 0.01` on a separate terminal after launching the world. Use with care!
 
 ---
 
@@ -90,7 +133,7 @@ ros2 run rmf_demos_tasks dispatch_delivery -p pantry -pd coke_dispenser -d hardw
 ```
 
 To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
-To run a scenario with multiple task requests, load `office_tasks.json` from `rmf_demos_panel/task_lists` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
+To run a scenario with multiple task requests, load [office_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/office_tasks.json) from `rmf_demos_panel/task_lists` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
 
 ![](../media/loop_request.gif)
 
@@ -113,7 +156,7 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz airport_terminal.launch.xml
 ```
 
-Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the `airport_terminal_tasks.json` list and click submit to begin a collection of loop, delivery and cleaning tasks.
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [airport_terminal_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/airport_terminal_tasks.json) list and click submit to begin a collection of loop, delivery and cleaning tasks.
 
 Or, submit `loop`, `delivery` or `clean` task via CLI:
 ```bash
@@ -129,7 +172,7 @@ ros2 launch rmf_demos_gz airport_terminal.launch.xml use_crowdsim:=1
 
 Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
 
-In the airport terminal map, a `Caddy` is spawned in the far right corner and can be controlled with `geometry_msgs/Twist` messages published over the `cmd_vel` topic. 
+In the airport terminal map, a `Caddy` is spawned in the far right corner and can be controlled with `geometry_msgs/Twist` messages published over the `cmd_vel` topic.
 
 Run `teleop_twist_keyboard` to control the `caddy` with your keyboard:
 ```bash
@@ -141,6 +184,8 @@ ros2 launch rmf_demos_ign airport_terminal_caddy.launch.xml
 ```
 
 ![](../media/caddy.gif)
+
+> Tip: To speedup simulation on gazebo, user can run `gz physics -s 0.01` on a separate terminal after launching the world. Use with care!
 
 ---
 
@@ -158,7 +203,7 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz clinic.launch.xml
 ```
 
-Select the `clinic` tab on RMF Panel. Load the `clinic_tasks.json` list and click submit to begin a collection of loop and delivery tasks.
+Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [clinic_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/clinic_tasks.json) list and click submit to begin a collection of loop and delivery tasks.
 
 Or, submit a task via CLI:
 ```bash
@@ -175,34 +220,6 @@ Multi-fleet demo:
 
 ![](../media/clinic.gif)
 
----
-
-### Hotel World
-
-This is a hotel with a lobby and a guest level. The hotel has two lifts and two robot fleets. The tiny robots are supposed to guide the guests and the delivery robots are used to load and deliver cargo.
-
-The hotel map is truncated due to the high memory usage. The full map can be accessed [here](https://github.com/MakinoharaShouko/hotel).
-
-Hotel floor plan in `traffic_editor`:
-![](../media/hotel.png)
-
-Full hotel floor plan in `traffic_editor`:
-![](../media/hotel_full.png)
-
-#### Demo Scenario
-
-To launch the world and the schedule visualizer,
-
-```bash
-source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_gz hotel.launch.xml
-```
-
-Select the `hotel` tab on RMF Panel. Loop requests can be submitted via "Submit a Task" form.
-
-Robot taking lift:
-
-![](../media/robot_taking_lift_hotel.gif)
 
 ---
 
@@ -228,6 +245,39 @@ Note that `tinyRobot1` is a standard "full control" robot, while `tinyRobot2` "t
 $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
 (new terminal) $ ros2 launch rmf_demos office_traffic_light_test.launch.xml
 ```
+
+### Additional Features
+
+ - **lift watchdog**
+   - The robot can query an external `lift_watchdog_server` for the permission to enter the lift cabin during the `LiftSession` Phase.
+   - Command lines:
+    ```bash
+    # run hotel world with lift_watch_dog enabled
+    ros2 launch rmf_demos_gz hotel.launch.xml enable_experimental_lift_watchdog:=1
+
+    ## On a separate terminal, set lift as crowded
+    ros2 launch rmf_demos experimental_crowded_lift.launch.xml
+
+    # Dispatch robot from level1 to level3, robot will wait in front of the lift cabin
+    ros2 run rmf_demos_tasks dispatch_loop -s L3_room1 -f L3_room1 -n 1 --use_sim_time
+
+    # Lift is cleared. Give robot the permission to enter the lift
+    ros2 launch rmf_demos experimental_clear_lift.launch.xml
+    ```
+ - **Custom Docking Sequence**
+    - Fleet adapter will notify the robot (via `dock()` api/ModeRequest) to execute its custom dock sequence when the robot reaches a "dock" waypoint.
+    - Implementation is similar to Clean task, refer to docs [here](https://osrf.github.io/ros2multirobotbook/task_types.html?highlight=docking#step-1-defining-waypoints-for-cleaning-in-traffic-editor)
+
+ - **Emergency Alarm**
+   - All robots will get directed to the nearest parking spot when the emergency alarm is triggered.
+   - Command lines:
+    ```bash
+    # toggle alarm ON
+    ros2 topic pub -1 /fire_alarm_trigger std_msgs/Bool '{data: true}'
+
+    # toggle alarm OFF
+    ros2 topic pub -1 /fire_alarm_trigger std_msgs/Bool '{data: false}'
+    ```
 
 ## Task Dispatching in RMF
 ![](../media/RMF_Bidding.png)
