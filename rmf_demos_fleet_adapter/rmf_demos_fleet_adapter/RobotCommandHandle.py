@@ -316,13 +316,13 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                 # waypoint or the target one
                                 if self.target_waypoint.graph_index is not \
                                         None and self.dist(self.position,
-                                        target_pose) < 0.5:
+                                                           target_pose) < 0.5:
                                     self.on_waypoint =\
                                         self.target_waypoint.graph_index
                                 elif self.last_known_waypoint_index is not \
                                         None and self.dist(
                                         self.position, self.graph.get_waypoint(
-                                        self.last_known_waypoint_index\
+                                        self.last_known_waypoint_index
                                         ).location) < 0.5:
                                     self.on_waypoint =\
                                         self.last_known_waypoint_index
@@ -576,7 +576,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     next_index = index + 1
                     if (next_index < len(waypoints)):
                         if (self.dist(waypoints[next_index].position,
-                                waypoints[index].position) < threshold):
+                                      waypoints[index].position) < threshold):
                             if (next_index == len(waypoints) - 1):
                                 # append last waypoint
                                 changed = True

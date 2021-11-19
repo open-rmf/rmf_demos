@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Copyright 2021 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/usr/bin/env python3
 import sys
 import math
 import yaml
@@ -81,7 +82,7 @@ class FleetManager(Node):
                 *self.config['rmf_fleet']['limits']['linear']),
             angular=traits.Limits(
                 *self.config['rmf_fleet']['limits']['angular']),
-                profile=profile)
+            profile=profile)
         self.vehicle_traits.differential.reversible =\
             self.config['rmf_fleet']['reversible']
 
@@ -125,9 +126,10 @@ class FleetManager(Node):
                     ori_delta = ori_delta - (2 * np.pi)
                 if ori_delta < -np.pi:
                     ori_delta = (2 * np.pi) + ori_delta
-                duration = (dist_to_target/
-                    self.vehicle_traits.linear.nominal_velocity +
-                    ori_delta/self.vehicle_traits.rotational.nominal_velocity)
+                duration = (dist_to_target /
+                            self.vehicle_traits.linear.nominal_velocity +
+                            ori_delta /
+                            self.vehicle_traits.rotational.nominal_velocity)
                 data['data']['destination_arrival_duration'] = duration
             else:
                 data['data']['destination_arrival_duration'] = 0.0
@@ -157,8 +159,8 @@ class FleetManager(Node):
 
             disp = self.disp([target_x, target_y], [cur_x, cur_y])
             duration = int(disp/self.vehicle_traits.linear.nominal_velocity) +\
-                int(abs(abs(cur_yaw) - abs(target_yaw))/
-                self.vehicle_traits.rotational.nominal_velocity)
+                int(abs(abs(cur_yaw) - abs(target_yaw)) /
+                    self.vehicle_traits.rotational.nominal_velocity)
             t.sec = t.sec + duration
             target_loc = Location()
             target_loc.t = t
@@ -248,9 +250,9 @@ def main(argv=sys.argv):
     spin_thread.start()
 
     uvicorn.run(app,
-        host='127.0.0.1',
-        port=int(args.port),
-        log_level='warning')
+                host='127.0.0.1',
+                port=int(args.port),
+                log_level='warning')
 
 
 if __name__ == '__main__':
