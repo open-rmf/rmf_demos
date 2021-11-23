@@ -92,7 +92,7 @@ To submit a **loop task**, select `Loop` from the `Select a request type` dropdo
 Or, dispatch robot via CLI
 ```bash
 ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
-ros2 run rmf_demos_tasks restaurant -s restaurant -f L3_master_suite -n 1 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_loop -s restaurant -f L3_master_suite -n 1 --use_sim_time
 ```
 
 Robots running Clean and Loop Task:
