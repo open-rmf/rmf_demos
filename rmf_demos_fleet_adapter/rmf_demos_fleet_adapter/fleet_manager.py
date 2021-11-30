@@ -90,7 +90,7 @@ class FleetManager(Node):
             RobotState,
             'robot_state',
             self.robot_state_cb,
-            10)
+            100)
 
         self.path_pub = self.create_publisher(
             PathRequest,
