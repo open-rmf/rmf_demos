@@ -5,6 +5,7 @@
   <version>0.0.0</version>
   <description>A fleet adapter for interfacing with robots with a fleet manager via REST API</description>
   <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
+  <author email="xiyu@openrobotics.org">Xi Yu Oh</author>
   <license>Apache License 2.0</license>
 
   <exec_depend>rmf_fleet_adapter_python</exec_depend>
