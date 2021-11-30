@@ -71,6 +71,7 @@ robots:
 
 # TRANSFORM CONFIG =============================================================
 # For computing transforms between Robot and RMF coordinate systems
+# For demos, robots operate in the same coordinate system as RMF
 
 reference_coordinates:
   rmf: [[0.0, 0.0 ],
