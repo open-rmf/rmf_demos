@@ -1,27 +1,14 @@
 <?xml version='1.0' ?>
 
 <launch>
-
-  <arg name="fleet_name" default="tinyRobot" description="Name of this fleet of tinyRobot robots"/>
-  <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
-  <arg name="nav_graph_file" description="Nav graph required by fleet adapter"/>
-  <arg name="config_file" description="Config parameters required by fleet adapter"/>
-
   <group>
     <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
-
-      <!-- The name and control type of the fleet -->
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="control_type" value="full_control"/>
 
       <!-- The graph that this fleet should use for navigation -->
       <arg name="nav_graph_file" value="$(var nav_graph_file)" />
 
       <!-- The config file that provides important parameters for setting up the adapter -->
       <arg name="config_file" value="$(var config_file)"/>
-
-      <!-- The port number for the fleet manager server -->
-      <arg name="port" value="8001"/>
 
     </include>
   </group>

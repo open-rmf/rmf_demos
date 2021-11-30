@@ -23,7 +23,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_system_default
 
-from rmf_fleet_msgs.msg import RobotState, Location, PathRequest
+from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, DockSummary
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
@@ -57,20 +57,17 @@ class State:
 
 
 class FleetManager(Node):
-    def __init__(self, config_path, nav_path, port):
-        super().__init__('rmf_demos_fleet_manager')
-        self.port = port
-
-        self.config = None
-        with open(config_path, "r") as f:
-            self.config = yaml.safe_load(f)
+    def __init__(self, config, nav_path):
+        self.config = config
         self.fleet_name = self.config["rmf_fleet"]["name"]
+
+        super().__init__(f'{self.fleet_name}_fleet_manager')
+
         self.robots = {}  # Map robot name to state
-        self.prefix = ''
+        self.docks = {}  # Map dock name to waypoints
 
         for robot_name, robot_config in self.config["robots"].items():
             self.robots[robot_name] = State()
-            self.prefix = robot_config['robot_config']['base_url']
         assert(len(self.robots) > 0)
 
         profile = traits.Profile(geometry.make_final_convex_circle(
@@ -92,6 +89,12 @@ class FleetManager(Node):
             self.robot_state_cb,
             100)
 
+        self.create_subscription(
+            DockSummary,
+            'dock_summary',
+            self.dock_summary_cb,
+            10)
+
         self.path_pub = self.create_publisher(
             PathRequest,
             'robot_path_requests',
@@ -104,48 +107,32 @@ class FleetManager(Node):
             data = {'data': {},
                     'success': False,
                     'msg': ''}
-            state = self.robots.get(robot_name)
-            if state is None or state.state is None:
-                return data
-            position = [state.state.location.x, state.state.location.y]
-            angle = state.state.location.yaw
-            data['success'] = True
-            data['data']['robot_name'] = robot_name
-            data['data']['map_name'] = state.state.location.level_name
-            data['data']['position'] =\
-                {'x': position[0], 'y': position[1], 'yaw': angle}
-            data['data']['battery'] = state.state.battery_percent
-            data['data']['completed_request'] = False
-            if state.destination is not None:
-                destination = state.destination
-                # calculate arrival estimate
-                dist_to_target =\
-                    self.disp(position, [destination.x, destination.y])
-                ori_delta = abs(abs(angle) - abs(destination.yaw))
-                if ori_delta > np.pi:
-                    ori_delta = ori_delta - (2 * np.pi)
-                if ori_delta < -np.pi:
-                    ori_delta = (2 * np.pi) + ori_delta
-                duration = (dist_to_target /
-                            self.vehicle_traits.linear.nominal_velocity +
-                            ori_delta /
-                            self.vehicle_traits.rotational.nominal_velocity)
-                data['data']['destination_arrival_duration'] = duration
+            if robot_name is None:
+                data['data']['all_robots'] = []
+                for robot_name in self.robots:
+                    state = self.robots.get(robot_name)
+                    if state is None or state.state is None:
+                        return data
+                    data['data']['all_robots'].append(
+                        self.get_robot_state(state, robot_name))
             else:
-                data['data']['destination_arrival_duration'] = 0.0
-                data['data']['completed_request'] = True
+                state = self.robots.get(robot_name)
+                if state is None or state.state is None:
+                    return data
+                data['data'] = self.get_robot_state(state, robot_name)
+            data['success'] = True
             return data
 
         @app.post('/open-rmf/rmf_demos_fm/navigate/')
         async def navigate(robot_name: str, dest: Request):
             data = {'success': False, 'msg': ''}
-            if (robot_name not in self.robots or
-                    len(dest.destination) < 1):
+            if (robot_name not in self.robots or len(dest.destination) < 1):
                 return data
 
             target_x = dest.destination['x']
             target_y = dest.destination['y']
             target_yaw = dest.destination['yaw']
+            target_map = dest.map_name
 
             t = self.get_clock().now().to_msg()
 
@@ -167,7 +154,7 @@ class FleetManager(Node):
             target_loc.x = target_x
             target_loc.y = target_y
             target_loc.yaw = target_yaw
-            target_loc.level_name = state.state.location.level_name
+            target_loc.level_name = target_map
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
@@ -200,11 +187,49 @@ class FleetManager(Node):
         async def start_process(robot_name: str, task: Request):
             data = {'success': False, 'msg': ''}
             if (robot_name not in self.robots or
-                    len(task.task) < 1):
+                    len(task.task) < 1 or
+                    task.task not in self.docks):
                 return data
-            # ------------------------ #
-            # TODO START PROCESS HERE
-            # ------------------------ #
+
+            t = self.get_clock().now().to_msg()
+
+            path_request = PathRequest()
+            state = self.robots[robot_name]
+            cur_x = state.state.location.x
+            cur_y = state.state.location.y
+            cur_yaw = state.state.location.yaw
+            cur_loc = state.state.location
+            path_request.path.append(cur_loc)
+
+            for wp in self.docks[task.task]:
+
+                target_x = wp.x
+                target_y = wp.y
+                target_yaw = wp.yaw
+
+                disp = self.disp([target_x, target_y], [cur_x, cur_y])
+                duration = int(disp /
+                               self.vehicle_traits.linear.nominal_velocity) +\
+                    int(abs(abs(cur_yaw) - abs(target_yaw)) /
+                        self.vehicle_traits.rotational.nominal_velocity)
+                t.sec = t.sec + duration
+                target_loc = Location()
+                target_loc.t = t
+                target_loc.x = target_x
+                target_loc.y = target_y
+                target_loc.yaw = target_yaw
+                target_loc.level_name = wp.level_name
+
+                path_request.path.append(target_loc)
+
+            path_request.fleet_name = self.fleet_name
+            path_request.robot_name = robot_name
+            self.task_id = self.task_id + 1
+            path_request.task_id = str(self.task_id)
+            self.path_pub.publish(path_request)
+
+            self.robots[robot_name].destination = target_loc
+
             data['success'] = True
             return data
 
@@ -219,6 +244,41 @@ class FleetManager(Node):
             if ((msg.mode.mode == 0 or msg.mode.mode == 1) and
                     len(msg.path) == 0):
                 self.robots[msg.name].destination = None
+
+    def dock_summary_cb(self, msg):
+        for fleet in msg.docks:
+            for dock in fleet.params:
+                self.docks[dock.start] = dock.path
+
+    def get_robot_state(self, state, robot_name):
+        data = {}
+        position = [state.state.location.x, state.state.location.y]
+        angle = state.state.location.yaw
+        data['robot_name'] = robot_name
+        data['map_name'] = state.state.location.level_name
+        data['position'] =\
+            {'x': position[0], 'y': position[1], 'yaw': angle}
+        data['battery'] = state.state.battery_percent
+        data['completed_request'] = False
+        if state.destination is not None:
+            destination = state.destination
+            # calculate arrival estimate
+            dist_to_target =\
+                self.disp(position, [destination.x, destination.y])
+            ori_delta = abs(abs(angle) - abs(destination.yaw))
+            if ori_delta > np.pi:
+                ori_delta = ori_delta - (2 * np.pi)
+            if ori_delta < -np.pi:
+                ori_delta = (2 * np.pi) + ori_delta
+            duration = (dist_to_target /
+                        self.vehicle_traits.linear.nominal_velocity +
+                        ori_delta /
+                        self.vehicle_traits.rotational.nominal_velocity)
+            data['destination_arrival_duration'] = duration
+        else:
+            data['destination_arrival_duration'] = 0.0
+            data['completed_request'] = True
+        return data
 
     def disp(self, A, B):
         return math.sqrt((A[0]-B[0])**2 + (A[1]-B[1])**2)
@@ -240,18 +300,20 @@ def main(argv=sys.argv):
                         help="Path to the config.yaml file")
     parser.add_argument("-n", "--nav_graph", type=str, required=True,
                         help="Path to the nav_graph for this fleet adapter")
-    parser.add_argument('-p', '--port', help='Port for API Server')
     args = parser.parse_args(args_without_ros[1:])
     print(f"Starting fleet manager...")
 
-    fleet_manager = FleetManager(args.config_file, args.nav_graph, args.port)
+    with open(args.config_file, "r") as f:
+        config = yaml.safe_load(f)
+
+    fleet_manager = FleetManager(config, args.nav_graph)
 
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()
 
     uvicorn.run(app,
-                host='127.0.0.1',
-                port=int(args.port),
+                host=config['rmf_fleet']['fleet_manager']['ip'],
+                port=config['rmf_fleet']['fleet_manager']['port'],
                 log_level='warning')
 
 
