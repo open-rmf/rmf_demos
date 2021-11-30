@@ -18,6 +18,7 @@ import rclpy
 import math
 import argparse
 import yaml
+import time
 from rclpy.node import Node
 from rclpy.time import Time
 
@@ -116,6 +117,7 @@ class MockDocker(Node):
                 dock_sub_map[dock_name] = param.path
             dock_summary.docks.append(dock)
             self.dock_map[fleet_name] = dock_sub_map
+        time.sleep(20)
         self.dock_summary_publisher.publish(dock_summary)
 
     def mode_request_cb(self, msg: ModeRequest):
