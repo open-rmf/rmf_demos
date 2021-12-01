@@ -230,7 +230,7 @@ levels:
       - [261.124, 652.61, 0, ""]
       - [261.443, 700.003, 0, deliverybot_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, deliveryBot_1], spawn_robot_type: [1, DeliveryRobot]}]
       - [354.274, 388.677, 0, ""]
-      - [454.844, 638.353, 0, ""]
+      - [441.6, 637.3, 0, ""]
       - [153.378, 393.876, 0, ""]
       - [297.116, 202.189, 0, ""]
       - [318.71, 249.37, 0, ""]
