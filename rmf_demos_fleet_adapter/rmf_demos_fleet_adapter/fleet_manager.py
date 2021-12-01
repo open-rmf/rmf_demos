@@ -23,7 +23,8 @@ import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_system_default
 
-from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, DockSummary
+from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
+    DockSummary, ModeRequest, ModeParameter
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
@@ -98,6 +99,11 @@ class FleetManager(Node):
         self.path_pub = self.create_publisher(
             PathRequest,
             'robot_path_requests',
+            qos_profile=qos_profile_system_default)
+
+        self.mode_pub = self.create_publisher(
+            ModeRequest,
+            'robot_mode_requests',
             qos_profile=qos_profile_system_default)
 
         self.task_id = -1
@@ -192,6 +198,18 @@ class FleetManager(Node):
                 return data
 
             t = self.get_clock().now().to_msg()
+
+            mode_request = ModeRequest()
+            mode_request.fleet_name = self.fleet_name
+            mode_request.robot_name = robot_name
+            self.task_id = self.task_id + 1
+            mode_request.task_id = str(self.task_id)
+            mode_request.mode.mode = mode_request.mode.MODE_DOCKING
+            dock = ModeParameter()
+            dock.name = 'docking'
+            dock.value = task.task
+            mode_request.parameters = [dock]
+            self.mode_pub.publish(mode_request)
 
             path_request = PathRequest()
             state = self.robots[robot_name]
