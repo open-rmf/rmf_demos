@@ -205,8 +205,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.state == RobotState.WAITING):
                 # Check if we need to abort
                 if self._quit_path_event.is_set():
-                    self.node.get_logger().info(f"{self.name} aborting "
-                                                "previously followed path")
+                    self.node.get_logger().info(f"Robot [{self.name}] aborting"
+                                                " previously followed path")
                     return
                 # State machine
                 if self.state == RobotState.IDLE:
@@ -343,15 +343,25 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 self.on_waypoint = None
                 self.on_lane = None
             time.sleep(0.5)
-            # ------------------------ #
-            # IMPLEMENT YOUR CODE HERE #
-            # With whatever logic you need for docking #
+
             if self.dock_name not in self.docks:
-                self.node.get_logger().info(f"Request dock not found")
-            else:
-                positions = []
-                for wp in self.docks[self.dock_name]:
-                    positions.append([wp.x, wp.y, wp.yaw])
+                self.node.get_logger().info(f"Request dock not found, "
+                                            "aborting docking")
+                return
+
+            positions = []
+            for wp in self.docks[self.dock_name]:
+                positions.append([wp.x, wp.y, wp.yaw])
+
+            while (not self.api.process_completed(self.name)):
+
+                if len(positions) < 1:
+                    continue
+
+                cur_loc = self.get_position()
+                if self.dist(cur_loc, positions[0]) < 0.2:
+                    del positions[0]
+
                 traj = schedule.make_trajectory(self.vehicle_traits,
                                                 self.adapter.now(),
                                                 positions)
@@ -359,8 +369,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 if self.update_handle is not None:
                     participant = self.update_handle.get_unstable_participant()
                     participant.set_itinerary([itinerary])
-            # ------------------------ #
-            while (not self.api.process_completed(self.name)):
+
                 # Check if we need to abort
                 if self._quit_dock_event.is_set():
                     self.node.get_logger().info("Aborting docking")

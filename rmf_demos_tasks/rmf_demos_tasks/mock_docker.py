@@ -163,8 +163,15 @@ class MockDocker(Node):
             return
 
         requested_path = self.watching[msg.name]
-        finish_location = requested_path.path[-1]
-        if not close(finish_location, msg.location):
+        finish_location = (requested_path.path[-1].x,
+                           requested_path.path[-1].y,
+                           requested_path.path[-1].yaw)
+
+        # Check current pose, update remaining path
+        if not close(self.watching[msg.name].path[0], msg.location):
+            return
+        elif len(self.watching[msg.name].path) > 1:
+            self.watching[msg.name].path.pop(0)
             return
 
         # This is needed to acknowledge the slot car that a Docking Mode
