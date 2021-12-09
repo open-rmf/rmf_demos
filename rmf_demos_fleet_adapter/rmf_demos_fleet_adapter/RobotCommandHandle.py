@@ -372,6 +372,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             positions = []
             for wp in self.docks[self.dock_name]:
                 positions.append([wp.x, wp.y, wp.yaw])
+            self.node.get_logger().info(f"Robot {self.name} is docking...")
 
             while (not self.api.process_completed(self.name)):
 
@@ -384,7 +385,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
                 traj = schedule.make_trajectory(self.vehicle_traits,
                                                 self.adapter.now(),
-                                                positions)
+                                                [cur_loc] + positions)
                 itinerary = schedule.Route(self.map_name, traj)
                 if self.update_handle is not None:
                     participant = self.update_handle.get_unstable_participant()
@@ -394,14 +395,14 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 if self._quit_dock_event.is_set():
                     self.node.get_logger().info("Aborting docking")
                     return
-                self.node.get_logger().info("Robot is docking...")
                 self.sleep_for(0.1)
 
             with self._lock:
                 self.on_waypoint = self.dock_waypoint_index
                 self.dock_waypoint_index = None
                 self.docking_finished_callback()
-                self.node.get_logger().info("Docking completed")
+                self.node.get_logger().info(f"Robot {self.name} has completed"
+                                            " docking")
 
         self._dock_thread = threading.Thread(target=_dock)
         self._dock_thread.start()
