@@ -23,6 +23,11 @@ import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_system_default
 
+from rclpy.qos import QoSProfile
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSReliabilityPolicy as Reliability
+
 from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
     DockSummary, ModeRequest, ModeParameter
 
@@ -90,11 +95,17 @@ class FleetManager(Node):
             self.robot_state_cb,
             100)
 
+        transient_qos = QoSProfile(
+            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
+            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+
         self.create_subscription(
             DockSummary,
             'dock_summary',
             self.dock_summary_cb,
-            10)
+            qos_profile=transient_qos)
 
         self.path_pub = self.create_publisher(
             PathRequest,
@@ -265,8 +276,9 @@ class FleetManager(Node):
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
-            for dock in fleet.params:
-                self.docks[dock.start] = dock.path
+            if(fleet.fleet_name == self.fleet_name):
+                for dock in fleet.params:
+                    self.docks[dock.start] = dock.path
 
     def get_robot_state(self, state, robot_name):
         data = {}
