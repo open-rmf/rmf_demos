@@ -142,10 +142,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.on_waypoint = start.waypoint
 
         transient_qos = QoSProfile(
-            history=History.KEEP_LAST,
+            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
             depth=1,
-            reliability=Reliability.RELIABLE,
-            durability=Durability.TRANSIENT_LOCAL)
+            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
+            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
 
         self.node.create_subscription(
             DockSummary,
@@ -362,7 +362,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             with self._lock:
                 self.on_waypoint = None
                 self.on_lane = None
-            self.sleep_for(0.5)
+            self.sleep_for(0.1)
 
             if self.dock_name not in self.docks:
                 self.node.get_logger().info(f"Request dock not found, "
@@ -395,7 +395,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.node.get_logger().info("Aborting docking")
                     return
                 self.node.get_logger().info("Robot is docking...")
-                self.sleep_for(0.5)
+                self.sleep_for(0.1)
 
             with self._lock:
                 self.on_waypoint = self.dock_waypoint_index
