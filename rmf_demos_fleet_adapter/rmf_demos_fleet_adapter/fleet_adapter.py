@@ -170,7 +170,6 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         prefix,
         fleet_config['fleet_manager']['user'],
         fleet_config['fleet_manager']['password'])
-    assert api.connected, "Unable to connect to Robot API server"
 
     # Initialize robots for this fleet
 
@@ -179,6 +178,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     def _add_fleet_robots():
         robots = {}
         while len(missing_robots) > 0:
+            time.sleep(0.2)
             for robot_name in list(missing_robots.keys()):
                 node.get_logger().debug(f"Connecting to robot: {robot_name}")
                 data = api.data(robot_name)
@@ -231,7 +231,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                         vehicle_traits=vehicle_traits,
                         transforms=transforms,
                         map_name=rmf_config['start']['map_name'],
-                        starts=starts,
+                        start=starts[0],
                         position=position,
                         charger_waypoint=rmf_config['charger']['waypoint'],
                         update_frequency=rmf_config.get(
@@ -245,7 +245,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                         fleet_handle.add_robot(robot,
                                                robot_name,
                                                profile,
-                                               robot.starts,
+                                               [starts[0]],
                                                partial(_updater_inserter,
                                                        robot))
                         node.get_logger().info(
@@ -265,6 +265,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
 
     add_robots = threading.Thread(target=_add_fleet_robots, args=())
     add_robots.start()
+    return adapter
 
 
 # ------------------------------------------------------------------------------
@@ -304,7 +305,7 @@ def main(argv=sys.argv):
         param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
         node.set_parameters([param])
 
-    initialize_fleet(
+    adapter = initialize_fleet(
         config_yaml,
         nav_graph_path,
         node,

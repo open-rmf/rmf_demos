@@ -12,6 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import rclpy
+import rclpy.node
+from rclpy.duration import Duration
+
+from rclpy.qos import QoSProfile
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 import rmf_adapter as adpt
 import rmf_adapter.plan as plan
@@ -59,7 +67,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                  vehicle_traits,
                  transforms,
                  map_name,
-                 starts,
+                 start,
                  position,
                  charger_waypoint,
                  update_frequency,
@@ -73,7 +81,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.vehicle_traits = vehicle_traits
         self.transforms = transforms
         self.map_name = map_name
-        self.starts = starts
         # Get the index of the charger waypoint
         waypoint = self.graph.find_waypoint(charger_waypoint)
         assert waypoint, f"Charger waypoint {charger_waypoint} \
@@ -121,8 +128,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             f"The robot is starting at: [{self.position[0]:.2f}, "
             f"{self.position[1]:.2f}, {self.position[2]:.2f}]")
 
-        start = self.starts[0]
-
         # Update tracking variables
         if start.lane is not None:  # If the robot is on a lane
             self.last_known_lane_index = start.lane
@@ -132,17 +137,32 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.last_known_waypoint_index = start.waypoint
             self.on_waypoint = start.waypoint
 
+        transient_qos = QoSProfile(
+            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
+            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+
         self.node.create_subscription(
             DockSummary,
             'dock_summary',
             self.dock_summary_cb,
-            10)
+            qos_profile=transient_qos)
 
-        self.state_update_timer = self.node.create_timer(
-            1.0 / self.update_frequency,
-            self.update)
+        # self.state_update_timer = self.node.create_timer(
+        #     1.0 / self.update_frequency,
+        #     self.update)
+
+        self.update_thread = threading.Thread(target=self.update)
+        self.update_thread.start()
 
         self.initialized = True
+
+    def sleep_for(self, seconds):
+        goal_time =\
+          self.node.get_clock().now() + Duration(nanoseconds=1e9*seconds)
+        while (self.node.get_clock().now() <= goal_time):
+            time.sleep(0.001)
 
     def clear(self):
         with self._lock:
@@ -159,7 +179,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.node.get_logger().info("Requesting robot to stop...")
             if self.api.stop(self.name):
                 break
-            time.sleep(0.5)
+            # time.sleep(0.5)
+            self.sleep_for(0.1)
         if self._follow_path_thread is not None:
             self._quit_path_event.set()
             if self._follow_path_thread.is_alive():
@@ -235,10 +256,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                             f"Robot {self.name} failed to navigate to "
                             f"[{x:.0f}, {y:.0f}, {theta:.0f}] coordinates. "
                             f"Retrying...")
-                        time.sleep(0.5)
+                        # time.sleep(0.5)
+                        self.sleep_for(0.1)
 
                 elif self.state == RobotState.WAITING:
-                    time.sleep(0.5)
+                    # time.sleep(0.5)
+                    self.sleep_for(0.1)
                     time_now = self.adapter.now()
                     with self._lock:
                         if self.target_waypoint is not None:
@@ -255,7 +278,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                         timedelta(seconds=0.0))
 
                 elif self.state == RobotState.MOVING:
-                    time.sleep(0.5)
+                    # time.sleep(0.5)
+                    self.sleep_for(0.1)
                     # Check if we have reached the target
                     with self._lock:
                         if (self.api.navigation_completed(self.name)):
@@ -342,7 +366,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             with self._lock:
                 self.on_waypoint = None
                 self.on_lane = None
-            time.sleep(0.5)
+            # time.sleep(0.5)
+            self.sleep_for(0.1)
 
             if self.dock_name not in self.docks:
                 self.node.get_logger().info(f"Request dock not found, "
@@ -375,7 +400,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.node.get_logger().info("Aborting docking")
                     return
                 self.node.get_logger().info("Robot is docking...")
-                time.sleep(0.5)
+                # time.sleep(0.5)
+                self.sleep_for(0.1)
 
             with self._lock:
                 self.on_waypoint = self.dock_waypoint_index
@@ -420,10 +446,13 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             return self.battery_soc
 
     def update(self):
-        self.position = self.get_position()
-        self.battery_soc = self.get_battery_soc()
-        if self.update_handle is not None:
-            self.update_state()
+        while rclpy.ok():
+            self.position = self.get_position()
+            self.battery_soc = self.get_battery_soc()
+            if self.update_handle is not None:
+                self.update_state()
+            sleep_duration = float(1.0/self.update_frequency)
+            self.sleep_for(sleep_duration)
 
     def update_state(self):
         self.update_handle.update_battery_soc(self.battery_soc)
