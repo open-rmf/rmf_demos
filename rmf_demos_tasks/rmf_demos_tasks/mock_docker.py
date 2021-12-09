@@ -22,7 +22,6 @@ import time
 from rclpy.node import Node
 from rclpy.time import Time
 
-from rclpy.qos import qos_profile_system_default
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
