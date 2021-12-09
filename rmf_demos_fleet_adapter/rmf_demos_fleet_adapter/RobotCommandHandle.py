@@ -61,6 +61,7 @@ class PlanWaypoint:
 class RobotCommandHandle(adpt.RobotCommandHandle):
     def __init__(self,
                  name,
+                 fleet_name,
                  config,
                  node,
                  graph,
@@ -75,6 +76,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                  api):
         adpt.RobotCommandHandle.__init__(self)
         self.name = name
+        self.fleet_name = fleet_name
         self.config = config
         self.node = node
         self.graph = graph
@@ -95,6 +97,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.initialized = False
         self.state = RobotState.IDLE
         self.dock_name = ""
+        # TODO(YV): Remove self.adapter. This is only being used for time point
+        # comparison with Plan::Waypoint::time
         self.adapter = adapter
 
         self.requested_waypoints = []  # RMF Plan waypoints
@@ -138,20 +142,16 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.on_waypoint = start.waypoint
 
         transient_qos = QoSProfile(
-            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            history=History.KEEP_LAST,
             depth=1,
-            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
-            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
 
         self.node.create_subscription(
             DockSummary,
             'dock_summary',
             self.dock_summary_cb,
             qos_profile=transient_qos)
-
-        # self.state_update_timer = self.node.create_timer(
-        #     1.0 / self.update_frequency,
-        #     self.update)
 
         self.update_thread = threading.Thread(target=self.update)
         self.update_thread.start()
@@ -179,7 +179,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.node.get_logger().info("Requesting robot to stop...")
             if self.api.stop(self.name):
                 break
-            # time.sleep(0.5)
             self.sleep_for(0.1)
         if self._follow_path_thread is not None:
             self._quit_path_event.set()
@@ -256,11 +255,9 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                             f"Robot {self.name} failed to navigate to "
                             f"[{x:.0f}, {y:.0f}, {theta:.0f}] coordinates. "
                             f"Retrying...")
-                        # time.sleep(0.5)
                         self.sleep_for(0.1)
 
                 elif self.state == RobotState.WAITING:
-                    # time.sleep(0.5)
                     self.sleep_for(0.1)
                     time_now = self.adapter.now()
                     with self._lock:
@@ -278,7 +275,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                         timedelta(seconds=0.0))
 
                 elif self.state == RobotState.MOVING:
-                    # time.sleep(0.5)
                     self.sleep_for(0.1)
                     # Check if we have reached the target
                     with self._lock:
@@ -366,8 +362,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             with self._lock:
                 self.on_waypoint = None
                 self.on_lane = None
-            # time.sleep(0.5)
-            self.sleep_for(0.1)
+            self.sleep_for(0.5)
 
             if self.dock_name not in self.docks:
                 self.node.get_logger().info(f"Request dock not found, "
@@ -400,8 +395,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.node.get_logger().info("Aborting docking")
                     return
                 self.node.get_logger().info("Robot is docking...")
-                # time.sleep(0.5)
-                self.sleep_for(0.1)
+                self.sleep_for(0.5)
 
             with self._lock:
                 self.on_waypoint = self.dock_waypoint_index
@@ -618,5 +612,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
-            for dock in fleet.params:
-                self.docks[dock.start] = dock.path
+            if(fleet.fleet_name == self.fleet_name):
+                for dock in fleet.params:
+                    self.docks[dock.start] = dock.path

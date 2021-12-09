@@ -18,7 +18,6 @@ import rclpy
 import math
 import argparse
 import yaml
-import time
 from rclpy.node import Node
 from rclpy.time import Time
 
@@ -84,10 +83,10 @@ class MockDocker(Node):
             RobotState, 'robot_state', self.robot_state_cb, 10)
 
         transient_qos = QoSProfile(
-            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            history=History.KEEP_LAST,
             depth=1,
-            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
-            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
         self.dock_summary_publisher = self.create_publisher(
             DockSummary, 'dock_summary', qos_profile=transient_qos)
 
@@ -117,7 +116,6 @@ class MockDocker(Node):
                 dock_sub_map[dock_name] = param.path
             dock_summary.docks.append(dock)
             self.dock_map[fleet_name] = dock_sub_map
-        time.sleep(20)
         self.dock_summary_publisher.publish(dock_summary)
 
     def mode_request_cb(self, msg: ModeRequest):
