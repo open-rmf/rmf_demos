@@ -297,7 +297,7 @@ def main(argv=sys.argv):
 
     # ROS 2 node for the command handle
     fleet_name = config_yaml['rmf_fleet']['name']
-    node = rclpy.node.Node(f'{fleet_name}_fleet_adapter')
+    node = rclpy.node.Node(f'{fleet_name}_command_handle')
 
     # Enable sim time for testing offline
     if args.use_sim_time:
