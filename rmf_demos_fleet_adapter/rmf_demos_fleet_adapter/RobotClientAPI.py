@@ -34,16 +34,7 @@ class RobotAPI:
         self.user = user
         self.password = password
         self.timeout = 5.0
-        # self.robot_name = robot_name
         self.debug = False
-        self.connected = False
-        # Test connectivity
-        connected = self.check_connection()
-        if connected:
-            print('Successfully able to query API server')
-            self.connected = True
-        else:
-            print('Unable to query API server')
 
     def check_connection(self):
         ''' Return True if connection to the robot API server is successful'''
