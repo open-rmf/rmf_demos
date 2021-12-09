@@ -225,6 +225,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
 
                     robot = RobotCommandHandle(
                         name=robot_name,
+                        fleet_name=fleet_name,
                         config=robot_config,
                         node=node,
                         graph=nav_graph,
