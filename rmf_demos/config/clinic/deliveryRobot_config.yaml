@@ -52,10 +52,10 @@ robots:
       robot_state_update_frequency: 10.0
       start:
         map_name: "L1"
-        waypoint: "deliveryRobot_1_charger"
+        waypoint: "L1_sub_waiting_area_1"
         orientation: 0.0 # radians
       charger:
-        waypoint: "deliveryRobot_1_charger"
+        waypoint: "L1_sub_waiting_area_1"
   # Configuration for deliveryRobot_2
   deliveryRobot_2:
     robot_config:
