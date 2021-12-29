@@ -94,8 +94,9 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
 
     fleet_handle = adapter.add_fleet(fleet_name, vehicle_traits, nav_graph)
 
-    if not fleet_config['publish_fleet_state']:
-        fleet_handle.fleet_state_publish_period(None)
+    fleet_state_update_frequency = fleet_config['publish_fleet_state']
+    fleet_handle.fleet_state_publish_period(
+        datetime.timedelta(milliseconds=1000.0/fleet_state_update_frequency))
     # Account for battery drain
     drain_battery = fleet_config['account_for_battery_drain']
     recharge_threshold = fleet_config['recharge_threshold']
