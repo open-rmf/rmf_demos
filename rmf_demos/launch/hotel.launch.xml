@@ -32,6 +32,7 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/1.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/cleanerBotA_config.yaml"/>
+      <arg name="perform_loop" value="true"/>
       <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
     </include>
      <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
@@ -44,7 +45,9 @@
 
   <!-- TinyRobot fleet adapter, and robot state aggregator needed for the TinyRobot slotcar_plugin -->
   <group>
+    <let name="fleet_name" value="tinyBot"/>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_adapter.launch.xml">
+      <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/tinyRobot_config.yaml"/>
@@ -60,10 +63,13 @@
 
   <!-- DeliveryRobot fleet adapter and robot state aggregator needed for DeliveryRobot slotcar_plugin -->
   <group>
+    <let name="fleet_name" value="deliveryBot"/>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/deliveryRobot_adapter.launch.xml">
+      <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/deliveryRobot_config.yaml"/>
+      <arg name="finishing_request" value="park"/>
       <arg name="experimental_lift_watchdog_service" value="$(env EXPT_LIFT_WATCHDOG_SRV)"/>
       <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
     </include>
