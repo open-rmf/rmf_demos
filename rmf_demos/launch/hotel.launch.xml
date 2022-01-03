@@ -4,6 +4,7 @@
   <arg name="use_sim_time" default="false"/>
   <arg name="failover_mode" default="false"/>
   <arg name="enable_experimental_lift_watchdog" default="false" description="experimental lift watchdog"/>
+  <arg name="enable_fleet_manager_mode" default="false"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -31,6 +32,13 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/1.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/cleanerBotA_config.yaml"/>
+      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
+    </include>
+     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="$(var fleet_name)"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
@@ -40,6 +48,13 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/tinyRobot_config.yaml"/>
+      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
+    </include>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="$(var fleet_name)"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
@@ -50,6 +65,13 @@
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/deliveryRobot_config.yaml"/>
       <arg name="experimental_lift_watchdog_service" value="$(env EXPT_LIFT_WATCHDOG_SRV)"/>
+      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
+    </include>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="$(var fleet_name)"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
