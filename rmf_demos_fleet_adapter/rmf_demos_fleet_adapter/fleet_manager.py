@@ -53,6 +53,12 @@ class Request(BaseModel):
     data: Optional[dict] = None
 
 
+class Response(BaseModel):
+    data: Optional[dict] = None
+    success: bool
+    msg: str
+
+
 # ------------------------------------------------------------------------------
 # Fleet Manager
 # ------------------------------------------------------------------------------
@@ -119,7 +125,8 @@ class FleetManager(Node):
 
         self.task_id = -1
 
-        @app.get('/open-rmf/rmf_demos_fm/status/')
+        @app.get('/open-rmf/rmf_demos_fm/status/',
+                 response_model=Response)
         async def position(robot_name: Optional[str] = None):
             data = {'data': {},
                     'success': False,
@@ -140,7 +147,8 @@ class FleetManager(Node):
             data['success'] = True
             return data
 
-        @app.post('/open-rmf/rmf_demos_fm/navigate/')
+        @app.post('/open-rmf/rmf_demos_fm/navigate/',
+                  response_model=Response)
         async def navigate(robot_name: str, dest: Request):
             data = {'success': False, 'msg': ''}
             if (robot_name not in self.robots or len(dest.destination) < 1):
@@ -185,7 +193,8 @@ class FleetManager(Node):
             data['success'] = True
             return data
 
-        @app.get('/open-rmf/rmf_demos_fm/stop_robot/')
+        @app.get('/open-rmf/rmf_demos_fm/stop_robot/',
+                 response_model=Response)
         async def stop(robot_name: str):
             data = {'success': False, 'msg': ''}
             if robot_name not in self.robots:
@@ -200,7 +209,8 @@ class FleetManager(Node):
             data['success'] = True
             return data
 
-        @app.post('/open-rmf/rmf_demos_fm/start_task/')
+        @app.post('/open-rmf/rmf_demos_fm/start_task/',
+                  response_model=Response)
         async def start_process(robot_name: str, task: Request):
             data = {'success': False, 'msg': ''}
             if (robot_name not in self.robots or
