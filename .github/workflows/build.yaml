@@ -19,7 +19,7 @@ jobs:
           qt5-default \
           python3-shapely python3-yaml python3-requests \
           ignition-edifice  python3-pip -y
-        pip3 install flask-socketio
+        pip3 install flask-socketio fastapi uvicorn
     - name: create-ws
       run: |
         mkdir -p rmf_demos_ws/src
