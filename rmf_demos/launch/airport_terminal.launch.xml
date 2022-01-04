@@ -15,34 +15,30 @@
 
   <!-- TinyRobot fleet adapter, and robot state aggregator needed for the TinyRobot slotcar_plugin -->
   <group>
+    <let name="fleet_name" value="tinyRobot"/>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_adapter.launch.xml">
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/2.yaml" />
-      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/tinyRobot_config.yaml"/>
-      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
-    </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="$(var fleet_name)"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="failover_mode" value="$(var failover_mode)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/2.yaml" />
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/tinyRobot_config.yaml"/>
+      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
     </include>
   </group>
 
   <!-- DeliveryRobot fleet adapter and robot state aggregator needed for DeliveryRobot slotcar_plugin -->
   <group>
+    <let name="fleet_name" value="deliveryRobot"/>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/deliveryRobot_adapter.launch.xml">
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/1.yaml" />
-      <arg name="finishing_request" value="park"/>
-      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/deliveryRobot_config.yaml"/>
-      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
-    </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="$(var fleet_name)"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="failover_mode" value="$(var failover_mode)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/1.yaml" />
+      <arg name="finishing_request" value="park"/>
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/deliveryRobot_config.yaml"/>
+      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
     </include>
   </group>
 
@@ -63,34 +59,30 @@
 
   <!-- cleanerBotA fleet adapter and robot state aggregator needed for the slotcar_plugin -->
   <group>
+    <let name="fleet_name" value="cleanerBotA"/>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/cleanerBotA_adapter.launch.xml">
+      <arg name="robot_prefix" value="$(var fleet_name)"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/0.yaml" />
       <arg name="finishing_request" value="charge"/>
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/cleanerBotA_config.yaml"/>
       <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
     </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="$(var fleet_name)"/>
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="failover_mode" value="$(var failover_mode)"/>
-    </include>
   </group>
 
   <!-- cleanerBotE fleet adapter and robot state aggregator needed for the slotcar_plugin -->
   <group>
+    <let name="fleet_name" value="cleanerBotE"/>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/cleanerBotE_adapter.launch.xml">
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/4.yaml" />
-      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/cleanerBotE_config.yaml"/>
-      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
-    </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
       <arg name="robot_prefix" value="$(var fleet_name)"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="failover_mode" value="$(var failover_mode)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/4.yaml" />
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/cleanerBotE_config.yaml"/>
+      <arg name="enable_fleet_manager_mode" value="$(var enable_fleet_manager_mode)"/>
     </include>
   </group>
 
