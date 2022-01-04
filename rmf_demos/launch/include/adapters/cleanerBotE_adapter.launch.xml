@@ -2,6 +2,8 @@
 
 <launch>
 
+  <arg name="failover_mode" default="false"/>
+  <arg name="robot_prefix" default="" description="The prefix that this aggregator should look for in the incoming robot names"/>
   <arg name="fleet_name" default="cleanerBotE" description="Name of this fleet of cleanerBotE robots"/>
   <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="nav_graph_file" description="Nav graph required by fleet adapter"/>
@@ -77,6 +79,12 @@
 
       <arg name="recharge_threshold" value="0.2"/>
 
+    </include>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
+      <arg name="robot_prefix" value="$(var fleet_name)"/>
+      <arg name="fleet_name" value="$(var fleet_name)"/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
