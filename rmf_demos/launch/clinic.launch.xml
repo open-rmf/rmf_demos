@@ -11,7 +11,7 @@
     <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/clinic/dashboard_config.json"/>
   </include>
 
-  <!-- DeliveryRobot fleet adapter and robot state aggregator needed for DeliveryRobot slotcar_plugin -->
+  <!-- DeliveryRobot fleet adapter -->
   <group>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/deliveryRobot_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
@@ -20,7 +20,7 @@
     </include>
   </group>
 
-  <!-- TinyRobot fleet adapter, and robot state aggregator needed for the TinyRobot slotcar_plugin -->
+  <!-- TinyRobot fleet adapter -->
   <group>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
