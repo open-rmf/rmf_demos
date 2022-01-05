@@ -8,18 +8,20 @@ The fleet adapter uses FastAPI to:
 
 ## Getting Started
 
-Install the required dependencies:
+Make sure the required dependencies are installed:
 ```bash
 pip3 install fastapi uvicorn
 ```
-The current default fleet adapter mode is the legacy `full_control` fleet adapter. In order to run this fleet adapter/manager implementation, you will need to set the fleet manager mode to `true` during launch, e.g.
+
+You can interact with the endpoints with FastAPI's automatic documentation. First launch a demo world, then visit the base URL with `/docs` appended at the end. Do take note that the port number for each demo fleet is specified in `rmf_demos/rmf_demos/config/`.
+
+#### Example
+Launch the Office world:
 ```bash
-ros2 launch rmf_demos_gz office.launch.xml enable_fleet_manager_mode:=true
+source ~/rmf_ws/install/setup.bash
+ros2 launch rmf_demos_gz office.launch.xml
 ```
-
-You can also interact with the endpoints with FastAPI's automatic documentation. First launch a demo world, then visit the base URL with `/docs` appended at the end. Do take note that the port number for each demo fleet is specified in `rmf_demos/rmf_demos/config/`.
-
-For example, after launching the Office world `office.launch.xml`, you can visit http://127.0.0.1:8001/docs in your browser to interact with the endpoints.
+Then, visit http://127.0.0.1:8001/docs in your browser to interact with the endpoints.
 
 ## Request/Response Schemas
 Depending on the endpoint, the content may vary (i.e. some items may be removed), but a general structure is followed:
