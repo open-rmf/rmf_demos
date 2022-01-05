@@ -5,7 +5,7 @@ rmf_fleet:
   name: "deliveryRobot"
   fleet_manager:
     ip: "127.0.0.1"
-    port: 8002
+    port: 7002
     user: "some_user"
     password: "some_password"
   limits:
@@ -47,7 +47,7 @@ robots:
   deliveryRobot_1:
     robot_config:
       max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
-      filter_waypoints: True
+      filter_waypoints: False
     rmf_config:
       robot_state_update_frequency: 10.0
       start:
@@ -60,7 +60,7 @@ robots:
   deliveryRobot_2:
     robot_config:
       max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
-      filter_waypoints: True
+      filter_waypoints: False
     rmf_config:
       robot_state_update_frequency: 10.0
       start:
