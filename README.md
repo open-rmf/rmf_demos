@@ -264,12 +264,6 @@ $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
     # Lift is cleared. Give robot the permission to enter the lift
     ros2 launch rmf_demos experimental_clear_lift.launch.xml
     ```
- - **Legacy Fleet Adapter Mode vs. Fleet Manager Mode**
-    - The default fleet adapter used is the legacy `full_control` fleet adapter. You can toggle between the two modes by enabling the fleet manager mode during launch. Make sure to download the dependencies beforehand. More instructions can be found in the `rmf_demos_fleet_adapter`'s README.md
-    - Command lines:
-     ```bash
-     # run office world with fleet_manager_mode enabled
-     ros2 launch rmf_demos_gz office.launch.xml enable_fleet_manager_mode:=1
  - **Custom Docking Sequence**
     - Fleet adapter will notify the robot (via `dock()` api/ModeRequest) to execute its custom dock sequence when the robot reaches a "dock" waypoint.
     - Implementation is similar to Clean task, refer to docs [here](https://osrf.github.io/ros2multirobotbook/task_types.html?highlight=docking#step-1-defining-waypoints-for-cleaning-in-traffic-editor)
