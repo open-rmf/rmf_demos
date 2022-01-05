@@ -12,7 +12,7 @@
     <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/airport_terminal/dashboard_config.json"/>
   </include>
 
-  <!-- TinyRobot fleet adapter, and robot state aggregator needed for the TinyRobot slotcar_plugin -->
+  <!-- TinyRobot fleet adapter -->
   <group>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
@@ -21,7 +21,7 @@
     </include>
   </group>
 
-  <!-- DeliveryRobot fleet adapter and robot state aggregator needed for DeliveryRobot slotcar_plugin -->
+  <!-- DeliveryRobot fleet adapter -->
   <group>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/deliveryRobot_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
@@ -45,7 +45,7 @@
     </include>
   </group>
 
-  <!-- cleanerBotA fleet adapter and robot state aggregator needed for the slotcar_plugin -->
+  <!-- cleanerBotA fleet adapter -->
   <group>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/cleanerBotA_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
@@ -54,7 +54,7 @@
     </include>
   </group>
 
-  <!-- cleanerBotE fleet adapter and robot state aggregator needed for the slotcar_plugin -->
+  <!-- cleanerBotE fleet adapter -->
   <group>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/cleanerBotE_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
