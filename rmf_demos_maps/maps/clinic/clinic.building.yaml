@@ -304,7 +304,6 @@ levels:
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 2048.673, y: 916.732, yaw: -1.5708, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 697.478, y: 1347.126, yaw: -2.37, z: 0}
       - {model_name: OpenRobotics/NurseTable, name: OpenRobotics/NurseTable, static: true, x: 729.872, y: 1450.413, yaw: -3.1416, z: 0}
-      - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 445.716, y: 1102.832, yaw: -0, z: 0}
       - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 445.32, y: 933.817, yaw: 0, z: 0}
       - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 446.507, y: 693.951, yaw: 0, z: 0}
       - {model_name: OpenRobotics/PotatoChipChair, name: OpenRobotics/PotatoChipChair, static: true, x: 1861.401, y: 841.975, yaw: -3.1318, z: 0}
@@ -545,7 +544,6 @@ levels:
       - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 310.63, y: 1092.101, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/MaleVisitorSit, name: OpenRobotics/MaleVisitorSit, static: true, x: 267.005, y: 1094.373, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 359.254, y: 1130.954, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 454.385, y: 1083.851, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 454.905, y: 933.698, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1175.991, y: 1531.013, yaw: -3.1416, z: 0}
       - {model_name: OpenRobotics/VisitorKidSit, name: OpenRobotics/VisitorKidSit, static: true, x: 1109.247, y: 1481.258, yaw: -3.1416, z: 0}
