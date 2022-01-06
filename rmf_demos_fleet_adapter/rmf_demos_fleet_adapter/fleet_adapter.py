@@ -15,7 +15,6 @@
 import sys
 import argparse
 import yaml
-import nudged
 import time
 import threading
 import datetime
@@ -139,27 +138,6 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     fleet_handle.accept_task_requests(
         partial(_task_request_check, task_capabilities))
 
-    # Transforms
-    rmf_coordinates = config_yaml['reference_coordinates']['rmf']
-    robot_coordinates = config_yaml['reference_coordinates']['robot']
-    transforms = {
-        'rmf_to_robot': nudged.estimate(rmf_coordinates, robot_coordinates),
-        'robot_to_rmf': nudged.estimate(robot_coordinates, rmf_coordinates)}
-    transforms['orientation_offset'] = \
-        transforms['rmf_to_robot'].get_rotation()
-    mse = nudged.estimate_error(transforms['rmf_to_robot'],
-                                rmf_coordinates,
-                                robot_coordinates)
-    print(f"Coordinate transformation error: {mse}")
-    print("RMF to Robot transform:")
-    print(f"    rotation:{transforms['rmf_to_robot'].get_rotation()}")
-    print(f"    scale:{transforms['rmf_to_robot'].get_scale()}")
-    print(f"    trans:{transforms['rmf_to_robot'].get_translation()}")
-    print("Robot to RMF transform:")
-    print(f"    rotation:{transforms['robot_to_rmf'].get_rotation()}")
-    print(f"    scale:{transforms['robot_to_rmf'].get_scale()}")
-    print(f"    trans:{transforms['robot_to_rmf'].get_translation()}")
-
     def _updater_inserter(cmd_handle, update_handle):
         """Insert a RobotUpdateHandle."""
         cmd_handle.update_handle = update_handle
@@ -231,7 +209,6 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                         node=node,
                         graph=nav_graph,
                         vehicle_traits=vehicle_traits,
-                        transforms=transforms,
                         map_name=rmf_config['start']['map_name'],
                         start=starts[0],
                         position=position,
