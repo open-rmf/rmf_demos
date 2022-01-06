@@ -92,7 +92,7 @@ levels:
       - [353, 352, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_right_consult_rm_13_inner], plugin: [1, none], right_left_ratio: [3, 1], type: [1, sliding]}]
       - [435, 436, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_existing_single_ahu], plugin: [1, none], right_left_ratio: [3, 1], type: [1, double_hinged]}]
       - [441, 440, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_left_inner], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, sliding]}]
-      - [443, 442, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_right_inner], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, sliding]}]
+      - [443, 442, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_right_inner], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
     drawing:
       filename: clinic.png
     elevation: 0
@@ -1013,7 +1013,7 @@ levels:
       - [1368.794, 448.242, 0, ""]
       - [1369.498, 372.678, 0, L1_sub_waiting_area_3, {is_holding_point: [4, true], is_parking_spot: [4, false]}]
       - [1521.632, 448.03, 0, ""]
-      - [1520.861, 552.348, 0, ""]
+      - [1521.974, 544.822, 0, ""]
       - [1519.393, 750.879, 0, L1_right_nurse_center, {is_holding_point: [4, true], is_parking_spot: [4, true]}]
       - [1598.871, 388.003, 0, ""]
       - [1599.39, 447.922, 0, ""]
