@@ -66,7 +66,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                  node,
                  graph,
                  vehicle_traits,
-                 transforms,
                  map_name,
                  start,
                  position,
@@ -81,7 +80,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.node = node
         self.graph = graph
         self.vehicle_traits = vehicle_traits
-        self.transforms = transforms
         self.map_name = map_name
         # Get the index of the charger waypoint
         waypoint = self.graph.find_waypoint(charger_waypoint)
@@ -232,10 +230,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.path_index = self.remaining_waypoints[0].index
                     # Move robot to next waypoint
                     target_pose = self.target_waypoint.position
-                    [x, y] = self.transforms["rmf_to_robot"].transform(
-                        target_pose[:2])
-                    theta = target_pose[2] + \
-                        self.transforms['orientation_offset']
+                    [x, y] = target_pose[:2]
+                    theta = target_pose[2]
                     # ------------------------ #
                     # IMPLEMENT YOUR CODE HERE #
                     # Ensure x, y, theta are in units that api.navigate() #
@@ -408,9 +404,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         RMF coordinate frame'''
         position = self.api.position(self.name)
         if position is not None:
-            x, y = self.transforms['robot_to_rmf'].transform(
-                [position[0], position[1]])
-            theta = position[2] - self.transforms['orientation_offset']
+            x, y = [position[0], position[1]]
+            theta = position[2]
             # ------------------------ #
             # IMPLEMENT YOUR CODE HERE #
             # Ensure x, y are in meters and theta in radians #
