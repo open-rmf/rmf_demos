@@ -43,7 +43,7 @@ levels:
       - [284, 285, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_right_consult_rm_4_outer], plugin: [1, none], right_left_ratio: [3, 1], type: [1, sliding]}]
       - [287, 288, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_right_consult_rm_5_outer], plugin: [1, none], right_left_ratio: [3, 1], type: [1, sliding]}]
       - [290, 291, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_right_consult_rm_6_outer], plugin: [1, none], right_left_ratio: [3, 1], type: [1, sliding]}]
-      - [359, 360, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_clinic_b], plugin: [1, none], right_left_ratio: [3, 1], type: [1, double_sliding]}]
+      - [359, 360, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_clinic_b], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_sliding]}]
       - [187, 188, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_left_consult_rm_6_outer], plugin: [1, none], right_left_ratio: [3, 1], type: [1, sliding]}]
       - [100, 101, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_left_treatment_1], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, sliding]}]
       - [127, 121, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, L1_left_negative_air_pressure], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, sliding]}]
