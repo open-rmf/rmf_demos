@@ -136,7 +136,7 @@ class MockDocker(Node):
         fleet_name = self.dock_map.get(msg.fleet_name)
         if fleet_name is None:
             self.get_logger().warn(
-                'Unknown fleet name reuested [{msg.fleet_name}].')
+                'Unknown fleet name requested [{msg.fleet_name}].')
             return
 
         dock = fleet_name.get(msg.parameters[0].value)
@@ -162,15 +162,8 @@ class MockDocker(Node):
             return
 
         requested_path = self.watching[msg.name]
-        finish_location = (requested_path.path[-1].x,
-                           requested_path.path[-1].y,
-                           requested_path.path[-1].yaw)
-
-        # Check current pose, update remaining path
-        if not close(self.watching[msg.name].path[0], msg.location):
-            return
-        elif len(self.watching[msg.name].path) > 1:
-            self.watching[msg.name].path.pop(0)
+        finish_location = requested_path.path[-1]
+        if not close(finish_location, msg.location):
             return
 
         # This is needed to acknowledge the slot car that a Docking Mode
