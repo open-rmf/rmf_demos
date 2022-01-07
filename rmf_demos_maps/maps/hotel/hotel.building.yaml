@@ -147,8 +147,6 @@ levels:
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 512.076, y: 712.3680000000001, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 537.609, y: 712.199, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 559.9299999999999, y: 712.876, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CleaningSection, name: OpenRobotics/CleaningSection, static: true, x: 546.207, y: 534.1609999999999, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/MopCart4, name: OpenRobotics/MopCart4, static: true, x: 458.269, y: 534.4450000000001, yaw: 1.7524, z: 0}
     vertices:
       - [127.862, 550.573, 0, ""]
       - [127.1, 350.915, 0, ""]
@@ -175,7 +173,7 @@ levels:
       - [274.441, 469.922, 0, ""]
       - [343.431, 469.922, 0, ""]
       - [383.346, 469.182, 0, ""]
-      - [451.461, 469.204, 0, ""]
+      - [442.992, 469.978, 0, ""]
       - [555.309, 468.997, 0, ""]
       - [589.26, 468.993, 0, ""]
       - [588.575, 615.333, 0, ""]
@@ -224,12 +222,12 @@ levels:
       - [216.974, 446.636, 0, ""]
       - [205.957, 391.294, 0, ""]
       - [153.759, 417.897, 0, clean_waiting_area, {dock_name: [1, clean_waiting_area], is_cleaning_zone: [4, true]}]
-      - [527.8339999999999, 493.098, 0, cleanerbot_charger2, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_2], spawn_robot_type: [1, CleanerBotA]}]
-      - [479.703, 493.643, 0, cleanerbot_charger1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_1], spawn_robot_type: [1, CleanerBotA]}]
+      - [525.131, 496.822, 0, cleanerbot_charger2, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_2], spawn_robot_type: [1, CleanerBotA]}]
+      - [473.507, 498.428, 0, cleanerbot_charger1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_1], spawn_robot_type: [1, CleanerBotA]}]
       - [205.148, 321.043, 0, ""]
       - [254.959, 203.925, 0, ""]
       - [230.964, 204.483, 0, clean_restaurant, {dock_name: [1, clean_restaurant], is_cleaning_zone: [4, true]}]
-      - [430.631, 489.53, 0, tinybot_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyBot_1], spawn_robot_type: [1, TinyRobot]}]
+      - [422.801, 492.463, 0, tinybot_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyBot_1], spawn_robot_type: [1, TinyRobot]}]
       - [255.891, 653.729, 0, ""]
       - [261.443, 700.003, 0, deliverybot_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, deliveryBot_1], spawn_robot_type: [1, DeliveryRobot]}]
       - [356.481, 391.294, 0, "", {is_holding_point: [4, true]}]
@@ -246,8 +244,8 @@ levels:
       - [251.133, 417.478, 0, ""]
       - [355, 340, 0, "", {lift_cabin: [1, Lift1]}]
       - [305, 435, 0, "", {lift_cabin: [1, Lift2]}]
-      - [430.507, 544.1079999999999, 0, ""]
-      - [450.393, 546.582, 0, ""]
+      - [422.572, 544.316, 0, ""]
+      - [443.451, 546.381, 0, ""]
       - [366.047, 590.2380000000001, 0, ""]
       - [367.461, 634.951, 0, "", {is_holding_point: [4, true]}]
       - [253.502, 320.513, 0, "", {is_holding_point: [4, true]}]
