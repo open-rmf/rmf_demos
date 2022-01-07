@@ -33,7 +33,7 @@ rmf_fleet:
   publish_fleet_state: 10.0 # Publish frequency for fleet state, ensure that it is same as robot_state_update_frequency
   account_for_battery_drain: True
   task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
-    loop: True
+    loop: False
     delivery: False
     clean: True
     finishing_request: "park" # [park, charge, nothing]

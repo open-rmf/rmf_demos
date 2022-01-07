@@ -168,15 +168,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         with self._lock:
             self.requested_waypoints = []
             self.remaining_waypoints = []
-            self.path_finished_callback = None
-            self.next_arrival_estimator = None
-            self.docking_finished_callback = None
             self.state = RobotState.IDLE
 
     def stop(self):
         # Stop the robot. Tracking variables should remain unchanged.
         while True:
-            self.node.get_logger().info("Requesting robot to stop...")
+            self.node.get_logger().info(f"Requesting {self.name} to stop...")
             if self.api.stop(self.name):
                 break
             self.sleep_for(0.1)
@@ -196,7 +193,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.stop()
         self._quit_path_event.clear()
 
-        self.node.get_logger().info("Received new path to follow...")
+        self.node.get_logger().info(f"Received new path for {self.name}")
 
         wait, entries = self.filter_waypoints(waypoints)
         self.remaining_waypoints = copy.copy(entries)
@@ -355,9 +352,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
         def _dock():
             # Request the robot to start the relevant process
-            self.node.get_logger().info(
-                f"Requesting robot {self.name} to dock at {self.dock_name}")
-            self.api.start_process(self.name, self.dock_name, self.map_name)
+            while (
+              not self.api.start_process(
+                self.name, self.dock_name, self.map_name)):
+                self.node.get_logger().info(
+                    f"Requesting robot {self.name} to dock at {self.dock_name}")
+                time.sleep_for(1.0)
 
             with self._lock:
                 self.on_waypoint = None
