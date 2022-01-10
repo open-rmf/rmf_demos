@@ -5,7 +5,7 @@ rmf_fleet:
   name: "tinyRobot"
   fleet_manager:
     ip: "127.0.0.1"
-    port: 7001
+    port: 22011
     user: "some_user"
     password: "some_password"
   limits:
