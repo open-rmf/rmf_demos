@@ -29,7 +29,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
-    DockSummary, ModeRequest, ModeParameter
+    DockSummary
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
@@ -116,11 +116,6 @@ class FleetManager(Node):
         self.path_pub = self.create_publisher(
             PathRequest,
             'robot_path_requests',
-            qos_profile=qos_profile_system_default)
-
-        self.mode_pub = self.create_publisher(
-            ModeRequest,
-            'robot_mode_requests',
             qos_profile=qos_profile_system_default)
 
         self.task_id = -1
@@ -220,46 +215,25 @@ class FleetManager(Node):
 
             t = self.get_clock().now().to_msg()
 
-            mode_request = ModeRequest()
-            mode_request.fleet_name = self.fleet_name
-            mode_request.robot_name = robot_name
-            self.task_id = self.task_id + 1
-            mode_request.task_id = str(self.task_id)
-            mode_request.mode.mode = mode_request.mode.MODE_DOCKING
-            dock = ModeParameter()
-            dock.name = 'docking'
-            dock.value = task.task
-            mode_request.parameters = [dock]
-            self.mode_pub.publish(mode_request)
-
             path_request = PathRequest()
             state = self.robots[robot_name]
-            cur_x = state.state.location.x
-            cur_y = state.state.location.y
-            cur_yaw = state.state.location.yaw
             cur_loc = state.state.location
-            path_request.path.append(cur_loc)
-
+            cur_x = cur_loc.x
+            cur_y = cur_loc.y
+            cur_yaw = cur_loc.yaw
+            previous_wp = [cur_x, cur_y, cur_yaw]
+            target_loc = Location()
             for wp in self.docks[task.task]:
-
-                target_x = wp.x
-                target_y = wp.y
-                target_yaw = wp.yaw
-
-                disp = self.disp([target_x, target_y], [cur_x, cur_y])
+                disp = self.disp([wp.x, wp.y], previous_wp)
                 duration = int(disp /
                                self.vehicle_traits.linear.nominal_velocity) +\
-                    int(abs(abs(cur_yaw) - abs(target_yaw)) /
+                    int(abs(abs(previous_wp[2]) - abs(wp.yaw)) /
                         self.vehicle_traits.rotational.nominal_velocity)
                 t.sec = t.sec + duration
-                target_loc = Location()
+                target_loc = wp
                 target_loc.t = t
-                target_loc.x = target_x
-                target_loc.y = target_y
-                target_loc.yaw = target_yaw
-                target_loc.level_name = wp.level_name
-
                 path_request.path.append(target_loc)
+                previous_wp = [wp.x, wp.y, wp.yaw]
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
