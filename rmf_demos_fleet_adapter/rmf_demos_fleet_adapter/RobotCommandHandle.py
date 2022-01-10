@@ -379,13 +379,13 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 if len(positions) < 1:
                     continue
 
-                cur_loc = self.get_position()
-                if self.dist(cur_loc, positions[0]) < 0.2:
-                    del positions[0]
+                # cur_loc = self.get_position()
+                # if self.dist(cur_loc, positions[0]) < 0.2:
+                #     del positions[0]
 
                 traj = schedule.make_trajectory(self.vehicle_traits,
                                                 self.adapter.now(),
-                                                [cur_loc] + positions)
+                                                positions)
                 itinerary = schedule.Route(self.map_name, traj)
                 if self.update_handle is not None:
                     participant = self.update_handle.get_unstable_participant()
