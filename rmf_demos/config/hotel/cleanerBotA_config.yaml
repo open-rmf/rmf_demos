@@ -5,7 +5,7 @@ rmf_fleet:
   name: "cleanerBotA"
   fleet_manager:
     ip: "127.0.0.1"
-    port: 7003
+    port: 22013
     user: "some_user"
     password: "some_password"
   limits:

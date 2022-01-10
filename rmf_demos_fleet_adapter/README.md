@@ -21,7 +21,7 @@ Launch the Office world:
 source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz office.launch.xml
 ```
-Then, visit http://127.0.0.1:7001/docs in your browser to interact with the endpoints.
+Then, visit http://127.0.0.1:22011/docs in your browser to interact with the endpoints.
 
 ## Request/Response Schemas
 Depending on the endpoint, the content may vary (i.e. some items may be removed), but a general structure is followed:
@@ -40,12 +40,12 @@ Depending on the endpoint, the content may vary (i.e. some items may be removed)
   "data": {},
   "success": true,
   "msg": ""
-}
+}1
 ```
 
 ## API Endpoints
 
-Note: The base URL in this section contains the port number `7001` dedicated to the tinyRobot fleet. The port number varies across different fleets.
+Note: The base URL in this section contains the port number `22011` dedicated to the tinyRobot fleet. The port number varies across different fleets.
 
 ### 1. Get Robot Status
 The `status` endpoint allows the fleet adapter to access robot state information such as its current position and battery level. This endpoint does not require a Request Body.
@@ -53,7 +53,7 @@ The `status` endpoint allows the fleet adapter to access robot state information
 There are two ways to request the fleet robot status:
 
 #### a. Get status of all robots in the fleet
-Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/status/`
+Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/`
 ##### Response Body:
 ```json
 {
@@ -93,7 +93,7 @@ Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/status/`
 #### b. Get status of specified robot in the fleet
 Append a `robot_name` query parameter to the end of the URL.
 
-Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/status/?robot_name=tinyRobot1`
+Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/?robot_name=tinyRobot1`
 ##### Response Body:
 ```json
 {
@@ -117,7 +117,7 @@ Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/status/?robot_name=tin
 ### 2. Send Navigation Request
 The `navigate` endpoint allows the fleet adapter to send navigation waypoints to a specified robot. This endpoint requires a Request Body and a `robot_name` query parameter.
 
-Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/navigate/?robot_name=tinyRobot1`
+Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/navigate/?robot_name=tinyRobot1`
 ##### Request Body:
 ```json
 {
@@ -141,7 +141,7 @@ Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/navigate/?robot_name=t
 ### 3. Stop Robot
 The `stop` endpoint allows the fleet adapter to command a specified robot to stop. This endpoint only requires a `robot_name` query parameter.
 
-Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/stop/?robot_name=tinyRobot1`
+Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/stop/?robot_name=tinyRobot1`
 ##### Response Body:
 ```json
 {
@@ -153,7 +153,7 @@ Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/stop/?robot_name=tinyR
 ### 4. Send Task Request
 The `start_task` endpoint allows the fleet adapter to send task requests to a specified robot. This endpoint requires a Request Body and a `robot_name` query parameter.
 
-Request URL: `http://127.0.0.1:7001/open-rmf/rmf_demos_fm/start_task/?robot_name=tinyRobot1`
+Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/start_task/?robot_name=tinyRobot1`
 ##### Request Body:
 ```json
 {

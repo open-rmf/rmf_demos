@@ -348,11 +348,11 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
         def _dock():
             # Request the robot to start the relevant process
-            while (
-              not self.api.start_process(
-                self.name, self.dock_name, self.map_name)):
+            while (not self.api.start_process(
+                    self.name, self.dock_name, self.map_name)):
                 self.node.get_logger().info(
-                    f"Requesting robot {self.name} to dock at {self.dock_name}")
+                    f"Requesting robot {self.name} "
+                    "to dock at {self.dock_name}")
                 time.sleep_for(1.0)
 
             with self._lock:

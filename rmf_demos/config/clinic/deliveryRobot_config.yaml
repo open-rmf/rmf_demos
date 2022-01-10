@@ -5,7 +5,7 @@ rmf_fleet:
   name: "deliveryRobot"
   fleet_manager:
     ip: "127.0.0.1"
-    port: 7002
+    port: 22012
     user: "some_user"
     password: "some_password"
   limits:

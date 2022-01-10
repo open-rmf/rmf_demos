@@ -161,6 +161,8 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
             for robot_name in list(missing_robots.keys()):
                 node.get_logger().debug(f"Connecting to robot: {robot_name}")
                 data = api.data(robot_name)
+                if data is None:
+                    continue
                 if data['success']:
                     node.get_logger().info(f"Initializing robot: {robot_name}")
                     robots_config = config_yaml['robots'][robot_name]
