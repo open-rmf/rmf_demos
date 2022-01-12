@@ -90,6 +90,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.update_frequency = update_frequency
         self.update_handle = None  # RobotUpdateHandle
         self.battery_soc = 1.0
+        self.speed_limit = 0.0
         self.api = api
         self.position = position  # (x,y,theta) in RMF crs (meters,radians)
         self.initialized = False
@@ -232,13 +233,16 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     target_pose = self.target_waypoint.position
                     [x, y] = target_pose[:2]
                     theta = target_pose[2]
+                    # Update speed limit
+                    self.get_current_lane()
                     # ------------------------ #
                     # IMPLEMENT YOUR CODE HERE #
                     # Ensure x, y, theta are in units that api.navigate() #
                     # ------------------------ #
                     response = self.api.navigate(self.name,
                                                  [x, y, theta],
-                                                 self.map_name)
+                                                 self.map_name,
+                                                 self.speed_limit)
 
                     if response:
                         self.remaining_waypoints = self.remaining_waypoints[1:]
@@ -506,6 +510,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # Spin on the spot
         if approach_lanes is None or len(approach_lanes) == 0:
             return None
+        approach_lane_limit = None
         # Determine which lane the robot is currently on
         for lane_index in approach_lanes:
             lane = self.graph.get_lane(lane_index)
@@ -514,6 +519,14 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             p = self.position
             before_lane = projection(p, p0, p0, p1) < 0.0
             after_lane = projection(p, p1, p0, p1) >= 0.0
+            # Check speed limit
+            lane_limit = lane.properties.speed_limit
+            if lane_limit is not None:
+                if approach_lane_limit is None:
+                    approach_lane_limit = lane_limit
+                else:
+                    approach_lane_limit = min(approach_lane_limit, lane_limit)
+                self.speed_limit = approach_lane_limit
             if not before_lane and not after_lane:  # The robot is on this lane
                 return lane_index
         return None
