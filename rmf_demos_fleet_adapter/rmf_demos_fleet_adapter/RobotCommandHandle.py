@@ -510,7 +510,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # Spin on the spot
         if approach_lanes is None or len(approach_lanes) == 0:
             return None
-        approach_lane_limit = None
+        approach_lane_limit = 0.0
         # Determine which lane the robot is currently on
         for lane_index in approach_lanes:
             lane = self.graph.get_lane(lane_index)
@@ -522,11 +522,11 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             # Check speed limit
             lane_limit = lane.properties.speed_limit
             if lane_limit is not None:
-                if approach_lane_limit is None:
-                    approach_lane_limit = lane_limit
-                else:
+                if approach_lane_limit > 0:
                     approach_lane_limit = min(approach_lane_limit, lane_limit)
-                self.speed_limit = approach_lane_limit
+                else:
+                    approach_lane_limit = lane_limit
+            self.speed_limit = approach_lane_limit
             if not before_lane and not after_lane:  # The robot is on this lane
                 return lane_index
         return None
