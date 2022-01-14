@@ -218,8 +218,6 @@ class FleetManager(Node):
                     task.task not in self.docks):
                 return data
 
-            t = self.get_clock().now().to_msg()
-
             path_request = PathRequest()
             state = self.robots[robot_name]
             cur_loc = state.state.location
@@ -229,14 +227,7 @@ class FleetManager(Node):
             previous_wp = [cur_x, cur_y, cur_yaw]
             target_loc = Location()
             for wp in self.docks[task.task]:
-                disp = self.disp([wp.x, wp.y], previous_wp)
-                duration = int(disp /
-                               self.vehicle_traits.linear.nominal_velocity) +\
-                    int(abs(abs(previous_wp[2]) - abs(wp.yaw)) /
-                        self.vehicle_traits.rotational.nominal_velocity)
-                t.sec = t.sec + duration
                 target_loc = wp
-                target_loc.t = t
                 path_request.path.append(target_loc)
                 previous_wp = [wp.x, wp.y, wp.yaw]
 
