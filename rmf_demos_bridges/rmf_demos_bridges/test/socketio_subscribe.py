@@ -1,21 +1,29 @@
 import socketio
+import sys
 
 sio = socketio.Client()
+
+topic = '/fleet_states'
+
+try:
+    topic = sys.argv[1]
+except Exception:
+    pass
 
 
 @sio.event
 def connect():
-  print('connection established')
+    print('connection established')
 
 
-@sio.on('tinyRobot')
-def tinyRobot_fleet_state(data):
-  print(data)
+@sio.on(topic)
+def message(data):
+    print(data)
 
 
 @sio.event
 def disconnect():
-  print('disconnected from server')
+    print('disconnected from server')
 
 
 sio.connect('ws://localhost:8080')

@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'fleet_socketio_bridge=rmf_demos_bridges.fleet_socketio_bridge:main'
+            'fleet_socketio_bridge=rmf_demos_bridges.fleet_socketio_bridge:main',
         ],
     },
 )

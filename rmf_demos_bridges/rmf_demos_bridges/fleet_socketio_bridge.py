@@ -19,9 +19,12 @@ import rclpy
 import rclpy.executors
 import threading
 import sys
+import json
+import copy
 import argparse
 from collections import OrderedDict
 from rosidl_runtime_py import message_to_ordereddict
+from pyproj import Transformer
 
 from rclpy.node import Node
 from flask_socketio import SocketIO, emit, disconnect
@@ -31,7 +34,23 @@ from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
-from rmf_fleet_msgs.msg import FleetState
+from rmf_fleet_msgs.msg import FleetState, RobotState
+
+SUPPORTED_GPS_FRAMES = ['svy21']
+
+# Temporary Message definition for GPS messages
+GPS_MESSAGE_DEFINITION = {
+    "timestamp": -1,     # Unix time
+    "robot_id": "",      # String
+    "lat": -1,           # Float32
+    "lon": -1,           # Float32
+    "alt": -1,           # Float32
+    "heading": 0,        # Uint
+
+    "x": 0,              # 2D robot x position
+    "y": 0,              # 2D robot y position
+    "angle": 0,          # 2D robot angle
+}
 
 
 class FleetSocketIOBridge(Node):
@@ -42,11 +61,29 @@ class FleetSocketIOBridge(Node):
                             type=str,
                             default='/fleet_states',
                             help='Topic to listen on for Fleet States')
+        parser.add_argument('-f', '--filter_fleet',
+                            required=False,
+                            type=str,
+                            help='Only listen to this fleet.')
+        parser.add_argument('-g', '--gps_state_topic',
+                            required=False,
+                            type=str,
+                            help='SocketIO topic to publish GPS.')
+        parser.add_argument('-x', '--offset_x',
+                            required=False,
+                            type=float,
+                            default=0.0,
+                            help='X offset for simulations.')
+        parser.add_argument('-y', '--offset_y',
+                            required=False,
+                            type=float,
+                            default=0.0,
+                            help='Y offset for simulations.')
         parser.add_argument('-i', '--listening_interfaces',
                             required=False,
                             type=str,
                             default='0.0.0.0',
-                            help='Interfaces for SocketIO to listen on')
+                            help='Interfaces for SocketIO to serve on')
         parser.add_argument('-p', '--listening_port',
                             required=False,
                             type=str,
@@ -60,14 +97,27 @@ class FleetSocketIOBridge(Node):
         self._init_pubsub()
         self._init_webserver()
 
+        if self.args.gps_state_topic:
+            self._init_gps_conversion_tools('svy21')
+
     def fleet_state_callback(self, msg: FleetState):
         try:
-            self.socketio.emit(msg.name, message_to_ordereddict(msg))
+            if self.args.filter_fleet:
+                if msg.name != self.args.filter_fleet:
+                    return
+
+            self._sio.emit(self.args.fleet_state_topic,
+                           message_to_ordereddict(msg))
+
+            if self.args.gps_state_topic:
+                fleet_state_json = self._fleet_state_to_gps_json(msg)
+                self._sio.emit(self.args.gps_state_topic,
+                               fleet_state_json)
         except Exception as e:
             print(e)
 
     def start_socketio(self):
-        self.app.run(self.args.listening_interfaces, self.args.listening_port)
+        self._app.run(self.args.listening_interfaces, self.args.listening_port)
 
     def spin_background(self):
         def spin():
@@ -82,11 +132,11 @@ class FleetSocketIOBridge(Node):
         self._finish_gc = self.create_guard_condition(
             lambda: self._finish_spin.set_result(None))
 
-        self.app = Flask(__name__)
-        CORS(self.app, origins=r"/*")
+        self._app = Flask(__name__)
+        CORS(self._app, origins=r"/*")
 
-        self.socketio = SocketIO(self.app, async_mode='threading')
-        self.socketio.init_app(self.app, cors_allowed_origins="*")
+        self._sio = SocketIO(self._app, async_mode='threading')
+        self._sio.init_app(self._app, cors_allowed_origins="*")
 
     def _init_pubsub(self):
         self.fleet_state_sub = self.create_subscription(
@@ -94,6 +144,55 @@ class FleetSocketIOBridge(Node):
             self.args.fleet_state_topic,
             self.fleet_state_callback,
             10)
+
+    def _init_gps_conversion_tools(self, frame: str):
+        assert frame in SUPPORTED_GPS_FRAMES
+
+        if frame == 'svy21':
+            self._wgs_transformer = Transformer.from_crs(
+                'EPSG:3414', 'EPSG:4326')
+            return
+
+        raise Exception("This should not happen")
+
+    def _fleet_state_to_gps_json(self, fleet_state: FleetState):
+        fleet_state_json = {}
+        fleet_state_json['name'] = fleet_state.name
+        fleet_state_json['robots'] = []
+        for state in fleet_state.robots:
+            robot_state_json = self._robot_state_to_gps_json(state)
+            fleet_state_json['robots'].append(json.loads(robot_state_json))
+        return json.dumps(fleet_state_json)
+
+    def _robot_state_to_gps_json(self, robot_state: RobotState):
+        resp = copy.deepcopy(GPS_MESSAGE_DEFINITION)
+
+        svy21_xy = self._remove_offsets(
+            robot_state.location.x,
+            robot_state.location.y
+        )
+        wgs84_xy = self._wgs_transformer.transform(
+            svy21_xy[1], svy21_xy[0])  # inputs are y,x
+        resp["timestamp"] = robot_state.location.t.sec
+        resp["robot_id"] = robot_state.name
+        resp["lat"] = wgs84_xy[0]
+        resp["lon"] = wgs84_xy[1]
+        resp["alt"] = 0         # BH(WARN): Hardcoded
+        resp["heading"] = robot_state.location.yaw
+
+        resp["x"] = robot_state.location.x
+        resp["y"] = robot_state.location.y
+        resp["heading"] = robot_state.location.yaw
+
+        return json.dumps(resp)
+
+    def _remove_offsets(self, x: float, y: float):
+        return (x + self.args.offset_x,
+                y + self.args.offset_y)
+
+    def _apply_offsets(self, x: float, y: float):
+        return (x - self.args.offset_x,
+                y - self.args.offset_y)
 
 
 def main(argv=sys.argv):
