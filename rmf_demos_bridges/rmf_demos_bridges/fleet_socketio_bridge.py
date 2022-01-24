@@ -50,6 +50,8 @@ GPS_MESSAGE_DEFINITION = {
     "x": 0,              # 2D robot x position
     "y": 0,              # 2D robot y position
     "angle": 0,          # 2D robot angle
+
+    "battery": 100.0,    # Battery percentage
 }
 
 
@@ -182,7 +184,9 @@ class FleetSocketIOBridge(Node):
 
         resp["x"] = robot_state.location.x
         resp["y"] = robot_state.location.y
-        resp["heading"] = robot_state.location.yaw
+        resp["angle"] = robot_state.location.yaw
+
+        resp["battery"] = robot_state.battery_percent
 
         return json.dumps(resp)
 

@@ -2,7 +2,7 @@
 # RMF Fleet parameters
 
 rmf_fleet:
-  name: "TinyRobot"
+  name: "tinyRobot"
   limits:
     linear: [0.5, 0.75] # velocity, acceleration
     angular: [0.6, 2.0] # velocity, acceleration
@@ -24,7 +24,7 @@ rmf_fleet:
     power: 0.0 # W
   recharge_threshold: 0.10 # Battery level below which robots in this fleet will not operate
   recharge_soc: 1.0 # Battery level to which robots in this fleet should be charged up to during recharging tasks
-  publish_fleet_state: True
+  publish_fleet_state: False
   account_for_battery_drain: True
   task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
     loop: True
@@ -40,6 +40,8 @@ robots:
   # Configuration for first robot in this fleet
   tinyRobot_1:
     robot_config:
+      offset_x: 22000
+      offset_y: 31500
       base_url: "http://0.0.0.0:8080" # API endpoint for the robot
       user: "some_user"
       password: "some_password"
@@ -57,6 +59,8 @@ robots:
         waypoint: "room_5"
   tinyRobot_2:
     robot_config:
+      offset_x: 22000
+      offset_y: 31500
       base_url: "http://0.0.0.0:8080" # API endpoint for the robot
       user: "some_user"
       password: "some_password"
@@ -74,6 +78,8 @@ robots:
         waypoint: "room_6"
   tinyRobot_3:
     robot_config:
+      offset_x: 22000
+      offset_y: 31500
       base_url: "http://0.0.0.0:8080" # API endpoint for the robot
       user: "some_user"
       password: "some_password"
