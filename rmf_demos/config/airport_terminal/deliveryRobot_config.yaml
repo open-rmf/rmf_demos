@@ -46,7 +46,7 @@ robots:
   # Configuration for deliveryRobot_0
   deliveryRobot_0:
     robot_config:
-      max_delay: 30.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
       filter_waypoints: False
     rmf_config:
       robot_state_update_frequency: 10.0
@@ -59,7 +59,7 @@ robots:
   # Configuration for deliveryRobot_1
   deliveryRobot_1:
     robot_config:
-      max_delay: 30.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
       filter_waypoints: False
     rmf_config:
       robot_state_update_frequency: 10.0
@@ -72,7 +72,7 @@ robots:
   # Configuration for deliveryRobot_2
   deliveryRobot_2:
     robot_config:
-      max_delay: 30.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
       filter_waypoints: False
     rmf_config:
       robot_state_update_frequency: 10.0

@@ -45,7 +45,7 @@ robots:
   # Configuration for tinyRobot1
   tinyRobot1:
     robot_config:
-      max_delay: 30.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
       filter_waypoints: False
     rmf_config:
       robot_state_update_frequency: 10.0
@@ -58,7 +58,7 @@ robots:
   # Configuration for tinyRobot2
   tinyRobot2:
     robot_config:
-      max_delay: 30.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
       filter_waypoints: False
     rmf_config:
       robot_state_update_frequency: 10.0
