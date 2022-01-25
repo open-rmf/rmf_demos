@@ -232,10 +232,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     target_pose = self.target_waypoint.position
                     [x, y] = target_pose[:2]
                     theta = target_pose[2]
-                    # ------------------------ #
-                    # IMPLEMENT YOUR CODE HERE #
-                    # Ensure x, y, theta are in units that api.navigate() #
-                    # ------------------------ #
                     response = self.api.navigate(self.name,
                                                  [x, y, theta],
                                                  self.map_name)
@@ -310,8 +306,15 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                         duration =\
                             self.api.navigation_remaining_duration(self.name)
                         if self.path_index is not None:
-                            self.next_arrival_estimator(
-                                self.path_index, timedelta(seconds=duration))
+                            target_time = self.target_waypoint.time
+                            now = self.adapter.now()
+                            if target_time < now + timedelta(seconds=duration):
+                                self.next_arrival_estimator(
+                                    self.path_index,
+                                    timedelta(seconds=duration))
+                            else:
+                                self.next_arrival_estimator(
+                                    self.path_index, target_time - now)
             self.path_finished_callback()
             self.node.get_logger().info(
                 f"Robot {self.name} has successfully navigated along "
@@ -406,10 +409,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         if position is not None:
             x, y = [position[0], position[1]]
             theta = position[2]
-            # ------------------------ #
-            # IMPLEMENT YOUR CODE HERE #
-            # Ensure x, y are in meters and theta in radians #
-            # ------------------------ #
             # Wrap theta between [-pi, pi]. Else arrival estimate will
             # assume robot has to do full rotations and delay the schedule
             if theta > np.pi:
@@ -549,6 +548,14 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     break
                 waypoints[index].position = last_pose
                 index = index + 1
+
+        # If robot is already past the first waypoint, remove first waypoint
+        if len(waypoints) > 1:
+            dist_to_next = self.dist(waypoints[1].position, last_pose)
+            first_to_next = \
+                self.dist(waypoints[0].position, waypoints[1].position)
+            if dist_to_next < first_to_next:
+                del waypoints[0]
 
         if (self.perform_filtering is False):
             return (first, waypoints)
