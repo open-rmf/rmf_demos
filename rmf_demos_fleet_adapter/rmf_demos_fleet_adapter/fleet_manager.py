@@ -66,7 +66,6 @@ class State:
     def __init__(self, state: RobotState = None, destination: Location = None):
         self.state = state
         self.destination = destination
-        self.total_path_distance = None
 
 
 class FleetManager(Node):
@@ -185,8 +184,6 @@ class FleetManager(Node):
             self.path_pub.publish(path_request)
 
             self.robots[robot_name].destination = target_loc
-            self.robots[robot_name].total_path_distance = \
-                self.disp([cur_x, cur_y], [target_x, target_y])
 
             data['success'] = True
             return data
@@ -282,33 +279,13 @@ class FleetManager(Node):
             # calculate arrival estimate
             dist_to_target =\
                 self.disp(position, [destination.x, destination.y])
-            total_path_distance = state.total_path_distance
             ori_delta = abs(abs(angle) - abs(destination.yaw))
             if ori_delta > np.pi:
                 ori_delta = ori_delta - (2 * np.pi)
             if ori_delta < -np.pi:
                 ori_delta = (2 * np.pi) + ori_delta
-
-            a_n = self.vehicle_traits.linear.nominal_acceleration
-            v_n = self.vehicle_traits.linear.nominal_velocity
-            # Calculate accelerate and decelerate distances
-            s_a = v_n**2 / (2*a_n)
-            s_d = s_a
-            if total_path_distance < 2*s_a:  # if robot v_max < v_nom
-                s_d = total_path_distance/2
-
-            # Calculate linear duration from current position to target
-            t_left = \
-                dist_to_target / self.vehicle_traits.linear.nominal_velocity
-            if total_path_distance > dist_to_target:
-                dist_traveled = total_path_distance - dist_to_target
-                # Check if robot started decelerating
-                if dist_to_target < s_d:
-                    t_left = math.sqrt(2*dist_to_target/a_n)
-                elif dist_traveled > s_a:
-                    t_left = dist_to_target/v_n + 0.5*v_n/a_n
-
-            duration = (t_left +
+            duration = (dist_to_target /
+                        self.vehicle_traits.linear.nominal_velocity +
                         ori_delta /
                         self.vehicle_traits.rotational.nominal_velocity)
             data['destination_arrival_duration'] = duration
