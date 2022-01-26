@@ -61,10 +61,10 @@ class TaskRequester(Node):
         self.args = parser.parse_args(argv[1:])
 
         transient_qos = QoSProfile(
-            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            history=History.KEEP_LAST,
             depth=1,
-            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
-            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
 
         self.pub = self.create_publisher(
           ApiRequest, 'task_api_requests', transient_qos)
