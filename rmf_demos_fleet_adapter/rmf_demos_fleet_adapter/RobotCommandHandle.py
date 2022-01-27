@@ -25,7 +25,7 @@ import rmf_adapter as adpt
 import rmf_adapter.plan as plan
 import rmf_adapter.schedule as schedule
 
-from rmf_fleet_msgs.msg import DockSummary
+from rmf_fleet_msgs.msg import DockSummary, ModeRequest
 
 import numpy as np
 
@@ -98,6 +98,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # TODO(YV): Remove self.adapter. This is only being used for time point
         # comparison with Plan::Waypoint::time
         self.adapter = adapter
+        self.action_execution = None
 
         self.requested_waypoints = []  # RMF Plan waypoints
         self.remaining_waypoints = []
@@ -149,6 +150,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             DockSummary,
             'dock_summary',
             self.dock_summary_cb,
+            qos_profile=transient_qos)
+
+        self.node.create_subscription(
+            ModeRequest,
+            'action_execution_notice',
+            self.mode_request_cb,
             qos_profile=transient_qos)
 
         self.update_thread = threading.Thread(target=self.update)
@@ -615,8 +622,28 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
         return (first, second)
 
+    def set_action_execution(self, action_execution):
+        self.action_execution = action_execution
+
+    def complete_robot_action(self):
+        if self.action_execution is None:
+            return
+
+        self.action_execution.finished()
+        self.action_execution = None
+
+        self.node.get_logger().info(f"Robot {self.name} has completed the"
+                                     " action it was performing")
+
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
             if(fleet.fleet_name == self.fleet_name):
                 for dock in fleet.params:
                     self.docks[dock.start] = dock.path
+
+    def mode_request_cb(self, msg):
+        if msg.fleet_name is None or msg.fleet_name != self.fleet_name or\
+                msg.robot_name is None:
+            return
+        if msg.mode.mode == RobotState.IDLE:
+            self.complete_robot_action()
