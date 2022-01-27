@@ -83,7 +83,7 @@ class TaskRequester(Node):
         description["phases"] = []
         activities = []
         activities.append({"category": "go_to_place",  "description": self.args.start})
-        activities.append({"category": "perform_action",  "description": {"unix_millis_action_duration_estimate": 30000, "category": "teleop", "description": {}}})
+        activities.append({"category": "perform_action",  "description": {"unix_millis_action_duration_estimate": 60000, "category": "teleop", "description": {}}})
         description["phases"].append({"activity":{"category": "sequence", "description":{"activities":activities}}})
         request["description"] = description
         payload["request"] = request
