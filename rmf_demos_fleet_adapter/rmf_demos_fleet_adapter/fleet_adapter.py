@@ -169,7 +169,11 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                     rmf_config = robots_config['rmf_config']
                     robot_config = robots_config['robot_config']
                     initial_waypoint = rmf_config['start']['waypoint']
-                    initial_orientation = rmf_config['start']['orientation']
+                    if 'position' in data['data']:
+                        initial_orientation = data['data']['position']['yaw']
+                    else:
+                        initial_orientation = \
+                            rmf_config['start']['orientation']
 
                     starts = []
                     time_now = adapter.now()
