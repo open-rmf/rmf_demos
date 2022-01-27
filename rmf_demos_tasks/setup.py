@@ -30,7 +30,8 @@ setup(
           'dispatch_delivery = rmf_demos_tasks.dispatch_delivery:main',
           'dispatch_clean = rmf_demos_tasks.dispatch_clean:main',
           'mock_docker = rmf_demos_tasks.mock_docker:main',
-          'direct_patrol = rmf_demos_tasks.direct_patrol:main'
+          'direct_patrol = rmf_demos_tasks.direct_patrol:main',
+          'dispatch_teleop = rmf_demos_tasks.dispatch_teleop:main'
         ],
     },
 )

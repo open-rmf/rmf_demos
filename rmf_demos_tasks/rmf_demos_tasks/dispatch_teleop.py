@@ -38,17 +38,8 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-F', '--fleet', required=True,
-                            type=str, help='Fleet name')
-        parser.add_argument('-R', '--robot', required=True,
-                            type=str, help='Robot name')
         parser.add_argument('-s', '--start', required=True,
                             type=str, help='Start waypoint')
-        parser.add_argument('-f', '--finish', required=True,
-                            type=str, help='Finish waypoint')
-        parser.add_argument('-n', '--loop_num',
-                            help='Number of loops to perform',
-                            type=int, default=1)
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
@@ -77,27 +68,27 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "direct_" + str(uuid.uuid4())
+        msg.request_id = "teleop_" + str(uuid.uuid4())
         payload = {}
-        payload["type"] = "robot_task_request"
-        payload["robot"] = self.args.robot
-        payload["fleet"] = self.args.fleet
+        payload["type"] = "dispatch_task_request"
         request = {}
         now = self.get_clock().now().to_msg()
         now.sec =  now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request["unix_millis_earliest_start_time"] = start_time
         # todo(YV): Fill priority after schema is added
-        request["category"] = "patrol"
-        description = {}
-        description["places"] = []
-        description["places"].append(self.args.start)
-        description["places"].append(self.args.finish)
-        description["rounds"] = self.args.loop_num
+        request["category"] = "compose"
+        description = {} # task_description_Compose.json
+        description["category"] = "teleop"
+        description["phases"] = []
+        activities = []
+        activities.append({"category": "go_to_place",  "description": self.args.start})
+        activities.append({"category": "perform_action",  "description": {"unix_millis_action_duration_estimate": 30000, "category": "teleop", "description": {}}})
+        description["phases"].append({"activity":{"category": "sequence", "description":{"activities":activities}}})
         request["description"] = description
         payload["request"] = request
         msg.json_msg = json.dumps(payload)
-
+        print(f"msg: {msg}")
         self.pub.publish(msg)
 
 
