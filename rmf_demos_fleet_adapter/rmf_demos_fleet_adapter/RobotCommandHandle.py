@@ -90,7 +90,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.update_frequency = update_frequency
         self.update_handle = None  # RobotUpdateHandle
         self.battery_soc = 1.0
-        self.speed_limit = 0.0
         self.api = api
         self.position = position  # (x,y,theta) in RMF crs (meters,radians)
         self.initialized = False
@@ -233,8 +232,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     target_pose = self.target_waypoint.position
                     [x, y] = target_pose[:2]
                     theta = target_pose[2]
-                    # Update speed limit
-                    self.get_current_lane()
+                    speed_limit = self.get_speed_limit(self.target_waypoint)
                     # ------------------------ #
                     # IMPLEMENT YOUR CODE HERE #
                     # Ensure x, y, theta are in units that api.navigate() #
@@ -242,7 +240,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     response = self.api.navigate(self.name,
                                                  [x, y, theta],
                                                  self.map_name,
-                                                 self.speed_limit)
+                                                 speed_limit)
 
                     if response:
                         self.remaining_waypoints = self.remaining_waypoints[1:]
@@ -510,7 +508,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # Spin on the spot
         if approach_lanes is None or len(approach_lanes) == 0:
             return None
-        approach_lane_limit = 0.0
         # Determine which lane the robot is currently on
         for lane_index in approach_lanes:
             lane = self.graph.get_lane(lane_index)
@@ -519,14 +516,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             p = self.position
             before_lane = projection(p, p0, p0, p1) < 0.0
             after_lane = projection(p, p1, p0, p1) >= 0.0
-            # Check speed limit
-            lane_limit = lane.properties.speed_limit
-            if lane_limit is not None:
-                if approach_lane_limit > 0:
-                    approach_lane_limit = min(approach_lane_limit, lane_limit)
-                else:
-                    approach_lane_limit = lane_limit
-            self.speed_limit = approach_lane_limit
             if not before_lane and not after_lane:  # The robot is on this lane
                 return lane_index
         return None
@@ -536,6 +525,19 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         assert(len(A) > 1)
         assert(len(B) > 1)
         return math.sqrt((A[0] - B[0])**2 + (A[1] - B[1])**2)
+
+    def get_speed_limit(self, target_waypoint):
+        approach_lane_limit = 0.0
+        approach_lanes = target_waypoint.approach_lanes
+        for lane_index in approach_lanes:
+            lane = self.graph.get_lane(lane_index)
+            lane_limit = lane.properties.speed_limit
+            if lane_limit is not None:
+                if approach_lane_limit > 0:
+                    approach_lane_limit = min(approach_lane_limit, lane_limit)
+                else:
+                    approach_lane_limit = lane_limit
+        return approach_lane_limit
 
     def filter_waypoints(self, wps: list, threshold=1.0):
         ''' Return filtered PlanWaypoints'''

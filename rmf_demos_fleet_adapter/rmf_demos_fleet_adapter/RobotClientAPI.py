@@ -72,7 +72,7 @@ class RobotAPI:
                  robot_name: str,
                  pose,
                  map_name: str,
-                 speed_limit: float):
+                 speed_limit=0.0):
         ''' Request the robot to navigate to pose:[x,y,theta] where x, y and
             and theta are in the robot's coordinate convention. This function
             should return True if the robot has accepted the request,
