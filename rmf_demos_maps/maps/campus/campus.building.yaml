@@ -183,7 +183,7 @@ levels:
           yaw: -1.570796326794897
         visible: true
     models:
-      - {model_name: Campus, name: Campus, static: true, x: 103.7801583, y: 1.30069369999994, yaw: 0, z: 0}
+      - {model_name: NCS_robotmanager/Campus, name: Campus, static: true, x: 103.7801583, y: 1.30069369999994, yaw: 0, z: 0}
     vertices:
       - [103.7805632654825, 1.300903083500757, 0, ""]
       - [103.7804701421919, 1.300942101239272, 0, ""]
