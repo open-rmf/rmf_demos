@@ -2,7 +2,7 @@
 # RMF Fleet parameters
 
 rmf_fleet:
-  name: "tinyRobot"
+  name: "deliveryRobot"
   limits:
     linear: [0.5, 0.75] # velocity, acceleration
     angular: [0.6, 2.0] # velocity, acceleration
@@ -38,14 +38,14 @@ robots:
   # Here the user is expected to append the configuration for each robot in the
   # fleet.
   # Configuration for first robot in this fleet
-  tinyRobot_1:
+  deliveryRobot_1:
     robot_config:
       offset_x: 22000
       offset_y: 31500
       base_url: "http://0.0.0.0:8080" # API endpoint for the robot
       user: "some_user"
       password: "some_password"
-      fleet_name: "TinyRobot"
+      fleet_name: "DeliveryRobot"
       max_delay: 10000.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
     rmf_config:
       robot_state_update_frequency: 0.5
@@ -57,14 +57,14 @@ robots:
         orientation: null
       charger:
         waypoint: "room_5"
-  tinyRobot_2:
+  deliveryRobot_2:
     robot_config:
       offset_x: 22000
       offset_y: 31500
       base_url: "http://0.0.0.0:8080" # API endpoint for the robot
       user: "some_user"
       password: "some_password"
-      fleet_name: "TinyRobot"
+      fleet_name: "DeliveryRobot"
       max_delay: 10000.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
     rmf_config:
       robot_state_update_frequency: 0.5
@@ -76,14 +76,14 @@ robots:
         orientation: null
       charger:
         waypoint: "room_6"
-  tinyRobot_3:
+  deliveryRobot_3:
     robot_config:
       offset_x: 22000
       offset_y: 31500
       base_url: "http://0.0.0.0:8080" # API endpoint for the robot
       user: "some_user"
       password: "some_password"
-      fleet_name: "TinyRobot"
+      fleet_name: "DeliveryRobot"
       max_delay: 10000.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
     rmf_config:
       robot_state_update_frequency: 0.5

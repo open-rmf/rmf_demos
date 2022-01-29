@@ -11,24 +11,23 @@
     <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/campus/campus.building.yaml"/>
   </include>
 
-  <!-- TinyRobot fleet adapter and robot state aggregator needed for the TinyRobot slotcar_plugin -->
   <group>
-    <let name="fleet_name" value="tinyRobot"/>
+    <let name="fleet_name" value="deliveryRobot"/>
     <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="tinyRobot"/>
+      <arg name="robot_prefix" value="deliveryRobot"/>
       <arg name="fleet_name" value="$(var fleet_name)"/>
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="failover_mode" value="$(var failover_mode)"/>
     </include>
   </group>
 
-  <node pkg="rmf_demos_adapters" exec="tinyrobot_gps_fleet_adapter" output="both" name="tinyrobot_gps_fleet_adapter">
+  <node pkg="rmf_demos_adapters" exec="deliveryrobot_gps_fleet_adapter" output="both" name="deliveryrobot_gps_fleet_adapter">
     <param name="use_sim_time" value="$(var use_sim_time)"/>
-    <param name="config_file" value="$(find-pkg-share rmf_demos)/include/campus/tinyrobot_config.yaml"/>
+    <param name="config_file" value="$(find-pkg-share rmf_demos)/include/campus/deliveryrobot_config.yaml"/>
     <param name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/campus/nav_graphs/0.yaml"/>
   </node>
 
-  <executable cmd="ros2 run rmf_demos_bridges fleet_socketio_bridge -f tinyRobot -g /gps -y 31500 -x 22000" output="both">
+  <executable cmd="ros2 run rmf_demos_bridges fleet_socketio_bridge -f deliveryRobot -g /gps -y 31500 -x 22000" output="both">
     <env name="FLASK_ENV" value="development"/>
   </executable>
 

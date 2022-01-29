@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "tinyrobot_gps_fleet_adapter=rmf_demos_adapters.TinyRobot.tinyrobot_gps_fleet_adapter:main"
+            "deliveryrobot_gps_fleet_adapter=rmf_demos_adapters.DeliveryRobot.deliveryrobot_gps_fleet_adapter:main"
         ],
     },
 )
