@@ -190,11 +190,24 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self._follow_path_thread = None
             self.clear()
 
+    def find_location(self, target_pose):
+        if self.target_waypoint.graph_index is not \
+                None and self.dist(self.position, target_pose) < 0.5:
+            self.on_waypoint = self.target_waypoint.graph_index
+        elif self.last_known_waypoint_index is not \
+                None and self.dist(
+                self.position, self.graph.get_waypoint(
+                    self.last_known_waypoint_index).location) < 0.5:
+            self.on_waypoint = self.last_known_waypoint_index
+        else:
+            self.on_lane = None  # update_off_grid()
+            self.on_waypoint = None
+
     def follow_new_path(
-        self,
-        waypoints,
-        next_arrival_estimator,
-        path_finished_callback):
+            self,
+            waypoints,
+            next_arrival_estimator,
+            path_finished_callback):
 
         self.stop()
         self._quit_path_event.clear()
@@ -210,9 +223,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         def _follow_path():
             target_pose = []
             while (
-                self.remaining_waypoints or
-                self.state == RobotState.MOVING or
-                self.state == RobotState.WAITING):
+                    self.remaining_waypoints or
+                    self.state == RobotState.MOVING or
+                    self.state == RobotState.WAITING):
+
                 # Check if we need to abort
                 if self._quit_path_event.is_set():
                     self.node.get_logger().info("Aborting previously followed "
@@ -255,11 +269,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                 self.state = RobotState.IDLE
                             else:
                                 if self.path_index is not None:
+                                    delta = waypoint_wait_time - time_now
                                     self.node.get_logger().info(
-                                        f"Waiting for "
-                                        f"{(waypoint_wait_time - time_now).seconds}s")
+                                        f"Waiting for {(delta).seconds}s")
                                     self.next_arrival_estimator(
-                                        self.path_index, timedelta(seconds=0.0))
+                                        self.path_index,
+                                        timedelta(seconds=0.0))
 
                 elif self.state == RobotState.MOVING:
                     time.sleep(1.0)
@@ -286,17 +301,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                             else:
                                 # The robot may either be on the previous
                                 # waypoint or the target one
-                                if self.target_waypoint.graph_index is not \
-                                    None and self.dist(self.position, target_pose) < 0.5:
-                                    self.on_waypoint = self.target_waypoint.graph_index
-                                elif self.last_known_waypoint_index is not \
-                                    None and self.dist(
-                                    self.position, self.graph.get_waypoint(
-                                      self.last_known_waypoint_index).location) < 0.5:
-                                    self.on_waypoint = self.last_known_waypoint_index
-                                else:
-                                    self.on_lane = None  # update_off_grid()
-                                    self.on_waypoint = None
+                                self.find_location(target_pose)
+
                         # ------------------------ #
                         # IMPLEMENT YOUR CODE HERE #
                         # If your robot does not have an API to report the
@@ -452,8 +458,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 self.update_handle.update_off_grid_position(
                     self.position, self.dock_waypoint_index)
             # if robot is merging into a waypoint
-            elif (self.target_waypoint is not None and \
-                self.target_waypoint.graph_index is not None):
+            elif (self.target_waypoint is not None and
+                    self.target_waypoint.graph_index is not None):
                 self.update_handle.update_off_grid_position(
                     self.position, self.target_waypoint.graph_index)
             else:  # if robot is lost
@@ -508,4 +514,3 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         for i in range(len(waypoints)):
             remaining_waypoints.append((i, waypoints[i]))
         return remaining_waypoints
-

@@ -163,9 +163,11 @@ class RobotAPI(Node):
             return None
 
     def navigate(self, pose, map_name: str):
-        ''' Request the robot to navigate to pose:[x,y,theta] where x, y and
-            and theta are in the robot's coordinate convention. This functihould return True if the robot has accepted the request,
-            else False'''
+        '''
+        Request the robot to navigate to pose:[x,y,theta] where x, y and theta
+        are in the robot's coordinate convention. This functihould return True
+        if the robot has accepted the request, else False
+        '''
 
         # Compute displacement required
         # BH(TODO): Error handling
