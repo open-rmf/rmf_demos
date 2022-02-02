@@ -527,17 +527,15 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         return math.sqrt((A[0] - B[0])**2 + (A[1] - B[1])**2)
 
     def get_speed_limit(self, target_waypoint):
-        approach_lane_limit = 0.0
+        approach_lane_limit = np.inf
         approach_lanes = target_waypoint.approach_lanes
         for lane_index in approach_lanes:
             lane = self.graph.get_lane(lane_index)
             lane_limit = lane.properties.speed_limit
             if lane_limit is not None:
-                if approach_lane_limit > 0:
-                    approach_lane_limit = min(approach_lane_limit, lane_limit)
-                else:
+                if lane_limit < approach_lane_limit:
                     approach_lane_limit = lane_limit
-        return approach_lane_limit
+        return approach_lane_limit if approach_lane_limit != np.inf else 0.0
 
     def filter_waypoints(self, wps: list, threshold=1.0):
         ''' Return filtered PlanWaypoints'''
