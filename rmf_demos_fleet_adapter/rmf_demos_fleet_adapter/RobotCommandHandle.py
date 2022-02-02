@@ -549,13 +549,20 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 waypoints[index].position = last_pose
                 index = index + 1
 
-        # If robot is already past the first waypoint, remove first waypoint
-        if len(waypoints) > 1:
-            dist_to_next = self.dist(waypoints[1].position, last_pose)
-            first_to_next = \
-                self.dist(waypoints[0].position, waypoints[1].position)
-            if dist_to_next < first_to_next:
-                del waypoints[0]
+        # move first waypoint a little ahead
+        if len(waypoints) > 2 and\
+                self.dist(waypoints[0].position, last_pose) < 0.5:
+            first_wp = waypoints[0].position
+            next_wp = waypoints[1].position
+            first_to_next = self.dist(first_wp, next_wp)
+            cur_to_next = self.dist(last_pose, next_wp)
+            if first_to_next > 0 and 0 < first_to_next - cur_to_next < 0.5:
+                # Set distance to move
+                move = min(0.25 * first_to_next, 0.5)
+                d_x = (move/first_to_next) * (next_wp[0] - first_wp[0])
+                d_y = (move/first_to_next) * (next_wp[1] - first_wp[1])
+                waypoints[0].position = [first_wp[0] + d_x,
+                                         first_wp[1] + d_y, first_wp[2]]
 
         if (self.perform_filtering is False):
             return (first, waypoints)
