@@ -141,6 +141,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     def _updater_inserter(cmd_handle, update_handle):
         """Insert a RobotUpdateHandle."""
         cmd_handle.update_handle = update_handle
+        cmd_handle.update_handle.set_stop_callback(cmd_handle.api.stop)
 
     # Initialize robot API for this fleet
     prefix = 'http://' + fleet_config['fleet_manager']['ip'] + \
