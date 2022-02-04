@@ -68,7 +68,11 @@ class RobotAPI:
             print(f'Other error: {err}')
         return None
 
-    def navigate(self, robot_name: str, pose, map_name: str):
+    def navigate(self,
+                 robot_name: str,
+                 pose,
+                 map_name: str,
+                 speed_limit=0.0):
         ''' Request the robot to navigate to pose:[x,y,theta] where x, y and
             and theta are in the robot's coordinate convention. This function
             should return True if the robot has accepted the request,
@@ -79,6 +83,7 @@ class RobotAPI:
         data = {}  # data fields: task, map_name, destination{}, data{}
         data['map_name'] = map_name
         data['destination'] = {'x': pose[0], 'y': pose[1], 'yaw': pose[2]}
+        data['speed_limit'] = speed_limit
         try:
             response = requests.post(url, timeout=self.timeout, json=data)
             response.raise_for_status()
@@ -91,7 +96,10 @@ class RobotAPI:
             print(f'Other error: {err}')
         return False
 
-    def start_process(self, robot_name: str, process: str, map_name: str):
+    def start_process(self,
+                      robot_name: str,
+                      process: str,
+                      map_name: str):
         ''' Request the robot to begin a process. This is specific to the robot
             and the use case. For example, load/unload a cart for Deliverybot
             or begin cleaning a zone for a cleaning robot.

@@ -232,13 +232,15 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     target_pose = self.target_waypoint.position
                     [x, y] = target_pose[:2]
                     theta = target_pose[2]
+                    speed_limit = self.get_speed_limit(self.target_waypoint)
                     # ------------------------ #
                     # IMPLEMENT YOUR CODE HERE #
                     # Ensure x, y, theta are in units that api.navigate() #
                     # ------------------------ #
                     response = self.api.navigate(self.name,
                                                  [x, y, theta],
-                                                 self.map_name)
+                                                 self.map_name,
+                                                 speed_limit)
 
                     if response:
                         self.remaining_waypoints = self.remaining_waypoints[1:]
@@ -523,6 +525,17 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         assert(len(A) > 1)
         assert(len(B) > 1)
         return math.sqrt((A[0] - B[0])**2 + (A[1] - B[1])**2)
+
+    def get_speed_limit(self, target_waypoint):
+        approach_lane_limit = np.inf
+        approach_lanes = target_waypoint.approach_lanes
+        for lane_index in approach_lanes:
+            lane = self.graph.get_lane(lane_index)
+            lane_limit = lane.properties.speed_limit
+            if lane_limit is not None:
+                if lane_limit < approach_lane_limit:
+                    approach_lane_limit = lane_limit
+        return approach_lane_limit if approach_lane_limit != np.inf else 0.0
 
     def filter_waypoints(self, wps: list, threshold=1.0):
         ''' Return filtered PlanWaypoints'''

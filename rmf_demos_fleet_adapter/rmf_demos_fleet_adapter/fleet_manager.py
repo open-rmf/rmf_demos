@@ -51,6 +51,7 @@ class Request(BaseModel):
     task: Optional[str] = None
     destination: Optional[dict] = None
     data: Optional[dict] = None
+    speed_limit: Optional[float] = None
 
 
 class Response(BaseModel):
@@ -153,6 +154,7 @@ class FleetManager(Node):
             target_y = dest.destination['y']
             target_yaw = dest.destination['yaw']
             target_map = dest.map_name
+            target_speed_limit = dest.speed_limit
 
             t = self.get_clock().now().to_msg()
 
@@ -175,6 +177,9 @@ class FleetManager(Node):
             target_loc.y = target_y
             target_loc.yaw = target_yaw
             target_loc.level_name = target_map
+            if target_speed_limit > 0:
+                target_loc.obey_approach_speed_limit = True
+                target_loc.approach_speed_limit = target_speed_limit
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
@@ -213,8 +218,6 @@ class FleetManager(Node):
                     task.task not in self.docks):
                 return data
 
-            t = self.get_clock().now().to_msg()
-
             path_request = PathRequest()
             state = self.robots[robot_name]
             cur_loc = state.state.location
@@ -224,14 +227,7 @@ class FleetManager(Node):
             previous_wp = [cur_x, cur_y, cur_yaw]
             target_loc = Location()
             for wp in self.docks[task.task]:
-                disp = self.disp([wp.x, wp.y], previous_wp)
-                duration = int(disp /
-                               self.vehicle_traits.linear.nominal_velocity) +\
-                    int(abs(abs(previous_wp[2]) - abs(wp.yaw)) /
-                        self.vehicle_traits.rotational.nominal_velocity)
-                t.sec = t.sec + duration
                 target_loc = wp
-                target_loc.t = t
                 path_request.path.append(target_loc)
                 previous_wp = [wp.x, wp.y, wp.yaw]
 
