@@ -20,6 +20,7 @@ from rclpy.qos import QoSProfile
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
+from rclpy.qos import qos_profile_system_default
 
 import rmf_adapter as adpt
 import rmf_adapter.plan as plan
@@ -119,6 +120,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.target_waypoint = None  # this is a Plan::Waypoint
         # The graph index of the waypoint the robot is currently docking into
         self.dock_waypoint_index = None
+        # The graph index of the waypoint where the robot is starting an action
+        self.action_waypoint_index = None
 
         # Threading variables
         self._lock = threading.Lock()
@@ -156,7 +159,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             ModeRequest,
             'action_execution_notice',
             self.mode_request_cb,
-            qos_profile=transient_qos)
+            qos_profile=qos_profile_system_default)
 
         self.update_thread = threading.Thread(target=self.update)
         self.update_thread.start()
@@ -488,6 +491,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             elif (self.dock_waypoint_index is not None):
                 self.update_handle.update_off_grid_position(
                     self.position, self.dock_waypoint_index)
+            # if robot is performing an action
+            elif (self.action_execution is not None):
+                self.update_handle.update_off_grid_position(
+                    self.position, self.action_waypoint_index)
             # if robot is merging into a waypoint
             elif (self.target_waypoint is not None and
                     self.target_waypoint.graph_index is not None):
@@ -623,6 +630,11 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         return (first, second)
 
     def set_action_execution(self, action_execution):
+        if self.action_execution is None:
+            with self._lock:
+                self.action_waypoint_index = self.on_waypoint
+                self.on_waypoint = None
+                self.on_lane = None
         self.action_execution = action_execution
 
     def complete_robot_action(self):
@@ -633,7 +645,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.action_execution = None
 
         self.node.get_logger().info(f"Robot {self.name} has completed the"
-                                     " action it was performing")
+                                    f" action it was performing")
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
