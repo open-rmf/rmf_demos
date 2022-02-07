@@ -225,7 +225,7 @@ Multi-fleet demo:
 
 This is a larger scale "Campus" World. In this world, there are multiple delivery robots that operate. The world is designed and traffic lanes are annotated at the planet scale, using GPS WGS84 coordinates. Each robot is also streaming its location in WGS84 coordinates, which are processed by its fleet adapter. This demo intends to show the potential of RMF on a large scale map.
 
-![](../media/campus.png)
+![](../media/campus.gif)
 
 #### Demo Scenario
 To launch the world and the schedule visualizer,
