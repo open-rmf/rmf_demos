@@ -210,7 +210,7 @@ class FleetManager(Node):
             pause_request.robot_name = robot_name
             pause_request.type = pause_request.TYPE_PAUSE_IMMEDIATELY
             self.pause_pub.publish(pause_request)
-            time.sleep(0.2)
+            time.sleep(0.1)
 
             pause_request.type = pause_request.TYPE_RESUME
             self.pause_pub.publish(pause_request)

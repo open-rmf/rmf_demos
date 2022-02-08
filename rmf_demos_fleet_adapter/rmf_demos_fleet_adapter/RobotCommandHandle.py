@@ -566,6 +566,19 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 waypoints[index].position = last_pose
                 index = index + 1
 
+        # Stop spinning
+        elif len(waypoints) > 1 and\
+                self.dist(first_position, last_pose) < threshold:
+            changed = False
+            index = 0
+            while (not changed and index < len(waypoints) - 1):
+                if self.dist(waypoints[index].position,
+                             waypoints[index+1].position) > 0.05:
+                    changed = True
+                    break
+                waypoints[index].position = waypoints[index+1].position
+                index = index + 1
+
         if (self.perform_filtering is False):
             return (first, waypoints)
 
