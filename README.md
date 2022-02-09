@@ -239,6 +239,14 @@ ros2 run rmf_demos_tasks  dispatch_loop -s campus_5 -f room_3 -n 10 --use_sim_ti
 ros2 run rmf_demos_tasks  dispatch_loop -s room_2 -f dead_end -n 10 --use_sim_time
 ```
 
+#### RobotManager Integration
+(Add instructions for RobotManager integration)
+```
+apt install mosquitto
+ros2 run rmf_demos_bridges fleet_robotmanager_mqtt_bridge -y 31500 -x 22000
+mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
+```
+
 ---
 
 ### Traffic Light Robot Demos
