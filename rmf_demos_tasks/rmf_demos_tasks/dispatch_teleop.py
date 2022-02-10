@@ -38,6 +38,10 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
+        parser.add_argument('-F', '--fleet', required=False, default='',
+                            type=str, help='Fleet name')
+        parser.add_argument('-R', '--robot', required=False, default='',
+                            type=str, help='Robot name')
         parser.add_argument('-s', '--start', required=True,
                             type=str, help='Start waypoint')
         parser.add_argument('-st', '--start_time',
@@ -70,7 +74,12 @@ class TaskRequester(Node):
         msg = ApiRequest()
         msg.request_id = "teleop_" + str(uuid.uuid4())
         payload = {}
-        payload["type"] = "dispatch_task_request"
+        if self.args.fleet and self.args.robot:
+            payload["type"] = "robot_task_request"
+            payload["robot"] = self.args.robot
+            payload["fleet"] = self.args.fleet
+        else:
+            payload["type"] = "dispatch_task_request"
         request = {}
         now = self.get_clock().now().to_msg()
         now.sec =  now.sec + self.args.start_time
