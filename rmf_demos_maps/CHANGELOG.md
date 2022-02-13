@@ -1,5 +1,9 @@
 ## Changelog for package rmf_demos_maps
 
+1.4.0 (2022-02-14)
+------------------
+* Add an indoor-outdoor campus example [#121](https://github.com/open-rmf/rmf_demos/pull/121)
+
 1.2.0 (2021-07-21)
 ------------------
 * update all namings with rmf_demos as prefix [#1](https://github.com/open-rmf/rmf_demos/pull/1)
