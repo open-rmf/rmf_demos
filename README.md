@@ -63,6 +63,15 @@ There are two main modes of submitting tasks to RMF via the Panel:
 1. Submit a Task: Used to submit a single task.
 2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_panel/task_lists`.
 
+**LATEST UPDATE: Display Task States**
+
+`task_state_uptates` are now published via websocket. To display task states on `rmf-panel`, specify `server_uri:="ws://localhost:7878"` during ros2 launch. Example:
+```
+ros2 launch rmf_demos_gz office.launch.xml server_uri:="ws://localhost:7878"
+```
+
+This will let RMF (websocket clients) to publish their states to port `7878`. In this case, rmf-panel's `api_simple_server` is the websocket server.
+
 ---
 
 ### Hotel World
