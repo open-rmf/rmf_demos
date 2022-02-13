@@ -220,6 +220,32 @@ Multi-fleet demo:
 
 ![](../media/clinic.gif)
 
+---
+### Campus World
+
+This is a larger scale "Campus" World. In this world, there are multiple delivery robots that operate. The world is designed and traffic lanes are annotated at the planet scale, using GPS WGS84 coordinates. Each robot is also streaming its location in WGS84 coordinates, which are processed by its fleet adapter. This demo intends to show the potential of RMF on a large scale map.
+
+![](../media/campus.gif)
+
+#### Demo Scenario
+To launch the world and the schedule visualizer,
+
+```bash
+source ~/rmf_ws/install/setup.bash
+ros2 launch rmf_demos_ign campus.launch.xml
+
+ros2 run rmf_demos_tasks  dispatch_loop -s room_5 -f campus_4 -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_loop -s campus_5 -f room_3 -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_loop -s room_2 -f dead_end -n 10 --use_sim_time
+```
+
+#### RobotManager Integration
+(Add instructions for RobotManager integration)
+```
+apt install mosquitto
+ros2 run rmf_demos_bridges fleet_robotmanager_mqtt_bridge -y 31500 -x 22000
+mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
+```
 
 ---
 
