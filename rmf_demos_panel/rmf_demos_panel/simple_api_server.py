@@ -153,7 +153,7 @@ def rmf_state_listener(port_num: str, done_fut: asyncio.Future):
         msg_callback,
         msg_filters={RmfMsgType.TaskState: []},
         server_url="localhost",
-        server_port=port_num
+        server_port=int(port_num)
     )
     observer.spin(done_fut)
 
@@ -170,11 +170,11 @@ def main(args=None):
         print(f"Set Server IP to: {server_ip}")
 
     if "RMF_DEMOS_API_SERVER_PORT" in os.environ:
-        port_num = os.environ['RMF_DEMOS_API_SERVER_PORT']
+        port_num = int(os.environ['RMF_DEMOS_API_SERVER_PORT'])
         print(f"Set Server port to: {server_ip}:{port_num}")
 
     if "RMF_WS_SERVER_PORT" in os.environ:
-        ws_port_num = os.environ['RMF_WS_SERVER_PORT']
+        ws_port_num = int(os.environ['RMF_WS_SERVER_PORT'])
         print(f"Set RMF Websocket port to: localhost:{ws_port_num}")
 
     if "DASHBOARD_CONFIG_PATH" in os.environ:
