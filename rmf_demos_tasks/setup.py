@@ -32,7 +32,8 @@ setup(
           'mock_docker = rmf_demos_tasks.mock_docker:main',
           'direct_patrol = rmf_demos_tasks.direct_patrol:main',
           'dispatch_teleop = rmf_demos_tasks.dispatch_teleop:main',
-          'teleop_action = rmf_demos_tasks.teleop_action:main'
+          'teleop_action = rmf_demos_tasks.teleop_action:main',
+          'dispatch_multi_stop = rmf_demos_tasks.dispatch_multi_stop:main'
         ],
     },
 )

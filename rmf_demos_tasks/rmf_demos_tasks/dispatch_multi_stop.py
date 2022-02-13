@@ -38,12 +38,8 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-F', '--fleet', required=False, default='',
-                            type=str, help='Fleet name')
-        parser.add_argument('-R', '--robot', required=False, default='',
-                            type=str, help='Robot name')
-        parser.add_argument('-s', '--start', required=True,
-                            type=str, help='Start waypoint')
+        parser.add_argument('-p', '--places', required=True,
+                            type=str, nargs='+', help='List of places')
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
@@ -74,12 +70,7 @@ class TaskRequester(Node):
         msg = ApiRequest()
         msg.request_id = "teleop_" + str(uuid.uuid4())
         payload = {}
-        if self.args.fleet and self.args.robot:
-            payload["type"] = "robot_task_request"
-            payload["robot"] = self.args.robot
-            payload["fleet"] = self.args.fleet
-        else:
-            payload["type"] = "dispatch_task_request"
+        payload["type"] = "dispatch_task_request"
         request = {}
         now = self.get_clock().now().to_msg()
         now.sec =  now.sec + self.args.start_time
@@ -91,8 +82,8 @@ class TaskRequester(Node):
         description["category"] = "teleop"
         description["phases"] = []
         activities = []
-        activities.append({"category": "go_to_place",  "description": self.args.start})
-        activities.append({"category": "perform_action",  "description": {"unix_millis_action_duration_estimate": 60000, "category": "teleop", "description": {}}})
+        for place in self.args.places:
+            activities.append({"category": "go_to_place",  "description": place})
         description["phases"].append({"activity":{"category": "sequence", "description":{"activities":activities}}})
         request["description"] = description
         payload["request"] = request
