@@ -63,6 +63,15 @@ There are two main modes of submitting tasks to RMF via the Panel:
 1. Submit a Task: Used to submit a single task.
 2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_panel/task_lists`.
 
+**LATEST UPDATE: Display Task States**
+
+`task_state_uptates` are now published via websocket. To display task states on `rmf-panel`, specify `server_uri:="ws://localhost:7878"` during ros2 launch. Example:
+```
+ros2 launch rmf_demos_gz office.launch.xml server_uri:="ws://localhost:7878"
+```
+
+This will let RMF (websocket clients) to publish their states to port `7878`. In this case, rmf-panel's `api_simple_server` is the websocket server.
+
 ---
 
 ### Hotel World
@@ -220,6 +229,32 @@ Multi-fleet demo:
 
 ![](../media/clinic.gif)
 
+---
+### Campus World
+
+This is a larger scale "Campus" World. In this world, there are multiple delivery robots that operate. The world is designed and traffic lanes are annotated at the planet scale, using GPS WGS84 coordinates. Each robot is also streaming its location in WGS84 coordinates, which are processed by its fleet adapter. This demo intends to show the potential of RMF on a large scale map.
+
+![](../media/campus.gif)
+
+#### Demo Scenario
+To launch the world and the schedule visualizer,
+
+```bash
+source ~/rmf_ws/install/setup.bash
+ros2 launch rmf_demos_ign campus.launch.xml
+
+ros2 run rmf_demos_tasks  dispatch_loop -s room_5 -f campus_4 -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_loop -s campus_5 -f room_3 -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_loop -s room_2 -f dead_end -n 10 --use_sim_time
+```
+
+#### RobotManager Integration
+(Add instructions for RobotManager integration)
+```
+apt install mosquitto
+ros2 run rmf_demos_bridges fleet_robotmanager_mqtt_bridge -y 31500 -x 22000
+mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
+```
 
 ---
 
