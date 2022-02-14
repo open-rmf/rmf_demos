@@ -10,6 +10,7 @@
 
   <exec_depend>python3-flask</exec_depend>
   <exec_depend>python3-flask-cors</exec_depend>
+  <exec_depend>python3-websockets</exec_depend>
 
   <exec_depend>rmf_fleet_msgs</exec_depend>
   <exec_depend>rmf_task_msgs</exec_depend>

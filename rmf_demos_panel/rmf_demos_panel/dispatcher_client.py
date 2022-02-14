@@ -16,48 +16,51 @@
 import rclpy
 import time
 import json
+import uuid
+from typing import Tuple
 
 from rclpy.node import Node
 from rclpy.time import Time
 from rclpy.parameter import Parameter
 
+# Qos
 from rclpy.qos import qos_profile_system_default
 from rclpy.qos import QoSProfile
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSReliabilityPolicy as Reliability
 
-from rmf_task_msgs.srv import SubmitTask, GetTaskList, CancelTask
+from rmf_task_msgs.msg import ApiRequest, ApiResponse
 from rmf_building_map_msgs.srv import GetBuildingMap
-from rmf_task_msgs.msg import TaskDescription, TaskSummary
-from rmf_task_msgs.msg import TaskType, Delivery, Loop
 from rmf_fleet_msgs.msg import FleetState, RobotMode
-
 
 ###############################################################################
 
 
 class DispatcherClient(Node):
     def __init__(self):
-        super().__init__('api_client')
-        self.submit_task_srv = self.create_client(SubmitTask, '/submit_task')
-        self.cancel_task_srv = self.create_client(CancelTask, '/cancel_task')
-        self.get_tasks_srv = self.create_client(GetTaskList, '/get_tasks')
+        super().__init__('simple_api_server')
+        api_req_qos_profile = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
+        self.task_api_req_pub = self.create_publisher(
+            ApiRequest, '/task_api_requests', api_req_qos_profile)
 
         self.get_building_map_srv = self.create_client(
             GetBuildingMap, '/get_building_map')
 
-        qos_profile = QoSProfile(depth=20)
-
         # to show robot states
         self.fleet_state_subscription = self.create_subscription(
             FleetState, 'fleet_states', self.fleet_state_cb,
-            qos_profile=qos_profile)
+            qos_profile=QoSProfile(depth=20))
         self.fleet_states_dict = {}
 
-        self.active_tasks_cache = []
-        self.terminated_tasks_cache = []
-
-        # just check one srv endpoint
-        while not self.submit_task_srv.wait_for_service(timeout_sec=1.0):
-            self.get_logger().warn('Dispatcher node is not avail, waiting...')
+        # TODO remove this
+        sim_time_bool = Parameter('use_sim_time', Parameter.Type.BOOL, True)
+        self.set_parameters([sim_time_bool])
+        self.task_states_cache = {}
 
     def fleet_state_cb(self, msg: FleetState):
         fleet_name = msg.name
@@ -67,9 +70,9 @@ class DispatcherClient(Node):
         rclpy.spin_once(self, timeout_sec=0.1)
 
     def ros_time(self) -> int:
-        return self.get_clock().now().to_msg().sec
+        return self.get_clock().now().seconds_nanoseconds()[0]
 
-    def submit_task_request(self, req_json) -> (str, str):
+    def submit_task_request(self, req_json) -> Tuple[str, str]:
         """
         Task Submission - This function will trigger a ros srv call to the
         dispatcher node, and return a response. Function will return a Task ID
@@ -79,55 +82,44 @@ class DispatcherClient(Node):
         Returns:
             task_id, error_msg: if submission failed
         """
-
-        # Convert a task json to rmf_task_msg form
-        print("Submit Task Request!")
-        desc_msg, err_msg = self.__convert_task_description(req_json)
-        if desc_msg is None:
+        # construct task request json from legacy format
+        request_json, err_msg = self.__convert_task_description(req_json)
+        if request_json is None:
+            self.get_logger().error(err_msg)
             return "", err_msg
+        payload = {
+            "type": "dispatch_task_request",
+            "request": request_json
+        }
 
-        req_msg = SubmitTask.Request()
-        req_msg.description = desc_msg
-        req_msg.requester = "api-server"
+        msg = ApiRequest()
+        msg.request_id = "demos_" + str(uuid.uuid4())
+        msg.json_msg = json.dumps(payload)
+        self.task_api_req_pub.publish(msg)
+        self.get_logger().info(f'Publish task request {msg}')
 
-        try:
-            future = self.submit_task_srv.call_async(req_msg)
-            rclpy.spin_until_future_complete(self, future, timeout_sec=0.5)
-            response = future.result()
-            if response is None:
-                self.get_logger().warn('/submit_task srv call failed')
-            elif not response.success:
-                self.node.get_logger().error(
-                    'Dispatcher node failed to accept task')
-            else:
-                self.get_logger().info(
-                    f'New Dispatch task_id {response.task_id}')
-                if response.task_id:
-                    return response.task_id, ""
-        except Exception as e:
-            self.get_logger().error('Error! Submit Srv failed %r' % (e,))
-        return "", "Dispatcher server failed in accepting the task"
+        # Note: API Response or can wait for response
+        # TODO: listen to "/task_api_responses"
+        return msg.request_id, ""  # success
 
     def cancel_task_request(self, task_id) -> bool:
         """
         Cancel Task - This function will trigger a ros srv call to the
         dispatcher node, and return a response.
         """
-        print("Canceling Task Request!")
-        req = CancelTask.Request()
-        req.task_id = task_id
-        try:
-            future = self.cancel_task_srv.call_async(req)
-            rclpy.spin_until_future_complete(self, future, timeout_sec=0.5)
-            response = future.result()
-            if response is None:
-                self.get_logger().warn('/cancel_task srv call failed')
-            else:
-                self.get_logger().info(
-                    f'Cancel Task, success? {response.success}')
-                return response.success
-        except Exception as e:
-            self.get_logger().error('Error! Cancel Srv failed %r' % (e,))
+        print(f"Canceling Task Request! {task_id}")
+        payload = {
+            "type": "cancel_task_request",
+            "task_id": task_id,
+            "labels": ["cancellation from simple api server"]
+        }
+        msg = ApiRequest()
+        msg.request_id = "demos_" + str(uuid.uuid4())
+        msg.json_msg = json.dumps(payload)
+        # self.task_api_req_pub.publish(msg)
+
+        # TODO: check res from "/task_api_responses"
+        #   cancellation is not fully tested in "rmf_ros2"
         return False
 
     def get_task_status(self):
@@ -135,27 +127,7 @@ class DispatcherClient(Node):
         Get all task status - This fn will trigger a ros srv call to acquire
         all submitted tasks to dispatcher node. Fn returns an object of tasks
         """
-        req = GetTaskList.Request()
-        try:
-            future = self.get_tasks_srv.call_async(req)
-            rclpy.spin_until_future_complete(self, future, timeout_sec=0.5)
-            response = future.result()
-            if response is None:
-                # self.get_logger().debug('/get_tasks srv call failed')
-                return self.active_tasks_cache + self.terminated_tasks_cache
-            else:
-                # self.get_logger().info(f'Get Task, success? \
-                #   {response.success}')
-                active_tasks = self.__convert_task_status_msg(
-                    response.active_tasks, False)
-                terminated_tasks = self.__convert_task_status_msg(
-                    response.terminated_tasks, True)
-                self.active_tasks_cache = active_tasks
-                self.terminated_tasks_cache = terminated_tasks
-                return active_tasks + terminated_tasks
-        except Exception as e:
-            self.get_logger().error('Error! GetTasks Srv failed %r' % (e,))
-        return []  # empty list
+        return list(self.task_states_cache.values())
 
     def get_robot_states(self):
         """
@@ -190,85 +162,76 @@ class DispatcherClient(Node):
                 'Error! GetBuildingMap Srv failed %r' % (e,))
         return {}  # empty dict
 
+    def set_task_state(self, json_obj):
+        """
+        set and store the latest task_state.
+        """
+        state = self.__convert_task_state_msg(json_obj)
+        id = state["task_id"]
+        self.task_states_cache[id] = state
+
 ###############################################################################
 
-    def __convert_task_status_msg(self, task_summaries, is_done=True):
+    def __convert_task_state_msg(self, json_obj):
         """
-        convert task summary msg and return a jsonify-able task status obj
+        convert task_state v2 msg to legacy dashbaord json msg format
         """
-        states_enum = {
-            TaskSummary.STATE_QUEUED: "Queued",
-            TaskSummary.STATE_ACTIVE: "Active/Executing",
-            TaskSummary.STATE_COMPLETED: "Completed",
-            TaskSummary.STATE_FAILED: "Failed",
-            TaskSummary.STATE_CANCELED: "Cancelled",
-            TaskSummary.STATE_PENDING: "Pending",
-        }
-        type_enum = {
-            TaskType.TYPE_STATION: "Station",
-            TaskType.TYPE_LOOP: "Loop",
-            TaskType.TYPE_DELIVERY: "Delivery",
-            TaskType.TYPE_CHARGE_BATTERY: "Charging",
-            TaskType.TYPE_CLEAN: "Clean",
-            TaskType.TYPE_PATROL: "Patrol",
-        }
+        task_state = {}
+        task_state["task_id"] = json_obj["booking"]["id"]
+        task_state["state"] = json_obj["status"]
+        task_state["fleet_name"] = json_obj["assigned_to"]["group"]
+        task_state["robot_name"] = json_obj["assigned_to"]["name"]
+        task_state["task_type"] = json_obj["category"]
+        task_state["priority"] = 0  # TODO
 
-        status_list = []
-        rclpy.spin_once(self, timeout_sec=0.0)
-        now = self.get_clock().now().to_msg().sec  # only use sec
-        for task in task_summaries:
-            desc = task.task_profile.description
-            status = {}
-            status["task_id"] = task.task_id
-            status["state"] = states_enum[task.state]
-            status["done"] = is_done
-            status["fleet_name"] = task.fleet_name
-            status["robot_name"] = task.robot_name
-            status["task_type"] = type_enum[desc.task_type.type]
-            status["priority"] = desc.priority.value
-            status["submited_start_time"] = desc.start_time.sec
-            status["start_time"] = task.start_time.sec     # only use sec
-            status["end_time"] = task.end_time.sec         # only use sec
+        # Note: all in seconds
+        task_state["start_time"] = round(
+            json_obj["unix_millis_start_time"]/1000.0, 2)
+        task_state["end_time"] = round(
+            json_obj["unix_millis_finish_time"]/1000.0, 2)
+        task_state["submited_start_time"] = round(
+            json_obj["booking"]["unix_millis_earliest_start_time"]/1000.0, 2)
 
-            if status["task_type"] == "Clean":
-                status["description"] = desc.clean.start_waypoint
-            elif status["task_type"] == "Loop":
-                status["description"] = desc.loop.start_name + " --> " + \
-                    desc.loop.finish_name + " x" + str(desc.loop.num_loops)
-            elif status["task_type"] == "Delivery":
-                status["description"] = desc.delivery.pickup_place_name + \
-                    " --> " + desc.delivery.dropoff_place_name
-            elif status["task_type"] == "Charging":
-                status["description"] = "Back to Charging Station"
-            else:
-                status["description"] = ""
+        # \note description should be: e.g. cleaning zone
+        if "active" in json_obj:
+            active_phase = json_obj["active"]
+            task_state["description"] = json_obj["phases"][str(
+                active_phase)]["detail"]
+        else:
+            task_state["description"] = "queued"
 
-            # Current hack to generate a progress percentage
-            duration = abs(task.end_time.sec - task.start_time.sec)
-            # TOD0: is done shouldnt be indicative at all
-            if is_done or task.state == TaskSummary.STATE_COMPLETED:
-                status["progress"] = "100%"
-            elif (duration == 0 or
-                  task.state == TaskSummary.STATE_QUEUED or
-                  task.state == TaskSummary.STATE_CANCELED):
-                status["progress"] = "0%"
-            else:
-                percent = int(100*(now - task.start_time.sec)/float(duration))
-                if (percent < 0):
-                    status["progress"] = "0%"
-                elif (percent > 100):
-                    status["progress"] = "Delayed"
-                else:
-                    status["progress"] = f"{percent}%"
-            status_list.insert(0, status)  # insert front
-        return status_list
+        # use start_time, end_time and current time to compute percent
+        predicted_duration = task_state["end_time"] - task_state["start_time"]
+        task_duration = self.ros_time() - task_state["start_time"]
+        percent = task_duration/predicted_duration
+        if (percent > 1.0):
+            task_state["progress"] = f"100%"
+        elif (task_state["state"] == "completed"):
+            task_state["progress"] = f"100%"
+        elif(percent < 0.0):
+            task_state["progress"] = f"0%"
+        else:
+            percent = int(100.0*percent)
+            task_state["progress"] = f"{percent}%"
+
+        done_status_type = [
+            "uninitialized", "blocked", "error", "failed",
+            "skipped", "canceled", "killed", "completed"]
+        if task_state["state"] in done_status_type:
+            task_state["done"] = True
+        else:
+            task_state["done"] = False
+
+        # Hack, change to capital letter for frontend compliance
+        task_state["state"] = task_state["state"].title()
+        return task_state
 
     def __get_robot_assignment(self, robot_name):
         assigned_tasks = []
         assigned_task_ids = []
-        for task in self.active_tasks_cache:
-            if task["robot_name"] == robot_name:
-                assigned_tasks.append(task)
+        for _, state in self.task_states_cache.items():
+            if state["robot_name"] == robot_name:
+                assigned_tasks.append(state)
         assigned_tasks.sort(key=lambda x: x.get('start_time'))
         for task in assigned_tasks:
             assigned_task_ids.append(task["task_id"])
@@ -306,12 +269,15 @@ class DispatcherClient(Node):
 
     def __convert_task_description(self, task_json):
         """
-        Convert a json task req format to rmf_task_msgs/TaskDescription.
+        Convert a json task req format to legacy dashboard json msg format
         :note: The 'start time' here is the "Duration" from now.
         """
-        task_desc = TaskDescription()
-        print(task_json)
-
+        # default request fields
+        request = {
+            "priority": {"type": "binary", "value": 0},
+            "labels": ["rmf_demos.simple_api_server"],
+            "description": {}
+        }
         try:
             if (("task_type" not in task_json) or
                 ("start_time" not in task_json) or
@@ -319,45 +285,49 @@ class DispatcherClient(Node):
                 raise Exception("Key value is incomplete")
 
             if ("priority" in task_json):
-                priority = int(task_json["priority"])
-                if (priority < 0):
+                priority_val = int(task_json["priority"])
+                if (priority_val < 0):
                     raise Exception("Priority value is less than 0")
-                task_desc.priority.value = priority
-            else:
-                task_desc.priority.value = 0
+                request["priority"]["value"] = priority_val
 
+            # Refer to task schemas
+            # https://github.com/open-rmf/rmf_ros2/blob/redesign_v2/rmf_fleet_adapter/schemas
             desc = task_json["description"]
             if task_json["task_type"] == "Clean":
-                task_desc.task_type.type = TaskType.TYPE_CLEAN
-                task_desc.clean.start_waypoint = desc["cleaning_zone"]
+                request["category"] = "clean"
+                request["description"]["zone"] = desc["cleaning_zone"]
             elif task_json["task_type"] == "Loop":
-                task_desc.task_type.type = TaskType.TYPE_LOOP
-                loop = Loop()
-                loop.num_loops = int(desc["num_loops"])
-                loop.start_name = desc["start_name"]
-                loop.finish_name = desc["finish_name"]
-                task_desc.loop = loop
+                request["category"] = "patrol"
+                request["description"]["places"] = [
+                    desc["start_name"],
+                    desc["finish_name"]]
+                request["description"]["rounds"] = int(desc["num_loops"])
             elif task_json["task_type"] == "Delivery":
-                task_desc.task_type.type = TaskType.TYPE_DELIVERY
-                delivery = Delivery()
-                delivery.pickup_place_name = desc["pickup_place_name"]
-                delivery.pickup_dispenser = desc["pickup_dispenser"]
-                delivery.dropoff_ingestor = desc["dropoff_ingestor"]
-                delivery.dropoff_place_name = desc["dropoff_place_name"]
-                task_desc.delivery = delivery
+                request["category"] = "delivery"
+                request["description"]["pickup"] = {
+                    "place": desc["pickup_place_name"],
+                    "handler": desc["pickup_dispenser"],
+                    "payload": []}
+                request["description"]["dropoff"] = {
+                    "place": desc["dropoff_place_name"],
+                    "handler": desc["dropoff_ingestor"],
+                    "payload": []}
             else:
                 raise Exception("Invalid TaskType")
 
-            # Calc start time, convert min to sec: TODO better representation
+            # Calc earliest_start_time, convert "Duration from now(min)"
+            # to unix_milli epoch time
             rclpy.spin_once(self, timeout_sec=0.0)
-            ros_start_time = self.get_clock().now().to_msg()
-            ros_start_time.sec += int(task_json["start_time"]*60)
-            task_desc.start_time = ros_start_time
+            rostime_now = self.get_clock().now()
+            unix_milli_time = round(rostime_now.nanoseconds/1e6)
+            unix_milli_time += int(task_json["start_time"]*60)
+            request["unix_millis_earliest_start_time"] = unix_milli_time
         except KeyError as ex:
             return None, f"Missing Key value in json body: {ex}"
         except Exception as ex:
             return None, str(ex)
-        return task_desc, ""
+        print("return", request)
+        return request, ""
 
     def __convert_building_map_msg(self, msg):
         map_data = {}
