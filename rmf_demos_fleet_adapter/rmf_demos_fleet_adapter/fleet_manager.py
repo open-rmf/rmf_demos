@@ -30,7 +30,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
-    PauseRequest, DockSummary
+    DockSummary
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
@@ -120,11 +120,6 @@ class FleetManager(Node):
             'robot_path_requests',
             qos_profile=qos_profile_system_default)
 
-        self.pause_pub = self.create_publisher(
-            PauseRequest,
-            'robot_pause_requests',
-            qos_profile=qos_profile_system_default)
-
         self.task_id = -1
 
         @app.get('/open-rmf/rmf_demos_fm/status/',
@@ -205,15 +200,24 @@ class FleetManager(Node):
             data = {'success': False, 'msg': ''}
             if robot_name not in self.robots:
                 return data
-            pause_request = PauseRequest()
-            pause_request.fleet_name = self.fleet_name
-            pause_request.robot_name = robot_name
-            pause_request.type = pause_request.TYPE_PAUSE_IMMEDIATELY
-            self.pause_pub.publish(pause_request)
-            time.sleep(0.1)
 
-            pause_request.type = pause_request.TYPE_RESUME
-            self.pause_pub.publish(pause_request)
+            path_request = PathRequest()
+            path_request.fleet_name = self.fleet_name
+            path_request.robot_name = robot_name
+            self.task_id = self.task_id + 1
+            path_request.task_id = str(self.task_id)
+
+            state = self.robots[robot_name]
+            cur_loc = state.state.location
+            path_request.path.append(cur_loc)
+
+            target_loc = state.state.location
+            target_loc.t.sec = cur_loc.t.sec + 1  # stop for 1s
+            path_request.path.append(target_loc)
+            self.path_pub.publish(path_request)
+
+            self.robots[robot_name].destination = target_loc
+
             data['success'] = True
             return data
 
