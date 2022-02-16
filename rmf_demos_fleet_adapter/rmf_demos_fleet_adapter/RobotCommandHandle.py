@@ -467,6 +467,15 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 self.node.get_logger().warn(
                     "Invalid waypoint supplied for charger. "
                     "Using default nearest charger in the map")
+
+            def _action_executor(category: str,
+                                 description: dict,
+                                 execution:
+                                 adpt.robot_update_handle.ActionExecution):
+                self.set_action_execution(execution)
+            # Set the action_executioner for the robot
+            self.update_handle.set_action_executor(_action_executor)
+
             self.charger_is_set = True
         # Update position
         with self._lock:
