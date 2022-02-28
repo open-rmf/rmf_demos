@@ -203,20 +203,10 @@ class FleetManager(Node):
             path_request = PathRequest()
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
+            path_request.path = []
             self.task_id = self.task_id + 1
             path_request.task_id = str(self.task_id)
-
-            state = self.robots[robot_name]
-            cur_loc = state.state.location
-            path_request.path.append(cur_loc)
-
-            target_loc = state.state.location
-            target_loc.t.sec = cur_loc.t.sec + 1  # stop for 1s
-            path_request.path.append(target_loc)
             self.path_pub.publish(path_request)
-
-            self.robots[robot_name].destination = target_loc
-
             data['success'] = True
             return data
 
