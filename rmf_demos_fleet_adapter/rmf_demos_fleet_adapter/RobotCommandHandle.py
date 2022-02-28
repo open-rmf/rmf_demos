@@ -554,8 +554,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # within a threshold of the robot's current position
         first_position = waypoints[0].position
         if len(waypoints) > 2 and\
-                self.dist(first_position, last_pose) < threshold and\
-                abs(first_position[2] - last_pose[2]) < 0.1:
+                self.dist(first_position, last_pose) < threshold:
             del waypoints[0]
 
         return (first, waypoints)

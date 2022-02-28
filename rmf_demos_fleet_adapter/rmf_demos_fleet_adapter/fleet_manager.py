@@ -18,7 +18,6 @@ import sys
 import math
 import yaml
 import argparse
-import time
 
 import rclpy
 from rclpy.node import Node
