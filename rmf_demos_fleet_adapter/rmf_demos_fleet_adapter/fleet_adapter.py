@@ -91,7 +91,11 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     adapter.start()
     time.sleep(1.0)
 
-    fleet_handle = adapter.add_fleet(fleet_name, vehicle_traits, nav_graph)
+    server_uri = None
+    if 'server_uri' in fleet_config:
+        server_uri = fleet_config['server_uri']
+
+    fleet_handle = adapter.add_fleet(fleet_name, vehicle_traits, nav_graph, server_uri)
 
     fleet_state_update_frequency = fleet_config['publish_fleet_state']
     fleet_handle.fleet_state_publish_period(
