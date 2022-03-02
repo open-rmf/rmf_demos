@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>rmf_demos_bridges</name>
-  <version>1.0.0</version>
+  <version>1.4.0</version>
   <description>Nodes for bridging between different communication stacks</description>
   <maintainer email="cnboonhan@openrobotics.org">Boon Han</maintainer>
   <license>Apache 2.0</license>
@@ -18,6 +18,6 @@
   <exec_depend>python3-paho-mqtt</exec_depend>
   <exec_depend>python3-yaml</exec_depend>
   <exec_depend>python3-pyproj</exec_depend>
-  <exec_depend>python3-socketio</exec_depend>
+  <exec_depend>python3-flask-socketio</exec_depend>
 
 </package>
