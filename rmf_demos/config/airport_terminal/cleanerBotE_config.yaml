@@ -3,6 +3,7 @@
 
 rmf_fleet:
   name: "cleanerBotE"
+  server_uri: "ws://localhost:8001"
   fleet_manager:
     ip: "127.0.0.1"
     port: 22014
