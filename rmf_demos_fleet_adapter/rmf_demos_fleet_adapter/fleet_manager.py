@@ -199,6 +199,7 @@ class FleetManager(Node):
             data = {'success': False, 'msg': ''}
             if robot_name not in self.robots:
                 return data
+
             path_request = PathRequest()
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name

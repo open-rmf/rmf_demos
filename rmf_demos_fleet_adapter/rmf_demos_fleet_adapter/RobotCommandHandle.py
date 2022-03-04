@@ -105,7 +105,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.next_arrival_estimator = None
         self.path_index = 0
         self.docking_finished_callback = None
-        self.perform_filtering = self.config["filter_waypoints"]
         self.docks = {}
 
         # RMF location trackers
@@ -175,12 +174,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             if self.api.stop(self.name):
                 break
             self.sleep_for(0.1)
-        if self._follow_path_thread is not None:
-            self._quit_path_event.set()
-            if self._follow_path_thread.is_alive():
-                self._follow_path_thread.join()
-            self._follow_path_thread = None
-            self.clear()
 
     def follow_new_path(
             self,
@@ -188,7 +181,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             next_arrival_estimator,
             path_finished_callback):
 
-        self.stop()
+        if self._follow_path_thread is not None:
+            self._quit_path_event.set()
+            if self._follow_path_thread.is_alive():
+                self._follow_path_thread.join()
+            self._follow_path_thread = None
+            self.clear()
         self._quit_path_event.clear()
 
         self.node.get_logger().info(f"Received new path for {self.name}")
@@ -312,8 +310,15 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                         duration =\
                             self.api.navigation_remaining_duration(self.name)
                         if self.path_index is not None:
-                            self.next_arrival_estimator(
-                                self.path_index, timedelta(seconds=duration))
+                            target_time = self.target_waypoint.time
+                            now = self.adapter.now()
+                            if target_time < now + timedelta(seconds=duration):
+                                self.next_arrival_estimator(
+                                    self.path_index,
+                                    timedelta(seconds=duration))
+                            else:
+                                self.next_arrival_estimator(
+                                    self.path_index, target_time - now)
             self.path_finished_callback()
             self.node.get_logger().info(
                 f"Robot {self.name} has successfully navigated along "
@@ -408,10 +413,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         if position is not None:
             x, y = [position[0], position[1]]
             theta = position[2]
-            # ------------------------ #
-            # IMPLEMENT YOUR CODE HERE #
-            # Ensure x, y are in meters and theta in radians #
-            # ------------------------ #
             # Wrap theta between [-pi, pi]. Else arrival estimate will
             # assume robot has to do full rotations and delay the schedule
             if theta > np.pi:
@@ -542,78 +543,20 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
         assert(len(wps) > 0)
         first = None
-        second = []
-        threshold = 1.0
+        threshold = 0.5
         last_pose = copy.copy(self.position)
         waypoints = []
         for i in range(len(wps)):
             waypoints.append(PlanWaypoint(i, wps[i]))
 
-        # We assume the robot will backtack if the first waypoint in the plan
-        # is behind the current position of the robot
+        # We assume the first waypoint is safe for pruning if it is
+        # within a threshold of the robot's current position
         first_position = waypoints[0].position
         if len(waypoints) > 2 and\
-                self.dist(first_position, last_pose) > threshold:
-            changed = False
-            index = 0
-            while (not changed):
-                if self.dist(waypoints[index].position, first_position) > 0.1:
-                    changed = True
-                    break
-                waypoints[index].position = last_pose
-                index = index + 1
+                self.dist(first_position, last_pose) < threshold:
+            del waypoints[0]
 
-        if (self.perform_filtering is False):
-            return (first, waypoints)
-
-        changed = False
-        # Find the first waypoint
-        index = 0
-        while (not changed and index < len(waypoints)):
-            if (self.dist(last_pose, waypoints[index].position) < threshold):
-                first = waypoints[index]
-                last_pose = waypoints[index].position
-            else:
-                break
-            index = index + 1
-
-        while (index < len(waypoints)):
-            parent_index = copy.copy(index)
-            wp = waypoints[index]
-            if (self.dist(wp.position, last_pose) >= threshold):
-                changed = False
-                while (not changed):
-                    next_index = index + 1
-                    if (next_index < len(waypoints)):
-                        if (self.dist(waypoints[next_index].position,
-                                      waypoints[index].position) < threshold):
-                            if (next_index == len(waypoints) - 1):
-                                # append last waypoint
-                                changed = True
-                                wp = waypoints[next_index]
-                                wp.approach_lanes =\
-                                    waypoints[parent_index].approach_lanes
-                                second.append(wp)
-                        else:
-                            # append if next waypoint changes
-                            changed = True
-                            wp = waypoints[index]
-                            wp.approach_lanes =\
-                                waypoints[parent_index].approach_lanes
-                            second.append(wp)
-                    else:
-                        # we add the current index to second
-                        changed = True
-                        wp = waypoints[index]
-                        wp.approach_lanes =\
-                            waypoints[parent_index].approach_lanes
-                        second.append(wp)
-                    last_pose = waypoints[index].position
-                    index = next_index
-            else:
-                index = index + 1
-
-        return (first, second)
+        return (first, waypoints)
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
