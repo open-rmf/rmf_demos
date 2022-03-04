@@ -251,7 +251,7 @@ ros2 run rmf_demos_tasks  dispatch_loop -s room_2 -f dead_end -n 10 --use_sim_ti
 #### RobotManager Integration
 (Add instructions for RobotManager integration)
 ```
-apt install mosquitto
+apt install mosquitto mosquitto-clients
 ros2 run rmf_demos_bridges fleet_robotmanager_mqtt_bridge -y 31500 -x 22000
 mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
 ```

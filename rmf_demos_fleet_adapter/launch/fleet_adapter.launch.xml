@@ -3,6 +3,7 @@
 <launch>
 
   <arg name="use_sim_time" default="true" description="Use the /clock topic for time to sync with simulation"/>
+  <arg name="server_uri" default="" description="The URI of the api server to transmit state and task information."/>
   <arg name="output" default="screen"/>
 
   <node pkg="rmf_demos_fleet_adapter"
@@ -19,6 +20,7 @@
         output="both">
 
     <param name="use_sim_time" value="$(var use_sim_time)"/>
+    <param name="server_uri" value="$(var server_uri)"/>
   </node>
 
 </launch>
