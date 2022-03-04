@@ -145,6 +145,14 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     fleet_handle.accept_task_requests(
         partial(_task_request_check, task_capabilities))
 
+    def _consider(description: dict):
+        confirm = adpt.fleet_update_handle.Confirmation()
+        confirm.accept()
+        return confirm
+
+    # Configure this fleet to perform any kind of teleop action
+    fleet_handle.add_performable_action("teleop", _consider)
+
     def _updater_inserter(cmd_handle, update_handle):
         """Insert a RobotUpdateHandle."""
         cmd_handle.update_handle = update_handle

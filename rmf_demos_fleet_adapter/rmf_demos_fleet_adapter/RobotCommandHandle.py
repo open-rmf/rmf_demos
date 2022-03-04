@@ -20,12 +20,13 @@ from rclpy.qos import QoSProfile
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
+from rclpy.qos import qos_profile_system_default
 
 import rmf_adapter as adpt
 import rmf_adapter.plan as plan
 import rmf_adapter.schedule as schedule
 
-from rmf_fleet_msgs.msg import DockSummary
+from rmf_fleet_msgs.msg import DockSummary, ModeRequest
 
 import numpy as np
 
@@ -98,6 +99,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # TODO(YV): Remove self.adapter. This is only being used for time point
         # comparison with Plan::Waypoint::time
         self.adapter = adapter
+        self.action_execution = None
 
         self.requested_waypoints = []  # RMF Plan waypoints
         self.remaining_waypoints = []
@@ -117,6 +119,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.target_waypoint = None  # this is a Plan::Waypoint
         # The graph index of the waypoint the robot is currently docking into
         self.dock_waypoint_index = None
+        # The graph index of the waypoint the robot starts or ends an action
+        self.action_waypoint_index = None
 
         # Threading variables
         self._lock = threading.Lock()
@@ -149,6 +153,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             'dock_summary',
             self.dock_summary_cb,
             qos_profile=transient_qos)
+
+        self.node.create_subscription(
+            ModeRequest,
+            'action_execution_notice',
+            self.mode_request_cb,
+            qos_profile=qos_profile_system_default)
 
         self.update_thread = threading.Thread(target=self.update)
         self.update_thread.start()
@@ -445,6 +455,22 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
     def update_state(self):
         self.update_handle.update_battery_soc(self.battery_soc)
+
+        def _action_executor(category: str,
+                             description: dict,
+                             execution:
+                             adpt.robot_update_handle.ActionExecution):
+            with self._lock:
+                if len(description) > 0 and description in self.graph.keys:
+                    self.action_waypoint_index = \
+                        self.graph.find_waypoint(description).index
+                else:
+                    self.action_waypoint_index = self.last_known_waypoint_index
+                self.on_waypoint = None
+                self.on_lane = None
+                self.action_execution = execution
+        # Set the action_executioner for the robot
+        self.update_handle.set_action_executor(_action_executor)
         if not self.charger_is_set:
             if ("max_delay" in self.config.keys()):
                 max_delay = self.config["max_delay"]
@@ -482,6 +508,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             elif (self.dock_waypoint_index is not None):
                 self.update_handle.update_off_grid_position(
                     self.position, self.dock_waypoint_index)
+            # if robot is performing an action
+            elif (self.action_execution is not None):
+                self.update_handle.update_off_grid_position(
+                    self.position, self.action_waypoint_index)
             # if robot is merging into a waypoint
             elif (self.target_waypoint is not None and
                     self.target_waypoint.graph_index is not None):
@@ -558,8 +588,24 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
         return (first, waypoints)
 
+    def complete_robot_action(self):
+        with self._lock:
+            if self.action_execution is None:
+                return
+            self.action_execution.finished()
+            self.action_execution = None
+            self.node.get_logger().info(f"Robot {self.name} has completed the"
+                                        f" action it was performing")
+
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
             if(fleet.fleet_name == self.fleet_name):
                 for dock in fleet.params:
                     self.docks[dock.start] = dock.path
+
+    def mode_request_cb(self, msg):
+        if msg.fleet_name is None or msg.fleet_name != self.fleet_name or\
+                msg.robot_name is None:
+            return
+        if msg.mode.mode == RobotState.IDLE:
+            self.complete_robot_action()
