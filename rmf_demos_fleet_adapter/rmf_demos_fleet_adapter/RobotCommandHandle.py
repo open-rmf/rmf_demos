@@ -119,7 +119,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.target_waypoint = None  # this is a Plan::Waypoint
         # The graph index of the waypoint the robot is currently docking into
         self.dock_waypoint_index = None
-        # The graph index of the waypoint where the robot is starting an action
+        # The graph index of the waypoint the robot starts or ends an action
         self.action_waypoint_index = None
 
         # Threading variables
@@ -455,6 +455,22 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
     def update_state(self):
         self.update_handle.update_battery_soc(self.battery_soc)
+
+        def _action_executor(category: str,
+                             description: dict,
+                             execution:
+                             adpt.robot_update_handle.ActionExecution):
+            with self._lock:
+                if len(description) > 0 and description in self.graph.keys:
+                    self.action_waypoint_index = \
+                        self.graph.find_waypoint(description).index
+                else:
+                    self.action_waypoint_index = self.last_known_waypoint_index
+                self.on_waypoint = None
+                self.on_lane = None
+                self.action_execution = execution
+        # Set the action_executioner for the robot
+        self.update_handle.set_action_executor(_action_executor)
         if not self.charger_is_set:
             if ("max_delay" in self.config.keys()):
                 max_delay = self.config["max_delay"]
@@ -468,15 +484,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 self.node.get_logger().warn(
                     "Invalid waypoint supplied for charger. "
                     "Using default nearest charger in the map")
-
-            def _action_executor(category: str,
-                                 description: dict,
-                                 execution:
-                                 adpt.robot_update_handle.ActionExecution):
-                self.set_action_execution(execution)
-            # Set the action_executioner for the robot
-            self.update_handle.set_action_executor(_action_executor)
-
             self.charger_is_set = True
         # Update position
         with self._lock:
@@ -581,23 +588,14 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
         return (first, waypoints)
 
-    def set_action_execution(self, action_execution):
-        if self.action_execution is None:
-            with self._lock:
-                self.action_waypoint_index = self.on_waypoint
-                self.on_waypoint = None
-                self.on_lane = None
-        self.action_execution = action_execution
-
     def complete_robot_action(self):
-        if self.action_execution is None:
-            return
-
-        self.action_execution.finished()
-        self.action_execution = None
-
-        self.node.get_logger().info(f"Robot {self.name} has completed the"
-                                    f" action it was performing")
+        with self._lock:
+            if self.action_execution is None:
+                return
+            self.action_execution.finished()
+            self.action_execution = None
+            self.node.get_logger().info(f"Robot {self.name} has completed the"
+                                        f" action it was performing")
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
