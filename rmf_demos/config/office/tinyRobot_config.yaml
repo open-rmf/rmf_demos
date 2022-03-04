@@ -3,7 +3,6 @@
 
 rmf_fleet:
   name: "tinyRobot"
-  server_uri: "ws://localhost:8001"
   fleet_manager:
     ip: "127.0.0.1"
     port: 22011

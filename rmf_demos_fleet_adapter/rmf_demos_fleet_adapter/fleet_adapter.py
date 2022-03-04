@@ -91,9 +91,11 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     adapter.start()
     time.sleep(1.0)
 
-    server_uri = None
-    if 'server_uri' in fleet_config:
-        server_uri = fleet_config['server_uri']
+    node.declare_parameter('server_uri', rclpy.Parameter.Type.STRING)
+    server_uri = node.get_parameter(
+        'server_uri').get_parameter_value().string_value
+    if server_uri == "":
+        server_uri = None
 
     fleet_handle = adapter.add_fleet(
         fleet_name, vehicle_traits, nav_graph, server_uri)
