@@ -3,6 +3,7 @@
 <launch>
   <arg name="use_sim_time" default="true"/>
   <arg name="use_tpe" default="false"/>
+  <arg name="ignition_version" default='6'/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/triple_H.launch.xml">
@@ -13,6 +14,7 @@
   <!-- Simulation launch -->
   <include file="$(find-pkg-share rmf_demos_ign)/simulation.launch.xml">
     <arg name="map_name" value="triple_H" />
+    <arg name="ignition_version" value="$(var ignition_version)" />
   </include>
 
 </launch>
