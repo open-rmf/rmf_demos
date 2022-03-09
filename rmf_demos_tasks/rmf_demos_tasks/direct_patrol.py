@@ -83,12 +83,18 @@ class TaskRequester(Node):
         payload["robot"] = self.args.robot
         payload["fleet"] = self.args.fleet
         request = {}
+
+        # Set task request start time
         now = self.get_clock().now().to_msg()
-        now.sec =  now.sec + self.args.start_time
+        now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request["unix_millis_earliest_start_time"] = start_time
         # todo(YV): Fill priority after schema is added
+
+        # Define task request category
         request["category"] = "patrol"
+
+        # Define task request description
         description = {}
         description["places"] = []
         description["places"].append(self.args.start)
@@ -99,7 +105,6 @@ class TaskRequester(Node):
         msg.json_msg = json.dumps(payload)
 
         self.pub.publish(msg)
-
 
 
 ###############################################################################

@@ -44,19 +44,19 @@ class Requester(Node):
 
         self.pub = self.create_publisher(
           PathRequest, 'robot_path_requests', 1)
-        pts = [[5.3,-4.9], [3.3, -8.9], [5.3, -9.9], [7.3, -6.1], [5.3,-4.9]]
+        pts = [[5.3, -4.9], [3.3, -8.9], [5.3, -9.9], [7.3, -6.1], [5.3, -4.9]]
 
         msg = PathRequest()
         msg.fleet_name = self.args.fleet
         msg.robot_name = self.args.robot
         msg.task_id = str(uuid.uuid1())
         for p in pts:
-            l = Location()
-            l.x = p[0]
-            l.y = p[1]
-            l.yaw = 0.0
-            l.level_name = "L1"
-            msg.path.append(l)
+            loc = Location()
+            loc.x = p[0]
+            loc.y = p[1]
+            loc.yaw = 0.0
+            loc.level_name = "L1"
+            msg.path.append(loc)
         self.pub.publish(msg)
 
 ###############################################################################
