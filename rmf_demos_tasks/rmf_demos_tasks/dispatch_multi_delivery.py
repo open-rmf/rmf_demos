@@ -39,9 +39,9 @@ class TaskRequester(Node):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument('-p', '--pickup', required=True,
-                            type=str, nargs='+', help='Start waypoint')
+                            type=str, nargs='+', help='Pickup description')
         parser.add_argument('-d', '--dropoff', required=True,
-                            type=str, nargs='+', help='Finish waypoint')
+                            type=str, nargs='+', help='Dropoff description')
         parser.add_argument('-F', '--fleet', required=False, default='',
                             type=str, help='Fleet name')
         parser.add_argument('-R', '--robot', required=False, default='',
