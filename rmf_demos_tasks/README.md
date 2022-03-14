@@ -5,14 +5,6 @@ This package provides scripts used in the RMF demos to demonstrate the tasks tha
 ## Legacy Tasks
 
 This package offers some task scripts that can be used with `rmf_demos` simulation robots. To run these tasks:
-- `dispatch_clean`
-
-  This script submits a cleaning task. The `-cs` flag takes in the desired cleaning zone as an argument.
-
-  Example for Hotel world:
-  ```
-  ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
-  ```
 - `dispatch_delivery`
 
   This script submits a delivery task.
@@ -38,7 +30,7 @@ Do remember to add the `--use_sim_time` flag when running these tasks in simulat
 
 ## Flexible Tasks
 
-The new task system allows users to construct and submit their own tasks in a more flexible manner, such as having multiple stops in a loop or cleaning task. This package contains some helpful scripts that demonstrate how to compose such tasks:
+The new task system allows users to construct and submit their own tasks in a more flexible manner, such as having multiple stops in a loop or specifying a robot for a cleaning task. This package contains some helpful scripts that demonstrate how to compose such tasks:
 - `direct_patrol`
 
   This task is similar to `dispatch_loop`, but it allows users to specify a robot to perform the patrol task. On top of the start and finish waypoints, you will need to provide a fleet name `-F` and robot name `-R`.
@@ -47,13 +39,13 @@ The new task system allows users to construct and submit their own tasks in a mo
   ```
   ros2 run rmf_demos_tasks direct_patrol -F tinyRobot -R tinyRobot1 -s pantry -f lounge -n 2 --use_sim_time
   ```
-- `dispatch_multi_clean`
+- `dispatch_clean`
 
-  This script provides users the option of requesting a specific robot to clean multiple cleaning zones within a single task. You will need to specify the desired cleaning zones `-z`.
+  This script submits a cleaning task. The `-cs` flag takes in the desired cleaning zone as an argument. You may also choose to specify a robot to perform the cleaning task by providing a fleet name `-F` and robot name `-R`.
 
   Example for Hotel world:
   ```
-  ros2 run rmf_demos_tasks dispatch_multi_clean -F cleanerBotA -R cleanerBotA_2 -z clean_lobby clean_waiting_area --use_sim_time
+  ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby -F cleanerBotA -R cleanerBotA_1 --use_sim_time
   ```
 - `dispatch_multi_delivery`
 
@@ -72,24 +64,29 @@ The new task system allows users to construct and submit their own tasks in a mo
   ```
 - `dispatch_teleop`
 
-  This script demonstrates how to compose a task with the `PerformAction` feature. You can ask a robot to go to a starting point `-s` to execute an action, then return control to RMF when the action is completed.
+  This script demonstrates how to compose a task with the `PerformAction` feature. You can ask a robot to go to a starting point `-s` to execute an action.
 
   Example for Office world:
   ```
   ros2 run rmf_demos_tasks dispatch_teleop -F tinyRobot -R tinyRobot1 -s coe --use_sim_time
   ```
+
+  After completing your teleop action, you will need to publish the following message to return control to RMF:
+  ```
+  ros2 topic pub /action_execution_notice rmf_fleet_msgs/msg/ModeRequest '{fleet_name:  tinyRobot, robot_name: tinyRobot1, mode: {mode: 0}}' --once
+  ```
+
+## Additional Scripts
+
 - `teleop_action`
 
-  This script demonstrates sending a teleop action with a particular set of coordinates you would like your robot to follow. To test it, launch the Office world and run the above command for `dispatch_teleop` to bring `tinyRobot1` to `coe`. Then,
+  This script demonstrates sending a teleop action with a particular set of coordinates you would like your robot to follow. To test it, launch the Office world and run the above `dispatch_teleop` task to bring `tinyRobot1` to `coe`. Then,
   ```
   ros2 run rmf_demos_tasks teleop_action -F tinyRobot -R tinyRobot1
   ```
   If you are running this in Gazebo, you will need to delete the room chair models for the simulation physics to run smoothly.
 
-  When the robot is done, you can end the teleop action by publishing the following message:
-  ```
-  ros2 topic pub /action_execution_notice rmf_fleet_msgs/msg/ModeRequest '{fleet_name:  tinyRobot, robot_name: tinyRobot1, mode: {mode: 0}}' --once
-  ```
+  You can end the action by publishing a `ModeRequest` via the `/action_execution_notice` topic as demonstrated above.
 
 ## Quality Declaration
 
