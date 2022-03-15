@@ -241,10 +241,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     [x, y] = target_pose[:2]
                     theta = target_pose[2]
                     speed_limit = self.get_speed_limit(self.target_waypoint)
-                    # ------------------------ #
-                    # IMPLEMENT YOUR CODE HERE #
-                    # Ensure x, y, theta are in units that api.navigate() #
-                    # ------------------------ #
                     response = self.api.navigate(self.name,
                                                  [x, y, theta],
                                                  self.map_name,
