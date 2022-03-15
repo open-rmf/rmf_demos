@@ -31,7 +31,8 @@ Depending on the endpoint, the content may vary (i.e. some items may be removed)
   "map_name": "string",
   "task": "string",
   "destination": {},
-  "data": {}
+  "data": {},
+  "speed_limit": 0.0
 }
 ```
 ##### Response Body
@@ -126,7 +127,8 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/navigate/?robot_name=
     "x": 7.0,
     "y": 3.5,
     "yaw": 0.5
-  }
+  },
+  "speed_limit": 0.0
 }
 ```
 
