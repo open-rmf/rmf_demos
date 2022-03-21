@@ -74,7 +74,7 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "hotel_multitask_" + str(uuid.uuid4())
+        msg.request_id = "delivery_" + str(uuid.uuid4())
         payload = {}
         if self.args.fleet and self.args.robot:
             payload["type"] = "robot_task_request"
