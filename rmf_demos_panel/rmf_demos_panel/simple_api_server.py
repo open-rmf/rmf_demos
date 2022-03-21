@@ -31,8 +31,10 @@ from threading import Thread
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, disconnect
+import asyncio
 
 from rmf_demos_panel.dispatcher_client import DispatcherClient
+from rmf_demos_panel.rmf_msg_observer import AsyncRmfMsgObserver, RmfMsgType
 
 ###############################################################################
 
@@ -55,7 +57,9 @@ logging.basicConfig(level=logging.DEBUG,
 
 # default dashboard
 dashboard_config = {"world_name": "EMPTY_DASHBOARD_CONFIG",
-                    "task": {"Delivery": {}, "Loop": {}, "Clean": {}}}
+                    "valid_task": [],
+                    "task": {"Delivery": {}, "Loop": {}, "Clean": {}}
+                    }
 
 ###############################################################################
 
@@ -132,12 +136,26 @@ def broadcast_states():
             socketio.emit('robot_states', robots, broadcast=True, namespace=ns)
             socketio.emit('ros_time', ros_time, broadcast=True, namespace=ns)
             logging.debug(f" ROS Time: {ros_time} | "
-                          "active tasks: "
-                          f"{len(dispatcher_client.active_tasks_cache)}"
-                          " | terminated tasks: "
-                          f"{len(dispatcher_client.terminated_tasks_cache)}"
+                          " tasks: "
+                          f"{len(dispatcher_client.task_states_cache)}"
                           f" | active robots: {len(robots)}")
         time.sleep(2)
+
+
+def rmf_state_listener(port_num: str, done_fut: asyncio.Future):
+    def msg_callback(msg_type, data):
+        dispatcher_client.set_task_state(data)
+        # data["phases"] = {}
+        # print(f" \nReceived [{msg_type}] :: Data: \n   "
+        #     f"{data}")
+
+    observer = AsyncRmfMsgObserver(
+        msg_callback,
+        msg_filters={RmfMsgType.TaskState: []},
+        server_url="localhost",
+        server_port=int(port_num)
+    )
+    observer.spin(done_fut)
 
 ###############################################################################
 
@@ -145,14 +163,19 @@ def broadcast_states():
 def main(args=None):
     server_ip = "0.0.0.0"
     port_num = 8083
+    ws_port_num = 7878
 
     if "RMF_DEMOS_API_SERVER_IP" in os.environ:
         server_ip = os.environ['RMF_DEMOS_API_SERVER_IP']
         print(f"Set Server IP to: {server_ip}")
 
     if "RMF_DEMOS_API_SERVER_PORT" in os.environ:
-        port_num = os.environ['RMF_DEMOS_API_SERVER_PORT']
+        port_num = int(os.environ['RMF_DEMOS_API_SERVER_PORT'])
         print(f"Set Server port to: {server_ip}:{port_num}")
+
+    if "RMF_WS_SERVER_PORT" in os.environ:
+        ws_port_num = int(os.environ['RMF_WS_SERVER_PORT'])
+        print(f"Set RMF Websocket port to: localhost:{ws_port_num}")
 
     if "DASHBOARD_CONFIG_PATH" in os.environ:
         config_path = os.environ['DASHBOARD_CONFIG_PATH']
@@ -178,10 +201,18 @@ def main(args=None):
     broadcast_thread = Thread(target=broadcast_states, args=())
     broadcast_thread.start()
 
-    print(f"Starting RMF_Demos API Server: {server_ip}:{port_num}")
+    done_fut = asyncio.Future()
+    listener_thread = Thread(
+        target=rmf_state_listener, args=(ws_port_num, done_fut))
+    listener_thread.start()
+
+    print(f"Starting RMF_Demos API Server: {server_ip}:{port_num}, "
+          f"with ws://localhost:{ws_port_num}")
     app.run(host=server_ip, port=port_num, debug=False)
     dispatcher_client.destroy_node()
     rclpy.shutdown()
+    print("shutting down...")
+    done_fut.set_result(True)  # shutdown listner
 
 
 if __name__ == "__main__":
