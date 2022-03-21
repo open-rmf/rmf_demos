@@ -1,5 +1,9 @@
 ## Changelog for package rmf_demos
 
+1.4.0 (2022-02-14)
+------------------
+* Add an indoor-outdoor campus example [#121](https://github.com/open-rmf/rmf_demos/pull/121)
+
 1.3.1 (2021-09-22)
 ------------------
 * migrate rmf_panel js component to a new repo [#93](https://github.com/open-rmf/rmf_demos/pull/93)
