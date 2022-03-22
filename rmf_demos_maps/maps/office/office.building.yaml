@@ -129,8 +129,11 @@ levels:
       - {model_name: OpenRobotics/WhiteCabinet, name: WhiteCabinet, static: true, x: 1779.929, y: 344.234, yaw: -0.0292, z: 0}
       - {model_name: OpenRobotics/SquareShelf, name: SquareShelf, static: true, x: 938.97, y: 352.118, yaw: 2.664, z: 0}
       - {model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser, static: true, x: 2091.359, y: 624.821, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser_2, static: true, x: 2091.589, y: 664.457, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Coke, name: Coke, static: false, x: 2091.359, y: 625.071, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Coke, name: Coke, static: false, x: 2092.668, y: 664.996, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/TeleportIngestor, name: coke_ingestor, static: true, x: 2662.887, y: 898.996, yaw: 1.5708, z: 0.805}
+      - {model_name: OpenRobotics/TeleportIngestor, name: coke_ingestor_2, static: true, x: 668.759, y: 703.864, yaw: 1.5708, z: 0.8}
     vertices:
       - [80.27, 1024.974, 0, ""]
       - [580.795, 43.396, 0, ""]
@@ -184,7 +187,7 @@ levels:
       - [1052.727, 730.182, 0, ""]
       - [2474.545, 885.636, 0, hardware_2, {dropoff_ingestor: [1, coke_ingestor], is_holding_point: [4, true], is_parking_spot: [4, false]}]
       - [934.9299999999999, 935.429, 0, "", {is_parking_spot: [4, false]}]
-      - [631.562, 587.894, 0, coe, {is_holding_point: [4, true], is_parking_spot: [4, false]}]
+      - [631.562, 587.894, 0, coe, {dropoff_ingestor: [1, coke_ingestor_2], is_holding_point: [4, true], is_parking_spot: [4, false]}]
       - [1790.467, 1326.218, 0, ""]
       - [1364.76, 1336.717, 0, ""]
       - [2222.415, 1308.722, 0, ""]

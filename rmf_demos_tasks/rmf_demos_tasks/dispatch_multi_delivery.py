@@ -38,17 +38,14 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-F', '--fleet', required=True,
+        parser.add_argument('-p', '--pickup', required=True,
+                            type=str, nargs='+', help='Pickup description')
+        parser.add_argument('-d', '--dropoff', required=True,
+                            type=str, nargs='+', help='Dropoff description')
+        parser.add_argument('-F', '--fleet', required=False, default='',
                             type=str, help='Fleet name')
-        parser.add_argument('-R', '--robot', required=True,
+        parser.add_argument('-R', '--robot', required=False, default='',
                             type=str, help='Robot name')
-        parser.add_argument('-s', '--start', required=True,
-                            type=str, help='Start waypoint')
-        parser.add_argument('-f', '--finish', required=True,
-                            type=str, help='Finish waypoint')
-        parser.add_argument('-n', '--loop_num',
-                            help='Number of loops to perform',
-                            type=int, default=1)
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
@@ -77,11 +74,14 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "direct_" + str(uuid.uuid4())
+        msg.request_id = "delivery_" + str(uuid.uuid4())
         payload = {}
-        payload["type"] = "robot_task_request"
-        payload["robot"] = self.args.robot
-        payload["fleet"] = self.args.fleet
+        if self.args.fleet and self.args.robot:
+            payload["type"] = "robot_task_request"
+            payload["robot"] = self.args.robot
+            payload["fleet"] = self.args.fleet
+        else:
+            payload["type"] = "dispatch_task_request"
         request = {}
 
         # Set task request start time
@@ -89,19 +89,43 @@ class TaskRequester(Node):
         now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request["unix_millis_earliest_start_time"] = start_time
-        # todo(YV): Fill priority after schema is added
 
         # Define task request category
-        request["category"] = "patrol"
+        request["category"] = "compose"
 
-        # Define task request description
-        description = {}
-        description["places"] = []
-        description["places"].append(self.args.start)
-        description["places"].append(self.args.finish)
-        description["rounds"] = self.args.loop_num
+        # Define task request description with phases
+        description = {}  # task_description_Compose.json
+        description["category"] = "multi_delivery"
+        description["phases"] = []
+        activities = []
+        # Add each pickup
+        for pick in self.args.pickup:
+            pick_list = pick.split(',')
+            activities.append({"category": "pickup",
+                               "description": {
+                                   "place": pick_list[0],
+                                   "handler": pick_list[1],
+                                   "payload": [{"sku": pick_list[2],
+                                                "quantity": int(pick_list[3])}]
+                                }})
+        # Add each dropoff
+        for drop in self.args.dropoff:
+            drop_list = drop.split(',')
+            activities.append({"category": "dropoff",
+                               "description": {
+                                   "place": drop_list[0],
+                                   "handler": drop_list[1],
+                                   "payload": [{"sku": drop_list[2],
+                                                "quantity": int(drop_list[3])}]
+                                }})
+        # Add activities to phases
+        description["phases"].append(
+            {"activity": {"category": "sequence",
+                          "description": {"activities": activities}}})
+
         request["description"] = description
         payload["request"] = request
+
         msg.json_msg = json.dumps(payload)
 
         self.pub.publish(msg)

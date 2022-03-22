@@ -72,25 +72,35 @@ class TaskRequester(Node):
         payload = {}
         payload["type"] = "dispatch_task_request"
         request = {}
+
+        # Set task request start time
         now = self.get_clock().now().to_msg()
-        now.sec =  now.sec + self.args.start_time
+        now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request["unix_millis_earliest_start_time"] = start_time
         # todo(YV): Fill priority after schema is added
+
+        # Define task request category
         request["category"] = "compose"
-        description = {} # task_description_Compose.json
+
+        # Define task request description with phases
+        description = {}  # task_description_Compose.json
         description["category"] = "teleop"
         description["phases"] = []
         activities = []
+        # Add activity for each go_to_place
         for place in self.args.places:
-            activities.append({"category": "go_to_place",  "description": place})
-        description["phases"].append({"activity":{"category": "sequence", "description":{"activities":activities}}})
+            activities.append({"category": "go_to_place",
+                               "description": place})
+        # Add activities to phases
+        description["phases"].append(
+            {"activity": {"category": "sequence",
+                          "description": {"activities": activities}}})
         request["description"] = description
         payload["request"] = request
         msg.json_msg = json.dumps(payload)
         print(f"msg: {msg}")
         self.pub.publish(msg)
-
 
 
 ###############################################################################

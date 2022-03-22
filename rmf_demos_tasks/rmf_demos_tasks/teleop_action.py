@@ -39,24 +39,28 @@ class Requester(Node):
                             type=str, help='Fleet name')
         parser.add_argument('-R', '--robot', required=True,
                             help='Robot name', type=str)
+        parser.add_argument('-p', '--points', required=True, nargs='+',
+                            help='Coordinate points for teleop', type=str)
+        parser.add_argument('-m', '--map', required=True,
+                            help='Map name', type=str)
 
         self.args = parser.parse_args(argv[1:])
 
         self.pub = self.create_publisher(
           PathRequest, 'robot_path_requests', 1)
-        pts = [[5.3,-4.9], [3.3, -8.9], [5.3, -9.9], [7.3, -6.1], [5.3,-4.9]]
 
         msg = PathRequest()
         msg.fleet_name = self.args.fleet
         msg.robot_name = self.args.robot
         msg.task_id = str(uuid.uuid1())
-        for p in pts:
-            l = Location()
-            l.x = p[0]
-            l.y = p[1]
-            l.yaw = 0.0
-            l.level_name = "L1"
-            msg.path.append(l)
+        for p in self.args.points:
+            pts = p.split(',')
+            loc = Location()
+            loc.x = float(pts[0])
+            loc.y = float(pts[1])
+            loc.yaw = 0.0
+            loc.level_name = self.args.map
+            msg.path.append(loc)
         self.pub.publish(msg)
 
 ###############################################################################

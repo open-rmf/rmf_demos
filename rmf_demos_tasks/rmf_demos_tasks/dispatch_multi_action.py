@@ -38,17 +38,12 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-F', '--fleet', required=True,
+        parser.add_argument('-F', '--fleet', required=False, default='',
                             type=str, help='Fleet name')
-        parser.add_argument('-R', '--robot', required=True,
+        parser.add_argument('-R', '--robot', required=False, default='',
                             type=str, help='Robot name')
-        parser.add_argument('-s', '--start', required=True,
-                            type=str, help='Start waypoint')
-        parser.add_argument('-f', '--finish', required=True,
-                            type=str, help='Finish waypoint')
-        parser.add_argument('-n', '--loop_num',
-                            help='Number of loops to perform',
-                            type=int, default=1)
+        parser.add_argument('-s', '--starts', required=True,
+                            type=str, nargs='+', help='Action start waypoints')
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
@@ -77,11 +72,14 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "direct_" + str(uuid.uuid4())
+        msg.request_id = "teleop_" + str(uuid.uuid4())
         payload = {}
-        payload["type"] = "robot_task_request"
-        payload["robot"] = self.args.robot
-        payload["fleet"] = self.args.fleet
+        if self.args.fleet and self.args.robot:
+            payload["type"] = "robot_task_request"
+            payload["robot"] = self.args.robot
+            payload["fleet"] = self.args.fleet
+        else:
+            payload["type"] = "dispatch_task_request"
         request = {}
 
         # Set task request start time
@@ -92,18 +90,37 @@ class TaskRequester(Node):
         # todo(YV): Fill priority after schema is added
 
         # Define task request category
-        request["category"] = "patrol"
+        request["category"] = "compose"
 
-        # Define task request description
-        description = {}
-        description["places"] = []
-        description["places"].append(self.args.start)
-        description["places"].append(self.args.finish)
-        description["rounds"] = self.args.loop_num
+        # Define task request description with phases
+        description = {}  # task_description_Compose.json
+        description["category"] = "teleop"
+        description["phases"] = []
+        activities = []
+        # Add action activities
+        for start in self.args.starts:
+            activities.append({"category": "go_to_place",
+                               "description": start})
+            # For demos cleaning fleets, set use_tool_sink to True
+            # for teleop + cleaning action
+            if 'clean' in start:
+                use_tool_sink = True
+            else:
+                use_tool_sink = False
+            activities.append({"category": "perform_action",
+                               "description": {
+                                   "unix_millis_action_duration_estimate":
+                                       60000,
+                                   "category": "teleop", "description": {},
+                                   "use_tool_sink": use_tool_sink}})
+        # Add activities to phases
+        description["phases"].append(
+            {"activity": {"category": "sequence",
+                          "description": {"activities": activities}}})
         request["description"] = description
         payload["request"] = request
         msg.json_msg = json.dumps(payload)
-
+        print(f"msg: {msg}")
         self.pub.publish(msg)
 
 
