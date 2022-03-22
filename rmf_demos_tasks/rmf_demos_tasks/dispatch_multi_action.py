@@ -100,7 +100,7 @@ class TaskRequester(Node):
         # Add action activities
         for start in self.args.starts:
             activities.append({"category": "go_to_place",
-                            "description": start})
+                               "description": start})
             # For demos cleaning fleets, set use_tool_sink to True
             # for teleop + cleaning action
             if 'clean' in start:
@@ -108,10 +108,11 @@ class TaskRequester(Node):
             else:
                 use_tool_sink = False
             activities.append({"category": "perform_action",
-                            "description": {
-                                "unix_millis_action_duration_estimate": 60000,
-                                "category": "teleop", "description": {},
-                                "use_tool_sink": use_tool_sink}})
+                               "description": {
+                                   "unix_millis_action_duration_estimate":
+                                       60000,
+                                   "category": "teleop", "description": {},
+                                   "use_tool_sink": use_tool_sink}})
         # Add activities to phases
         description["phases"].append(
             {"activity": {"category": "sequence",
