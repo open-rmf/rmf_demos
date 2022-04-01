@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-package_name = 'rmf_demos_adapters'
+package_name = 'rmf_demos_fleet_adapter'
 
 setup(
     name=package_name,
@@ -21,7 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             ('deliveryrobot_gps_fleet_adapter='
-                'rmf_demos_adapters.DeliveryRobot'
+                'rmf_demos_fleet_adapter.DeliveryRobot'
                 '.deliveryrobot_gps_fleet_adapter:main')
         ],
     },
