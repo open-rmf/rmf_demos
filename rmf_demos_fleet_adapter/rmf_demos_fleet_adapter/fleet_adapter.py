@@ -157,6 +157,34 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         """Insert a RobotUpdateHandle."""
         cmd_handle.update_handle = update_handle
 
+        def _action_executor(category: str,
+                             description: dict,
+                             execution:
+                             adpt.robot_update_handle.ActionExecution):
+            with cmd_handle._lock:
+                if len(description) > 0 and description in cmd_handle.graph.keys:
+                    cmd_handle.action_waypoint_index = \
+                        cmd_handle.find_waypoint(description).index
+                else:
+                    cmd_handle.action_waypoint_index = cmd_handle.last_known_waypoint_index
+                cmd_handle.on_waypoint = None
+                cmd_handle.on_lane = None
+                cmd_handle.action_execution = execution
+        # Set the action_executioner for the robot
+        cmd_handle.update_handle.set_action_executor(_action_executor)
+        if ("max_delay" in cmd_handle.config.keys()):
+            max_delay = cmd_handle.config["max_delay"]
+            cmd_handle.node.get_logger().info(
+                f"Setting max delay to {max_delay}s")
+            cmd_handle.update_handle.set_maximum_delay(max_delay)
+        if (cmd_handle.charger_waypoint_index < cmd_handle.graph.num_waypoints):
+            cmd_handle.update_handle.set_charger_waypoint(
+                cmd_handle.charger_waypoint_index)
+        else:
+            cmd_handle.node.get_logger().warn(
+                "Invalid waypoint supplied for charger. "
+                "Using default nearest charger in the map")
+
     # Initialize robot API for this fleet
     prefix = 'http://' + fleet_config['fleet_manager']['ip'] + \
              ':' + str(fleet_config['fleet_manager']['port'])

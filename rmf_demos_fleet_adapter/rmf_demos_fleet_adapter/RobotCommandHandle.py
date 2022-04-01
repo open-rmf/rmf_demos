@@ -87,7 +87,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         assert waypoint, f"Charger waypoint {charger_waypoint} \
           does not exist in the navigation graph"
         self.charger_waypoint_index = waypoint.index
-        self.charger_is_set = False
         self.update_frequency = update_frequency
         self.update_handle = None  # RobotUpdateHandle
         self.battery_soc = 1.0
@@ -451,36 +450,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
     def update_state(self):
         self.update_handle.update_battery_soc(self.battery_soc)
-
-        def _action_executor(category: str,
-                             description: dict,
-                             execution:
-                             adpt.robot_update_handle.ActionExecution):
-            with self._lock:
-                if len(description) > 0 and description in self.graph.keys:
-                    self.action_waypoint_index = \
-                        self.graph.find_waypoint(description).index
-                else:
-                    self.action_waypoint_index = self.last_known_waypoint_index
-                self.on_waypoint = None
-                self.on_lane = None
-                self.action_execution = execution
-        # Set the action_executioner for the robot
-        self.update_handle.set_action_executor(_action_executor)
-        if not self.charger_is_set:
-            if ("max_delay" in self.config.keys()):
-                max_delay = self.config["max_delay"]
-                self.node.get_logger().info(
-                    f"Setting max delay to {max_delay}s")
-                self.update_handle.set_maximum_delay(max_delay)
-            if (self.charger_waypoint_index < self.graph.num_waypoints):
-                self.update_handle.set_charger_waypoint(
-                    self.charger_waypoint_index)
-            else:
-                self.node.get_logger().warn(
-                    "Invalid waypoint supplied for charger. "
-                    "Using default nearest charger in the map")
-            self.charger_is_set = True
         # Update position
         with self._lock:
             if (self.on_waypoint is not None):  # if robot is on a waypoint
