@@ -4,7 +4,7 @@ package_name = 'rmf_demos_fleet_adapter'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='1.4.0',
     packages=find_packages(),
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -13,10 +13,11 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Charayaphan Nakorn Boon Han',
-    maintainer_email='charayaphan.nakorn.boon.han@gmail.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    maintainer='Xi Yu Oh',
+    maintainer_email='xiyu@openrobotics.org',
+    description='Fleet adapters for interfacing with RMF Demos robots with a '
+                'fleet manager via REST API',
+    license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
