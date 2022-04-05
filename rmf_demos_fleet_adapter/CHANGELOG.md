@@ -1,4 +1,4 @@
-## Changelog for package rmf_demos_adapters
+## Changelog for package rmf_demos_fleet_adapter
 
 1.4.0 (2022-02-14)
 ------------------
