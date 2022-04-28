@@ -26,17 +26,13 @@ setup(
         'console_scripts': [
           'request_loop = rmf_demos_tasks.request_loop:main',
           'request_lift = rmf_demos_tasks.request_lift:main',
-          'dispatch_loop = rmf_demos_tasks.dispatch_loop:main',
+          'cancel_task = rmf_demos_tasks.cancel_task:main',          
+          'dispatch_action = rmf_demos_tasks.dispatch_action:main',
+          'dispatch_patrol = rmf_demos_tasks.dispatch_patrol:main',
           'dispatch_delivery = rmf_demos_tasks.dispatch_delivery:main',
           'dispatch_clean = rmf_demos_tasks.dispatch_clean:main',
           'mock_docker = rmf_demos_tasks.mock_docker:main',
-          'direct_patrol = rmf_demos_tasks.direct_patrol:main',
-          'dispatch_teleop = rmf_demos_tasks.dispatch_teleop:main',
           'teleop_action = rmf_demos_tasks.teleop_action:main',
-          'dispatch_multi_stop = rmf_demos_tasks.dispatch_multi_stop:main',
-          'dispatch_multi_delivery = '
-            'rmf_demos_tasks.dispatch_multi_delivery:main',
-          'dispatch_multi_action = rmf_demos_tasks.dispatch_multi_action:main'
         ],
     },
 )

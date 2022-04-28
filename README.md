@@ -107,7 +107,7 @@ To submit a **loop task**, select `Loop` from the `Select a request type` dropdo
 Or, dispatch robot via CLI
 ```bash
 ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
-ros2 run rmf_demos_tasks dispatch_loop -s restaurant -f L3_master_suite -n 1 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_patrol -p restaurant  L3_master_suite -n 1 --use_sim_time
 ```
 
 Robots running Clean and Loop Task:
@@ -143,8 +143,8 @@ To submit a **delivery task**, select `Delivery` from the `Select a request type
 
 Or, submit a task via CLI:
 ```bash
-ros2 run rmf_demos_tasks dispatch_loop -s coe -f lounge -n 3 --use_sim_time
-ros2 run rmf_demos_tasks dispatch_delivery -p pantry -pd coke_dispenser -d hardware_2 -di coke_ingestor --use_sim_time
+ros2 run rmf_demos_tasks dispatch_patrol -p coe lounge -n 3 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_delivery -p pantry,coke_dispenser,coke,1 -d hardware_2,coke_ingestor,coke,1 --use_sim_time
 ```
 
 To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
@@ -175,7 +175,7 @@ Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [airport_te
 
 Or, submit `loop`, `delivery` or `clean` task via CLI:
 ```bash
-ros2 run rmf_demos_tasks dispatch_loop -s s07 -f n12 -n 3 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_patrol -p s07   n12 -n 3 --use_sim_time
 ros2 run rmf_demos_tasks dispatch_delivery -p mopcart_pickup -pd mopcart_dispenser -d spill -di mopcart_collector --use_sim_time
 ros2 run rmf_demos_tasks dispatch_clean -cs zone_3 --use_sim_time
 ```
@@ -200,7 +200,7 @@ ros2 launch rmf_demos_ign airport_terminal_caddy.launch.xml
 
 ![](../media/caddy.gif)
 
-> Tip: To speedup simulation on gazebo, user can run `gz physics -s 0.01` on a separate terminal after launching the world. Use with care!
+> Tip: To speedup simulation on gazebo, user can run `gz physics -p 0.01` on a separate terminal after launching the world. Use with care!
 
 ---
 
@@ -222,8 +222,8 @@ Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [clinic_tas
 
 Or, submit a task via CLI:
 ```bash
-ros2 run rmf_demos_tasks dispatch_loop -s L1_left_nurse_center -f L2_right_nurse_center -n 5 --use_sim_time
-ros2 run rmf_demos_tasks dispatch_loop -s L2_north_counter -f L1_right_nurse_center -n 5 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_patrol -p L1_left_nurse_center   L2_right_nurse_center -n 5 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_patrol -p L2_north_counter   L1_right_nurse_center -n 5 --use_sim_time
 ```
 
 Robots taking lift:
@@ -249,9 +249,9 @@ To launch the world and the schedule visualizer,
 source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_ign campus.launch.xml
 
-ros2 run rmf_demos_tasks  dispatch_loop -s room_5 -f campus_4 -n 10 --use_sim_time
-ros2 run rmf_demos_tasks  dispatch_loop -s campus_5 -f room_3 -n 10 --use_sim_time
-ros2 run rmf_demos_tasks  dispatch_loop -s room_2 -f dead_end -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_patrol -p room_5   campus_4 -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_patrol -p campus_5  room_3 -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_patrol -p room_2  dead_end -n 10 --use_sim_time
 ```
 
 #### RobotManager Integration
@@ -288,6 +288,8 @@ $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
 ```
 
 ### Additional Features
+ - **Flexible Tasks Scripts**
+   For more [details](rmf_demos_tasks/README.md).
 
  - **lift watchdog**
    - The robot can query an external `lift_watchdog_server` for the permission to enter the lift cabin during the `LiftSession` Phase.
@@ -300,7 +302,7 @@ $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
     ros2 launch rmf_demos experimental_crowded_lift.launch.xml
 
     # Dispatch robot from level1 to level3, robot will wait in front of the lift cabin
-    ros2 run rmf_demos_tasks dispatch_loop -s L3_room1 -f L3_room1 -n 1 --use_sim_time
+    ros2 run rmf_demos_tasks dispatch_patrol -p L3_room1  L3_room1 -n 1 --use_sim_time
 
     # Lift is cleared. Give robot the permission to enter the lift
     ros2 launch rmf_demos experimental_clear_lift.launch.xml
