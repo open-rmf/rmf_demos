@@ -49,11 +49,12 @@ class TaskRequester(Node):
                             type=int, default=0)
         parser.add_argument('-a', '--action', required=True,
                             type=str, help='action name')
-        parser.add_argument('-ad', '--action_desc', required=False, default='{}',
+        parser.add_argument('-ad', '--action_desc', required=False,
+                            default='{}',
                             type=str, help='action description in json str')
         parser.add_argument('-F', '--fleet', type=str,
                             help='Fleet name, should define tgt with robot')
-        parser.add_argument('-R', '--robot', type=str, 
+        parser.add_argument('-R', '--robot', type=str,
                             help='Robot name, should define tgt with fleet')
         parser.add_argument("--use_sim_time", action="store_true",
                             help='Use sim time, default: false')
@@ -98,7 +99,7 @@ class TaskRequester(Node):
         # todo(YV): Fill priority after schema is added
 
         # For demos cleaning fleets, set use_tool_sink to True
-         # TODO: better way to deal with this
+        # TODO: better way to deal with this
         use_tool_sink = ('clean' == self.args.action)
         # Define task request category
         request["category"] = "compose"
@@ -110,27 +111,35 @@ class TaskRequester(Node):
         activities = []
 
         def _add_action():
-            activities.append({"category": "perform_action",
-                    "description": {
-                        "unix_millis_action_duration_estimate":
-                            60000,
+            activities.append(
+                {
+                    "category": "perform_action",
+                    "description":
+                    {
+                        "unix_millis_action_duration_estimate": 60000,
                         "category": self.args.action,
                         "description": json.loads(self.args.action_desc),
-                        "use_tool_sink": use_tool_sink}})
+                        "use_tool_sink": use_tool_sink
+                    }
+                })
 
         if not self.args.starts:
             _add_action()
         else:
             # Add action activities
             for start in self.args.starts:
-                activities.append({"category": "go_to_place",
-                                    "description": start})
+                activities.append({
+                        "category": "go_to_place",
+                        "description": start
+                    })
                 _add_action()
 
         # Add activities to phases
-        description["phases"].append(
-                        {"activity": {"category": "sequence",
-                        "description": {"activities": activities}}})
+        description["phases"].append({
+                "activity": {
+                    "category": "sequence",
+                    "description": {"activities": activities}}
+            })
 
         request["description"] = description
         payload["request"] = request

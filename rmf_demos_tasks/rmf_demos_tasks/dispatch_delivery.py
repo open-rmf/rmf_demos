@@ -49,7 +49,7 @@ class TaskRequester(Node):
                                  "[place, handler, sku, quantity]")
         parser.add_argument('-F', '--fleet', type=str,
                             help='Fleet name, should define tgt with robot')
-        parser.add_argument('-R', '--robot', type=str, 
+        parser.add_argument('-R', '--robot', type=str,
                             help='Robot name, should define tgt with fleet')
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
@@ -99,12 +99,12 @@ class TaskRequester(Node):
         request["unix_millis_earliest_start_time"] = start_time
 
         def __create_workcell_desc(workcell_list):
-            l = workcell_list.split(',')
+            wl = workcell_list.split(',')
             return {
-                    "place": l[0],
-                    "handler": l[1],
-                    "payload": [{"sku": l[2],
-                                "quantity": int(l[3])}]
+                    "place": wl[0],
+                    "handler": wl[1],
+                    "payload": [{"sku": wl[2],
+                                "quantity": int(wl[3])}]
                     }
 
         # Use standard delivery task type
@@ -125,16 +125,19 @@ class TaskRequester(Node):
             activities = []
             # Add each pickup
             for pick in self.args.pickups:
-                activities.append({"category": "pickup",
-                                "description": __create_workcell_desc(pick)})
+                activities.append({
+                    "category": "pickup",
+                    "description": __create_workcell_desc(pick)})
             # Add each dropoff
             for drop in self.args.dropoffs:
-                activities.append({"category": "dropoff",
-                                "description": __create_workcell_desc(drop)})
+                activities.append({
+                    "category": "dropoff",
+                    "description": __create_workcell_desc(drop)})
             # Add activities to phases
             description["phases"].append(
-                {"activity": {"category": "sequence",
-                            "description": {"activities": activities}}})
+                {"activity": {
+                    "category": "sequence",
+                    "description": {"activities": activities}}})
 
         request["description"] = description
         payload["request"] = request

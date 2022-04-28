@@ -26,7 +26,7 @@ setup(
         'console_scripts': [
           'request_loop = rmf_demos_tasks.request_loop:main',
           'request_lift = rmf_demos_tasks.request_lift:main',
-          'cancel_task = rmf_demos_tasks.cancel_task:main',          
+          'cancel_task = rmf_demos_tasks.cancel_task:main',
           'dispatch_action = rmf_demos_tasks.dispatch_action:main',
           'dispatch_patrol = rmf_demos_tasks.dispatch_patrol:main',
           'dispatch_delivery = rmf_demos_tasks.dispatch_delivery:main',

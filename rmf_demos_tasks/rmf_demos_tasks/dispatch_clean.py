@@ -43,7 +43,7 @@ class TaskRequester(Node):
                             type=str, help='Cleaning zone')
         parser.add_argument('-F', '--fleet', type=str,
                             help='Fleet name, should define tgt with robot')
-        parser.add_argument('-R', '--robot', type=str, 
+        parser.add_argument('-R', '--robot', type=str,
                             help='Robot name, should define tgt with fleet')
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
