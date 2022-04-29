@@ -17,8 +17,7 @@ jobs:
         sudo apt update && sudo apt install \
           git cmake python3-vcstool curl \
           qt5-default \
-          python3-shapely python3-yaml python3-requests \
-          ignition-edifice  python3-pip -y
+          python3-shapely python3-yaml python3-requests python3-pip -y
         pip3 install flask-socketio
     - name: create-ws
       run: |
