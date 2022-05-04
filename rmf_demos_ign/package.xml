@@ -17,7 +17,7 @@
 
   <exec_depend>teleop_twist_keyboard</exec_depend>
   <exec_depend>launch_xml</exec_depend>
-  <exec_depend>ignition-gazebo5-plugins</exec_depend>
+  <exec_depend>ignition-fortress</exec_depend>
 
   <exec_depend>ros_ign_bridge</exec_depend>
 
