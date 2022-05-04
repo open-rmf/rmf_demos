@@ -2,6 +2,7 @@
 
 <launch>
   <arg name="use_sim_time" default="false"/>
+  <arg name="crs" default="EPSG:3414"/>
   <arg name="enable_experimental_lift_watchdog" default="false" description="experimental lift watchdog"/>
 
   <!-- Common launch -->
@@ -30,6 +31,7 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/1.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/cleanerBotA_config.yaml"/>
+      <arg name="crs" value="$(var crs)"/>
     </include>
   </group>
 
@@ -39,6 +41,7 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/tinyRobot_config.yaml"/>
+      <arg name="crs" value="$(var crs)"/>
     </include>
   </group>
 
@@ -49,6 +52,7 @@
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/2.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/deliveryRobot_config.yaml"/>
       <arg name="experimental_lift_watchdog_service" value="$(env EXPT_LIFT_WATCHDOG_SRV)"/>
+      <arg name="crs" value="$(var crs)"/>
     </include>
   </group>
 

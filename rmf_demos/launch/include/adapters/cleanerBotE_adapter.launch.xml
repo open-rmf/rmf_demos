@@ -10,6 +10,9 @@
       <!-- The config file that provides important parameters for setting up the adapter -->
       <arg name="config_file" value="$(var config_file)"/>
 
+      <!-- The coordinate reference system that the fleet operates in -->
+      <arg name="crs" value="$(var crs)"/>
+
     </include>
   </group>
 </launch>

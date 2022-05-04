@@ -36,6 +36,7 @@ import rmf_adapter.vehicletraits as traits
 import rmf_adapter.geometry as geometry
 
 import numpy as np
+from .Transformer import CrsTransformer
 
 from fastapi import FastAPI
 import uvicorn
@@ -70,8 +71,11 @@ class State:
 
 
 class FleetManager(Node):
-    def __init__(self, config, nav_path):
+    def __init__(self, config, nav_path, crs):
         self.config = config
+        self.crs_transformer = None
+        if crs != 'EPSG:3414':
+            self.crs_transformer = CrsTransformer(crs)
         self.fleet_name = self.config["rmf_fleet"]["name"]
 
         super().__init__(f'{self.fleet_name}_fleet_manager')
@@ -155,6 +159,10 @@ class FleetManager(Node):
             target_yaw = dest.destination['yaw']
             target_map = dest.map_name
             target_speed_limit = dest.speed_limit
+
+            # Ensure that target_x and target_y are in RMF coordinates
+            if self.crs_transformer is not None:
+                target_x, target_y = self.crs_transformer.transform_crs_to_rmf(target_x, target_y)
 
             t = self.get_clock().now().to_msg()
 
@@ -311,13 +319,15 @@ def main(argv=sys.argv):
                         help="Path to the config.yaml file")
     parser.add_argument("-n", "--nav_graph", type=str, required=True,
                         help="Path to the nav_graph for this fleet adapter")
+    parser.add_argument("--crs", type=str, required=False, default="EPSG:3414",
+                        help="Coordinate system this fleet adapter operates in")
     args = parser.parse_args(args_without_ros[1:])
     print(f"Starting fleet manager...")
 
     with open(args.config_file, "r") as f:
         config = yaml.safe_load(f)
 
-    fleet_manager = FleetManager(config, args.nav_graph)
+    fleet_manager = FleetManager(config, args.nav_graph, args.crs)
 
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()

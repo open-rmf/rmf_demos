@@ -38,6 +38,8 @@ import time
 
 from datetime import timedelta
 
+from .Transformer import CrsTransformer
+
 
 # States for RobotCommandHandle's state machine used when guiding robot along
 # a new path
@@ -73,7 +75,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                  charger_waypoint,
                  update_frequency,
                  adapter,
-                 api):
+                 api,
+                 crs):
         adpt.RobotCommandHandle.__init__(self)
         self.name = name
         self.fleet_name = fleet_name
@@ -91,6 +94,9 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.update_handle = None  # RobotUpdateHandle
         self.battery_soc = 1.0
         self.api = api
+        self.crs_transformer = None
+        if crs != 'EPSG:3414':
+            self.crs_transformer = CrsTransformer(crs)
         self.position = position  # (x,y,theta) in RMF crs (meters,radians)
         self.initialized = False
         self.state = RobotState.IDLE
@@ -240,6 +246,9 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     [x, y] = target_pose[:2]
                     theta = target_pose[2]
                     speed_limit = self.get_speed_limit(self.target_waypoint)
+                    # Convert x, y to specified CRS if any
+                    if self.crs_transformer is not None:
+                        x, y = self.crs_transformer.transform_rmf_to_crs(x, y)
                     response = self.api.navigate(self.name,
                                                  [x, y, theta],
                                                  self.map_name,
