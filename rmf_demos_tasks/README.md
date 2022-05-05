@@ -83,12 +83,16 @@ The new task system allows users to construct and submit their own tasks in a mo
 
 ## Additional Scripts
 
-- **teleop_robot**
-
-  This script demonstrates sending a teleop action with a particular set of coordinates `-p` you would like your robot to follow in a given map `-m`. To test it, launch the Office world and run the above `dispatch_action` task to bring `tinyRobot1` to `coe`. Then,
+- **office_teleop_robot**
+  This script demonstrates the capability of `teleop` perform action task. Imagine when the robot executes a teleop action, the user would like to move the robot around. To simulate this behaviour, we will show this scenario in office world.
+  
+  Launch the Office world and run the above `dispatch_action` task to bring `tinyRobot1` to `coe`. During perform action, the fleetadapter give up control of the robot. To simulate a teleop operation, we will run:
   ```
   ros2 launch rmf_demos office_teleop_robot.launch.xml
   ```
+  
+  The `office_teleop_robot` script directly controls the robot motion in simulation without going through the fleet adapter.
+
   If you are running this in Gazebo, you will need to delete the room chair models for the simulation physics to run smoothly.
 
   You can end the action by publishing a `ModeRequest` via the `/action_execution_notice` topic as demonstrated above.
