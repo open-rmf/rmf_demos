@@ -94,8 +94,9 @@ The new task system allows users to construct and submit their own tasks in a mo
   You can end the action by publishing a `ModeRequest` via the `/action_execution_notice` topic as demonstrated above.
 
 - **dispatch_go_to_place**
-  Similar to `dispatch_patrol`, user can dispatch the robot to go towards a specified waypoint, optionally provide a stopping orientation after the robot reaches its destination.
+  Similar to `dispatch_patrol`, you can dispatch the robot to go to a specified waypoint. The useful side of `dispatch_go_to_place` is the ability to specify the orientation when the robot reaches the destination, with the arg `-o`. Additionally, you may also choose to specify a robot with `-f` and `-R`.
 
+  Example in office world:
   ```
   ros2 run rmf_demos_tasks  dispatch_go_to_place -p lounge -o 105 --use_sim_time
   ```
