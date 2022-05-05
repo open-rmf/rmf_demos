@@ -1,4 +1,4 @@
-Note, ROS2 Foxy on Ubuntu 20.04 with Ignition Edifice is the only supported setup.
+Note, this setup uses ROS2 Galactic on Ubuntu 20.04 with Ignition Fortress.
 
 1. Start by setting up your system dependencies:
 
@@ -18,26 +18,25 @@ Note, ROS2 Foxy on Ubuntu 20.04 with Ignition Edifice is the only supported setu
 The easiest way to setup ignition is to install from binaries:
 
     ```
-    sudo apt install ignition-edifice
+    sudo apt install ignition-fortress
     ```
 
 Alternatively you can install it from source.
 
 # Source installation
 
-1. Install `ignition-edifice` from source. The branches in the official guide can be used
+1. Install `ignition-fortress` from source. For more details, please refer to the [official doc](https://gazebosim.org/docs/fortress/install_ubuntu_src#getting-the-sources)
 
     ```
     mkdir ws_edifice/src -p
     cd ws_edifice
     ```
 
-1. Use the provided `ign-edifice.yaml` file and initialise the sources:
+1. Use the provided `ign-fortress.yaml` file and initialise the sources:
 
     ```
-    wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-edifice.yaml
-    vcs import src < collection-edifice.yaml
-
+    wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-fortress.yaml
+    vcs import < collection-fortress.yaml
     ```
 
 1. Build from source and source in your .bashrc (or remember to source manually before running any demo):
