@@ -58,6 +58,9 @@ class TaskRequester(Node):
                             help='Robot name, should define tgt with fleet')
         parser.add_argument("--use_sim_time", action="store_true",
                             help='Use sim time, default: false')
+        parser.add_argument("--use_tool_sink", action="store_true",
+                            help='Use tool sink during perform action, \
+                                default: false')
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -98,9 +101,6 @@ class TaskRequester(Node):
         request["unix_millis_earliest_start_time"] = start_time
         # todo(YV): Fill priority after schema is added
 
-        # For demos cleaning fleets, set use_tool_sink to True
-        # TODO: better way to deal with this
-        use_tool_sink = ('clean' == self.args.action)
         # Define task request category
         request["category"] = "compose"
 
@@ -119,7 +119,7 @@ class TaskRequester(Node):
                         "unix_millis_action_duration_estimate": 60000,
                         "category": self.args.action,
                         "description": json.loads(self.args.action_desc),
-                        "use_tool_sink": use_tool_sink
+                        "use_tool_sink": self.args.use_tool_sink
                     }
                 })
 

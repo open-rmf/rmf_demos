@@ -144,7 +144,7 @@ To submit a **delivery task**, select `Delivery` from the `Select a request type
 Or, submit a task via CLI:
 ```bash
 ros2 run rmf_demos_tasks dispatch_patrol -p coe lounge -n 3 --use_sim_time
-ros2 run rmf_demos_tasks dispatch_delivery -p pantry,coke_dispenser,coke,1 -d hardware_2,coke_ingestor,coke,1 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_delivery -p pantry -ph coke_dispenser -d hardware_2 -dh coke_ingestor --use_sim_time
 ```
 
 To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
@@ -175,8 +175,8 @@ Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [airport_te
 
 Or, submit `loop`, `delivery` or `clean` task via CLI:
 ```bash
-ros2 run rmf_demos_tasks dispatch_patrol -p s07   n12 -n 3 --use_sim_time
-ros2 run rmf_demos_tasks dispatch_delivery -p mopcart_pickup -pd mopcart_dispenser -d spill -di mopcart_collector --use_sim_time
+ros2 run rmf_demos_tasks dispatch_patrol -p s07 n12 -n 3 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_delivery -p mopcart_pickup -ph mopcart_dispenser -d spill -dh mopcart_collector --use_sim_time
 ros2 run rmf_demos_tasks dispatch_clean -cs zone_3 --use_sim_time
 ```
 
@@ -200,7 +200,7 @@ ros2 launch rmf_demos_ign airport_terminal_caddy.launch.xml
 
 ![](../media/caddy.gif)
 
-> Tip: To speedup simulation on gazebo, user can run `gz physics -p 0.01` on a separate terminal after launching the world. Use with care!
+> Tip: To speedup simulation on gazebo, user can run `gz physics -ps 0.01` on a separate terminal after launching the world. Use with care!
 
 ---
 
@@ -222,8 +222,8 @@ Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [clinic_tas
 
 Or, submit a task via CLI:
 ```bash
-ros2 run rmf_demos_tasks dispatch_patrol -p L1_left_nurse_center   L2_right_nurse_center -n 5 --use_sim_time
-ros2 run rmf_demos_tasks dispatch_patrol -p L2_north_counter   L1_right_nurse_center -n 5 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_patrol -p L1_left_nurse_center L2_right_nurse_center -n 5 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_patrol -p L2_north_counter L1_right_nurse_center -n 5 --use_sim_time
 ```
 
 Robots taking lift:
@@ -249,9 +249,9 @@ To launch the world and the schedule visualizer,
 source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_ign campus.launch.xml
 
-ros2 run rmf_demos_tasks  dispatch_patrol -p room_5   campus_4 -n 10 --use_sim_time
-ros2 run rmf_demos_tasks  dispatch_patrol -p campus_5  room_3 -n 10 --use_sim_time
-ros2 run rmf_demos_tasks  dispatch_patrol -p room_2  dead_end -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_patrol -p room_5 campus_4 -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_patrol -p campus_5 room_3 -n 10 --use_sim_time
+ros2 run rmf_demos_tasks  dispatch_patrol -p room_2 dead_end -n 10 --use_sim_time
 ```
 
 #### RobotManager Integration

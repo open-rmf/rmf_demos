@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright 2022 Open Source Robotics Foundation, Inc.
+# Copyright 2021 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,12 +41,22 @@ class TaskRequester(Node):
         parser = argparse.ArgumentParser()
         parser.add_argument('-p', '--pickups', required=True,
                             type=str, nargs='+',
-                            help="Pickups description, format: "
-                                 "[place, handler, sku, quantity]")
+                            help="Pickup names")
         parser.add_argument('-d', '--dropoffs', required=True,
                             type=str, nargs='+',
-                            help="Dropoffs description, format: "
-                                 "[place, handler, sku, quantity]")
+                            help="Dropoff names")
+        parser.add_argument('-ph', '--pickup_handlers', required=True,
+                            type=str, nargs='+',
+                            help="Pickup handler names")
+        parser.add_argument('-dh', '--dropoff_handlers', required=True,
+                            type=str, nargs='+',
+                            help="Dropoffs handler names")
+        parser.add_argument('-pp', '--pickup_payloads',
+                            type=str, nargs='+', default=[],
+                            help="Pickup payload [sku,quantity sku2,qty...]")
+        parser.add_argument('-dp', '--dropoff_payloads',
+                            type=str, nargs='+', default=[],
+                            help="Dropoff payload [sku,quantity sku2,qty...]")
         parser.add_argument('-F', '--fleet', type=str,
                             help='Fleet name, should define tgt with robot')
         parser.add_argument('-R', '--robot', type=str,
@@ -62,6 +72,18 @@ class TaskRequester(Node):
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
+
+        # check user delivery arg inputs
+        if (len(self.args.pickups) != len(self.args.pickup_handlers)):
+            self.get_logger().error(
+                "Invalid pickups, [-p] should have the same length as [-ph]")
+            parser.print_help()
+            sys.exit(1)
+        if (len(self.args.dropoffs) != len(self.args.dropoff_handlers)):
+            self.get_logger().error(
+                "Invalid dropoffs, [-d] should have the same length as [-dh]")
+            parser.print_help()
+            sys.exit(1)
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
@@ -98,21 +120,44 @@ class TaskRequester(Node):
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request["unix_millis_earliest_start_time"] = start_time
 
-        def __create_workcell_desc(workcell_list):
-            wl = workcell_list.split(',')
+        def __create_pickup_desc(index):
+            if index < len(self.args.pickup_payloads):
+                sku_qty = self.args.pickup_payloads[index].split(',')
+                assert len(sku_qty) == 2, \
+                    "please specify sku and qty for pickup payload"
+                payload = [{"sku": sku_qty[0],
+                            "quantity": int(sku_qty[1])}]
+            else:
+                payload = []
+
             return {
-                    "place": wl[0],
-                    "handler": wl[1],
-                    "payload": [{"sku": wl[2],
-                                "quantity": int(wl[3])}]
+                    "place": self.args.pickups[index],
+                    "handler": self.args.pickup_handlers[index],
+                    "payload": payload
+                    }
+
+        def __create_dropoff_desc(index):
+            if index < len(self.args.dropoff_payloads):
+                sku_qty = self.args.dropoff_payloads[index].split(',')
+                assert len(sku_qty) == 2, \
+                    "please specify sku and qty for dropoff payload"
+                payload = [{"sku": sku_qty[0],
+                            "quantity": int(sku_qty[1])}]
+            else:
+                payload = []
+
+            return {
+                    "place": self.args.dropoffs[index],
+                    "handler": self.args.dropoff_handlers[index],
+                    "payload": payload
                     }
 
         # Use standard delivery task type
         if len(self.args.pickups) == 1 and len(self.args.dropoffs) == 1:
             request["category"] = "delivery"
             description = {
-                "pickup": __create_workcell_desc(self.args.pickups[0]),
-                "dropoff": __create_workcell_desc(self.args.dropoffs[0])
+                "pickup": __create_pickup_desc(0),
+                "dropoff": __create_dropoff_desc(0)
                 }
         else:
             # Define multi_delivery with request category compose
@@ -124,15 +169,15 @@ class TaskRequester(Node):
             description["phases"] = []
             activities = []
             # Add each pickup
-            for pick in self.args.pickups:
+            for i in range(0, len(self.args.pickups)):
                 activities.append({
                     "category": "pickup",
-                    "description": __create_workcell_desc(pick)})
+                    "description": __create_pickup_desc(i)})
             # Add each dropoff
-            for drop in self.args.dropoffs:
+            for i in range(0, len(self.args.dropoffs)):
                 activities.append({
                     "category": "dropoff",
-                    "description": __create_workcell_desc(drop)})
+                    "description": __create_dropoff_desc(i)})
             # Add activities to phases
             description["phases"].append(
                 {"activity": {
