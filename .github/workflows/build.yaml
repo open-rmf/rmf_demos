@@ -41,4 +41,4 @@ jobs:
       run: |
         cd rmf_demos_ws
         source /opt/ros/galactic/setup.bash
-        colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release -DNO_DOWNLOAD_MODELS=True --no-warn-unused-cli
+        colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release -DNO_DOWNLOAD_MODELS=True
