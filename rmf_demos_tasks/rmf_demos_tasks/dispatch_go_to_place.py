@@ -80,7 +80,7 @@ class TaskRequester(Node):
         # Construct task
         msg = ApiRequest()
         msg.request_id = "direct_" + str(uuid.uuid4())
-        payload = { }
+        payload = {}
 
         if self.args.robot and self.args.fleet:
             self.get_logger().info("Using 'robot_task_request'")
@@ -98,7 +98,7 @@ class TaskRequester(Node):
         # todo(YV): Fill priority after schema is added
 
         # Define task request description
-        go_to_description = { 'waypoint': self.args.place }
+        go_to_description = {'waypoint': self.args.place}
         if self.args.orientation is not None:
             go_to_description['orientation'] = (
                 self.args.orientation*math.pi/180.0
