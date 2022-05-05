@@ -39,15 +39,15 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-F', '--fleet', required=True,
-                            type=str, help='Fleet name')
-        parser.add_argument('-R', '--robot', required=True,
-                            type=str, help='Robot name')
         parser.add_argument('-p', '--places', required=True, nargs='+',
                             type=str, help='Places to patrol through')
         parser.add_argument('-n', '--rounds',
                             help='Number of loops to perform',
                             type=int, default=1)
+        parser.add_argument('-F', '--fleet', type=str,
+                            help='Fleet name, should define tgt with robot')
+        parser.add_argument('-R', '--robot', type=str,
+                            help='Robot name, should define tgt with fleet')
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
@@ -65,7 +65,6 @@ class TaskRequester(Node):
             depth=1,
             reliability=Reliability.RELIABLE,
             durability=Durability.TRANSIENT_LOCAL)
-
         self.pub = self.create_publisher(
           ApiRequest, 'task_api_requests', transient_qos
         )
@@ -78,11 +77,18 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "direct_" + str(uuid.uuid4())
+        msg.request_id = "patrol_" + str(uuid.uuid4())
         payload = {}
-        payload["type"] = "robot_task_request"
-        payload["robot"] = self.args.robot
-        payload["fleet"] = self.args.fleet
+
+        if self.args.robot and self.args.fleet:
+            self.get_logger().info("Using 'robot_task_request'")
+            payload["type"] = "robot_task_request"
+            payload["robot"] = self.args.robot
+            payload["fleet"] = self.args.fleet
+        else:
+            self.get_logger().info("Using 'dispatch_task_request'")
+            payload["type"] = "dispatch_task_request"
+
         request = {}
 
         # Set task request start time
@@ -112,6 +118,7 @@ class TaskRequester(Node):
             ApiResponse, 'task_api_responses', receive_response, 10
         )
 
+        print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")
         self.pub.publish(msg)
 
 
@@ -123,7 +130,8 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = TaskRequester(args_without_ros)
-    rclpy.spin_until_future_complete(task_requester, task_requester.response)
+    rclpy.spin_until_future_complete(
+        task_requester, task_requester.response, timeout_sec=5.0)
     if task_requester.response.done():
         print(f'Got response:\n{task_requester.response.result()}')
     else:

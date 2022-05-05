@@ -38,16 +38,8 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-p', '--places', required=True,
-                            type=str, nargs='+', help='List of places')
-        parser.add_argument('-st', '--start_time',
-                            help='Start time from now in secs, default: 0',
-                            type=int, default=0)
-        parser.add_argument('-pt', '--priority',
-                            help='Priority value for this request',
-                            type=int, default=0)
-        parser.add_argument("--use_sim_time", action="store_true",
-                            help='Use sim time, default: false')
+        parser.add_argument('-id', '--task_id', required=True, default='',
+                            type=str, help='Cancel Task ID')
 
         self.args = parser.parse_args(argv[1:])
 
@@ -60,48 +52,16 @@ class TaskRequester(Node):
         self.pub = self.create_publisher(
           ApiRequest, 'task_api_requests', transient_qos)
 
-        # enable ros sim time
-        if self.args.use_sim_time:
-            self.get_logger().info("Using Sim Time")
-            param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
-            self.set_parameters([param])
-
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "teleop_" + str(uuid.uuid4())
+        msg.request_id = "cancel_task_" + str(uuid.uuid4())
         payload = {}
-        payload["type"] = "dispatch_task_request"
-        request = {}
+        payload["type"] = "cancel_task_request"
+        payload["task_id"] = self.args.task_id
 
-        # Set task request start time
-        now = self.get_clock().now().to_msg()
-        now.sec = now.sec + self.args.start_time
-        start_time = now.sec * 1000 + round(now.nanosec/10**6)
-        request["unix_millis_earliest_start_time"] = start_time
-        # todo(YV): Fill priority after schema is added
-
-        # Define task request category
-        request["category"] = "compose"
-
-        # Define task request description with phases
-        description = {}  # task_description_Compose.json
-        description["category"] = "teleop"
-        description["phases"] = []
-        activities = []
-        # Add activity for each go_to_place
-        for place in self.args.places:
-            activities.append({"category": "go_to_place",
-                               "description": place})
-        # Add activities to phases
-        description["phases"].append(
-            {"activity": {"category": "sequence",
-                          "description": {"activities": activities}}})
-        request["description"] = description
-        payload["request"] = request
         msg.json_msg = json.dumps(payload)
-        print(f"msg: {msg}")
+        print(f"msg: \n{json.dumps(payload, indent=2)}")
         self.pub.publish(msg)
-
 
 ###############################################################################
 

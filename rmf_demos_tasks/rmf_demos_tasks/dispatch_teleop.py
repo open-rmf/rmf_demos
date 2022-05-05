@@ -111,7 +111,7 @@ class TaskRequester(Node):
         request["description"] = description
         payload["request"] = request
         msg.json_msg = json.dumps(payload)
-        print(f"msg: {msg}")
+        print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")
         self.pub.publish(msg)
 
 
