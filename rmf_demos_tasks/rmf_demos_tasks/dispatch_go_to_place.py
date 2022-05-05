@@ -78,9 +78,15 @@ class TaskRequester(Node):
         msg = ApiRequest()
         msg.request_id = "direct_" + str(uuid.uuid4())
         payload = {}
-        payload["type"] = "robot_task_request"
-        payload["robot"] = self.args.robot
-        payload["fleet"] = self.args.fleet
+
+        if self.args.robot and self.args.fleet:
+            self.get_logger().info("Using 'robot_task_request'")
+            payload["type"] = "robot_task_request"
+            payload["robot"] = self.args.robot
+            payload["fleet"] = self.args.fleet
+        else:
+            self.get_logger().info("Using 'dispatch_task_request'")
+            payload["type"] = "dispatch_task_request"
 
         # Set task request start time
         now = self.get_clock().now().to_msg()
@@ -108,6 +114,7 @@ class TaskRequester(Node):
         }
 
         payload["request"] = rmf_task_request
+
         msg.json_msg = json.dumps(payload)
 
         def receive_response(response_msg: ApiResponse):
