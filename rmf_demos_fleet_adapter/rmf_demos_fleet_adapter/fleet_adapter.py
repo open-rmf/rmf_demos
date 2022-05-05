@@ -162,11 +162,13 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time, crs):
                              execution:
                              adpt.robot_update_handle.ActionExecution):
             with cmd_handle._lock:
-                if len(description) > 0 and description in cmd_handle.graph.keys:
+                if len(description) > 0 and\
+                        description in cmd_handle.graph.keys:
                     cmd_handle.action_waypoint_index = \
                         cmd_handle.find_waypoint(description).index
                 else:
-                    cmd_handle.action_waypoint_index = cmd_handle.last_known_waypoint_index
+                    cmd_handle.action_waypoint_index = \
+                        cmd_handle.last_known_waypoint_index
                 cmd_handle.on_waypoint = None
                 cmd_handle.on_lane = None
                 cmd_handle.action_execution = execution
@@ -177,7 +179,8 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time, crs):
             cmd_handle.node.get_logger().info(
                 f"Setting max delay to {max_delay}s")
             cmd_handle.update_handle.set_maximum_delay(max_delay)
-        if (cmd_handle.charger_waypoint_index < cmd_handle.graph.num_waypoints):
+        if (cmd_handle.charger_waypoint_index <
+                cmd_handle.graph.num_waypoints):
             cmd_handle.update_handle.set_charger_waypoint(
                 cmd_handle.charger_waypoint_index)
         else:
@@ -316,7 +319,7 @@ def main(argv=sys.argv):
     parser.add_argument("--use_sim_time", action="store_true",
                         help='Use sim time, default: false')
     parser.add_argument("--crs", type=str, required=False, default="EPSG:3414",
-                        help="Coordinate system this fleet adapter operates in")
+                        help="Coordinate system the fleet adapter operates in")
     args = parser.parse_args(args_without_ros[1:])
     print(f"Starting fleet adapter...")
 

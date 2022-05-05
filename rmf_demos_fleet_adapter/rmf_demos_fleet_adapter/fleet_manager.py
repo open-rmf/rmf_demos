@@ -162,7 +162,8 @@ class FleetManager(Node):
 
             # Ensure that target_x and target_y are in RMF coordinates
             if self.crs_transformer is not None:
-                target_x, target_y = self.crs_transformer.transform_crs_to_rmf(target_x, target_y)
+                target_x, target_y = self.crs_transformer.transform_crs_to_rmf(
+                    target_x, target_y)
 
             t = self.get_clock().now().to_msg()
 
@@ -320,7 +321,7 @@ def main(argv=sys.argv):
     parser.add_argument("-n", "--nav_graph", type=str, required=True,
                         help="Path to the nav_graph for this fleet adapter")
     parser.add_argument("--crs", type=str, required=False, default="EPSG:3414",
-                        help="Coordinate system this fleet adapter operates in")
+                        help="Coordinate system the fleet adapter operates in")
     args = parser.parse_args(args_without_ros[1:])
     print(f"Starting fleet manager...")
 
