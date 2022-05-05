@@ -40,10 +40,8 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-F', '--fleet', required=True,
-                            type=str, help='Fleet name')
-        parser.add_argument('-R', '--robot', required=True,
-                            type=str, help='Robot name')
+        parser.add_argument('-F', '--fleet', type=str, help='Fleet name')
+        parser.add_argument('-R', '--robot', type=str, help='Robot name')
         parser.add_argument('-p', '--place', required=True, type=str, help='Place to go to')
         parser.add_argument('-o', '--orientation', required=False, type=float, help='Orientation to face in degrees (optional)')
         parser.add_argument('-st', '--start_time',
