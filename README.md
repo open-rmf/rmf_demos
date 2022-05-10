@@ -37,11 +37,13 @@ A near-term roadmap of the RMF project can be found in the user manual [here](ht
 
 Full web application of RMF: [rmf-web](https://github.com/open-rmf/rmf-web).
 
-In order to interact with the default configuration of the web application, the `server_uri` launch parameter will need to be changed to `ws://localhost:8001`, for example,
+In order to interact with the default configuration of the web application, the `server_uri` launch parameter will need to be changed to `ws://localhost:8000/_internal`, for example,
 
 ```bash
-ros2 launch rmf_demos_ign office.launch.xml server_uri:="ws://localhost:8001"
+ros2 launch rmf_demos_ign office.launch.xml server_uri:="ws://localhost:8000/_internal"
 ```
+
+By specifying `server_uri`, the fleetadapter will update `rmf-web` `api-server` with the latest task and robot states. User can then monitor on-going states and initiate rmf task with an interactive web dashboard.
 
 ## Demo Worlds
 
