@@ -42,7 +42,7 @@ from .RobotClientAPI import RobotAPI
 # ------------------------------------------------------------------------------
 
 
-def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time, crs):
+def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     # Profile and traits
     fleet_config = config_yaml['rmf_fleet']
     profile = traits.Profile(geometry.make_final_convex_circle(
@@ -268,8 +268,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time, crs):
                         update_frequency=rmf_config.get(
                             'robot_state_update_frequency', 1),
                         adapter=adapter,
-                        api=api,
-                        crs=crs)
+                        api=api)
 
                     if robot.initialized:
                         robots[robot_name] = robot
@@ -318,8 +317,6 @@ def main(argv=sys.argv):
                         help="Path to the nav_graph for this fleet adapter")
     parser.add_argument("--use_sim_time", action="store_true",
                         help='Use sim time, default: false')
-    parser.add_argument("--crs", type=str, required=False, default="EPSG:3414",
-                        help="Coordinate system the fleet adapter operates in")
     args = parser.parse_args(args_without_ros[1:])
     print(f"Starting fleet adapter...")
 
@@ -343,8 +340,7 @@ def main(argv=sys.argv):
         config_yaml,
         nav_graph_path,
         node,
-        args.use_sim_time,
-        args.crs)
+        args.use_sim_time)
 
     # Create executor for the command handle node
     rclpy_executor = rclpy.executors.SingleThreadedExecutor()

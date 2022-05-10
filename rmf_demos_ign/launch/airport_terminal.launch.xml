@@ -5,14 +5,12 @@
   <arg name="failover_mode" default="false"/>
   <arg name="use_tpe" default="false"/>
   <arg name="ignition_version" default='6'/>
-  <arg name="crs" default="EPSG:3414"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/airport_terminal.launch.xml">
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="failover_mode" value="$(var failover_mode)"/>
     <arg name="use_tpe" value="$(var use_tpe)"/>
-    <arg name="crs" value="$(var crs)"/>
   </include>
 
   <!-- Simulation launch -->

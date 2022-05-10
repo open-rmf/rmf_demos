@@ -3,7 +3,6 @@
 <launch>
   <arg name="use_sim_time" default="false"/>
   <arg name="failover_mode" default="false"/>
-  <arg name="crs" default="EPSG:3414"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -19,7 +18,6 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/2.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/tinyRobot_config.yaml"/>
-      <arg name="crs" value="$(var crs)"/>
     </include>
   </group>
 
@@ -29,7 +27,6 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/1.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/deliveryRobot_config.yaml"/>
-      <arg name="crs" value="$(var crs)"/>
     </include>
   </group>
 
@@ -54,7 +51,6 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/cleanerBotA_config.yaml"/>
-      <arg name="crs" value="$(var crs)"/>
     </include>
   </group>
 
@@ -64,7 +60,6 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/4.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/cleanerBotE_config.yaml"/>
-      <arg name="crs" value="$(var crs)"/>
     </include>
   </group>
 

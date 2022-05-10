@@ -2,7 +2,6 @@
 
 <launch>
   <arg name="use_sim_time" default="false"/>
-  <arg name="crs" default="EPSG:3414"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -18,7 +17,6 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/office/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/office/tinyRobot_config.yaml"/>
-      <arg name="crs" value="$(var crs)"/>
     </include>
   </group>
 
