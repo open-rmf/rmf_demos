@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright 2021 Open Source Robotics Foundation, Inc.
+# Copyright 2022 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import uuid
 import argparse
 import json
 import asyncio
+import math
 
 import rclpy
 from rclpy.node import Node
@@ -39,12 +40,15 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-cs', '--clean_start', required=True,
-                            type=str, help='Cleaning zone')
-        parser.add_argument('-F', '--fleet', type=str,
-                            help='Fleet name, should define tgt with robot')
-        parser.add_argument('-R', '--robot', type=str,
-                            help='Robot name, should define tgt with fleet')
+        parser.add_argument('-F', '--fleet', type=str, help='Fleet name')
+        parser.add_argument('-R', '--robot', type=str, help='Robot name')
+        parser.add_argument(
+            '-p', '--place', required=True, type=str, help='Place to go to'
+        )
+        parser.add_argument(
+            '-o', '--orientation', required=False, type=float,
+            help='Orientation to face in degrees (optional)'
+        )
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
@@ -64,7 +68,8 @@ class TaskRequester(Node):
             durability=Durability.TRANSIENT_LOCAL)
 
         self.pub = self.create_publisher(
-          ApiRequest, 'task_api_requests', transient_qos)
+          ApiRequest, 'task_api_requests', transient_qos
+        )
 
         # enable ros sim time
         if self.args.use_sim_time:
@@ -74,9 +79,10 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "clean_" + str(uuid.uuid4())
+        msg.request_id = "direct_" + str(uuid.uuid4())
         payload = {}
-        if self.args.fleet and self.args.robot:
+
+        if self.args.robot and self.args.fleet:
             self.get_logger().info("Using 'robot_task_request'")
             payload["type"] = "robot_task_request"
             payload["robot"] = self.args.robot
@@ -84,23 +90,36 @@ class TaskRequester(Node):
         else:
             self.get_logger().info("Using 'dispatch_task_request'")
             payload["type"] = "dispatch_task_request"
-        request = {}
 
         # Set task request start time
         now = self.get_clock().now().to_msg()
         now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
-        request["unix_millis_earliest_start_time"] = start_time
+        # todo(YV): Fill priority after schema is added
 
-        # Define task request category
-        request["category"] = "clean"
+        # Define task request description
+        go_to_description = {'waypoint': self.args.place}
+        if self.args.orientation is not None:
+            go_to_description['orientation'] = (
+                self.args.orientation*math.pi/180.0
+            )
 
-        # Define task request description with cleaning zone
-        description = {}  # task_description_Clean.json
-        description["zone"] = self.args.clean_start
+        go_to_activity = {
+            'category': 'go_to_place',
+            'description': go_to_description
+        }
 
-        request["description"] = description
-        payload["request"] = request
+        rmf_task_request = {
+            'category': 'compose',
+            'description': {
+                'category': 'go_to_place',
+                'phases': [{'activity': go_to_activity}]
+            },
+            'unix_millis_earliest_start_time': start_time
+        }
+
+        payload["request"] = rmf_task_request
+
         msg.json_msg = json.dumps(payload)
 
         def receive_response(response_msg: ApiResponse):
@@ -112,6 +131,7 @@ class TaskRequester(Node):
         )
 
         print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")
+
         self.pub.publish(msg)
 
 

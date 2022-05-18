@@ -48,6 +48,9 @@ class TaskRequester:
         parser.add_argument("--use_sim_time", action="store_true",
                             help='Use sim time, default: false')
 
+        self.node.get_logger().warn(
+            '[Deprecation warning] use `dispatch_patrol` instead')
+
         self.args = parser.parse_args(argv[1:])
         self.node = rclpy.create_node('task_requester')
         self.submit_task_srv = self.node.create_client(

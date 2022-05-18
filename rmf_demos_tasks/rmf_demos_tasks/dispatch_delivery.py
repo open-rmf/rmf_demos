@@ -16,30 +16,51 @@
 
 import sys
 import uuid
-import time
 import argparse
+import json
+import asyncio
 
 import rclpy
 from rclpy.node import Node
 from rclpy.parameter import Parameter
-from rmf_task_msgs.srv import SubmitTask
-from rmf_task_msgs.msg import TaskType, Delivery
+from rclpy.qos import qos_profile_system_default
+from rclpy.qos import QoSProfile
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSReliabilityPolicy as Reliability
+
+from rmf_task_msgs.msg import ApiRequest, ApiResponse
+
 
 ###############################################################################
 
-
-class TaskRequester:
+class TaskRequester(Node):
 
     def __init__(self, argv=sys.argv):
+        super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-p', '--pickup', required=True,
-                            type=str, help='Start waypoint')
-        parser.add_argument('-pd', '--pickup_dispenser', required=True,
-                            type=str, help='Pickup dispenser name')
-        parser.add_argument('-d', '--dropoff', required=True,
-                            type=str, help='Finish waypoint')
-        parser.add_argument('-di', '--dropoff_ingestor', required=True,
-                            type=str, help='Dropoff ingestor name')
+        parser.add_argument('-p', '--pickups', required=True,
+                            type=str, nargs='+',
+                            help="Pickup names")
+        parser.add_argument('-d', '--dropoffs', required=True,
+                            type=str, nargs='+',
+                            help="Dropoff names")
+        parser.add_argument('-ph', '--pickup_handlers', required=True,
+                            type=str, nargs='+',
+                            help="Pickup handler names")
+        parser.add_argument('-dh', '--dropoff_handlers', required=True,
+                            type=str, nargs='+',
+                            help="Dropoffs handler names")
+        parser.add_argument('-pp', '--pickup_payloads',
+                            type=str, nargs='+', default=[],
+                            help="Pickup payload [sku,quantity sku2,qty...]")
+        parser.add_argument('-dp', '--dropoff_payloads',
+                            type=str, nargs='+', default=[],
+                            help="Dropoff payload [sku,quantity sku2,qty...]")
+        parser.add_argument('-F', '--fleet', type=str,
+                            help='Fleet name, should define tgt with robot')
+        parser.add_argument('-R', '--robot', type=str,
+                            help='Robot name, should define tgt with fleet')
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
@@ -50,60 +71,134 @@ class TaskRequester:
                             help='Use sim time, default: false')
 
         self.args = parser.parse_args(argv[1:])
-        self.node = rclpy.create_node('task_requester')
-        self.submit_task_srv = self.node.create_client(
-            SubmitTask, '/submit_task')
+        self.response = asyncio.Future()
+
+        # check user delivery arg inputs
+        if (len(self.args.pickups) != len(self.args.pickup_handlers)):
+            self.get_logger().error(
+                "Invalid pickups, [-p] should have the same length as [-ph]")
+            parser.print_help()
+            sys.exit(1)
+        if (len(self.args.dropoffs) != len(self.args.dropoff_handlers)):
+            self.get_logger().error(
+                "Invalid dropoffs, [-d] should have the same length as [-dh]")
+            parser.print_help()
+            sys.exit(1)
+
+        transient_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
+
+        self.pub = self.create_publisher(
+          ApiRequest, 'task_api_requests', transient_qos)
 
         # enable ros sim time
         if self.args.use_sim_time:
-            self.node.get_logger().info("Using Sim Time")
+            self.get_logger().info("Using Sim Time")
             param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
-            self.node.set_parameters([param])
+            self.set_parameters([param])
 
-    def generate_task_req_msg(self):
-        req_msg = SubmitTask.Request()
-        req_msg.description.task_type.type = TaskType.TYPE_DELIVERY
+        # Construct task
+        msg = ApiRequest()
+        msg.request_id = "delivery_" + str(uuid.uuid4())
+        payload = {}
+        if self.args.fleet and self.args.robot:
+            self.get_logger().info("Using 'robot_task_request'")
+            payload["type"] = "robot_task_request"
+            payload["robot"] = self.args.robot
+            payload["fleet"] = self.args.fleet
+        else:
+            self.get_logger().info("Using 'dispatch_task_request'")
+            payload["type"] = "dispatch_task_request"
+        request = {}
 
-        delivery = Delivery()
-        delivery.pickup_place_name = self.args.pickup
-        delivery.pickup_dispenser = self.args.pickup_dispenser
-        delivery.dropoff_place_name = self.args.dropoff
-        delivery.dropoff_ingestor = self.args.dropoff_ingestor
-        req_msg.description.delivery = delivery
+        # Set task request start time
+        now = self.get_clock().now().to_msg()
+        now.sec = now.sec + self.args.start_time
+        start_time = now.sec * 1000 + round(now.nanosec/10**6)
+        request["unix_millis_earliest_start_time"] = start_time
 
-        ros_start_time = self.node.get_clock().now().to_msg()
-        ros_start_time.sec += self.args.start_time
-        req_msg.description.start_time = ros_start_time
-
-        req_msg.description.priority.value = self.args.priority
-        return req_msg
-
-    def main(self):
-        if not self.submit_task_srv.wait_for_service(timeout_sec=3.0):
-            self.node.get_logger().error('Dispatcher Node is not available')
-            return
-
-        rclpy.spin_once(self.node, timeout_sec=1.0)
-        req_msg = self.generate_task_req_msg()
-        print(f"\nGenerated delivery request: \n {req_msg}\n")
-        self.node.get_logger().info("Submitting Delivery Request")
-
-        try:
-            future = self.submit_task_srv.call_async(req_msg)
-            rclpy.spin_until_future_complete(
-                self.node, future, timeout_sec=1.0)
-            response = future.result()
-            if response is None:
-                self.node.get_logger().error('/submit_task srv call failed')
-            elif not response.success:
-                self.node.get_logger().error(
-                    'Dispatcher node failed to accept task')
+        def __create_pickup_desc(index):
+            if index < len(self.args.pickup_payloads):
+                sku_qty = self.args.pickup_payloads[index].split(',')
+                assert len(sku_qty) == 2, \
+                    "please specify sku and qty for pickup payload"
+                payload = [{"sku": sku_qty[0],
+                            "quantity": int(sku_qty[1])}]
             else:
-                self.node.get_logger().info(
-                    'Request was successfully submitted '
-                    f'and assigned task_id: [{response.task_id}]')
-        except Exception as e:
-            self.node.get_logger().error('Error! Submit Srv failed %r' % (e,))
+                payload = []
+
+            return {
+                    "place": self.args.pickups[index],
+                    "handler": self.args.pickup_handlers[index],
+                    "payload": payload
+                    }
+
+        def __create_dropoff_desc(index):
+            if index < len(self.args.dropoff_payloads):
+                sku_qty = self.args.dropoff_payloads[index].split(',')
+                assert len(sku_qty) == 2, \
+                    "please specify sku and qty for dropoff payload"
+                payload = [{"sku": sku_qty[0],
+                            "quantity": int(sku_qty[1])}]
+            else:
+                payload = []
+
+            return {
+                    "place": self.args.dropoffs[index],
+                    "handler": self.args.dropoff_handlers[index],
+                    "payload": payload
+                    }
+
+        # Use standard delivery task type
+        if len(self.args.pickups) == 1 and len(self.args.dropoffs) == 1:
+            request["category"] = "delivery"
+            description = {
+                "pickup": __create_pickup_desc(0),
+                "dropoff": __create_dropoff_desc(0)
+                }
+        else:
+            # Define multi_delivery with request category compose
+            request["category"] = "compose"
+
+            # Define task request description with phases
+            description = {}  # task_description_Compose.json
+            description["category"] = "multi_delivery"
+            description["phases"] = []
+            activities = []
+            # Add each pickup
+            for i in range(0, len(self.args.pickups)):
+                activities.append({
+                    "category": "pickup",
+                    "description": __create_pickup_desc(i)})
+            # Add each dropoff
+            for i in range(0, len(self.args.dropoffs)):
+                activities.append({
+                    "category": "dropoff",
+                    "description": __create_dropoff_desc(i)})
+            # Add activities to phases
+            description["phases"].append(
+                {"activity": {
+                    "category": "sequence",
+                    "description": {"activities": activities}}})
+
+        request["description"] = description
+        payload["request"] = request
+        msg.json_msg = json.dumps(payload)
+
+        def receive_response(response_msg: ApiResponse):
+            if response_msg.request_id == msg.request_id:
+                self.response.set_result(json.loads(response_msg.json_msg))
+
+        self.sub = self.create_subscription(
+            ApiResponse, 'task_api_responses', receive_response, 10
+        )
+
+        print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")
+
+        self.pub.publish(msg)
 
 
 ###############################################################################
@@ -114,7 +209,12 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = TaskRequester(args_without_ros)
-    task_requester.main()
+    rclpy.spin_until_future_complete(
+        task_requester, task_requester.response, timeout_sec=5.0)
+    if task_requester.response.done():
+        print(f'Got response:\n{task_requester.response.result()}')
+    else:
+        print('Did not get a response')
     rclpy.shutdown()
 
 
