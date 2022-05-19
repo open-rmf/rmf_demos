@@ -2,10 +2,9 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>rmf_demos_fleet_adapter</name>
-  <version>0.0.0</version>
-  <description>A fleet adapter for interfacing with robots with a fleet manager via REST API</description>
-  <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
-  <author email="xiyu@openrobotics.org">Xi Yu Oh</author>
+  <version>1.4.0</version>
+  <description>Fleet adapters for interfacing with RMF Demos robots with a fleet manager via REST API</description>
+  <maintainer email="xiyu@openrobotics.org">Xi Yu Oh</maintainer>
   <license>Apache License 2.0</license>
 
   <exec_depend>rmf_fleet_adapter_python</exec_depend>

@@ -2,7 +2,7 @@
 # Stage 1 - build
 #-----------------
 
-FROM ros:foxy AS builder
+FROM ros:galactic AS builder
 
 COPY . /root/rmf/src
 
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
   libignition-common3-dev libignition-plugin-dev
 
 # build rmf
-RUN . /opt/ros/foxy/setup.bash && cd /root/rmf && \
+RUN . /opt/ros/galactic/setup.bash && cd /root/rmf && \
   colcon build --merge-install --install-base /opt/rmf --cmake-args -DCMAKE_BUILD_TYPE=Release
 
 #----------
