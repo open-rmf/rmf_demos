@@ -21,7 +21,7 @@
     </include>
   </group>
 
-  <node pkg="rmf_demos_adapters" exec="deliveryrobot_gps_fleet_adapter" output="both" name="deliveryrobot_gps_fleet_adapter">
+  <node pkg="rmf_demos_fleet_adapter" exec="deliveryrobot_gps_fleet_adapter" output="both" name="deliveryrobot_gps_fleet_adapter">
     <param name="use_sim_time" value="$(var use_sim_time)"/>
     <param name="config_file" value="$(find-pkg-share rmf_demos)/include/campus/deliveryrobot_config.yaml"/>
     <param name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/campus/nav_graphs/0.yaml"/>
