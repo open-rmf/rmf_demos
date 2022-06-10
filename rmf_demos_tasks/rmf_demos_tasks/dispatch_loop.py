@@ -53,6 +53,9 @@ class TaskRequester:
         self.submit_task_srv = self.node.create_client(
             SubmitTask, '/submit_task')
 
+        self.node.get_logger().warn(
+            '[Deprecation warning] use `dispatch_patrol` instead')
+
         # enable ros sim time
         if self.args.use_sim_time:
             self.node.get_logger().info("Using Sim Time")

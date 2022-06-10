@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright 2021 Open Source Robotics Foundation, Inc.
+# Copyright 2022 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,8 +39,11 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-cs', '--clean_start', required=True,
-                            type=str, help='Cleaning zone')
+        parser.add_argument('-p', '--places', required=True, nargs='+',
+                            type=str, help='Places to patrol through')
+        parser.add_argument('-n', '--rounds',
+                            help='Number of loops to perform',
+                            type=int, default=1)
         parser.add_argument('-F', '--fleet', type=str,
                             help='Fleet name, should define tgt with robot')
         parser.add_argument('-R', '--robot', type=str,
@@ -62,9 +65,9 @@ class TaskRequester(Node):
             depth=1,
             reliability=Reliability.RELIABLE,
             durability=Durability.TRANSIENT_LOCAL)
-
         self.pub = self.create_publisher(
-          ApiRequest, 'task_api_requests', transient_qos)
+          ApiRequest, 'task_api_requests', transient_qos
+        )
 
         # enable ros sim time
         if self.args.use_sim_time:
@@ -74,9 +77,10 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "clean_" + str(uuid.uuid4())
+        msg.request_id = "patrol_" + str(uuid.uuid4())
         payload = {}
-        if self.args.fleet and self.args.robot:
+
+        if self.args.robot and self.args.fleet:
             self.get_logger().info("Using 'robot_task_request'")
             payload["type"] = "robot_task_request"
             payload["robot"] = self.args.robot
@@ -84,6 +88,7 @@ class TaskRequester(Node):
         else:
             self.get_logger().info("Using 'dispatch_task_request'")
             payload["type"] = "dispatch_task_request"
+
         request = {}
 
         # Set task request start time
@@ -91,14 +96,16 @@ class TaskRequester(Node):
         now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request["unix_millis_earliest_start_time"] = start_time
+        # todo(YV): Fill priority after schema is added
 
         # Define task request category
-        request["category"] = "clean"
+        request["category"] = "patrol"
 
-        # Define task request description with cleaning zone
-        description = {}  # task_description_Clean.json
-        description["zone"] = self.args.clean_start
-
+        # Define task request description
+        description = {
+            'places': self.args.places,
+            'rounds': self.args.rounds
+        }
         request["description"] = description
         payload["request"] = request
         msg.json_msg = json.dumps(payload)
