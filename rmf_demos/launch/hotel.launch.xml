@@ -14,14 +14,14 @@
   </include>
 
   <!-- Experimental Lift watchdog service launch, default disable -->
-  <group if="$(var enable_experimental_lift_watchdog)">
+  <group if="$(var enable_experimental_lift_watchdog)" scoped="false">
     <node pkg="rmf_fleet_adapter"
           exec="experimental_lift_watchdog"
           name="experimental_lift_watchdog"
           output="both" />
     <set_env name="EXPT_LIFT_WATCHDOG_SRV" value="experimental_lift_watchdog"/>
   </group>
-  <group unless="$(var enable_experimental_lift_watchdog)">
+  <group unless="$(var enable_experimental_lift_watchdog)" scoped="false">
     <set_env name="EXPT_LIFT_WATCHDOG_SRV" value=""/>
   </group>
 
