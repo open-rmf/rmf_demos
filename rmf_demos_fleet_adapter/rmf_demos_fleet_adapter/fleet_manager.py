@@ -77,7 +77,8 @@ class State:
         self.gps_pos = [0, 0]
 
     def gps_to_xy(self, gps_json: dict):
-        svy21_xy = self.svy_transformer.transform(gps_json['lat'], gps_json['lon'])
+        svy21_xy = \
+            self.svy_transformer.transform(gps_json['lat'], gps_json['lon'])
         self.gps_pos[0] = svy21_xy[1]
         self.gps_pos[1] = svy21_xy[0]
 
@@ -89,7 +90,8 @@ class FleetManager(Node):
 
         self.gps = False
         self.offset = [0, 0]
-        if 'reference_coordinates' in self.config and 'offset' in self.config['reference_coordinates']:
+        if 'reference_coordinates' in self.config and \
+                'offset' in self.config['reference_coordinates']:
             self.gps = True
             self.offset = self.config['reference_coordinates']['offset']
 
@@ -132,7 +134,9 @@ class FleetManager(Node):
                     self.sio.connect('http://0.0.0.0:8080')
                     break
                 except Exception:
-                    self.get_logger().info(f"Trying to connect to sio server at http://0.0.0.0:8080..")
+                    self.get_logger().info(
+                        f"Trying to connect to sio server at"
+                        f"http://0.0.0.0:8080..")
                     time.sleep(1)
 
         self.create_subscription(
