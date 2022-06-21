@@ -2,6 +2,7 @@
 
 <launch>
   <arg name="use_sim_time" default="false"/>
+  <arg name="failover_mode" default="false"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -17,12 +18,6 @@
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/campus/deliveryRobot_config.yaml"/>
     </include>
   </group>
-
-  <node pkg="rmf_demos_fleet_adapter" exec="deliveryrobot_gps_fleet_adapter" output="both" name="deliveryrobot_gps_fleet_adapter">
-    <param name="use_sim_time" value="$(var use_sim_time)"/>
-    <param name="config_file" value="$(find-pkg-share rmf_demos)/include/campus/deliveryrobot_config.yaml"/>
-    <param name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/campus/nav_graphs/0.yaml"/>
-  </node>
 
   <executable cmd="ros2 run rmf_demos_bridges fleet_socketio_bridge -f deliveryRobot -g /gps -y 31500 -x 22000" output="both">
     <env name="FLASK_ENV" value="development"/>

@@ -17,6 +17,9 @@
 import sys
 import math
 import yaml
+import json
+import time
+import copy
 import argparse
 
 import rclpy
@@ -36,6 +39,9 @@ import rmf_adapter.vehicletraits as traits
 import rmf_adapter.geometry as geometry
 
 import numpy as np
+from pyproj import Transformer
+
+import socketio
 
 from fastapi import FastAPI
 import uvicorn
@@ -67,6 +73,13 @@ class State:
     def __init__(self, state: RobotState = None, destination: Location = None):
         self.state = state
         self.destination = destination
+        self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
+        self.gps_pos = [0, 0]
+
+    def gps_to_xy(self, gps_json: dict):
+        svy21_xy = self.svy_transformer.transform(gps_json['lat'], gps_json['lon'])
+        self.gps_pos[0] = svy21_xy[1]
+        self.gps_pos[1] = svy21_xy[0]
 
 
 class FleetManager(Node):
@@ -74,8 +87,10 @@ class FleetManager(Node):
         self.config = config
         self.fleet_name = self.config["rmf_fleet"]["name"]
 
+        self.gps = False
         self.offset = [0, 0]
-        if 'offset' in self.config['reference_coordinates']:
+        if 'reference_coordinates' in self.config and 'offset' in self.config['reference_coordinates']:
+            self.gps = True
             self.offset = self.config['reference_coordinates']['offset']
 
         super().__init__(f'{self.fleet_name}_fleet_manager')
@@ -99,6 +114,26 @@ class FleetManager(Node):
             profile=profile)
         self.vehicle_traits.differential.reversible =\
             self.config['rmf_fleet']['reversible']
+
+        self.sio = socketio.Client()
+
+        @self.sio.on("/gps")
+        def message(data):
+            try:
+                robot = json.loads(data)
+                robot_name = robot['robot_id']
+                self.robots[robot_name].gps_to_xy(robot)
+            except KeyError as e:
+                self.get_logger().info(f"Malformed GPS Message!: {e}")
+
+        if self.gps:
+            while True:
+                try:
+                    self.sio.connect('http://0.0.0.0:8080')
+                    break
+                except Exception:
+                    self.get_logger().info(f"Trying to connect to sio server at http://0.0.0.0:8080..")
+                    time.sleep(1)
 
         self.create_subscription(
             RobotState,
@@ -270,7 +305,10 @@ class FleetManager(Node):
 
     def get_robot_state(self, state, robot_name):
         data = {}
-        position = [state.state.location.x, state.state.location.y]
+        if self.gps:
+            position = copy.deepcopy(state.gps_pos)
+        else:
+            position = [state.state.location.x, state.state.location.y]
         angle = state.state.location.yaw
         data['robot_name'] = robot_name
         data['map_name'] = state.state.location.level_name
@@ -280,6 +318,10 @@ class FleetManager(Node):
         data['completed_request'] = False
         if state.destination is not None:
             destination = state.destination
+            # remove offset for calculation if using gps coords
+            if self.gps:
+                position[0] -= self.offset[0]
+                position[1] -= self.offset[1]
             # calculate arrival estimate
             dist_to_target =\
                 self.disp(position, [destination.x, destination.y])
@@ -296,9 +338,6 @@ class FleetManager(Node):
         else:
             data['destination_arrival_duration'] = 0.0
             data['completed_request'] = True
-        # Add offset to state location
-        data['position']['x'] += self.offset[0]
-        data['position']['y'] += self.offset[1]
         return data
 
     def disp(self, A, B):
