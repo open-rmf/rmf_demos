@@ -14,7 +14,7 @@
 
   <!-- TinyRobot fleet adapter -->
   <group>
-    <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_adapter.launch.xml">
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/2.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/tinyRobot_config.yaml"/>
@@ -23,7 +23,7 @@
 
   <!-- DeliveryRobot fleet adapter -->
   <group>
-    <include file="$(find-pkg-share rmf_demos)/include/adapters/deliveryRobot_adapter.launch.xml">
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/1.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/deliveryRobot_config.yaml"/>
@@ -47,7 +47,7 @@
 
   <!-- cleanerBotA fleet adapter -->
   <group>
-    <include file="$(find-pkg-share rmf_demos)/include/adapters/cleanerBotA_adapter.launch.xml">
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/cleanerBotA_config.yaml"/>
@@ -56,7 +56,7 @@
 
   <!-- cleanerBotE fleet adapter -->
   <group>
-    <include file="$(find-pkg-share rmf_demos)/include/adapters/cleanerBotE_adapter.launch.xml">
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/4.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/cleanerBotE_config.yaml"/>
