@@ -22,6 +22,7 @@ import sys
 import json
 import copy
 import argparse
+import logging
 from collections import OrderedDict
 from rosidl_runtime_py import message_to_ordereddict
 from pyproj import Transformer
@@ -35,6 +36,9 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import FleetState, RobotState
+
+log = logging.getLogger('werkzeug')
+log.disabled = True
 
 SUPPORTED_GPS_FRAMES = ['svy21']
 
