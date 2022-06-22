@@ -1,0 +1,5 @@
+<?xml version='1.0' ?>
+<launch>
+  <executable cmd="ros2 run rmf_demos_tasks dispatch_patrol -p patrol_A1 patrol_B patrol_C patrol_D1 -F tinyRobot -R tinyRobot1 -n 10 --use_sim_time" output="both"/>
+  <executable cmd="ros2 run rmf_demos_tasks dispatch_patrol -p patrol_A2 patrol_C patrol_B patrol_D2 -F tinyRobot -R tinyRobot2 -n 10 --use_sim_time" output="both"/>
+</launch>

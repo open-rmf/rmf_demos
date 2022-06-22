@@ -1,0 +1,5 @@
+<?xml version='1.0' ?>
+<launch>
+  <executable cmd="ros2 run rmf_demos_tasks teleop_robot -F tinyRobot -R tinyRobot1
+    -p 5.3,-4.9,0.0 3.3,-8.9,0.0 5.3,-9.9,0.0 7.3,-6.1,0.0 5.3,-4.9,0.0 -m L1" output="both"/>
+</launch>

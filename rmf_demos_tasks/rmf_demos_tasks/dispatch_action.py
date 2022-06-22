@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright 2021 Open Source Robotics Foundation, Inc.
+# Copyright 2022 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,20 +39,28 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-cs', '--clean_start', required=True,
-                            type=str, help='Cleaning zone')
-        parser.add_argument('-F', '--fleet', type=str,
-                            help='Fleet name, should define tgt with robot')
-        parser.add_argument('-R', '--robot', type=str,
-                            help='Robot name, should define tgt with fleet')
+        parser.add_argument('-s', '--starts', default=[],
+                            type=str, nargs='+', help='Action start waypoints')
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
         parser.add_argument('-pt', '--priority',
                             help='Priority value for this request',
                             type=int, default=0)
+        parser.add_argument('-a', '--action', required=True,
+                            type=str, help='action name')
+        parser.add_argument('-ad', '--action_desc', required=False,
+                            default='{}',
+                            type=str, help='action description in json str')
+        parser.add_argument('-F', '--fleet', type=str,
+                            help='Fleet name, should define tgt with robot')
+        parser.add_argument('-R', '--robot', type=str,
+                            help='Robot name, should define tgt with fleet')
         parser.add_argument("--use_sim_time", action="store_true",
                             help='Use sim time, default: false')
+        parser.add_argument("--use_tool_sink", action="store_true",
+                            help='Use tool sink during perform action, \
+                                default: false')
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -74,7 +82,7 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "clean_" + str(uuid.uuid4())
+        msg.request_id = "custom_action_" + str(uuid.uuid4())
         payload = {}
         if self.args.fleet and self.args.robot:
             self.get_logger().info("Using 'robot_task_request'")
@@ -91,13 +99,47 @@ class TaskRequester(Node):
         now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request["unix_millis_earliest_start_time"] = start_time
+        # todo(YV): Fill priority after schema is added
 
         # Define task request category
-        request["category"] = "clean"
+        request["category"] = "compose"
 
-        # Define task request description with cleaning zone
-        description = {}  # task_description_Clean.json
-        description["zone"] = self.args.clean_start
+        # Define task request description with phases
+        description = {}  # task_description_Compose.json
+        description["category"] = self.args.action
+        description["phases"] = []
+        activities = []
+
+        def _add_action():
+            activities.append(
+                {
+                    "category": "perform_action",
+                    "description":
+                    {
+                        "unix_millis_action_duration_estimate": 60000,
+                        "category": self.args.action,
+                        "description": json.loads(self.args.action_desc),
+                        "use_tool_sink": self.args.use_tool_sink
+                    }
+                })
+
+        if not self.args.starts:
+            _add_action()
+        else:
+            # Add action activities
+            for start in self.args.starts:
+                activities.append({
+                        "category": "go_to_place",
+                        "description": start
+                    })
+                _add_action()
+
+        # Add activities to phases
+        description["phases"].append({
+                "activity": {
+                    "category": "sequence",
+                    "description": {"activities": activities}}
+            })
 
         request["description"] = description
         payload["request"] = request
@@ -111,7 +153,7 @@ class TaskRequester(Node):
             ApiResponse, 'task_api_responses', receive_response, 10
         )
 
-        print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")
+        print(f"msg: \n{json.dumps(payload, indent=2)}")
         self.pub.publish(msg)
 
 

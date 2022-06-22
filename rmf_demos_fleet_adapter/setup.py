@@ -1,13 +1,13 @@
 import os
 from glob import glob
-from setuptools import setup
+from setuptools import setup, find_packages
 
 package_name = 'rmf_demos_fleet_adapter'
 
 setup(
     name=package_name,
-    version='0.0.0',
-    packages=[package_name],
+    version='1.4.0',
+    packages=find_packages(),
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -19,14 +19,17 @@ setup(
     ],
     install_requires=['setuptools', 'fastapi', 'uvicorn'],
     zip_safe=True,
-    maintainer='Yadunund',
-    maintainer_email='yadunund@openrobotics.org',
-    description='A fleet adapter for interfacing with robots with a'
+    maintainer='Xi Yu Oh',
+    maintainer_email='xiyu@openrobotics.org',
+    description='Fleet adapters for interfacing with RMF Demos robots with a '
                 'fleet manager via REST API',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'deliveryrobot_gps_fleet_adapter='
+                'rmf_demos_fleet_adapter.DeliveryRobot'
+                '.deliveryrobot_gps_fleet_adapter:main',
             'fleet_adapter=rmf_demos_fleet_adapter.fleet_adapter:main',
             'fleet_manager=rmf_demos_fleet_adapter.fleet_manager:main'
         ],
