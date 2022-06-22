@@ -81,4 +81,4 @@ robots:
         waypoint: "room_2"
 
 reference_coordinates:
-  offset: [22000, 31500]
+  offset: [22000, 31500] # offset from RMF cartesian frame to SVY21 cartesian frame

@@ -92,6 +92,8 @@ class FleetManager(Node):
         self.offset = [0, 0]
         if 'reference_coordinates' in self.config and \
                 'offset' in self.config['reference_coordinates']:
+            assert len(self.config['reference_coordinates']['offset']) > 1, \
+                ('Please ensure that the offset provided is valid.')
             self.gps = True
             self.offset = self.config['reference_coordinates']['offset']
 
