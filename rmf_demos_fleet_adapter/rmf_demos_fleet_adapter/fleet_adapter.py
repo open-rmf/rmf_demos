@@ -162,11 +162,13 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                              execution:
                              adpt.robot_update_handle.ActionExecution):
             with cmd_handle._lock:
-                if len(description) > 0 and description in cmd_handle.graph.keys:
+                if len(description) > 0 and\
+                        description in cmd_handle.graph.keys:
                     cmd_handle.action_waypoint_index = \
                         cmd_handle.find_waypoint(description).index
                 else:
-                    cmd_handle.action_waypoint_index = cmd_handle.last_known_waypoint_index
+                    cmd_handle.action_waypoint_index = \
+                        cmd_handle.last_known_waypoint_index
                 cmd_handle.on_waypoint = None
                 cmd_handle.on_lane = None
                 cmd_handle.action_execution = execution
@@ -177,7 +179,8 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
             cmd_handle.node.get_logger().info(
                 f"Setting max delay to {max_delay}s")
             cmd_handle.update_handle.set_maximum_delay(max_delay)
-        if (cmd_handle.charger_waypoint_index < cmd_handle.graph.num_waypoints):
+        if (cmd_handle.charger_waypoint_index <
+                cmd_handle.graph.num_waypoints):
             cmd_handle.update_handle.set_charger_waypoint(
                 cmd_handle.charger_waypoint_index)
         else:
