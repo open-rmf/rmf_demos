@@ -148,10 +148,10 @@ class FleetManager(Node):
             100)
 
         transient_qos = QoSProfile(
-            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            history=History.KEEP_LAST,
             depth=1,
-            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
-            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
 
         self.create_subscription(
             DockSummary,

@@ -333,10 +333,10 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         closed_lanes_pub.publish(state_msg)
 
     transient_qos = QoSProfile(
-        history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+        history=History.KEEP_LAST,
         depth=1,
-        reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
-        durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+        reliability=Reliability.RELIABLE,
+        durability=Durability.TRANSIENT_LOCAL)
 
     node.create_subscription(
         LaneRequest,
