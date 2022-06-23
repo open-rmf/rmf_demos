@@ -35,6 +35,10 @@ from rmf_fleet_msgs.msg import LaneRequest, ClosedLanes
 
 from functools import partial
 
+from rclpy.qos import QoSProfile
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSReliabilityPolicy as Reliability
 from rclpy.qos import qos_profile_system_default
 
 from .RobotCommandHandle import RobotCommandHandle
@@ -328,6 +332,12 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         state_msg.closed_lanes = closed_lanes
         closed_lanes_pub.publish(state_msg)
 
+    transient_qos = QoSProfile(
+        history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+        depth=1,
+        reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
+        durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+
     node.create_subscription(
         LaneRequest,
         'lane_closure_requests',
@@ -337,7 +347,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
     closed_lanes_pub = node.create_publisher(
         ClosedLanes,
         'closed_lanes',
-        qos_profile=qos_profile_system_default)
+        qos_profile=transient_qos)
 
     return adapter
 
