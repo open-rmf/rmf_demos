@@ -31,8 +31,11 @@ import rmf_adapter.graph as graph
 import rmf_adapter.plan as plan
 
 from rmf_task_msgs.msg import TaskProfile, TaskType
+from rmf_fleet_msgs.msg import LaneRequest, ClosedLanes
 
 from functools import partial
+
+from rclpy.qos import qos_profile_system_default
 
 from .RobotCommandHandle import RobotCommandHandle
 from .RobotClientAPI import RobotAPI
@@ -197,11 +200,10 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         fleet_config['fleet_manager']['password'])
 
     # Initialize robots for this fleet
-
+    robots = {}
     missing_robots = config_yaml['robots']
 
     def _add_fleet_robots():
-        robots = {}
         while len(missing_robots) > 0:
             time.sleep(0.2)
             for robot_name in list(missing_robots.keys()):
@@ -296,6 +298,47 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
 
     add_robots = threading.Thread(target=_add_fleet_robots, args=())
     add_robots.start()
+
+    # Add LaneRequest callback
+    closed_lanes = []
+
+    def _lane_request_cb(msg):
+        if msg.fleet_name is None or msg.fleet_name != fleet_name:
+            return
+
+        fleet_handle.open_lanes(msg.open_lanes)
+        fleet_handle.close_lanes(msg.close_lanes)
+
+        newly_closed_lanes = []
+
+        for lane_idx in msg.close_lanes:
+            if lane_idx not in closed_lanes:
+                newly_closed_lanes.append(lane_idx)
+                closed_lanes.append(lane_idx)
+
+        for lane_idx in msg.open_lanes:
+            if lane_idx in closed_lanes:
+                closed_lanes.remove(lane_idx)
+
+        for robot_name, robot in robots.items():
+            robot.newly_closed_lanes(newly_closed_lanes)
+
+        state_msg = ClosedLanes()
+        state_msg.fleet_name = fleet_name
+        state_msg.closed_lanes = closed_lanes
+        closed_lanes_pub.publish(state_msg)
+
+    node.create_subscription(
+        LaneRequest,
+        'lane_closure_requests',
+        _lane_request_cb,
+        qos_profile=qos_profile_system_default)
+
+    closed_lanes_pub = node.create_publisher(
+        ClosedLanes,
+        'closed_lanes',
+        qos_profile=qos_profile_system_default)
+
     return adapter
 
 
