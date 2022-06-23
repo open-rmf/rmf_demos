@@ -25,8 +25,9 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 
-## supply args: map_name, transform [tx, ty, yaw]
-## if use_launch_config, this means the input param is from cli launch arg
+
+# supply args: map_name, transform [tx, ty, yaw]
+# if use_launch_config, this means the input param is from cli launch arg
 def create_map_server(
     ld,
     map_name,
@@ -35,27 +36,28 @@ def create_map_server(
     yaw,
     world_name,
     use_launch_config=False,
-    ):
+):
     # static pub mode
     tf_pub_node = Node(
-        package = "tf2_ros",
-        executable = "static_transform_publisher",
-        name = f"static_transform_publisher",
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name=f"static_transform_publisher",
         namespace=map_name,
-        arguments = [tx, ty, '0', yaw, '0', '0', 'map', map_name])
+        arguments=[tx, ty, '0', yaw, '0', '0', 'map', map_name])
 
     pkg_share_dir = get_package_share_directory('rmf_demos_maps')
 
     if use_launch_config:
-        yaml_filename = [pkg_share_dir, "/", world_name, "/", map_name, ".yaml"]
+        yaml_filename = \
+            [pkg_share_dir, "/", world_name, "/", map_name, ".yaml"]
     else:
         yaml_filename = f"{pkg_share_dir}/{world_name}/{map_name}.yaml"
 
     # map server node
     map_server_node = launch_ros.actions.LifecycleNode(
-        package = "nav2_map_server",
-        executable = "map_server",
-        name = f"map_server",
+        package="nav2_map_server",
+        executable="map_server",
+        name=f"map_server",
         namespace=map_name,
         output="screen",
         emulate_tty=True,
@@ -68,20 +70,22 @@ def create_map_server(
 
     configure_trans_event = launch.actions.EmitEvent(
         event=launch_ros.events.lifecycle.ChangeState(
-            lifecycle_node_matcher = launch.events.matches_action(map_server_node),
-            transition_id = lifecycle_msgs.msg.Transition.TRANSITION_CONFIGURE,
+            lifecycle_node_matcher=launch.events.matches_action(
+                map_server_node),
+            transition_id=lifecycle_msgs.msg.Transition.TRANSITION_CONFIGURE,
         )
     )
 
     activate_trans_event = launch.actions.EmitEvent(
         event=launch_ros.events.lifecycle.ChangeState(
-            lifecycle_node_matcher = launch.events.matches_action(map_server_node),
-            transition_id = lifecycle_msgs.msg.Transition.TRANSITION_ACTIVATE,
+            lifecycle_node_matcher=launch.events.matches_action(
+                map_server_node),
+            transition_id=lifecycle_msgs.msg.Transition.TRANSITION_ACTIVATE,
         )
     )
 
     # Add the actions to the launch description.
-    # The order they are added reflects the order in which they will be executed.
+    # The order should reflects the order in which they will be executed.
     ld.add_action(tf_pub_node)
     ld.add_action(map_server_node)
     ld.add_action(configure_trans_event)
@@ -100,7 +104,7 @@ def generate_launch_description():
     declare_map_name_cmd = DeclareLaunchArgument(
         'map_name',
         default_value='',
-        description='name of the map, should also corespond to the .yaml file name',
+        description='map name, should also corespond to the .yaml file name',
     )
     declare_tx_cmd = DeclareLaunchArgument(
         'tx', default_value='0.0', description='x-axis translation')
@@ -117,10 +121,10 @@ def generate_launch_description():
     ld.add_action(declare_ty_cmd)
     ld.add_action(declare_yaw_cmd)
 
-    ## with this, can be launched with cli:
+    # With this, can be launched with cli:
     #    ros2 launch rmf_demos map_server.launch.py \
     #        map_name:=ecobot_office tx:=1.33 ty:=0.057 yaw:=-1.598
-    ##   Note: transformation value is obtained from traffic-editor
+    # Note: transformation value is obtained from traffic-editor
     ld = create_map_server(
         ld, map_name, tx, ty, yaw, world_name, use_launch_config=True)
     return ld
