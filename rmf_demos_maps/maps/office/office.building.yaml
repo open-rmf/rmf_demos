@@ -16,6 +16,11 @@ graphs:
   {}
 levels:
   L1:
+    constraints:
+      - {ids: ["{aa7269f1-f9c5-438e-b229-53a908d7cee7}", "{6afec236-c8a4-4cc3-babf-e3389bde50a9}"]}
+      - {ids: ["{760fa0a7-da43-4bc1-8dbc-ed115b46423d}", "{8ab8fc65-501d-4f8d-adbe-10b34a1560ee}"]}
+      - {ids: ["{10b7d64a-84f0-4e52-96ab-798c1b965d7c}", "{edc3f43b-8c9d-4344-9bc8-b9b53bc4d483}"]}
+      - {ids: ["{673ea8d8-017c-4302-8a7a-c934319933c4}", "{aeaad865-28f8-4169-a5a1-70eafbf230c2}"]}
     doors:
       - [31, 13, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, main_door], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_hinged]}]
       - [35, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, coe_door], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
@@ -23,6 +28,11 @@ levels:
     drawing:
       filename: office.png
     elevation: 0
+    features:
+      - {id: "{8ab8fc65-501d-4f8d-adbe-10b34a1560ee}", name: "", x: 1017.955, y: 353.594}
+      - {id: "{6afec236-c8a4-4cc3-babf-e3389bde50a9}", name: "", x: 2803.503, y: 342.141}
+      - {id: "{673ea8d8-017c-4302-8a7a-c934319933c4}", name: "", x: 2293.382, y: 1362.382}
+      - {id: "{10b7d64a-84f0-4e52-96ab-798c1b965d7c}", name: "", x: 664.289, y: 1280.104}
     floors:
       - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum], indoor: [2, 0], texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [27, 28, 29, 30, 31, 13, 14, 15, 21, 20, 19, 22, 23, 24, 38, 25, 26, 36]
@@ -58,7 +68,20 @@ levels:
       - [59, 67, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
       - [59, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
     layers:
-      {}
+      ecobot:
+        color: [1, 0, 0, 0.5]
+        features:
+          - {id: "{aa7269f1-f9c5-438e-b229-53a908d7cee7}", name: "", x: 47.961, y: 18.983}
+          - {id: "{aeaad865-28f8-4169-a5a1-70eafbf230c2}", name: "", x: 228.371, y: 101.391}
+          - {id: "{edc3f43b-8c9d-4344-9bc8-b9b53bc4d483}", name: "", x: 218.899, y: 385.571}
+          - {id: "{760fa0a7-da43-4bc1-8dbc-ed115b46423d}", name: "", x: 60.043, y: 330.204}
+        filename: ecobot_office.png
+        transform:
+          scale: 0.04873508376309721
+          translation_x: 24.71499709457617
+          translation_y: 0.5794233827190223
+          yaw: -1.598022090952649
+        visible: true
     measurements:
       - [1, 0, {distance: [3, 9.315]}]
       - [5, 4, {distance: [3, 8.409000000000001]}]

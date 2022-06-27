@@ -3,6 +3,7 @@
 <launch>
   <arg name="use_sim_time" default="false"/>
   <arg name="failover_mode" default="false"/>
+  <arg name="run_fleet_adapters" default="true"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -13,7 +14,7 @@
   </include>
 
   <!-- TinyRobot fleet adapter and robot state aggregator needed for the TinyRobot slotcar_plugin -->
-  <group>
+  <group if="$(var run_fleet_adapters)">
     <let name="fleet_name" value="tinyRobot"/>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_adapter.launch.xml">
       <arg name="fleet_name" value="$(var fleet_name)"/>
