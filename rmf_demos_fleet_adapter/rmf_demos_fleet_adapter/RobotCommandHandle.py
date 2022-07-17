@@ -575,31 +575,21 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     # We take this to mean that the robot needs to reverse.
                     if lane_idx == current_lane:
                         lane = self.graph.get_lane(current_lane)
-                        wp0 = self.graph.get_waypoint(
-                            lane.entry.waypoint_index).location
-                        wp1 = self.graph.get_waypoint(
-                            lane.exit.waypoint_index).location
 
-                        position = self.position
-                        return_waypoint = wp0.index
+                        return_waypoint = lane.entry.waypoint_index
                         reverse_lane = \
-                            self.graph.lane_from(wp1.index, wp0.index)
+                            self.graph.lane_from(lane.entry.waypoint_index,
+                                                 lane.exit.waypoint_index)
 
-                        if reverse_lane:
-                            # We know what lane will reverse us back to the
-                            # beginning of our current lane, so we will update
-                            # our position by saying that we are on that lane.
-                            lanes = []
-                            lanes.append(reverse_lane.index)
-                            self.update_handle.update_current_lanes(
-                                position, lanes)
-                        else:
-                            # There isn't an explicit lane for getting back to
-                            # the beginning of our current lane, so we will
-                            # update with only our current position and the
-                            # waypoint index that we intend to return to.
-                            self.update_handle.update_off_grid_position(
-                                position, return_waypoint)
+                        with self._lock:
+                            if reverse_lane:
+                                # Update current lane to reverse back to
+                                # start of the lane
+                                self.on_lane = reverse_lane.index
+                            else:
+                                # Update current position and waypoint index
+                                # to return to
+                                self.target_waypoint = return_waypoint
 
         if not need_to_replan and self.target_waypoint is not None:
             # Check if the remainder of the current plan has been invalidated
