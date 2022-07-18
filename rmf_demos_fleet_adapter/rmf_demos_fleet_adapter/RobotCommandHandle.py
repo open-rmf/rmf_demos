@@ -142,10 +142,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.on_waypoint = start.waypoint
 
         transient_qos = QoSProfile(
-            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            history=History.KEEP_LAST,
             depth=1,
-            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
-            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
 
         self.node.create_subscription(
             DockSummary,
@@ -561,6 +561,49 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.action_execution = None
             self.node.get_logger().info(f"Robot {self.name} has completed the"
                                         f" action it was performing")
+
+    def newly_closed_lanes(self, closed_lanes):
+        need_to_replan = False
+        current_lane = self.get_current_lane()
+
+        if self.target_waypoint is not None and \
+                self.target_waypoint.approach_lanes is not None:
+            for lane_idx in self.target_waypoint.approach_lanes:
+                if lane_idx in closed_lanes:
+                    need_to_replan = True
+                    # The robot is currently on a lane that has been closed.
+                    # We take this to mean that the robot needs to reverse.
+                    if lane_idx == current_lane:
+                        lane = self.graph.get_lane(current_lane)
+
+                        return_waypoint = lane.entry.waypoint_index
+                        reverse_lane = \
+                            self.graph.lane_from(lane.entry.waypoint_index,
+                                                 lane.exit.waypoint_index)
+
+                        with self._lock:
+                            if reverse_lane:
+                                # Update current lane to reverse back to
+                                # start of the lane
+                                self.on_lane = reverse_lane.index
+                            else:
+                                # Update current position and waypoint index
+                                # to return to
+                                self.target_waypoint = return_waypoint
+
+        if not need_to_replan and self.target_waypoint is not None:
+            # Check if the remainder of the current plan has been invalidated
+            # by the lane closure
+            for wp in self.remaining_waypoints:
+                for lane in wp.approach_lanes:
+                    if lane in closed_lanes:
+                        need_to_replan = True
+                        break
+                if need_to_replan:
+                    break
+
+        if need_to_replan:
+            self.update_handle.replan()
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
