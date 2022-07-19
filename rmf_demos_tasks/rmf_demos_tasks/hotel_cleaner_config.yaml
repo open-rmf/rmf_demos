@@ -1,7 +1,9 @@
-# This docking config file provides the mock docker a series of known paths which
-# the cleaner robot will follow during a docking (aka cleaning) process. 
-#   Example:  Destination: "CLEANZONE" ;  The path here is the trajactory 
-#             which starts from "CLEANZONE_start" to "CLEANZONE"
+# The configuration file for docking actions that robots can perform
+# FleetName: The name of the fleet
+#   DockName: The name of the docking waypoint
+#     level_name: The level name
+#     path: The waypoints that the robot will pass through during the docking process)
+#     finish_waypoint: The name of the waypoint where the robot will end up at the end of the docking process
 #
 # Note: These waypoints are in (x meters, y meters, yaw radian) form
 #
@@ -11,12 +13,11 @@
 # Configuring Cleaning path:
 #    The full cleaning path which the robot will travel along. When configuring, the first
 #    waypoint is required to be the current robot's waypoint.
-#    And the last waypoint should the exact same waypoint as 'finish_waypoint'
 
 cleanerBotA:
-  clean_lobby: 
+  clean_lobby:
     level_name: "L1"
-    path: [ [25.42, -35.45, 0.0],
+    path: [ [24.59, -35.49, 0.0],
             [24.24, -38.77, 1.57],
             [18.3, -38.62, 0.0],
             [18.3, -35.3, 0.0],

@@ -22,6 +22,7 @@ import sys
 import json
 import copy
 import argparse
+import logging
 from collections import OrderedDict
 from rosidl_runtime_py import message_to_ordereddict
 from pyproj import Transformer
@@ -35,6 +36,9 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import FleetState, RobotState
+
+log = logging.getLogger('werkzeug')
+log.disabled = True
 
 SUPPORTED_GPS_FRAMES = ['svy21']
 
@@ -58,11 +62,11 @@ GPS_MESSAGE_DEFINITION = {
 class FleetSocketIOBridge(Node):
     def __init__(self, argv=sys.argv):
         parser = argparse.ArgumentParser()
-        parser.add_argument('-t', '--fleet_state_topic',
+        parser.add_argument('-t', '--robot_state_topic',
                             required=False,
                             type=str,
-                            default='/fleet_states',
-                            help='Topic to listen on for Fleet States')
+                            default='/robot_state',
+                            help='Topic to listen on for Robot States')
         parser.add_argument('-f', '--filter_fleet',
                             required=False,
                             type=str,
@@ -102,19 +106,19 @@ class FleetSocketIOBridge(Node):
         if self.args.gps_state_topic:
             self._init_gps_conversion_tools('svy21')
 
-    def fleet_state_callback(self, msg: FleetState):
+    def robot_state_callback(self, msg: RobotState):
         try:
             if self.args.filter_fleet:
-                if msg.name != self.args.filter_fleet:
+                if self.args.filter_fleet not in msg.name:
                     return
 
-            self._sio.emit(self.args.fleet_state_topic,
+            self._sio.emit(self.args.robot_state_topic,
                            message_to_ordereddict(msg))
 
             if self.args.gps_state_topic:
-                fleet_state_json = self._fleet_state_to_gps_json(msg)
+                robot_state_json = self._robot_state_to_gps_json(msg)
                 self._sio.emit(self.args.gps_state_topic,
-                               fleet_state_json)
+                               robot_state_json)
         except Exception as e:
             print(e)
 
@@ -141,10 +145,10 @@ class FleetSocketIOBridge(Node):
         self._sio.init_app(self._app, cors_allowed_origins="*")
 
     def _init_pubsub(self):
-        self.fleet_state_sub = self.create_subscription(
-            FleetState,
-            self.args.fleet_state_topic,
-            self.fleet_state_callback,
+        self.robot_state_sub = self.create_subscription(
+            RobotState,
+            self.args.robot_state_topic,
+            self.robot_state_callback,
             10)
 
     def _init_gps_conversion_tools(self, frame: str):
@@ -156,15 +160,6 @@ class FleetSocketIOBridge(Node):
             return
 
         raise Exception("This should not happen")
-
-    def _fleet_state_to_gps_json(self, fleet_state: FleetState):
-        fleet_state_json = {}
-        fleet_state_json['name'] = fleet_state.name
-        fleet_state_json['robots'] = []
-        for state in fleet_state.robots:
-            robot_state_json = self._robot_state_to_gps_json(state)
-            fleet_state_json['robots'].append(json.loads(robot_state_json))
-        return json.dumps(fleet_state_json)
 
     def _robot_state_to_gps_json(self, robot_state: RobotState):
         resp = copy.deepcopy(GPS_MESSAGE_DEFINITION)
