@@ -1,0 +1,57 @@
+# FLEET CONFIG =================================================================
+# RMF Fleet parameters
+
+rmf_fleet:
+  name: "cleanerBotA"
+  fleet_manager:
+    ip: "127.0.0.1"
+    port: 22013
+    user: "some_user"
+    password: "some_password"
+  limits:
+    linear: [0.7, 0.5] # velocity, acceleration
+    angular: [0.4, 1.0] # velocity, acceleration
+  profile: # Robot profile is modelled as a circle
+    footprint: 1.0 # radius in m
+    vicinity: 1.2 # radius in m
+  reversible: False # whether robots in this fleet can reverse
+  # TODO Update battery parameters with actual specs
+  battery_system:
+    voltage: 24.0 # V
+    capacity: 20.0 # Ahr
+    charging_current: 10.0 # A
+  mechanical_system:
+    mass: 70.0 # kg
+    moment_of_inertia: 40.0 #kgm^2
+    friction_coefficient: 0.22
+  ambient_system:
+    power: 100.0 # W
+  tool_system:
+    power: 0.0 # W
+  recharge_threshold: 0.20 # Battery level below which robots in this fleet will not operate
+  recharge_soc: 1.0 # Battery level to which robots in this fleet should be charged up to during recharging tasks
+  publish_fleet_state: 10.0 # Publish frequency for fleet state, ensure that it is same as robot_state_update_frequency
+  account_for_battery_drain: True
+  task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
+    loop: False
+    delivery: False
+    clean: True
+    finishing_request: "park" # [park, charge, nothing]
+
+# CleanerBotA CONFIG =================================================================
+
+robots:
+  # Here the user is expected to append the configuration for each robot in the
+  # fleet.
+  # Configuration for cleanerBotA_0
+  cleanerBotA_0:
+    robot_config:
+      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
+    rmf_config:
+      robot_state_update_frequency: 10.0
+      start:
+        map_name: "L1"
+        waypoint: "charger_cleanerBotA_0"
+        orientation: 0.0 # radians
+      charger:
+        waypoint: "charger_cleanerBotA_0"

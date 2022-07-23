@@ -18,10 +18,10 @@ import rclpy
 import math
 import argparse
 import yaml
+import time
 from rclpy.node import Node
 from rclpy.time import Time
 
-from rclpy.qos import qos_profile_system_default
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
@@ -116,6 +116,7 @@ class MockDocker(Node):
                 dock_sub_map[dock_name] = param.path
             dock_summary.docks.append(dock)
             self.dock_map[fleet_name] = dock_sub_map
+        time.sleep(2)
         self.dock_summary_publisher.publish(dock_summary)
 
     def mode_request_cb(self, msg: ModeRequest):
@@ -135,7 +136,7 @@ class MockDocker(Node):
         fleet_name = self.dock_map.get(msg.fleet_name)
         if fleet_name is None:
             self.get_logger().warn(
-                'Unknown fleet name reuested [{msg.fleet_name}].')
+                'Unknown fleet name requested [{msg.fleet_name}].')
             return
 
         dock = fleet_name.get(msg.parameters[0].value)

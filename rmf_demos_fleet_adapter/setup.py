@@ -1,3 +1,5 @@
+import os
+from glob import glob
 from setuptools import setup, find_packages
 
 package_name = 'rmf_demos_fleet_adapter'
@@ -10,8 +12,12 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name, ['config.yaml']),
+        (os.path.join('share', package_name, 'launch'),
+            glob('launch/*.launch.xml')),
+
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'fastapi', 'uvicorn'],
     zip_safe=True,
     maintainer='Xi Yu Oh',
     maintainer_email='xiyu@openrobotics.org',
@@ -21,9 +27,11 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            ('deliveryrobot_gps_fleet_adapter='
+            'deliveryrobot_gps_fleet_adapter='
                 'rmf_demos_fleet_adapter.DeliveryRobot'
-                '.deliveryrobot_gps_fleet_adapter:main')
+                '.deliveryrobot_gps_fleet_adapter:main',
+            'fleet_adapter=rmf_demos_fleet_adapter.fleet_adapter:main',
+            'fleet_manager=rmf_demos_fleet_adapter.fleet_manager:main'
         ],
     },
 )

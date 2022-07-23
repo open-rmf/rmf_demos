@@ -67,11 +67,11 @@ ROBOTMANAGER_GPS_DEFINITION = {
 class FleetRobotManagerMQTTBridge(Node):
     def __init__(self, argv=sys.argv):
         parser = argparse.ArgumentParser()
-        parser.add_argument('-t', '--fleet_state_topic',
+        parser.add_argument('-t', '--robot_state_topic',
                             required=False,
                             type=str,
-                            default='/fleet_states',
-                            help='Topic to listen on for Fleet States')
+                            default='/robot_state',
+                            help='Topic to listen on for Robot States')
         parser.add_argument('-f', '--filter_fleet',
                             required=False,
                             type=str,
@@ -106,31 +106,31 @@ class FleetRobotManagerMQTTBridge(Node):
         self._init_mqtt()
         self._init_gps_conversion_tools('svy21')
 
-    def fleet_state_callback(self, msg: FleetState):
+    def robot_state_callback(self, msg: RobotState):
         try:
             if self.args.filter_fleet:
-                if msg.name != self.args.filter_fleet:
+                if self.args.filter_fleet not in msg.name:
                     return
-            for robot in msg.robots:
-                if robot.name not in ROBOT_ID_TO_AUTHKEY_MAP.keys():
-                    print(
-                        f"Skipping {robot.name} as it does not have auth key")
-                else:
-                    json = self._robot_state_to_gps_json(robot)
-                    rbmgr_uuid = ROBOT_ID_TO_AUTHKEY_MAP[robot.name]
-                    self.mqtt_pubs[robot.name].publish(
-                        self.args.mqtt_base_topic + rbmgr_uuid,
-                        json
-                    )
+            robot = msg
+            if robot.name not in ROBOT_ID_TO_AUTHKEY_MAP.keys():
+                print(
+                    f"Skipping {robot.name} as it does not have auth key")
+            else:
+                json = self._robot_state_to_gps_json(robot)
+                rbmgr_uuid = ROBOT_ID_TO_AUTHKEY_MAP[robot.name]
+                self.mqtt_pubs[robot.name].publish(
+                    self.args.mqtt_base_topic + rbmgr_uuid,
+                    json
+                )
 
         except Exception as e:
             print(e)
 
     def _init_pubsub(self):
-        self.fleet_state_sub = self.create_subscription(
-            FleetState,
-            self.args.fleet_state_topic,
-            self.fleet_state_callback,
+        self.robot_state_sub = self.create_subscription(
+            RobotState,
+            self.args.robot_state_topic,
+            self.robot_state_callback,
             10)
 
     def _init_mqtt(self):
@@ -153,15 +153,6 @@ class FleetRobotManagerMQTTBridge(Node):
             return
 
         raise Exception("This should not happen")
-
-    def _fleet_state_to_gps_json(self, fleet_state: FleetState):
-        fleet_state_json = {}
-        fleet_state_json['name'] = fleet_state.name
-        fleet_state_json['robots'] = []
-        for state in fleet_state.robots:
-            robot_state_json = self._robot_state_to_gps_json(state)
-            fleet_state_json['robots'].append(json.loads(robot_state_json))
-        return json.dumps(fleet_state_json)
 
     def _robot_state_to_gps_json(self, robot_state: RobotState):
         resp = copy.deepcopy(ROBOTMANAGER_GPS_DEFINITION)

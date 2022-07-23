@@ -1,6 +1,6 @@
 crowd_sim:
   agent_groups:
-    - agents_name: [tinyRobot_4, deliveryRobot_2, tinyRobot_2, deliveryRobot_0, deliveryRobot_1, tinyRobot_0, tinyRobot_1, cleanerBotE_0, cleanerBotE_1, cleanerBotA_0]
+    - agents_name: [tinyRobot_3, deliveryRobot_2, tinyRobot_2, deliveryRobot_0, deliveryRobot_1, tinyRobot_0, tinyRobot_1, cleanerBotE_0, cleanerBotE_1, cleanerBotA_0]
       agents_number: 10 # TODO: cant add caddy (>10 agents), issue due to external agents are all spawn at the same postion.
       group_id: 0
       profile_selector: external_agent
@@ -1452,7 +1452,7 @@ levels:
       - [117.107, 560.4059999999999, 0, ""]
       - [18.55, 546.477, 0, junction_n01]
       - [19.54, 396.147, 0, ""]
-      - [265.173, 334.272, 0, n03, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot_4], spawn_robot_type: [1, TinyRobot]}]
+      - [265.173, 334.272, 0, n03, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot_3], spawn_robot_type: [1, TinyRobot]}]
       - [194.487, 391.049, 0, ""]
       - [146.307, 113.153, 0, ""]
       - [146.99, 76.544, 0, ""]
@@ -1991,8 +1991,8 @@ levels:
       - [1914.686, 675.55, 0, ""]
       - [1944.653, 676.5700000000001, 0, charger_cleanerBotE_0, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotE_0], spawn_robot_type: [1, CleanerBotE]}]
       - [1944.648, 645.399, 0, ""]
-      - [1976.269, 646.121, 0, ""]
-      - [1976.009, 676.758, 0, charger_cleanerBotE_1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotE_1], spawn_robot_type: [1, CleanerBotE]}]
+      - [1990.269, 645.721, 0, ""]
+      - [1990.009, 677.358, 0, charger_cleanerBotE_1, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotE_1], spawn_robot_type: [1, CleanerBotE]}]
       - [1850.375, 734.322, 0, zone_4, {dock_name: [1, zone_4], is_cleaning_zone: [4, true]}]
       - [1429.736, 602.524, 0, charger_cleanerBotA_0, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, cleanerBotA_0], spawn_robot_type: [1, CleanerBotA]}]
       - [2068.856, 362.446, 0, ""]
