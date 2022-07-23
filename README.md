@@ -172,7 +172,7 @@ To send task requests, open rmf_demos web panel: https://open-rmf.github.io/rmf-
 
 ![](../media/home_world.gif?raw=true)
 
-To submit a delivery task, select Delivery from the Select a request type dropdown list. Next, select from desired coke delivery option from the Select delivery task list. Choose an desired start time for task and click submit.
+To submit a delivery task, select ```Delivery``` from the ```Select a request type``` dropdown list. Next, select ```your desired coke delivery location``` from the ```Select delivery task``` list. Choose an desired start time for task and click submit.
 
 Or, submit a task via CLI:
 
