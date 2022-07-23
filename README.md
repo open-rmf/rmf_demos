@@ -166,7 +166,22 @@ This demo world shows robot inside a home environment where the robot is configu
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch rmf_demos_gz home_world.launch.xml
 ```
+2 types of Tasks are defined: **Delivery** and **Loop**
+
+To send task requests, open rmf_demos web panel: https://open-rmf.github.io/rmf-panel-js/
+
 ![](../media/home_world.gif?raw=true)
+
+To submit a delivery task, select Delivery from the Select a request type dropdown list. Next, select from desired coke delivery option from the Select delivery task list. Choose an desired start time for task and click submit.
+
+Or, submit a task via CLI:
+
+```bash
+ros2 run rmf_demos_tasks dispatch_patrol -p kitchen dining_table -n 2 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_delivery -p kitchen -ph coke_dispenser -d bedroom_1 -dh coke_ingestor_bedroom_1 --use_sim_time
+```
+
+To submit a **loop task**, select ```Loop``` from the ```Select a request type``` dropdown list. Choose desired start and end locations and click submit.
 
 ---
 ### Airport Terminal World
