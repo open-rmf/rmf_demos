@@ -9,7 +9,6 @@ ament_package()
 set(outputs
   ${CMAKE_CURRENT_SOURCE_DIR}/airport_terminal/main.json
   ${CMAKE_CURRENT_SOURCE_DIR}/office/main.json
-  ${CMAKE_CURRENT_SOURCE_DIR}/home/main.json
 )
 
 if(${CMAKE_VERSION} VERSION_GREATER_EQUAL 3.12)
@@ -33,6 +32,5 @@ install(DIRECTORY
   office
   hotel
   clinic
-  home
   DESTINATION share/${PROJECT_NAME}
 )
