@@ -164,7 +164,7 @@ This demo world shows robot inside a home environment where the robot is configu
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
-ros2 launch rmf_demos_gz home_world.launch.xml
+ros2 launch rmf_demos_gz home.launch.xml
 ```
 2 types of Tasks are defined: **Delivery** and **Loop**
 
