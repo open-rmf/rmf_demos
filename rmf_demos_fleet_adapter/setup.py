@@ -17,7 +17,7 @@ setup(
             glob('launch/*.launch.xml')),
 
     ],
-    install_requires=['setuptools', 'fastapi', 'uvicorn'],
+    install_requires=['setuptools', 'fastapi>=0.79.0', 'uvicorn>=0.18.2'],
     zip_safe=True,
     maintainer='Xi Yu Oh',
     maintainer_email='xiyu@openrobotics.org',
@@ -27,11 +27,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'deliveryrobot_gps_fleet_adapter='
-                'rmf_demos_fleet_adapter.DeliveryRobot'
-                '.deliveryrobot_gps_fleet_adapter:main',
             'fleet_adapter=rmf_demos_fleet_adapter.fleet_adapter:main',
-            'fleet_manager=rmf_demos_fleet_adapter.fleet_manager:main'
+            'fleet_manager=rmf_demos_fleet_adapter.fleet_manager:main',
         ],
     },
 )
