@@ -11,6 +11,8 @@ This fleet adapter integration relies on a fleet manager and a fleet adapter:
 Make sure the required dependencies are installed:
 ```bash
 pip3 install fastapi uvicorn
+
+# **Ensure the py libs version are 'fastapi>=0.79.0', 'uvicorn>=0.18.2'.
 ```
 
 You can interact with the endpoints with FastAPI's automatic documentation. First launch a demo world, then visit the base URL with `/docs` appended at the end. Do take note that the port number for each demo fleet is specified in `rmf_demos/rmf_demos/config/`.
