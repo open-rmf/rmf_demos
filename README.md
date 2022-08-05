@@ -257,10 +257,19 @@ ros2 run rmf_demos_tasks  dispatch_patrol -p room_2 dead_end -n 10 --use_sim_tim
 ```
 
 #### RobotManager Integration
-(Add instructions for RobotManager integration)
-```
-apt install mosquitto mosquitto-clients
+`fleet_robotmanager_mqtt_bridge` can be used to publish robot locations to a `/gps` websocket endpoint. An instance of RobotManager can be configured to subscribe to this server to receive json messages, which will in turn visualize the robots on RobotManager.
+
+```bash
+# Install the prerequisites
+sudo apt install mosquitto mosquitto-clients
+
+# Start the bridge
 ros2 run rmf_demos_bridges fleet_robotmanager_mqtt_bridge -y 31500 -x 22000
+```
+
+The json messages for the first robot can be echoed using the following example command,
+
+```bash
 mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
 ```
 
