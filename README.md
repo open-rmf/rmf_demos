@@ -257,7 +257,7 @@ ros2 run rmf_demos_tasks  dispatch_patrol -p room_2 dead_end -n 10 --use_sim_tim
 ```
 
 #### RobotManager Integration
-`fleet_robotmanager_mqtt_bridge` can be used to publish robot locations to a `/gps` websocket endpoint. An instance of RobotManager can be configured to subscribe to this server to receive json messages, which will in turn visualize the robots on RobotManager.
+`fleet_robotmanager_mqtt_bridge` can be used to publish robot locations, battery percentage and state to a `/robot/status/ROBOT-ID` websocket endpoint. An instance of RobotManager can be configured to subscribe to this server to receive json messages, which will in turn visualize the robots on RobotManager.
 
 ```bash
 # Install the prerequisites
