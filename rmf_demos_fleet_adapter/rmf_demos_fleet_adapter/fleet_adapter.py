@@ -31,7 +31,7 @@ import rmf_adapter.graph as graph
 import rmf_adapter.plan as plan
 
 from rmf_task_msgs.msg import TaskProfile, TaskType
-from rmf_fleet_msgs.msg import LaneRequest, ClosedLanes
+from rmf_fleet_msgs.msg import LaneRequest, ClosedLanes, SpeedLimitRequest
 
 from functools import partial
 
@@ -348,6 +348,24 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         ClosedLanes,
         'closed_lanes',
         qos_profile=transient_qos)
+
+    # Add SpeedLimitRequest callback
+    def _speed_limit_request_cb(msg):
+        if msg.fleet_name is None or msg.fleet_name != fleet_name:
+            return
+
+        requests = []
+        for limit in msg.speed_limits:
+            request = adpt.fleet_update_handle.SpeedLimitRequest(limit.lane_index, limit.speed_limit)
+            requests.append(request)
+        fleet_handle.limit_lane_speeds(requests)
+        fleet_handle.remove_speed_limits(msg.remove_limits)
+
+    node.create_subscription(
+        SpeedLimitRequest,
+        'speed_limit_requests',
+        _speed_limit_request_cb,
+        qos_profile=qos_profile_system_default)
 
     return adapter
 
