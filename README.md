@@ -64,11 +64,11 @@ ros2 launch rmf_demos_gz office.launch.xml gazebo_version:=9
 
 Click this link: https://open-rmf.github.io/rmf-panel-js/
 
-> For a full-proof web application of RMF, please refer to [rmf-web](https://github.com/open-rmf/rmf-web).
+> For a full-proof web application of Open-RMF, please refer to [rmf-web](https://github.com/open-rmf/rmf-web).
 
 The [RMF panel](https://github.com/open-rmf/rmf-panel-js) is a web based dashboard for interacting with rmf_demos. It allows users to send task requests to RMF and monitor the status of robots and submitted tasks. For more [details](rmf_demos_panel/README.md).
 
-There are two main modes of submitting tasks to RMF via the Panel:
+There are two main modes of submitting tasks to Open-RMF via the Panel:
 
 1. Submit a Task: Used to submit a single task.
 2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_panel/task_lists`.
@@ -80,7 +80,7 @@ There are two main modes of submitting tasks to RMF via the Panel:
 ros2 launch rmf_demos_gz office.launch.xml server_uri:="ws://localhost:7878"
 ```
 
-This will let RMF (websocket clients) to publish their states to port `7878`. In this case, rmf-panel's `api_simple_server` is the websocket server.
+This will let Open-RMF (websocket clients) to publish their states to port `7878`. In this case, rmf-panel's `api_simple_server` is the websocket server.
 
 ---
 
@@ -189,7 +189,7 @@ To see crowd simulation in action, enable crowd sim by:
 ros2 launch rmf_demos_gz airport_terminal.launch.xml use_crowdsim:=1
 ```
 
-Non-autonomous vehicles can also be integrated with RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In RMF nomenclature, this vehicle is classified as a `read_only` type, ie, RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the RMF schedule.
+Non-autonomous vehicles can also be integrated with Open-RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In Open-RMF nomenclature, this vehicle is classified as a `read_only` type, ie, Open-RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the Open-RMF schedule.
 
 In the airport terminal map, a `Caddy` is spawned in the far right corner and can be controlled with `geometry_msgs/Twist` messages published over the `cmd_vel` topic.
 
@@ -242,7 +242,7 @@ Multi-fleet demo:
 ---
 ### Campus World
 
-This is a larger scale "Campus" World. In this world, there are multiple delivery robots that operate. The world is designed and traffic lanes are annotated at the planet scale, using GPS WGS84 coordinates. Each robot is also streaming its location in WGS84 coordinates, which are processed by its fleet adapter. This demo intends to show the potential of RMF on a large scale map.
+This is a larger scale "Campus" World. In this world, there are multiple delivery robots that operate. The world is designed and traffic lanes are annotated at the planet scale, using GPS WGS84 coordinates. Each robot is also streaming its location in WGS84 coordinates, which are processed by its fleet adapter. This demo intends to show the potential of Open-RMF on a large scale map.
 
 ![](../media/campus.gif)
 
@@ -280,21 +280,19 @@ mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
 
 An Open-RMF simulation demonstration created by ROS-Industrial Asia Pacific showcasing workcell (conveyor and fixed manipulator), multiple AMR fleets and infrastructure interoperability using the Open Robotics Middleeware Framework (Open-RMF).
 
-[![Alt text](https://img.youtube.com/vi/oSVQrjx_4w4/0.jpg)](https://www.youtube.com/watch?v=oSVQrjx_4w4)
-
 <p align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/oSVQrjx_4w4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Alt text](https://img.youtube.com/vi/oSVQrjx_4w4/0.jpg)](https://www.youtube.com/watch?v=oSVQrjx_4w4)
 </p>
 
 ## Other Tools and Features Demos
 
 * [Traffic Light Robot Demos](#Traffic-Light-Robot-Demos)
 * [Additional Features](#Additional-Features)
-* [Task Dispatching in RMF](#Task-Dispatching-in-RMF)
+* [Task Dispatching in Open-RMF](#Task-Dispatching-in-Open-RMF)
 
 ### Traffic Light Robot Demos
 
-RMF can also manage fleets whose API or fleet managers only offer pause and resume commands to control their robots. Such fleets are classified as `traffic_light`. To integrate a `traffic_light` fleet, users are expected to implement a `traffic_light` fleet adapter based on this [API](https://github.com/open-rmf/rmf_ros2/blob/main/rmf_fleet_adapter/include/rmf_fleet_adapter/agv/EasyTrafficLight.hpp). The `rmf_demos` repository contains demonstrations of `traffic_light` fleets in various scenarios. A simplistic `mock_traffic_light` adapter is used in these demonstrations.
+Open-RMF can also manage fleets whose API or fleet managers only offer pause and resume commands to control their robots. Such fleets are classified as `traffic_light`. To integrate a `traffic_light` fleet, users are expected to implement a `traffic_light` fleet adapter based on this [API](https://github.com/open-rmf/rmf_ros2/blob/main/rmf_fleet_adapter/include/rmf_fleet_adapter/agv/EasyTrafficLight.hpp). The `rmf_demos` repository contains demonstrations of `traffic_light` fleets in various scenarios. A simplistic `mock_traffic_light` adapter is used in these demonstrations.
 
 #### Triple-H scenario:
 ```bash
@@ -350,9 +348,9 @@ $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
     ros2 topic pub -1 /fire_alarm_trigger std_msgs/Bool '{data: false}'
     ```
 
-## Task Dispatching in RMF
+## Task Dispatching in Open-RMF
 ![](../media/RMF_Bidding.png)
 
-In RMF version `21.04` and above, tasks are awarded to robot fleets based on the outcome of a bidding process that is orchestrated by a Dispatcher node, `rmf_dispatcher_node`. When the Dispatcher receives a new task request from a UI, it sends out a `rmf_task_msgs/BidNotice` message to all the fleet adapters. If a fleet adapter is able to process that request, it submits a `rmf_task_msgs/BidProposal` message back to the Dispatcher with a cost to accommodate the task. An instance of `rmf_task::agv::TaskPlanner` is used by the fleet adapters to determine how best to accommodate the new request. The Dispatcher compares all the `BidProposals` received and then submits a `rmf_task_msgs/DispatchRequest` message with the fleet name of the robot that the bid is awarded to. There are a couple different ways the Dispatcher evaluates the proposals such as fastest to finish, lowest cost, etc which can be configured.
+In Open-RMF version `21.04` and above, tasks are awarded to robot fleets based on the outcome of a bidding process that is orchestrated by a Dispatcher node, `rmf_dispatcher_node`. When the Dispatcher receives a new task request from a UI, it sends out a `rmf_task_msgs/BidNotice` message to all the fleet adapters. If a fleet adapter is able to process that request, it submits a `rmf_task_msgs/BidProposal` message back to the Dispatcher with a cost to accommodate the task. An instance of `rmf_task::agv::TaskPlanner` is used by the fleet adapters to determine how best to accommodate the new request. The Dispatcher compares all the `BidProposals` received and then submits a `rmf_task_msgs/DispatchRequest` message with the fleet name of the robot that the bid is awarded to. There are a couple different ways the Dispatcher evaluates the proposals such as fastest to finish, lowest cost, etc which can be configured.
 
 Battery recharging is tightly integrated with the new task planner. `ChargeBattery` tasks are optimally injected into a robot's schedule when the robot has insufficient charge to fulfill a series of tasks. Currently we assume each robot in the map has a dedicated charging location as annotated with the `is_charger` option in the traffic editor map.
