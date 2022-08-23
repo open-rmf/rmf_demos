@@ -3,10 +3,10 @@
 ![](https://github.com/open-rmf/rmf_demos/workflows/build/badge.svg)
 ![](https://github.com/open-rmf/rmf_demos/workflows/style/badge.svg)
 
-The Robotics Middleware Framework (RMF) enables interoperability among heterogeneous robot fleets while managing robot traffic that share resources such as space, building infrastructure systems (lifts, doors, etc) and other automation systems within the same facility. RMF also handles task allocation and conflict resolution  among its participants (de-conflicting traffic lanes and other resources). These capabilities are provided by various libraries in [RMF](https://github.com/open-rmf/rmf).
-More details about RMF, refer to the comprehensive documentation provided [here](https://osrf.github.io/ros2multirobotbook/intro.html).
+The Open Robotics Middleware Framework (Open-RMF) enables interoperability among heterogeneous robot fleets while managing robot traffic that share resources such as space, building infrastructure systems (lifts, doors, etc) and other automation systems within the same facility. Open-RMF also handles task allocation and conflict resolution  among its participants (de-conflicting traffic lanes and other resources). These capabilities are provided by various libraries in [Open-RMF](https://github.com/open-rmf/rmf).
+For more details about Open RMF, refer to the comprehensive documentation provided [here](https://osrf.github.io/ros2multirobotbook/intro.html).
 
-This repository contains demonstrations of the above mentioned capabilities of RMF. It serves as a starting point for working and integrating with RMF.
+This repository contains demonstrations of the above mentioned capabilities of RMF. It serves as a starting point for working and integrating with Open-RMF.
 
 [![Robotics Middleware Framework](../media/thumbnail.png?raw=true)](https://vimeo.com/405803151)
 
@@ -31,11 +31,11 @@ Answers to frequently asked questions can be found [here](docs/faq.md).
 
 ## Roadmap
 
-A near-term roadmap of the RMF project can be found in the user manual [here](https://osrf.github.io/ros2multirobotbook/roadmap.html).
+A near-term roadmap of the Open-RMF project can be found in the user manual [here](https://osrf.github.io/ros2multirobotbook/roadmap.html).
 
 ## RMF-Web
 
-Full web application of RMF: [rmf-web](https://github.com/open-rmf/rmf-web).
+Full web application of Open-RMF: [rmf-web](https://github.com/open-rmf/rmf-web).
 
 In order to interact with the default configuration of the web application, the `server_uri` launch parameter will need to be changed to `ws://localhost:8000/_internal`, for example,
 
@@ -51,6 +51,8 @@ By specifying `server_uri`, the fleetadapter will update `rmf-web` `api-server` 
 * [Office World](#Office-World)
 * [Airport Terminal World](#Airport-Terminal-World)
 * [Clinic World](#Clinic-World)
+* [Campus World](#Campus-World)
+* [Manufacturing & Logistics World](#Manufacturing-&-Logistics-World)
 
 > Note: When running the demos on Ubuntu 18.04 (not officially supported), you are required to explicitly supply gazebo_version launch argument. Eg:
 ros2 launch rmf_demos_gz office.launch.xml gazebo_version:=9
@@ -274,6 +276,21 @@ mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
 ```
 
 ---
+### Manufacturing & Logistics World
+
+An Open-RMF simulation demonstration created by ROS-Industrial Asia Pacific showcasing workcell (conveyor and fixed manipulator), multiple AMR fleets and infrastructure interoperability using the Open Robotics Middleeware Framework (Open-RMF).
+
+[![Alt text](https://img.youtube.com/vi/oSVQrjx_4w4/0.jpg)](https://www.youtube.com/watch?v=oSVQrjx_4w4)
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oSVQrjx_4w4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+## Other Tools and Features Demos
+
+* [Traffic Light Robot Demos](#Traffic-Light-Robot-Demos)
+* [Additional Features](#Additional-Features)
+* [Task Dispatching in RMF](#Task-Dispatching-in-RMF)
 
 ### Traffic Light Robot Demos
 
