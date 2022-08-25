@@ -7,8 +7,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        docker_image: ['ros:humble-ros-base']
     container:
-      image: docker://ros:humble-ros-base-focal
+      image: ${{ matrix.docker_image }}
     steps:
     - name: non-ros-deps
       run: |
