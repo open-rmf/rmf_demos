@@ -1,4 +1,8 @@
-## Changelog for package rmf_demos_ign
+## Changelog for package rmf_demos_gz_classic
+
+2.0.0 (2022-XX-XX)
+------------------
+* Renamed to rmf_demos_gz_classic
 
 1.3.1 (2021-11-30)
 ------------------
@@ -7,5 +11,4 @@
 
 1.3.0 (2021-09-08)
 ------------------
-* Provides launch files for running various demonstrations in ignition-gazebo
-
+* Provides launch files for running various demonstrations in gazebo

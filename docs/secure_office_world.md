@@ -77,7 +77,7 @@ Gazebo needs the environment variables to locate files, and set up communication
 ```bash
 echo 'export GAZEBO_MODEL_PATH=~/rmf_demos_ws/install/rmf_demos_maps/share/rmf_demos_maps/maps/office/models:~/rmf_demos_ws/install/rmf_demos_assets/share/rmf_demos_assets/models:/usr/share/gazebo-11/models
 export GAZEBO_RESOURCE_PATH=~/rmf_demos_ws/install/rmf_demos_assets/share/rmf_demos_assets:/usr/share/gazebo-11
-export GAZEBO_PLUGIN_PATH=~/rmf_demos_ws/install/rmf_robot_sim_gazebo_plugins/lib:~/rmf_demos_ws/install/building_gazebo_plugins/lib/
+export GAZEBO_PLUGIN_PATH=~/rmf_demos_ws/install/rmf_robot_sim_gz_classic_plugins/lib:~/rmf_demos_ws/install/building_gazebo_plugins/lib/
 export GAZEBO_MODEL_DATABASE_URI=""' > gazebo_environment.sh
 ```
 

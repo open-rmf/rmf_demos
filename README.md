@@ -40,7 +40,7 @@ Full web application of Open-RMF: [rmf-web](https://github.com/open-rmf/rmf-web)
 In order to interact with the default configuration of the web application, the `server_uri` launch parameter will need to be changed to `ws://localhost:8000/_internal`, for example,
 
 ```bash
-ros2 launch rmf_demos_ign office.launch.xml server_uri:="ws://localhost:8000/_internal"
+ros2 launch rmf_demos_gz office.launch.xml server_uri:="ws://localhost:8000/_internal"
 ```
 
 By specifying `server_uri`, the fleetadapter will update `rmf-web` `api-server` with the latest task and robot states. User can then monitor on-going states and initiate rmf task with an interactive web dashboard.
@@ -55,9 +55,9 @@ By specifying `server_uri`, the fleetadapter will update `rmf-web` `api-server` 
 * [Manufacturing & Logistics World](#Manufacturing-&-Logistics-World)
 
 > Note: When running the demos on Ubuntu 18.04 (not officially supported), you are required to explicitly supply gazebo_version launch argument. Eg:
-ros2 launch rmf_demos_gz office.launch.xml gazebo_version:=9
+ros2 launch rmf_demos_gz_classic office.launch.xml gazebo_version:=9
 
-> To run the demos using Ignition instead of Gazebo, change the commands from `ros2 launch rmf_demos_gz [...]` to `ros2 launch rmf_demos_ign [...]`
+> To run the demos using Ignition instead of Gazebo, change the commands from `ros2 launch rmf_demos_gz_classic [...]` to `ros2 launch rmf_demos_gz [...]`
 
 **RMF Panel**
 ![](../media/RMF_Panel.png?raw=true)
@@ -77,7 +77,7 @@ There are two main modes of submitting tasks to Open-RMF via the Panel:
 
 `task_state_uptates` are now published via websocket. To display task states on `rmf-panel`, specify `server_uri:="ws://localhost:7878"` during ros2 launch. Example:
 ```
-ros2 launch rmf_demos_gz office.launch.xml server_uri:="ws://localhost:7878"
+ros2 launch rmf_demos_gz_classic office.launch.xml server_uri:="ws://localhost:7878"
 ```
 
 This will let Open-RMF (websocket clients) to publish their states to port `7878`. In this case, rmf-panel's `api_simple_server` is the websocket server.
@@ -97,10 +97,10 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_gz hotel.launch.xml
+ros2 launch rmf_demos_gz_classic hotel.launch.xml
 
 # Or, run with ignition simulator
-ros2 launch rmf_demos_ign hotel.launch.xml
+ros2 launch rmf_demos_gz hotel.launch.xml
 ```
 
 Here, we will showcase 2 types of Tasks: **Loop** and **Clean**
@@ -131,10 +131,10 @@ An indoor office environment for robots to navigate around. It includes a bevera
 
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
-ros2 launch rmf_demos_gz office.launch.xml
+ros2 launch rmf_demos_gz_classic office.launch.xml
 
 # Or, run with ignition simulator
-ros2 launch rmf_demos_ign office.launch.xml
+ros2 launch rmf_demos_gz office.launch.xml
 ```
 
 Now we will showcase 2 types of Tasks: **Delivery** and **Loop**
@@ -172,7 +172,7 @@ In the airport world, we introduce a new task type to rmf: `Clean`. To launch th
 
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_gz airport_terminal.launch.xml
+ros2 launch rmf_demos_gz_classic airport_terminal.launch.xml
 ```
 
 Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [airport_terminal_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/airport_terminal_tasks.json) list and click submit to begin a collection of loop, delivery and cleaning tasks.
@@ -186,7 +186,7 @@ ros2 run rmf_demos_tasks dispatch_clean -cs zone_3 --use_sim_time
 
 To see crowd simulation in action, enable crowd sim by:
 ```bash
-ros2 launch rmf_demos_gz airport_terminal.launch.xml use_crowdsim:=1
+ros2 launch rmf_demos_gz_classic airport_terminal.launch.xml use_crowdsim:=1
 ```
 
 Non-autonomous vehicles can also be integrated with Open-RMF provided their positions can be localized in the world. This may be of value at facilities where space is shared by autonomous robots as well as manually operated vehicles such as forklifts or transporters. In this demo, we can introduce a vehicle (caddy) which can be driven around through keyboard/joystick teleop. In Open-RMF nomenclature, this vehicle is classified as a `read_only` type, ie, Open-RMF can only infer its position in the world but does not have control over its motion. Here, the goal is to have other controllable robots avoid this vehicle's path by replanning their routes if needed. The model is fitted with a plugin which generates a prediction of the vehicle's path based on its current heading. It is configured to occupy the same lanes as the `tinyRobot` robots. Here, a `read_only_fleet_adapter` submits the prediction from the plugin to the Open-RMF schedule.
@@ -199,7 +199,7 @@ Run `teleop_twist_keyboard` to control the `caddy` with your keyboard:
 ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 # if launched with the Ignition simulator
-ros2 launch rmf_demos_ign airport_terminal_caddy.launch.xml
+ros2 launch rmf_demos_gz airport_terminal_caddy.launch.xml
 ```
 
 ![](../media/caddy.gif)
@@ -219,7 +219,7 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_gz clinic.launch.xml
+ros2 launch rmf_demos_gz_classic clinic.launch.xml
 ```
 
 Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [clinic_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/clinic_tasks.json) list and click submit to begin a collection of loop and delivery tasks.
@@ -251,7 +251,7 @@ To launch the world and the schedule visualizer,
 
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_ign campus.launch.xml
+ros2 launch rmf_demos_gz campus.launch.xml
 
 ros2 run rmf_demos_tasks  dispatch_patrol -p room_5 campus_4 -n 10 --use_sim_time
 ros2 run rmf_demos_tasks  dispatch_patrol -p campus_5 room_3 -n 10 --use_sim_time
@@ -296,20 +296,20 @@ Open-RMF can also manage fleets whose API or fleet managers only offer pause and
 
 #### Triple-H scenario:
 ```bash
-$ ros2 launch rmf_demos_gz triple_H.launch.xml
+$ ros2 launch rmf_demos_gz_classic triple_H.launch.xml
 (new terminal) $ ros2 launch rmf_demos the_pedigree.launch.xml
 ```
 #### Battle Royale Scenario:
 
 ```bash
-$ ros2 launch rmf_demos_gz battle_royale.launch.xml
+$ ros2 launch rmf_demos_gz_classic battle_royale.launch.xml
 (new terminal) $ ros2 launch rmf_demos battle_go.launch.xml
 ```
 
 #### Office Scenario:
 Note that `tinyRobot1` is a standard "full control" robot, while `tinyRobot2` "traffic light" robot.
 ```bash
-$ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
+$ ros2 launch rmf_demos_gz_classic office_mock_traffic_light.launch.xml
 (new terminal) $ ros2 launch rmf_demos office_traffic_light_test.launch.xml
 ```
 
@@ -322,7 +322,7 @@ $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
    - Command lines:
     ```bash
     # run hotel world with lift_watch_dog enabled
-    ros2 launch rmf_demos_gz hotel.launch.xml enable_experimental_lift_watchdog:=1
+    ros2 launch rmf_demos_gz_classic hotel.launch.xml enable_experimental_lift_watchdog:=1
 
     ## On a separate terminal, set lift as crowded
     ros2 launch rmf_demos experimental_crowded_lift.launch.xml
