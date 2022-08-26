@@ -23,7 +23,7 @@ jobs:
           git cmake python3-vcstool curl \
           clang clang-tools lld \
           python3-shapely python3-yaml python3-requests \
-          ignition-edifice  python3-pip -y
+          python3-pip -y
         pip3 install flask-socketio fastapi uvicorn
     - name: create-ws
       run: |
