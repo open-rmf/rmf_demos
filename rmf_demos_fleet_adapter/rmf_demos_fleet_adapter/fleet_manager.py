@@ -275,6 +275,7 @@ class FleetManager(Node):
             cur_yaw = cur_loc.yaw
             previous_wp = [cur_x, cur_y, cur_yaw]
             target_loc = Location()
+            path_request.path.append(cur_loc)
             for wp in self.docks[task.task]:
                 target_loc = wp
                 path_request.path.append(target_loc)
