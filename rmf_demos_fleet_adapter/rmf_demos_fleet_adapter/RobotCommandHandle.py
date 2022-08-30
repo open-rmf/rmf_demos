@@ -365,7 +365,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 self.node.get_logger().info(
                     f"Requesting robot {self.name} "
                     "to dock at {self.dock_name}")
-                time.sleep_for(1.0)
+                self.sleep_for(1.0)
 
             with self._lock:
                 self.on_waypoint = None
