@@ -6,8 +6,11 @@ on:
 jobs:
   linter:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        docker_image: ['ros:humble-ros-base']
     container:
-      image: docker://ros:humble-ros-base-focal
+      image: ${{ matrix.docker_image }}
     steps:
     - uses: actions/checkout@v2
     - name: deps
