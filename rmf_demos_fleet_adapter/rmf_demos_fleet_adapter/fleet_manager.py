@@ -73,6 +73,8 @@ class State:
     def __init__(self, state: RobotState = None, destination: Location = None):
         self.state = state
         self.destination = destination
+        self.expected_task_id = 0
+        self.last_path_request = None
         self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
         self.gps_pos = [0, 0]
 
@@ -82,6 +84,15 @@ class State:
         self.gps_pos[0] = svy21_xy[1]
         self.gps_pos[1] = svy21_xy[0]
 
+    def next_task_id(self):
+        self.expected_task_id = self.expected_task_id + 1
+        return self.expected_task_id
+
+    def is_expected_task_id(self, task_id):
+        if self.expected_task_id > 0:
+            if task_id != str(self.expected_task_id):
+                return False
+        return True
 
 class FleetManager(Node):
     def __init__(self, config, nav_path):
@@ -164,8 +175,6 @@ class FleetManager(Node):
             'robot_path_requests',
             qos_profile=qos_profile_system_default)
 
-        self.task_id = -1
-
         @app.get('/open-rmf/rmf_demos_fm/status/',
                  response_model=Response)
         async def position(robot_name: Optional[str] = None):
@@ -194,6 +203,8 @@ class FleetManager(Node):
             data = {'success': False, 'msg': ''}
             if (robot_name not in self.robots or len(dest.destination) < 1):
                 return data
+
+            robot = self.robots[robot_name]
 
             target_x = dest.destination['x']
             target_y = dest.destination['y']
@@ -232,11 +243,11 @@ class FleetManager(Node):
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
             path_request.path.append(target_loc)
-            self.task_id = self.task_id + 1
-            path_request.task_id = str(self.task_id)
+            path_request.task_id = str(robot.next_task_id())
             self.path_pub.publish(path_request)
 
-            self.robots[robot_name].destination = target_loc
+            robot.destination = target_loc
+            robot.last_path_request = path_request
 
             data['success'] = True
             return data
@@ -248,13 +259,14 @@ class FleetManager(Node):
             if robot_name not in self.robots:
                 return data
 
+            robot = self.robots[robot_name]
             path_request = PathRequest()
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
             path_request.path = []
-            self.task_id = self.task_id + 1
-            path_request.task_id = str(self.task_id)
+            path_request.task_id = str(robot.next_task_id())
             self.path_pub.publish(path_request)
+            robot.last_path_request = path_request
             data['success'] = True
             return data
 
@@ -266,6 +278,8 @@ class FleetManager(Node):
                     len(task.task) < 1 or
                     task.task not in self.docks):
                 return data
+
+            robot = self.robots[robot_name]
 
             path_request = PathRequest()
             state = self.robots[robot_name]
@@ -282,17 +296,26 @@ class FleetManager(Node):
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
-            self.task_id = self.task_id + 1
-            path_request.task_id = str(self.task_id)
+            path_request.task_id = str(robot.next_task_id())
             self.path_pub.publish(path_request)
+            robot.last_path_request = path_request
 
-            self.robots[robot_name].destination = target_loc
+            robot.destination = target_loc
 
             data['success'] = True
             return data
 
     def robot_state_cb(self, msg):
         if (msg.name in self.robots):
+            robot = self.robots[msg.name]
+            if not robot.is_expected_task_id(msg.task_id):
+                # This message is out of date, so disregard it.
+                if robot.last_path_request is not None:
+                    # Resend the latest task request for this robot, in case the
+                    # message was dropped.
+                    self.path_pub.publish(robot.last_path_request)
+                return
+
             self.robots[msg.name].state = msg
             # Check if robot has reached destination
             state = self.robots[msg.name]
