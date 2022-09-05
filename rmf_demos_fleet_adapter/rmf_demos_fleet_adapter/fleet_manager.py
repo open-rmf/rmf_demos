@@ -48,9 +48,6 @@ import uvicorn
 from typing import Optional
 from pydantic import BaseModel
 
-from icecream import ic
-ic.configureOutput(includeContext=True)
-
 import threading
 app = FastAPI()
 
@@ -375,14 +372,11 @@ class FleetManager(Node):
                         ori_delta /
                         self.vehicle_traits.rotational.nominal_velocity)
             cmd_id = int(robot.last_path_request.task_id)
-            dest = [destination.x, destination.y]
-            ic((cmd_id, robot_name, position, dest, dist_to_target, ori_delta, duration))
             data['destination_arrival'] = {
                 'cmd_id': cmd_id,
                 'duration': duration
             }
         else:
-            ic('No destination arrival')
             data['destination_arrival'] = None
 
         data['last_completed_request'] = robot.last_completed_request

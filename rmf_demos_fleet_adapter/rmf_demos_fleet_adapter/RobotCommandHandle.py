@@ -35,9 +35,6 @@ import math
 import enum
 import time
 
-from icecream import ic
-ic.configureOutput(includeContext=True)
-
 from datetime import timedelta
 
 
@@ -244,14 +241,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 # will be told to do is abort.
                 cmd_id = self.current_cmd_id
                 # Check if we need to abort
-                ic(self.name, cmd_id)
                 if self._quit_path_event.is_set():
                     self.node.get_logger().info(f"Robot [{self.name}] aborting"
                                                 " previously followed path")
                     return
                 # State machine
                 if self.state == RobotState.IDLE:
-                    ic(self.name, cmd_id)
                     # Assign the next waypoint
                     self.target_waypoint = self.remaining_waypoints[0]
                     self.path_index = self.remaining_waypoints[0].index
@@ -282,12 +277,9 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     if self.api.blocked(self.name):
                         self.replan()
                     self.sleep_for(0.1)
-                    ic(self.name, cmd_id)
                     # Check if we have reached the target
                     with self._lock:
-                        print(f'Checking completion of {cmd_id} for {self.name}')
                         if self.api.navigation_completed(self.name, cmd_id):
-                            ic(self.name, cmd_id)
                             self.node.get_logger().info(
                                 f"Robot [{self.name}] has reached a target "
                                 f"waypoint"
@@ -301,7 +293,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                             else:
                                 self.on_waypoint = None  # still on a lane
                         else:
-                            ic(self.name, cmd_id)
                             # Update the lane the robot is on
                             lane = self.get_current_lane()
                             if lane is not None:
@@ -330,9 +321,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                         )
 
                         if self.path_index is not None and duration is not None:
-                            ic((self.name, duration))
-                            if abs(duration) > 60:
-                                print(f'Supsicious duration {duration} for robot {self.name}')
                             self.next_arrival_estimator(
                                 self.path_index,
                                 timedelta(seconds=duration)
@@ -594,10 +582,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 # Check if the robot's position is close enough to the lane
                 # endpoint to merge it
                 if np.linalg.norm(p - p1) <= self.lane_merge_distance:
-                    print(
-                        f'Robot {self.name} is close enough to the end point '
-                        f'of the lane from {i0} to {i1}'
-                    )
                     begin_at_index = i1
                     break
                 # Otherwise, continue to the next lane because the robot is not
@@ -607,10 +591,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 # Check if the robot's position is close enough to the lane
                 # start point to merge it
                 if np.linalg.norm(p - p0) <= self.lane_merge_distance:
-                    print(
-                        f'Robot {self.name} is close enough to the start point '
-                        f'of the lane from {i0} to {i1}'
-                    )
                     begin_at_index = i0
                     break
                 # Otherwise, continue to the next lane because the robot is not
@@ -619,18 +599,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
             lane_dist = np.linalg.norm(p_l - p_l_proj*n_lane)
             if lane_dist <= self.lane_merge_distance:
-                print(
-                    f'Robot {self.name} is closed enough ({lane_dist}) to '
-                    f'the lane from {i0} to {i1}'
-                )
                 begin_at_index = i1
                 break
 
         original_size = len(waypoints)
         if begin_at_index > 0:
-            print(f'Culling path up to {begin_at_index} for robot {self.name}')
             del waypoints[:begin_at_index]
-        print(f'New path for {self.name} has length {len(waypoints)}, down from {original_size}')
 
         return waypoints
 

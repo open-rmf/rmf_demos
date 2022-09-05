@@ -158,7 +158,6 @@ class RobotAPI:
         if response is not None:
             data = response.get('data')
             if data is not None:
-                print(f'Last completed request for {robot_name}: {data["last_completed_request"]}')
                 return data['last_completed_request'] == cmd_id
 
         return False
