@@ -31,6 +31,7 @@ rmf_fleet:
   recharge_soc: 1.0 # Battery level to which robots in this fleet should be charged up to during recharging tasks
   publish_fleet_state: 10.0 # Publish frequency for fleet state, ensure that it is same as robot_state_update_frequency
   account_for_battery_drain: True
+  lane_merge_distance: 1.0 # If a robot is within 1.0m of a lane, we can consider the robot to be on that lane
   task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
     loop: True
     delivery: True

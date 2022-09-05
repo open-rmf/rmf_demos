@@ -32,7 +32,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
-    DockSummary
+    DockSummary, RobotMode
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
@@ -47,6 +47,9 @@ from fastapi import FastAPI
 import uvicorn
 from typing import Optional
 from pydantic import BaseModel
+
+from icecream import ic
+ic.configureOutput(includeContext=True)
 
 import threading
 app = FastAPI()
@@ -73,8 +76,8 @@ class State:
     def __init__(self, state: RobotState = None, destination: Location = None):
         self.state = state
         self.destination = destination
-        self.expected_task_id = 0
         self.last_path_request = None
+        self.last_completed_request = None
         self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
         self.gps_pos = [0, 0]
 
@@ -84,13 +87,9 @@ class State:
         self.gps_pos[0] = svy21_xy[1]
         self.gps_pos[1] = svy21_xy[0]
 
-    def next_task_id(self):
-        self.expected_task_id = self.expected_task_id + 1
-        return self.expected_task_id
-
     def is_expected_task_id(self, task_id):
-        if self.expected_task_id > 0:
-            if task_id != str(self.expected_task_id):
+        if self.last_path_request is not None:
+            if task_id != self.last_path_request.task_id:
                 return False
         return True
 
@@ -177,32 +176,34 @@ class FleetManager(Node):
 
         @app.get('/open-rmf/rmf_demos_fm/status/',
                  response_model=Response)
-        async def position(robot_name: Optional[str] = None):
-            data = {'data': {},
-                    'success': False,
-                    'msg': ''}
+        async def status(robot_name: Optional[str] = None):
+            response = {
+                'data': {},
+                'success': False,
+                'msg': ''
+            }
             if robot_name is None:
-                data['data']['all_robots'] = []
+                response['data']['all_robots'] = []
                 for robot_name in self.robots:
                     state = self.robots.get(robot_name)
                     if state is None or state.state is None:
-                        return data
-                    data['data']['all_robots'].append(
+                        return response
+                    response['data']['all_robots'].append(
                         self.get_robot_state(state, robot_name))
             else:
                 state = self.robots.get(robot_name)
                 if state is None or state.state is None:
-                    return data
-                data['data'] = self.get_robot_state(state, robot_name)
-            data['success'] = True
-            return data
+                    return response
+                response['data'] = self.get_robot_state(state, robot_name)
+            response['success'] = True
+            return response
 
         @app.post('/open-rmf/rmf_demos_fm/navigate/',
                   response_model=Response)
-        async def navigate(robot_name: str, dest: Request):
-            data = {'success': False, 'msg': ''}
+        async def navigate(robot_name: str, cmd_id: int, dest: Request):
+            response = {'success': False, 'msg': ''}
             if (robot_name not in self.robots or len(dest.destination) < 1):
-                return data
+                return response
 
             robot = self.robots[robot_name]
 
@@ -243,47 +244,49 @@ class FleetManager(Node):
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
             path_request.path.append(target_loc)
-            path_request.task_id = str(robot.next_task_id())
+            path_request.task_id = str(cmd_id)
             self.path_pub.publish(path_request)
 
             robot.destination = target_loc
             robot.last_path_request = path_request
 
-            data['success'] = True
-            return data
+            response['success'] = True
+            return response
 
         @app.get('/open-rmf/rmf_demos_fm/stop_robot/',
                  response_model=Response)
-        async def stop(robot_name: str):
-            data = {'success': False, 'msg': ''}
+        async def stop(robot_name: str, cmd_id: int):
+            response = {'success': False, 'msg': ''}
             if robot_name not in self.robots:
-                return data
+                return response
 
             robot = self.robots[robot_name]
             path_request = PathRequest()
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
             path_request.path = []
-            path_request.task_id = str(robot.next_task_id())
+            path_request.task_id = str(cmd_id)
             self.path_pub.publish(path_request)
+
             robot.last_path_request = path_request
-            data['success'] = True
-            return data
+            robot.destination = None
+
+            response['success'] = True
+            return response
 
         @app.post('/open-rmf/rmf_demos_fm/start_task/',
                   response_model=Response)
-        async def start_process(robot_name: str, task: Request):
-            data = {'success': False, 'msg': ''}
+        async def start_process(robot_name: str, cmd_id: int, task: Request):
+            response = {'success': False, 'msg': ''}
             if (robot_name not in self.robots or
                     len(task.task) < 1 or
                     task.task not in self.docks):
-                return data
+                return response
 
             robot = self.robots[robot_name]
 
             path_request = PathRequest()
-            state = self.robots[robot_name]
-            cur_loc = state.state.location
+            cur_loc = robot.state.location
             cur_x = cur_loc.x
             cur_y = cur_loc.y
             cur_yaw = cur_loc.yaw
@@ -297,14 +300,14 @@ class FleetManager(Node):
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
-            path_request.task_id = str(robot.next_task_id())
+            path_request.task_id = str(cmd_id)
             self.path_pub.publish(path_request)
-            robot.last_path_request = path_request
 
+            robot.last_path_request = path_request
             robot.destination = target_loc
 
-            data['success'] = True
-            return data
+            response['success'] = True
+            return response
 
     def robot_state_cb(self, msg):
         if (msg.name in self.robots):
@@ -317,15 +320,21 @@ class FleetManager(Node):
                     self.path_pub.publish(robot.last_path_request)
                 return
 
-            self.robots[msg.name].state = msg
+            robot.state = msg
             # Check if robot has reached destination
-            state = self.robots[msg.name]
-            if state.destination is None:
+            if robot.destination is None:
                 return
-            destination = state.destination
-            if ((msg.mode.mode == 0 or msg.mode.mode == 1) and
-                    len(msg.path) == 0):
-                self.robots[msg.name].destination = None
+
+            if (
+                (
+                    msg.mode.mode == RobotMode.MODE_IDLE
+                    or msg.mode.mode == RobotMode.MODE_CHARGING
+                )
+                and len(msg.path) == 0
+            ):
+                robot = self.robots[msg.name]
+                robot.destination = None
+                robot.last_completed_request = int(msg.task_id)
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
@@ -333,21 +342,22 @@ class FleetManager(Node):
                 for dock in fleet.params:
                     self.docks[dock.start] = dock.path
 
-    def get_robot_state(self, state, robot_name):
+    def get_robot_state(self, robot: State, robot_name):
         data = {}
         if self.gps:
-            position = copy.deepcopy(state.gps_pos)
+            position = copy.deepcopy(robot.gps_pos)
         else:
-            position = [state.state.location.x, state.state.location.y]
-        angle = state.state.location.yaw
+            position = [robot.state.location.x, robot.state.location.y]
+        angle = robot.state.location.yaw
         data['robot_name'] = robot_name
-        data['map_name'] = state.state.location.level_name
+        data['map_name'] = robot.state.location.level_name
         data['position'] =\
             {'x': position[0], 'y': position[1], 'yaw': angle}
-        data['battery'] = state.state.battery_percent
-        data['completed_request'] = False
-        if state.destination is not None:
-            destination = state.destination
+        data['battery'] = robot.state.battery_percent
+        if (robot.destination is not None
+            and robot.last_path_request is not None
+        ):
+            destination = robot.destination
             # remove offset for calculation if using gps coords
             if self.gps:
                 position[0] -= self.offset[0]
@@ -364,10 +374,25 @@ class FleetManager(Node):
                         self.vehicle_traits.linear.nominal_velocity +
                         ori_delta /
                         self.vehicle_traits.rotational.nominal_velocity)
-            data['destination_arrival_duration'] = duration
+            cmd_id = int(robot.last_path_request.task_id)
+            dest = [destination.x, destination.y]
+            ic((cmd_id, robot_name, position, dest, dist_to_target, ori_delta, duration))
+            data['destination_arrival'] = {
+                'cmd_id': cmd_id,
+                'duration': duration
+            }
         else:
-            data['destination_arrival_duration'] = 0.0
-            data['completed_request'] = True
+            ic('No destination arrival')
+            data['destination_arrival'] = None
+
+        data['last_completed_request'] = robot.last_completed_request
+        if robot.state.mode.mode == RobotMode.MODE_WAITING:
+            # The name of MODE_WAITING is not very intuitive, but the slotcar
+            # plugin uses it to indicate when another robot is blocking its path
+            data['blocked'] = True
+        else:
+            data['blocked'] = False
+
         return data
 
     def disp(self, A, B):

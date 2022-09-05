@@ -112,6 +112,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         datetime.timedelta(seconds=1.0/fleet_state_update_frequency))
     # Account for battery drain
     drain_battery = fleet_config['account_for_battery_drain']
+    lane_merge_distance = fleet_config.get('lane_merge_distance', 1.0)
     recharge_threshold = fleet_config['recharge_threshold']
     recharge_soc = fleet_config['recharge_soc']
     finishing_request = fleet_config['task_capabilities']['finishing_request']
@@ -231,12 +232,17 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                     time_now = adapter.now()
                     # No need to offset robot and RMF crs for demos
                     position = api.position(robot_name)
+                    if position is None:
+                        node.get_logger().info(
+                            f'Failed to obtain initial position of {robot_name}'
+                        )
+                        continue
 
                     if (initial_waypoint is not None) and\
                             (initial_orientation is not None):
                         node.get_logger().info(
                             f"Using provided initial waypoint "
-                            "[{initial_waypoint}] "
+                            f"[{initial_waypoint}] "
                             f"and orientation [{initial_orientation:.2f}] to "
                             f"initialize starts for robot [{robot_name}]")
                         # Get the waypoint index for initial_waypoint
@@ -273,6 +279,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                         charger_waypoint=rmf_config['charger']['waypoint'],
                         update_frequency=rmf_config.get(
                             'robot_state_update_frequency', 1),
+                        lane_merge_distance=lane_merge_distance,
                         adapter=adapter,
                         api=api)
 
