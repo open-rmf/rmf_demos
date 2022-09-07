@@ -114,8 +114,9 @@ class TaskRequester(Node):
             if response_msg.request_id == msg.request_id:
                 self.response.set_result(json.loads(response_msg.json_msg))
 
+        transient_qos.depth = 10
         self.sub = self.create_subscription(
-            ApiResponse, 'task_api_responses', receive_response, 10
+            ApiResponse, 'task_api_responses', receive_response, transient_qos
         )
 
         print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")

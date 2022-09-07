@@ -88,7 +88,7 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/`
         "battery": 100,
         "last_completed_request": 3,
         "destination_arrival": null,
-        "blocked": true
+        "replan": true
       }
     ]
   },

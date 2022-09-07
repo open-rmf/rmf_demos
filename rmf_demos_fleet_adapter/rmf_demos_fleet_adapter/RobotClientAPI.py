@@ -176,11 +176,11 @@ class RobotAPI:
         else:
             return None
 
-    def blocked(self, robot_name: str):
-        '''Return whether the robot is currently blocked by an obstacle'''
+    def requires_replan(self, robot_name: str):
+        '''Return whether the robot needs RMF to replan'''
         response = self.data(robot_name)
         if response is not None:
-            return response['data'].get('blocked', False)
+            return response['data'].get('replan', False)
         return False
 
     def data(self, robot_name=None):

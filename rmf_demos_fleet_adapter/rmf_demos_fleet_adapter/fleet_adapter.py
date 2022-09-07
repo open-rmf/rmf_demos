@@ -375,7 +375,7 @@ def main(argv=sys.argv):
                         help="Path to the config.yaml file")
     parser.add_argument("-n", "--nav_graph", type=str, required=True,
                         help="Path to the nav_graph for this fleet adapter")
-    parser.add_argument("--use_sim_time", action="store_true",
+    parser.add_argument("-sim", "--use_sim_time", action="store_true",
                         help='Use sim time, default: false')
     args = parser.parse_args(args_without_ros[1:])
     print(f"Starting fleet adapter...")

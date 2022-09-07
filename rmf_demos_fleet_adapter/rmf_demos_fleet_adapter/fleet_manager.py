@@ -92,6 +92,7 @@ class State:
 
 class FleetManager(Node):
     def __init__(self, config, nav_path):
+        self.debug = False
         self.config = config
         self.fleet_name = self.config["rmf_fleet"]["name"]
 
@@ -216,11 +217,11 @@ class FleetManager(Node):
             t = self.get_clock().now().to_msg()
 
             path_request = PathRequest()
-            state = self.robots[robot_name]
-            cur_x = state.state.location.x
-            cur_y = state.state.location.y
-            cur_yaw = state.state.location.yaw
-            cur_loc = state.state.location
+            robot = self.robots[robot_name]
+            cur_x = robot.state.location.x
+            cur_y = robot.state.location.y
+            cur_yaw = robot.state.location.yaw
+            cur_loc = robot.state.location
             path_request.path.append(cur_loc)
 
             disp = self.disp([target_x, target_y], [cur_x, cur_y])
@@ -244,8 +245,10 @@ class FleetManager(Node):
             path_request.task_id = str(cmd_id)
             self.path_pub.publish(path_request)
 
-            robot.destination = target_loc
+            if self.debug:
+                print(f'Sending navigate request for {robot_name}: {cmd_id}')
             robot.last_path_request = path_request
+            robot.destination = target_loc
 
             response['success'] = True
             return response
@@ -262,9 +265,16 @@ class FleetManager(Node):
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
             path_request.path = []
+            # Appending the current location twice will effectively tell the
+            # robot to stop
+            path_request.path.append(robot.state.location)
+            path_request.path.append(robot.state.location)
+
             path_request.task_id = str(cmd_id)
             self.path_pub.publish(path_request)
 
+            if self.debug:
+                print(f'Sending stop request for {robot_name}: {cmd_id}')
             robot.last_path_request = path_request
             robot.destination = None
 
@@ -300,6 +310,8 @@ class FleetManager(Node):
             path_request.task_id = str(cmd_id)
             self.path_pub.publish(path_request)
 
+            if self.debug:
+                print(f'Sending process request for {robot_name}: {cmd_id}')
             robot.last_path_request = path_request
             robot.destination = target_loc
 
@@ -314,6 +326,12 @@ class FleetManager(Node):
                 if robot.last_path_request is not None:
                     # Resend the latest task request for this robot, in case the
                     # message was dropped.
+                    if self.debug:
+                        print(
+                            f'Republishing task request for {msg.name}: '
+                            f'{robot.last_path_request.task_id}, '
+                            f'because it is currently following {msg.task_id}'
+                        )
                     self.path_pub.publish(robot.last_path_request)
                 return
 
@@ -331,7 +349,14 @@ class FleetManager(Node):
             ):
                 robot = self.robots[msg.name]
                 robot.destination = None
-                robot.last_completed_request = int(msg.task_id)
+                completed_request = int(msg.task_id)
+                if robot.last_completed_request != completed_request:
+                    if self.debug:
+                        print(
+                            f'Detecting completed request for {msg.name}: '
+                            f'{completed_request}'
+                        )
+                robot.last_completed_request = completed_request
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
@@ -380,12 +405,21 @@ class FleetManager(Node):
             data['destination_arrival'] = None
 
         data['last_completed_request'] = robot.last_completed_request
-        if robot.state.mode.mode == RobotMode.MODE_WAITING:
+        if (
+            robot.state.mode.mode == RobotMode.MODE_WAITING
+            or robot.state.mode.mode == RobotMode.MODE_ADAPTER_ERROR
+        ):
             # The name of MODE_WAITING is not very intuitive, but the slotcar
-            # plugin uses it to indicate when another robot is blocking its path
-            data['blocked'] = True
+            # plugin uses it to indicate when another robot is blocking its
+            # path.
+            #
+            # MODE_ADAPTER_ERROR means the robot received a plan that
+            # didn't make sense, i.e. the plan expected the robot was starting
+            # very far from its real present location. When that happens we
+            # should replan, so we'll set replan to true in that case as well.
+            data['replan'] = True
         else:
-            data['blocked'] = False
+            data['replan'] = False
 
         return data
 
