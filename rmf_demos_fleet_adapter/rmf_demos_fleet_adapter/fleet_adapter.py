@@ -234,7 +234,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                     position = api.position(robot_name)
                     if position is None:
                         node.get_logger().info(
-                            f'Failed to obtain initial position of {robot_name}'
+                            f'Failed to get initial position of {robot_name}'
                         )
                         continue
 

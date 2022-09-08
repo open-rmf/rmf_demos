@@ -90,6 +90,7 @@ class State:
                 return False
         return True
 
+
 class FleetManager(Node):
     def __init__(self, config, nav_path):
         self.debug = False
@@ -324,8 +325,8 @@ class FleetManager(Node):
             if not robot.is_expected_task_id(msg.task_id):
                 # This message is out of date, so disregard it.
                 if robot.last_path_request is not None:
-                    # Resend the latest task request for this robot, in case the
-                    # message was dropped.
+                    # Resend the latest task request for this robot, in case
+                    # the message was dropped.
                     if self.debug:
                         print(
                             f'Republishing task request for {msg.name}: '
@@ -377,8 +378,7 @@ class FleetManager(Node):
             {'x': position[0], 'y': position[1], 'yaw': angle}
         data['battery'] = robot.state.battery_percent
         if (robot.destination is not None
-            and robot.last_path_request is not None
-        ):
+                and robot.last_path_request is not None):
             destination = robot.destination
             # remove offset for calculation if using gps coords
             if self.gps:

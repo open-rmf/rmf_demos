@@ -40,6 +40,7 @@ from datetime import timedelta
 from icecream import ic
 ic.configureOutput(includeContext=True)
 
+
 # States for RobotCommandHandle's state machine used when guiding robot along
 # a new path
 class RobotState(enum.IntEnum):
@@ -195,7 +196,10 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
     def interrupt(self):
         if self.debug:
-            print(f'Interrupting {self.name} (latest cmd_id is {self.current_cmd_id})')
+            print(
+                f'Interrupting {self.name} '
+                f'(latest cmd_id is {self.current_cmd_id})'
+            )
         self._quit_dock_event.set()
         self._quit_path_event.set()
         self._quit_stopping_event.set()
@@ -221,9 +225,12 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # Stop the robot. Tracking variables should remain unchanged.
         with self._lock:
             self._quit_stopping_event.clear()
+
             def _stop():
                 while not self._quit_stopping_event.is_set():
-                    self.node.get_logger().info(f"Requesting {self.name} to stop...")
+                    self.node.get_logger().info(
+                        f"Requesting {self.name} to stop..."
+                    )
                     if self.api.stop(self.name, self.next_cmd_id()):
                         break
                     self._quit_stopping_event.wait(0.1)
@@ -267,13 +274,14 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             def _follow_path():
                 target_pose = None
                 path_index = 0
-                while self.remaining_waypoints or self.state == RobotState.MOVING:
-                    # Save the current_cmd_id before checking if we need to abort.
-                    # We should always be told to abort before the current_cmd_id
-                    # gets modified, so whatever the value of current_cmd_id is
-                    # before being told to abort will be the value that we want. If
-                    # we are saving the wrong value here, then the next thing we
-                    # will be told to do is abort.
+                while self.remaining_waypoints \
+                        or self.state == RobotState.MOVING:
+                    # Save the current_cmd_id before checking if we need to
+                    # abort. We should always be told to abort before the
+                    # current_cmd_id gets modified, so whatever the value of
+                    # current_cmd_id is before being told to abort will be the
+                    # value that we want. If we are saving the wrong value
+                    # here, then the next thing we will be told to do is abort.
                     cmd_id = self.current_cmd_id
                     # Check if we need to abort
                     if self._quit_path_event.is_set():
@@ -290,7 +298,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                         target_pose = self.target_waypoint.position
                         [x, y] = target_pose[:2]
                         theta = target_pose[2]
-                        speed_limit = self.get_speed_limit(self.target_waypoint)
+                        speed_limit = \
+                            self.get_speed_limit(self.target_waypoint)
                         response = self.api.navigate(
                             self.name,
                             self.next_cmd_id(),
@@ -300,12 +309,14 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                         )
 
                         if response:
-                            self.remaining_waypoints = self.remaining_waypoints[1:]
+                            self.remaining_waypoints = \
+                                self.remaining_waypoints[1:]
                             self.state = RobotState.MOVING
                         else:
                             self.node.get_logger().info(
-                                f"Robot {self.name} failed to request navigation "
-                                f"to [{x:.0f}, {y:.0f}, {theta:.0f}] coordinates. "
+                                f"Robot {self.name} failed to request "
+                                f"navigation to "
+                                f"[{x:.0f}, {y:.0f}, {theta:.0f}]."
                                 f"Retrying...")
                             self._quit_path_event.wait(0.1)
 
@@ -318,17 +329,18 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
                         # Check if we have reached the target
                         with self._lock:
-                            if self.api.navigation_completed(self.name, cmd_id):
+                            if self.api.navigation_completed(
+                                    self.name, cmd_id):
                                 self.node.get_logger().info(
                                     f"Robot [{self.name}] has reached the "
                                     f"destination for cmd_id {cmd_id}"
                                 )
                                 self.state = RobotState.IDLE
-                                if self.target_waypoint.graph_index is not None:
-                                    self.on_waypoint = \
-                                        self.target_waypoint.graph_index
+                                graph_index = self.target_waypoint.graph_index
+                                if graph_index is not None:
+                                    self.on_waypoint = graph_index
                                     self.last_known_waypoint_index = \
-                                        self.on_waypoint
+                                        graph_index
                                 else:
                                     self.on_waypoint = None  # still on a lane
                             else:
@@ -340,20 +352,23 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                 else:
                                     # The robot may either be on the previous
                                     # waypoint or the target one
-                                    if self.target_waypoint.graph_index is not \
-                                            None and self.dist(self.position,
-                                                            target_pose) < 0.5:
+                                    if self.target_waypoint.graph_index is \
+                                        not None \
+                                        and self.dist(
+                                            self.position, target_pose) < 0.5:
                                         self.on_waypoint =\
                                             self.target_waypoint.graph_index
-                                    elif self.last_known_waypoint_index is not \
-                                            None and self.dist(
-                                            self.position, self.graph.get_waypoint(
-                                            self.last_known_waypoint_index
+                                    elif self.last_known_waypoint_index is \
+                                            not None and self.dist(
+                                            self.position,
+                                            self.graph.get_waypoint(
+                                                self.last_known_waypoint_index
                                             ).location) < 0.5:
                                         self.on_waypoint =\
                                             self.last_known_waypoint_index
                                     else:
-                                        self.on_lane = None  # update_off_grid()
+                                        # update_off_grid()
+                                        self.on_lane = None
                                         self.on_waypoint = None
                             duration = self.api.navigation_remaining_duration(
                                 self.name, cmd_id
@@ -365,7 +380,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                                     timedelta(seconds=duration)
                                 )
 
-                if (not self.remaining_waypoints) and self.state == RobotState.IDLE:
+                if (not self.remaining_waypoints) \
+                        and self.state == RobotState.IDLE:
                     path_finished_callback()
                     self.node.get_logger().info(
                         f"Robot {self.name} has successfully navigated along "
@@ -405,7 +421,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.name, cmd_id, self.dock_name, self.map_name
                 ):
                     self.node.get_logger().info(
-                        f"Requesting robot {self.name} to dock at {self.dock_name}"
+                        f"Requesting robot {self.name} to dock at "
+                        f"{self.dock_name}"
                     )
                     if self._quit_dock_event.wait(1.0):
                         break
@@ -419,8 +436,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                         f"Requested dock {self.dock_name} not found, "
                         "ignoring docking request"
                     )
-                    # TODO(MXG): This should open an issue ticket for the robot to
-                    # tell the operator that the robot cannot proceed
+                    # TODO(MXG): This should open an issue ticket for the robot
+                    # to tell the operator that the robot cannot proceed
                     return
 
                 positions = []
@@ -441,7 +458,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     )
                     itinerary = schedule.Route(self.map_name, traj)
                     if self.update_handle is not None:
-                        participant = self.update_handle.get_unstable_participant()
+                        participant = \
+                            self.update_handle.get_unstable_participant()
                         participant.set_itinerary([itinerary])
 
                     # Check if we need to abort

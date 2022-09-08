@@ -24,6 +24,7 @@
 import requests
 from urllib.error import HTTPError
 
+
 class RobotAPI:
     # The constructor below accepts parameters typically required to submit
     # http requests. Users should modify the constructor as per the
@@ -73,7 +74,8 @@ class RobotAPI:
             else False'''
         assert(len(pose) > 2)
         url = self.prefix +\
-            f'/open-rmf/rmf_demos_fm/navigate/?robot_name={robot_name}&cmd_id={cmd_id}'
+            f'/open-rmf/rmf_demos_fm/navigate/?robot_name={robot_name}' \
+            f'&cmd_id={cmd_id}'
         data = {}  # data fields: task, map_name, destination{}, data{}
         data['map_name'] = map_name
         data['destination'] = {'x': pose[0], 'y': pose[1], 'yaw': pose[2]}
@@ -100,7 +102,8 @@ class RobotAPI:
             or begin cleaning a zone for a cleaning robot.
             Return True if the robot has accepted the request, else False'''
         url = self.prefix +\
-            f"/open-rmf/rmf_demos_fm/start_task?robot_name={robot_name}&cmd_id={cmd_id}"
+            f"/open-rmf/rmf_demos_fm/start_task?robot_name={robot_name}" \
+            f"&cmd_id={cmd_id}"
         # data fields: task, map_name, destination{}, data{}
         data = {'task': process, 'map_name': map_name}
         try:
@@ -119,7 +122,8 @@ class RobotAPI:
         ''' Command the robot to stop.
             Return True if robot has successfully stopped. Else False'''
         url = self.prefix +\
-            f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={robot_name}&cmd_id={cmd_id}'
+            f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={robot_name}' \
+            f'&cmd_id={cmd_id}'
         try:
             response = requests.get(url, self.timeout)
             response.raise_for_status()
