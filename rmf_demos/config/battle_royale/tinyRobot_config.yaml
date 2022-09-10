@@ -13,7 +13,7 @@ rmf_fleet:
     angular: [0.6, 2.0] # velocity, acceleration
   profile: # Robot profile is modelled as a circle
     footprint: 0.3 # radius in m
-    vicinity: 0.5 # radius in m
+    vicinity: 1.2 # radius in m
   reversible: True # whether robots in this fleet can reverse
   battery_system:
     voltage: 12.0 # V
