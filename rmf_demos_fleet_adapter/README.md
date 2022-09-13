@@ -1,9 +1,9 @@
 # rmf_demos_fleet_adapter
 
-This is an implementation of the python based [fleet adapter template](https://github.com/open-rmf/fleet_adapter_template) on selected RMF demo worlds: Hotel, Office, Airport Terminal and Clinic. 
+This is an implementation of the python based [fleet adapter template](https://github.com/open-rmf/fleet_adapter_template) on selected RMF demo worlds: Hotel, Office, Airport Terminal and Clinic.
 
 This fleet adapter integration relies on a fleet manager and a fleet adapter:
-- The **fleet manager** comprises of specific endpoints that help relay commands to the fleet's robots. It communicates with the robots over internal ROS 2 messages, while interfacing with the adapter via an API chosen by the user. For this demo fleet adapter implementation, we are using REST API with FastAPI framework. 
+- The **fleet manager** comprises of specific endpoints that help relay commands to the fleet's robots. It communicates with the robots over internal ROS 2 messages, while interfacing with the adapter via an API chosen by the user. For this demo fleet adapter implementation, we are using REST API with FastAPI framework.
 - The **fleet adapter** receives commands from RMF and interfaces with the fleet manager to receive robot state information, as well as send task and navigation commands to the robots
 
 ## Getting Started
@@ -21,7 +21,7 @@ You can interact with the endpoints with FastAPI's automatic documentation. Firs
 Launch the Office world:
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_gz office.launch.xml
+ros2 launch rmf_demos_gz_classic office.launch.xml
 ```
 Then, visit http://127.0.0.1:22011/docs in your browser to interact with the endpoints.
 

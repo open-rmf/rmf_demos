@@ -1,6 +1,6 @@
-# rmf_demos_ign
+# rmf_demos_gz_classic
 
-This package provides top level launch files using the Ignition Gazebo simulator demonstrating how to build and start systems using RMF.
+This package provides top level launch files using the Gazebo-classic simulator demonstrating how to build and start systems using RMF.
 
 ## Quality Declaration
 
