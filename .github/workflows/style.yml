@@ -1,10 +1,16 @@
 name: style
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches: [ main ]
 jobs:
-  build:
-    runs-on: ubuntu-20.04
+  linter:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        docker_image: ['ros:humble-ros-base']
     container:
-      image: docker://ros:galactic-ros-base-focal
+      image: ${{ matrix.docker_image }}
     steps:
     - uses: actions/checkout@v2
     - name: deps

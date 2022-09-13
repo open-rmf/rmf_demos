@@ -1,0 +1,33 @@
+<?xml version='1.0' ?>
+
+<launch>
+  <arg name="map_package" default="rmf_demos_maps" description="Name of the map package" />
+  <arg name="map_name" description="Name of the rmf_demos map to simulate" />
+  <arg name="use_crowdsim" default='0'/>
+
+  <arg name="gazebo_version" default="11"/>
+  <let name="world_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/$(var map_name).world" />
+  <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/models:$(find-pkg-share rmf_demos_assets)/models:/usr/share/gazebo-$(var gazebo_version)/models" />
+  <let name="resource_path" value="$(find-pkg-share rmf_demos_assets):/usr/share/gazebo-$(var gazebo_version)" />
+  <let name="plugin_path" value="$(find-pkg-prefix rmf_robot_sim_gz_classic_plugins)/lib/rmf_robot_sim_gz_classic_plugins:$(find-pkg-prefix rmf_building_sim_gz_classic_plugins)/lib/rmf_building_sim_gz_classic_plugins:/usr/share/gazebo-$(var gazebo_version)" />
+
+  <!-- Use crowd sim if `use_crowdsim` is true-->
+  <let name="menge_resource_path" if="$(var use_crowdsim)" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/config_resource"/>
+  <let name="menge_resource_path" unless="$(var use_crowdsim)" value="" />
+
+  <executable cmd="gzserver --verbose -s libgazebo_ros_factory.so -s libgazebo_ros_init.so $(var world_path)" output="both">
+    <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
+    <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
+    <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
+    <env name="GAZEBO_MODEL_DATABASE_URI" value="" />
+    <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
+  </executable>
+  <group unless="$(var headless)">
+    <executable cmd="gzclient --verbose $(var world_path)" output="both">
+      <env name="GAZEBO_MODEL_PATH" value="$(var model_path)" />
+      <env name="GAZEBO_RESOURCE_PATH" value="$(var resource_path)" />
+      <env name="GAZEBO_PLUGIN_PATH" value="$(var plugin_path)" />
+    </executable>
+  </group>
+
+</launch>
