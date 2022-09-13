@@ -1,6 +1,6 @@
 ## RMF Demos Panel
 Here we describe additional details of `rmf_demos_panel`. This package uses a simple web server
-to expose the essential RMF topics/services to users as web endpoints. Currently, this lite implementation is 
+to expose the essential RMF topics/services to users as web endpoints. Currently, this lite implementation is
 useful for task submission and observing status of on-going tasks and robots in RMF.
 
 **For a full-proof web application of RMF, please refer to [rmf-web](https://github.com/open-rmf/rmf-web).**
@@ -19,12 +19,12 @@ python3 -m pip install flask-socketio
 colcon build --packages-select rmf_demos_panel
 ```
 
-## Run 
+## Run
 Test Run with office world
 
 1. Start Office World
 ```bash
-ros2 launch rmf_demos_gz office.launch.xml
+ros2 launch rmf_demos_gz_classic office.launch.xml
 ```
 
 #### Simple CURL Test
@@ -33,7 +33,7 @@ ros2 launch rmf_demos_gz office.launch.xml
 # Submit Task (POST)
 curl -X POST http://localhost:8083/submit_task \
 -d '{"task_type":"Loop", "start_time":0, "description": {"start_name": "coe", "finish_name": "pantry", "num_loops":1}}' \
--H "Content-Type: application/json" 
+-H "Content-Type: application/json"
 
 # Get Task List (GET)
 curl http://localhost:8083/task_list
@@ -41,7 +41,7 @@ curl http://localhost:8083/task_list
 
 
 #### rmf-panel-js
- 
+
 A front end dashboard, [rmf-panel-js](https://github.com/open-rmf/rmf-panel-js) is also provided.
 This will will be the client for the rmf_demos's api server.
 
@@ -66,8 +66,8 @@ Endpoints | Type | Parameters | Description
 ## Run Sample Tasks
 
 **Submit a list of tasks***
-On the right side column of the panel, users are able to select a file which consists of a list of  
-tasks. Example. for office world, load `rmf_demos_tasks/rmf_demos_tasks/office_tasks.json`. 
+On the right side column of the panel, users are able to select a file which consists of a list of
+tasks. Example. for office world, load `rmf_demos_tasks/rmf_demos_tasks/office_tasks.json`.
 Once the tasks are populated in the box, hit submit!
 
 More details on the format for the `.json` file is presented below.

@@ -21,7 +21,7 @@ You can interact with the endpoints with FastAPI's automatic documentation. Firs
 Launch the Office world:
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_gz office.launch.xml
+ros2 launch rmf_demos_gz_classic office.launch.xml
 ```
 Then, visit http://127.0.0.1:22011/docs in your browser to interact with the endpoints.
 

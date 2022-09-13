@@ -2,15 +2,13 @@
 
 <launch>
 
-  <!-- Start the joystick teleop node -->
+  <!-- Opens a new terminal and starts the teleop keyboard node to control the "Caddy" -->
   <group>
-    <node pkg="joy" exec="joy_node" args="--ros-args --remap _dev:=/dev/input/js0" />
-    <node pkg="teleop_twist_joy" exec="teleop_node">
-      <param name="axis_linear.x" value="1" />
-      <param name="axis_angular.yaw" value="0" />
-      <param name="scale_linear.x" value="1.0" />
-      <param name="scale_angular.yaw" value="0.8" />
-      <param name="enable_button" value="5" />
+    <!-- Launch keyboard control for Caddy -->
+    <node pkg="teleop_twist_keyboard" exec="teleop_twist_keyboard" output="screen" launch-prefix="gnome-terminal --">
+      <remap from="/cmd_vel" to="/model/caddy/cmd_vel"/> <!-- remap topic name for the diff_drive ignition plugin -->
     </node>
+    <!-- Let diff drive ignition plugin read from /model/caddy/cmd_vel topic published to by the teleop_twist_keyboard -->
+    <node pkg="ros_ign_bridge" exec="parameter_bridge" args="/model/caddy/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist"></node>
   </group>
 </launch>
