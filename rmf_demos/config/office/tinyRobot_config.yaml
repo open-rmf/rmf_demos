@@ -36,6 +36,7 @@ rmf_fleet:
     delivery: True
     clean: False
     finishing_request: "park" # [park, charge, nothing]
+    action: ["teleop"]
 
 # TinyRobot CONFIG =================================================================
 
