@@ -3,9 +3,11 @@
 <launch>
   <arg name="gazebo_version" default="11"/>
   <arg name="use_sim_time" default="true"/>
+  <arg name="use_traffic_light" default="false"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/battle_royale.launch.xml">
+    <arg name="use_traffic_light" value="$(var use_traffic_light)"/>
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
   </include>
 
