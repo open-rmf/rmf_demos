@@ -29,6 +29,8 @@ setup(
         'console_scripts': [
             'fleet_adapter=rmf_demos_fleet_adapter.fleet_adapter:main',
             'fleet_manager=rmf_demos_fleet_adapter.fleet_manager:main',
+            'easy_fleet_adapter='
+            'rmf_demos_fleet_adapter.easy_fleet_adapter:main',
         ],
     },
 )
