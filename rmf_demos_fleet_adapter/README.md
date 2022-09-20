@@ -71,8 +71,11 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/`
           "yaw": 1.0
         },
         "battery": 100,
-        "completed_request": true,
-        "destination_arrival_duration": 0
+        "last_completed_request": 2,
+        "destination_arrival": {
+          "cmd_id": 3,
+          "duration": 14.3
+        }
       },
       {
         "robot_name": "tinyRobot2",
@@ -83,8 +86,9 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/`
           "yaw": 1.4
         },
         "battery": 100,
-        "completed_request": true,
-        "destination_arrival_duration": 0
+        "last_completed_request": 3,
+        "destination_arrival": null,
+        "replan": true
       }
     ]
   },
@@ -109,8 +113,11 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/?robot_name=ti
       "yaw": 1.0
     },
     "battery": 100,
-    "completed_request": true,
-    "destination_arrival_duration": 0
+    "last_completed_request": 2,
+    "destination_arrival": {
+      "cmd_id": 3,
+      "duration": 14.3
+    }
   },
   "success": true,
   "msg": ""

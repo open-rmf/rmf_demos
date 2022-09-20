@@ -1,7 +1,9 @@
 <?xml version='1.0' ?>
 
 <launch>
-  <arg name="use_sim_time" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <!-- true for using traffic light, false for using full control -->
+  <arg name="use_traffic_light" default="false"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -10,8 +12,17 @@
     <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/battle_royale/battle_royale.building.yaml"/>
   </include>
 
-  <!-- TinyRobot fleet adapter and robot state aggregator needed for the TinyRobot slotcar_plugin -->
-  <group>
+  <!-- TinyRobot full control fleet adapter -->
+  <group unless="$(var use_traffic_light)">
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
+      <arg name="use_sim_time" value="true"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/battle_royale/nav_graphs/0.yaml" />
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/battle_royale/tinyRobot_config.yaml"/>
+    </include>
+  </group>
+
+  <!-- TinyRobot mock traffic light fleet adapter and robot state aggregator needed for the TinyRobot slotcar_plugin -->
+  <group if="$(var use_traffic_light)">
     <let name="fleet_name" value="tinyRobot"/>
     <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_mock_traffic_light.launch.xml">
       <arg name="fleet_name" value="$(var fleet_name)"/>
