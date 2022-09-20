@@ -55,11 +55,13 @@ def add_easy_fleet_robots(node, easy_adapter, config_yaml):
             pose = current_status['data']['position']
             battery_soc = current_status['data']['battery']
             map_name = current_status['data']['map_name']
+            replan = api.requires_replan(robot_name)
 
             position = adpt.easy_full_control_handle.Position()
             position.position = [pose['x'], pose['y'], pose['yaw']]
             position.battery_percent = battery_soc
             position.map_name = map_name
+            position.replan = replan
             return position
 
         # Use this callback to check whether the robot completed process
