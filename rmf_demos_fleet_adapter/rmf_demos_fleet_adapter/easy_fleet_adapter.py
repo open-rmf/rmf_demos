@@ -26,69 +26,12 @@ import rmf_adapter as adpt
 
 from .RobotClientAPI import RobotAPI
 
-
 # ------------------------------------------------------------------------------
-# Main
+# Helper functions
 # ------------------------------------------------------------------------------
-def main(argv=sys.argv):
-    # Init rclpy and adapter
-    rclpy.init(args=argv)
-    adpt.init_rclcpp()
-    args_without_ros = rclpy.utilities.remove_ros_args(argv)
 
-    parser = argparse.ArgumentParser(
-        prog="fleet_adapter",
-        description="Configure and spin up the fleet adapter")
-    parser.add_argument("-c", "--config_file", type=str, required=True,
-                        help="Path to the config.yaml file")
-    parser.add_argument("-n", "--nav_graph", type=str, required=True,
-                        help="Path to the nav_graph for this fleet adapter")
-    parser.add_argument("--use_sim_time", action="store_true",
-                        help='Use sim time, default: false')
-    args = parser.parse_args(args_without_ros[1:])
-    print(f"Starting fleet adapter...")
 
-    config_path = args.config_file
-    nav_graph_path = args.nav_graph
-
-    # Load config and nav graph yamls
-    with open(config_path, "r") as f:
-        config_yaml = yaml.safe_load(f)
-
-    # ROS 2 node for the command handle
-    fleet_name = config_yaml['rmf_fleet']['name']
-    node = rclpy.node.Node(f'{fleet_name}_command_handle')
-
-    # Enable sim time for testing offline
-    if args.use_sim_time:
-        param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
-        node.set_parameters([param])
-
-    # Set server uri
-    node.declare_parameter('server_uri', rclpy.Parameter.Type.STRING)
-    server_uri = node.get_parameter(
-        'server_uri').get_parameter_value().string_value
-    if server_uri == "":
-        server_uri = None
-
-    adapter = adpt.Adapter.make(f'{fleet_name}_fleet_adapter')
-    if args.use_sim_time:
-        adapter.node.use_sim_time()
-    assert adapter, ("Unable to initialize fleet adapter. Please ensure "
-                     "RMF Schedule Node is running")
-    adapter.start()
-    time.sleep(1.0)
-
-    # Set up Configuration and make EasyFullControl fleet
-    adapter_config = adpt.easy_full_control_handle.Configuration(
-        config_path,
-        nav_graph_path,
-        server_uri)
-
-    easy_adapter = adpt.EasyFullControl.make(adapter_config, adapter)
-    assert easy_adapter, ("Unable to initialize easy fleet adapter.")
-
-    # Add robots to fleet adapter
+def add_easy_fleet_robots(node, easy_adapter, config_yaml):
     # Initialize robot API for this fleet
     fleet_config = config_yaml['rmf_fleet']
     prefix = 'http://' + fleet_config['fleet_manager']['ip'] + \
@@ -120,33 +63,30 @@ def main(argv=sys.argv):
             return position
 
         # Use this callback to check whether the robot completed process
-        def _check_completed():
-            current_status = api.data(robot_name)
-            if current_status:
-                return current_status['data']['completed_request']
-            else:
-                return
+        def _check_completed(cmd_id: int):
+            resp = api.process_completed(robot_name, cmd_id)
+            return resp
 
         # Define navigate callback for this robot
         def _navigate(target: adpt.easy_full_control_handle.Target):
-            resp = api.navigate(robot_name, target.pose, target.map_name,
-                                target.speed_limit)
+            resp = api.navigate(robot_name, target.cmd_id, target.pose,
+                                target.map_name, target.speed_limit)
             if resp:
                 return _check_completed
             else:
                 return
 
         # Define dock callback for this robot
-        def _dock(dock_name: str):
-            resp = api.start_process(robot_name, dock_name, map_name='')
+        def _dock(dock_name: str, cmd_id: int):
+            resp = api.start_process(robot_name, cmd_id, dock_name, map_name='')
             if resp:
                 return _check_completed
             else:
                 return
 
         # Define stop function for this robot
-        def _stop():
-            resp = api.stop(robot_name)
+        def _stop(cmd_id: int):
+            resp = api.stop(robot_name, cmd_id)
             return resp
 
         # Define action executor callback for this robot
@@ -175,13 +115,14 @@ def main(argv=sys.argv):
                 if data is None:
                     continue
                 if data['success']:
-                    robots_config = config_yaml['robots'][robot_name]
-                    rmf_config = robots_config['rmf_config']
-                    initial_waypoint = rmf_config['start']['waypoint']
-
-                    position = data['data']['position']
+                    # We use the robot's current start position to compute plan start
+                    position = api.position(robot_name)
+                    if position is None:
+                        node.get_logger().info(
+                            f'Failed to get initial position of {robot_name}')
+                        continue
                     start_pose = \
-                        [position['x'], position['y'], position['yaw']]
+                        [position[0], position[1], position[2]]
 
                     success = _assign_callbacks(robot_name, start_pose)
 
@@ -203,7 +144,71 @@ def main(argv=sys.argv):
     add_robots = threading.Thread(target=_add_fleet_robots, args=())
     add_robots.start()
 
-    # ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Main
+# ------------------------------------------------------------------------------
+def main(argv=sys.argv):
+    # Init rclpy and adapter
+    rclpy.init(args=argv)
+    adpt.init_rclcpp()
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
+
+    parser = argparse.ArgumentParser(
+        prog="fleet_adapter",
+        description="Configure and spin up the fleet adapter")
+    parser.add_argument("-c", "--config_file", type=str, required=True,
+                        help="Path to the config.yaml file")
+    parser.add_argument("-n", "--nav_graph", type=str, required=True,
+                        help="Path to the nav_graph for this fleet adapter")
+    parser.add_argument("-sim", "--use_sim_time", action="store_true",
+                        help='Use sim time, default: false')
+    args = parser.parse_args(args_without_ros[1:])
+    print(f"Starting fleet adapter...")
+
+    config_path = args.config_file
+    nav_graph_path = args.nav_graph
+
+    # Load config and nav graph yamls
+    with open(config_path, "r") as f:
+        config_yaml = yaml.safe_load(f)
+
+    # ROS 2 node for the command handle
+    fleet_name = config_yaml['rmf_fleet']['name']
+    node = rclpy.node.Node(f'{fleet_name}_command_handle')
+
+    # Enable sim time for testing offline
+    if args.use_sim_time:
+        param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
+        node.set_parameters([param])
+
+    # Set server uri
+    node.declare_parameter('server_uri', rclpy.Parameter.Type.STRING)
+    server_uri = node.get_parameter(
+        'server_uri').get_parameter_value().string_value
+    if server_uri == "":
+        server_uri = None
+
+    # Make an adapter instance
+    adapter = adpt.Adapter.make(f'{fleet_name}_fleet_adapter')
+    if args.use_sim_time:
+        adapter.node.use_sim_time()
+    assert adapter, ("Unable to initialize fleet adapter. Please ensure "
+                     "RMF Schedule Node is running")
+    adapter.start()
+    time.sleep(1.0)
+
+    # Set up Configuration and make EasyFullControl fleet
+    adapter_config = adpt.easy_full_control_handle.Configuration(
+        config_path,
+        nav_graph_path,
+        server_uri)
+
+    easy_adapter = adpt.EasyFullControl.make(adapter_config, adapter)
+    assert easy_adapter, ("Unable to initialize easy fleet adapter.")
+
+    # Add robots to fleet adapter
+    add_easy_fleet_robots(node, easy_adapter, config_yaml)
 
     # Create executor for the command handle node
     rclpy_executor = rclpy.executors.SingleThreadedExecutor()
