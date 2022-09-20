@@ -80,7 +80,8 @@ def add_easy_fleet_robots(node, easy_adapter, config_yaml):
 
         # Define dock callback for this robot
         def _dock(dock_name: str, cmd_id: int):
-            resp = api.start_process(robot_name, cmd_id, dock_name, map_name='')
+            resp = api.start_process(
+                robot_name, cmd_id, dock_name, map_name='')
             if resp:
                 return _check_completed
             else:
@@ -117,7 +118,7 @@ def add_easy_fleet_robots(node, easy_adapter, config_yaml):
                 if data is None:
                     continue
                 if data['success']:
-                    # We use the robot's current start position to compute plan start
+                    # We use the robot's current position to compute plan start
                     position = api.position(robot_name)
                     if position is None:
                         node.get_logger().info(
