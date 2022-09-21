@@ -21,6 +21,7 @@ import json
 import time
 import copy
 import argparse
+import uuid
 
 import rclpy
 from rclpy.node import Node
@@ -323,8 +324,15 @@ class FleetManager(Node):
         if (msg.name in self.robots):
             robot = self.robots[msg.name]
             if not robot.is_expected_task_id(msg.task_id):
-                # This message is out of date, so disregard it.
-                if robot.last_path_request is not None:
+                # This message is out of date. Check if task_id is a valid
+                # uuid, as the robot may be carrying out a teleop action.
+                try:
+                    action_id = uuid.UUID(msg.task_id)
+                except ValueError:
+                    return
+                if robot.last_path_request is not None and \
+                        (robot.last_completed_request !=
+                         int(robot.last_path_request.task_id)):
                     # Resend the latest task request for this robot, in case
                     # the message was dropped.
                     if self.debug:
@@ -334,7 +342,7 @@ class FleetManager(Node):
                             f'because it is currently following {msg.task_id}'
                         )
                     self.path_pub.publish(robot.last_path_request)
-                return
+                    return
 
             robot.state = msg
             # Check if robot has reached destination
