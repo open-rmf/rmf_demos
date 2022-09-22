@@ -187,6 +187,24 @@ class RobotAPI:
             return response['data'].get('replan', False)
         return False
 
+    def toggle_action(self, robot_name: str, toggle: bool):
+        '''Request to toggle the robot's mode_teleop parameter.
+           Return True if the toggle request is successful'''
+        url = self.prefix +\
+            f"/open-rmf/rmf_demos_fm/toggle_action?robot_name={robot_name}"
+        data = {'toggle': toggle}
+        try:
+            response = requests.post(url, timeout=self.timeout, json=data)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()['success']
+        except HTTPError as http_err:
+            print(f'HTTP error: {http_err}')
+        except Exception as err:
+            print(f'Other error: {err}')
+        return False
+
     def data(self, robot_name=None):
         if robot_name is None:
             url = self.prefix + f'/open-rmf/rmf_demos_fm/status/'

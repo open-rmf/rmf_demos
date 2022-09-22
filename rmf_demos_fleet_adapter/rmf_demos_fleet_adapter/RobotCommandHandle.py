@@ -119,6 +119,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         # The graph index of the waypoint the robot starts or ends an action
         self.action_waypoint_index = None
         self.current_cmd_id = 0
+        self.started_action = False
 
         # Threading variables
         self._lock = threading.Lock()
@@ -539,6 +540,9 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.position, self.dock_waypoint_index)
             # if robot is performing an action
             elif (self.action_execution is not None):
+                if not self.started_action:
+                    self.started_action = True
+                    self.api.toggle_action(self.name, self.started_action)
                 self.update_handle.update_off_grid_position(
                     self.position, self.action_waypoint_index)
             # if robot is merging into a waypoint
@@ -662,6 +666,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 return
             self.action_execution.finished()
             self.action_execution = None
+            self.started_action = False
+            self.api.toggle_action(self.name, self.started_action)
             self.node.get_logger().info(f"Robot {self.name} has completed the"
                                         f" action it was performing")
 

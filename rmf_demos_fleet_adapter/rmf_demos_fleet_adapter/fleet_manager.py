@@ -21,7 +21,6 @@ import json
 import time
 import copy
 import argparse
-import uuid
 
 import rclpy
 from rclpy.node import Node
@@ -54,11 +53,12 @@ app = FastAPI()
 
 
 class Request(BaseModel):
-    map_name: str
+    map_name: Optional[str] = None
     task: Optional[str] = None
     destination: Optional[dict] = None
     data: Optional[dict] = None
     speed_limit: Optional[float] = None
+    toggle: Optional[bool] = None
 
 
 class Response(BaseModel):
@@ -76,6 +76,7 @@ class State:
         self.destination = destination
         self.last_path_request = None
         self.last_completed_request = None
+        self.mode_teleop = False
         self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
         self.gps_pos = [0, 0]
 
@@ -320,19 +321,24 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
+        @app.post('/open-rmf/rmf_demos_fm/toggle_action/',
+                  response_model=Response)
+        async def toggle_teleop(robot_name: str, mode: Request):
+            response = {'success': False, 'msg': ''}
+            if (robot_name not in self.robots):
+                return response
+            # Toggle action mode
+            self.robots[robot_name].mode_teleop = mode.toggle
+            response['success'] = True
+            return response
+
     def robot_state_cb(self, msg):
         if (msg.name in self.robots):
             robot = self.robots[msg.name]
-            if not robot.is_expected_task_id(msg.task_id):
-                # This message is out of date. Check if task_id is a valid
-                # uuid, as the robot may be carrying out a teleop action.
-                try:
-                    action_id = uuid.UUID(msg.task_id)
-                except ValueError:
-                    return
-                if robot.last_path_request is not None and \
-                        (robot.last_completed_request !=
-                         int(robot.last_path_request.task_id)):
+            if not robot.is_expected_task_id(msg.task_id) and \
+                    not robot.mode_teleop:
+                # This message is out of date, so disregard it.
+                if robot.last_path_request is not None:
                     # Resend the latest task request for this robot, in case
                     # the message was dropped.
                     if self.debug:
@@ -342,7 +348,7 @@ class FleetManager(Node):
                             f'because it is currently following {msg.task_id}'
                         )
                     self.path_pub.publish(robot.last_path_request)
-                    return
+                return
 
             robot.state = msg
             # Check if robot has reached destination
