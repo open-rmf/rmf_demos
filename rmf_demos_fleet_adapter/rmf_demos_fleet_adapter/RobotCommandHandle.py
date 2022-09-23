@@ -120,6 +120,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.action_waypoint_index = None
         self.current_cmd_id = 0
         self.started_action = False
+        self.clean_zone = None
 
         # Threading variables
         self._lock = threading.Lock()
@@ -129,6 +130,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self._quit_dock_event = threading.Event()
         self._stopping_thread = None
         self._quit_stopping_event = threading.Event()
+        self._action_thread = None
+        self._quit_action_event = threading.Event()
 
         self.node.get_logger().info(
             f"The robot is starting at: [{self.position[0]:.2f}, "
@@ -476,6 +479,26 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self._dock_thread = threading.Thread(target=_dock)
             self._dock_thread.start()
 
+    def perform_clean_action(self):
+        cmd_id = self.next_cmd_id()
+        self.started_action = True
+
+        def _perform_clean():
+            self.api.start_process(
+                self.name, cmd_id, self.clean_zone, self.map_name)
+
+            while not self.api.process_completed(self.name, cmd_id):
+                if self.action_execution is None:
+                    break
+
+                if self._quit_action_event.wait(0.1):
+                    self.node.get_logger().info("Aborting action")
+                    return
+
+        self._action_thread = threading.Thread(target=_perform_clean)
+        self._action_thread.start()
+        return
+
     def get_position(self):
         ''' This helper function returns the live position of the robot in the
         RMF coordinate frame'''
@@ -543,6 +566,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 if not self.started_action:
                     self.started_action = True
                     self.api.toggle_action(self.name, self.started_action)
+                    if self.clean_zone is not None:
+                        self.perform_clean_action()
                 self.update_handle.update_off_grid_position(
                     self.position, self.action_waypoint_index)
             # if robot is merging into a waypoint
@@ -668,6 +693,9 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.action_execution = None
             self.started_action = False
             self.api.toggle_action(self.name, self.started_action)
+            if self._action_thread is not None:
+                if self._action_thread.is_alive():
+                    self._action_thread.join()
             self.node.get_logger().info(f"Robot {self.name} has completed the"
                                         f" action it was performing")
 

@@ -159,7 +159,9 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         return confirm
 
     # Configure this fleet to perform any kind of teleop action
-    fleet_handle.add_performable_action("teleop", _consider)
+    if 'action' in fleet_config['task_capabilities']:
+        for action in fleet_config['task_capabilities']['action']:
+            fleet_handle.add_performable_action(action, _consider)
 
     def _updater_inserter(cmd_handle, update_handle):
         """Insert a RobotUpdateHandle."""
@@ -170,15 +172,21 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                              execution:
                              adpt.robot_update_handle.ActionExecution):
             with cmd_handle._lock:
-                if len(description) > 0 and\
+                # Check if an action waypoint is provided in the description
+                # If yes, it will be a string instead of a dict
+                if type(description) is str and len(description) > 0 and\
                         description in cmd_handle.graph.keys:
                     cmd_handle.action_waypoint_index = \
-                        cmd_handle.find_waypoint(description).index
+                        cmd_handle.graph.find_waypoint(description).index
                 else:
                     cmd_handle.action_waypoint_index = \
                         cmd_handle.last_known_waypoint_index
                 cmd_handle.on_waypoint = None
                 cmd_handle.on_lane = None
+                # Set the clean zone if this is a cleaning task
+                if category == 'clean' and \
+                        type(description) is dict and 'zone' in description:
+                    cmd_handle.clean_zone = description['zone']
                 cmd_handle.action_execution = execution
         # Set the action_executioner for the robot
         cmd_handle.update_handle.set_action_executor(_action_executor)
