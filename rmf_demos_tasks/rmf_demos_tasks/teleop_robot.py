@@ -48,7 +48,8 @@ class Requester(Node):
         self.args = parser.parse_args(argv[1:])
 
         self.pub = self.create_publisher(
-          PathRequest, 'robot_path_requests', 1)
+          PathRequest, 'robot_path_requests',
+          qos_profile=qos_profile_system_default)
 
         msg = PathRequest()
         msg.fleet_name = self.args.fleet
