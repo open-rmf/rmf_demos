@@ -37,6 +37,7 @@ rmf_fleet:
     delivery: False
     clean: True
     finishing_request: "park" # [park, charge, nothing]
+    action: ["clean"]
 
 # CleanerBotA CONFIG =================================================================
 
