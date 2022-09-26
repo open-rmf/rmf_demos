@@ -121,6 +121,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.current_cmd_id = 0
         self.started_action = False
         self.clean_zone = None
+        self.auto_end = False
 
         # Threading variables
         self._lock = threading.Lock()
@@ -494,6 +495,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 if self._quit_action_event.wait(0.1):
                     self.node.get_logger().info("Aborting action")
                     return
+            if self.auto_end:
+                self.complete_robot_action()
 
         self._action_thread = threading.Thread(target=_perform_clean)
         self._action_thread.start()
@@ -692,6 +695,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.action_execution.finished()
             self.action_execution = None
             self.started_action = False
+            self.auto_end = False
             self.api.toggle_action(self.name, self.started_action)
             if self._action_thread is not None:
                 if self._action_thread.is_alive():
