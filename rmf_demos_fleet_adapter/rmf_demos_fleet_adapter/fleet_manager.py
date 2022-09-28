@@ -32,7 +32,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
-    DockSummary, RobotMode
+    DockSummary, RobotMode, CleanTaskSummary
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
@@ -112,6 +112,7 @@ class FleetManager(Node):
 
         self.robots = {}  # Map robot name to state
         self.docks = {}  # Map dock name to waypoints
+        self.clean_paths = {}  # Map clean tasks to waypoints
 
         for robot_name, robot_config in self.config["robots"].items():
             self.robots[robot_name] = State()
@@ -168,6 +169,12 @@ class FleetManager(Node):
             DockSummary,
             'dock_summary',
             self.dock_summary_cb,
+            qos_profile=transient_qos)
+
+        self.create_subscription(
+            CleanTaskSummary,
+            'clean_task_summary',
+            self.clean_task_summary_cb,
             qos_profile=transient_qos)
 
         self.path_pub = self.create_publisher(
@@ -290,7 +297,8 @@ class FleetManager(Node):
             response = {'success': False, 'msg': ''}
             if (robot_name not in self.robots or
                     len(task.task) < 1 or
-                    task.task not in self.docks):
+                    (task.task not in self.docks and
+                     task.task not in self.clean_paths)):
                 return response
 
             robot = self.robots[robot_name]
@@ -303,7 +311,15 @@ class FleetManager(Node):
             previous_wp = [cur_x, cur_y, cur_yaw]
             target_loc = Location()
             path_request.path.append(cur_loc)
-            for wp in self.docks[task.task]:
+
+            if task.task in self.docks:
+                task_wps = self.docks[task.task]
+            elif task.task in self.clean_paths:
+                task_wps = self.clean_paths[task.task]
+            else:
+                return response
+
+            for wp in task_wps:
                 target_loc = wp
                 path_request.path.append(target_loc)
                 previous_wp = [wp.x, wp.y, wp.yaw]
@@ -375,9 +391,15 @@ class FleetManager(Node):
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
-            if(fleet.fleet_name == self.fleet_name):
+            if (fleet.fleet_name == self.fleet_name):
                 for dock in fleet.params:
                     self.docks[dock.start] = dock.path
+
+    def clean_task_summary_cb(self, msg):
+        for fleet in msg.clean_tasks:
+            if (fleet.fleet_name == self.fleet_name):
+                for clean_task in fleet.params:
+                    self.clean_paths[clean_task.name] = clean_task.path
 
     def get_robot_state(self, robot: State, robot_name):
         data = {}

@@ -1,14 +1,14 @@
-# The configuration file for docking actions that robots can perform
+# The configuration file for cleaning actions that robots can perform
 # FleetName: The name of the fleet
-#   DockName: The name of the docking waypoint
+#   Clean task name: The name of the cleaning task
 #     level_name: The level name
-#     path: The waypoints that the robot will pass through during the docking process)
-#     finish_waypoint: The name of the waypoint where the robot will end up at the end of the docking process
+#     path: The waypoints that the robot will pass through during the cleaning process)
+#     finish_waypoint: The name of the waypoint where the robot will end up at the end of the cleaning process
 #
 # Note: These waypoints are in (x meters, y meters, yaw radian) form
 #
 # If loaded correctly, you will be able to echo the msg via:
-#   ros2 topic echo /dock_summary --qos-durability transient_local --qos-reliability reliable
+#   ros2 topic echo /clean_task_summary --qos-durability transient_local --qos-reliability reliable
 #
 # Configuring Cleaning path:
 #    The full cleaning path which the robot will travel along. When configuring, the first
