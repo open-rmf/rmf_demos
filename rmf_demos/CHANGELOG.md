@@ -1,5 +1,8 @@
 ## Changelog for package rmf_demos
 
+2.0.0 (2022-09-29)
+------------------
+
 1.4.0 (2022-02-14)
 ------------------
 * Add an indoor-outdoor campus example [#121](https://github.com/open-rmf/rmf_demos/pull/121)

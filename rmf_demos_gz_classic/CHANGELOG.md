@@ -1,6 +1,6 @@
 ## Changelog for package rmf_demos_gz_classic
 
-2.0.0 (2022-XX-XX)
+2.0.0 (2022-09-29)
 ------------------
 * Renamed to rmf_demos_gz_classic
 
