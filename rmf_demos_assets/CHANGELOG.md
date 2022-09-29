@@ -1,5 +1,8 @@
 ## Changelog for package rmf_demos_assets
 
+2.0.0 (2022-09-29)
+------------------
+
 1.3.0 (2021-09-08)
 ------------------
 * Removed gazebo related dependencies: [#81](https://github.com/open-rmf/rmf_demos/pull/81)
