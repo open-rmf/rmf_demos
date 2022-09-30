@@ -52,11 +52,4 @@
     </include>
   </group>
 
-  <!-- Cleaning Server Node, to provide CleanerBotA Fleet Adapter fixed cleaning task paths -->
-  <group>
-    <let name="cleaner_config_file" value="$(find-pkg-share rmf_demos_tasks)/hotel_cleaner_config.yaml"/>
-    <node pkg="rmf_demos_tasks" exec="cleaning_server" args="-c $(var cleaner_config_file)">
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-    </node>
-  </group>
 </launch>

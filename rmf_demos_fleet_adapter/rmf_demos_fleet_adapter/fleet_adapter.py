@@ -183,10 +183,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                         cmd_handle.last_known_waypoint_index
                 cmd_handle.on_waypoint = None
                 cmd_handle.on_lane = None
-                # Set the clean zone if this is a cleaning task
-                if category == 'clean' and type(description) is dict and \
-                        'clean_task_name' in description:
-                    cmd_handle.clean_zone = description['clean_task_name']
+                cmd_handle.action_description = description
                 cmd_handle.action_execution = execution
         # Set the action_executioner for the robot
         cmd_handle.update_handle.set_action_executor(_action_executor)

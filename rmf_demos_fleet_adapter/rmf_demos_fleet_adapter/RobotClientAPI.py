@@ -92,6 +92,25 @@ class RobotAPI:
             print(f'Other error: {err}')
         return False
 
+    def retrieve_process_waypoints(self,
+                                   process: str):
+        ''' Returns the list of waypoints for a given process.'''
+        url = self.prefix +\
+            f'/open-rmf/rmf_demos_fm/process_waypoints?process={process}'
+        try:
+            response = requests.get(url, timeout=self.timeout)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            if not response.json()['success']:
+                return None
+            return response.json()['data']['path']
+        except HTTPError as http_err:
+            print(f'HTTP error: {http_err}')
+        except Exception as err:
+            print(f'Other error: {err}')
+        return None
+
     def start_process(self,
                       robot_name: str,
                       cmd_id: int,

@@ -120,7 +120,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.action_waypoint_index = None
         self.current_cmd_id = 0
         self.started_action = False
-        self.clean_zone = None
+        self.action_description = None
 
         # Threading variables
         self._lock = threading.Lock()
@@ -484,30 +484,60 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self._dock_thread = threading.Thread(target=_dock)
             self._dock_thread.start()
 
-    def perform_clean_action(self):
+    def check_perform_action(self):
         cmd_id = self.next_cmd_id()
         self._quit_action_event.clear()
         self.started_action = True
 
-        def _perform_clean():
+        task_name = None
+        for desc_key in self.action_description.keys():
+            if '_task_name' in desc_key:
+                task_name = self.action_description[desc_key]
+                break
+        if task_name is None:
+            # If there is no task name, it is possible that this action is
+            # a manual process where RMF releases control, e.g. teleop
+            # An /action_execution_notice should be published manually to
+            # end the action
+            return
+
+        def _perform_action():
+            wps = self.api.retrieve_process_waypoints(task_name)
+            if wps is None:
+                # If no waypoints are found for this task, end robot action
+                self.node.get_logger().info(
+                    f'No waypoints found for task [{task_name}], '
+                    f'ending robot action')
+                self.complete_robot_action()
+                return
+
             self.api.start_process(
-                self.name, cmd_id, self.clean_zone, self.map_name)
+                self.name, cmd_id, task_name, self.map_name)
             self.node.get_logger().info(
-                f'Robot [{self.name}] is starting a new cleaning '
-                f'task: {self.clean_zone}')
+                f'Robot [{self.name}] is executing perform action {task_name}')
 
             while not self.api.process_completed(self.name, cmd_id):
                 if self.action_execution is None:
                     break
 
+                traj = schedule.make_trajectory(
+                    self.vehicle_traits,
+                    self.adapter.now(),
+                    wps)
+                itinerary = schedule.Route(self.map_name, traj)
+                if self.update_handle is not None:
+                    participant = \
+                        self.update_handle.get_unstable_participant()
+                    participant.set_itinerary([itinerary])
+
                 if self._quit_action_event.wait(0.1):
                     self.node.get_logger().info("Aborting action")
                     return
 
-            # End the clean action once it is completed
+            # End the robot action once it is completed
             self.complete_robot_action()
 
-        self._action_thread = threading.Thread(target=_perform_clean)
+        self._action_thread = threading.Thread(target=_perform_action)
         self._action_thread.start()
         return
 
@@ -578,8 +608,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 if not self.started_action:
                     self.started_action = True
                     self.api.toggle_action(self.name, self.started_action)
-                    if self.clean_zone is not None:
-                        self.perform_clean_action()
+                    self.check_perform_action()
                 self.update_handle.update_off_grid_position(
                     self.position, self.action_waypoint_index)
             # if robot is merging into a waypoint
@@ -704,8 +733,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.action_execution.finished()
             self.action_execution = None
             self.started_action = False
-            if self.clean_zone is not None:
-                self.clean_zone = None
+            self.action_description = None
             self.api.toggle_action(self.name, self.started_action)
             self.node.get_logger().info(f"Robot {self.name} has completed the"
                                         f" action it was performing")
