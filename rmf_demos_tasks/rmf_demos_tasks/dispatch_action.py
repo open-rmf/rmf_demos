@@ -50,7 +50,7 @@ class TaskRequester(Node):
         parser.add_argument('-a', '--action', required=True,
                             type=str, help='action name')
         parser.add_argument('-ad', '--action_desc', required=False,
-                            default='{}', nargs='+',
+                            default='{}',
                             type=str, help='action description in json str')
         parser.add_argument('-F', '--fleet', type=str,
                             help='Fleet name, should define tgt with robot')
@@ -110,11 +110,7 @@ class TaskRequester(Node):
         description["phases"] = []
         activities = []
 
-        def _add_action(i=0):
-            try:
-                action_desc = json.loads(self.args.action_desc[i])
-            except ValueError as e:
-                action_desc = self.args.action_desc[i]
+        def _add_action():
             activities.append(
                 {
                     "category": "perform_action",
@@ -122,7 +118,7 @@ class TaskRequester(Node):
                     {
                         "unix_millis_action_duration_estimate": 60000,
                         "category": self.args.action,
-                        "description": action_desc,
+                        "description": json.loads(self.args.action_desc),
                         "use_tool_sink": self.args.use_tool_sink
                     }
                 })
@@ -131,12 +127,12 @@ class TaskRequester(Node):
             _add_action()
         else:
             # Add action activities
-            for i in range(len(self.args.starts)):
+            for start in self.args.starts:
                 activities.append({
                         "category": "go_to_place",
-                        "description": self.args.starts[i]
+                        "description": start
                     })
-                _add_action(i)
+                _add_action()
 
         # Add activities to phases
         description["phases"].append({
