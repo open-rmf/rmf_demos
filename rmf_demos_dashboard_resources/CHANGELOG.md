@@ -1,6 +1,6 @@
 ## Changelog for package rmf_demos_dashboard_resources
 
-2.0.0 (2022-09-29)
+2.0.1 (2022-09-29)
 ------------------
 
 1.3.0 (2021-09-08)
