@@ -16,6 +16,13 @@ graphs:
   {}
 levels:
   L1:
+    constraints:
+      - {ids: ["{6f0220ba-b283-41c9-b8a4-86fede28d5d0}", "{d49c8fba-68ad-48bd-bf6a-c2109638ccf3}"]}
+      - {ids: ["{844460e1-af5d-4250-8d41-446513692ffa}", "{408fa383-49e0-4095-bcd3-51819004e3e1}"]}
+      - {ids: ["{865b9319-b742-4cca-920a-9bd12f19b360}", "{e115c6bd-b457-4d18-a725-c465da2262d0}"]}
+      - {ids: ["{ab9f38f4-dd89-4a12-90bc-74b7fc8413fa}", "{e3618f91-56f5-4839-8309-67a21cbea49b}"]}
+      - {ids: ["{c0d424cc-0758-49db-a027-66ea337ac06a}", "{f1b40475-decb-4906-b7fd-63372eba2468}"]}
+      - {ids: ["{2908bd90-c304-4521-bec2-5a0bd83a9b4c}", "{e71feb28-4a54-46ac-9b7e-eded602789a1}"]}
     doors:
       - [31, 13, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, main_door], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_hinged]}]
       - [35, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, coe_door], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
@@ -23,6 +30,13 @@ levels:
     drawing:
       filename: office.png
     elevation: 0
+    features:
+      - {id: "{d49c8fba-68ad-48bd-bf6a-c2109638ccf3}", name: "", x: 2297.8440000000001, y: 1274.268}
+      - {id: "{844460e1-af5d-4250-8d41-446513692ffa}", name: "", x: 2131.29, y: 545.20100000000002}
+      - {id: "{e115c6bd-b457-4d18-a725-c465da2262d0}", name: "", x: 2296.5, y: 724.024}
+      - {id: "{e3618f91-56f5-4839-8309-67a21cbea49b}", name: "", x: 1250.971, y: 559.85900000000004}
+      - {id: "{f1b40475-decb-4906-b7fd-63372eba2468}", name: "", x: 1832.5139999999999, y: 726.98299999999995}
+      - {id: "{e71feb28-4a54-46ac-9b7e-eded602789a1}", name: "", x: 983.28300000000002, y: 634.46900000000005}
     floors:
       - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum], indoor: [2, 0], texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
         vertices: [27, 28, 29, 30, 31, 13, 14, 15, 21, 20, 19, 22, 23, 24, 38, 25, 26, 36]
@@ -58,7 +72,22 @@ levels:
       - [59, 67, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
       - [59, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
     layers:
-      {}
+      turtlebot-scan:
+        color: [1, 0, 0, 0.5]
+        features:
+          - {id: "{408fa383-49e0-4095-bcd3-51819004e3e1}", name: "", x: 171.93100000000001, y: 213.447}
+          - {id: "{6f0220ba-b283-41c9-b8a4-86fede28d5d0}", name: "", x: 380.72500000000002, y: 165.71000000000001}
+          - {id: "{865b9319-b742-4cca-920a-9bd12f19b360}", name: "", x: 231.28200000000001, y: 170.36799999999999}
+          - {id: "{ab9f38f4-dd89-4a12-90bc-74b7fc8413fa}", name: "", x: 177.40199999999999, y: 458.13099999999997}
+          - {id: "{c0d424cc-0758-49db-a027-66ea337ac06a}", name: "", x: 233.06800000000001, y: 298.99799999999999}
+          - {id: "{2908bd90-c304-4521-bec2-5a0bd83a9b4c}", name: "", x: 190.96000000000001, y: 523.68399999999997}
+        filename: turtlebot-scan.png
+        transform:
+          scale: 0.030677038355105209
+          translation_x: 24.420221502738251
+          translation_y: -0.99679592887909063
+          yaw: -1.5478243144113724
+        visible: true
     measurements:
       - [1, 0, {distance: [3, 9.315]}]
       - [5, 4, {distance: [3, 8.409000000000001]}]
