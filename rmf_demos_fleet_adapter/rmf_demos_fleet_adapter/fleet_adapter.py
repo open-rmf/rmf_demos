@@ -86,7 +86,11 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         battery_sys, ambient_power_sys)
     tool_sink = battery.SimpleDevicePowerSink(battery_sys, tool_power_sys)
 
-    nav_graph = graph.parse_graph(nav_graph_path, vehicle_traits)
+    try:
+        nav_graph = graph.parse_graph(nav_graph_path, vehicle_traits)
+    except Exception as e:
+        print(f'Unable to load {nav_graph_path}: {e}')
+        raise e
 
     # Adapter
     fleet_name = fleet_config['name']
