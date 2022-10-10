@@ -6,7 +6,7 @@ package_name = 'rmf_demos_fleet_adapter'
 
 setup(
     name=package_name,
-    version='2.0.1',
+    version='2.0.2',
     packages=find_packages(),
     data_files=[
         ('share/ament_index/resource_index/packages',
