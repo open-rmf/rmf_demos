@@ -28,9 +28,7 @@ add_custom_command(OUTPUT ${outputs}
 add_custom_target(build ALL DEPENDS ${outputs})
 
 install(DIRECTORY
-  airport_terminal
   office
   hotel
-  clinic
   DESTINATION share/${PROJECT_NAME}
 )
