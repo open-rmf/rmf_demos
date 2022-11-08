@@ -26,8 +26,6 @@ from rclpy.parameter import Parameter
 import rmf_adapter as adpt
 import rmf_adapter.plan as plan
 
-from .configuration import get_configuration
-
 from functools import partial
 
 from rclpy.qos import QoSProfile
@@ -45,12 +43,15 @@ from .RobotClientAPI import RobotAPI
 
 class FleetAdapter:
 
-    def __init__(self, config_yaml, nav_graph_path, node, use_sim_time):
+    def __init__(self, config_path, nav_graph_path, node, use_sim_time):
         # global counter for command ids
         self.next_id = 0
         # Keep track of which map the robot is in
         self.last_map = {}
         self.cmd_ids = {}
+        # Load config yaml
+        with open(config_path, "r") as f:
+            config_yaml = yaml.safe_load(f)
         # Initialize robot API for this fleet
         fleet_config = config_yaml['rmf_fleet']
         prefix = 'http://' + fleet_config['fleet_manager']['ip'] + \
@@ -60,7 +61,13 @@ class FleetAdapter:
             fleet_config['fleet_manager']['user'],
             fleet_config['fleet_manager']['password'])
 
-        configuration = get_configuration(config_yaml, nav_graph_path, node)
+        node.declare_parameter('server_uri', rclpy.Parameter.Type.STRING)
+        server_uri = node.get_parameter(
+            'server_uri').get_parameter_value().string_value
+        if server_uri == "":
+            server_uri = None
+
+        configuration = adpt.easy_full_control.Configuration.make(config_path, nav_graph_path, server_uri)
         self.adapter = self.initialize_fleet(configuration, config_yaml['robots'], node, use_sim_time)
 
     def initialize_fleet(self, configuration, robots_yaml, node, use_sim_time):
@@ -177,7 +184,7 @@ def main(argv=sys.argv):
         node.set_parameters([param])
 
     adapter = FleetAdapter(
-        config_yaml,
+        config_path,
         nav_graph_path,
         node,
         args.use_sim_time)
