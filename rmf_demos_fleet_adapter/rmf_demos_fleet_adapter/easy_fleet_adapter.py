@@ -55,7 +55,7 @@ class FleetAdapter:
         # Initialize robot API for this fleet
         fleet_config = config_yaml['rmf_fleet']
         prefix = 'http://' + fleet_config['fleet_manager']['ip'] + \
-                ':' + str(fleet_config['fleet_manager']['port'])
+                 ':' + str(fleet_config['fleet_manager']['port'])
         self.api = RobotAPI(
             prefix,
             fleet_config['fleet_manager']['user'],
@@ -67,8 +67,10 @@ class FleetAdapter:
         if server_uri == "":
             server_uri = None
 
-        configuration = adpt.easy_full_control.Configuration.make(config_path, nav_graph_path, server_uri)
-        self.adapter = self.initialize_fleet(configuration, config_yaml['robots'], node, use_sim_time)
+        configuration = adpt.easy_full_control.Configuration.make(
+            config_path, nav_graph_path, server_uri)
+        self.adapter = self.initialize_fleet(
+            configuration, config_yaml['robots'], node, use_sim_time)
 
     def initialize_fleet(self, configuration, robots_yaml, node, use_sim_time):
         # Make the easy full control
@@ -78,9 +80,11 @@ class FleetAdapter:
             easy_full_control.node.use_sim_time()
 
         def _goal_completed(robot_name):
-            success = self.api.process_completed(robot_name, self.cmd_ids[robot_name])
+            success = self.api.process_completed(
+                robot_name, self.cmd_ids[robot_name])
             request_replan = self.api.requires_replan(robot_name)
-            remaining_time = self.api.navigation_remaining_duration(robot_name, self.cmd_ids[robot_name])
+            remaining_time = self.api.navigation_remaining_duration(
+                robot_name, self.cmd_ids[robot_name])
             if remaining_time:
                 remaining_time = datetime.timedelta(seconds=remaining_time)
             goal_status = adpt.easy_full_control.GoalStatus(
@@ -121,13 +125,15 @@ class FleetAdapter:
             cmd_id = self.next_id
             self.next_id += 1
             self.cmd_ids[robot_name] = cmd_id
-            self.api.start_process(robot_name, cmd_id, dock_name, self.last_map[robot_name])
+            self.api.start_process(
+                robot_name, cmd_id, dock_name, self.last_map[robot_name])
             return partial(_goal_completed, robot_name)
 
-        def _action_executor(robot_name: str,
-                             category: str,
-                             description: dict,
-                             execution: adpt.robot_update_handle.ActionExecution):
+        def _action_executor(
+                robot_name: str,
+                category: str,
+                description: dict,
+                execution: adpt.robot_update_handle.ActionExecution):
             pass
 
         # Add the robots
