@@ -77,10 +77,17 @@ class FleetAdapter:
         if use_sim_time:
             easy_full_control.node.use_sim_time()
 
-        def _goal_completed(robot_name, remaining_time, request_replan):
+        def _goal_completed(robot_name):
+            success = self.api.process_completed(robot_name, self.cmd_ids[robot_name])
             request_replan = self.api.requires_replan(robot_name)
             remaining_time = self.api.navigation_remaining_duration(robot_name, self.cmd_ids[robot_name])
-            return self.api.process_completed(robot_name, self.cmd_ids[robot_name])
+            if remaining_time:
+                remaining_time = datetime.timedelta(seconds=remaining_time)
+            goal_status = adpt.easy_full_control.GoalStatus(
+                success,
+                remaining_time,
+                request_replan)
+            return goal_status
 
         def _robot_state(robot_name):
             data = self.api.data(robot_name)
