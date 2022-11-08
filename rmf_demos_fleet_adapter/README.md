@@ -1,9 +1,9 @@
 # rmf_demos_fleet_adapter
 
-This is an implementation of the python based [fleet adapter template](https://github.com/open-rmf/fleet_adapter_template) on selected RMF demo worlds: Hotel, Office, Airport Terminal and Clinic. 
+This is an implementation of the python based [fleet adapter template](https://github.com/open-rmf/fleet_adapter_template) on selected RMF demo worlds: Hotel, Office, Airport Terminal and Clinic.
 
 This fleet adapter integration relies on a fleet manager and a fleet adapter:
-- The **fleet manager** comprises of specific endpoints that help relay commands to the fleet's robots. It communicates with the robots over internal ROS 2 messages, while interfacing with the adapter via an API chosen by the user. For this demo fleet adapter implementation, we are using REST API with FastAPI framework. 
+- The **fleet manager** comprises of specific endpoints that help relay commands to the fleet's robots. It communicates with the robots over internal ROS 2 messages, while interfacing with the adapter via an API chosen by the user. For this demo fleet adapter implementation, we are using REST API with FastAPI framework.
 - The **fleet adapter** receives commands from RMF and interfaces with the fleet manager to receive robot state information, as well as send task and navigation commands to the robots
 
 ## Getting Started
@@ -11,6 +11,8 @@ This fleet adapter integration relies on a fleet manager and a fleet adapter:
 Make sure the required dependencies are installed:
 ```bash
 pip3 install fastapi uvicorn
+
+# **Ensure the py libs version are 'fastapi>=0.79.0', 'uvicorn>=0.18.2'.
 ```
 
 You can interact with the endpoints with FastAPI's automatic documentation. First launch a demo world, then visit the base URL with `/docs` appended at the end. Do take note that the port number for each demo fleet is specified in `rmf_demos/rmf_demos/config/`.
@@ -19,7 +21,7 @@ You can interact with the endpoints with FastAPI's automatic documentation. Firs
 Launch the Office world:
 ```bash
 source ~/rmf_ws/install/setup.bash
-ros2 launch rmf_demos_gz office.launch.xml
+ros2 launch rmf_demos_gz_classic office.launch.xml
 ```
 Then, visit http://127.0.0.1:22011/docs in your browser to interact with the endpoints.
 
@@ -69,8 +71,11 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/`
           "yaw": 1.0
         },
         "battery": 100,
-        "completed_request": true,
-        "destination_arrival_duration": 0
+        "last_completed_request": 2,
+        "destination_arrival": {
+          "cmd_id": 3,
+          "duration": 14.3
+        }
       },
       {
         "robot_name": "tinyRobot2",
@@ -81,8 +86,9 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/`
           "yaw": 1.4
         },
         "battery": 100,
-        "completed_request": true,
-        "destination_arrival_duration": 0
+        "last_completed_request": 3,
+        "destination_arrival": null,
+        "replan": true
       }
     ]
   },
@@ -107,8 +113,11 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/status/?robot_name=ti
       "yaw": 1.0
     },
     "battery": 100,
-    "completed_request": true,
-    "destination_arrival_duration": 0
+    "last_completed_request": 2,
+    "destination_arrival": {
+      "cmd_id": 3,
+      "duration": 14.3
+    }
   },
   "success": true,
   "msg": ""

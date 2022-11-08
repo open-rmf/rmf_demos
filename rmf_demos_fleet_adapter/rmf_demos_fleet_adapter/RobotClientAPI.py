@@ -45,31 +45,26 @@ class RobotAPI:
     def position(self, robot_name: str):
         ''' Return [x, y, theta] expressed in the robot's coordinate frame or
             None if any errors are encountered'''
-        if robot_name is not None:
-            url = self.prefix +\
-                f'/open-rmf/rmf_demos_fm/status/?robot_name={robot_name}'
-        else:
-            url = self.prefix + f'/open-rmf/rmf_demos_fm/status'
-        try:
-            response = requests.get(url, self.timeout)
-            response.raise_for_status()
-            data = response.json()
+        response = self.data(robot_name)
+        if response is not None:
             if self.debug:
-                print(f'Response: {data}')
-            if not data['success']:
+                print(f'Response: {response}')
+            if not response['success']:
+                print(f'Response for {robot_name} was not successful')
                 return None
-            x = data['data']['position']['x']
-            y = data['data']['position']['y']
-            angle = data['data']['position']['yaw']
+
+            position = response['data']['position']
+            x = position['x']
+            y = position['y']
+            angle = position['yaw']
             return [x, y, angle]
-        except HTTPError as http_err:
-            print(f'HTTP error: {http_err}')
-        except Exception as err:
-            print(f'Other error: {err}')
+
+        print(f'No response received for {robot_name}')
         return None
 
     def navigate(self,
                  robot_name: str,
+                 cmd_id: int,
                  pose,
                  map_name: str,
                  speed_limit=0.0):
@@ -79,7 +74,8 @@ class RobotAPI:
             else False'''
         assert(len(pose) > 2)
         url = self.prefix +\
-            f'/open-rmf/rmf_demos_fm/navigate/?robot_name={robot_name}'
+            f'/open-rmf/rmf_demos_fm/navigate/?robot_name={robot_name}' \
+            f'&cmd_id={cmd_id}'
         data = {}  # data fields: task, map_name, destination{}, data{}
         data['map_name'] = map_name
         data['destination'] = {'x': pose[0], 'y': pose[1], 'yaw': pose[2]}
@@ -98,6 +94,7 @@ class RobotAPI:
 
     def start_process(self,
                       robot_name: str,
+                      cmd_id: int,
                       process: str,
                       map_name: str):
         ''' Request the robot to begin a process. This is specific to the robot
@@ -105,7 +102,8 @@ class RobotAPI:
             or begin cleaning a zone for a cleaning robot.
             Return True if the robot has accepted the request, else False'''
         url = self.prefix +\
-            f"/open-rmf/rmf_demos_fm/start_task?robot_name={robot_name}"
+            f"/open-rmf/rmf_demos_fm/start_task?robot_name={robot_name}" \
+            f"&cmd_id={cmd_id}"
         # data fields: task, map_name, destination{}, data{}
         data = {'task': process, 'map_name': map_name}
         try:
@@ -120,11 +118,12 @@ class RobotAPI:
             print(f'Other error: {err}')
         return False
 
-    def stop(self, robot_name: str):
+    def stop(self, robot_name: str, cmd_id: int):
         ''' Command the robot to stop.
             Return True if robot has successfully stopped. Else False'''
         url = self.prefix +\
-            f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={robot_name}'
+            f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={robot_name}' \
+            f'&cmd_id={cmd_id}'
         try:
             response = requests.get(url, self.timeout)
             response.raise_for_status()
@@ -137,28 +136,40 @@ class RobotAPI:
             print(f'Other error: {err}')
         return False
 
-    def navigation_remaining_duration(self, robot_name: str):
+    def navigation_remaining_duration(self, robot_name: str, cmd_id: int):
         ''' Return the number of seconds remaining for the robot to reach its
             destination'''
         response = self.data(robot_name)
+        if response is None:
+            return None
+
         if response is not None:
-            return response['data']['destination_arrival_duration']
-        else:
-            return 0.0
+            arrival = response['data'].get('destination_arrival')
+            if arrival is not None:
+                if arrival.get('cmd_id') != cmd_id:
+                    return None
+                return arrival.get('duration')
+            else:
+                return None
 
-    def navigation_completed(self, robot_name: str):
-        ''' Return True if the robot has successfully completed its previous
-            navigation request. Else False.'''
+        else:
+            return None
+
+    def navigation_completed(self, robot_name: str, cmd_id: int):
+        ''' Return True if the last request the robot successfully completed
+            matches cmd_id. Else False.'''
         response = self.data(robot_name)
-        if response is not None and response.get('data') is not None:
-            return response['data']['completed_request']
-        else:
-            return False
+        if response is not None:
+            data = response.get('data')
+            if data is not None:
+                return data['last_completed_request'] == cmd_id
 
-    def process_completed(self, robot_name: str):
+        return False
+
+    def process_completed(self, robot_name: str, cmd_id: int):
         ''' Return True if the robot has successfully completed its previous
             process request. Else False.'''
-        return self.navigation_completed(robot_name)
+        return self.navigation_completed(robot_name, cmd_id)
 
     def battery_soc(self, robot_name: str):
         ''' Return the state of charge of the robot as a value between 0.0
@@ -168,6 +179,31 @@ class RobotAPI:
             return response['data']['battery']/100.0
         else:
             return None
+
+    def requires_replan(self, robot_name: str):
+        '''Return whether the robot needs RMF to replan'''
+        response = self.data(robot_name)
+        if response is not None:
+            return response['data'].get('replan', False)
+        return False
+
+    def toggle_action(self, robot_name: str, toggle: bool):
+        '''Request to toggle the robot's mode_teleop parameter.
+           Return True if the toggle request is successful'''
+        url = self.prefix +\
+            f"/open-rmf/rmf_demos_fm/toggle_action?robot_name={robot_name}"
+        data = {'toggle': toggle}
+        try:
+            response = requests.post(url, timeout=self.timeout, json=data)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()['success']
+        except HTTPError as http_err:
+            print(f'HTTP error: {http_err}')
+        except Exception as err:
+            print(f'Other error: {err}')
+        return False
 
     def data(self, robot_name=None):
         if robot_name is None:

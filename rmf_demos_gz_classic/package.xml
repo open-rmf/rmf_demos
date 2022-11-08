@@ -1,25 +1,24 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>rmf_demos_ign</name>
+  <name>rmf_demos_gz_classic</name>
   <version>1.4.0</version>
-  <description>Launch files for RMF demos using the Ignition simulator</description>
+  <description>Launch files for RMF demos using the Gazebo-classic simulator</description>
   <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
-  <maintainer email="luca@openrobotics.org">Luca Della Vedova</maintainer>
   <maintainer email="marco@openrobotics.org">Marco A. Gutiérrez</maintainer>
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <exec_depend>rmf_demos</exec_depend>
-  <exec_depend>rmf_building_sim_ignition_plugins</exec_depend>
-  <exec_depend>rmf_robot_sim_ignition_plugins</exec_depend>
 
-  <exec_depend>teleop_twist_keyboard</exec_depend>
+  <exec_depend>rmf_building_sim_gz_classic_plugins</exec_depend>
+  <exec_depend>rmf_robot_sim_gz_classic_plugins</exec_depend>
+
+  <exec_depend>joy</exec_depend>
+  <exec_depend>teleop_twist_joy</exec_depend>
   <exec_depend>launch_xml</exec_depend>
-  <exec_depend>ignition-fortress</exec_depend>
-
-  <exec_depend>ros_ign_bridge</exec_depend>
+  <exec_depend>gazebo_plugins</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

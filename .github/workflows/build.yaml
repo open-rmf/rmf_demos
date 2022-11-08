@@ -1,11 +1,15 @@
 name: build
-on: [push, pull_request]
-jobs:
+on:
+  pull_request:
 
-  ros2:
-    runs-on: ubuntu-20.04
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        docker_image: ['ros:humble-ros-base']
     container:
-      image: docker://ros:galactic-ros-base-focal
+      image: ${{ matrix.docker_image }}
     steps:
     - name: non-ros-deps
       run: |
@@ -15,9 +19,9 @@ jobs:
         wget https://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
         sudo apt update && sudo apt install \
           git cmake python3-vcstool curl \
-          qt5-default \
+          clang clang-tools lld \
           python3-shapely python3-yaml python3-requests \
-          ignition-edifice  python3-pip -y
+          python3-pip -y
         pip3 install flask-socketio fastapi uvicorn
     - name: create-ws
       run: |
@@ -34,13 +38,16 @@ jobs:
     - name: ros-deps
       run: |
         export DEBIAN_FRONTEND=noninteractive
+        colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
+        colcon mixin update default
         cd rmf_demos_ws
         rosdep update
-        rosdep install --from-paths src --ignore-src --rosdistro galactic -yr
+        rosdep install --from-paths src --ignore-src --rosdistro humble -yr
     - name: build
       shell: bash
       run: |
         cd rmf_demos_ws
-        source /opt/ros/galactic/setup.bash
-        colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release -DNO_DOWNLOAD_MODELS=True
-  
+        source /opt/ros/humble/setup.bash
+        export CXX=clang++
+        export CX=clang
+        colcon build --mixin lld --cmake-args -DNO_DOWNLOAD_MODELS=True

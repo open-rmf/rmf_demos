@@ -114,32 +114,27 @@ This quality declaration has not been externally peer-reviewed and is not regist
 
 `rmf_demos_gz` has the following runtime ROS dependencies.
 
-#### rmf_building_sim_gazebo_plugins
+#### rmf_building_sim_gz_plugins
 
-`rmf_building_sim_gazebo_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_building_sim_gazebo_plugins/QUALITY_DECLARATION.md).
+`rmf_building_sim_gz_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_building_sim_gz_plugins/QUALITY_DECLARATION.md).
 
-#### rmf_robot_sim_gazebo_plugins
+#### rmf_robot_sim_gz_plugins
 
-`rmf_robot_sim_gazebo_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_robot_sim_gazebo_plugins/QUALITY_DECLARATION.md).
+`rmf_robot_sim_gz_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_robot_sim_gz_plugins/QUALITY_DECLARATION.md).
 
-#### gazebo_ros_pkgs
+#### teleop_twist_keyboard
 
-`gazebo_ros_pkgs` does not declare a Quality Level.
-It is assumed to be at least **Quality Level 4** based on its widespread use.
-
-#### joy
-
-`joy` does not declare a Quality Level.
-It is assumed tobe at **Quality Level 4** based on its widespread use.
-
-#### teleop_twist_joy
-
-`teleop_twist_joy` does not declare a Quality Level.
+`teleop_twist_keyboard` does not declare a Quality Level.
 It is assumed tobe at **Quality Level 4** based on its widespread use.
 
 #### launch_xml
 
 `launch_xml` does not declare a Quality Level.
+It is assumed tobe at **Quality Level 4** based on its widespread use.
+
+#### ros_ign_bridge
+
+`ros_ign_bridge` does not declare a Quality Level.
 It is assumed tobe at **Quality Level 4** based on its widespread use.
 
 ### Optional Direct Runtime ROS Dependencies [5.ii]
