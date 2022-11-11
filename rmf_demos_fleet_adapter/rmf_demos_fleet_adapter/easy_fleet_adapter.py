@@ -18,6 +18,7 @@ import yaml
 import time
 import threading
 import datetime
+import enum
 
 import rclpy
 import rclpy.node
@@ -25,6 +26,10 @@ from rclpy.parameter import Parameter
 
 import rmf_adapter as adpt
 import rmf_adapter.plan as plan
+import rmf_adapter.schedule as schedule
+
+from rmf_fleet_msgs.msg import DockSummary, ModeRequest, LaneRequest, \
+    ClosedLanes
 
 from functools import partial
 
@@ -39,6 +44,13 @@ from .RobotClientAPI import RobotAPI
 # ------------------------------------------------------------------------------
 # Helper functions
 # ------------------------------------------------------------------------------
+
+
+# States for RobotCommandHandle's state machine used when guiding robot along
+# a new path
+class RobotState(enum.IntEnum):
+    IDLE = 0
+    MOVING = 1
 
 
 class FleetAdapter:
@@ -67,10 +79,49 @@ class FleetAdapter:
         if server_uri == "":
             server_uri = None
 
-        configuration = adpt.easy_full_control.Configuration.make(
+        # ----------------------------------
+        # RMF Demos specific items
+        # ----------------------------------
+        self.fleet_name = fleet_config['name']
+        self.node = node
+        self.closed_lanes = []  # Store the closed lanes in the map
+        self.docks = {}  # Map robots to docks
+        self.actions = {}  # Map robots to actions
+
+        transient_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
+        # Dock summary subscriber
+        node.create_subscription(
+            DockSummary,
+            'dock_summary',
+            self.dock_summary_cb,
+            qos_profile=transient_qos)
+        # Subscribe to ModeRequest for action execution notice
+        node.create_subscription(
+            ModeRequest,
+            'action_execution_notice',
+            self.mode_request_cb,
+            qos_profile=qos_profile_system_default)
+        # Lane request subscriber
+        node.create_subscription(
+            LaneRequest,
+            'lane_closure_requests',
+            self.lane_request_cb,
+            qos_profile=qos_profile_system_default)
+        # Closed lanes publisher
+        self.closed_lanes_pub = node.create_publisher(
+            ClosedLanes,
+            'closed_lanes',
+            qos_profile=transient_qos)
+
+        # Create EasyFullControl adapter
+        self.configuration = adpt.easy_full_control.Configuration.make(
             config_path, nav_graph_path, server_uri)
         self.adapter = self.initialize_fleet(
-            configuration, config_yaml['robots'], node, use_sim_time)
+            self.configuration, config_yaml['robots'], node, use_sim_time)
 
     def initialize_fleet(self, configuration, robots_yaml, node, use_sim_time):
         # Make the easy full control
@@ -98,12 +149,17 @@ class FleetAdapter:
             if data is None or data['success'] is False:
                 return None
             pos = data['data']['position']
+            action = False
+            if robot_name in self.actions and \
+                    self.actions[robot_name] is not None:
+                action = True
             state = adpt.easy_full_control.RobotState(
                 robot,
                 robot_config['charger']['waypoint'],
                 data['data']['map_name'],
                 [pos['x'], pos['y'], pos['yaw']],
-                data['data']['battery'])
+                data['data']['battery'],
+                action)
             self.last_map[robot_name] = data['data']['map_name']
             return state
 
@@ -122,11 +178,30 @@ class FleetAdapter:
             return self.api.stop(robot_name, cmd_id)
 
         def _dock(robot_name, dock_name, update_handle):
+            if dock_name not in self.docks:
+                node.get_logger().info(
+                    f'Requested dock {dock_name} not found, '
+                    f'ignoring docking request')
+                return
+
             cmd_id = self.next_id
             self.next_id += 1
             self.cmd_ids[robot_name] = cmd_id
             self.api.start_process(
                 robot_name, cmd_id, dock_name, self.last_map[robot_name])
+
+            positions = []
+            for wp in self.docks[dock_name]:
+                positions.append([wp.x, wp.y, wp.yaw])
+            task_completed_cb = self.api.navigation_completed
+            node.get_logger().info(
+                f"Robot {robot_name} is docking at {dock_name}...")
+            self.traj_thread = threading.Thread(
+                target=self.start_trajectory,
+                args=(task_completed_cb, robot_name, positions,
+                      update_handle))
+            self.traj_thread.start()
+
             return partial(_goal_completed, robot_name)
 
         def _action_executor(
@@ -134,7 +209,8 @@ class FleetAdapter:
                 category: str,
                 description: dict,
                 execution: adpt.robot_update_handle.ActionExecution):
-            pass
+            self.actions[robot_name] = execution
+            self.api.toggle_action(robot_name, True)
 
         # Add the robots
         for robot in robots_yaml:
@@ -157,6 +233,73 @@ class FleetAdapter:
                     partial(_action_executor, robot))
 
         return easy_full_control
+
+    # Store docking paths
+    def dock_summary_cb(self, msg):
+        for fleet in msg.docks:
+            if (fleet.fleet_name == self.fleet_name):
+                for dock in fleet.params:
+                    self.docks[dock.start] = dock.path
+
+    # Receive action execution notice to end robot action
+    def mode_request_cb(self, msg):
+        if msg.fleet_name is None or msg.fleet_name != self.fleet_name or\
+                msg.robot_name is None:
+            return
+        if msg.mode.mode == RobotState.IDLE:
+            self.complete_robot_action(msg.robot_name)
+
+    # Complete robot action
+    def complete_robot_action(self, robot_name):
+        action_execution = self.actions[robot_name]
+        if action_execution is None:
+            return
+        action_execution.finished()
+        self.api.toggle_action(robot_name, False)
+        self.actions[robot_name] = None
+        self.node.get_logger().info(f'Robot {robot_name} has completed the'
+                                    f' action it was performing')
+
+    # Track newly closed lanes
+    def lane_request_cb(self, msg):
+        if msg.fleet_name is None or msg.fleet_name != self.fleet_name:
+            return
+        self.adapter.fleet_handle().open_lanes(msg.open_lanes)
+        self.adapter.fleet_handle().close_lanes(msg.close_lanes)
+        newly_closed_lanes = []
+        for lane_idx in msg.close_lanes:
+            if lane_idx not in self.closed_lanes:
+                newly_closed_lanes.append(lane_idx)
+                self.closed_lanes.append(lane_idx)
+
+        for lane_idx in msg.open_lanes:
+            if lane_idx in self.closed_lanes:
+                self.closed_lanes.remove(lane_idx)
+
+        self.adapter.newly_closed_lanes(set(newly_closed_lanes))
+
+        state_msg = ClosedLanes()
+        state_msg.fleet_name = self.fleet_name
+        state_msg.closed_lanes = self.closed_lanes
+        self.closed_lanes_pub.publish(state_msg)
+
+    # Track trajectory of docking or custom actions
+    def start_trajectory(self,
+                         task_completed_cb,
+                         robot_name,
+                         positions,
+                         update_handle):
+        while not task_completed_cb(robot_name, self.cmd_ids[robot_name]):
+            now = datetime.datetime.fromtimestamp(0) + \
+                self.adapter.node.now()
+            traj = schedule.make_trajectory(
+                self.configuration.vehicle_traits(),
+                now,
+                positions)
+            itinerary = schedule.Route(self.last_map[robot_name], traj)
+            if update_handle is not None:
+                participant = update_handle.get_unstable_participant()
+                participant.set_itinerary([itinerary])
 
 
 # ------------------------------------------------------------------------------
