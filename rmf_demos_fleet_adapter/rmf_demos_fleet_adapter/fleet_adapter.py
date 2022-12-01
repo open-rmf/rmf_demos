@@ -363,7 +363,8 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
 
         requests = []
         for limit in msg.speed_limits:
-            request = adpt.fleet_update_handle.SpeedLimitRequest(limit.lane_index, limit.speed_limit)
+            request = adpt.fleet_update_handle.SpeedLimitRequest(
+                limit.lane_index, limit.speed_limit)
             requests.append(request)
         fleet_handle.limit_lane_speeds(requests)
         fleet_handle.remove_speed_limits(msg.remove_limits)

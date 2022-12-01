@@ -20,6 +20,7 @@ class build(_build):
             pass
         super().run()
 
+
 setup(
     name=package_name,
     version='1.4.0',
