@@ -20,4 +20,22 @@
     </include>
   </group>
 
+    <!-- Demo lift adapter -->
+  <!--
+    <group>
+      <include file="$(find-pkg-share rmf_demos_lift_adapter)/launch/lift_adapter.launch.xml">
+        <arg name="use_sim_time" value="$(var use_sim_time)"/>
+        <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/office/lift_adapter_config.yaml"/>
+      </include>
+    </group>
+  -->
+
+    <!-- Demo door adapter -->
+    <group>
+      <include file="$(find-pkg-share rmf_demos_door_adapter)/launch/door_adapter.launch.xml">
+        <arg name="use_sim_time" value="$(var use_sim_time)"/>
+        <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/office/door_adapter_config.yaml"/>
+      </include>
+    </group>
+
 </launch>
