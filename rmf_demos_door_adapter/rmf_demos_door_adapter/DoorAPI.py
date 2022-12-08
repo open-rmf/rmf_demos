@@ -17,35 +17,30 @@
 from __future__ import annotations
 
 import requests
-from yaml import YAMLObject
 from typing import Optional
 
 from rmf_door_msgs.msg import DoorMode
 from rclpy.impl.rcutils_logger import RcutilsLogger
 
 
-"""
-    The DoorAPI class is a wrapper for API calls to the door.
-
-    Here users are expected to fill up the implementations of functions which
-    will be used by the DoorAdapter. For example, if your door has a REST API,
-    you will need to make http request calls to the appropriate endpoints
-    within these functions.
-"""
+'''
+    The DoorAPI class is a wrapper for API calls to the door. Here users are
+    expected to fill up the implementations of functions which will be used by
+    the DoorAdapter. For example, if your door has a REST API, you will need to
+    make http request calls to the appropriate endpoints within these functions.
+'''
 
 
 class DoorAPI:
     # The constructor accepts a safe loaded YAMLObject, which should contain all
     # information that is required to run any of these API calls.
-    def __init__(self, config: YAMLObject, logger: RcutilsLogger):
-        self.config = config
-        self.prefix = 'http://' + config['door_manager']['ip'] +\
-            ':' + str(config['door_manager']['port'])
+    def __init__(self, address: str, port: int, logger: RcutilsLogger):
+        self.prefix = 'http://' + address + ':' + str(port)
         self.logger = logger
         self.timeout = 1.0
 
-    def door_mode(self, door_name) -> Optional[int]:
-        """Returns the DoorMode or None if the query failed."""
+    def door_mode(self, door_name: str) -> Optional[int]:
+        ''' Returns the DoorMode or None if the query failed'''
         try:
             response = requests.get(self.prefix +
                                     f'/open-rmf/demo-door/door_state?door_name={door_name}',
@@ -60,12 +55,9 @@ class DoorAPI:
         door_mode = response.json()['data']['current_mode']
         return door_mode
 
-    def _command_door(self, door_name, requested_mode: int) -> bool:
-        """Utility function to command doors.
-
-        Returns True if the request was sent out successfully, False
-        otherwise
-        """
+    def _command_door(self, door_name: str, requested_mode: int) -> bool:
+        ''' Utility function to command doors. Returns True if the request
+            was sent out successfully, False otherwise'''
         try:
             data = {'requested_mode': requested_mode}
             response = requests.post(self.prefix +
@@ -79,18 +71,26 @@ class DoorAPI:
             return False
         return True
 
-    def open_door(self, door_name):
-        """Command the door to open.
+    def get_door_names(self) -> Optional[list]:
+        ''' Query the door manager for door names. Returns a list of door names
+            if the request was sent out successfully, None otherwise'''
+        try:
+            response = requests.get(self.prefix +
+                                    '/open-rmf/demo-door/door_names',
+                                    timeout=self.timeout)
+        except Exception as err:
+            self.logger.info(f'{err}')
+            return None
+        if response.status_code != 200 or response.json()['success'] is False:
+            return None
+        return response.json()['data']['door_names']
 
-        Returns True if the request was sent out successfully, False
-        otherwise
-        """
+    def open_door(self, door_name: str) -> bool:
+        ''' Command the door to open. Returns True if the request
+            was sent out successfully, False otherwise'''
         return self._command_door(door_name, DoorMode.MODE_OPEN)
 
-    def close_door(self, door_name):
-        """Command the door to close.
-
-        Returns True if the request was sent out successfully, False
-        otherwise
-        """
+    def close_door(self, door_name: str) -> bool:
+        ''' Command the door to close. Returns True if the request
+            was sent out successfully, False otherwise'''
         return self._command_door(door_name, DoorMode.MODE_CLOSED)
