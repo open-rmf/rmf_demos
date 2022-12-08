@@ -20,20 +20,11 @@
     </include>
   </group>
 
-    <!-- Demo lift adapter -->
-  <!--
-    <group>
-      <include file="$(find-pkg-share rmf_demos_lift_adapter)/launch/lift_adapter.launch.xml">
-        <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      </include>
-    </group>
-  -->
-
-    <!-- Demo door adapter -->
-    <group>
-      <include file="$(find-pkg-share rmf_demos_door_adapter)/launch/door_adapter.launch.xml">
-        <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      </include>
-    </group>
+  <!-- Demo door adapter -->
+  <group>
+    <include file="$(find-pkg-share rmf_demos_door_adapter)/launch/door_adapter.launch.xml">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+    </include>
+  </group>
 
 </launch>
