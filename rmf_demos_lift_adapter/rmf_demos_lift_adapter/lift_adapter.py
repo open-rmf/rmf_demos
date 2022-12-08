@@ -15,10 +15,7 @@
 # limitations under the License.
 
 import sys
-import yaml
-import argparse
 from typing import Optional
-from yaml import YAMLObject
 
 import rclpy
 from rclpy.node import Node
@@ -27,24 +24,24 @@ from rmf_lift_msgs.msg import LiftState, LiftRequest
 
 from .LiftAPI import LiftAPI
 
-"""
+'''
     The DemoLiftAdapter is a node which provide updates to Open-RMF, as well
     as handle incoming requests to control the integrated lift, by calling the
     implemented functions in LiftAPI.
-"""
+'''
 
 
 class DemoLiftAdapter(Node):
-    def __init__(self, args, config: YAMLObject):
+    def __init__(self):
         super().__init__('rmf_demos_lift_adapter')
 
         self.lift_states = {}
         self.lift_requests = {}
-        self.lift_config = config
-        self.lift_api = LiftAPI(self.lift_config, self.get_logger())
-        for lift in config['lifts']:
-            self.lift_requests[lift] = None
-            self.lift_states[lift] = self._lift_state(lift)
+
+        address = self.declare_parameter('manager_address', 'localhost').value
+        port = self.declare_parameter('manager_port', 5003).value
+
+        self.lift_api = LiftAPI(address, port, self.get_logger())
 
         self.lift_state_pub = self.create_publisher(
             LiftState,
@@ -61,7 +58,11 @@ class DemoLiftAdapter(Node):
 
     def update_callback(self):
         new_states = {}
-        for lift_name, lift_state in self.lift_states.items():
+        lift_names = self.lift_api.get_lift_names()
+        for lift_name in lift_names:
+            if lift_name not in self.lift_requests:
+                self.lift_requests[lift_name] = None
+
             new_state = self._lift_state(lift_name)
             new_states[lift_name] = new_state
             if new_state is None:
@@ -75,8 +76,8 @@ class DemoLiftAdapter(Node):
                 continue
 
             # If all is done, set request to None
-            if lift_request.destination_floor ==\
-                    new_state.current_floor and\
+            if lift_request.destination_floor == \
+                    new_state.current_floor and \
                     new_state.door_state == LiftState.DOOR_OPEN:
                 lift_request = None
         self.lift_states = new_states
@@ -102,7 +103,7 @@ class DemoLiftAdapter(Node):
 
         lift_request = self.lift_requests[lift_name]
         if lift_request is not None:
-            if lift_request.request_type ==\
+            if lift_request.request_type == \
                     LiftRequest.REQUEST_END_SESSION:
                 new_state.session_id = ''
             else:
@@ -122,7 +123,7 @@ class DemoLiftAdapter(Node):
             return
 
         lift_state = self.lift_states[msg.lift_name]
-        if lift_state is not None and\
+        if lift_state is not None and \
                 msg.destination_floor not in lift_state.available_floors:
             self.get_logger().info(
                 'Floor {} not available.'.format(msg.destination_floor))
@@ -139,18 +140,8 @@ class DemoLiftAdapter(Node):
 
 
 def main(argv=sys.argv):
-    args_without_ros = rclpy.utilities.remove_ros_args(argv)
-    parser = argparse.ArgumentParser(
-        prog='rmf_demos_lift_adapter',
-        description='RMF Demos lift adapter')
-    parser.add_argument('-c', '--config', required=True, type=str)
-    args = parser.parse_args(args_without_ros[1:])
-
-    with open(args.config, 'r') as f:
-        config = yaml.safe_load(f)
-
     rclpy.init()
-    node = DemoLiftAdapter(args, config)
+    node = DemoLiftAdapter()
     rclpy.spin(node)
     rclpy.shutdown()
 
