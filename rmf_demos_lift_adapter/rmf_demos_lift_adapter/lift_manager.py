@@ -128,7 +128,7 @@ class LiftManager(Node):
             req.request_type = req.REQUEST_AGV_MODE
             req.door_state = floor.door_state
             req.destination_floor = floor.floor
-            req.session_id = req.lift_name + '-' + str(now)
+            req.session_id = 'rmf_demos_lift_adapter'
 
             self.lift_request_pub.publish(req)
             response['success'] = True

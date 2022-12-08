@@ -134,8 +134,6 @@ class DemoLiftAdapter(Node):
                 f'Failed to send lift to {msg.destination_floor}.')
             return
 
-        self.get_logger().info(f'Requested lift {msg.lift_name} '
-                               f'to {msg.destination_floor}.')
         self.lift_requests[msg.lift_name] = msg
 
 
