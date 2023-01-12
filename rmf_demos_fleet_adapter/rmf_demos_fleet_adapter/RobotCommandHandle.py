@@ -489,46 +489,36 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self._quit_action_event.clear()
         self.started_action = True
 
-        task_name = None
-        for desc_key in self.action_description.keys():
-            if '_task_name' in desc_key:
-                task_name = self.action_description[desc_key]
-                break
-        if task_name is None:
-            # If there is no task name, it is possible that this action is
-            # a manual process where RMF releases control, e.g. teleop
+        category = self.action_description['category']
+        if category == 'teleop':
+            # Teleop is a manual process where RMF releases control,
             # An /action_execution_notice should be published manually to
             # end the action
             return
 
         def _perform_action():
-            wps = self.api.retrieve_process_waypoints(task_name)
-            if wps is None:
-                # If no waypoints are found for this task, end robot action
-                self.node.get_logger().info(
-                    f'No waypoints found for task [{task_name}], '
-                    f'ending robot action')
-                self.complete_robot_action()
-                return
+            wps = self.api.retrieve_process_waypoints(self.action_description)
 
             self.api.start_process(
-                self.name, cmd_id, task_name, self.map_name)
+                self.name, cmd_id, self.action_description, self.map_name)
             self.node.get_logger().info(
-                f'Robot [{self.name}] is executing perform action {task_name}')
+                f'Robot [{self.name}] is executing perform action {category}')
 
             while not self.api.process_completed(self.name, cmd_id):
                 if self.action_execution is None:
                     break
 
-                traj = schedule.make_trajectory(
-                    self.vehicle_traits,
-                    self.adapter.now(),
-                    wps)
-                itinerary = schedule.Route(self.map_name, traj)
-                if self.update_handle is not None:
-                    participant = \
-                        self.update_handle.get_unstable_participant()
-                    participant.set_itinerary([itinerary])
+                # If there are waypoints in this action, update the schedule
+                if wps is not None:
+                    traj = schedule.make_trajectory(
+                        self.vehicle_traits,
+                        self.adapter.now(),
+                        wps)
+                    itinerary = schedule.Route(self.map_name, traj)
+                    if self.update_handle is not None:
+                        participant = \
+                            self.update_handle.get_unstable_participant()
+                        participant.set_itinerary([itinerary])
 
                 if self._quit_action_event.wait(0.1):
                     self.node.get_logger().info("Aborting action")

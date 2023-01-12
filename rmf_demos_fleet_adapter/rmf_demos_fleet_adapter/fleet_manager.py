@@ -54,7 +54,6 @@ app = FastAPI()
 
 class Request(BaseModel):
     map_name: Optional[str] = None
-    task: Optional[str] = None
     destination: Optional[dict] = None
     data: Optional[dict] = None
     speed_limit: Optional[float] = None
@@ -294,21 +293,23 @@ class FleetManager(Node):
                  response_model=Response)
         async def process_waypoints(process: str):
             response = {'success': False, 'msg': ''}
-            if (process not in self.process_waypoints):
-                return response
+            try:
+                response['data'] = self.process_waypoints[process]
+                response['success'] = True
+            except KeyError:
+                pass
 
-            response['data'] = self.process_waypoints[process]
-            response['success'] = True
             return response
 
         @app.post('/open-rmf/rmf_demos_fm/start_task/',
                   response_model=Response)
         async def start_process(robot_name: str, cmd_id: int, task: Request):
             response = {'success': False, 'msg': ''}
-            if (robot_name not in self.robots or
-                    len(task.task) < 1 or
-                    (task.task not in self.docks and
-                     task.task not in self.process_waypoints)):
+            try:
+                task_description = task.data['description']
+                task_category = task.data['category']
+                robot = self.robots[robot_name]
+            except (TypeError, KeyError):
                 return response
 
             robot = self.robots[robot_name]
@@ -322,16 +323,17 @@ class FleetManager(Node):
             target_loc = Location()
             path_request.path.append(cur_loc)
 
-            if task.task in self.docks:
-                task_wps = self.docks[task.task]
+            task_name = task_description.get('task_name')
+            if task_name in self.docks:
+                task_wps = self.docks[task_name]
                 for wp in task_wps:
                     target_loc = wp
                     path_request.path.append(target_loc)
                     previous_wp = [wp.x, wp.y, wp.yaw]
-            elif task.task in self.process_waypoints:
-                task_wps = self.process_waypoints[task.task]['path']
+            elif task_name in self.process_waypoints:
+                task_wps = self.process_waypoints[task_name]['path']
                 task_level_name = \
-                    self.process_waypoints[task.task]['level_name']
+                    self.process_waypoints[task_name]['level_name']
                 for wp in task_wps:
                     target_loc = Location()
                     target_loc.x = wp[0]
@@ -340,6 +342,9 @@ class FleetManager(Node):
                     target_loc.level_name = task_level_name
                     path_request.path.append(target_loc)
                     previous_wp = wp
+            else:
+                # No path was found
+                return response
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
