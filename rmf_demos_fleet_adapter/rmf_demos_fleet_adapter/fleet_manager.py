@@ -32,7 +32,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
-    DockSummary, RobotMode
+    DockSummary, RobotMode, ModeRequest
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
@@ -180,6 +180,11 @@ class FleetManager(Node):
             'robot_path_requests',
             qos_profile=qos_profile_system_default)
 
+        self.mode_pub = self.create_publisher(
+            ModeRequest,
+            'robot_mode_requests',
+            qos_profile=qos_profile_system_default)
+
         @app.get('/open-rmf/rmf_demos_fm/status/',
                  response_model=Response)
         async def status(robot_name: Optional[str] = None):
@@ -312,6 +317,16 @@ class FleetManager(Node):
             except (TypeError, KeyError):
                 return response
 
+            if task_category == 'attach_cart':
+                self.attach_cart(robot_name, cmd_id)
+                # TODO encode outcome
+                response['success'] = True
+                return response
+            elif task_category == 'detach_cart':
+                self.detach_cart(robot_name, cmd_id)
+                response['success'] = True
+                return response
+
             robot = self.robots[robot_name]
 
             path_request = PathRequest()
@@ -370,6 +385,26 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
+    def _make_mode_request(self, robot_name, cmd_id, mode):
+        mode_msg = ModeRequest()
+        mode_msg.fleet_name = self.fleet_name
+        mode_msg.robot_name = robot_name
+        mode_msg.mode.mode = mode
+        mode_msg.mode.mode_request_id = cmd_id
+        return mode_msg
+
+    def attach_cart(self, robot_name, cmd_id):
+        # Use robot mode publisher to set it to "attaching cart mode"
+        msg = self._make_mode_request(robot_name, cmd_id,
+                                      RobotMode.MODE_ATTACHING_CART)
+        self.mode_pub.publish(msg)
+
+    def detach_cart(self, robot_name, cmd_id):
+        # Use robot mode publisher to set it to "detaching cart mode"
+        msg = self._make_mode_request(robot_name, cmd_id,
+                                      RobotMode.MODE_DETACHING_CART)
+        self.mode_pub.publish(msg)
+
     def robot_state_cb(self, msg):
         if (msg.name in self.robots):
             robot = self.robots[msg.name]
@@ -389,6 +424,11 @@ class FleetManager(Node):
                 return
 
             robot.state = msg
+
+            if (msg.mode.mode == RobotMode.MODE_IDLE and robot.last_completed_request is not None):
+                # Use the most recent one
+                robot.last_completed_request = max(robot.last_completed_request, msg.mode.mode_request_id)
+
             # Check if robot has reached destination
             if robot.destination is None:
                 return

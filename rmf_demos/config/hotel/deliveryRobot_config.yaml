@@ -37,6 +37,7 @@ rmf_fleet:
     delivery: True
     clean: False
     finishing_request: "park" # [park, charge, nothing]
+    action: ["attach_cart", "detach_cart"]
 
 # DeliveryRobot CONFIG =================================================================
 
