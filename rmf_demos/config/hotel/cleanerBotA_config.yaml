@@ -37,7 +37,7 @@ rmf_fleet:
     delivery: False
     clean: True
     finishing_request: "park" # [park, charge, nothing]
-    action: ["clean"]
+    actions: ["clean"]
   process_waypoints:
     clean_lobby:
       level_name: "L1"

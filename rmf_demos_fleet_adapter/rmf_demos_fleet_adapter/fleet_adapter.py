@@ -159,8 +159,8 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         return confirm
 
     # Configure this fleet to perform any kind of teleop action
-    if 'action' in fleet_config['task_capabilities']:
-        for action in fleet_config['task_capabilities']['action']:
+    if 'actions' in fleet_config['task_capabilities']:
+        for action in fleet_config['task_capabilities']['actions']:
             fleet_handle.add_performable_action(action, _consider)
 
     def _updater_inserter(cmd_handle, update_handle):
