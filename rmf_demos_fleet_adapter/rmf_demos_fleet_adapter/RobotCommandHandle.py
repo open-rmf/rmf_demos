@@ -484,7 +484,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self._dock_thread = threading.Thread(target=_dock)
             self._dock_thread.start()
 
-    def check_perform_action(self):
+    def start_perform_action(self):
         cmd_id = self.next_cmd_id()
         self._quit_action_event.clear()
         self.started_action = True
@@ -529,7 +529,6 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
         self._action_thread = threading.Thread(target=_perform_action)
         self._action_thread.start()
-        return
 
     def get_position(self):
         ''' This helper function returns the live position of the robot in the
@@ -598,7 +597,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                 if not self.started_action:
                     self.started_action = True
                     self.api.toggle_action(self.name, self.started_action)
-                    self.check_perform_action()
+                    self.start_perform_action()
                 self.update_handle.update_off_grid_position(
                     self.position, self.action_waypoint_index)
             # if robot is merging into a waypoint

@@ -35,9 +35,8 @@ rmf_fleet:
   task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
     loop: False
     delivery: False
-    clean: True
     finishing_request: "park" # [park, charge, nothing]
-    action: ["clean"]
+    actions: ["clean"]
   process_waypoints:
     clean_lobby:
       level_name: "L1"
