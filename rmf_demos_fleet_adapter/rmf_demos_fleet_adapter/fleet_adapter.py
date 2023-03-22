@@ -138,10 +138,6 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         node.get_logger().info(
             f"Fleet [{fleet_name}] is configured to perform Delivery tasks")
         task_capabilities.append(TaskType.TYPE_DELIVERY)
-    if fleet_config['task_capabilities']['clean']:
-        node.get_logger().info(
-            f"Fleet [{fleet_name}] is configured to perform Clean tasks")
-        task_capabilities.append(TaskType.TYPE_CLEAN)
 
     # Callable for validating requests that this fleet can accommodate
     def _task_request_check(task_capabilities, msg: TaskProfile):
