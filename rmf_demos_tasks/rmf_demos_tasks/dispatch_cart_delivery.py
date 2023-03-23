@@ -98,13 +98,16 @@ class TaskRequester(Node):
 
         # TODO(luca) expose duration and tool sink to CLI
         def __create_perform_action(action_category, duration_ms=10000,
-                                  use_tool_sink=False):
+                                    use_tool_sink=False):
             return {
                     "unix_millis_action_duration_estimate": duration_ms,
-                    "category": action_category,  # used to check performable action by fleet update handle
+                    # for internal FleetUpdateHandle to check if action
+                    # is performable by this fleet
+                    "category": action_category,
                     "description":
                     {
-                        "deliver_cart_task_name": action_category  # used to pass on to fleet manager to start process
+                        # for fleet manager to start action process
+                        "deliver_cart_task_name": action_category
                     },
                     "use_tool_sink": use_tool_sink
                     }

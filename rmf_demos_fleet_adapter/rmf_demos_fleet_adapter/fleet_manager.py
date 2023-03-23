@@ -133,7 +133,8 @@ class FleetManager(Node):
             self.config['rmf_fleet']['reversible']
 
         if 'actions' in self.config['rmf_fleet']['task_capabilities']:
-            self.actions = self.config['rmf_fleet']['task_capabilities']['actions']
+            self.actions = \
+                self.config['rmf_fleet']['task_capabilities']['actions']
         if 'process_waypoints' in self.config['rmf_fleet']:
             process_waypoints = self.config['rmf_fleet']['process_waypoints']
             for task_name, task_waypoints in process_waypoints.items():
@@ -320,7 +321,8 @@ class FleetManager(Node):
             robot = self.robots[robot_name]
 
             # Task contains process waypoints, create path request for the task
-            if (task.task in self.docks or task.task in self.process_waypoints):
+            if (task.task in self.docks or
+                    task.task in self.process_waypoints):
                 path_request = PathRequest()
                 cur_loc = robot.state.location
                 cur_x = cur_loc.x
@@ -355,7 +357,8 @@ class FleetManager(Node):
                 self.path_pub.publish(path_request)
 
                 if self.debug:
-                    print(f'Sending process request for {robot_name}: {cmd_id}')
+                    print(f'Sending process request for {robot_name}: '
+                          f'{cmd_id}')
                 robot.last_path_request = path_request
                 robot.destination = target_loc
 
@@ -426,15 +429,15 @@ class FleetManager(Node):
                 return
 
             robot.state = msg
+            completed_request = None
 
-            if (msg.mode.mode == RobotMode.MODE_IDLE and robot.last_completed_request is not None):
-                # Use the most recent one
-                robot.last_completed_request = max(robot.last_completed_request, msg.mode.mode_request_id)
+            # Check if robot completed an action without destination
+            if (robot.destination is None and
+                    msg.mode.mode == RobotMode.MODE_IDLE and
+                    robot.perform_action_mode):
+                completed_request = msg.mode.mode_request_id
 
             # Check if robot has reached destination
-            if robot.destination is None:
-                return
-
             if (
                 (
                     msg.mode.mode == RobotMode.MODE_IDLE
@@ -445,6 +448,9 @@ class FleetManager(Node):
                 robot = self.robots[msg.name]
                 robot.destination = None
                 completed_request = int(msg.task_id)
+
+            # Update completed requests in internal robot state
+            if completed_request is not None:
                 if robot.last_completed_request != completed_request:
                     if self.debug:
                         print(

@@ -507,7 +507,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.api.start_process(
                 self.name, cmd_id, task_name, self.map_name)
             self.node.get_logger().info(
-                f'Robot [{self.name}] is executing perform action [{task_name}]')
+                f'Robot [{self.name}] is executing action [{task_name}]')
 
             while not self.api.process_completed(self.name, cmd_id):
                 if self.action_execution is None:
