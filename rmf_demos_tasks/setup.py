@@ -29,7 +29,8 @@ setup(
           'dispatch_action = rmf_demos_tasks.dispatch_action:main',
           'dispatch_patrol = rmf_demos_tasks.dispatch_patrol:main',
           'dispatch_delivery = rmf_demos_tasks.dispatch_delivery:main',
-          'dispatch_cart_delivery = rmf_demos_tasks.dispatch_cart_delivery:main',
+          'dispatch_cart_delivery = '
+            'rmf_demos_tasks.dispatch_cart_delivery:main',
           'dispatch_clean = rmf_demos_tasks.dispatch_clean:main',
           'dispatch_go_to_place = rmf_demos_tasks.dispatch_go_to_place:main',
           'mock_docker = rmf_demos_tasks.mock_docker:main',

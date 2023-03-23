@@ -436,9 +436,11 @@ class FleetManager(Node):
                     msg.mode.mode == RobotMode.MODE_IDLE and
                     robot.perform_action_mode):
                 completed_request = msg.mode.mode_request_id
-
+            # Otherwise if destination is none, no ongoing process
+            elif robot.destination is None:
+                return
             # Check if robot has reached destination
-            if (
+            elif (
                 (
                     msg.mode.mode == RobotMode.MODE_IDLE
                     or msg.mode.mode == RobotMode.MODE_CHARGING
