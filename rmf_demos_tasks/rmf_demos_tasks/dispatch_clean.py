@@ -115,7 +115,7 @@ class TaskRequester(Node):
                 "category": "clean",
                 "description":
                 {
-                    "task_name": self.args.clean_start
+                    "clean_task_name": self.args.clean_start
                 },
                 "use_tool_sink": True
             }

@@ -93,12 +93,11 @@ class RobotAPI:
         return False
 
     def retrieve_process_waypoints(self,
-                                   process: dict):
+                                   process: str):
         ''' Returns the list of waypoints for a given process.'''
+        url = self.prefix +\
+            f'/open-rmf/rmf_demos_fm/process_waypoints?process={process}'
         try:
-            process_name = process['description']['task_name']
-            url = self.prefix +\
-                f'/open-rmf/rmf_demos_fm/process_waypoints?process={process_name}'
             response = requests.get(url, timeout=self.timeout)
             response.raise_for_status()
             if self.debug:
@@ -106,8 +105,6 @@ class RobotAPI:
             if not response.json()['success']:
                 return None
             return response.json()['data']['path']
-        except KeyError:
-            return None
         except HTTPError as http_err:
             print(f'HTTP error: {http_err}')
         except Exception as err:
@@ -117,7 +114,7 @@ class RobotAPI:
     def start_process(self,
                       robot_name: str,
                       cmd_id: int,
-                      process: dict,
+                      process: str,
                       map_name: str):
         ''' Request the robot to begin a process. This is specific to the robot
             and the use case. For example, load/unload a cart for Deliverybot
@@ -126,8 +123,8 @@ class RobotAPI:
         url = self.prefix +\
             f"/open-rmf/rmf_demos_fm/start_task?robot_name={robot_name}" \
             f"&cmd_id={cmd_id}"
-        # data fields: destination{}, data{}
-        data = {'data': process}
+        # data fields: task, map_name, destination{}, data{}
+        data = {'task': process, 'map_name': map_name}
         try:
             response = requests.post(url, timeout=self.timeout, json=data)
             response.raise_for_status()

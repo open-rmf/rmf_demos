@@ -489,9 +489,14 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self._quit_action_event.clear()
         self.started_action = True
 
-        category = self.action_description['category']
-        if category == 'teleop':
-            # Teleop is a manual process where RMF releases control,
+        task_name = None
+        for desc_key in self.action_description.keys():
+            if '_task_name' in desc_key:
+                task_name = self.action_description[desc_key]
+                break
+        if task_name is None:
+            # If there is no task name, it is possible that this action is
+            # a manual process where RMF releases control, e.g. teleop
             # An /action_execution_notice should be published manually to
             # end the action
             return
@@ -500,9 +505,9 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             wps = self.api.retrieve_process_waypoints(self.action_description)
 
             self.api.start_process(
-                self.name, cmd_id, self.action_description, self.map_name)
+                self.name, cmd_id, task_name, self.map_name)
             self.node.get_logger().info(
-                f'Robot [{self.name}] is executing perform action {category}')
+                f'Robot [{self.name}] is executing perform action [{task_name}]')
 
             while not self.api.process_completed(self.name, cmd_id):
                 if self.action_execution is None:

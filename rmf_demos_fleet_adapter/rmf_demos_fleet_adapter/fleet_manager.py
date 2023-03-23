@@ -54,6 +54,7 @@ app = FastAPI()
 
 class Request(BaseModel):
     map_name: Optional[str] = None
+    task: Optional[str] = None
     destination: Optional[dict] = None
     data: Optional[dict] = None
     speed_limit: Optional[float] = None
@@ -75,7 +76,7 @@ class State:
         self.destination = destination
         self.last_path_request = None
         self.last_completed_request = None
-        self.mode_teleop = False
+        self.perform_action_mode = False
         self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
         self.gps_pos = [0, 0]
 
@@ -110,6 +111,7 @@ class FleetManager(Node):
         super().__init__(f'{self.fleet_name}_fleet_manager')
 
         self.robots = {}  # Map robot name to state
+        self.actions = []
         self.docks = {}  # Map dock name to waypoints
         self.process_waypoints = {}  # Map processes to waypoints
 
@@ -130,6 +132,8 @@ class FleetManager(Node):
         self.vehicle_traits.differential.reversible =\
             self.config['rmf_fleet']['reversible']
 
+        if 'actions' in self.config['rmf_fleet']['task_capabilities']:
+            self.actions = self.config['rmf_fleet']['task_capabilities']['actions']
         if 'process_waypoints' in self.config['rmf_fleet']:
             process_waypoints = self.config['rmf_fleet']['process_waypoints']
             for task_name, task_waypoints in process_waypoints.items():
@@ -298,90 +302,88 @@ class FleetManager(Node):
                  response_model=Response)
         async def process_waypoints(process: str):
             response = {'success': False, 'msg': ''}
-            try:
-                response['data'] = self.process_waypoints[process]
-                response['success'] = True
-            except KeyError:
-                pass
+            if (process not in self.process_waypoints):
+                return response
 
+            response['data'] = self.process_waypoints[process]
+            response['success'] = True
             return response
 
         @app.post('/open-rmf/rmf_demos_fm/start_task/',
                   response_model=Response)
         async def start_process(robot_name: str, cmd_id: int, task: Request):
             response = {'success': False, 'msg': ''}
-            try:
-                task_description = task.data['description']
-                task_category = task.data['category']
-                robot = self.robots[robot_name]
-            except (TypeError, KeyError):
-                return response
 
-            if task_category == 'attach_cart':
-                self.attach_cart(robot_name, cmd_id)
-                # TODO encode outcome
-                response['success'] = True
+            # Invalid request
+            if (robot_name not in self.robots or len(task.task) < 1):
                 return response
-            elif task_category == 'detach_cart':
-                self.detach_cart(robot_name, cmd_id)
-                response['success'] = True
-                return response
-
             robot = self.robots[robot_name]
 
-            path_request = PathRequest()
-            cur_loc = robot.state.location
-            cur_x = cur_loc.x
-            cur_y = cur_loc.y
-            cur_yaw = cur_loc.yaw
-            previous_wp = [cur_x, cur_y, cur_yaw]
-            target_loc = Location()
-            path_request.path.append(cur_loc)
+            # Task contains process waypoints, create path request for the task
+            if (task.task in self.docks or task.task in self.process_waypoints):
+                path_request = PathRequest()
+                cur_loc = robot.state.location
+                cur_x = cur_loc.x
+                cur_y = cur_loc.y
+                cur_yaw = cur_loc.yaw
+                previous_wp = [cur_x, cur_y, cur_yaw]
+                target_loc = Location()
+                path_request.path.append(cur_loc)
 
-            task_name = task_description.get('task_name')
-            if task_name in self.docks:
-                task_wps = self.docks[task_name]
-                for wp in task_wps:
-                    target_loc = wp
-                    path_request.path.append(target_loc)
-                    previous_wp = [wp.x, wp.y, wp.yaw]
-            elif task_name in self.process_waypoints:
-                task_wps = self.process_waypoints[task_name]['path']
-                task_level_name = \
-                    self.process_waypoints[task_name]['level_name']
-                for wp in task_wps:
-                    target_loc = Location()
-                    target_loc.x = wp[0]
-                    target_loc.y = wp[1]
-                    target_loc.yaw = wp[2]
-                    target_loc.level_name = task_level_name
-                    path_request.path.append(target_loc)
-                    previous_wp = wp
+                if task.task in self.docks:
+                    task_wps = self.docks[task.task]
+                    for wp in task_wps:
+                        target_loc = wp
+                        path_request.path.append(target_loc)
+                        previous_wp = [wp.x, wp.y, wp.yaw]
+                elif task.task in self.process_waypoints:
+                    task_wps = self.process_waypoints[task.task]['path']
+                    task_level_name = \
+                        self.process_waypoints[task.task]['level_name']
+                    for wp in task_wps:
+                        target_loc = Location()
+                        target_loc.x = wp[0]
+                        target_loc.y = wp[1]
+                        target_loc.yaw = wp[2]
+                        target_loc.level_name = task_level_name
+                        path_request.path.append(target_loc)
+                        previous_wp = wp
+
+                path_request.fleet_name = self.fleet_name
+                path_request.robot_name = robot_name
+                path_request.task_id = str(cmd_id)
+                self.path_pub.publish(path_request)
+
+                if self.debug:
+                    print(f'Sending process request for {robot_name}: {cmd_id}')
+                robot.last_path_request = path_request
+                robot.destination = target_loc
+
+            # Task is a valid action
+            elif (task.task in self.actions):
+                # Here we add the logic for known demos actions
+                if task.task == 'attach_cart':
+                    self.attach_cart(robot_name, cmd_id)
+                    # TODO encode outcome
+                elif task.task == 'detach_cart':
+                    self.detach_cart(robot_name, cmd_id)
+                    # TODO encode outcome
+
+            # Invalid task, return
             else:
-                # No path was found
                 return response
-
-            path_request.fleet_name = self.fleet_name
-            path_request.robot_name = robot_name
-            path_request.task_id = str(cmd_id)
-            self.path_pub.publish(path_request)
-
-            if self.debug:
-                print(f'Sending process request for {robot_name}: {cmd_id}')
-            robot.last_path_request = path_request
-            robot.destination = target_loc
 
             response['success'] = True
             return response
 
         @app.post('/open-rmf/rmf_demos_fm/toggle_action/',
                   response_model=Response)
-        async def toggle_teleop(robot_name: str, mode: Request):
+        async def toggle_action(robot_name: str, mode: Request):
             response = {'success': False, 'msg': ''}
             if (robot_name not in self.robots):
                 return response
             # Toggle action mode
-            self.robots[robot_name].mode_teleop = mode.toggle
+            self.robots[robot_name].perform_action_mode = mode.toggle
             response['success'] = True
             return response
 
@@ -409,7 +411,7 @@ class FleetManager(Node):
         if (msg.name in self.robots):
             robot = self.robots[msg.name]
             if not robot.is_expected_task_id(msg.task_id) and \
-                    not robot.mode_teleop:
+                    not robot.perform_action_mode:
                 # This message is out of date, so disregard it.
                 if robot.last_path_request is not None:
                     # Resend the latest task request for this robot, in case

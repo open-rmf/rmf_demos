@@ -179,8 +179,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                         cmd_handle.last_known_waypoint_index
                 cmd_handle.on_waypoint = None
                 cmd_handle.on_lane = None
-                cmd_handle.action_description = \
-                    {'category': category, 'description': description}
+                cmd_handle.action_description = description
                 cmd_handle.action_execution = execution
         # Set the action_executioner for the robot
         cmd_handle.update_handle.set_action_executor(_action_executor)

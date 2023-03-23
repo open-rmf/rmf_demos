@@ -101,8 +101,11 @@ class TaskRequester(Node):
                                   use_tool_sink=False):
             return {
                     "unix_millis_action_duration_estimate": duration_ms,
-                    "category": action_category,
-                    "description": {},
+                    "category": action_category,  # used to check performable action by fleet update handle
+                    "description":
+                    {
+                        "deliver_cart_task_name": action_category  # used to pass on to fleet manager to start process
+                    },
                     "use_tool_sink": use_tool_sink
                     }
 
