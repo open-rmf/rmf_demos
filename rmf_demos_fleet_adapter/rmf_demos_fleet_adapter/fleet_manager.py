@@ -432,10 +432,15 @@ class FleetManager(Node):
             completed_request = None
 
             # Check if robot completed an action without destination
-            if (robot.destination is None and
-                    msg.mode.mode == RobotMode.MODE_IDLE and
-                    robot.perform_action_mode):
-                completed_request = msg.mode.mode_request_id
+            if (robot.destination is None and robot.perform_action_mode):
+                if (msg.mode.mode == RobotMode.MODE_ACTION_COMPLETED):
+                    completed_request = msg.mode.mode_request_id
+                elif (msg.mode.mode != RobotMode.MODE_ATTACHING_CART and
+                      msg.mode.mode != RobotMode.MODE_ACTION_COMPLETED):
+                    self.get_logger().info(f'Robot [{msg.name}] attach cart '
+                                           f'action unsuccessful, continuing '
+                                           f'with next step of the task...')
+                    completed_request = msg.mode.mode_request_id
             # Otherwise if destination is none, no ongoing process
             elif robot.destination is None:
                 return
