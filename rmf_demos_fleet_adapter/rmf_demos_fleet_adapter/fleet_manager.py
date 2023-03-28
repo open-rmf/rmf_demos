@@ -435,7 +435,8 @@ class FleetManager(Node):
             if (robot.destination is None and robot.perform_action_mode):
                 if (msg.mode.mode == RobotMode.MODE_ACTION_COMPLETED):
                     completed_request = msg.mode.mode_request_id
-                    msg = self._make_mode_request(msg.name, msg.mode.mode_request_id + 1,
+                    msg = self._make_mode_request(msg.name,
+                                                  msg.mode.mode_request_id + 1,
                                                   RobotMode.MODE_IDLE)
                     self.mode_pub.publish(msg)
                 elif (msg.mode.mode != RobotMode.MODE_ATTACHING_CART and
