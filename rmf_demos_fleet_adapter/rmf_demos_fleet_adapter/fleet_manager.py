@@ -180,15 +180,21 @@ class FleetManager(Node):
             self.dock_summary_cb,
             qos_profile=transient_qos)
 
+        publisher_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=10,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.VOLATILE)
+
         self.path_pub = self.create_publisher(
             PathRequest,
             'robot_path_requests',
-            qos_profile=qos_profile_system_default)
+            qos_profile=publisher_qos)
 
         self.mode_pub = self.create_publisher(
             ModeRequest,
             'robot_mode_requests',
-            qos_profile=qos_profile_system_default)
+            qos_profile=publisher_qos)
 
         @app.get('/open-rmf/rmf_demos_fm/status/',
                  response_model=Response)
