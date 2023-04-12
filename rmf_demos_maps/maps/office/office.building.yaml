@@ -160,8 +160,8 @@ levels:
       - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 2354.6289999999999, y: 849.779, yaw: 1.5732999999999999, z: 0}
       - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 883, y: 457, yaw: 4.2286000000000001, z: 0}
       - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 1536.4100000000001, y: 657.46100000000001, yaw: 1.5913999999999999, z: 0}
-      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2683.2669999999998, y: 398.84500000000003, yaw: 1.8623000000000001, z: 0}
-      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2646.9299999999998, y: 539.81500000000005, yaw: 1.4218999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2676.4400000000001, y: 406.87200000000001, yaw: 1.8623000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2648.7919999999999, y: 545.11199999999997, yaw: 1.4218999999999999, z: 0}
       - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 1678.0609999999999, y: 1006.211, yaw: -1.5708, z: 0}
       - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2598, y: 888, yaw: 1.419, z: 0}
       - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2567.058, y: 1215.8510000000001, yaw: 1.4599, z: 0}
@@ -197,8 +197,8 @@ levels:
       - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1522.318, y: 1375.692, yaw: 3.0893000000000002, z: 0}
       - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1571.0940000000001, y: 1377.078, yaw: 3.1097000000000001, z: 0}
       - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1679.73, y: 1373.4749999999999, yaw: -3.0832999999999999, z: 0}
-      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: OpenRobotics/AdjTable, static: true, x: 2702.5300000000002, y: 530.18399999999997, yaw: -1.7435, z: 0}
-      - {dispensable: false, model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 2723.982, y: 392.71600000000001, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: OpenRobotics/AdjTable, static: true, x: 2699.48, y: 546.64800000000002, yaw: -1.7435, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 2732.7600000000002, y: 394.072, yaw: 1.5708, z: 0}
       - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1031.5450000000001, y: 397.61099999999999, yaw: 1.1779999999999999, z: 0}
       - {dispensable: false, model_name: OpenRobotics/SquareShelf, name: OpenRobotics/SquareShelf, static: true, x: 2660.7089999999998, y: 672.20100000000002, yaw: 0.0286, z: 0}
       - {dispensable: false, model_name: OpenRobotics/TrashBin, name: OpenRobotics/TrashBin, static: true, x: 1511.2360000000001, y: 901.80999999999995, yaw: 1.5708, z: 0}
