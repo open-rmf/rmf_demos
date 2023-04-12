@@ -92,12 +92,12 @@ levels:
           - {id: "{9f5edf7f-4922-4653-a9d6-c901e8e302c0}", name: "", x: 157.876, y: 188.31100000000001}
           - {id: "{360e4cb1-cf4c-4ee9-9309-34ce6e4926b5}", name: "", x: 1.4390000000000001, y: 310.25400000000002}
           - {id: "{6aa3ed92-e5ea-420f-a4d2-4ab9855749c5}", name: "", x: 169.17099999999999, y: 408.33100000000002}
-        filename: ../../../../../../../ws_tb/office.png
+        filename: office_scan.png
         transform:
-          scale: 0.050642399342451405
-          translation_x: 21.530635267785868
-          translation_y: -4.517188042152072
-          yaw: -1.2034307885332622
+          scale: 0.050642399999999997
+          translation_x: 21.530999999999999
+          translation_y: -4.5170000000000003
+          yaw: -1.20343942583513
         visible: true
       turtlebot-scan:
         color: [1, 0, 0, 0.5]
