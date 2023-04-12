@@ -48,8 +48,14 @@ levels:
       - {id: "{e303c869-a30c-4218-9ce5-c204a6ee9eb6}", name: "", x: 773.20000000000005, y: 135.44300000000001}
       - {id: "{8132c192-fd43-440e-96b7-5218f14d8cb4}", name: "", x: 658.71600000000001, y: 1277.7639999999999}
     floors:
-      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum], indoor: [2, 0], texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
-        vertices: [27, 28, 29, 30, 31, 13, 14, 15, 21, 20, 19, 22, 23, 24, 38, 25, 26, 36]
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum_high_contrast], indoor: [2, 0], texture_name: [1, blue_linoleum_high_contrast], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [27, 36, 33, 6, 7, 8, 9, 16, 15, 14, 13, 31, 30, 29, 28]
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, concrete2], indoor: [2, 0], texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 10]}
+        vertices: [6, 68, 69, 9, 8, 7]
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum_high_contrast], indoor: [2, 0], texture_name: [1, blue_linoleum_high_contrast], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [36, 34, 37, 38, 25, 26]
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, black_concrete], indoor: [2, 0], texture_name: [1, black_concrete], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [6, 33, 34, 35, 37, 38, 24, 23, 22, 19, 20, 21, 15, 16, 9, 69, 68]
     lanes:
       - [39, 40, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
       - [43, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
@@ -281,6 +287,8 @@ levels:
       - [2016.125, 1310.9549999999999, 0, ""]
       - [2468.096, 1217.693, 0, ""]
       - [2412.5810000000001, 627.5, 0, tinyRobot2_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot2], spawn_robot_type: [1, TinyRobot]}]
+      - [1255.0239999999999, 824.40300000000002, 0, ""]
+      - [2141.6390000000001, 799.18499999999995, 0, ""]
     walls:
       - [6, 7, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [7, 12, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
