@@ -289,6 +289,9 @@ levels:
       - [2412.5810000000001, 627.5, 0, tinyRobot2_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot2], spawn_robot_type: [1, TinyRobot]}]
       - [1255.0239999999999, 824.40300000000002, 0, ""]
       - [2141.6390000000001, 799.18499999999995, 0, ""]
+      - [1252.1369999999999, 556.17600000000004, 0, ""]
+      - [1830.4449999999999, 546.74699999999996, 0, ""]
+      - [2135.799, 541.26700000000005, 0, ""]
     walls:
       - [6, 7, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [7, 12, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
@@ -321,5 +324,7 @@ levels:
       - [25, 38, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [38, 24, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
       - [37, 38, {alpha: [3, 0.80000000000000004], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [70, 71, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, blue_linoleum_high_contrast], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [71, 72, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, blue_linoleum_high_contrast], texture_scale: [3, 1], texture_width: [3, 1]}]
 lifts: {}
 name: building
