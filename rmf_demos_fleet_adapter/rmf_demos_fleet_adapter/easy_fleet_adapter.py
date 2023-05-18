@@ -79,6 +79,10 @@ class FleetAdapter:
         if server_uri == "":
             server_uri = None
 
+        self._lock = threading.Lock()
+        self.nav_threads = {}
+        self.traj_threads = {}
+
         # ----------------------------------
         # RMF Demos specific items
         # ----------------------------------
@@ -130,20 +134,6 @@ class FleetAdapter:
         if use_sim_time:
             easy_full_control.node.use_sim_time()
 
-        def _goal_completed(robot_name):
-            success = self.api.process_completed(
-                robot_name, self.cmd_ids[robot_name])
-            request_replan = self.api.requires_replan(robot_name)
-            remaining_time = self.api.navigation_remaining_duration(
-                robot_name, self.cmd_ids[robot_name])
-            if remaining_time:
-                remaining_time = datetime.timedelta(seconds=remaining_time)
-            goal_status = adpt.easy_full_control.GoalStatus(
-                success,
-                remaining_time,
-                request_replan)
-            return goal_status
-
         def _robot_state(robot_name):
             data = self.api.data(robot_name)
             if data is None or data['success'] is False:
@@ -163,13 +153,24 @@ class FleetAdapter:
             self.last_map[robot_name] = data['data']['map_name']
             return state
 
-        def _navigate(robot_name, map_name, goal, update_handle):
+        def _navigate(robot_name, map_name, goal, execution):
+            # Clear current ongoing navigations if any
+            if robot_name in self.nav_threads:
+                if self.nav_threads[robot_name] is not None:
+                    if self.nav_threads[robot_name].is_alive():
+                        self.nav_threads[robot_name].join()
+
             cmd_id = self.next_id
             self.next_id += 1
             self.cmd_ids[robot_name] = cmd_id
             self.api.navigate(robot_name, cmd_id, goal, map_name)
-            node.get_logger().info(f"Navigating robot {robot_name}")
-            return partial(_goal_completed, robot_name)
+
+            with self._lock:
+                self.nav_threads[robot_name] = None
+                self.nav_threads[robot_name] = threading.Thread(
+                    target=self.start_navigation,
+                    args=(robot_name, execution))
+                self.nav_threads[robot_name].start()
 
         def _stop(robot_name):
             cmd_id = self.next_id
@@ -177,12 +178,18 @@ class FleetAdapter:
             self.cmd_ids[robot_name] = cmd_id
             return self.api.stop(robot_name, cmd_id)
 
-        def _dock(robot_name, dock_name, update_handle):
+        def _dock(robot_name, dock_name, execution):
             if dock_name not in self.docks:
                 node.get_logger().info(
                     f'Requested dock {dock_name} not found, '
                     f'ignoring docking request')
                 return
+
+            # Clear current ongoing docking if any
+            if robot_name in self.traj_threads:
+                if self.traj_threads[robot_name] is not None:
+                    if self.traj_threads[robot_name].is_alive():
+                        self.traj_threads[robot_name].join()
 
             cmd_id = self.next_id
             self.next_id += 1
@@ -196,13 +203,14 @@ class FleetAdapter:
             task_completed_cb = self.api.navigation_completed
             node.get_logger().info(
                 f"Robot {robot_name} is docking at {dock_name}...")
-            self.traj_thread = threading.Thread(
+
+            with self._lock:
+                self.traj_threads[robot_name] = None
+            self.traj_threads[robot_name] = threading.Thread(
                 target=self.start_trajectory,
                 args=(task_completed_cb, robot_name, positions,
-                      update_handle))
-            self.traj_thread.start()
-
-            return partial(_goal_completed, robot_name)
+                      execution.handle(), execution))
+            self.traj_threads[robot_name].start()
 
         def _action_executor(
                 robot_name: str,
@@ -283,12 +291,27 @@ class FleetAdapter:
         state_msg.closed_lanes = self.closed_lanes
         self.closed_lanes_pub.publish(state_msg)
 
+    def start_navigation(self,
+                         robot_name,
+                         execution):
+        while not self.api.process_completed(robot_name,
+                                             self.cmd_ids[robot_name]):
+            remaining_time = self.api.navigation_remaining_duration(
+                robot_name, self.cmd_ids[robot_name])
+            if remaining_time:
+                remaining_time = datetime.timedelta(seconds=remaining_time)
+            request_replan = self.api.requires_replan(robot_name)
+            execution.update_request(request_replan, remaining_time)
+        # Navigation completed
+        execution.finished()
+
     # Track trajectory of docking or custom actions
     def start_trajectory(self,
                          task_completed_cb,
                          robot_name,
                          positions,
-                         update_handle):
+                         update_handle,
+                         execution):
         while not task_completed_cb(robot_name, self.cmd_ids[robot_name]):
             now = datetime.datetime.fromtimestamp(0) + \
                 self.adapter.node.now()
@@ -300,6 +323,7 @@ class FleetAdapter:
             if update_handle is not None:
                 participant = update_handle.get_unstable_participant()
                 participant.set_itinerary([itinerary])
+        execution.finished()
 
 
 # ------------------------------------------------------------------------------
