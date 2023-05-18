@@ -1,7 +1,17 @@
 ## Changelog for package rmf_demos_maps
 
+2.0.2 (2022-10-10)
+------------------
+
+2.0.1 (2022-09-29)
+------------------
+
 1.4.0 (2022-02-14)
 ------------------
+* Async behavior improvements (`#157 <https://github.com/open-rmf/rmf_demos/issues/157>`_)
+* Feature/demo fleet adapter (`#109 <https://github.com/open-rmf/rmf_demos/issues/109>`_)
+* Additional composed task scripts (`#129 <https://github.com/open-rmf/rmf_demos/issues/129>`_)
+* Helpful scripts for submitting composite tasks (`#122 <https://github.com/open-rmf/rmf_demos/issues/122>`_)
 * Add an indoor-outdoor campus example [#121](https://github.com/open-rmf/rmf_demos/pull/121)
 
 1.2.0 (2021-07-21)
