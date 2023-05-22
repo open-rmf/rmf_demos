@@ -182,11 +182,6 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                 cmd_handle.action_execution = execution
         # Set the action_executioner for the robot
         cmd_handle.update_handle.set_action_executor(_action_executor)
-        if ("max_delay" in cmd_handle.config.keys()):
-            max_delay = cmd_handle.config["max_delay"]
-            cmd_handle.node.get_logger().info(
-                f"Setting max delay to {max_delay}s")
-            cmd_handle.update_handle.set_maximum_delay(max_delay)
         if (cmd_handle.charger_waypoint_index <
                 cmd_handle.graph.num_waypoints):
             cmd_handle.update_handle.set_charger_waypoint(
