@@ -228,7 +228,8 @@ class FleetAdapter:
                 robot_config = robots_yaml[robot]['rmf_config']
                 state = _robot_state(robot)
                 if state is None:
-                    node.get_logger().info(f'Unable to find robot [{robot}], trying again...')
+                    node.get_logger().info(
+                        f'Unable to find robot [{robot}], trying again...')
                     time.sleep(0.2)
                     continue
                 # Found robot, add to fleet
@@ -239,7 +240,8 @@ class FleetAdapter:
                     partial(_stop, robot),
                     partial(_dock, robot),
                     partial(_action_executor, robot))
-                node.get_logger().info(f'Successfully added new robot: [{robot}]')
+                node.get_logger().info(
+                    f'Successfully added new robot: [{robot}]')
                 del missing_robots[robot]
 
         return easy_full_control
