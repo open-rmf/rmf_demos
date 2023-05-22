@@ -221,17 +221,17 @@ class FleetAdapter:
             self.api.toggle_action(robot_name, True)
 
         # Add the robots
-        for robot in robots_yaml:
-            node.get_logger().info(f'Found robot {robot}')
-            robot_config = robots_yaml[robot]['rmf_config']
-            success = False
-            while success is False:
+        missing_robots = robots_yaml
+        while len(missing_robots) > 0:
+            for robot in list(missing_robots.keys()):
+                node.get_logger().info(f'Connecting to robot [{robot}]')
+                robot_config = robots_yaml[robot]['rmf_config']
                 state = _robot_state(robot)
                 if state is None:
+                    node.get_logger().info(f'Unable to find robot [{robot}], trying again...')
                     time.sleep(0.2)
                     continue
-                success = True
-                # Add robot to fleet
+                # Found robot, add to fleet
                 easy_full_control.add_robot(
                     state,
                     partial(_robot_state, robot),
@@ -239,6 +239,8 @@ class FleetAdapter:
                     partial(_stop, robot),
                     partial(_dock, robot),
                     partial(_action_executor, robot))
+                node.get_logger().info(f'Successfully added new robot: [{robot}]')
+                del missing_robots[robot]
 
         return easy_full_control
 
