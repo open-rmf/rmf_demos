@@ -320,7 +320,7 @@ class DispatcherClient(Node):
             rclpy.spin_once(self, timeout_sec=0.0)
             rostime_now = self.get_clock().now()
             unix_milli_time = round(rostime_now.nanoseconds/1e6)
-            unix_milli_time += int(task_json["start_time"]*60)
+            unix_milli_time += int(task_json["start_time"]*60*1000)
             request["unix_millis_earliest_start_time"] = unix_milli_time
         except KeyError as ex:
             return None, f"Missing Key value in json body: {ex}"
