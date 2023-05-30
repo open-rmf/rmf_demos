@@ -122,7 +122,7 @@ class FleetAdapter:
             qos_profile=transient_qos)
 
         # Create EasyFullControl adapter
-        self.configuration = adpt.easy_full_control.Configuration.make(
+        self.configuration = adpt.easy_full_control.Configuration.make_simple(
             config_path, nav_graph_path, server_uri)
         self.adapter = self.initialize_fleet(
             self.configuration, config_yaml['robots'], node, use_sim_time)
@@ -209,7 +209,7 @@ class FleetAdapter:
             self.traj_threads[robot_name] = threading.Thread(
                 target=self.start_trajectory,
                 args=(task_completed_cb, robot_name, positions,
-                      execution.handle(), execution))
+                      execution))
             self.traj_threads[robot_name].start()
 
         def _action_executor(
@@ -304,8 +304,9 @@ class FleetAdapter:
                 robot_name, self.cmd_ids[robot_name])
             if remaining_time:
                 remaining_time = datetime.timedelta(seconds=remaining_time)
+                execution.update_remaining_time(remaining_time)
             request_replan = self.api.requires_replan(robot_name)
-            execution.update_request(request_replan, remaining_time)
+            execution.replan(request_replan)
         # Navigation completed
         execution.finished()
 
@@ -314,7 +315,6 @@ class FleetAdapter:
                          task_completed_cb,
                          robot_name,
                          positions,
-                         update_handle,
                          execution):
         while not task_completed_cb(robot_name, self.cmd_ids[robot_name]):
             now = datetime.datetime.fromtimestamp(0) + \
@@ -323,10 +323,7 @@ class FleetAdapter:
                 self.configuration.vehicle_traits(),
                 now,
                 positions)
-            itinerary = schedule.Route(self.last_map[robot_name], traj)
-            if update_handle is not None:
-                participant = update_handle.get_unstable_participant()
-                participant.set_itinerary([itinerary])
+            execution.override_schedule(self.last_map[robot_name], traj)
         execution.finished()
 
 
