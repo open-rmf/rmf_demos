@@ -2,6 +2,13 @@
 Changelog for package rmf_demos_panel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Switch to rst changelogs (`#182 <https://github.com/open-rmf/rmf_demos/pull/182>`_)
+* Fix conversion from minutes to milliseconds (`#176 <https://github.com/open-rmf/rmf_demos/pull/176>`_)
+* Version updates from latest release synced to main (`#167 <https://github.com/open-rmf/rmf_demos/pull/167>`_)
+* Contributors: Esteban Martinena Guerrero, Grey, Yadunund
+
 2.0.2 (2022-10-10)
 ------------------
 
