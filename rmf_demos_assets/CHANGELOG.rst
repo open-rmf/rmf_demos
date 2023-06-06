@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_assets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.1.0 (2023-06-06)
+------------------
 * Switch to rst changelogs (`#182 <https://github.com/open-rmf/rmf_demos/pull/182>`_)
 * Version updates from latest release synced to main (`#167 <https://github.com/open-rmf/rmf_demos/pull/167>`_)
 * Contributors: Esteban Martinena Guerrero, Yadunund
