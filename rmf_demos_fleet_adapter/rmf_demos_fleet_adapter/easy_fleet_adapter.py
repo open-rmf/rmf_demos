@@ -305,8 +305,8 @@ class FleetAdapter:
             if remaining_time:
                 remaining_time = datetime.timedelta(seconds=remaining_time)
                 execution.update_remaining_time(remaining_time)
-            request_replan = self.api.requires_replan(robot_name)
-            execution.replan(request_replan)
+            if self.api.requires_replan(robot_name):
+                execution.replan()
         # Navigation completed
         execution.finished()
 
