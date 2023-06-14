@@ -101,4 +101,4 @@ The dashboard config file is located here: `rmf_demos_dashboard_resources/$WORLD
 - server ip is configurable via `RMF_DEMOS_API_SERVER_IP` in the `dashboard.launch.xml`
 - The `simple_api_server` outputs and stores a summarized log: `web_server.log`.
 - cancel task will not be working. A fully functional cancel will be introduced in a future PR.
-- Rosdep will automatically install system version of `python3-flask` and `python3-flask-cors`. Yet we will download `flask-socketio` (5.x) separately via pip since the ubuntu packaged version is too old.
+- `rosdep` will automatically install system version of `python3-flask` and `python3-flask-cors`. Yet we will download `flask-socketio` (5.x) separately via `pip` since the Ubuntu packaged version has issues.
