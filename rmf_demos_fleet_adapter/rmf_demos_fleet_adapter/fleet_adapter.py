@@ -127,7 +127,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
         recharge_soc,
         drain_battery,
         finishing_request,
-        node.get_name())
+        adapter.node)
     assert ok, ("Unable to set task planner params")
 
     task_capabilities = []
