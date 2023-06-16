@@ -29,11 +29,11 @@ foreach(path ${traffic_editor_paths})
   # Generate Gz world and download Models
   ##############################################################################
 
-  message("BUILDING WORLDFILE WITH COMMAND: ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}")
+  message("BUILDING WORLDFILE WITH COMMAND: ros2 run rmf_building_map_tools building_map_generator gazebo-classic ${map_path} ${output_world_path} ${output_model_dir}")
   if (NO_DOWNLOAD_MODELS)
     add_custom_command(
       DEPENDS ${map_path}
-      COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
+      COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo-classic ${map_path} ${output_world_path} ${output_model_dir}
       OUTPUT ${output_world_path}
     )
   else()
@@ -41,14 +41,14 @@ foreach(path ${traffic_editor_paths})
     if(DEFINED ENV{RMF_DOWNLOAD_MODELS_HOME})
       add_custom_command(
         DEPENDS ${map_path}
-        COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
+        COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo-classic ${map_path} ${output_world_path} ${output_model_dir}
         COMMAND ros2 run rmf_building_map_tools building_map_model_downloader ${map_path} -f -e ~/.gazebo/models
         OUTPUT ${output_world_path}
       )
     else()
       add_custom_command(
         DEPENDS ${map_path}
-        COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
+        COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo-classic ${map_path} ${output_world_path} ${output_model_dir}
         COMMAND ros2 run rmf_building_map_tools building_map_model_downloader ${map_path} -f -e ${output_model_dir}
         OUTPUT ${output_world_path}
       )
@@ -68,7 +68,7 @@ foreach(path ${traffic_editor_paths})
   # This will initiate both custom commands: ${output_world_path} and ${world_name}_crowdsim
   add_custom_target(generate_${world_name}_crowdsim ALL
     DEPENDS ${world_name}_crowdsim
-  )  
+  )
 
   ##############################################################################
   ## Ign worlds
@@ -81,7 +81,7 @@ foreach(path ${traffic_editor_paths})
 
   add_custom_command(
     OUTPUT ${ign_output_world_path}
-    COMMAND ros2 run rmf_building_map_tools building_map_generator ignition ${map_path} ${ign_output_world_path} ${ign_output_model_dir}
+    COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${ign_output_world_path} ${ign_output_model_dir}
     DEPENDS ${map_path}
   )
 
