@@ -542,7 +542,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             elif (self.action_execution is not None):
                 if not self.started_action:
                     self.started_action = True
-                    self.api.toggle_action(self.name, self.started_action)
+                    self.api.toggle_teleop(self.name, self.started_action)
                 self.update_handle.update_off_grid_position(
                     self.position, self.action_waypoint_index)
             # if robot is merging into a waypoint
@@ -667,7 +667,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             self.action_execution.finished()
             self.action_execution = None
             self.started_action = False
-            self.api.toggle_action(self.name, self.started_action)
+            self.api.toggle_teleop(self.name, self.started_action)
             self.node.get_logger().info(f"Robot {self.name} has completed the"
                                         f" action it was performing")
 

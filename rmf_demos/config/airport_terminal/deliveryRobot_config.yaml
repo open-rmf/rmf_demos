@@ -3,11 +3,6 @@
 
 rmf_fleet:
   name: "deliveryRobot"
-  fleet_manager:
-    ip: "127.0.0.1"
-    port: 22012
-    user: "some_user"
-    password: "some_password"
   limits:
     linear: [0.7, 0.75] # velocity, acceleration
     angular: [0.6, 2.0] # velocity, acceleration
@@ -35,7 +30,7 @@ rmf_fleet:
   task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
     loop: True
     delivery: True
-    finishing_request: "park" # [park, charge, nothing]
+  finishing_request: "park" # [park, charge, nothing]
 
 # DeliveryRobot CONFIG =================================================================
 
@@ -78,3 +73,9 @@ robots:
         orientation: 0.0 # radians
       charger:
         waypoint: "charger_deliveryRobot_2"
+
+fleet_manager:
+  ip: "127.0.0.1"
+  port: 22012
+  user: "some_user"
+  password: "some_password"

@@ -22,8 +22,18 @@
 '''
 
 import requests
+import enum
 from urllib.error import HTTPError
 
+class RobotAPIResult(enum.IntEnum):
+    SUCCESS = 0
+    """The request was successful"""
+
+    RETRY = 1
+    """The client failed to connect but might succeed if you try again"""
+
+    IMPOSSIBLE = 2
+    """The client connected but something about the request is impossible"""
 
 class RobotAPI:
     # The constructor below accepts parameters typically required to submit
@@ -42,12 +52,14 @@ class RobotAPI:
             return False
         return True
 
-    def navigate(self,
-                 robot_name: str,
-                 cmd_id: int,
-                 pose,
-                 map_name: str,
-                 speed_limit=0.0):
+    def navigate(
+            self,
+            robot_name: str,
+            cmd_id: int,
+            pose,
+            map_name: str,
+            speed_limit=0.0
+        ):
         ''' Request the robot to navigate to pose:[x,y,theta] where x, y and
             and theta are in the robot's coordinate convention. This function
             should return True if the robot has accepted the request,
@@ -72,31 +84,39 @@ class RobotAPI:
             print(f'Other error: {err}')
         return False
 
-    def start_process(self,
-                      robot_name: str,
-                      cmd_id: int,
-                      process: str,
-                      map_name: str):
+    def start_activity(
+            self,
+            robot_name: str,
+            cmd_id: int,
+            activity: str,
+            label: str
+        ):
         ''' Request the robot to begin a process. This is specific to the robot
             and the use case. For example, load/unload a cart for Deliverybot
-            or begin cleaning a zone for a cleaning robot.
-            Return True if the robot has accepted the request, else False'''
-        url = self.prefix +\
-            f"/open-rmf/rmf_demos_fm/start_task?robot_name={robot_name}" \
+            or begin cleaning a zone for a cleaning robot.'''
+        url = (
+            self.prefix +
+            f"/open-rmf/rmf_demos_fm/start_activity?robot_name={robot_name}"
             f"&cmd_id={cmd_id}"
+        )
         # data fields: task, map_name, destination{}, data{}
-        data = {'task': process, 'map_name': map_name}
+        data = {'activity': activity, 'label': label}
         try:
             response = requests.post(url, timeout=self.timeout, json=data)
             response.raise_for_status()
             if self.debug:
                 print(f'Response: {response.json()}')
-            return response.json()['success']
+
+            if response.json()['success']:
+                return (RobotAPIResult.SUCCESS, response.json()['msg'])
+
+            # If we get a response with success=False, then
+            return RobotAPIResult.IMPOSSIBLE
         except HTTPError as http_err:
             print(f'HTTP error: {http_err}')
         except Exception as err:
             print(f'Other error: {err}')
-        return False
+        return RobotAPIResult.RETRY
 
     def stop(self, robot_name: str, cmd_id: int):
         ''' Command the robot to stop.
@@ -116,11 +136,11 @@ class RobotAPI:
             print(f'Other error: {err}')
         return False
 
-    def toggle_action(self, robot_name: str, toggle: bool):
+    def toggle_teleop(self, robot_name: str, toggle: bool):
         '''Request to toggle the robot's mode_teleop parameter.
            Return True if the toggle request is successful'''
         url = self.prefix +\
-            f"/open-rmf/rmf_demos_fm/toggle_action?robot_name={robot_name}"
+            f"/open-rmf/rmf_demos_fm/toggle_teleop?robot_name={robot_name}"
         data = {'toggle': toggle}
         try:
             response = requests.post(url, timeout=self.timeout, json=data)

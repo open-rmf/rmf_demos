@@ -111,8 +111,7 @@ class FleetManager(Node):
         super().__init__(f'{self.fleet_name}_fleet_manager')
 
         self.robots = {}  # Map robot name to state
-        self.docks = {}  # Map dock name to waypoints
-        self.process_waypoints = {}  # Map processes to waypoints
+        self.action_paths = {}  # Map activities to paths
 
         for robot_name, robot_config in self.config["robots"].items():
             self.robots[robot_name] = State()
@@ -131,11 +130,8 @@ class FleetManager(Node):
         self.vehicle_traits.differential.reversible =\
             self.config['rmf_fleet']['reversible']
 
-        if 'process_waypoints' in self.config['rmf_fleet']:
-            process_waypoints = self.config['rmf_fleet']['process_waypoints']
-            for task_name, task_waypoints in process_waypoints.items():
-                self.process_waypoints[task_name] = task_waypoints
-
+        fleet_manager_config = self.config['fleet_manager']
+        self.action_paths = fleet_manager_config.get('action_paths', {})
         self.sio = socketio.Client()
 
         @self.sio.on("/gps")
@@ -162,7 +158,8 @@ class FleetManager(Node):
             RobotState,
             'robot_state',
             self.robot_state_cb,
-            100)
+            100
+        )
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
@@ -243,7 +240,7 @@ class FleetManager(Node):
             target_loc.x = target_x
             target_loc.y = target_y
             target_loc.yaw = target_yaw
-            target_loc.level_name = target_map
+            target_loc.map_name = target_map
             if target_speed_limit > 0:
                 target_loc.obey_approach_speed_limit = True
                 target_loc.approach_speed_limit = target_speed_limit
@@ -290,56 +287,47 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
-        @app.get('/open-rmf/rmf_demos_fm/process_waypoints/',
+        @app.get('/open-rmf/rmf_demos_fm/action_paths/',
                  response_model=Response)
-        async def process_waypoints(process: str):
+        async def action_paths(activity: str, label: str):
             response = {'success': False, 'msg': ''}
-            if (process not in self.process_waypoints):
+            if activity not in self.action_paths:
                 return response
 
-            response['data'] = self.process_waypoints[process]
+            if label not in self.action_paths[activity][label]:
+                return response
+
+            response['data'] = self.action_paths[activity][label]
             response['success'] = True
             return response
 
-        @app.post('/open-rmf/rmf_demos_fm/start_task/',
+        @app.post('/open-rmf/rmf_demos_fm/start_activity/',
                   response_model=Response)
-        async def start_process(robot_name: str, cmd_id: int, task: Request):
+        async def start_activity(robot_name: str, cmd_id: int, request: Request):
             response = {'success': False, 'msg': ''}
-            if (robot_name not in self.robots or
-                    len(task.task) < 1 or
-                    (task.task not in self.docks and
-                     task.task not in self.process_waypoints)):
+            if (
+                robot_name not in self.robots
+                or request.activity not in self.action_paths
+                or request.label not in self.action_paths[request.activity]
+            ):
                 return response
 
             robot = self.robots[robot_name]
 
             path_request = PathRequest()
             cur_loc = robot.state.location
-            cur_x = cur_loc.x
-            cur_y = cur_loc.y
-            cur_yaw = cur_loc.yaw
-            previous_wp = [cur_x, cur_y, cur_yaw]
             target_loc = Location()
             path_request.path.append(cur_loc)
 
-            if task.task in self.docks:
-                task_wps = self.docks[task.task]
-                for wp in task_wps:
-                    target_loc = wp
-                    path_request.path.append(target_loc)
-                    previous_wp = [wp.x, wp.y, wp.yaw]
-            elif task.task in self.process_waypoints:
-                task_wps = self.process_waypoints[task.task]['path']
-                task_level_name = \
-                    self.process_waypoints[task.task]['level_name']
-                for wp in task_wps:
-                    target_loc = Location()
-                    target_loc.x = wp[0]
-                    target_loc.y = wp[1]
-                    target_loc.yaw = wp[2]
-                    target_loc.level_name = task_level_name
-                    path_request.path.append(target_loc)
-                    previous_wp = wp
+            activity_path = self.action_paths[request.activity][request.label]
+            map_name = activity_path['map_name']
+            for wp in activity_path['path']:
+                target_loc = Location()
+                target_loc.x = wp[0]
+                target_loc.y = wp[1]
+                target_loc.yaw = wp[2]
+                target_loc.map_name = map_name
+                path_request.path.append(target_loc)
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
@@ -347,14 +335,18 @@ class FleetManager(Node):
             self.path_pub.publish(path_request)
 
             if self.debug:
-                print(f'Sending process request for {robot_name}: {cmd_id}')
+                print(
+                    f'Sending [{request.activity}] at [{request.label}] '
+                    f'request for {robot_name}: {cmd_id}'
+                )
             robot.last_path_request = path_request
             robot.destination = target_loc
 
             response['success'] = True
+            response['msg'] = activity_path
             return response
 
-        @app.post('/open-rmf/rmf_demos_fm/toggle_action/',
+        @app.post('/open-rmf/rmf_demos_fm/toggle_teleop/',
                   response_model=Response)
         async def toggle_teleop(robot_name: str, mode: Request):
             response = {'success': False, 'msg': ''}
@@ -420,7 +412,7 @@ class FleetManager(Node):
             position = [robot.state.location.x, robot.state.location.y]
         angle = robot.state.location.yaw
         data['robot_name'] = robot_name
-        data['map_name'] = robot.state.location.level_name
+        data['map_name'] = robot.state.location.map_name
         data['position'] =\
             {'x': position[0], 'y': position[1], 'yaw': angle}
         data['battery'] = robot.state.battery_percent
@@ -501,10 +493,12 @@ def main(argv=sys.argv):
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()
 
-    uvicorn.run(app,
-                host=config['rmf_fleet']['fleet_manager']['ip'],
-                port=config['rmf_fleet']['fleet_manager']['port'],
-                log_level='warning')
+    uvicorn.run(
+        app,
+        host=config['fleet_manager']['ip'],
+        port=config['fleet_manager']['port'],
+        log_level='warning'
+    )
 
 
 if __name__ == '__main__':

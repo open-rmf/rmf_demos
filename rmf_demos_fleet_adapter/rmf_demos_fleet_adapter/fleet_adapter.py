@@ -37,9 +37,7 @@ from rclpy.qos import QoSReliabilityPolicy as Reliability
 from rclpy.qos import qos_profile_system_default
 
 from .RobotCommandHandle import RobotCommandHandle
-from .RobotClientAPI import RobotAPI, RobotUpdateData
-
-from rmf_fleet_msgs.msg import DockSummary
+from .RobotClientAPI import RobotAPI, RobotUpdateData, RobotAPIResult
 
 # ------------------------------------------------------------------------------
 # Main
@@ -115,11 +113,10 @@ def main(argv=sys.argv):
         fleet_mgr_yaml['password']
     )
 
-    docks = {}
     robots = []
     for robot_name in fleet_config.known_robots:
         robot_config = fleet_config.get_known_robot_configuration(robot_name)
-        robots.append(RobotAdapter(robot_name, robot_config, node, api, docks))
+        robots.append(RobotAdapter(robot_name, robot_config, node, api))
 
     def update_robot(robot: RobotAdapter):
         data = api.get_data(robot.name)
@@ -160,7 +157,7 @@ def main(argv=sys.argv):
     update_thread.start()
 
     # Connect to the extra ROS2 topics that are relevant for the adapter
-    ros_connections(node, robots, docks, fleet_handle)
+    ros_connections(node, robots, fleet_handle)
 
     # Create executor for the command handle node
     rclpy_executor = rclpy.executors.SingleThreadedExecutor()
@@ -181,8 +178,7 @@ class RobotAdapter:
         name: str,
         configuration,
         node,
-        api: RobotAPI,
-        docks
+        api: RobotAPI
     ):
         self.name = name
         self.execution = None
@@ -192,7 +188,6 @@ class RobotAdapter:
         self.configuration = configuration
         self.node = node
         self.api = api
-        self.docks = docks
         self.override = None
         self.issue_cmd_thread = None
         self.cancel_cmd_event = threading.Event()
@@ -220,12 +215,11 @@ class RobotAdapter:
         self.cmd_id += 1
 
         if destination.dock() is not None:
-            path = self.docks.get(destination.dock())
-            if path is not None:
-                self.perform_docking(destination, execution, path)
-                return
-            # If we don't recognize the dock name then just treat this as a
-            # regular navigation command.
+            self.attempt_cmd_until_success(
+                cmd=self.perform_docking,
+                args=(destination,)
+            )
+            return
 
         self.attempt_cmd_until_success(
             cmd=self.api.navigate,
@@ -248,7 +242,19 @@ class RobotAdapter:
     def execute_action(self, category: str, description: dict, execution):
         self.execution = execution
         self.activity_identifier = execution.identifier
+        self.cmd_id += 1
 
+        match category:
+            case 'teleop':
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_teleop,
+                    args=(True,)
+                )
+            case 'clean':
+                self.attempt_cmd_until_success(
+                    cmd=self.perform_clean,
+                    args=(description['zone'],)
+                )
 
     def finish_action(self):
         # This is triggered by a ModeRequest callback which allows human
@@ -258,28 +264,56 @@ class RobotAdapter:
             self.execution.finished()
             self.execution = None
             self.activity_identifier = None
-
-
-    def perform_docking(self, destination, execution, path):
-        self.override = execution.override_schedule(
-            destination.map(),
-            path
-        )
-
-        self.attempt_cmd_until_success(
-            cmd=self.api.start_process,
-            args=(
-                self.name,
-                self.cmd_id,
-                destination.dock(),
-                destination.map()
+            self.attempt_cmd_until_success(
+                cmd=self.api.toggle_teleop,
+                args=(self.name, False)
             )
-        )
+
+    def perform_docking(self, destination):
+        match self.api.start_activity(self.name, self.cmd_id, 'dock', destination.dock()):
+            case (RobotAPIResult.SUCCESS, path):
+                self.override = self.execution.override_schedule(
+                    path['map_name'],
+                    path['path']
+                )
+                return True
+            case RobotAPIResult.RETRY:
+                return False
+            case RobotAPIResult.IMPOSSIBLE:
+                # If the fleet manager does not know this dock name, then treat
+                # it as a regular navigation request
+                return self.api.navigate(
+                    self.name,
+                    self.cmd_id,
+                    destination.position,
+                    destination.map,
+                    destination.speed_limit
+                )
+
+    def perform_clean(self, zone):
+        match self.api.start_activity(self.name, self.cmd_id, 'clean', zone):
+            case (RobotAPIResult.SUCCESS, path):
+                self.override = self.execution.override_schedule(
+                    path['map_name'],
+                    path['path']
+                )
+                return True
+            case RobotAPIResult.RETRY:
+                return False
+            case RobotAPIResult.IMPOSSIBLE:
+                self.node.get_logger().error(
+                    f'Fleet manager for [{self.name}] does not know how to '
+                    f'clean zone [{zone}]. We will terminate the activity.'
+                )
+                self.execution.finished()
+                self.execution = None
+                self.activity_identifier = None
+                return True
 
     def attempt_cmd_until_success(self, cmd, args):
         self.cancel_cmd_attempt()
         def loop():
-            while not cmd(args):
+            while not cmd(*args):
                 self.node.get_logger().warn(
                     f'Failed to contact fleet manager for robot {self.name}'
                 )
@@ -301,7 +335,7 @@ class RobotAdapter:
         self.cancel_cmd_event.clear()
 
 
-def ros_connections(node, robots, docks, fleet_handle):
+def ros_connections(node, robots, fleet_handle):
     fleet_name = fleet_handle.more().fleet_name
 
     transient_qos = QoSProfile(
@@ -316,19 +350,6 @@ def ros_connections(node, robots, docks, fleet_handle):
         'closed_lanes',
         qos_profile=transient_qos
     )
-
-    def dock_summary_cb(msg):
-        # TODO(@mxgrey): The DockSummary messages are inconsistent with how
-        # docks are labelled. They use a `start` and `finish` waypoint
-        # representation instead of a lane representation.
-        for fleet in msg.docks:
-            if fleet.fleet_name != fleet_name:
-                continue
-            for dock in fleet.params:
-                path = []
-                for p in dock.path:
-                    path.append([p.x, p.y, p.yaw])
-                docks[dock.start] = path
 
     closed_lanes = set()
     def lane_request_cb(msg):
@@ -358,14 +379,6 @@ def ros_connections(node, robots, docks, fleet_handle):
             if robot is None:
                 return
             robot.finish_action()
-
-
-    node.create_subscription(
-        DockSummary,
-        'dock_summary',
-        dock_summary_cb,
-        qos_profile=transient_qos
-    )
 
     node.create_subscription(
         LaneRequest,
