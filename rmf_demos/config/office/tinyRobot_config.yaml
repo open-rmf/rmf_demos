@@ -3,11 +3,6 @@
 
 rmf_fleet:
   name: "tinyRobot"
-  fleet_manager:
-    ip: "127.0.0.1"
-    port: 22011
-    user: "some_user"
-    password: "some_password"
   limits:
     linear: [0.5, 0.75] # velocity, acceleration
     angular: [0.6, 2.0] # velocity, acceleration
@@ -66,3 +61,10 @@ robots:
         orientation: 0.0 # radians
       charger:
         waypoint: "tinyRobot2_charger"
+
+fleet_manager:
+  ip: "127.0.0.1"
+  port: 22011
+  user: "some_user"
+  password: "some_password"
+  robot_state_update_frequency: 10.0

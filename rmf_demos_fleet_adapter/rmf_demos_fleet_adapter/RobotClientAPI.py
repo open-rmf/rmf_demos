@@ -42,26 +42,6 @@ class RobotAPI:
             return False
         return True
 
-    def position(self, robot_name: str):
-        ''' Return [x, y, theta] expressed in the robot's coordinate frame or
-            None if any errors are encountered'''
-        response = self.data(robot_name)
-        if response is not None:
-            if self.debug:
-                print(f'Response: {response}')
-            if not response['success']:
-                print(f'Response for {robot_name} was not successful')
-                return None
-
-            position = response['data']['position']
-            x = position['x']
-            y = position['y']
-            angle = position['yaw']
-            return [x, y, angle]
-
-        print(f'No response received for {robot_name}')
-        return None
-
     def navigate(self,
                  robot_name: str,
                  cmd_id: int,
@@ -136,57 +116,6 @@ class RobotAPI:
             print(f'Other error: {err}')
         return False
 
-    def navigation_remaining_duration(self, robot_name: str, cmd_id: int):
-        ''' Return the number of seconds remaining for the robot to reach its
-            destination'''
-        response = self.data(robot_name)
-        if response is None:
-            return None
-
-        if response is not None:
-            arrival = response['data'].get('destination_arrival')
-            if arrival is not None:
-                if arrival.get('cmd_id') != cmd_id:
-                    return None
-                return arrival.get('duration')
-            else:
-                return None
-
-        else:
-            return None
-
-    def navigation_completed(self, robot_name: str, cmd_id: int):
-        ''' Return True if the last request the robot successfully completed
-            matches cmd_id. Else False.'''
-        response = self.data(robot_name)
-        if response is not None:
-            data = response.get('data')
-            if data is not None:
-                return data['last_completed_request'] == cmd_id
-
-        return False
-
-    def process_completed(self, robot_name: str, cmd_id: int):
-        ''' Return True if the robot has successfully completed its previous
-            process request. Else False.'''
-        return self.navigation_completed(robot_name, cmd_id)
-
-    def battery_soc(self, robot_name: str):
-        ''' Return the state of charge of the robot as a value between 0.0
-            and 1.0. Else return None if any errors are encountered'''
-        response = self.data(robot_name)
-        if response is not None:
-            return response['data']['battery']/100.0
-        else:
-            return None
-
-    def requires_replan(self, robot_name: str):
-        '''Return whether the robot needs RMF to replan'''
-        response = self.data(robot_name)
-        if response is not None:
-            return response['data'].get('replan', False)
-        return False
-
     def toggle_action(self, robot_name: str, toggle: bool):
         '''Request to toggle the robot's mode_teleop parameter.
            Return True if the toggle request is successful'''
@@ -205,7 +134,11 @@ class RobotAPI:
             print(f'Other error: {err}')
         return False
 
-    def data(self, robot_name=None):
+    def get_data(self, robot_name: str | None = None):
+        """
+        Return a RobotUpdateData for one robot if a name is given. Otherwise
+        return a list of RobotUpdateData for all robots.
+        """
         if robot_name is None:
             url = self.prefix + f'/open-rmf/rmf_demos_fm/status/'
         else:
@@ -216,9 +149,33 @@ class RobotAPI:
             response.raise_for_status()
             if self.debug:
                 print(f'Response: {response.json()}')
-            return response.json()
+            if robot_name is not None:
+                return RobotUpdateData(response.json()['data'])
+            else:
+                all_robots = []
+                for robot in response.json()['all_robots']:
+                    all_robots.append(RobotUpdateData(robot))
+                return all_robots
         except HTTPError as http_err:
             print(f'HTTP error: {http_err}')
         except Exception as err:
             print(f'Other error: {err}')
         return None
+
+
+class RobotUpdateData:
+    """Update data for a single robot"""
+    def __init__(self, data):
+        self.robot_name = data['robot_name']
+        position = data['position']
+        x = position['x']
+        y = position['y']
+        yaw = position['yaw']
+        self.position = [x, y, yaw]
+        self.map = data['map_name']
+        self.battery_soc = data['battery']/100.0
+        self.requires_replan = data.get('replan', False)
+        self.last_request_completed = data['last_completed_request']
+
+    def is_command_completed(self, cmd_id):
+        return self.last_request_completed == cmd_id
