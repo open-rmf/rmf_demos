@@ -112,6 +112,7 @@ class FleetManager(Node):
 
         self.robots = {}  # Map robot name to state
         self.docks = {}  # Map dock name to waypoints
+        self.process_waypoints = {}  # Map processes to waypoints
 
         for robot_name, robot_config in self.config["robots"].items():
             self.robots[robot_name] = State()
@@ -129,6 +130,11 @@ class FleetManager(Node):
             profile=profile)
         self.vehicle_traits.differential.reversible =\
             self.config['rmf_fleet']['reversible']
+
+        if 'process_waypoints' in self.config['rmf_fleet']:
+            process_waypoints = self.config['rmf_fleet']['process_waypoints']
+            for task_name, task_waypoints in process_waypoints.items():
+                self.process_waypoints[task_name] = task_waypoints
 
         self.sio = socketio.Client()
 
@@ -284,13 +290,25 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
+        @app.get('/open-rmf/rmf_demos_fm/process_waypoints/',
+                 response_model=Response)
+        async def process_waypoints(process: str):
+            response = {'success': False, 'msg': ''}
+            if (process not in self.process_waypoints):
+                return response
+
+            response['data'] = self.process_waypoints[process]
+            response['success'] = True
+            return response
+
         @app.post('/open-rmf/rmf_demos_fm/start_task/',
                   response_model=Response)
         async def start_process(robot_name: str, cmd_id: int, task: Request):
             response = {'success': False, 'msg': ''}
             if (robot_name not in self.robots or
                     len(task.task) < 1 or
-                    task.task not in self.docks):
+                    (task.task not in self.docks and
+                     task.task not in self.process_waypoints)):
                 return response
 
             robot = self.robots[robot_name]
@@ -303,10 +321,25 @@ class FleetManager(Node):
             previous_wp = [cur_x, cur_y, cur_yaw]
             target_loc = Location()
             path_request.path.append(cur_loc)
-            for wp in self.docks[task.task]:
-                target_loc = wp
-                path_request.path.append(target_loc)
-                previous_wp = [wp.x, wp.y, wp.yaw]
+
+            if task.task in self.docks:
+                task_wps = self.docks[task.task]
+                for wp in task_wps:
+                    target_loc = wp
+                    path_request.path.append(target_loc)
+                    previous_wp = [wp.x, wp.y, wp.yaw]
+            elif task.task in self.process_waypoints:
+                task_wps = self.process_waypoints[task.task]['path']
+                task_level_name = \
+                    self.process_waypoints[task.task]['level_name']
+                for wp in task_wps:
+                    target_loc = Location()
+                    target_loc.x = wp[0]
+                    target_loc.y = wp[1]
+                    target_loc.yaw = wp[2]
+                    target_loc.level_name = task_level_name
+                    path_request.path.append(target_loc)
+                    previous_wp = wp
 
             path_request.fleet_name = self.fleet_name
             path_request.robot_name = robot_name
@@ -375,7 +408,7 @@ class FleetManager(Node):
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
-            if(fleet.fleet_name == self.fleet_name):
+            if (fleet.fleet_name == self.fleet_name):
                 for dock in fleet.params:
                     self.docks[dock.start] = dock.path
 
