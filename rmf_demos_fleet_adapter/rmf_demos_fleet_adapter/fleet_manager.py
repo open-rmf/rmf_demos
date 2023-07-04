@@ -97,23 +97,24 @@ class FleetManager(Node):
     def __init__(self, config, nav_path):
         self.debug = False
         self.config = config
-        self.fleet_name = self.config["rmf_fleet"]["name"]
+        self.fleet_name = self.config['rmf_fleet']['name']
+        mgr_config = self.config['fleet_manager']
 
         self.gps = False
         self.offset = [0, 0]
-        if 'reference_coordinates' in self.config and \
-                'offset' in self.config['reference_coordinates']:
-            assert len(self.config['reference_coordinates']['offset']) > 1, \
-                ('Please ensure that the offset provided is valid.')
-            self.gps = True
-            self.offset = self.config['reference_coordinates']['offset']
+        reference_coordinates_yaml = mgr_config.get('reference_coordinates')
+        if reference_coordinates_yaml is not None:
+            offset_yaml = reference_coordinates_yaml.get('offset')
+            if offset_yaml is not None and len(offset_yaml) > 1:
+                self.gps = True
+                self.offset = offset_yaml
 
         super().__init__(f'{self.fleet_name}_fleet_manager')
 
         self.robots = {}  # Map robot name to state
         self.action_paths = {}  # Map activities to paths
 
-        for robot_name, robot_config in self.config["robots"].items():
+        for robot_name, _ in self.config['rmf_fleet']['robots'].items():
             self.robots[robot_name] = State()
         assert(len(self.robots) > 0)
 
@@ -240,8 +241,9 @@ class FleetManager(Node):
             target_loc.x = target_x
             target_loc.y = target_y
             target_loc.yaw = target_yaw
-            target_loc.map_name = target_map
-            if target_speed_limit > 0:
+            target_loc.level_name = target_map
+            target_loc.obey_approach_speed_limit = False
+            if target_speed_limit is not None and target_speed_limit > 0.0:
                 target_loc.obey_approach_speed_limit = True
                 target_loc.approach_speed_limit = target_speed_limit
 
@@ -326,7 +328,7 @@ class FleetManager(Node):
                 target_loc.x = wp[0]
                 target_loc.y = wp[1]
                 target_loc.yaw = wp[2]
-                target_loc.map_name = map_name
+                target_loc.level_name = map_name
                 path_request.path.append(target_loc)
 
             path_request.fleet_name = self.fleet_name
@@ -412,7 +414,7 @@ class FleetManager(Node):
             position = [robot.state.location.x, robot.state.location.y]
         angle = robot.state.location.yaw
         data['robot_name'] = robot_name
-        data['map_name'] = robot.state.location.map_name
+        data['map_name'] = robot.state.location.level_name
         data['position'] =\
             {'x': position[0], 'y': position[1], 'yaw': angle}
         data['battery'] = robot.state.battery_percent

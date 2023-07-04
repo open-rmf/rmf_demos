@@ -1,6 +1,3 @@
-# FLEET CONFIG =================================================================
-# RMF Fleet parameters
-
 rmf_fleet:
   name: "cleanerBotA"
   limits:
@@ -32,17 +29,13 @@ rmf_fleet:
     delivery: False
   finishing_request: "park" # [park, charge, nothing]
   actions: ["clean"]
-
-# CleanerBotA CONFIG =================================================================
-
-robots:
-  # Here the user is expected to append the configuration for each robot in the
-  # fleet.
-  # Configuration for cleanerBotA_0
-  cleanerBotA_0:
-    charger: "charger_cleanerBotA_0"
+  robots:
+    # Here the user is expected to append the configuration for each robot in the fleet.
+    cleanerBotA_0:
+      charger: "charger_cleanerBotA_0"
 
 fleet_manager:
+  # Here is data related to the fleet manager. RMF will not parse any of this.
   ip: "127.0.0.1"
   port: 22013
   user: "some_user"

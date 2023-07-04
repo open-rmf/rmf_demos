@@ -66,7 +66,7 @@ class RobotAPI:
             else False'''
         assert(len(pose) > 2)
         url = self.prefix +\
-            f'/open-rmf/rmf_demos_fm/navigate/?robot_name={robot_name}' \
+            f'/open-rmf/rmf_demos_fm/navigate?robot_name={robot_name}' \
             f'&cmd_id={cmd_id}'
         data = {}  # data fields: task, map_name, destination{}, data{}
         data['map_name'] = map_name
@@ -79,9 +79,9 @@ class RobotAPI:
                 print(f'Response: {response.json()}')
             return response.json()['success']
         except HTTPError as http_err:
-            print(f'HTTP error: {http_err}')
+            print(f'HTTP error for {robot_name} in navigate: {http_err}')
         except Exception as err:
-            print(f'Other error: {err}')
+            print(f'Other error for {robot_name} in navigate: {err}')
         return False
 
     def start_activity(
@@ -113,9 +113,9 @@ class RobotAPI:
             # If we get a response with success=False, then
             return RobotAPIResult.IMPOSSIBLE
         except HTTPError as http_err:
-            print(f'HTTP error: {http_err}')
+            print(f'HTTP error for {robot_name} in start_activity: {http_err}')
         except Exception as err:
-            print(f'Other error: {err}')
+            print(f'Other error {robot_name} in start_activity: {err}')
         return RobotAPIResult.RETRY
 
     def stop(self, robot_name: str, cmd_id: int):
@@ -131,9 +131,9 @@ class RobotAPI:
                 print(f'Response: {response.json()}')
             return response.json()['success']
         except HTTPError as http_err:
-            print(f'HTTP error: {http_err}')
+            print(f'HTTP error for {robot_name} in stop: {http_err}')
         except Exception as err:
-            print(f'Other error: {err}')
+            print(f'Other error for {robot_name} in stop: {err}')
         return False
 
     def toggle_teleop(self, robot_name: str, toggle: bool):
@@ -149,9 +149,9 @@ class RobotAPI:
                 print(f'Response: {response.json()}')
             return response.json()['success']
         except HTTPError as http_err:
-            print(f'HTTP error: {http_err}')
+            print(f'HTTP error for {robot_name} in toggle_teleop: {http_err}')
         except Exception as err:
-            print(f'Other error: {err}')
+            print(f'Other error {robot_name} in toggle_teleop: {err}')
         return False
 
     def get_data(self, robot_name: str | None = None):
@@ -160,7 +160,7 @@ class RobotAPI:
         return a list of RobotUpdateData for all robots.
         """
         if robot_name is None:
-            url = self.prefix + f'/open-rmf/rmf_demos_fm/status/'
+            url = self.prefix + f'/open-rmf/rmf_demos_fm/status'
         else:
             url = self.prefix +\
                 f'/open-rmf/rmf_demos_fm/status?robot_name={robot_name}'
@@ -177,9 +177,9 @@ class RobotAPI:
                     all_robots.append(RobotUpdateData(robot))
                 return all_robots
         except HTTPError as http_err:
-            print(f'HTTP error: {http_err}')
+            print(f'HTTP error for {robot_name} in get_data: {http_err}')
         except Exception as err:
-            print(f'Other error: {err}')
+            print(f'Other error for {robot_name} in get_data: {err}')
         return None
 
 

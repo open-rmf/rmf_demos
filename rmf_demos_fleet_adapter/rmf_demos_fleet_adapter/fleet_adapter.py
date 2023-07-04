@@ -17,7 +17,7 @@ import argparse
 import yaml
 import time
 import threading
-from multiprocessing import Pool
+import asyncio
 
 import rclpy
 import rclpy.node
@@ -25,7 +25,7 @@ from rclpy.parameter import Parameter
 from rclpy.duration import Duration
 
 import rmf_adapter
-import rmf_adapter.Adapter as Adapter
+from rmf_adapter import Adapter
 import rmf_adapter.easy_full_control as rmf_easy
 
 from rmf_fleet_msgs.msg import LaneRequest, ClosedLanes, ModeRequest, RobotMode
@@ -73,7 +73,7 @@ def main(argv=sys.argv):
         config_yaml = yaml.safe_load(f)
 
     # ROS 2 node for the command handle
-    fleet_name = fleet_config.name
+    fleet_name = fleet_config.fleet_name
     node = rclpy.node.Node(f'{fleet_name}_command_handle')
     adapter = Adapter.make(f'{fleet_name}_fleet_adapter')
     assert adapter, (
@@ -90,7 +90,7 @@ def main(argv=sys.argv):
     adapter.start()
     time.sleep(1.0)
 
-    node.declare_paramter('server_uri', rclpy.Parameter.Type.STRING)
+    node.declare_parameter('server_uri', '')
     server_uri = node.get_parameter(
         'server_uri'
     ).get_parameter_value().string_value
@@ -102,7 +102,7 @@ def main(argv=sys.argv):
 
     # Initialize robot API for this fleet
     fleet_mgr_yaml = config_yaml['fleet_manager']
-    update_period = 1.0/fleet_mgr_yaml['robot_state_update_frequency']
+    update_period = 1.0/fleet_mgr_yaml.get('robot_state_update_frequency', 10.0)
     api_prefix = (
         'http://' + fleet_mgr_yaml['ip'] + ':'
         + str(fleet_mgr_yaml['port'])
@@ -116,38 +116,22 @@ def main(argv=sys.argv):
     robots = []
     for robot_name in fleet_config.known_robots:
         robot_config = fleet_config.get_known_robot_configuration(robot_name)
-        robots.append(RobotAdapter(robot_name, robot_config, node, api))
-
-    def update_robot(robot: RobotAdapter):
-        data = api.get_data(robot.name)
-        if data is None:
-            return
-
-        state = rmf_easy.RobotState(
-            data.map,
-            data.position,
-            data.battery_soc
-        )
-
-        if robot.update_handle is None:
-            robot.update_handle = fleet_handle.add_robot(
-                robot.name,
-                state,
-                robot.configuration,
-                robot.make_callbacks
-            )
-            return
-
-        robot.update(state)
+        robots.append(RobotAdapter(robot_name, robot_config, node, api, fleet_handle))
 
 
     def update_loop():
-        pool = Pool(4)
+        asyncio.set_event_loop(asyncio.new_event_loop())
         while rclpy.ok():
             now = node.get_clock().now()
 
             # Update all the robots in parallel using a thread pool
-            pool.map(update_robot, robots)
+            update_jobs = []
+            for robot in robots:
+                update_jobs.append(update_robot(robot))
+
+            asyncio.get_event_loop().run_until_complete(
+                asyncio.wait(update_jobs)
+            )
 
             next_wakeup = now + Duration(nanoseconds=update_period*1e9)
             while node.get_clock().now() < next_wakeup:
@@ -178,7 +162,8 @@ class RobotAdapter:
         name: str,
         configuration,
         node,
-        api: RobotAPI
+        api: RobotAPI,
+        fleet_handle
     ):
         self.name = name
         self.execution = None
@@ -188,13 +173,14 @@ class RobotAdapter:
         self.configuration = configuration
         self.node = node
         self.api = api
+        self.fleet_handle = fleet_handle
         self.override = None
         self.issue_cmd_thread = None
         self.cancel_cmd_event = threading.Event()
 
-    def update(self, state: RobotUpdateData):
+    def update(self, state, data: RobotUpdateData):
         if self.execution:
-            if state.is_command_completed(self.cmd_id):
+            if data.is_command_completed(self.cmd_id):
                 self.execution.finished()
                 self.execution = None
                 self.activity_identifier = None
@@ -203,7 +189,7 @@ class RobotAdapter:
 
 
     def make_callbacks(self):
-        rmf_easy.RobotCallbacks(
+        return rmf_easy.RobotCallbacks(
             lambda destination, execution: self.navigate(destination, execution),
             lambda: self.stop(),
             lambda category, description, execution: self.execute_action(category, description, execution)
@@ -214,7 +200,7 @@ class RobotAdapter:
         self.activity_identifier = execution.identifier
         self.cmd_id += 1
 
-        if destination.dock() is not None:
+        if destination.dock is not None:
             self.attempt_cmd_until_success(
                 cmd=self.perform_docking,
                 args=(destination,)
@@ -333,6 +319,38 @@ class RobotAdapter:
                 self.issue_cmd_thread.join()
                 self.issue_cmd_thread = None
         self.cancel_cmd_event.clear()
+
+
+# Parallel processing solution derived from https://stackoverflow.com/a/59385935
+def background(f):
+    def wrapped(*args, **kwargs):
+        return asyncio.get_event_loop().run_in_executor(None, f, *args, **kwargs)
+
+    return wrapped
+
+
+@background
+def update_robot(robot: RobotAdapter):
+    data = robot.api.get_data(robot.name)
+    if data is None:
+        return
+
+    state = rmf_easy.RobotState(
+        data.map,
+        data.position,
+        data.battery_soc
+    )
+
+    if robot.update_handle is None:
+        robot.update_handle = robot.fleet_handle.add_robot(
+            robot.name,
+            state,
+            robot.configuration,
+            robot.make_callbacks()
+        )
+        return
+
+    robot.update(state, data)
 
 
 def ros_connections(node, robots, fleet_handle):
