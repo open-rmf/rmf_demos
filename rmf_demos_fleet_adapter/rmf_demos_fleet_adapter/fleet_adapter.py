@@ -167,7 +167,6 @@ class RobotAdapter:
     ):
         self.name = name
         self.execution = None
-        self.activity_identifier = None
         self.cmd_id = 0
         self.update_handle = None
         self.configuration = configuration
@@ -179,26 +178,27 @@ class RobotAdapter:
         self.cancel_cmd_event = threading.Event()
 
     def update(self, state, data: RobotUpdateData):
+        activity_identifier = None
         if self.execution:
             if data.is_command_completed(self.cmd_id):
                 self.execution.finished()
                 self.execution = None
-                self.activity_identifier = None
+            else:
+                activity_identifier = self.execution.identifier
 
-        self.update_handle.update(state, self.activity_identifier)
+        self.update_handle.update(state, activity_identifier)
 
 
     def make_callbacks(self):
         return rmf_easy.RobotCallbacks(
             lambda destination, execution: self.navigate(destination, execution),
-            lambda: self.stop(),
+            lambda activity: self.stop(activity),
             lambda category, description, execution: self.execute_action(category, description, execution)
         )
 
     def navigate(self, destination, execution):
-        self.execution = execution
-        self.activity_identifier = execution.identifier
         self.cmd_id += 1
+        self.execution = execution
 
         if destination.dock is not None:
             self.attempt_cmd_until_success(
@@ -218,17 +218,18 @@ class RobotAdapter:
             )
         )
 
-    def stop(self):
-        self.current_activity = None
-        self.attempt_cmd_until_success(
-            cmd=self.api.stop,
-            args=(self.name, self.cmd_id)
-        )
+    def stop(self, activity):
+        if self.execution is not None:
+            if self.execution.identifier.is_same(activity):
+                self.execution = None
+                self.attempt_cmd_until_success(
+                    cmd=self.api.stop,
+                    args=(self.name, self.cmd_id)
+                )
 
     def execute_action(self, category: str, description: dict, execution):
-        self.execution = execution
-        self.activity_identifier = execution.identifier
         self.cmd_id += 1
+        self.execution = execution
 
         match category:
             case 'teleop':
@@ -249,7 +250,6 @@ class RobotAdapter:
         if self.execution is not None:
             self.execution.finished()
             self.execution = None
-            self.activity_identifier = None
             self.attempt_cmd_until_success(
                 cmd=self.api.toggle_teleop,
                 args=(self.name, False)
@@ -293,7 +293,6 @@ class RobotAdapter:
                 )
                 self.execution.finished()
                 self.execution = None
-                self.activity_identifier = None
                 return True
 
     def attempt_cmd_until_success(self, cmd, args):
