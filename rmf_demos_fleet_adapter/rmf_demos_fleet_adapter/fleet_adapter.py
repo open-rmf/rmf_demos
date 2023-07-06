@@ -18,6 +18,7 @@ import yaml
 import time
 import threading
 import asyncio
+import math
 
 import rclpy
 import rclpy.node
@@ -113,10 +114,10 @@ def main(argv=sys.argv):
         fleet_mgr_yaml['password']
     )
 
-    robots = []
+    robots = {}
     for robot_name in fleet_config.known_robots:
         robot_config = fleet_config.get_known_robot_configuration(robot_name)
-        robots.append(RobotAdapter(robot_name, robot_config, node, api, fleet_handle))
+        robots[robot_name] = RobotAdapter(robot_name, robot_config, node, api, fleet_handle)
 
 
     def update_loop():
@@ -126,7 +127,7 @@ def main(argv=sys.argv):
 
             # Update all the robots in parallel using a thread pool
             update_jobs = []
-            for robot in robots:
+            for robot in robots.values():
                 update_jobs.append(update_robot(robot))
 
             asyncio.get_event_loop().run_until_complete(
@@ -167,6 +168,7 @@ class RobotAdapter:
     ):
         self.name = name
         self.execution = None
+        self.teleoperation = None
         self.cmd_id = 0
         self.update_handle = None
         self.configuration = configuration
@@ -183,8 +185,12 @@ class RobotAdapter:
             if data.is_command_completed(self.cmd_id):
                 self.execution.finished()
                 self.execution = None
+                self.teleoperation = None
             else:
                 activity_identifier = self.execution.identifier
+
+        if self.teleoperation is not None:
+            self.teleoperation.update(data)
 
         self.update_handle.update(state, activity_identifier)
 
@@ -233,9 +239,10 @@ class RobotAdapter:
 
         match category:
             case 'teleop':
+                self.teleoperation = Teleoperation(execution)
                 self.attempt_cmd_until_success(
                     cmd=self.api.toggle_teleop,
-                    args=(True,)
+                    args=(self.name, True)
                 )
             case 'clean':
                 self.attempt_cmd_until_success(
@@ -319,6 +326,30 @@ class RobotAdapter:
                 self.issue_cmd_thread = None
         self.cancel_cmd_event.clear()
 
+
+class Teleoperation:
+    def __init__(self, execution):
+        self.execution = execution
+        self.override = None
+        self.last_position = None
+
+    def update(self, data: RobotUpdateData):
+        if self.last_position is None:
+            print(f'about to override schedule with {data.map}: {[data.position]}')
+            self.override = self.execution.override_schedule(
+                data.map, [data.position], 30.0
+            )
+            self.last_position = data.position
+        else:
+            dx = self.last_position[0] - data.position[0]
+            dy = self.last_position[1] - data.position[1]
+            dist = math.sqrt(dx*dx + dy*dy)
+            if dist > 0.1:
+                print('about to replace override schedule')
+                self.override = self.execution.override_schedule(
+                    data.map, [data.position], 30.0
+                )
+                self.last_position = data.position
 
 # Parallel processing solution derived from https://stackoverflow.com/a/59385935
 def background(f):

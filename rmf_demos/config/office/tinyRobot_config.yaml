@@ -29,6 +29,7 @@ rmf_fleet:
   task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
     loop: True
     delivery: True
+  actions: ["teleop"]
   finishing_request: "park" # [park, charge, nothing]
   robots:
     # Here the user is expected to append the configuration for each robot in the fleet.
