@@ -54,7 +54,8 @@ app = FastAPI()
 
 class Request(BaseModel):
     map_name: Optional[str] = None
-    task: Optional[str] = None
+    activity: Optional[str] = None
+    label: Optional[str] = None
     destination: Optional[dict] = None
     data: Optional[dict] = None
     speed_limit: Optional[float] = None
@@ -345,7 +346,8 @@ class FleetManager(Node):
             robot.destination = target_loc
 
             response['success'] = True
-            response['msg'] = activity_path
+            response['data'] = {}
+            response['data']['path'] = activity_path
             return response
 
         @app.post('/open-rmf/rmf_demos_fm/toggle_teleop/',

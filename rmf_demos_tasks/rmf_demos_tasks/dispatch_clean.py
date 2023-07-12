@@ -113,9 +113,10 @@ class TaskRequester(Node):
             {
                 "unix_millis_action_duration_estimate": 60000,
                 "category": "clean",
+                "expected_finish_location": self.args.clean_start,
                 "description":
                 {
-                    "clean_task_name": self.args.clean_start
+                    "zone": self.args.clean_start
                 },
                 "use_tool_sink": True
             }

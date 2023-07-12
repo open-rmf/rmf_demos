@@ -108,7 +108,7 @@ class RobotAPI:
                 print(f'Response: {response.json()}')
 
             if response.json()['success']:
-                return (RobotAPIResult.SUCCESS, response.json()['msg'])
+                return (RobotAPIResult.SUCCESS, response.json()['data']['path'])
 
             # If we get a response with success=False, then
             return RobotAPIResult.IMPOSSIBLE

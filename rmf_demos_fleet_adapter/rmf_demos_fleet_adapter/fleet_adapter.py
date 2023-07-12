@@ -205,6 +205,10 @@ class RobotAdapter:
     def navigate(self, destination, execution):
         self.cmd_id += 1
         self.execution = execution
+        self.node.get_logger().info(
+            f'Commanding [{self.name}] to navigate to {destination.position} '
+            f'on map [{destination.map}]: cmd_id {self.cmd_id}'
+        )
 
         if destination.dock is not None:
             self.attempt_cmd_until_success(
@@ -286,6 +290,9 @@ class RobotAdapter:
     def perform_clean(self, zone):
         match self.api.start_activity(self.name, self.cmd_id, 'clean', zone):
             case (RobotAPIResult.SUCCESS, path):
+                self.node.get_logger().info(
+                    f'Commanding [{self.name}] to clean zone [{zone}]'
+                )
                 self.override = self.execution.override_schedule(
                     path['map_name'],
                     path['path']
@@ -352,14 +359,14 @@ class Teleoperation:
                 self.last_position = data.position
 
 # Parallel processing solution derived from https://stackoverflow.com/a/59385935
-def background(f):
-    def wrapped(*args, **kwargs):
+def parallel(f):
+    def run_in_parallel(*args, **kwargs):
         return asyncio.get_event_loop().run_in_executor(None, f, *args, **kwargs)
 
-    return wrapped
+    return run_in_parallel
 
 
-@background
+@parallel
 def update_robot(robot: RobotAdapter):
     data = robot.api.get_data(robot.name)
     if data is None:
