@@ -37,7 +37,6 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 from rclpy.qos import qos_profile_system_default
 
-from .RobotCommandHandle import RobotCommandHandle
 from .RobotClientAPI import RobotAPI, RobotUpdateData, RobotAPIResult
 
 # ------------------------------------------------------------------------------
