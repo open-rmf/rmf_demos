@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_maps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.0.4 (2023-08-10)
+------------------
 * Fix gz classic model download (`#187 <https://github.com/open-rmf/rmf_demos/pull/187>`_)
 * Contributors: Aaron Chong
 
