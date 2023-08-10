@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_panel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.2.1 (2023-08-10)
+------------------
 * Fix typo in readme (`#184 <https://github.com/open-rmf/rmf_demos/pull/184>`_)
 * Contributors: Arjo Chakravarty, Yadunund
 
