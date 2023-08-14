@@ -39,6 +39,7 @@ from rclpy.qos import qos_profile_system_default
 
 from .RobotClientAPI import RobotAPI, RobotUpdateData, RobotAPIResult
 
+
 # ------------------------------------------------------------------------------
 # Main
 # ------------------------------------------------------------------------------
@@ -102,7 +103,9 @@ def main(argv=sys.argv):
 
     # Initialize robot API for this fleet
     fleet_mgr_yaml = config_yaml['fleet_manager']
-    update_period = 1.0/fleet_mgr_yaml.get('robot_state_update_frequency', 10.0)
+    update_period = 1.0/fleet_mgr_yaml.get(
+        'robot_state_update_frequency', 10.0
+    )
     api_prefix = (
         'http://' + fleet_mgr_yaml['ip'] + ':'
         + str(fleet_mgr_yaml['port'])
@@ -116,8 +119,9 @@ def main(argv=sys.argv):
     robots = {}
     for robot_name in fleet_config.known_robots:
         robot_config = fleet_config.get_known_robot_configuration(robot_name)
-        robots[robot_name] = RobotAdapter(robot_name, robot_config, node, api, fleet_handle)
-
+        robots[robot_name] = RobotAdapter(
+            robot_name, robot_config, node, api, fleet_handle
+        )
 
     def update_loop():
         asyncio.set_event_loop(asyncio.new_event_loop())
@@ -193,12 +197,15 @@ class RobotAdapter:
 
         self.update_handle.update(state, activity_identifier)
 
-
     def make_callbacks(self):
         return rmf_easy.RobotCallbacks(
-            lambda destination, execution: self.navigate(destination, execution),
+            lambda destination, execution: self.navigate(
+                destination, execution
+            ),
             lambda activity: self.stop(activity),
-            lambda category, description, execution: self.execute_action(category, description, execution)
+            lambda category, description, execution: self.execute_action(
+                category, description, execution
+            )
         )
 
     def navigate(self, destination, execution):
@@ -266,7 +273,12 @@ class RobotAdapter:
             )
 
     def perform_docking(self, destination):
-        match self.api.start_activity(self.name, self.cmd_id, 'dock', destination.dock()):
+        match self.api.start_activity(
+            self.name,
+            self.cmd_id,
+            'dock',
+            destination.dock()
+        ):
             case (RobotAPIResult.SUCCESS, path):
                 self.override = self.execution.override_schedule(
                     path['map_name'],
@@ -310,6 +322,7 @@ class RobotAdapter:
 
     def attempt_cmd_until_success(self, cmd, args):
         self.cancel_cmd_attempt()
+
         def loop():
             while not cmd(*args):
                 self.node.get_logger().warn(
@@ -341,7 +354,10 @@ class Teleoperation:
 
     def update(self, data: RobotUpdateData):
         if self.last_position is None:
-            print(f'about to override schedule with {data.map}: {[data.position]}')
+            print(
+                'about to override schedule with '
+                f'{data.map}: {[data.position]}'
+            )
             self.override = self.execution.override_schedule(
                 data.map, [data.position], 30.0
             )
@@ -357,10 +373,14 @@ class Teleoperation:
                 )
                 self.last_position = data.position
 
-# Parallel processing solution derived from https://stackoverflow.com/a/59385935
+
+# Parallel processing solution derived from
+# https://stackoverflow.com/a/59385935
 def parallel(f):
     def run_in_parallel(*args, **kwargs):
-        return asyncio.get_event_loop().run_in_executor(None, f, *args, **kwargs)
+        return asyncio.get_event_loop().run_in_executor(
+            None, f, *args, **kwargs
+        )
 
     return run_in_parallel
 
@@ -406,6 +426,7 @@ def ros_connections(node, robots, fleet_handle):
     )
 
     closed_lanes = set()
+
     def lane_request_cb(msg):
         if msg.fleet_name is None or msg.fleet_name != fleet_name:
             return
@@ -425,7 +446,11 @@ def ros_connections(node, robots, fleet_handle):
         closed_lanes_pub.publish(state_msg)
 
     def mode_request_cb(msg):
-        if msg.fleet_name is None or msg.fleet_name != fleet_name or msg.robot_name is None:
+        if (
+            msg.fleet_name is None
+            or msg.fleet_name != fleet_name
+            or msg.robot_name is None
+        ):
             return
 
         if msg.mode.mode == RobotMode.MODE_IDLE:
@@ -447,6 +472,7 @@ def ros_connections(node, robots, fleet_handle):
         mode_request_cb,
         qos_profile=qos_profile_system_default
     )
+
 
 if __name__ == '__main__':
     main(sys.argv)

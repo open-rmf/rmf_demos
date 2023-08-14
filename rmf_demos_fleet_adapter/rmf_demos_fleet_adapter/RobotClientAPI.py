@@ -25,6 +25,7 @@ import requests
 import enum
 from urllib.error import HTTPError
 
+
 class RobotAPIResult(enum.IntEnum):
     SUCCESS = 0
     """The request was successful"""
@@ -34,6 +35,7 @@ class RobotAPIResult(enum.IntEnum):
 
     IMPOSSIBLE = 2
     """The client connected but something about the request is impossible"""
+
 
 class RobotAPI:
     # The constructor below accepts parameters typically required to submit
@@ -53,13 +55,13 @@ class RobotAPI:
         return True
 
     def navigate(
-            self,
-            robot_name: str,
-            cmd_id: int,
-            pose,
-            map_name: str,
-            speed_limit=0.0
-        ):
+        self,
+        robot_name: str,
+        cmd_id: int,
+        pose,
+        map_name: str,
+        speed_limit=0.0
+    ):
         ''' Request the robot to navigate to pose:[x,y,theta] where x, y and
             and theta are in the robot's coordinate convention. This function
             should return True if the robot has accepted the request,
@@ -85,12 +87,12 @@ class RobotAPI:
         return False
 
     def start_activity(
-            self,
-            robot_name: str,
-            cmd_id: int,
-            activity: str,
-            label: str
-        ):
+        self,
+        robot_name: str,
+        cmd_id: int,
+        activity: str,
+        label: str
+    ):
         ''' Request the robot to begin a process. This is specific to the robot
             and the use case. For example, load/unload a cart for Deliverybot
             or begin cleaning a zone for a cleaning robot.'''
@@ -108,7 +110,10 @@ class RobotAPI:
                 print(f'Response: {response.json()}')
 
             if response.json()['success']:
-                return (RobotAPIResult.SUCCESS, response.json()['data']['path'])
+                return (
+                    RobotAPIResult.SUCCESS,
+                    response.json()['data']['path']
+                )
 
             # If we get a response with success=False, then
             return RobotAPIResult.IMPOSSIBLE

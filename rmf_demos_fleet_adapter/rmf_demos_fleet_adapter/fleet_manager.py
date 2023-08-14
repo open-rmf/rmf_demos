@@ -306,7 +306,11 @@ class FleetManager(Node):
 
         @app.post('/open-rmf/rmf_demos_fm/start_activity/',
                   response_model=Response)
-        async def start_activity(robot_name: str, cmd_id: int, request: Request):
+        async def start_activity(
+            robot_name: str,
+            cmd_id: int,
+            request: Request
+        ):
             response = {'success': False, 'msg': ''}
             if (
                 robot_name not in self.robots
