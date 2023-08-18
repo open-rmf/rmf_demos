@@ -173,10 +173,18 @@ Request URL: `http://127.0.0.1:22011/open-rmf/rmf_demos_fm/start_activity/?robot
 }
 ```
 
+The fleet manager will respond by indicating what path the robot will follow while performing the activity.
+
 ##### Response Body:
 ```json
 {
   "success": true,
-  "msg": ""
+  "msg": "",
+  "data": {
+    "path": {
+      "map_name": "L1",
+      "path": [ ... ]
+    }
+  }
 }
 ```
