@@ -15,7 +15,6 @@ setup(
         ('share/' + package_name, ['config.yaml']),
         (os.path.join('share', package_name, 'launch'),
             glob('launch/*.launch.xml')),
-
     ],
     install_requires=['setuptools', 'fastapi>=0.79.0', 'uvicorn>=0.18.2'],
     zip_safe=True,
@@ -29,6 +28,8 @@ setup(
         'console_scripts': [
             'fleet_adapter=rmf_demos_fleet_adapter.fleet_adapter:main',
             'fleet_manager=rmf_demos_fleet_adapter.fleet_manager:main',
+            'easy_fleet_adapter='
+            'rmf_demos_fleet_adapter.easy_fleet_adapter:main',
         ],
     },
 )

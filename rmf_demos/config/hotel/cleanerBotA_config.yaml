@@ -3,11 +3,6 @@
 
 rmf_fleet:
   name: "cleanerBotA"
-  fleet_manager:
-    ip: "127.0.0.1"
-    port: 22013
-    user: "some_user"
-    password: "some_password"
   limits:
     linear: [0.7, 0.5] # velocity, acceleration
     angular: [0.4, 1.0] # velocity, acceleration
@@ -30,40 +25,50 @@ rmf_fleet:
     power: 0.0 # W
   recharge_threshold: 0.20 # Battery level below which robots in this fleet will not operate
   recharge_soc: 1.0 # Battery level to which robots in this fleet should be charged up to during recharging tasks
+  max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
   publish_fleet_state: 10.0 # Publish frequency for fleet state, ensure that it is same as robot_state_update_frequency
   account_for_battery_drain: True
   task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
     loop: False
     delivery: False
-    clean: True
-    finishing_request: "park" # [park, charge, nothing]
+  actions: ["clean"]
+  finishing_request: "park" # [park, charge, nothing]
+  robots:
+    cleanerBotA_1:
+      charger: "cleanerbot_charger1"
+    cleanerBotA_2:
+      charger: "cleanerbot_charger2"
 
-# CleanerBotA CONFIG =================================================================
+fleet_manager:
+  ip: "127.0.0.1"
+  port: 22013
+  user: "some_user"
+  password: "some_password"
+  robot_state_update_frequency: 10.0
+  action_paths:
+    clean:
+      clean_lobby:
+        map_name: "L1"
+        path: [ [24.59, -35.49, 0.0],
+                [24.24, -38.77, 1.57],
+                [18.3, -38.62, 0.0],
+                [18.3, -35.3, 0.0],
+                [23.8, -35.45, 0.0] ]
+        finish_waypoint: "clean_lobby"
+      clean_waiting_area:
+        map_name: "L1"
+        path: [ [8.54, -21.93, 1.57],
+                [14.0, -23.25, 0.0],
+                [14.0, -24.7, 0.0],
+                [8.6, -24.7, 1.57],
+                [8.56, -23.27, 0.0] ]
+        finish_waypoint: "clean_waiting_area"
+      clean_restaurant:
+        map_name: "L1"
+        path: [ [14.2, -11.35, 1.57],
+                [16.5, -11.35, 1.57],
+                [17.8, -13.9, 0.0],
+                [12.8, -14.1, 0.0],
+                [12.86, -11.4, 0.0] ]
+        finish_waypoint: "clean_restaurant"
 
-robots:
-  # Here the user is expected to append the configuration for each robot in the
-  # fleet.
-  # Configuration for cleanerBotA_1
-  cleanerBotA_1:
-    robot_config:
-      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
-    rmf_config:
-      robot_state_update_frequency: 10.0
-      start:
-        map_name: "L1"
-        waypoint: "cleanerbot_charger1"
-        orientation: 0.0 # radians
-      charger:
-        waypoint: "cleanerbot_charger1"
-  # Configuration for cleanerBotA_2
-  cleanerBotA_2:
-    robot_config:
-      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
-    rmf_config:
-      robot_state_update_frequency: 10.0
-      start:
-        map_name: "L1"
-        waypoint: "cleanerbot_charger2"
-        orientation: 0.0 # radians
-      charger:
-        waypoint: "cleanerbot_charger2"

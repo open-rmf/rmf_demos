@@ -17,12 +17,15 @@
 import sys
 import uuid
 import argparse
-import json
+import asyncio
 
 import rclpy
 from rclpy.node import Node
-from rclpy.parameter import Parameter
-from rclpy.qos import qos_profile_system_default
+from rclpy.qos import QoSProfile
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSReliabilityPolicy as Reliability
+from rclpy.timer import Timer
 
 from rmf_fleet_msgs.msg import PathRequest, Location
 
@@ -47,9 +50,13 @@ class Requester(Node):
 
         self.args = parser.parse_args(argv[1:])
 
+        transient_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
         self.pub = self.create_publisher(
-          PathRequest, 'robot_path_requests',
-          qos_profile=qos_profile_system_default)
+          PathRequest, 'robot_path_requests', transient_qos)
 
         msg = PathRequest()
         msg.fleet_name = self.args.fleet
@@ -72,8 +79,16 @@ class Requester(Node):
 def main(argv=sys.argv):
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
-
     requester = Requester(args_without_ros)
+
+    timeout = asyncio.Future()
+
+    def trigger_timeout():
+        timeout.set_result(True)
+
+    timer = requester.create_timer(5.0, trigger_timeout)
+
+    rclpy.spin_until_future_complete(requester, timeout)
     rclpy.shutdown()
 
 
