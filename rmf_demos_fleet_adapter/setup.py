@@ -15,7 +15,6 @@ setup(
         ('share/' + package_name, ['config.yaml']),
         (os.path.join('share', package_name, 'launch'),
             glob('launch/*.launch.xml')),
-
     ],
     install_requires=['setuptools', 'fastapi>=0.79.0', 'uvicorn>=0.18.2'],
     zip_safe=True,
