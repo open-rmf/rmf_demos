@@ -52,11 +52,4 @@
     </include>
   </group>
 
-  <!-- Mock Docker Node, to provide CleanerBotA Fleet Adapter fix cleaning task paths -->
-  <group>
-    <let name="docking_config_file" value="$(find-pkg-share rmf_demos_tasks)/hotel_cleaner_config.yaml"/>
-    <node pkg="rmf_demos_tasks" exec="mock_docker" args="-c $(var docking_config_file)">
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-    </node>
-  </group>
 </launch>

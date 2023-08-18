@@ -17,23 +17,19 @@ import argparse
 import yaml
 import time
 import threading
-import datetime
+import asyncio
+import math
 
 import rclpy
 import rclpy.node
 from rclpy.parameter import Parameter
+from rclpy.duration import Duration
 
-import rmf_adapter as adpt
-import rmf_adapter.vehicletraits as traits
-import rmf_adapter.battery as battery
-import rmf_adapter.geometry as geometry
-import rmf_adapter.graph as graph
-import rmf_adapter.plan as plan
+import rmf_adapter
+from rmf_adapter import Adapter
+import rmf_adapter.easy_full_control as rmf_easy
 
-from rmf_task_msgs.msg import TaskProfile, TaskType
-from rmf_fleet_msgs.msg import LaneRequest, ClosedLanes
-
-from functools import partial
+from rmf_fleet_msgs.msg import LaneRequest, ClosedLanes, ModeRequest, RobotMode
 
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSHistoryPolicy as History
@@ -41,322 +37,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 from rclpy.qos import qos_profile_system_default
 
-from .RobotCommandHandle import RobotCommandHandle
-from .RobotClientAPI import RobotAPI
-
-# ------------------------------------------------------------------------------
-# Helper functions
-# ------------------------------------------------------------------------------
-
-
-def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
-    # Profile and traits
-    fleet_config = config_yaml['rmf_fleet']
-    profile = traits.Profile(geometry.make_final_convex_circle(
-        fleet_config['profile']['footprint']),
-        geometry.make_final_convex_circle(fleet_config['profile']['vicinity']))
-    vehicle_traits = traits.VehicleTraits(
-        linear=traits.Limits(*fleet_config['limits']['linear']),
-        angular=traits.Limits(*fleet_config['limits']['angular']),
-        profile=profile)
-    vehicle_traits.differential.reversible = fleet_config['reversible']
-
-    # Battery system
-    voltage = fleet_config['battery_system']['voltage']
-    capacity = fleet_config['battery_system']['capacity']
-    charging_current = fleet_config['battery_system']['charging_current']
-    battery_sys = battery.BatterySystem.make(
-        voltage, capacity, charging_current)
-
-    # Mechanical system
-    mass = fleet_config['mechanical_system']['mass']
-    moment = fleet_config['mechanical_system']['moment_of_inertia']
-    friction = fleet_config['mechanical_system']['friction_coefficient']
-    mech_sys = battery.MechanicalSystem.make(mass, moment, friction)
-
-    # Power systems
-    ambient_power_sys = battery.PowerSystem.make(
-        fleet_config['ambient_system']['power'])
-    tool_power_sys = battery.PowerSystem.make(
-        fleet_config['tool_system']['power'])
-
-    # Power sinks
-    motion_sink = battery.SimpleMotionPowerSink(battery_sys, mech_sys)
-    ambient_sink = battery.SimpleDevicePowerSink(
-        battery_sys, ambient_power_sys)
-    tool_sink = battery.SimpleDevicePowerSink(battery_sys, tool_power_sys)
-
-    nav_graph = graph.parse_graph(nav_graph_path, vehicle_traits)
-
-    # Adapter
-    fleet_name = fleet_config['name']
-    adapter = adpt.Adapter.make(f'{fleet_name}_fleet_adapter')
-    if use_sim_time:
-        adapter.node.use_sim_time()
-    assert adapter, ("Unable to initialize fleet adapter. Please ensure "
-                     "RMF Schedule Node is running")
-    adapter.start()
-    time.sleep(1.0)
-
-    node.declare_parameter('server_uri', rclpy.Parameter.Type.STRING)
-    server_uri = node.get_parameter(
-        'server_uri').get_parameter_value().string_value
-    if server_uri == "":
-        server_uri = None
-
-    fleet_handle = adapter.add_fleet(
-        fleet_name, vehicle_traits, nav_graph, server_uri)
-
-    fleet_state_update_frequency = fleet_config['publish_fleet_state']
-    fleet_handle.fleet_state_publish_period(
-        datetime.timedelta(seconds=1.0/fleet_state_update_frequency))
-    # Account for battery drain
-    drain_battery = fleet_config['account_for_battery_drain']
-    lane_merge_distance = fleet_config.get('lane_merge_distance', 0.1)
-    recharge_threshold = fleet_config['recharge_threshold']
-    recharge_soc = fleet_config['recharge_soc']
-    finishing_request = fleet_config['task_capabilities']['finishing_request']
-    node.get_logger().info(f"Finishing request: [{finishing_request}]")
-    # Set task planner params
-    ok = fleet_handle.set_task_planner_params(
-        battery_sys,
-        motion_sink,
-        ambient_sink,
-        tool_sink,
-        recharge_threshold,
-        recharge_soc,
-        drain_battery,
-        finishing_request)
-    assert ok, ("Unable to set task planner params")
-
-    task_capabilities = []
-    if fleet_config['task_capabilities']['loop']:
-        node.get_logger().info(
-            f"Fleet [{fleet_name}] is configured to perform Loop tasks")
-        task_capabilities.append(TaskType.TYPE_LOOP)
-    if fleet_config['task_capabilities']['delivery']:
-        node.get_logger().info(
-            f"Fleet [{fleet_name}] is configured to perform Delivery tasks")
-        task_capabilities.append(TaskType.TYPE_DELIVERY)
-    if fleet_config['task_capabilities']['clean']:
-        node.get_logger().info(
-            f"Fleet [{fleet_name}] is configured to perform Clean tasks")
-        task_capabilities.append(TaskType.TYPE_CLEAN)
-
-    # Callable for validating requests that this fleet can accommodate
-    def _task_request_check(task_capabilities, msg: TaskProfile):
-        if msg.description.task_type in task_capabilities:
-            return True
-        else:
-            return False
-
-    fleet_handle.accept_task_requests(
-        partial(_task_request_check, task_capabilities))
-
-    def _consider(description: dict):
-        confirm = adpt.fleet_update_handle.Confirmation()
-        confirm.accept()
-        return confirm
-
-    # Configure this fleet to perform any kind of teleop action
-    fleet_handle.add_performable_action("teleop", _consider)
-
-    def _updater_inserter(cmd_handle, update_handle):
-        """Insert a RobotUpdateHandle."""
-        cmd_handle.update_handle = update_handle
-
-        def _action_executor(category: str,
-                             description: dict,
-                             execution:
-                             adpt.robot_update_handle.ActionExecution):
-            with cmd_handle._lock:
-                if len(description) > 0 and\
-                        description in cmd_handle.graph.keys:
-                    cmd_handle.action_waypoint_index = \
-                        cmd_handle.find_waypoint(description).index
-                else:
-                    cmd_handle.action_waypoint_index = \
-                        cmd_handle.last_known_waypoint_index
-                cmd_handle.on_waypoint = None
-                cmd_handle.on_lane = None
-                cmd_handle.action_execution = execution
-        # Set the action_executioner for the robot
-        cmd_handle.update_handle.set_action_executor(_action_executor)
-        if ("max_delay" in cmd_handle.config.keys()):
-            max_delay = cmd_handle.config["max_delay"]
-            cmd_handle.node.get_logger().info(
-                f"Setting max delay to {max_delay}s")
-            cmd_handle.update_handle.set_maximum_delay(max_delay)
-        if (cmd_handle.charger_waypoint_index <
-                cmd_handle.graph.num_waypoints):
-            cmd_handle.update_handle.set_charger_waypoint(
-                cmd_handle.charger_waypoint_index)
-        else:
-            cmd_handle.node.get_logger().warn(
-                "Invalid waypoint supplied for charger. "
-                "Using default nearest charger in the map")
-
-    # Initialize robot API for this fleet
-    prefix = 'http://' + fleet_config['fleet_manager']['ip'] + \
-             ':' + str(fleet_config['fleet_manager']['port'])
-    api = RobotAPI(
-        prefix,
-        fleet_config['fleet_manager']['user'],
-        fleet_config['fleet_manager']['password'])
-
-    # Initialize robots for this fleet
-    robots = {}
-    missing_robots = config_yaml['robots']
-
-    def _add_fleet_robots():
-        while len(missing_robots) > 0:
-            time.sleep(0.2)
-            for robot_name in list(missing_robots.keys()):
-                node.get_logger().debug(f"Connecting to robot: {robot_name}")
-                data = api.data(robot_name)
-                if data is None:
-                    continue
-                if data['success']:
-                    node.get_logger().info(f"Initializing robot: {robot_name}")
-                    robots_config = config_yaml['robots'][robot_name]
-                    rmf_config = robots_config['rmf_config']
-                    robot_config = robots_config['robot_config']
-                    initial_waypoint = rmf_config['start']['waypoint']
-                    if 'position' in data['data']:
-                        initial_orientation = data['data']['position']['yaw']
-                    else:
-                        initial_orientation = \
-                            rmf_config['start']['orientation']
-
-                    starts = []
-                    time_now = adapter.now()
-                    # No need to offset robot and RMF crs for demos
-                    position = api.position(robot_name)
-                    if position is None:
-                        node.get_logger().info(
-                            f'Failed to get initial position of {robot_name}'
-                        )
-                        continue
-
-                    if (initial_waypoint is not None) and\
-                            (initial_orientation is not None):
-                        node.get_logger().info(
-                            f"Using provided initial waypoint "
-                            f"[{initial_waypoint}] "
-                            f"and orientation [{initial_orientation:.2f}] to "
-                            f"initialize starts for robot [{robot_name}]")
-                        # Get the waypoint index for initial_waypoint
-                        initial_waypoint_index = nav_graph.find_waypoint(
-                            initial_waypoint).index
-                        starts = [plan.Start(time_now,
-                                             initial_waypoint_index,
-                                             initial_orientation)]
-                    else:
-                        node.get_logger().info(
-                            f"Running compute_plan_starts for robot: "
-                            "{robot_name}")
-                        starts = plan.compute_plan_starts(
-                            nav_graph,
-                            rmf_config['start']['map_name'],
-                            position,
-                            time_now)
-
-                    if starts is None or len(starts) == 0:
-                        node.get_logger().error(
-                            f"Unable to determine StartSet for {robot_name}")
-                        continue
-
-                    robot = RobotCommandHandle(
-                        name=robot_name,
-                        fleet_name=fleet_name,
-                        config=robot_config,
-                        node=node,
-                        graph=nav_graph,
-                        vehicle_traits=vehicle_traits,
-                        map_name=rmf_config['start']['map_name'],
-                        start=starts[0],
-                        position=position,
-                        charger_waypoint=rmf_config['charger']['waypoint'],
-                        update_frequency=rmf_config.get(
-                            'robot_state_update_frequency', 1),
-                        lane_merge_distance=lane_merge_distance,
-                        adapter=adapter,
-                        api=api)
-
-                    if robot.initialized:
-                        robots[robot_name] = robot
-                        # Add robot to fleet
-                        fleet_handle.add_robot(robot,
-                                               robot_name,
-                                               profile,
-                                               [starts[0]],
-                                               partial(_updater_inserter,
-                                                       robot))
-                        node.get_logger().info(
-                            f"Successfully added new robot: {robot_name}")
-
-                    else:
-                        node.get_logger().error(
-                            f"Failed to initialize robot: {robot_name}")
-
-                    del missing_robots[robot_name]
-
-                else:
-                    pass
-                    node.get_logger().debug(
-                        f"{robot_name} not found, trying again...")
-        return
-
-    add_robots = threading.Thread(target=_add_fleet_robots, args=())
-    add_robots.start()
-
-    # Add LaneRequest callback
-    closed_lanes = []
-
-    def _lane_request_cb(msg):
-        if msg.fleet_name is None or msg.fleet_name != fleet_name:
-            return
-
-        fleet_handle.open_lanes(msg.open_lanes)
-        fleet_handle.close_lanes(msg.close_lanes)
-
-        newly_closed_lanes = []
-
-        for lane_idx in msg.close_lanes:
-            if lane_idx not in closed_lanes:
-                newly_closed_lanes.append(lane_idx)
-                closed_lanes.append(lane_idx)
-
-        for lane_idx in msg.open_lanes:
-            if lane_idx in closed_lanes:
-                closed_lanes.remove(lane_idx)
-
-        for robot_name, robot in robots.items():
-            robot.newly_closed_lanes(newly_closed_lanes)
-
-        state_msg = ClosedLanes()
-        state_msg.fleet_name = fleet_name
-        state_msg.closed_lanes = closed_lanes
-        closed_lanes_pub.publish(state_msg)
-
-    transient_qos = QoSProfile(
-        history=History.KEEP_LAST,
-        depth=1,
-        reliability=Reliability.RELIABLE,
-        durability=Durability.TRANSIENT_LOCAL)
-
-    node.create_subscription(
-        LaneRequest,
-        'lane_closure_requests',
-        _lane_request_cb,
-        qos_profile=qos_profile_system_default)
-
-    closed_lanes_pub = node.create_publisher(
-        ClosedLanes,
-        'closed_lanes',
-        qos_profile=transient_qos)
-
-    return adapter
+from .RobotClientAPI import RobotAPI, RobotUpdateData, RobotAPIResult
 
 
 # ------------------------------------------------------------------------------
@@ -365,7 +46,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
 def main(argv=sys.argv):
     # Init rclpy and adapter
     rclpy.init(args=argv)
-    adpt.init_rclcpp()
+    rmf_adapter.init_rclcpp()
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
 
     parser = argparse.ArgumentParser(
@@ -383,24 +64,88 @@ def main(argv=sys.argv):
     config_path = args.config_file
     nav_graph_path = args.nav_graph
 
-    # Load config and nav graph yamls
+    fleet_config = rmf_easy.FleetConfiguration.from_config_files(
+        config_path, nav_graph_path
+    )
+    assert fleet_config, f'Failed to parse config file [{config_path}]'
+
+    # Parse the yaml in Python to get the fleet_manager info
     with open(config_path, "r") as f:
         config_yaml = yaml.safe_load(f)
 
     # ROS 2 node for the command handle
-    fleet_name = config_yaml['rmf_fleet']['name']
+    fleet_name = fleet_config.fleet_name
     node = rclpy.node.Node(f'{fleet_name}_command_handle')
+    adapter = Adapter.make(f'{fleet_name}_fleet_adapter')
+    assert adapter, (
+        'Unable to initialize fleet adapter. '
+        'Please ensure RMF Schedule Node is running'
+    )
 
     # Enable sim time for testing offline
     if args.use_sim_time:
         param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
         node.set_parameters([param])
+        adapter.node.use_sim_time()
 
-    adapter = initialize_fleet(
-        config_yaml,
-        nav_graph_path,
-        node,
-        args.use_sim_time)
+    adapter.start()
+    time.sleep(1.0)
+
+    node.declare_parameter('server_uri', '')
+    server_uri = node.get_parameter(
+        'server_uri'
+    ).get_parameter_value().string_value
+    if server_uri == '':
+        server_uri = None
+
+    fleet_config.server_uri = server_uri
+    fleet_handle = adapter.add_easy_fleet(fleet_config)
+
+    # Initialize robot API for this fleet
+    fleet_mgr_yaml = config_yaml['fleet_manager']
+    update_period = 1.0/fleet_mgr_yaml.get(
+        'robot_state_update_frequency', 10.0
+    )
+    api_prefix = (
+        'http://' + fleet_mgr_yaml['ip'] + ':'
+        + str(fleet_mgr_yaml['port'])
+    )
+    api = RobotAPI(
+        api_prefix,
+        fleet_mgr_yaml['user'],
+        fleet_mgr_yaml['password']
+    )
+
+    robots = {}
+    for robot_name in fleet_config.known_robots:
+        robot_config = fleet_config.get_known_robot_configuration(robot_name)
+        robots[robot_name] = RobotAdapter(
+            robot_name, robot_config, node, api, fleet_handle
+        )
+
+    def update_loop():
+        asyncio.set_event_loop(asyncio.new_event_loop())
+        while rclpy.ok():
+            now = node.get_clock().now()
+
+            # Update all the robots in parallel using a thread pool
+            update_jobs = []
+            for robot in robots.values():
+                update_jobs.append(update_robot(robot))
+
+            asyncio.get_event_loop().run_until_complete(
+                asyncio.wait(update_jobs)
+            )
+
+            next_wakeup = now + Duration(nanoseconds=update_period*1e9)
+            while node.get_clock().now() < next_wakeup:
+                time.sleep(0.001)
+
+    update_thread = threading.Thread(target=update_loop, args=())
+    update_thread.start()
+
+    # Connect to the extra ROS2 topics that are relevant for the adapter
+    ros_connections(node, robots, fleet_handle)
 
     # Create executor for the command handle node
     rclpy_executor = rclpy.executors.SingleThreadedExecutor()
@@ -413,6 +158,320 @@ def main(argv=sys.argv):
     node.destroy_node()
     rclpy_executor.shutdown()
     rclpy.shutdown()
+
+
+class RobotAdapter:
+    def __init__(
+        self,
+        name: str,
+        configuration,
+        node,
+        api: RobotAPI,
+        fleet_handle
+    ):
+        self.name = name
+        self.execution = None
+        self.teleoperation = None
+        self.cmd_id = 0
+        self.update_handle = None
+        self.configuration = configuration
+        self.node = node
+        self.api = api
+        self.fleet_handle = fleet_handle
+        self.override = None
+        self.issue_cmd_thread = None
+        self.cancel_cmd_event = threading.Event()
+
+    def update(self, state, data: RobotUpdateData):
+        activity_identifier = None
+        if self.execution:
+            if data.is_command_completed(self.cmd_id):
+                self.execution.finished()
+                self.execution = None
+                self.teleoperation = None
+            else:
+                activity_identifier = self.execution.identifier
+
+        if self.teleoperation is not None:
+            self.teleoperation.update(data)
+
+        self.update_handle.update(state, activity_identifier)
+
+    def make_callbacks(self):
+        return rmf_easy.RobotCallbacks(
+            lambda destination, execution: self.navigate(
+                destination, execution
+            ),
+            lambda activity: self.stop(activity),
+            lambda category, description, execution: self.execute_action(
+                category, description, execution
+            )
+        )
+
+    def navigate(self, destination, execution):
+        self.cmd_id += 1
+        self.execution = execution
+        self.node.get_logger().info(
+            f'Commanding [{self.name}] to navigate to {destination.position} '
+            f'on map [{destination.map}]: cmd_id {self.cmd_id}'
+        )
+
+        if destination.dock is not None:
+            self.attempt_cmd_until_success(
+                cmd=self.perform_docking,
+                args=(destination,)
+            )
+            return
+
+        self.attempt_cmd_until_success(
+            cmd=self.api.navigate,
+            args=(
+                self.name,
+                self.cmd_id,
+                destination.position,
+                destination.map,
+                destination.speed_limit
+            )
+        )
+
+    def stop(self, activity):
+        if self.execution is not None:
+            if self.execution.identifier.is_same(activity):
+                self.execution = None
+                self.attempt_cmd_until_success(
+                    cmd=self.api.stop,
+                    args=(self.name, self.cmd_id)
+                )
+
+    def execute_action(self, category: str, description: dict, execution):
+        self.cmd_id += 1
+        self.execution = execution
+
+        match category:
+            case 'teleop':
+                self.teleoperation = Teleoperation(execution)
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_teleop,
+                    args=(self.name, True)
+                )
+            case 'clean':
+                self.attempt_cmd_until_success(
+                    cmd=self.perform_clean,
+                    args=(description['zone'],)
+                )
+
+    def finish_action(self):
+        # This is triggered by a ModeRequest callback which allows human
+        # operators to manually change the operational mode of the robot. This
+        # is typically used to indicate when teleoperation has finished.
+        if self.execution is not None:
+            self.execution.finished()
+            self.execution = None
+            self.attempt_cmd_until_success(
+                cmd=self.api.toggle_teleop,
+                args=(self.name, False)
+            )
+
+    def perform_docking(self, destination):
+        match self.api.start_activity(
+            self.name,
+            self.cmd_id,
+            'dock',
+            destination.dock()
+        ):
+            case (RobotAPIResult.SUCCESS, path):
+                self.override = self.execution.override_schedule(
+                    path['map_name'],
+                    path['path']
+                )
+                return True
+            case RobotAPIResult.RETRY:
+                return False
+            case RobotAPIResult.IMPOSSIBLE:
+                # If the fleet manager does not know this dock name, then treat
+                # it as a regular navigation request
+                return self.api.navigate(
+                    self.name,
+                    self.cmd_id,
+                    destination.position,
+                    destination.map,
+                    destination.speed_limit
+                )
+
+    def perform_clean(self, zone):
+        match self.api.start_activity(self.name, self.cmd_id, 'clean', zone):
+            case (RobotAPIResult.SUCCESS, path):
+                self.node.get_logger().info(
+                    f'Commanding [{self.name}] to clean zone [{zone}]'
+                )
+                self.override = self.execution.override_schedule(
+                    path['map_name'],
+                    path['path']
+                )
+                return True
+            case RobotAPIResult.RETRY:
+                return False
+            case RobotAPIResult.IMPOSSIBLE:
+                self.node.get_logger().error(
+                    f'Fleet manager for [{self.name}] does not know how to '
+                    f'clean zone [{zone}]. We will terminate the activity.'
+                )
+                self.execution.finished()
+                self.execution = None
+                return True
+
+    def attempt_cmd_until_success(self, cmd, args):
+        self.cancel_cmd_attempt()
+
+        def loop():
+            while not cmd(*args):
+                self.node.get_logger().warn(
+                    f'Failed to contact fleet manager for robot {self.name}'
+                )
+                if self.cancel_cmd_event.wait(1.0):
+                    break
+
+        self.issue_cmd_thread = threading.Thread(
+            target=loop,
+            args=()
+        )
+        self.issue_cmd_thread.start()
+
+    def cancel_cmd_attempt(self):
+        if self.issue_cmd_thread is not None:
+            self.cancel_cmd_event.set()
+            if self.issue_cmd_thread.is_alive():
+                self.issue_cmd_thread.join()
+                self.issue_cmd_thread = None
+        self.cancel_cmd_event.clear()
+
+
+class Teleoperation:
+    def __init__(self, execution):
+        self.execution = execution
+        self.override = None
+        self.last_position = None
+
+    def update(self, data: RobotUpdateData):
+        if self.last_position is None:
+            print(
+                'about to override schedule with '
+                f'{data.map}: {[data.position]}'
+            )
+            self.override = self.execution.override_schedule(
+                data.map, [data.position], 30.0
+            )
+            self.last_position = data.position
+        else:
+            dx = self.last_position[0] - data.position[0]
+            dy = self.last_position[1] - data.position[1]
+            dist = math.sqrt(dx*dx + dy*dy)
+            if dist > 0.1:
+                print('about to replace override schedule')
+                self.override = self.execution.override_schedule(
+                    data.map, [data.position], 30.0
+                )
+                self.last_position = data.position
+
+
+# Parallel processing solution derived from
+# https://stackoverflow.com/a/59385935
+def parallel(f):
+    def run_in_parallel(*args, **kwargs):
+        return asyncio.get_event_loop().run_in_executor(
+            None, f, *args, **kwargs
+        )
+
+    return run_in_parallel
+
+
+@parallel
+def update_robot(robot: RobotAdapter):
+    data = robot.api.get_data(robot.name)
+    if data is None:
+        return
+
+    state = rmf_easy.RobotState(
+        data.map,
+        data.position,
+        data.battery_soc
+    )
+
+    if robot.update_handle is None:
+        robot.update_handle = robot.fleet_handle.add_robot(
+            robot.name,
+            state,
+            robot.configuration,
+            robot.make_callbacks()
+        )
+        return
+
+    robot.update(state, data)
+
+
+def ros_connections(node, robots, fleet_handle):
+    fleet_name = fleet_handle.more().fleet_name
+
+    transient_qos = QoSProfile(
+        history=History.KEEP_LAST,
+        depth=1,
+        reliability=Reliability.RELIABLE,
+        durability=Durability.TRANSIENT_LOCAL
+    )
+
+    closed_lanes_pub = node.create_publisher(
+        ClosedLanes,
+        'closed_lanes',
+        qos_profile=transient_qos
+    )
+
+    closed_lanes = set()
+
+    def lane_request_cb(msg):
+        if msg.fleet_name is None or msg.fleet_name != fleet_name:
+            return
+
+        fleet_handle.open_lanes(msg.open_lanes)
+        fleet_handle.close_lanes(msg.close_lanes)
+
+        for lane_idx in msg.close_lanes:
+            closed_lanes.add(lane_idx)
+
+        for lane_idx in msg.open_lanes:
+            closed_lanes.remove(lane_idx)
+
+        state_msg = ClosedLanes()
+        state_msg.fleet_name = fleet_name
+        state_msg.closed_lanes = list(closed_lanes)
+        closed_lanes_pub.publish(state_msg)
+
+    def mode_request_cb(msg):
+        if (
+            msg.fleet_name is None
+            or msg.fleet_name != fleet_name
+            or msg.robot_name is None
+        ):
+            return
+
+        if msg.mode.mode == RobotMode.MODE_IDLE:
+            robot = robots.get(msg.robot_name)
+            if robot is None:
+                return
+            robot.finish_action()
+
+    node.create_subscription(
+        LaneRequest,
+        'lane_closure_requests',
+        lane_request_cb,
+        qos_profile=qos_profile_system_default
+    )
+
+    node.create_subscription(
+        ModeRequest,
+        'action_execution_notice',
+        mode_request_cb,
+        qos_profile=qos_profile_system_default
+    )
 
 
 if __name__ == '__main__':
