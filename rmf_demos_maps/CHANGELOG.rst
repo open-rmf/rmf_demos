@@ -2,6 +2,11 @@
 Changelog for package rmf_demos_maps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* EasyFullControl integration with rmf_demos (`#158 <https://github.com/open-rmf/rmf_demos/pull/158>`_)
+* Contributors: Aaron Chong, Grey, Xiyu, Yadunund
+
 2.2.1 (2023-08-10)
 ------------------
 * Fix gz classic model download (`#185 <https://github.com/open-rmf/rmf_demos/pull/185>`_)
