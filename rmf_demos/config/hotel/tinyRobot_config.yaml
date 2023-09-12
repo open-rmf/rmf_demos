@@ -34,6 +34,9 @@ rmf_fleet:
   robots:
     tinyBot_1:
       charger: "tinybot_charger"
+  lift_emergency_levels:
+    Lift1: "L1"
+    Lift2: "L3"
 
 fleet_manager:
   ip: "127.0.0.1"

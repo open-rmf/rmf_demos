@@ -35,6 +35,9 @@ rmf_fleet:
   robots:
     deliveryBot_1:
       charger: "deliverybot_charger"
+  lift_emergency_levels:
+    Lift1: "L1"
+    Lift2: "L3"
 
 fleet_manager:
   ip: "127.0.0.1"

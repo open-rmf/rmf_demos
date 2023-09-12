@@ -38,6 +38,10 @@ rmf_fleet:
       charger: "cleanerbot_charger1"
     cleanerBotA_2:
       charger: "cleanerbot_charger2"
+  lift_emergency_levels:
+    Lift1: "L1"
+    Lift2: "L3"
+
 
 fleet_manager:
   ip: "127.0.0.1"
