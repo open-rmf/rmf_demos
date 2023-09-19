@@ -6,6 +6,7 @@
   <arg name="config_file" description="The config file that provides important parameters for setting up the adapter"/>
   <arg name="nav_graph_file" description="The graph that this fleet should use for navigation"/>
   <arg name="server_uri" default="" description="The URI of the api server to transmit state and task information."/>
+  <arg name="easy_fleet" default="false" description="Set to true if using the EasyFullControl fleet adapter"/>
   <arg name="output" default="screen"/>
 
   <!-- Fleet manager -->
@@ -17,27 +18,54 @@
     <param name="use_sim_time" value="$(var use_sim_time)"/>
   </node>
 
-  <!-- Fleet adapter -->
-  <group if="$(var use_sim_time)">
-    <node pkg="rmf_demos_fleet_adapter"
-          exec="fleet_adapter"
-          args="-c $(var config_file) -n $(var nav_graph_file) -sim"
-          output="both">
+  <!-- EasyFullControl fleet adapter -->
+  <group if="$(var easy_fleet)">
+    <group if="$(var use_sim_time)">
+      <node pkg="rmf_demos_fleet_adapter"
+            exec="easy_fleet_adapter"
+            args="-c $(var config_file) -n $(var nav_graph_file) -sim"
+            output="both">
 
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-      <param name="server_uri" value="$(var server_uri)"/>
-    </node>
+        <param name="use_sim_time" value="$(var use_sim_time)"/>
+        <param name="server_uri" value="$(var server_uri)"/>
+      </node>
+    </group>
+
+    <group unless="$(var use_sim_time)">
+      <node pkg="rmf_demos_fleet_adapter"
+            exec="easy_fleet_adapter"
+            args="-c $(var config_file) -n $(var nav_graph_file)"
+            output="both">
+
+        <param name="use_sim_time" value="$(var use_sim_time)"/>
+        <param name="server_uri" value="$(var server_uri)"/>
+      </node>
+    </group>
   </group>
 
-  <group unless="$(var use_sim_time)">
-    <node pkg="rmf_demos_fleet_adapter"
-          exec="fleet_adapter"
-          args="-c $(var config_file) -n $(var nav_graph_file)"
-          output="both">
+  <!-- Fleet adapter -->
+  <group unless="$(var easy_fleet)">
+    <group if="$(var use_sim_time)">
+      <node pkg="rmf_demos_fleet_adapter"
+            exec="fleet_adapter"
+            args="-c $(var config_file) -n $(var nav_graph_file) -sim"
+            output="both">
 
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-      <param name="server_uri" value="$(var server_uri)"/>
-    </node>
+        <param name="use_sim_time" value="$(var use_sim_time)"/>
+        <param name="server_uri" value="$(var server_uri)"/>
+      </node>
+    </group>
+
+    <group unless="$(var use_sim_time)">
+      <node pkg="rmf_demos_fleet_adapter"
+            exec="fleet_adapter"
+            args="-c $(var config_file) -n $(var nav_graph_file)"
+            output="both">
+
+        <param name="use_sim_time" value="$(var use_sim_time)"/>
+        <param name="server_uri" value="$(var server_uri)"/>
+      </node>
+    </group>
   </group>
 
 </launch>
