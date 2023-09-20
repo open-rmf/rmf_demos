@@ -2,6 +2,11 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* EasyFullControl integration with rmf_demos (`#195 <https://github.com/open-rmf/rmf_demos/pull/195>`_)
+* Contributors: Aaron Chong, Grey, Xiyu, Yadunund
+
 2.1.1 (2023-08-10)
 ------------------
 

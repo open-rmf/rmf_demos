@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_gz_classic
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 2.1.1 (2023-08-10)
 ------------------
 
