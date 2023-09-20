@@ -2,8 +2,8 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.1.2 (2023-09-20)
+------------------
 * EasyFullControl integration with rmf_demos (`#195 <https://github.com/open-rmf/rmf_demos/pull/195>`_)
 * Contributors: Aaron Chong, Grey, Xiyu, Yadunund
 
