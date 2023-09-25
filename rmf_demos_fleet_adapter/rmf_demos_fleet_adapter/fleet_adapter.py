@@ -198,7 +198,7 @@ class RobotAdapter:
         self.update_handle.update(state, activity_identifier)
 
     def make_callbacks(self):
-        return rmf_easy.RobotCallbacks(
+        callbacks = rmf_easy.RobotCallbacks(
             lambda destination, execution: self.navigate(
                 destination, execution
             ),
@@ -207,6 +207,11 @@ class RobotAdapter:
                 category, description, execution
             )
         )
+
+        callbacks.localize = lambda estimate, execution: self.localize(
+            estimate, execution
+        )
+        return callbacks
 
     def navigate(self, destination, execution):
         self.cmd_id += 1
@@ -242,6 +247,16 @@ class RobotAdapter:
                     cmd=self.api.stop,
                     args=(self.name, self.cmd_id)
                 )
+
+    def localize(self, _, execution):
+        def print_and_wait(execution):
+            print(f'Localizing {self.name} ...')
+            time.sleep(2.0)
+            print(f'... Done localizing {self.name}')
+            execution.finished()
+        localize = threading.Thread(target=print_and_wait, args=(execution,))
+        localize.run()
+
 
     def execute_action(self, category: str, description: dict, execution):
         self.cmd_id += 1
