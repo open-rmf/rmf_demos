@@ -9,7 +9,7 @@ rmf_fleet:
   profile: # Robot profile is modelled as a circle
     footprint: 0.6 # radius in m
     vicinity: 0.8 # radius in m
-  reversible: True # whether robots in this fleet can reverse
+  reversible: False # whether robots in this fleet can reverse
   # TODO Update battery parameters with actual specs
   battery_system:
     voltage: 24.0 # V
@@ -38,6 +38,7 @@ rmf_fleet:
   lift_emergency_levels:
     Lift1: "L1"
     Lift2: "L3"
+  max_merge_lane_distance: 1.5
 
 fleet_manager:
   ip: "127.0.0.1"
@@ -45,3 +46,31 @@ fleet_manager:
   user: "some_user"
   password: "some_password"
   robot_state_update_frequency: 10.0
+  action_paths:
+    dock:
+      enter_Lift2_L1:
+        map_name: "L1"
+        path: [
+          [16.9825, -21.7710, -1.57],
+          [16.9825, -24.0334, -1.57],
+          [16.9825, -24.0334, 1.57]
+        ]
+      enter_Lift2_L2:
+        map_name: "L2"
+        path: [
+          [16.9825, -21.7710, -1.57],
+          [16.9825, -24.0334, -1.57],
+          [16.9825, -24.0334, 1.57]
+        ]
+      exit_Lift2_L1:
+        map_name: "L1"
+        path: [
+          [16.9825, -24.0334, 1.57],
+          [17.0301, -21.6304, 1.57]
+        ]
+      exit_Lift2_L2:
+        map_name: "L2"
+        path: [
+          [16.9825, -24.0334, 1.57],
+          [17.0301, -21.6304, 1.57]
+        ]

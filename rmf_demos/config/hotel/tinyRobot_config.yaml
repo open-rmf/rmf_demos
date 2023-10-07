@@ -43,3 +43,11 @@ fleet_manager:
   port: 22011
   user: "some_user"
   password: "some_password"
+  action_paths:
+    dock:
+      enter_Lift2:
+        map_name: "L1"
+        path: [
+          [16.9825, -21.7710, -1.57],
+          [16.9825, -24.8334, 1.57]
+        ]

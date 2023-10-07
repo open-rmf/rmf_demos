@@ -211,10 +211,6 @@ class RobotAdapter:
     def navigate(self, destination, execution):
         self.cmd_id += 1
         self.execution = execution
-        self.node.get_logger().info(
-            f'Commanding [{self.name}] to navigate to {destination.position} '
-            f'on map [{destination.map}]: cmd_id {self.cmd_id}'
-        )
 
         if destination.dock is not None:
             self.attempt_cmd_until_success(
@@ -222,6 +218,19 @@ class RobotAdapter:
                 args=(destination,)
             )
             return
+
+        if destination.inside_lift is not None:
+            self.node.get_logger().info(
+                f'IGNORING navigate COMMAND TAKING PLACE INSIDE LIFT {destination.inside_lift}'
+            )
+            self.execution = None
+            execution.finished()
+            return
+
+        self.node.get_logger().info(
+            f'Commanding [{self.name}] to navigate to {destination.position} '
+            f'on map [{destination.map}]: cmd_id {self.cmd_id}'
+        )
 
         self.attempt_cmd_until_success(
             cmd=self.api.navigate,
@@ -277,13 +286,19 @@ class RobotAdapter:
             self.name,
             self.cmd_id,
             'dock',
-            destination.dock()
+            destination.dock
         ):
             case (RobotAPIResult.SUCCESS, path):
-                self.override = self.execution.override_schedule(
-                    path['map_name'],
-                    path['path']
+                self.node.get_logger().info(
+                    f'Commanding [{self.name}] to dock using [{destination.dock}]'
                 )
+                self.node.get_logger().info(
+                    f'Path: {path["path"]}'
+                )
+                # self.override = self.execution.override_schedule(
+                #     path['map_name'],
+                #     path['path']
+                # )
                 return True
             case RobotAPIResult.RETRY:
                 return False
