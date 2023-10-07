@@ -19,7 +19,7 @@
   </node>
 
   <!-- EasyFullControl fleet adapter -->
-  <!-- <group if="$(var easy_fleet)">
+  <group if="$(var easy_fleet)">
     <group if="$(var use_sim_time)">
       <node pkg="rmf_demos_fleet_adapter"
             exec="easy_fleet_adapter"
@@ -41,10 +41,10 @@
         <param name="server_uri" value="$(var server_uri)"/>
       </node>
     </group>
-  </group> -->
+  </group>
 
   <!-- Fleet adapter -->
-  <!-- <group unless="$(var easy_fleet)">
+  <group unless="$(var easy_fleet)">
     <group if="$(var use_sim_time)">
       <node pkg="rmf_demos_fleet_adapter"
             exec="fleet_adapter"
@@ -66,6 +66,6 @@
         <param name="server_uri" value="$(var server_uri)"/>
       </node>
     </group>
-  </group> -->
+  </group>
 
 </launch>
