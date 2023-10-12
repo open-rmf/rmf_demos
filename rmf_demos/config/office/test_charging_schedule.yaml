@@ -1,0 +1,6 @@
+tinyRobot:
+  "00:00": { tinyRobot1: tinyRobot1_charger, tinyRobot2: tinyRobot2_charger }
+  "00:01": { tinyRobot1: tinyRobot2_charger, tinyRobot2: tinyRobot1_charger }
+  "00:02": { tinyRobot1: hardware_2 }
+  "00:03": { tinyRobot2: supplies }
+  "00:04": { tinyRobot1: tinyRobot1_charger, tinyRobot2: tinyRobot2_charger }
