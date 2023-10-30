@@ -4,28 +4,33 @@
         "cleanerBotA":{
             "icons":{
                 "cleanerBotA":"/icons/cleanerBotA.png"
-            }
+            },
+            "scale": 0.01
         },
         "cleanerBotE":{
             "icons":{
                 "cleanerBotE":"/icons/cleanerBotE.png"
-            }
+            },
+            "scale": 0.01
         },
         "caddy":{
             "icons":{
                 "caddy":"/icons/caddy.png"
-            }
+            },
+            "scale": 0.01
         },
         "deliveryRobot":{
             "icons":{
                 "deliveryRobot":"/icons/deliveryRobot.png"
-            }
+            },
+            "scale": 0.01
         },
         "tinyRobot":{
             "icons":{
                 "tinyRobot":"/icons/tinyRobot.png"
-            }
-        }
+            },
+            "scale": 0.01
+        },
     },
     "logos":{
         "headerLogo":{
