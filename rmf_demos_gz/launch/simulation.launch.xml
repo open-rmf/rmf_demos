@@ -23,26 +23,26 @@
   <let name="ign_headless" unless="$(var headless)" value="" />
 
   <group unless="$(var use_tpe)">
-    <executable cmd="ign gazebo --force-version $(var ignition_version) $(var ign_headless) $(var tpe_engine) -r -v 4 $(var world_path)" output="both">
-      <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
-      <env name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
-      <env name="IGN_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
+    <executable cmd="gz sim $(var ign_headless) $(var tpe_engine) -r $(var world_path)" output="both">
+      <env name="GZ_SIM_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
+      <env name="GZ_SIM_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
+      <env name="GZ_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
       <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
     </executable>
   </group>
 
   <group if ="$(var use_tpe)">
-    <executable cmd="ign gazebo $(var ign_headless) --physics-engine ignition-physics-tpe-plugin -r -v 4 $(var world_path)" output="both">
-      <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
-      <env name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
-      <env name="IGN_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
+    <executable cmd="gz sim $(var ign_headless) --physics-engine ignition-physics-tpe-plugin -r -v 4 $(var world_path)" output="both">
+      <env name="GZ_SIM_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
+      <env name="GZ_SIM_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
+      <env name="GZ_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
       <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
     </executable>
   </group>
 
   <!-- ros_ign bridge for simulation clock -->
-  <node pkg="ros_ign_bridge" exec="parameter_bridge"
-    args="/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock"
+  <node pkg="ros_gz_bridge" exec="parameter_bridge"
+    args="/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"
     />
 
 </launch>

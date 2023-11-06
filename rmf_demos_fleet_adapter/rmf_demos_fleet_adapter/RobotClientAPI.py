@@ -170,10 +170,11 @@ class RobotAPI:
             url = self.prefix +\
                 f'/open-rmf/rmf_demos_fm/status?robot_name={robot_name}'
         try:
+            print(f'Requesting url {url}')
             response = requests.get(url, timeout=self.timeout)
             response.raise_for_status()
-            if self.debug:
-                print(f'Response: {response.json()}')
+            #if self.debug:
+            print(f'Response: {response.json()}')
             if robot_name is not None:
                 return RobotUpdateData(response.json()['data'])
             else:

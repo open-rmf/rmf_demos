@@ -34,6 +34,7 @@ setup(
           'dispatch_teleop = rmf_demos_tasks.dispatch_teleop:main',
           'mock_docker = rmf_demos_tasks.mock_docker:main',
           'teleop_robot = rmf_demos_tasks.teleop_robot:main',
+          'reservation_dance = rmf_demos_tasks.reservation_dance:main'
         ],
     },
 )

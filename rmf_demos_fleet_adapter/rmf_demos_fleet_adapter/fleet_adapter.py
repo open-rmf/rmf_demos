@@ -82,6 +82,8 @@ def main(argv=sys.argv):
         'Please ensure RMF Schedule Node is running'
     )
 
+    node.get_logger().info("Reading config from "+ config_path)
+
     # Enable sim time for testing offline
     if args.use_sim_time:
         param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
@@ -118,6 +120,7 @@ def main(argv=sys.argv):
 
     robots = {}
     for robot_name in fleet_config.known_robots:
+        node.get_logger().info("Adding robot "+robot_name)
         robot_config = fleet_config.get_known_robot_configuration(robot_name)
         robots[robot_name] = RobotAdapter(
             robot_name, robot_config, node, api, fleet_handle

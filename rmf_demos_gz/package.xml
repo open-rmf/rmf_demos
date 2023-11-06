@@ -17,9 +17,9 @@
 
   <exec_depend>teleop_twist_keyboard</exec_depend>
   <exec_depend>launch_xml</exec_depend>
-  <exec_depend>ignition-fortress</exec_depend>
+  <!--<exec_depend>ignition-fortress</exec_depend>-->
 
-  <exec_depend>ros_ign_bridge</exec_depend>
+  <!--<exec_depend>ros_ign_bridge</exec_depend>-->
 
   <export>
     <build_type>ament_cmake</build_type>
