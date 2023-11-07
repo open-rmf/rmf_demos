@@ -32,6 +32,8 @@ from rclpy.qos import QoSProfile, QoSDurabilityPolicy
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
+from rclpy.time import Time
+from rclpy.duration import Duration
 
 from rmf_task_msgs.msg import ApiRequest, ApiResponse
 from rmf_chope_msgs.srv import FixedTimeRequest, ClaimReservation
@@ -52,12 +54,17 @@ class AgentState(Enum):
     PARKED = 6
     SWAP_PARKING = 7
 
-parking_spots = {"pantry", "tinyRobot1_charger", "lounge", "supplies"}
+class ParkingState(Enum):
+    RESERVERED = 0
+    NEXT_BID = 1
+
+parking_spots = {"pantry", "lounge", "supplies"}
 chargers = {"pantry"}
 
 CHARGE_DURATION = 10
 CLOCK_RATE = 0.1
 OPERATION_DURATION = 60
+PARKING_SPOT_HOLD_DUR = 5
 
 class ChargerDance(Node):
 
@@ -101,13 +108,26 @@ class ChargerDance(Node):
             Graph, 'nav_graphs', self.get_nav_graph, latching_qos
         )
 
+        transient_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
+
+        self.pub = self.create_publisher(
+          ApiRequest, 'task_api_requests', transient_qos
+        )
+
         self.timer = self.create_timer(CLOCK_RATE, self.updating_battery_state)
+        self.poll_parking = self.create_timer(PARKING_SPOT_HOLD_DUR, self.parking_manager)
 
         self.nav_graph = None
 
         self.distance_to_location = {}
 
         self.robot_location = None
+
+        self.parking_state = ParkingState.NEXT_BID
 
     def get_nav_graph(self, building_msgs: Graph):
         print("Got graph")
@@ -120,7 +140,6 @@ class ChargerDance(Node):
             y_loc = robot_state_msgs.location.y
 
             location = None
-
             for node in self.nav_graph.vertices:
                 dist = (x_loc - node.x) ** 2 + (y_loc - node.y) ** 2
                 self.distance_to_location[node.name] = dist
@@ -130,17 +149,38 @@ class ChargerDance(Node):
             self.robot_location = location
 
     def get_estimated_use_time(self):
-        return self.current_battery / 100 * OPERATION_DURATION + self.get_clock().now()
+        seconds = self.current_battery / 100 * OPERATION_DURATION + self.get_clock().now().nanoseconds * 1e-9
+        nanoseconds = seconds * 1e9 - math.floor(seconds) * 1e9
+        seconds = math.floor(seconds)
+        return Time(seconds=seconds, nanoseconds=nanoseconds).to_msg()
 
-    def generate_alternatives(self, parameters):
+    def generate_alternatives(self, parameters, start_time, duration):
         self.alternatives = []
         for alt in parameters:
             alternative = FixedTimeReservationAlt()
-            alternative.resource_name.data = alt
+            alternative.resource_name = alt
             #Dumb heuristic. Nearest spot (euclidean).
-            alternative.cost = self.distance_to_location[node.name]
-            alternative.start_time = self.get_estimated_use_time()
+            alternative.cost = self.distance_to_location[alt]
+            alternative.start_time = start_time
+            alternative.has_end = True
+            alternative.duration = Duration(seconds=duration).to_msg()
             self.alternatives.append(alternative)
+        print(f"Generated {len(self.alternatives)} alternatives")
+
+    def parking_manager(self):
+        if self.state == AgentState.PARKED:
+            if self.parking_state == ParkingState.NEXT_BID:
+                claim_time = self.get_clock().now() + Duration(seconds=PARKING_SPOT_HOLD_DUR)
+                self.generate_alternatives(parking_spots, claim_time.to_msg(), PARKING_SPOT_HOLD_DUR)
+                request = FixedTimeRequest.Request()
+                request.alternatives = self.alternatives
+                fut = self.reservation_request_client.call_async(request)
+                fut.add_done_callback(self.on_get_assigned_ticket)
+                self.parking_state = ParkingState.RESERVERED
+            else:
+                print("Claiming charger spot")
+                self.claim_and_rush_to_spot()
+                self.parking_state = ParkingState.NEXT_BID
 
     def receive_response(self, response_msg: ApiResponse):
         pass
@@ -149,9 +189,10 @@ class ChargerDance(Node):
 
     def updating_battery_state(self):
         if self.robot_location in chargers:
-            if self.current_battery >= 100:
+            if self.current_battery >= 100 and self.state != AgentState.PARKED:
                 # Put in parking state since no job is available
                 self.state = AgentState.PARKED
+                print("Almost charged... switching to parking state")
             else:
                 self.current_battery += 100 * CLOCK_RATE / CHARGE_DURATION
         else:
@@ -170,10 +211,16 @@ class ChargerDance(Node):
         if x.result().ok:
             print ("Selecting: ")
             move_idx = x.result().alternative
-            if x in self.alternatives[move_idx]:
-                x 
+            print("Moving to " + self.alternatives[move_idx].resource_name)
+            self.goto_place(self.alternatives[move_idx].resource_name) 
         else:
             print("Could not claim spot! Panic! Give UP!")
+
+    def claim_and_rush_to_spot(self):
+        req = ClaimReservation.Request()
+        req.ticket = self.ticket
+        fut = self.claim_client.call_async(req)
+        fut.add_done_callback(self.move_to_location_based_on_rsys)
 
     def claim_and_rush_to_charger(self):
         if self.state == AgentState.REQUESTED_CHARGE and self.ticket is not None:
@@ -182,19 +229,20 @@ class ChargerDance(Node):
             req.ticket = self.ticket
             fut = self.claim_client.call_async(req)
             fut.add_done_callback(self.move_to_location_based_on_rsys)
-
+            self.state = AgentState.CHARGING
 
     def on_get_assigned_ticket(self, x):
         if x.result().ok:
+            print("Got ticket")
             self.ticket = x.result().ticket
         else:
             print("Could not get ticket")
 
     def on_battery_warning(self):
-        if self.state != AgentState.REQUESTED_CHARGE:
+        if self.state == AgentState.ACTIVE:
             print("Requesting charger")
             self.state = AgentState.REQUESTED_CHARGE
-            self.generate_alternatives()
+            self.generate_alternatives(chargers, self.get_estimated_use_time(), CHARGE_DURATION)
             request = FixedTimeRequest.Request()
             request.alternatives = self.alternatives
             fut = self.reservation_request_client.call_async(request)
@@ -205,26 +253,19 @@ class ChargerDance(Node):
         msg.request_id = "direct_" + str(uuid.uuid4())
         payload = {}
 
-        if self.args.robot and self.args.fleet:
-            self.get_logger().info("Using 'robot_task_request'")
-            payload["type"] = "robot_task_request"
-            payload["robot"] = self.args.robot
-            payload["fleet"] = self.args.fleet
-        else:
-            self.get_logger().info("Using 'dispatch_task_request'")
-            payload["type"] = "dispatch_task_request"
+        #if self.args.robot and self.args.fleet:
+        self.get_logger().info("Using 'robot_task_request'")
+        payload["type"] = "robot_task_request"
+        payload["robot"] = self.args.robot
+        payload["fleet"] = "tinyRobot"
 
         # Set task request start time
         now = self.get_clock().now().to_msg()
-        now.sec = now.sec + self.args.start_time
+        now.sec = now.sec
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
 
         # Define task request description
         go_to_description = {'waypoint': place}
-        if self.args.orientation is not None:
-            go_to_description['orientation'] = (
-                self.args.orientation*math.pi/180.0
-            )
 
         go_to_activity = {
             'category': 'go_to_place',
