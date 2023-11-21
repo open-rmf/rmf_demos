@@ -105,6 +105,15 @@ The new task system allows users to construct and submit their own tasks in a mo
   ros2 run rmf_demos_tasks  dispatch_go_to_place -p lounge -o 105 --use_sim_time
   ```
 
+  **dispatch_go_to_nearest_place**
+  Similar to `dispatch_go_to_place`. Sends a robot to the nearest waypoint from a list of provided waypoints.
+  
+  Example in office world:
+  ```
+  ros2 run rmf_demos_tasks dispatch_go_to_nearest_place -F tinyRobot -R tinyRobot1 -p supplies,pantry --use_sim_time
+  ```
+  If the robot is nearer supplies it will go to supplies, otherwise it goes to the pantry.
+
 ## Quality Declaration
 
 This package claims to be in the **Quality Level 4** category, see the [Quality Declaration](./QUALITY_DECLARATION.md) for more details.
