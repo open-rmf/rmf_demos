@@ -11,5 +11,5 @@
     <arg name="use_tpe" value="$(var use_tpe)"/>
   </include>
 
-  <node pkg="rmf_reservation_ros2" exec="reservation_node"/>
+  <node pkg="rmf_reservation_ros2" exec="reservation_node" output="screen"/>
 </launch>
