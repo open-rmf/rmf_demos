@@ -94,11 +94,13 @@ class TaskRequester(Node):
 
         # Define task request description
         wps = [{"waypoint": wp} for wp in self.args.places]
-        go_to_description = {'one_of': wps,
-                             'constraints': [{
-                                "category": "same_floor",
-                                "description": ""
-        }]}
+        go_to_description = {
+            'one_of': wps,
+            'constraints': [{
+                "category": "same_floor",
+                "description": ""
+            }]
+        }
         go_to_activity = {
             'category': 'go_to_place',
             'description': go_to_description
