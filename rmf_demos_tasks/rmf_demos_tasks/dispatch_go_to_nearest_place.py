@@ -32,9 +32,10 @@ from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_task_msgs.msg import ApiRequest, ApiResponse
 
+
 def list_of_strings(arg):
     return arg.split(',')
-###############################################################################
+
 
 class TaskRequester(Node):
 
@@ -92,12 +93,12 @@ class TaskRequester(Node):
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
 
         # Define task request description
-        go_to_description = {'one_of': [ {"waypoint": wp} for wp in self.args.places],
-                             'constraints' : [{
+        wps = [{"waypoint": wp} for wp in self.args.places]
+        go_to_description = {'one_of': wps,
+                             'constraints': [{
                                 "category": "same_floor",
                                 "description": ""
         }]}
-      
         go_to_activity = {
             'category': 'go_to_place',
             'description': go_to_description
