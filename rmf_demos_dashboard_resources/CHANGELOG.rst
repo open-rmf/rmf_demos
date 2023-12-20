@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_dashboard_resources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.2.3 (2023-12-20)
+------------------
 * Adding scale for icons (`#196 <https://github.com/open-rmf/rmf_demos/pull/196>`_)
 * Contributors: Aaron Chong
 
