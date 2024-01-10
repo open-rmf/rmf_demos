@@ -94,6 +94,9 @@ class TaskRequester(Node):
 
         # Define task request category
         request["category"] = "compose"
+        
+        if self.args.robot is None and self.args.fleet:
+            request["fleet_name"] = self.args.fleet
 
         # Define task request description with cleaning zone
         description = {}  # task_description_Compose.json
