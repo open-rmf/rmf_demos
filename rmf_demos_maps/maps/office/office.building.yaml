@@ -88,7 +88,7 @@ levels:
       - [59, 67, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
       - [59, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
     layers:
-      office_latest:
+      office_laserscan:
         color: [0.20799999999999999, 0.51800000000000002, 0.89400000000000002, 0.5]
         features:
           - {id: "{0d82361f-259c-48ae-bbbc-0d60ad276554}", name: "", x: 90.046000000000006, y: 313.48599999999999}
@@ -105,23 +105,6 @@ levels:
           translation_y: -4.5170000000000003
           yaw: -1.20343942583513
         visible: true
-      turtlebot-scan:
-        color: [1, 0, 0, 0.5]
-        features:
-          - {id: "{408fa383-49e0-4095-bcd3-51819004e3e1}", name: "", x: 171.93100000000001, y: 213.447}
-          - {id: "{6f0220ba-b283-41c9-b8a4-86fede28d5d0}", name: "", x: 380.72500000000002, y: 165.71000000000001}
-          - {id: "{865b9319-b742-4cca-920a-9bd12f19b360}", name: "", x: 231.28200000000001, y: 170.36799999999999}
-          - {id: "{ab9f38f4-dd89-4a12-90bc-74b7fc8413fa}", name: "", x: 177.40199999999999, y: 458.13099999999997}
-          - {id: "{c0d424cc-0758-49db-a027-66ea337ac06a}", name: "", x: 233.06800000000001, y: 298.99799999999999}
-          - {id: "{2908bd90-c304-4521-bec2-5a0bd83a9b4c}", name: "", x: 192.10400000000001, y: 526.02499999999998}
-          - {id: "{6a83a4e9-1966-4f69-bb7b-5e5c04474308}", name: "", x: 49.628999999999998, y: 560.99599999999998}
-        filename: turtlebot-scan.png
-        transform:
-          scale: 0.031158787166059292
-          translation_x: 24.353556865663599
-          translation_y: -1.2868349132815429
-          yaw: -1.527272365911712
-        visible: false
     measurements:
       - [1, 0, {distance: [3, 9.3149999999999995]}]
       - [5, 4, {distance: [3, 8.4090000000000007]}]
