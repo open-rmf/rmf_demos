@@ -54,6 +54,9 @@
     </include>
   </group>
 
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+  </node>
+
   <!-- cleanerBotE fleet adapter -->
   <group>
     <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
@@ -61,14 +64,6 @@
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/airport_terminal/nav_graphs/4.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/airport_terminal/cleanerBotE_config.yaml"/>
     </include>
-  </group>
-
-  <!-- Mock Docker Node, to provide Fleet Adapter fix cleaning task paths -->
-  <group>
-    <let name="docking_config_file" value="$(find-pkg-share rmf_demos_tasks)/airport_docker_config.yaml"/>
-    <node pkg="rmf_demos_tasks" exec="mock_docker" args="-c $(var docking_config_file)">
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-    </node>
   </group>
 
 </launch>

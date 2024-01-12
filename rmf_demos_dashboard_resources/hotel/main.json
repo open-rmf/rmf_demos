@@ -4,17 +4,20 @@
         "cleanerBotA":{
             "icons":{
                 "cleanerBotA":"/icons/cleanerBotA.png"
-            }
+            },
+            "scale": 0.003
         },
-        "deliveryBot":{
+        "deliveryRobot":{
             "icons":{
-                "deliveryBot":"/icons/deliveryRobot.png"
-            }
+                "deliveryRobot":"/icons/deliveryRobot.png"
+            },
+            "scale": 0.004
         },
-        "tinyBot":{
+        "tinyRobot":{
             "icons":{
-                "tinyBot":"/icons/tinyRobot.png"
-            }
+                "tinyRobot":"/icons/tinyRobot.png"
+            },
+            "scale": 0.00123
         }
     },
     "logos":{
