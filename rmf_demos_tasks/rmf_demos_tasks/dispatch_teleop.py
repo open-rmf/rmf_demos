@@ -93,10 +93,10 @@ class TaskRequester(Node):
 
         # Define task request category
         request["category"] = "compose"
-        
+
         if self.args.fleet:
             request["fleet_name"] = self.args.fleet
-   
+
         # Define task request description with phases
         description = {}  # task_description_Compose.json
         description["category"] = "teleop"

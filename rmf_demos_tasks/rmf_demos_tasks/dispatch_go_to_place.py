@@ -117,7 +117,7 @@ class TaskRequester(Node):
             },
             'unix_millis_earliest_start_time': start_time
         }
-        
+
         if self.args.fleet:
             rmf_task_request["fleet_name"] = self.args.fleet
 

@@ -103,7 +103,7 @@ class TaskRequester(Node):
 
         # Define task request category
         request["category"] = "compose"
-        
+
         if self.args.fleet:
             request["fleet_name"] = self.args.fleet
 
