@@ -26,7 +26,7 @@
 
   <!-- ros_gz bridge for simulation clock -->
   <node pkg="ros_gz_bridge" exec="parameter_bridge"
-    args="/clock@rosgraph_msgs/msg/Clock[gazebo.msgs.Clock"
+    args="/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"
     />
 
 </launch>
