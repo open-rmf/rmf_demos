@@ -2,13 +2,11 @@
 
 <launch>
   <arg name="use_sim_time" default="true"/>
-  <arg name="use_tpe" default="false"/>
   <arg name="gazebo_version" default='8'/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/office_mock_traffic_light.launch.xml">
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
-    <arg name="use_tpe" value="$(var use_tpe)"/>
   </include>
 
   <!-- Simulation launch -->
