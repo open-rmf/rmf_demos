@@ -3,7 +3,7 @@
 <launch>
   <arg name="use_sim_time" default="true"/>
   <arg name="use_tpe" default="false"/>
-  <arg name="ignition_version" default='6'/>
+  <arg name="ignition_version" default='8'/>
   <arg name="use_traffic_light" default="false"/>
 
   <!-- Common launch -->

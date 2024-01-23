@@ -4,7 +4,7 @@
   <arg name="use_sim_time" default="true"/>
   <arg name="failover_mode" default="false"/>
   <arg name="use_tpe" default="false"/>
-  <arg name="ignition_version" default='6'/>
+  <arg name="ignition_version" default='8'/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/campus.launch.xml">
