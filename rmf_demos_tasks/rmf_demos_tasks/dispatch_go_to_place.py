@@ -118,6 +118,9 @@ class TaskRequester(Node):
             'unix_millis_earliest_start_time': start_time
         }
 
+        if self.args.fleet:
+            rmf_task_request["fleet_name"] = self.args.fleet
+
         payload["request"] = rmf_task_request
 
         msg.json_msg = json.dumps(payload)

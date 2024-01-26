@@ -39,9 +39,9 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-F', '--fleet', required=False, default='',
+        parser.add_argument('-F', '--fleet', required=False,
                             type=str, help='Fleet name')
-        parser.add_argument('-R', '--robot', required=False, default='',
+        parser.add_argument('-R', '--robot', required=False,
                             type=str, help='Robot name')
         parser.add_argument('-s', '--start', required=True,
                             type=str, help='Start waypoint')
@@ -93,6 +93,9 @@ class TaskRequester(Node):
 
         # Define task request category
         request["category"] = "compose"
+
+        if self.args.fleet:
+            request["fleet_name"] = self.args.fleet
 
         # Define task request description with phases
         description = {}  # task_description_Compose.json
