@@ -120,6 +120,9 @@ class TaskRequester(Node):
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request["unix_millis_earliest_start_time"] = start_time
 
+        if self.args.fleet:
+            request["fleet_name"] = self.args.fleet
+
         def __create_pickup_desc(index):
             if index < len(self.args.pickup_payloads):
                 sku_qty = self.args.pickup_payloads[index].split(',')

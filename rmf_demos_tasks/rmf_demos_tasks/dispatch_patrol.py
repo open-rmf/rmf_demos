@@ -100,6 +100,9 @@ class TaskRequester(Node):
         # Define task request category
         request["category"] = "patrol"
 
+        if self.args.fleet:
+            request["fleet_name"] = self.args.fleet
+
         # Define task request description
         description = {
             'places': self.args.places,
