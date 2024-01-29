@@ -59,6 +59,7 @@ class TaskRequester(Node):
                 'When choosing between multiple destination options, prefer '
                 'an option on the same map as the starting location.'
             )
+        )
         parser.add_argument(
             '-st',
             '--start_time',
