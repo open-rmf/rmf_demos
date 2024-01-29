@@ -20,12 +20,11 @@ import time
 import uuid
 
 import rclpy
-from rclpy.node import Node
-from rmf_fleet_msgs.msg import FleetState
 from rmf_task_msgs.msg import Loop
 
 
 class LoopRequester:
+
     def __init__(self, argv=sys.argv):
         parser = argparse.ArgumentParser()
         parser.add_argument('-s', '--start', help='Start waypoint')
