@@ -25,7 +25,6 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-from rclpy.timer import Timer
 from rmf_fleet_msgs.msg import Location
 from rmf_fleet_msgs.msg import PathRequest
 
@@ -33,6 +32,7 @@ from rmf_fleet_msgs.msg import PathRequest
 
 
 class Requester(Node):
+
     def __init__(self, argv=sys.argv):
         super().__init__('teleop_publisher')
         parser = argparse.ArgumentParser()
@@ -96,7 +96,7 @@ def main(argv=sys.argv):
     def trigger_timeout():
         timeout.set_result(True)
 
-    timer = requester.create_timer(5.0, trigger_timeout)
+    _ = requester.create_timer(5.0, trigger_timeout)
 
     rclpy.spin_until_future_complete(requester, timeout)
     rclpy.shutdown()

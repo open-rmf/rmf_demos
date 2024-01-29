@@ -24,7 +24,6 @@ import uuid
 import rclpy
 from rclpy.node import Node
 from rclpy.parameter import Parameter
-from rclpy.qos import qos_profile_system_default
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
@@ -36,13 +35,19 @@ from rmf_task_msgs.msg import ApiResponse
 
 
 class TaskRequester(Node):
+
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument('-F', '--fleet', type=str, help='Fleet name')
         parser.add_argument('-R', '--robot', type=str, help='Robot name')
         parser.add_argument(
-            '-p', '--place', required=True, type=str, help='Place to go to'
+            '-p',
+            '--place',
+            required=True,
+            type=str,
+            help='Place to go to',
+            nargs='+',
         )
         parser.add_argument(
             '-o',
@@ -50,6 +55,16 @@ class TaskRequester(Node):
             required=False,
             type=float,
             help='Orientation to face in degrees (optional)',
+        )
+        parser.add_argument(
+            '-m',
+            '--prefer-same-map',
+            required=False,
+            action='store_true',
+            help=(
+                'When choosing between multiple destination options, prefer '
+                'an option on the same map as the starting location.'
+            ),
         )
         parser.add_argument(
             '-st',
@@ -112,11 +127,21 @@ class TaskRequester(Node):
         # todo(YV): Fill priority after schema is added
 
         # Define task request description
-        go_to_description = {'waypoint': self.args.place}
-        if self.args.orientation is not None:
-            go_to_description['orientation'] = (
-                self.args.orientation * math.pi / 180.0
-            )
+        one_of = []
+        for place in self.args.place:
+            place_json = {'waypoint': place}
+            if self.args.orientation is not None:
+                place_json['orientation'] = (
+                    self.args.orientation * math.pi / 180.0
+                )
+            one_of.append(place_json)
+
+        go_to_description = {'one_of': one_of}
+
+        if self.args.prefer_same_map:
+            go_to_description['constraints'] = [
+                {'category': 'prefer_same_map'}
+            ]
 
         go_to_activity = {
             'category': 'go_to_place',

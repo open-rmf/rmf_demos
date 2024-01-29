@@ -23,7 +23,6 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-from rclpy.time import Time
 from rmf_fleet_msgs.msg import Dock
 from rmf_fleet_msgs.msg import DockParameter
 from rmf_fleet_msgs.msg import DockSummary
@@ -55,7 +54,8 @@ def close(l0: Location, l1: Location):
 
 class MockDocker(Node):
     """
-    The MockDocker has two objectices
+    The MockDocker has two objectives.
+
     1) Publish a DockSummary message with information on all the docking
     processes in a building. The fleet adapters rely on this message for
     task planning.
@@ -72,7 +72,7 @@ class MockDocker(Node):
 
     def __init__(self, config_yaml):
         super().__init__('mock_docker')
-        self.get_logger().info(f'Greetings, I am mock docker')
+        self.get_logger().info('Greetings, I am mock docker')
         self.config_yaml = config_yaml
         self.path_request_publisher = self.create_publisher(
             PathRequest, 'robot_path_requests', 1
@@ -136,7 +136,7 @@ class MockDocker(Node):
 
         if not msg.parameters:
             self.get_logger().warn(
-                f'Missing docking name for docking request!'
+                'Missing docking name for docking request!'
             )
             return
 

@@ -23,7 +23,6 @@ import uuid
 import rclpy
 from rclpy.node import Node
 from rclpy.parameter import Parameter
-from rclpy.qos import qos_profile_system_default
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
@@ -35,6 +34,7 @@ from rmf_task_msgs.msg import ApiResponse
 
 
 class TaskRequester(Node):
+
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()

@@ -16,11 +16,8 @@
 
 import argparse
 import sys
-import time
-import uuid
 
 import rclpy
-from rclpy.node import Node
 from rclpy.parameter import Parameter
 from rmf_task_msgs.msg import Loop
 from rmf_task_msgs.msg import TaskType
@@ -30,6 +27,7 @@ from rmf_task_msgs.srv import SubmitTask
 
 
 class TaskRequester:
+
     def __init__(self, argv=sys.argv):
         parser = argparse.ArgumentParser()
         parser.add_argument(
