@@ -19,47 +19,55 @@ The main API Interfaces (default port 8083):
 2) socketIO broadcast states: /task_status, /robot_states, /ros_time
 """
 
-import sys
-import os
-import rclpy
 import argparse
-import time
+import asyncio
 import json
 import logging
+import os
+import sys
 from threading import Thread
+import time
 
-from flask import Flask, request, jsonify
+from flask import Flask
+from flask import jsonify
+from flask import request
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit, disconnect
-import asyncio
+from flask_socketio import disconnect
+from flask_socketio import emit
+from flask_socketio import SocketIO
+import rclpy
 
 from rmf_demos_panel.dispatcher_client import DispatcherClient
-from rmf_demos_panel.rmf_msg_observer import AsyncRmfMsgObserver, RmfMsgType
+from rmf_demos_panel.rmf_msg_observer import AsyncRmfMsgObserver
+from rmf_demos_panel.rmf_msg_observer import RmfMsgType
 
 ###############################################################################
 
 
 app = Flask(__name__)
-CORS(app, origins=r"/*")
+CORS(app, origins=r'/*')
 
 socketio = SocketIO(app, async_mode='threading')
-socketio.init_app(app, cors_allowed_origins="*")
+socketio.init_app(app, cors_allowed_origins='*')
 
 rclpy.init(args=None)
 dispatcher_client = DispatcherClient()
 
 # logging config
 logging.getLogger('werkzeug').setLevel(logging.ERROR)  # hide logs from flask
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s %(message)s',
-                    filename='web_server.log',
-                    filemode='w')
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s %(levelname)s %(message)s',
+    filename='web_server.log',
+    filemode='w',
+)
 
 # default dashboard
-dashboard_config = {"world_name": "EMPTY_DASHBOARD_CONFIG",
-                    "valid_task": [],
-                    "task": {"Delivery": {}, "Loop": {}, "Clean": {}}
-                    }
+dashboard_config = {
+    'world_name': 'EMPTY_DASHBOARD_CONFIG',
+    'valid_task': [],
+    'task': {'Delivery': {}, 'Loop': {}, 'Clean': {}},
+}
 
 ###############################################################################
 
@@ -68,49 +76,60 @@ dashboard_config = {"world_name": "EMPTY_DASHBOARD_CONFIG",
 def submit():
     """REST Call to submit task"""
     task_id, err_msg = dispatcher_client.submit_task_request(request.json)
-    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
-        Task Submission: {json.dumps(request.json)}, error: {err_msg}")
-    return jsonify({"task_id": task_id, "error_msg": err_msg})
+    logging.debug(
+        f' ROS Time: {dispatcher_client.ros_time()} | \
+        Task Submission: {json.dumps(request.json)}, error: {err_msg}'
+    )
+    return jsonify({'task_id': task_id, 'error_msg': err_msg})
 
 
 @app.route('/cancel_task', methods=['POST'])
 def cancel():
     cancel_id = request.json['task_id']
     cancel_success = dispatcher_client.cancel_task_request(cancel_id)
-    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
-        Cancel Task: {cancel_id}, success: {cancel_success}")
-    return jsonify({"success": cancel_success})
+    logging.debug(
+        f' ROS Time: {dispatcher_client.ros_time()} | \
+        Cancel Task: {cancel_id}, success: {cancel_success}'
+    )
+    return jsonify({'success': cancel_success})
 
 
 @app.route('/task_list', methods=['GET'])
 def status():
     task_status = jsonify(dispatcher_client.get_task_status())
-    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
-        Task Status: {json.dumps(task_status.json)}")
+    logging.debug(
+        f' ROS Time: {dispatcher_client.ros_time()} | \
+        Task Status: {json.dumps(task_status.json)}'
+    )
     return task_status
 
 
 @app.route('/robot_list', methods=['GET'])
 def robots():
     robot_status = jsonify(dispatcher_client.get_robot_states())
-    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
-        Robot Status: {robot_status}")
+    logging.debug(
+        f' ROS Time: {dispatcher_client.ros_time()} | \
+        Robot Status: {robot_status}'
+    )
     return robot_status
 
 
 @app.route('/building_map', methods=['GET'])
 def building_map():
     building_map_data = jsonify(dispatcher_client.get_building_map_data())
-    logging.debug(f" ROS Time: {dispatcher_client.ros_time()} | \
-        building_map_data: {building_map_data}")
+    logging.debug(
+        f' ROS Time: {dispatcher_client.ros_time()} | \
+        building_map_data: {building_map_data}'
+    )
     return building_map_data
 
 
 # Note: Get Dashboard Config for each "World", specific to rmf_demos impl
-@app.route("/dashboard_config", methods=['GET'])
+@app.route('/dashboard_config', methods=['GET'])
 def config():
     config = jsonify(dashboard_config)
     return config
+
 
 ###############################################################################
 
@@ -135,10 +154,12 @@ def broadcast_states():
             socketio.emit('task_status', tasks, broadcast=True, namespace=ns)
             socketio.emit('robot_states', robots, broadcast=True, namespace=ns)
             socketio.emit('ros_time', ros_time, broadcast=True, namespace=ns)
-            logging.debug(f" ROS Time: {ros_time} | "
-                          " tasks: "
-                          f"{len(dispatcher_client.task_states_cache)}"
-                          f" | active robots: {len(robots)}")
+            logging.debug(
+                f' ROS Time: {ros_time} | '
+                ' tasks: '
+                f'{len(dispatcher_client.task_states_cache)}'
+                f' | active robots: {len(robots)}'
+            )
         time.sleep(2)
 
 
@@ -152,48 +173,49 @@ def rmf_state_listener(port_num: str, done_fut: asyncio.Future):
     observer = AsyncRmfMsgObserver(
         msg_callback,
         msg_filters={RmfMsgType.TaskState: []},
-        server_url="localhost",
-        server_port=int(port_num)
+        server_url='localhost',
+        server_port=int(port_num),
     )
     observer.spin(done_fut)
+
 
 ###############################################################################
 
 
 def main(args=None):
-    server_ip = "0.0.0.0"
+    server_ip = '0.0.0.0'
     port_num = 8083
     ws_port_num = 7878
 
-    if "RMF_DEMOS_API_SERVER_IP" in os.environ:
+    if 'RMF_DEMOS_API_SERVER_IP' in os.environ:
         server_ip = os.environ['RMF_DEMOS_API_SERVER_IP']
-        print(f"Set Server IP to: {server_ip}")
+        print(f'Set Server IP to: {server_ip}')
 
-    if "RMF_DEMOS_API_SERVER_PORT" in os.environ:
+    if 'RMF_DEMOS_API_SERVER_PORT' in os.environ:
         port_num = int(os.environ['RMF_DEMOS_API_SERVER_PORT'])
-        print(f"Set Server port to: {server_ip}:{port_num}")
+        print(f'Set Server port to: {server_ip}:{port_num}')
 
-    if "RMF_WS_SERVER_PORT" in os.environ:
+    if 'RMF_WS_SERVER_PORT' in os.environ:
         ws_port_num = int(os.environ['RMF_WS_SERVER_PORT'])
-        print(f"Set RMF Websocket port to: localhost:{ws_port_num}")
+        print(f'Set RMF Websocket port to: localhost:{ws_port_num}')
 
-    if "DASHBOARD_CONFIG_PATH" in os.environ:
+    if 'DASHBOARD_CONFIG_PATH' in os.environ:
         config_path = os.environ['DASHBOARD_CONFIG_PATH']
 
         if not config_path:
-            print(f"WARN! env DASHBOARD_CONFIG_PATH is empty...")
+            print(f'WARN! env DASHBOARD_CONFIG_PATH is empty...')
         elif not os.path.exists(config_path):
-            raise FileNotFoundError(f"\n File [{config_path}] doesnt exist")
+            raise FileNotFoundError(f'\n File [{config_path}] doesnt exist')
         else:
             try:
                 f = open(config_path, 'r')
                 global dashboard_config
                 dashboard_config = json.load(f)
             except Exception as err:
-                print(f"Failed to read [{config_path}] dashboard config file")
+                print(f'Failed to read [{config_path}] dashboard config file')
                 raise err
     else:
-        print(f"WARN! env DASHBOARD_CONFIG_PATH is not specified...")
+        print(f'WARN! env DASHBOARD_CONFIG_PATH is not specified...')
 
     spin_thread = Thread(target=web_server_spin, args=())
     spin_thread.start()
@@ -203,17 +225,20 @@ def main(args=None):
 
     done_fut = asyncio.Future()
     listener_thread = Thread(
-        target=rmf_state_listener, args=(ws_port_num, done_fut))
+        target=rmf_state_listener, args=(ws_port_num, done_fut)
+    )
     listener_thread.start()
 
-    print(f"Starting RMF_Demos API Server: {server_ip}:{port_num}, "
-          f"with ws://localhost:{ws_port_num}")
+    print(
+        f'Starting RMF_Demos API Server: {server_ip}:{port_num}, '
+        f'with ws://localhost:{ws_port_num}'
+    )
     app.run(host=server_ip, port=port_num, debug=False)
     dispatcher_client.destroy_node()
     rclpy.shutdown()
-    print("shutting down...")
+    print('shutting down...')
     done_fut.set_result(True)  # shutdown listner
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main(sys.argv)
