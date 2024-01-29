@@ -21,4 +21,4 @@ jobs:
         rmf_demos_maps
         rmf_demos_panel
         rmf_demos_tasks
-      dist-matrix: '[{"ros_distribution": "rolling", "ubuntu_distribution": "jammy"}]'
+      dist-matrix: '[{"ros_distribution": "iron", "ubuntu_distribution": "jammy"}]'
