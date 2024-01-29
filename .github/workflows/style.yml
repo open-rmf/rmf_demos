@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        docker_image: ['ros:humble-ros-base']
+        docker_image: ['ros:rolling-ros-base']
     container:
       image: ${{ matrix.docker_image }}
     steps:
@@ -16,8 +16,7 @@ jobs:
     - name: deps
       shell: bash
       run: |
-        sudo apt-get update
-        sudo apt-get install wget pycodestyle
+        sudo apt update && sudo apt install pycodestyle
     #  Note: Enable this if only cpp files are available for style check
     # - name: rmf_uncrustify
     #   shell: bash
