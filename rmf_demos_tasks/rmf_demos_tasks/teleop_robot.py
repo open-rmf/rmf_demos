@@ -14,39 +14,46 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-import uuid
 import argparse
 import asyncio
+import sys
+import uuid
 
 import rclpy
 from rclpy.node import Node
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 from rclpy.timer import Timer
-
-from rmf_fleet_msgs.msg import PathRequest, Location
-
+from rmf_fleet_msgs.msg import Location
+from rmf_fleet_msgs.msg import PathRequest
 
 ###############################################################################
 
-class Requester(Node):
 
+class Requester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('teleop_publisher')
         parser = argparse.ArgumentParser()
 
-        parser.add_argument('-F', '--fleet', required=True,
-                            type=str, help='Fleet name')
-        parser.add_argument('-R', '--robot', required=True,
-                            help='Robot name', type=str)
-        parser.add_argument('-p', '--points', required=True, nargs='+',
-                            help='Coordinate points [x,y,yaw] for teleop',
-                            type=str)
-        parser.add_argument('-m', '--map', required=True,
-                            help='Map name', type=str)
+        parser.add_argument(
+            '-F', '--fleet', required=True, type=str, help='Fleet name'
+        )
+        parser.add_argument(
+            '-R', '--robot', required=True, help='Robot name', type=str
+        )
+        parser.add_argument(
+            '-p',
+            '--points',
+            required=True,
+            nargs='+',
+            help='Coordinate points [x,y,yaw] for teleop',
+            type=str,
+        )
+        parser.add_argument(
+            '-m', '--map', required=True, help='Map name', type=str
+        )
 
         self.args = parser.parse_args(argv[1:])
 
@@ -54,9 +61,11 @@ class Requester(Node):
             history=History.KEEP_LAST,
             depth=1,
             reliability=Reliability.RELIABLE,
-            durability=Durability.TRANSIENT_LOCAL)
+            durability=Durability.TRANSIENT_LOCAL,
+        )
         self.pub = self.create_publisher(
-          PathRequest, 'robot_path_requests', transient_qos)
+            PathRequest, 'robot_path_requests', transient_qos
+        )
 
         msg = PathRequest()
         msg.fleet_name = self.args.fleet
@@ -64,7 +73,7 @@ class Requester(Node):
         msg.task_id = str(uuid.uuid1())
         for p in self.args.points:
             pts = p.split(',')
-            assert len(pts) == 3, "each point should have 3 values {x,y,yaw}"
+            assert len(pts) == 3, 'each point should have 3 values {x,y,yaw}'
             loc = Location()
             loc.x = float(pts[0])
             loc.y = float(pts[1])
@@ -72,6 +81,7 @@ class Requester(Node):
             loc.level_name = self.args.map
             msg.path.append(loc)
         self.pub.publish(msg)
+
 
 ###############################################################################
 
