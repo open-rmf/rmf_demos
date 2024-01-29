@@ -3,11 +3,6 @@
 
 rmf_fleet:
   name: "cleanerBotE"
-  fleet_manager:
-    ip: "127.0.0.1"
-    port: 22014
-    user: "some_user"
-    password: "some_password"
   limits:
     linear: [0.7, 0.5] # velocity, acceleration
     angular: [0.4, 1.0] # velocity, acceleration
@@ -30,40 +25,57 @@ rmf_fleet:
     power: 0.0 # W
   recharge_threshold: 0.20 # Battery level below which robots in this fleet will not operate
   recharge_soc: 1.0 # Battery level to which robots in this fleet should be charged up to during recharging tasks
+  max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
   publish_fleet_state: 10.0 # Publish frequency for fleet state, ensure that it is same as robot_state_update_frequency
   account_for_battery_drain: True
   task_capabilities: # Specify the types of RMF Tasks that robots in this fleet are capable of performing
     loop: False
     delivery: False
-    clean: True
-    finishing_request: "park" # [park, charge, nothing]
+  actions: ["clean"]
+  finishing_request: "park" # [park, charge, nothing]
+  robots:
+    cleanerBotE_0:
+      charger: "charger_cleanerBotE_0"
+    cleanerBotE_1:
+      charger: "charger_cleanerBotE_1"
 
-# CleanerBotE CONFIG =================================================================
-
-robots:
-  # Here the user is expected to append the configuration for each robot in the
-  # fleet.
-  # Configuration for cleanerBotE_0
-  cleanerBotE_0:
-    robot_config:
-      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
-    rmf_config:
-      robot_state_update_frequency: 10.0
-      start:
+fleet_manager:
+  ip: "127.0.0.1"
+  port: 22014
+  user: "some_user"
+  password: "some_password"
+  robot_state_update_frequency: 10.0
+  action_paths:
+    clean:
+      zone_2:
         map_name: "L1"
-        waypoint: "charger_cleanerBotE_0"
-        orientation: 0.0 # radians
-      charger:
-        waypoint: "charger_cleanerBotE_0"
-  # Configuration for cleanerBotE_1
-  cleanerBotE_1:
-    robot_config:
-      max_delay: 15.0 # allowed seconds of delay of the current itinerary before it gets interrupted and replanned
-    rmf_config:
-      robot_state_update_frequency: 10.0
-      start:
+        path: [ [149.00, -29.22, 0.0],
+                [129.4, -29.67, -1.57],
+                [129.4, -24.76, -1.57],
+                [149.0, -24.76, 3.14],
+                [149.0, -27.11, 0.0] ]
+        finish_waypoint: "zone_2"
+      zone_3:
         map_name: "L1"
-        waypoint: "charger_cleanerBotE_1"
-        orientation: 0.0 # radians
-      charger:
-        waypoint: "charger_cleanerBotE_1"
+        path: [ [154.4, -29.51, -1.57],
+                [169.9, -29.79, -0.8],
+                [173.1, -26.41, 1.57],
+                [173.1, -23.26, 3.14],
+                [154.4, -23.26, -1.57],
+                [154.4, -25.00, -1.57],
+                [168.5, -25.00, 3.14],
+                [168.5, -27.60, 1.57],
+                [154.4, -27.60, 0.0]]
+        finish_waypoint: "zone_3"
+      zone_4:
+        map_name: "L1"
+        path: [ [152.0, -55.6, 0.0],
+                [123.1, -55.6, 0.0],
+                [123.1, -57.14, 0.0],
+                [148.5, -57.14, 0.0],
+                [148.5, -59.34, 0.0],
+                [148.5, -59.34, 0.0],
+                [123.0, -59.06, 0.0],
+                [123.0, -60.8, 0.0],
+                [152.0, -60.3, 0.0] ]
+        finish_waypoint: "zone_4"
