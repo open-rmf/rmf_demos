@@ -8,23 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        docker_image: ['ros:humble-ros-base']
+        docker_image: ['ros:rolling-ros-base']
     container:
       image: ${{ matrix.docker_image }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: deps
       shell: bash
       run: |
-        sudo apt-get update
-        sudo apt-get install wget pycodestyle
-    #  Note: Enable this if only cpp files are available for style check
-    # - name: rmf_uncrustify
-    #   shell: bash
-    #   run: |
-    #     wget https://raw.githubusercontent.com/open-rmf/rmf_utils/master/rmf_utils/test/format/rmf_code_style.cfg
-    #     source /opt/ros/foxy/setup.bash
-    #     ament_uncrustify -c rmf_code_style.cfg
+        sudo apt update && sudo apt install pycodestyle
     - name: pycodestyle
       shell: bash
       run: |
