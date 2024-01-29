@@ -13,17 +13,18 @@
 # limitations under the License.
 
 
-'''
-    The RobotAPI class is a wrapper for API calls to the robot. Here users
-    are expected to fill up the implementations of functions which will be used
-    by the RobotCommandHandle. For example, if your robot has a REST API, you
-    will need to make http request calls to the appropriate endpoints within
-    these functions.
-'''
+"""
+The RobotAPI class is a wrapper for API calls to the robot.
 
-import requests
+Here users are expected to fill up the implementations of functions which will
+be used by the RobotCommandHandle. For example, if your robot has a REST API,
+you will need to make http request calls to the appropriate endpoints within
+these functions.
+"""
 import enum
 from urllib.error import HTTPError
+
+import requests
 
 
 class RobotAPIResult(enum.IntEnum):
@@ -49,7 +50,7 @@ class RobotAPI:
         self.debug = False
 
     def check_connection(self):
-        ''' Return True if connection to the robot API server is successful'''
+        """Return True if connection to the robot API server is successful."""
         if self.data() is None:
             return False
         return True
@@ -60,16 +61,21 @@ class RobotAPI:
         cmd_id: int,
         pose,
         map_name: str,
-        speed_limit=0.0
+        speed_limit=0.0,
     ):
-        ''' Request the robot to navigate to pose:[x,y,theta] where x, y and
-            and theta are in the robot's coordinate convention. This function
-            should return True if the robot has accepted the request,
-            else False'''
-        assert(len(pose) > 2)
-        url = self.prefix +\
-            f'/open-rmf/rmf_demos_fm/navigate?robot_name={robot_name}' \
+        """
+        Request the robot to navigate to pose:[x,y,theta].
+
+        Where x, y and theta are in the robot's coordinate convention.
+        This function should return True if the robot has accepted the request,
+        else False.
+        """
+        assert len(pose) > 2
+        url = (
+            self.prefix
+            + f'/open-rmf/rmf_demos_fm/navigate?robot_name={robot_name}'
             f'&cmd_id={cmd_id}'
+        )
         data = {}  # data fields: task, map_name, destination{}, data{}
         data['map_name'] = map_name
         data['destination'] = {'x': pose[0], 'y': pose[1], 'yaw': pose[2]}
@@ -87,19 +93,19 @@ class RobotAPI:
         return False
 
     def start_activity(
-        self,
-        robot_name: str,
-        cmd_id: int,
-        activity: str,
-        label: str
+        self, robot_name: str, cmd_id: int, activity: str, label: str
     ):
-        ''' Request the robot to begin a process. This is specific to the robot
-            and the use case. For example, load/unload a cart for Deliverybot
-            or begin cleaning a zone for a cleaning robot.'''
+        """
+        Request the robot to begin a process.
+
+        This is specific to the robot and the use case.
+        For example, load/unload a cart for Deliverybot
+        or begin cleaning a zone for a cleaning robot.
+        """
         url = (
-            self.prefix +
-            f"/open-rmf/rmf_demos_fm/start_activity?robot_name={robot_name}"
-            f"&cmd_id={cmd_id}"
+            self.prefix
+            + f'/open-rmf/rmf_demos_fm/start_activity?robot_name={robot_name}'
+            f'&cmd_id={cmd_id}'
         )
         # data fields: task, map_name, destination{}, data{}
         data = {'activity': activity, 'label': label}
@@ -112,7 +118,7 @@ class RobotAPI:
             if response.json()['success']:
                 return (
                     RobotAPIResult.SUCCESS,
-                    response.json()['data']['path']
+                    response.json()['data']['path'],
                 )
 
             # If we get a response with success=False, then
@@ -124,11 +130,16 @@ class RobotAPI:
         return RobotAPIResult.RETRY
 
     def stop(self, robot_name: str, cmd_id: int):
-        ''' Command the robot to stop.
-            Return True if robot has successfully stopped. Else False'''
-        url = self.prefix +\
-            f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={robot_name}' \
+        """
+        Command the robot to stop.
+
+        Return True if robot has successfully stopped. Else False
+        """
+        url = (
+            self.prefix
+            + f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={robot_name}'
             f'&cmd_id={cmd_id}'
+        )
         try:
             response = requests.get(url, self.timeout)
             response.raise_for_status()
@@ -142,10 +153,15 @@ class RobotAPI:
         return False
 
     def toggle_teleop(self, robot_name: str, toggle: bool):
-        '''Request to toggle the robot's mode_teleop parameter.
-           Return True if the toggle request is successful'''
-        url = self.prefix +\
-            f"/open-rmf/rmf_demos_fm/toggle_teleop?robot_name={robot_name}"
+        """
+        Request to toggle the robot's mode_teleop parameter.
+
+        Return True if the toggle request is successful
+        """
+        url = (
+            self.prefix
+            + f'/open-rmf/rmf_demos_fm/toggle_teleop?robot_name={robot_name}'
+        )
         data = {'toggle': toggle}
         try:
             response = requests.post(url, timeout=self.timeout, json=data)
@@ -161,14 +177,17 @@ class RobotAPI:
 
     def get_data(self, robot_name: str | None = None):
         """
-        Return a RobotUpdateData for one robot if a name is given. Otherwise
-        return a list of RobotUpdateData for all robots.
+        Return a RobotUpdateData for one robot if a name is given.
+
+        Otherwise return a list of RobotUpdateData for all robots.
         """
         if robot_name is None:
-            url = self.prefix + f'/open-rmf/rmf_demos_fm/status'
+            url = self.prefix + '/open-rmf/rmf_demos_fm/status'
         else:
-            url = self.prefix +\
-                f'/open-rmf/rmf_demos_fm/status?robot_name={robot_name}'
+            url = (
+                self.prefix
+                + f'/open-rmf/rmf_demos_fm/status?robot_name={robot_name}'
+            )
         try:
             response = requests.get(url, timeout=self.timeout)
             response.raise_for_status()
@@ -189,7 +208,8 @@ class RobotAPI:
 
 
 class RobotUpdateData:
-    """Update data for a single robot"""
+    """Update data for a single robot."""
+
     def __init__(self, data):
         self.robot_name = data['robot_name']
         position = data['position']
@@ -198,7 +218,7 @@ class RobotUpdateData:
         yaw = position['yaw']
         self.position = [x, y, yaw]
         self.map = data['map_name']
-        self.battery_soc = data['battery']/100.0
+        self.battery_soc = data['battery'] / 100.0
         self.requires_replan = data.get('replan', False)
         self.last_request_completed = data['last_completed_request']
 

@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.3 (2023-12-20)
+------------------
+
 2.2.2 (2023-08-28)
 ------------------
 * EasyFullControl integration with rmf_demos (`#158 <https://github.com/open-rmf/rmf_demos/pull/158>`_)
