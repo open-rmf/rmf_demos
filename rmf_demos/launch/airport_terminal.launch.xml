@@ -54,9 +54,6 @@
     </include>
   </group>
 
-    <param name="use_sim_time" value="$(var use_sim_time)"/>
-  </node>
-
   <!-- cleanerBotE fleet adapter -->
   <group>
     <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">

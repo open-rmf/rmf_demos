@@ -1,5 +1,6 @@
-import socketio
 import sys
+
+import socketio
 
 sio = socketio.Client()
 

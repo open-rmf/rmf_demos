@@ -14,41 +14,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-import math
-import yaml
-import json
-import time
-import copy
 import argparse
+import copy
+import json
+import math
+import sys
+import threading
+import time
+from typing import Optional
 
+from fastapi import FastAPI
+import numpy as np
+from pydantic import BaseModel
+from pyproj import Transformer
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_system_default
-
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-
-from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
-    DockSummary, RobotMode
-
 import rmf_adapter as adpt
-import rmf_adapter.vehicletraits as traits
 import rmf_adapter.geometry as geometry
-
-import numpy as np
-from pyproj import Transformer
-
+import rmf_adapter.vehicletraits as traits
+from rmf_fleet_msgs.msg import DockSummary
+from rmf_fleet_msgs.msg import Location
+from rmf_fleet_msgs.msg import PathRequest
+from rmf_fleet_msgs.msg import RobotMode
+from rmf_fleet_msgs.msg import RobotState
 import socketio
-
-from fastapi import FastAPI
 import uvicorn
-from typing import Optional
-from pydantic import BaseModel
+import yaml
 
-import threading
 app = FastAPI()
 
 
@@ -72,6 +69,7 @@ class Response(BaseModel):
 # Fleet Manager
 # ------------------------------------------------------------------------------
 class State:
+
     def __init__(self, state: RobotState = None, destination: Location = None):
         self.state = state
         self.destination = destination
@@ -82,8 +80,9 @@ class State:
         self.gps_pos = [0, 0]
 
     def gps_to_xy(self, gps_json: dict):
-        svy21_xy = \
-            self.svy_transformer.transform(gps_json['lat'], gps_json['lon'])
+        svy21_xy = self.svy_transformer.transform(
+            gps_json['lat'], gps_json['lon']
+        )
         self.gps_pos[0] = svy21_xy[1]
         self.gps_pos[1] = svy21_xy[0]
 
@@ -95,6 +94,7 @@ class State:
 
 
 class FleetManager(Node):
+
     def __init__(self, config, nav_path):
         self.debug = False
         self.config = config
@@ -117,33 +117,41 @@ class FleetManager(Node):
 
         for robot_name, _ in self.config['rmf_fleet']['robots'].items():
             self.robots[robot_name] = State()
-        assert(len(self.robots) > 0)
+        assert len(self.robots) > 0
 
-        profile = traits.Profile(geometry.make_final_convex_circle(
-            self.config['rmf_fleet']['profile']['footprint']),
+        profile = traits.Profile(
             geometry.make_final_convex_circle(
-                self.config['rmf_fleet']['profile']['vicinity']))
+                self.config['rmf_fleet']['profile']['footprint']
+            ),
+            geometry.make_final_convex_circle(
+                self.config['rmf_fleet']['profile']['vicinity']
+            ),
+        )
         self.vehicle_traits = traits.VehicleTraits(
             linear=traits.Limits(
-                *self.config['rmf_fleet']['limits']['linear']),
+                *self.config['rmf_fleet']['limits']['linear']
+            ),
             angular=traits.Limits(
-                *self.config['rmf_fleet']['limits']['angular']),
-            profile=profile)
-        self.vehicle_traits.differential.reversible =\
-            self.config['rmf_fleet']['reversible']
+                *self.config['rmf_fleet']['limits']['angular']
+            ),
+            profile=profile,
+        )
+        self.vehicle_traits.differential.reversible = self.config['rmf_fleet'][
+            'reversible'
+        ]
 
         fleet_manager_config = self.config['fleet_manager']
         self.action_paths = fleet_manager_config.get('action_paths', {})
         self.sio = socketio.Client()
 
-        @self.sio.on("/gps")
+        @self.sio.on('/gps')
         def message(data):
             try:
                 robot = json.loads(data)
                 robot_name = robot['robot_id']
                 self.robots[robot_name].gps_to_xy(robot)
             except KeyError as e:
-                self.get_logger().info(f"Malformed GPS Message!: {e}")
+                self.get_logger().info(f'Malformed GPS Message!: {e}')
 
         if self.gps:
             while True:
@@ -152,42 +160,38 @@ class FleetManager(Node):
                     break
                 except Exception:
                     self.get_logger().info(
-                        f"Trying to connect to sio server at"
-                        f"http://0.0.0.0:8080..")
+                        'Trying to connect to sio server at '
+                        'http://0.0.0.0:8080..'
+                    )
                     time.sleep(1)
 
         self.create_subscription(
-            RobotState,
-            'robot_state',
-            self.robot_state_cb,
-            100
+            RobotState, 'robot_state', self.robot_state_cb, 100
         )
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
             depth=1,
             reliability=Reliability.RELIABLE,
-            durability=Durability.TRANSIENT_LOCAL)
+            durability=Durability.TRANSIENT_LOCAL,
+        )
 
         self.create_subscription(
             DockSummary,
             'dock_summary',
             self.dock_summary_cb,
-            qos_profile=transient_qos)
+            qos_profile=transient_qos,
+        )
 
         self.path_pub = self.create_publisher(
             PathRequest,
             'robot_path_requests',
-            qos_profile=qos_profile_system_default)
+            qos_profile=qos_profile_system_default,
+        )
 
-        @app.get('/open-rmf/rmf_demos_fm/status/',
-                 response_model=Response)
+        @app.get('/open-rmf/rmf_demos_fm/status/', response_model=Response)
         async def status(robot_name: Optional[str] = None):
-            response = {
-                'data': {},
-                'success': False,
-                'msg': ''
-            }
+            response = {'data': {}, 'success': False, 'msg': ''}
             if robot_name is None:
                 response['data']['all_robots'] = []
                 for robot_name in self.robots:
@@ -195,7 +199,8 @@ class FleetManager(Node):
                     if state is None or state.state is None:
                         return response
                     response['data']['all_robots'].append(
-                        self.get_robot_state(state, robot_name))
+                        self.get_robot_state(state, robot_name)
+                    )
             else:
                 state = self.robots.get(robot_name)
                 if state is None or state.state is None:
@@ -204,11 +209,10 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
-        @app.post('/open-rmf/rmf_demos_fm/navigate/',
-                  response_model=Response)
+        @app.post('/open-rmf/rmf_demos_fm/navigate/', response_model=Response)
         async def navigate(robot_name: str, cmd_id: int, dest: Request):
             response = {'success': False, 'msg': ''}
-            if (robot_name not in self.robots or len(dest.destination) < 1):
+            if robot_name not in self.robots or len(dest.destination) < 1:
                 return response
 
             robot = self.robots[robot_name]
@@ -233,9 +237,12 @@ class FleetManager(Node):
             path_request.path.append(cur_loc)
 
             disp = self.disp([target_x, target_y], [cur_x, cur_y])
-            duration = int(disp/self.vehicle_traits.linear.nominal_velocity) +\
-                int(abs(abs(cur_yaw) - abs(target_yaw)) /
-                    self.vehicle_traits.rotational.nominal_velocity)
+            duration = int(
+                disp / self.vehicle_traits.linear.nominal_velocity
+            ) + int(
+                abs(abs(cur_yaw) - abs(target_yaw))
+                / self.vehicle_traits.rotational.nominal_velocity
+            )
             t.sec = t.sec + duration
             target_loc = Location()
             target_loc.t = t
@@ -262,8 +269,7 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
-        @app.get('/open-rmf/rmf_demos_fm/stop_robot/',
-                 response_model=Response)
+        @app.get('/open-rmf/rmf_demos_fm/stop_robot/', response_model=Response)
         async def stop(robot_name: str, cmd_id: int):
             response = {'success': False, 'msg': ''}
             if robot_name not in self.robots:
@@ -290,8 +296,9 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
-        @app.get('/open-rmf/rmf_demos_fm/action_paths/',
-                 response_model=Response)
+        @app.get(
+            '/open-rmf/rmf_demos_fm/action_paths/', response_model=Response
+        )
         async def action_paths(activity: str, label: str):
             response = {'success': False, 'msg': ''}
             if activity not in self.action_paths:
@@ -304,12 +311,11 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
-        @app.post('/open-rmf/rmf_demos_fm/start_activity/',
-                  response_model=Response)
+        @app.post(
+            '/open-rmf/rmf_demos_fm/start_activity/', response_model=Response
+        )
         async def start_activity(
-            robot_name: str,
-            cmd_id: int,
-            request: Request
+            robot_name: str, cmd_id: int, request: Request
         ):
             response = {'success': False, 'msg': ''}
             if (
@@ -354,11 +360,12 @@ class FleetManager(Node):
             response['data']['path'] = activity_path
             return response
 
-        @app.post('/open-rmf/rmf_demos_fm/toggle_teleop/',
-                  response_model=Response)
+        @app.post(
+            '/open-rmf/rmf_demos_fm/toggle_teleop/', response_model=Response
+        )
         async def toggle_teleop(robot_name: str, mode: Request):
             response = {'success': False, 'msg': ''}
-            if (robot_name not in self.robots):
+            if robot_name not in self.robots:
                 return response
             # Toggle action mode
             self.robots[robot_name].mode_teleop = mode.toggle
@@ -366,10 +373,12 @@ class FleetManager(Node):
             return response
 
     def robot_state_cb(self, msg):
-        if (msg.name in self.robots):
+        if msg.name in self.robots:
             robot = self.robots[msg.name]
-            if not robot.is_expected_task_id(msg.task_id) and \
-                    not robot.mode_teleop:
+            if (
+                not robot.is_expected_task_id(msg.task_id)
+                and not robot.mode_teleop
+            ):
                 # This message is out of date, so disregard it.
                 if robot.last_path_request is not None:
                     # Resend the latest task request for this robot, in case
@@ -389,12 +398,9 @@ class FleetManager(Node):
                 return
 
             if (
-                (
-                    msg.mode.mode == RobotMode.MODE_IDLE
-                    or msg.mode.mode == RobotMode.MODE_CHARGING
-                )
-                and len(msg.path) == 0
-            ):
+                msg.mode.mode == RobotMode.MODE_IDLE
+                or msg.mode.mode == RobotMode.MODE_CHARGING
+            ) and len(msg.path) == 0:
                 robot = self.robots[msg.name]
                 robot.destination = None
                 completed_request = int(msg.task_id)
@@ -408,7 +414,7 @@ class FleetManager(Node):
 
     def dock_summary_cb(self, msg):
         for fleet in msg.docks:
-            if (fleet.fleet_name == self.fleet_name):
+            if fleet.fleet_name == self.fleet_name:
                 for dock in fleet.params:
                     self.docks[dock.start] = dock.path
 
@@ -421,32 +427,34 @@ class FleetManager(Node):
         angle = robot.state.location.yaw
         data['robot_name'] = robot_name
         data['map_name'] = robot.state.location.level_name
-        data['position'] =\
-            {'x': position[0], 'y': position[1], 'yaw': angle}
+        data['position'] = {'x': position[0], 'y': position[1], 'yaw': angle}
         data['battery'] = robot.state.battery_percent
-        if (robot.destination is not None
-                and robot.last_path_request is not None):
+        if (
+            robot.destination is not None
+            and robot.last_path_request is not None
+        ):
             destination = robot.destination
             # remove offset for calculation if using gps coords
             if self.gps:
                 position[0] -= self.offset[0]
                 position[1] -= self.offset[1]
             # calculate arrival estimate
-            dist_to_target =\
-                self.disp(position, [destination.x, destination.y])
+            dist_to_target = self.disp(
+                position, [destination.x, destination.y]
+            )
             ori_delta = abs(abs(angle) - abs(destination.yaw))
             if ori_delta > np.pi:
                 ori_delta = ori_delta - (2 * np.pi)
             if ori_delta < -np.pi:
                 ori_delta = (2 * np.pi) + ori_delta
-            duration = (dist_to_target /
-                        self.vehicle_traits.linear.nominal_velocity +
-                        ori_delta /
-                        self.vehicle_traits.rotational.nominal_velocity)
+            duration = (
+                dist_to_target / self.vehicle_traits.linear.nominal_velocity
+                + ori_delta / self.vehicle_traits.rotational.nominal_velocity
+            )
             cmd_id = int(robot.last_path_request.task_id)
             data['destination_arrival'] = {
                 'cmd_id': cmd_id,
-                'duration': duration
+                'duration': duration,
             }
         else:
             data['destination_arrival'] = None
@@ -471,7 +479,7 @@ class FleetManager(Node):
         return data
 
     def disp(self, A, B):
-        return math.sqrt((A[0]-B[0])**2 + (A[1]-B[1])**2)
+        return math.sqrt((A[0] - B[0]) ** 2 + (A[1] - B[1]) ** 2)
 
 
 # ------------------------------------------------------------------------------
@@ -484,16 +492,27 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
 
     parser = argparse.ArgumentParser(
-        prog="fleet_adapter",
-        description="Configure and spin up the fleet adapter")
-    parser.add_argument("-c", "--config_file", type=str, required=True,
-                        help="Path to the config.yaml file")
-    parser.add_argument("-n", "--nav_graph", type=str, required=True,
-                        help="Path to the nav_graph for this fleet adapter")
+        prog='fleet_adapter',
+        description='Configure and spin up the fleet adapter',
+    )
+    parser.add_argument(
+        '-c',
+        '--config_file',
+        type=str,
+        required=True,
+        help='Path to the config.yaml file',
+    )
+    parser.add_argument(
+        '-n',
+        '--nav_graph',
+        type=str,
+        required=True,
+        help='Path to the nav_graph for this fleet adapter',
+    )
     args = parser.parse_args(args_without_ros[1:])
-    print(f"Starting fleet manager...")
+    print('Starting fleet manager...')
 
-    with open(args.config_file, "r") as f:
+    with open(args.config_file, 'r') as f:
         config = yaml.safe_load(f)
 
     fleet_manager = FleetManager(config, args.nav_graph)
@@ -505,7 +524,7 @@ def main(argv=sys.argv):
         app,
         host=config['fleet_manager']['ip'],
         port=config['fleet_manager']['port'],
-        log_level='warning'
+        log_level='warning',
     )
 
 

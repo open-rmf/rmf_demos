@@ -1,4 +1,3 @@
-
 # Copyright 2021 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,22 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-import rclpy
-import math
 import argparse
-import yaml
+import math
+import sys
 import time
+
+import rclpy
 from rclpy.node import Node
-from rclpy.time import Time
-
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-
-from rmf_fleet_msgs.msg import ModeRequest, PathRequest, Location, \
-    RobotState, RobotMode, DockSummary, Dock, DockParameter
+from rmf_fleet_msgs.msg import Dock
+from rmf_fleet_msgs.msg import DockParameter
+from rmf_fleet_msgs.msg import DockSummary
+from rmf_fleet_msgs.msg import Location
+from rmf_fleet_msgs.msg import ModeRequest
+from rmf_fleet_msgs.msg import PathRequest
+from rmf_fleet_msgs.msg import RobotMode
+from rmf_fleet_msgs.msg import RobotState
+import yaml
 
 
 def make_location(p, level_name):
@@ -51,7 +54,8 @@ def close(l0: Location, l1: Location):
 
 class MockDocker(Node):
     """
-    The MockDocker has two objectices
+    The MockDocker has two objectives.
+
     1) Publish a DockSummary message with information on all the docking
     processes in a building. The fleet adapters rely on this message for
     task planning.
@@ -68,27 +72,33 @@ class MockDocker(Node):
 
     def __init__(self, config_yaml):
         super().__init__('mock_docker')
-        self.get_logger().info(f'Greetings, I am mock docker')
+        self.get_logger().info('Greetings, I am mock docker')
         self.config_yaml = config_yaml
         self.path_request_publisher = self.create_publisher(
-            PathRequest, 'robot_path_requests', 1)
+            PathRequest, 'robot_path_requests', 1
+        )
 
         self.mode_request_publisher = self.create_publisher(
-            ModeRequest, 'robot_mode_requests', 1)
+            ModeRequest, 'robot_mode_requests', 1
+        )
 
         self.mode_request_subscription = self.create_subscription(
-            ModeRequest, 'robot_mode_requests', self.mode_request_cb, 10)
+            ModeRequest, 'robot_mode_requests', self.mode_request_cb, 10
+        )
 
         self.robot_state_subscription = self.create_subscription(
-            RobotState, 'robot_state', self.robot_state_cb, 10)
+            RobotState, 'robot_state', self.robot_state_cb, 10
+        )
 
         transient_qos = QoSProfile(
             history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
             depth=1,
             reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
-            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL)
+            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL,
+        )
         self.dock_summary_publisher = self.create_publisher(
-            DockSummary, 'dock_summary', qos_profile=transient_qos)
+            DockSummary, 'dock_summary', qos_profile=transient_qos
+        )
 
         # This is a dict of robots which are in docking mode
         self.watching = {}
@@ -103,14 +113,15 @@ class MockDocker(Node):
             for dock_name, dock_waypoints in docking_info.items():
                 param = DockParameter()
                 param.start = dock_name
-                finish_waypoint = dock_waypoints.get("finish_waypoint")
+                finish_waypoint = dock_waypoints.get('finish_waypoint')
                 if finish_waypoint is None:
                     # for backwards compatibility
                     finish_waypoint = dock_name
                 param.finish = finish_waypoint
-                for point in dock_waypoints["path"]:
+                for point in dock_waypoints['path']:
                     location = make_location(
-                        point, dock_waypoints["level_name"])
+                        point, dock_waypoints['level_name']
+                    )
                     param.path.append(location)
                 dock.params.append(param)
                 dock_sub_map[dock_name] = param.path
@@ -125,28 +136,33 @@ class MockDocker(Node):
 
         if not msg.parameters:
             self.get_logger().warn(
-                f'Missing docking name for docking request!')
+                'Missing docking name for docking request!'
+            )
             return
 
         if msg.parameters[0].name != 'docking':
             self.get_logger().warn(
-                f'Unexpected docking parameter [{msg.parameters[0]}]')
+                f'Unexpected docking parameter [{msg.parameters[0]}]'
+            )
             return
 
         fleet_name = self.dock_map.get(msg.fleet_name)
         if fleet_name is None:
             self.get_logger().warn(
-                'Unknown fleet name requested [{msg.fleet_name}].')
+                'Unknown fleet name requested [{msg.fleet_name}].'
+            )
             return
 
         dock = fleet_name.get(msg.parameters[0].value)
         if not dock:
             self.get_logger().warn(
-                f'Unknown dock name requested [{msg.parameters[0].value}]')
+                f'Unknown dock name requested [{msg.parameters[0].value}]'
+            )
             return
 
         self.get_logger().info(
-            f'Received Docking Mode Request from [{msg.robot_name}]')
+            f'Received Docking Mode Request from [{msg.robot_name}]'
+        )
         path_request = PathRequest()
         path_request.fleet_name = msg.fleet_name
         path_request.robot_name = msg.robot_name
@@ -180,22 +196,24 @@ class MockDocker(Node):
         if msg.mode.mode != RobotMode.MODE_DOCKING:
             self.watching.pop(robot_name)
             self.get_logger().info(
-                f'{robot_name} done with docking at {finish_location}')
+                f'{robot_name} done with docking at {finish_location}'
+            )
 
 
 def main(argv=sys.argv):
     rclpy.init(args=argv)
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
     parser = argparse.ArgumentParser(
-        prog="mock_docker",
-        description="Configure and start mock_docker node")
-    parser.add_argument("-c", "--config", type=str, required=True,
-                        help="Path to config file")
+        prog='mock_docker', description='Configure and start mock_docker node'
+    )
+    parser.add_argument(
+        '-c', '--config', type=str, required=True, help='Path to config file'
+    )
     args = parser.parse_args(args_without_ros[1:])
 
     config = args.config
 
-    with open(config, "r") as f:
+    with open(config, 'r') as f:
         config_yaml = yaml.safe_load(f)
 
     mock_docker = MockDocker(config_yaml)

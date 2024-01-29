@@ -1,27 +1,27 @@
-from setuptools import setup
 from glob import glob
 import sys
 
+from setuptools import setup
+
 package_name = 'rmf_demos_panel'
-py_version = ".".join(map(str, sys.version_info[:2]))
+py_version = '.'.join(map(str, sys.version_info[:2]))
 site_pkgs_path = 'lib/python' + py_version + '/site-packages/rmf_demos_panel'
 
 setup(
     name=package_name,
-    version='2.2.2',
+    version='2.2.3',
     packages=[package_name],
     data_files=[
-        ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
         (
-            site_pkgs_path + '/templates',
-            glob(package_name + '/templates/*')
+            'share/ament_index/resource_index/packages',
+            ['resource/' + package_name],
         ),
+        ('share/' + package_name, ['package.xml']),
+        (site_pkgs_path + '/templates', glob(package_name + '/templates/*')),
         (
             site_pkgs_path + '/static/dist',
-            glob(package_name + '/static/dist/*.*')
-        )
+            glob(package_name + '/static/dist/*.*'),
+        ),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

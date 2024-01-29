@@ -27,12 +27,14 @@
         "deliveryRobot":{
             "icons":{
                 "deliveryRobot":"/icons/deliveryRobot.png"
-            }
+            },
+            "scale": 0.004
         },
         "tinyRobot":{
             "icons":{
                 "tinyRobot":"/icons/tinyRobot.png"
-            }
+            },
+            "scale": 0.00123
         }
     },
     "logos":{
