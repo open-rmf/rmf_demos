@@ -14,29 +14,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import argparse
+import asyncio
+import json
+import math
 import sys
 import uuid
-import argparse
-import json
-import asyncio
-import math
 
 import rclpy
 from rclpy.node import Node
 from rclpy.parameter import Parameter
 from rclpy.qos import qos_profile_system_default
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-
-from rmf_task_msgs.msg import ApiRequest, ApiResponse
-
+from rmf_task_msgs.msg import ApiRequest
+from rmf_task_msgs.msg import ApiResponse
 
 ###############################################################################
 
-class TaskRequester(Node):
 
+class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
@@ -46,17 +45,31 @@ class TaskRequester(Node):
             '-p', '--place', required=True, type=str, help='Place to go to'
         )
         parser.add_argument(
-            '-o', '--orientation', required=False, type=float,
-            help='Orientation to face in degrees (optional)'
+            '-o',
+            '--orientation',
+            required=False,
+            type=float,
+            help='Orientation to face in degrees (optional)',
         )
-        parser.add_argument('-st', '--start_time',
-                            help='Start time from now in secs, default: 0',
-                            type=int, default=0)
-        parser.add_argument('-pt', '--priority',
-                            help='Priority value for this request',
-                            type=int, default=0)
-        parser.add_argument("--use_sim_time", action="store_true",
-                            help='Use sim time, default: false')
+        parser.add_argument(
+            '-st',
+            '--start_time',
+            help='Start time from now in secs, default: 0',
+            type=int,
+            default=0,
+        )
+        parser.add_argument(
+            '-pt',
+            '--priority',
+            help='Priority value for this request',
+            type=int,
+            default=0,
+        )
+        parser.add_argument(
+            '--use_sim_time',
+            action='store_true',
+            help='Use sim time, default: false',
+        )
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -65,63 +78,64 @@ class TaskRequester(Node):
             history=History.KEEP_LAST,
             depth=1,
             reliability=Reliability.RELIABLE,
-            durability=Durability.TRANSIENT_LOCAL)
+            durability=Durability.TRANSIENT_LOCAL,
+        )
 
         self.pub = self.create_publisher(
-          ApiRequest, 'task_api_requests', transient_qos
+            ApiRequest, 'task_api_requests', transient_qos
         )
 
         # enable ros sim time
         if self.args.use_sim_time:
-            self.get_logger().info("Using Sim Time")
-            param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
+            self.get_logger().info('Using Sim Time')
+            param = Parameter('use_sim_time', Parameter.Type.BOOL, True)
             self.set_parameters([param])
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "direct_" + str(uuid.uuid4())
+        msg.request_id = 'direct_' + str(uuid.uuid4())
         payload = {}
 
         if self.args.robot and self.args.fleet:
             self.get_logger().info("Using 'robot_task_request'")
-            payload["type"] = "robot_task_request"
-            payload["robot"] = self.args.robot
-            payload["fleet"] = self.args.fleet
+            payload['type'] = 'robot_task_request'
+            payload['robot'] = self.args.robot
+            payload['fleet'] = self.args.fleet
         else:
             self.get_logger().info("Using 'dispatch_task_request'")
-            payload["type"] = "dispatch_task_request"
+            payload['type'] = 'dispatch_task_request'
 
         # Set task request start time
         now = self.get_clock().now().to_msg()
         now.sec = now.sec + self.args.start_time
-        start_time = now.sec * 1000 + round(now.nanosec/10**6)
+        start_time = now.sec * 1000 + round(now.nanosec / 10**6)
         # todo(YV): Fill priority after schema is added
 
         # Define task request description
         go_to_description = {'waypoint': self.args.place}
         if self.args.orientation is not None:
             go_to_description['orientation'] = (
-                self.args.orientation*math.pi/180.0
+                self.args.orientation * math.pi / 180.0
             )
 
         go_to_activity = {
             'category': 'go_to_place',
-            'description': go_to_description
+            'description': go_to_description,
         }
 
         rmf_task_request = {
             'category': 'compose',
             'description': {
                 'category': 'go_to_place',
-                'phases': [{'activity': go_to_activity}]
+                'phases': [{'activity': go_to_activity}],
             },
-            'unix_millis_earliest_start_time': start_time
+            'unix_millis_earliest_start_time': start_time,
         }
 
         if self.args.fleet:
-            rmf_task_request["fleet_name"] = self.args.fleet
+            rmf_task_request['fleet_name'] = self.args.fleet
 
-        payload["request"] = rmf_task_request
+        payload['request'] = rmf_task_request
 
         msg.json_msg = json.dumps(payload)
 
@@ -133,7 +147,7 @@ class TaskRequester(Node):
             ApiResponse, 'task_api_responses', receive_response, 10
         )
 
-        print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")
+        print(f'Json msg payload: \n{json.dumps(payload, indent=2)}')
 
         self.pub.publish(msg)
 
@@ -147,7 +161,8 @@ def main(argv=sys.argv):
 
     task_requester = TaskRequester(args_without_ros)
     rclpy.spin_until_future_complete(
-        task_requester, task_requester.response, timeout_sec=5.0)
+        task_requester, task_requester.response, timeout_sec=5.0
+    )
     if task_requester.response.done():
         print(f'Got response:\n{task_requester.response.result()}')
     else:
