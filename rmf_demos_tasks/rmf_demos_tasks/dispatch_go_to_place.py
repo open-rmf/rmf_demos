@@ -36,15 +36,18 @@ from rmf_task_msgs.msg import ApiResponse
 
 
 class TaskRequester(Node):
-
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument('-F', '--fleet', type=str, help='Fleet name')
         parser.add_argument('-R', '--robot', type=str, help='Robot name')
         parser.add_argument(
-            '-p', '--place', required=True, type=str, help='Place to go to',
-            nargs='+'
+            '-p',
+            '--place',
+            required=True,
+            type=str,
+            help='Place to go to',
+            nargs='+',
         )
         parser.add_argument(
             '-o',
@@ -54,11 +57,14 @@ class TaskRequester(Node):
             help='Orientation to face in degrees (optional)',
         )
         parser.add_argument(
-            '-m', '--prefer-same-map', required=False, action="store_true",
+            '-m',
+            '--prefer-same-map',
+            required=False,
+            action='store_true',
             help=(
                 'When choosing between multiple destination options, prefer '
                 'an option on the same map as the starting location.'
-            )
+            ),
         )
         parser.add_argument(
             '-st',
@@ -126,7 +132,7 @@ class TaskRequester(Node):
             place_json = {'waypoint': place}
             if self.args.orientation is not None:
                 place_json['orientation'] = (
-                    self.args.orientation*math.pi/180.0
+                    self.args.orientation * math.pi / 180.0
                 )
             one_of.append(place_json)
 

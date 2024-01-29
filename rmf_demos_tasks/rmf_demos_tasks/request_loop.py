@@ -76,9 +76,7 @@ class LoopRequester:
 
         self.node.get_logger().info(
             'Loop request between {} and {}, submitted to {} robot '
-            'fleet'.format(
-                self.start_wp, self.finish_wp, self.robot_type
-            )
+            'fleet'.format(self.start_wp, self.finish_wp, self.robot_type)
         )
 
 
