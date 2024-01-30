@@ -34,6 +34,7 @@ from rmf_task_msgs.msg import ApiResponse
 
 
 class TaskRequester(Node):
+
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()

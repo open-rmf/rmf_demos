@@ -40,8 +40,8 @@
     </executable>
   </group>
 
-  <!-- ros_ign bridge for simulation clock -->
-  <node pkg="ros_ign_bridge" exec="parameter_bridge"
+  <!-- ros_gz bridge for simulation clock -->
+  <node pkg="ros_gz_bridge" exec="parameter_bridge"
     args="/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock"
     />
 
