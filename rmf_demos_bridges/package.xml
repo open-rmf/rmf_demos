@@ -4,7 +4,7 @@
   <name>rmf_demos_bridges</name>
   <version>2.2.3</version>
   <description>Nodes for bridging between different communication stacks</description>
-  <maintainer email="cnboonhan@openrobotics.org">Boon Han</maintainer>
+  <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
   <license>Apache 2.0</license>
 
   <export>
