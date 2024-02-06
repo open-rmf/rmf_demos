@@ -60,6 +60,11 @@
     </node>
   </group>
 
+  <!-- Proto-Reservation system-->
+  <group>
+    <node pkg="rmf_chope_node" exec="queue_manager"></node>
+  </group>
+
   <group if="$(var use_rmf_panel)">
     <include file="$(find-pkg-share rmf_demos)/dashboard.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
