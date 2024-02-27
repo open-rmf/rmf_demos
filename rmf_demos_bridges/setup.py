@@ -4,11 +4,13 @@ package_name = 'rmf_demos_bridges'
 
 setup(
     name=package_name,
-    version='2.0.2',
+    version='2.2.3',
     packages=[package_name],
     data_files=[
-        ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+        (
+            'share/ament_index/resource_index/packages',
+            ['resource/' + package_name],
+        ),
         ('share/' + package_name, ['package.xml']),
     ],
     install_requires=['setuptools'],
@@ -20,10 +22,12 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            ('fleet_socketio_bridge='
+            (
+                'fleet_socketio_bridge='
                 'rmf_demos_bridges.fleet_socketio_bridge:main',
-             'fleet_robotmanager_mqtt_bridge='
-                'rmf_demos_bridges.fleet_robotmanager_mqtt_bridge:main'),
+                'fleet_robotmanager_mqtt_bridge='
+                'rmf_demos_bridges.fleet_robotmanager_mqtt_bridge:main',
+            ),
         ],
     },
 )

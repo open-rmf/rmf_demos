@@ -18,26 +18,28 @@
   </node>
 
   <!-- Fleet adapter -->
-  <group if="$(var use_sim_time)">
-    <node pkg="rmf_demos_fleet_adapter"
-          exec="fleet_adapter"
-          args="-c $(var config_file) -n $(var nav_graph_file) -sim"
-          output="both">
+  <group>
+    <group if="$(var use_sim_time)">
+      <node pkg="rmf_demos_fleet_adapter"
+            exec="fleet_adapter"
+            args="-c $(var config_file) -n $(var nav_graph_file) -sim"
+            output="both">
 
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-      <param name="server_uri" value="$(var server_uri)"/>
-    </node>
-  </group>
+        <param name="use_sim_time" value="$(var use_sim_time)"/>
+        <param name="server_uri" value="$(var server_uri)"/>
+      </node>
+    </group>
 
-  <group unless="$(var use_sim_time)">
-    <node pkg="rmf_demos_fleet_adapter"
-          exec="fleet_adapter"
-          args="-c $(var config_file) -n $(var nav_graph_file)"
-          output="both">
+    <group unless="$(var use_sim_time)">
+      <node pkg="rmf_demos_fleet_adapter"
+            exec="fleet_adapter"
+            args="-c $(var config_file) -n $(var nav_graph_file)"
+            output="both">
 
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-      <param name="server_uri" value="$(var server_uri)"/>
-    </node>
+        <param name="use_sim_time" value="$(var use_sim_time)"/>
+        <param name="server_uri" value="$(var server_uri)"/>
+      </node>
+    </group>
   </group>
 
 </launch>

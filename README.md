@@ -14,13 +14,13 @@ This repository contains demonstrations of the above mentioned capabilities of R
 
 ## System Requirements
 
-These demos were developed and tested on
+These demos were built and tested on
 
-* [Ubuntu 20.04 LTS](https://releases.ubuntu.com/20.04/)
+* [Ubuntu 22.04 LTS](https://releases.ubuntu.com/22.04/)
 
-* [ROS 2 - Galactic](https://docs.ros.org/en/foxy/Releases/Release-Galactic-Geochelone.html)
+* [ROS 2 - Humble](https://docs.ros.org/en/humble/Releases/Release-Humble-Hawksbill.html)
 
-* [Gazebo 11.1.0](http://gazebosim.org/)
+* [Gazebo Fortress](https://gazebosim.org/docs/fortress)
 > Note: RMF is fully supported on ROS 2 Foxy as well
 
 ## Installation
@@ -259,7 +259,7 @@ ros2 run rmf_demos_tasks  dispatch_patrol -p room_2 dead_end -n 10 --use_sim_tim
 ```
 
 #### RobotManager Integration
-`fleet_robotmanager_mqtt_bridge` can be used to publish robot locations, battery percentage and state to a `/robot/status/ROBOT-ID` websocket endpoint. An instance of RobotManager can be configured to subscribe to this server to receive json messages, which will in turn visualize the robots on RobotManager.
+`fleet_robotmanager_mqtt_bridge` (see [rmf_demos_bridges](https://github.com/open-rmf/rmf_demos/tree/main/rmf_demos_bridges/rmf_demos_bridges)) can be used to publish robot locations, battery percentage and state to a `/robot/status/ROBOT-ID` websocket endpoint. An instance of RobotManager can be configured to subscribe to this server to receive json messages, which will in turn visualize the robots on RobotManager.
 
 ```bash
 # Install the prerequisites
