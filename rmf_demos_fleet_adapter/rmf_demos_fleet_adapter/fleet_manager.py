@@ -42,6 +42,7 @@ from rmf_fleet_msgs.msg import Location
 from rmf_fleet_msgs.msg import PathRequest
 from rmf_fleet_msgs.msg import RobotMode
 from rmf_fleet_msgs.msg import RobotState
+from rmf_fleet_msgs.msg import ModeRequest
 import socketio
 import uvicorn
 import yaml
@@ -78,6 +79,7 @@ class State:
         self.perform_action_mode = False
         self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
         self.gps_pos = [0, 0]
+        self.mode_teleop = False
 
     def gps_to_xy(self, gps_json: dict):
         svy21_xy = self.svy_transformer.transform(
@@ -100,6 +102,7 @@ class FleetManager(Node):
         self.config = config
         self.fleet_name = self.config['rmf_fleet']['name']
         mgr_config = self.config['fleet_manager']
+        self.ignore_speed_limit = mgr_config.get('ignore_speed_limit', False)
 
         self.gps = False
         self.offset = [0, 0]
@@ -195,6 +198,17 @@ class FleetManager(Node):
             qos_profile=qos_profile_system_default,
         )
 
+        self.mode_pub = self.create_publisher(
+            ModeRequest,
+            'robot_mode_requests',
+            qos_profile=publisher_qos)
+
+        self.action_completed_pub = self.create_publisher(
+            ModeRequest,
+            'action_execution_notice',
+            qos_profile=qos_profile_system_default,
+        )
+
         @app.get('/open-rmf/rmf_demos_fm/status/', response_model=Response)
         async def status(robot_name: Optional[str] = None):
             response = {'data': {}, 'success': False, 'msg': ''}
@@ -228,6 +242,8 @@ class FleetManager(Node):
             target_yaw = dest.destination['yaw']
             target_map = dest.map_name
             target_speed_limit = dest.speed_limit
+            if self.ignore_speed_limit:
+                target_speed_limit = None
 
             target_x -= self.offset[0]
             target_y -= self.offset[1]
@@ -395,6 +411,22 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
+        @app.post(
+            '/open-rmf/rmf_demos_fm/toggle_attach/', response_model=Response
+        )
+        async def toggle_attach(robot_name: str, cmd_id: int, mode: Request):
+            response = {'success': False, 'msg': ''}
+            if robot_name not in self.robots:
+                return response
+            # Toggle action mode
+            if mode.toggle:
+                self.attach_cart(robot_name, cmd_id)
+            else:
+                self.detach_cart(robot_name, cmd_id)
+            # self.robots[robot_name].perform_action_mode = mode.toggle
+            response['success'] = True
+            return response
+
     def _make_mode_request(self, robot_name, cmd_id, mode):
         mode_msg = ModeRequest()
         mode_msg.fleet_name = self.fleet_name
@@ -405,12 +437,14 @@ class FleetManager(Node):
 
     def attach_cart(self, robot_name, cmd_id):
         # Use robot mode publisher to set it to "attaching cart mode"
+        self.get_logger().info(f'Publishing attaching mode...')
         msg = self._make_mode_request(robot_name, cmd_id,
                                       RobotMode.MODE_ATTACHING_CART)
         self.mode_pub.publish(msg)
 
     def detach_cart(self, robot_name, cmd_id):
         # Use robot mode publisher to set it to "detaching cart mode"
+        self.get_logger().info(f'Publishing detaching mode...')
         msg = self._make_mode_request(robot_name, cmd_id,
                                       RobotMode.MODE_DETACHING_CART)
         self.mode_pub.publish(msg)
@@ -441,7 +475,7 @@ class FleetManager(Node):
             if (
                 msg.mode.mode == RobotMode.MODE_IDLE
                 or msg.mode.mode == RobotMode.MODE_CHARGING
-            ) and len(msg.path) == 0:
+            ) and len(msg.path) == 0 and msg.task_id:
                 robot = self.robots[msg.name]
                 robot.destination = None
                 completed_request = int(msg.task_id)
@@ -519,6 +553,15 @@ class FleetManager(Node):
             data['replan'] = True
         else:
             data['replan'] = False
+        if (robot.state.mode.mode == RobotMode.MODE_ACTION_COMPLETED):
+            self.get_logger().info(f'Robot [{robot_name} completed attaching/detaching cart!')
+            completed_cmd_id = 0
+            msg = self._make_mode_request(robot_name, completed_cmd_id,
+                                          RobotMode.MODE_IDLE)
+            # Mark action execution as finished
+            self.action_completed_pub.publish(msg)
+            # # Request for robot idle
+            self.mode_pub.publish(msg)
 
         return data
 

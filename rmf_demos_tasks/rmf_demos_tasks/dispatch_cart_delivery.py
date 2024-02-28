@@ -126,13 +126,13 @@ class TaskRequester(Node):
             "description": self.args.pickup})
         activities.append({
             "category": "perform_action",
-            "description": __create_perform_action("attach_cart")})
+            "description": __create_perform_action("delivery_pickup")})
         activities.append({
             "category": "go_to_place",
             "description": self.args.dropoff})
         activities.append({
             "category": "perform_action",
-            "description": __create_perform_action("detach_cart")})
+            "description": __create_perform_action("delivery_dropoff")})
         # Add activities to phases
         description["phases"].append(
             {"activity": {

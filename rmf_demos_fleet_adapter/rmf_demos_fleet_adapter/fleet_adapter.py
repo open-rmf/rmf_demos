@@ -18,6 +18,7 @@ import math
 import sys
 import threading
 import time
+import json
 
 import rclpy
 from rclpy.duration import Duration
@@ -226,10 +227,14 @@ class RobotAdapter:
         )
 
         if destination.dock is not None:
-            self.attempt_cmd_until_success(
-                cmd=self.perform_docking, args=(destination,)
-            )
-            return
+            dock_json = json.loads(destination.dock)
+            if dock_json.get('dock_name') == 'enter_lift':
+                enter_lift = True
+            if not enter_lift:
+                self.attempt_cmd_until_success(
+                    cmd=self.perform_docking, args=(destination,)
+                )
+                return
 
         self.attempt_cmd_until_success(
             cmd=self.api.navigate,
@@ -264,6 +269,14 @@ class RobotAdapter:
                 self.attempt_cmd_until_success(
                     cmd=self.perform_clean, args=(description['zone'],)
                 )
+            case 'delivery_pickup':
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_attach, args=(self.name, True, self.cmd_id)
+                )
+            case 'delivery_dropoff':
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_attach, args=(self.name, False, self.cmd_id)
+                )
 
     def finish_action(self):
         # This is triggered by a ModeRequest callback which allows human
@@ -278,7 +291,7 @@ class RobotAdapter:
 
     def perform_docking(self, destination):
         match self.api.start_activity(
-            self.name, self.cmd_id, 'dock', destination.dock()
+            self.name, self.cmd_id, 'dock', destination.dock
         ):
             case (RobotAPIResult.SUCCESS, path):
                 self.override = self.execution.override_schedule(
