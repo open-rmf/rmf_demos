@@ -16,12 +16,12 @@ This repository contains demonstrations of the above mentioned capabilities of R
 
 These demos were built and tested on
 
-* [Ubuntu 22.04 LTS](https://releases.ubuntu.com/22.04/)
+* [Ubuntu 24.04 LTS](https://releases.ubuntu.com/24.04/)
 
-* [ROS 2 - Humble](https://docs.ros.org/en/humble/Releases/Release-Humble-Hawksbill.html)
+* [ROS 2 - Jazzy](https://docs.ros.org/en/jazzy/Releases/Release-Jazzy-Jalisco.html)
 
 * [Gazebo Harmonic](https://gazebosim.org/docs/harmonic)
-> Note: RMF is fully supported on ROS 2 Humble and Iron as well
+> Note: RMF is fully supported on ROS 2 Humble and Iron as well, but those will require [ros_gz](https://github.com/gazebosim/ros_gz) to be built from source.
 
 ## Installation
 Instructions can be found [here](https://github.com/open-rmf/rmf).
