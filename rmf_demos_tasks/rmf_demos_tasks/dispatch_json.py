@@ -14,18 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import argparse
+import asyncio
+import json
 import sys
 import uuid
-import argparse
-import json
-import asyncio
 
 import rclpy
 from rclpy.node import Node
 from rclpy.parameter import Parameter
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_task_msgs.msg import ApiRequest, ApiResponse
@@ -95,8 +95,8 @@ class TaskRequester(Node):
 
         # enable ros sim time
         if self.args.use_sim_time:
-            self.get_logger().info("Using Sim Time")
-            param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
+            self.get_logger().info('Using Sim Time')
+            param = Parameter('use_sim_time', Parameter.Type.BOOL, True)
             self.set_parameters([param])
 
         # Construct task
@@ -106,12 +106,12 @@ class TaskRequester(Node):
 
         if self.args.robot and self.args.fleet:
             self.get_logger().info("Using 'robot_task_request'")
-            payload["type"] = "robot_task_request"
-            payload["robot"] = self.args.robot
-            payload["fleet"] = self.args.fleet
+            payload['type'] = 'robot_task_request'
+            payload['robot'] = self.args.robot
+            payload['fleet'] = self.args.fleet
         else:
             self.get_logger().info("Using 'dispatch_task_request'")
-            payload["type"] = "dispatch_task_request"
+            payload['type'] = 'dispatch_task_request'
 
         request = {}
 
@@ -119,15 +119,15 @@ class TaskRequester(Node):
         now = self.get_clock().now().to_msg()
         now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
-        request["unix_millis_earliest_start_time"] = start_time
+        request['unix_millis_earliest_start_time'] = start_time
         # todo(YV): Fill priority after schema is added
 
         # Define task request category
-        request["category"] = self.args.category
+        request['category'] = self.args.category
 
         # Define task request description
-        request["description"] = description
-        payload["request"] = request
+        request['description'] = description
+        payload['request'] = request
         msg.json_msg = json.dumps(payload)
 
         def receive_response(response_msg: ApiResponse):
@@ -139,7 +139,7 @@ class TaskRequester(Node):
             ApiResponse, 'task_api_responses', receive_response, transient_qos
         )
 
-        print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")
+        print(f'Json msg payload: \n{json.dumps(payload, indent=2)}')
         self.pub.publish(msg)
 
 
