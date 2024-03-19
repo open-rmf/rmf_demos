@@ -32,6 +32,7 @@ import rmf_adapter
 from rmf_adapter import Adapter
 import rmf_adapter.easy_full_control as rmf_easy
 from rmf_fleet_msgs.msg import ClosedLanes
+from rmf_fleet_msgs.msg import InterruptRequest
 from rmf_fleet_msgs.msg import LaneRequest
 from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import RobotMode
@@ -459,6 +460,49 @@ def ros_connections(node, robots, fleet_handle):
         'action_execution_notice',
         mode_request_cb,
         qos_profile=qos_profile_system_default,
+    )
+
+    def decommission_cb(msg):
+        if msg.fleet_name is None or msg.fleet_name != fleet_name:
+            return
+
+        robot = robots.get(msg.robot_name)
+        if robot is None:
+            node.get_logger().info(
+                f'No robot named {msg.robot_name} available in fleet {fleet_name}'
+            )
+            return
+        update_handle = robot.update_handle
+        if update_handle is None:
+            node.get_logger().info(
+                f'RobotUpdateHandle of {msg.robot_name} not available'
+            )
+            return
+        update_handle = update_handle.more()
+
+        if msg.type == InterruptRequest.TYPE_INTERRUPT:
+            update_handle.unstable_decommission()
+            update_handle.override_status('uninitialized')
+            node.get_logger().info(
+                f'{msg.robot_name} of fleet {fleet_name} has been decommissioned'
+            )
+        elif msg.type == InterruptRequest.TYPE_RESUME:
+            update_handle.unstable_recommission()
+            update_handle.override_status(None)
+            node.get_logger().info(
+                f'{msg.robot_name} of fleet {fleet_name} has been recommissioned'
+            )
+
+    node.create_subscription(
+        InterruptRequest,
+        'robot_decommission_request',
+        decommission_cb,
+        qos_profile=QoSProfile(
+            history=rclpy.qos.HistoryPolicy.KEEP_LAST,
+            depth=10,
+            reliability=rclpy.qos.ReliabilityPolicy.RELIABLE,
+            durability=rclpy.qos.DurabilityPolicy.TRANSIENT_LOCAL,
+        ),
     )
 
 
