@@ -419,8 +419,8 @@ def ros_connections(node, robots, fleet_handle):
         if msg.fleet_name is None or msg.fleet_name != fleet_name:
             return
 
-        fleet_handle.open_lanes(msg.open_lanes)
-        fleet_handle.close_lanes(msg.close_lanes)
+        fleet_handle.more().open_lanes(msg.open_lanes)
+        fleet_handle.more().close_lanes(msg.close_lanes)
 
         for lane_idx in msg.close_lanes:
             closed_lanes.add(lane_idx)
