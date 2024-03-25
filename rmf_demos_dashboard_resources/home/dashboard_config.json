@@ -1,0 +1,52 @@
+{
+  "world_name" : "Home World",  
+  "valid_task": ["Delivery", "Loop"],
+  "task": {
+    "Delivery": {
+      "option": {
+        "coke_to_dining_table": {
+          "pickup_place_name": "kitchen",
+          "pickup_dispenser": "coke_dispenser",
+          "dropoff_place_name": "dining_table",
+          "dropoff_ingestor": "coke_ingestor_dining_table"
+        },
+        "coke_to_family_table": {
+          "pickup_place_name": "kitchen",
+          "pickup_dispenser": "coke_dispenser",
+          "dropoff_place_name": "family_table",
+          "dropoff_ingestor": "coke_ingestor_family_table"
+        },
+        "coke_to_bedroom_1": {
+          "pickup_place_name": "kitchen",
+          "pickup_dispenser": "coke_dispenser",
+          "dropoff_place_name": "bedroom_1",
+          "dropoff_ingestor": "coke_ingestor_bedroom_1"
+        },
+        "coke_to_bedroom_2": {
+          "pickup_place_name": "kitchen",
+          "pickup_dispenser": "coke_dispenser",
+          "dropoff_place_name": "bedroom_2",
+          "dropoff_ingestor": "coke_ingestor_bedroom_2"
+        }
+      }
+    },
+    "Loop": {
+      "places": [
+        "kitchen",
+        "dining_table",
+        "family_table",
+        "bedroom_1",
+        "bedroom_2",
+        "tinyRobot_charger"
+      ]
+    },
+    "Clean": {
+    },
+    "Station": {
+    },
+    "Patrol": {
+    },
+    "Charging": {
+    }
+  }
+}
