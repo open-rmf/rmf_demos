@@ -30,6 +30,7 @@ import threading
 import sys
 import asyncio
 
+
 def main(argv=sys.argv):
     rclpy.init(args=argv)
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
@@ -64,7 +65,10 @@ def main(argv=sys.argv):
         '--fleet',
         type=str,
         default='',
-        help='Which fleet should the lane be closed for. Empty string (default) indicates all fleets.',
+        help=(
+            'Which fleet should the lane be closed for. '
+            'Empty string (default) indicates all fleets.'
+        ),
     )
     parser.add_argument(
         '-n',
@@ -86,22 +90,31 @@ def main(argv=sys.argv):
 
     from_waypoint = nav_graph.find_waypoint(args.from_waypoint)
     if from_waypoint is None:
-        raise Exception(f'Unable to find waypoint [{args.from_waypoint}] in graph')
+        raise Exception(
+            f'Unable to find waypoint [{args.from_waypoint}] in graph'
+        )
 
     to_waypoint = nav_graph.find_waypoint(args.to_waypoint)
     if to_waypoint is None:
-        raise Exception(f'Unable to find waypoint [{args.to_waypoint}] in graph')
+        raise Exception(
+            f'Unable to find waypoint [{args.to_waypoint}] in graph'
+        )
 
     lane_indices = []
 
     lane = nav_graph.lane_from(from_waypoint.index, to_waypoint.index)
     if lane is None:
-        raise Exception(f'Unable to find a lane that connects [{args.from_waypoint}] to [{args.to_waypoint}]')
+        raise Exception(
+            f'Unable to find a lane that connects [{args.from_waypoint}] '
+            f'to [{args.to_waypoint}]'
+        )
 
     lane_indices.append(lane.index)
 
     if args.bidir:
-        reverse_lane = nav_graph.lane_from(to_waypoint.index, from_waypoint.index)
+        reverse_lane = nav_graph.lane_from(
+            to_waypoint.index, from_waypoint.index
+        )
         if reverse_lane is not None:
             lane_indices.append(reverse_lane.index)
 
@@ -138,6 +151,7 @@ def main(argv=sys.argv):
     rclpy_executor.spin_until_future_complete(f, 5.0)
     # TODO(@mxgrey): Subscribe to lane closure topic and keep spinning until
     # we see these lanes open/closed
+
 
 if __name__ == '__main__':
     main(sys.argv)
