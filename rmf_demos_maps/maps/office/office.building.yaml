@@ -164,9 +164,9 @@ levels:
       - {dispensable: false, model_name: OpenRobotics/ConfTable, name: ConfTable, static: true, x: 620, y: 872, yaw: 1.1016999999999999, z: 0}
       - {dispensable: false, model_name: OpenRobotics/WhiteCabinet, name: WhiteCabinet, static: true, x: 1775.8789999999999, y: 344.82299999999998, yaw: -0.035700000000000003, z: 0}
       - {dispensable: false, model_name: OpenRobotics/SquareShelf, name: SquareShelf, static: true, x: 938.97000000000003, y: 352.11799999999999, yaw: 2.6640000000000001, z: 0}
-      - {dispensable: false, model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser, static: true, x: 2097.3649999999998, y: 649.80899999999997, yaw: 1.5708, z: 2}
-      - {dispensable: false, model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser_2, static: true, x: 2095.2669999999998, y: 689.745, yaw: 1.5708, z: 1}
-      - {dispensable: false, model_name: OpenRobotics/Coke, name: Coke, static: false, x: 2098.6509999999998, y: 650.52300000000002, yaw: 1.5708, z: 2}
+      - {dispensable: false, model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser, static: true, x: 2097.3649999999998, y: 649.80899999999997, yaw: 1.5708, z: 1.0800000000000001}
+      - {dispensable: false, model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser_2, static: true, x: 2095.2669999999998, y: 689.745, yaw: 1.5708, z: 0.63}
+      - {dispensable: false, model_name: OpenRobotics/Coke, name: Coke, static: false, x: 2098.6509999999998, y: 650.52300000000002, yaw: 1.5708, z: 1.0800000000000001}
       - {dispensable: false, model_name: OpenRobotics/TeleportIngestor, name: coke_ingestor, static: true, x: 2662.8870000000002, y: 898.99599999999998, yaw: 1.5708, z: 0.80500000000000005}
       - {dispensable: false, model_name: OpenRobotics/TeleportIngestor, name: coke_ingestor_2, static: true, x: 668.75900000000001, y: 703.86400000000003, yaw: 1.5708, z: 0.80000000000000004}
       - {dispensable: false, model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 1946.0540000000001, y: 1238.8910000000001, yaw: 0.0092999999999999992, z: 0}
@@ -238,7 +238,7 @@ levels:
       - [612.96900000000005, 445.58999999999997, 0, ""]
       - [933.08600000000001, 744.67600000000004, 0, ""]
       - [657.60599999999999, 1282.1559999999999, 0, ""]
-      - [830.92200000000003, 249.364, 0, "", {is_parking_spot: [4, false]}]
+      - [830.92200000000003, 249.364, 0, presupplies, {is_parking_spot: [4, false]}]
       - [1210.5440000000001, 365.25400000000002, 0, patrol_D2]
       - [1191.442, 824.45699999999999, 0, patrol_A1]
       - [1232.421, 658.56700000000001, 0, tinyRobot1_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot1], spawn_robot_type: [1, TinyRobot]}]
