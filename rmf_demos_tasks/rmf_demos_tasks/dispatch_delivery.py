@@ -90,13 +90,13 @@ class TaskRequester(Node):
             '-F',
             '--fleet',
             type=str,
-            help='Fleet name, should define tgt with robot',
+            help='Fleet name, should define together with robot',
         )
         parser.add_argument(
             '-R',
             '--robot',
             type=str,
-            help='Robot name, should define tgt with fleet',
+            help='Robot name, should define together with fleet',
         )
         parser.add_argument(
             '-st',
