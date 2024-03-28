@@ -11,6 +11,7 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>rmf_building_map_tools</buildtool_depend>
+  <buildtool_depend>rmf_site_editor</buildtool_depend>
   <buildtool_depend>ros2run</buildtool_depend>
 
   <export>

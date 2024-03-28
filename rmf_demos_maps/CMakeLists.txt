@@ -34,14 +34,16 @@ foreach(path ${traffic_editor_paths})
     add_custom_command(
       DEPENDS ${map_path}
       COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
+      #COMMAND ros2 run rmf_site_editor rmf_site_editor --headless ${map_path} ${output_dir}
       OUTPUT ${output_world_path}
     )
   else()
     message("DOWNLOADING MODELS WITH COMMAND: ros2 run rmf_building_map_tools building_map_model_downloader ${map_path}")
     add_custom_command(
       DEPENDS ${map_path}
-      COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
-      COMMAND ros2 run rmf_building_map_tools building_map_model_downloader ${map_path} -e ~/.gazebo/models
+      COMMAND ros2 run rmf_site_editor rmf_site_editor ${map_path} --headless ${output_world_path}
+      #COMMAND ros2 run rmf_building_map_tools building_map_generator gazebo ${map_path} ${output_world_path} ${output_model_dir}
+      #COMMAND ros2 run rmf_building_map_tools building_map_model_downloader ${map_path} -e ~/.gazebo/models
       OUTPUT ${output_world_path}
     )
   endif()
@@ -60,22 +62,6 @@ foreach(path ${traffic_editor_paths})
   # This will initiate both custom commands: ${output_world_path} and ${world_name}_crowdsim
   add_custom_target(generate_${world_name}_crowdsim ALL
     DEPENDS ${world_name}_crowdsim
-  )
-
-  ##############################################################################
-  # Generate the nav graphs
-  ##############################################################################
-
-  set(output_nav_graphs_dir ${output_dir}/nav_graphs/)
-  set(output_nav_graphs_phony ${output_nav_graphs_dir}/phony)
-  add_custom_command(
-    OUTPUT ${output_nav_graphs_phony}
-    COMMAND ros2 run rmf_building_map_tools building_map_generator nav ${map_path} ${output_nav_graphs_dir}
-    DEPENDS ${map_path}
-  )
-
-  add_custom_target(generate_${output_world_name}_nav_graphs ALL
-    DEPENDS ${output_nav_graphs_phony}
   )
 
   install(
