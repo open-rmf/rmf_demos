@@ -2,19 +2,17 @@
 
 <launch>
   <arg name="use_sim_time" default="true"/>
-  <arg name="use_tpe" default="false"/>
-  <arg name="ignition_version" default='6'/>
+  <arg name="gazebo_version" default='8'/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/office_mock_traffic_light.launch.xml">
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
-    <arg name="use_tpe" value="$(var use_tpe)"/>
   </include>
 
   <!-- Simulation launch -->
   <include file="$(find-pkg-share rmf_demos_gz)/simulation.launch.xml">
     <arg name="map_name" value="office" />
-    <arg name="ignition_version" value="$(var ignition_version)" />
+    <arg name="gazebo_version" value="$(var gazebo_version)" />
   </include>
 
 </launch>
