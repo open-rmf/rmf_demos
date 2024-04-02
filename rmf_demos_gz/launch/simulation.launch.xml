@@ -17,7 +17,7 @@
   <let name="gz_headless" if="$(var headless)" value="-s"/>
   <let name="gz_headless" unless="$(var headless)" value="" />
 
-  <executable cmd="gz sim --force-version $(var gazebo_version) $(var gz_headless) -r -v 4 $(var world_path)" output="both">
+  <executable cmd="gz sim --force-version $(var gazebo_version) $(var gz_headless) -r -v 3 $(var world_path)" output="both">
     <env name="GZ_SIM_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
     <env name="GZ_SIM_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
     <env name="GZ_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
