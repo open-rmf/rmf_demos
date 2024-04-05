@@ -37,6 +37,7 @@ setup(
             'mock_docker = rmf_demos_tasks.mock_docker:main',
             'teleop_robot = rmf_demos_tasks.teleop_robot:main',
             'dispatch_json = rmf_demos_tasks.dispatch_json:main',
+            'api_request = rmf_demos_tasks.api_request:main',
         ],
     },
 )
