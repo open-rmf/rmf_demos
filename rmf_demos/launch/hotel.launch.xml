@@ -8,7 +8,7 @@
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="viz_config_file" value ="$(find-pkg-share rmf_demos)/include/hotel/hotel.rviz"/>
-    <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/hotel/hotel.building.yaml"/>
+    <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/hotel/hotel.site.json"/>
     <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/hotel/dashboard_config.json"/>
   </include>
 
