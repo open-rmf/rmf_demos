@@ -9,7 +9,8 @@
   <arg name="initial_map" default="L1" description="Initial map name for the visualizer"/>
   <arg name="headless" default="false" description="do not launch rviz; launch gazebo in headless mode"/>
   <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
-  <arg name="use_rmf_panel" default="true" description="launch web and api server for rmf_demos_panel"/>
+  <arg name="use_rmf_panel" default="false" description="launch web and api server for rmf_demos_panel"/>
+  <arg name="server_uri" default="ws://localhost:8000/_internal" description="api-server uri"/>
   <arg name="use_unique_hex_string_with_task_id" default="true" description="Appends a unique hex string to the task ID"/>
 
   <!-- Traffic Schedule  -->
@@ -59,6 +60,7 @@
       <param name="use_sim_time" value="$(var use_sim_time)"/>
       <param name="bidding_time_window" value="$(var bidding_time_window)"/>
       <param name="use_unique_hex_string_with_task_id" value="$(var use_unique_hex_string_with_task_id)"/>
+      <param name="server_uri" value="$(var server_uri)"/>
     </node>
   </group>
 
@@ -67,6 +69,10 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="dashboard_config_file" value ="$(var dashboard_config_file)"/>
     </include>
+  </group>
+
+  <group>
+    <node pkg="rmf_fleet_adapter" exec="mutex_group_supervisor" output="screen"/>
   </group>
 
 </launch>
