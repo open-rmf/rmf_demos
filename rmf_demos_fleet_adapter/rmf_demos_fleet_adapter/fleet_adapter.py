@@ -160,7 +160,7 @@ def main(argv=sys.argv):
     update_thread.start()
 
     # Connect to the extra ROS2 topics that are relevant for the adapter
-    ros_connections(node, robots, fleet_handle)
+    connections = ros_connections(node, robots, fleet_handle)
 
     # Create executor for the command handle node
     rclpy_executor = rclpy.executors.SingleThreadedExecutor()
@@ -429,11 +429,18 @@ def ros_connections(node, robots, fleet_handle):
     closed_lanes = set()
 
     def lane_request_cb(msg):
-        if msg.fleet_name is None or msg.fleet_name != fleet_name:
+        if msg.fleet_name and msg.fleet_name != fleet_name:
+            print(f'Ignoring lane request for fleet [{msg.fleet_name}]')
             return
 
-        fleet_handle.open_lanes(msg.open_lanes)
-        fleet_handle.close_lanes(msg.close_lanes)
+        if msg.open_lanes:
+            print(f'Opening lanes: {msg.open_lanes}')
+
+        if msg.close_lanes:
+            print(f'Closing lanes: {msg.close_lanes}')
+
+        fleet_handle.more().open_lanes(msg.open_lanes)
+        fleet_handle.more().close_lanes(msg.close_lanes)
 
         for lane_idx in msg.close_lanes:
             closed_lanes.add(lane_idx)
@@ -460,19 +467,24 @@ def ros_connections(node, robots, fleet_handle):
                 return
             robot.finish_action()
 
-    node.create_subscription(
+    lane_request_sub = node.create_subscription(
         LaneRequest,
         'lane_closure_requests',
         lane_request_cb,
         qos_profile=qos_profile_system_default,
     )
 
-    node.create_subscription(
+    action_execution_notice_sub = node.create_subscription(
         ModeRequest,
         'action_execution_notice',
         mode_request_cb,
         qos_profile=qos_profile_system_default,
     )
+
+    return [
+        lane_request_sub,
+        action_execution_notice_sub,
+    ]
 
 
 if __name__ == '__main__':
