@@ -367,24 +367,10 @@ class FleetManager(Node):
                 target_loc.level_name = map_name
                 path_request.path.append(target_loc)
 
-                if task.task in self.docks:
-                    task_wps = self.docks[task.task]
-                    for wp in task_wps:
-                        target_loc = wp
-                        path_request.path.append(target_loc)
-                        previous_wp = [wp.x, wp.y, wp.yaw]
-                elif task.task in self.process_waypoints:
-                    task_wps = self.process_waypoints[task.task]['path']
-                    task_level_name = \
-                        self.process_waypoints[task.task]['level_name']
-                    for wp in task_wps:
-                        target_loc = Location()
-                        target_loc.x = wp[0]
-                        target_loc.y = wp[1]
-                        target_loc.yaw = wp[2]
-                        target_loc.level_name = task_level_name
-                        path_request.path.append(target_loc)
-                        previous_wp = wp
+                path_request.fleet_name = self.fleet_name
+                path_request.robot_name = robot_name
+                path_request.task_id = str(cmd_id)
+                self.path_pub.publish(path_request)
 
             if self.debug:
                 print(

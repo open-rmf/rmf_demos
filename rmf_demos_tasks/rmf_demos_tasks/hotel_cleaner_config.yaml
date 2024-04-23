@@ -1,0 +1,41 @@
+# The configuration file for docking actions that robots can perform
+# FleetName: The name of the fleet
+#   DockName: The name of the docking waypoint
+#     level_name: The level name
+#     path: The waypoints that the robot will pass through during the docking process)
+#     finish_waypoint: The name of the waypoint where the robot will end up at the end of the docking process
+#
+# Note: These waypoints are in (x meters, y meters, yaw radian) form
+#
+# If loaded correctly, you will be able to echo the msg via:
+#   ros2 topic echo /dock_summary --qos-durability transient_local --qos-reliability reliable
+#
+# Configuring Cleaning path:
+#    The full cleaning path which the robot will travel along. When configuring, the first
+#    waypoint is required to be the current robot's waypoint.
+
+cleanerBotA:
+  clean_lobby:
+    level_name: "L1"
+    path: [ [24.59, -35.49, 0.0],
+            [24.24, -38.77, 1.57],
+            [18.3, -38.62, 0.0],
+            [18.3, -35.3, 0.0],
+            [23.8, -35.45, 0.0] ]
+    finish_waypoint: "clean_lobby"
+  clean_waiting_area:
+    level_name: "L1"
+    path: [ [8.54, -21.93, 1.57],
+            [14.0, -23.25, 0.0],
+            [14.0, -24.7, 0.0],
+            [8.6, -24.7, 1.57],
+            [8.56, -23.27, 0.0] ]
+    finish_waypoint: "clean_waiting_area"
+  clean_restaurant:
+    level_name: "L1"
+    path: [ [14.2, -11.35, 1.57],
+            [16.5, -11.35, 1.57],
+            [17.8, -13.9, 0.0],
+            [12.8, -14.1, 0.0],
+            [12.86, -11.4, 0.0] ]
+    finish_waypoint: "clean_restaurant"

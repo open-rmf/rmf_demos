@@ -18,7 +18,6 @@ import math
 import sys
 import threading
 import time
-import json
 
 import rclpy
 from rclpy.duration import Duration
@@ -227,14 +226,10 @@ class RobotAdapter:
         )
 
         if destination.dock is not None:
-            dock_json = json.loads(destination.dock)
-            if dock_json.get('dock_name') == 'enter_lift':
-                enter_lift = True
-            if not enter_lift:
-                self.attempt_cmd_until_success(
-                    cmd=self.perform_docking, args=(destination,)
-                )
-                return
+            self.attempt_cmd_until_success(
+                cmd=self.perform_docking, args=(destination,)
+            )
+            return
 
         self.attempt_cmd_until_success(
             cmd=self.api.navigate,
