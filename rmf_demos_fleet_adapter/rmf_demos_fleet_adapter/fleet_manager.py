@@ -79,7 +79,6 @@ class State:
         self.perform_action_mode = False
         self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
         self.gps_pos = [0, 0]
-        self.mode_teleop = False
 
     def gps_to_xy(self, gps_json: dict):
         svy21_xy = self.svy_transformer.transform(
@@ -409,7 +408,7 @@ class FleetManager(Node):
                 self.attach_cart(robot_name, cmd_id)
             else:
                 self.detach_cart(robot_name, cmd_id)
-            # self.robots[robot_name].perform_action_mode = mode.toggle
+            self.robots[robot_name].perform_action_mode = mode.toggle
             response['success'] = True
             return response
 
@@ -440,7 +439,7 @@ class FleetManager(Node):
             robot = self.robots[msg.name]
             if (
                 not robot.is_expected_task_id(msg.task_id)
-                and not robot.mode_teleop
+                and not robot.perform_action_mode
             ):
                 # This message is out of date, so disregard it.
                 if robot.last_path_request is not None:
