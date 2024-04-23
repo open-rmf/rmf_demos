@@ -405,10 +405,16 @@ class FleetManager(Node):
                 return response
             # Toggle action mode
             if mode.toggle:
-                self.attach_cart(robot_name, cmd_id)
+                # Use robot mode publisher to set it to "attaching cart mode"
+                self.get_logger().info(f'Publishing attaching mode...')
+                msg = self._make_mode_request(robot_name, cmd_id,
+                                            RobotMode.MODE_ATTACHING_CART)
             else:
-                self.detach_cart(robot_name, cmd_id)
-            self.robots[robot_name].perform_action_mode = mode.toggle
+                # Use robot mode publisher to set it to "detaching cart mode"
+                self.get_logger().info(f'Publishing detaching mode...')
+                msg = self._make_mode_request(robot_name, cmd_id,
+                                            RobotMode.MODE_DETACHING_CART)
+            self.mode_pub.publish(msg)
             response['success'] = True
             return response
 
@@ -419,20 +425,6 @@ class FleetManager(Node):
         mode_msg.mode.mode = mode
         mode_msg.mode.mode_request_id = cmd_id
         return mode_msg
-
-    def attach_cart(self, robot_name, cmd_id):
-        # Use robot mode publisher to set it to "attaching cart mode"
-        self.get_logger().info(f'Publishing attaching mode...')
-        msg = self._make_mode_request(robot_name, cmd_id,
-                                      RobotMode.MODE_ATTACHING_CART)
-        self.mode_pub.publish(msg)
-
-    def detach_cart(self, robot_name, cmd_id):
-        # Use robot mode publisher to set it to "detaching cart mode"
-        self.get_logger().info(f'Publishing detaching mode...')
-        msg = self._make_mode_request(robot_name, cmd_id,
-                                      RobotMode.MODE_DETACHING_CART)
-        self.mode_pub.publish(msg)
 
     def robot_state_cb(self, msg):
         if msg.name in self.robots:
@@ -460,7 +452,7 @@ class FleetManager(Node):
             if (
                 msg.mode.mode == RobotMode.MODE_IDLE
                 or msg.mode.mode == RobotMode.MODE_CHARGING
-            ) and len(msg.path) == 0 and msg.task_id:
+            ) and len(msg.path) == 0 and msg.task_id and msg.task_id.isdigit():
                 robot = self.robots[msg.name]
                 robot.destination = None
                 completed_request = int(msg.task_id)
