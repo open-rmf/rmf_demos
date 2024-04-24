@@ -366,10 +366,10 @@ class FleetManager(Node):
                 target_loc.level_name = map_name
                 path_request.path.append(target_loc)
 
-                path_request.fleet_name = self.fleet_name
-                path_request.robot_name = robot_name
-                path_request.task_id = str(cmd_id)
-                self.path_pub.publish(path_request)
+            path_request.fleet_name = self.fleet_name
+            path_request.robot_name = robot_name
+            path_request.task_id = str(cmd_id)
+            self.path_pub.publish(path_request)
 
             if self.debug:
                 print(
