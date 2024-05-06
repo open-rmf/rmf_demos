@@ -138,8 +138,8 @@ def main(argv=sys.argv):
         )
 
     def update_loop():
-        reassign_task_interval = \
-            config_yaml['rmf_fleet'].get('reassign_task_interval', 60) # seconds
+        reassign_task_interval = config_yaml['rmf_fleet'].get(
+            'reassign_task_interval', 60)  # seconds
         last_task_replan = node.get_clock().now()
         asyncio.set_event_loop(asyncio.new_event_loop())
         while rclpy.ok():
