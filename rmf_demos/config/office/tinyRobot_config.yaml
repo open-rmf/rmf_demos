@@ -32,6 +32,7 @@ rmf_fleet:
   actions: ["teleop", "wait_until", "multistop"]
   finishing_request: "park" # [park, charge, nothing]
   responsive_wait: True # Should responsive wait be on/off for the whole fleet by default? False if not specified.
+  reassign_task_interval: 120 # seconds, specify how often a task reassignment should be triggered in the fleet
   robots:
     tinyRobot1:
         charger: "tinyRobot1_charger"
