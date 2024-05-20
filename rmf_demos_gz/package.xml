@@ -17,7 +17,8 @@
 
   <exec_depend>teleop_twist_keyboard</exec_depend>
   <exec_depend>launch_xml</exec_depend>
-  <exec_depend>gz-sim8</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>gz_sim_vendor</exec_depend>
 
   <exec_depend>ros_gz_bridge</exec_depend>
 
