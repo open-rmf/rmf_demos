@@ -18,6 +18,9 @@ import math
 import sys
 import threading
 import time
+import datetime
+
+from icecream import ic
 
 import rclpy
 from rclpy.duration import Duration
@@ -35,6 +38,9 @@ from rmf_fleet_msgs.msg import ClosedLanes
 from rmf_fleet_msgs.msg import LaneRequest
 from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import RobotMode
+from rmf_fleet_msgs.msg import FleetAlert
+from rmf_fleet_msgs.msg import FleetAlertParameter
+from rmf_fleet_msgs.msg import FleetAlertResponse
 import yaml
 
 from .RobotClientAPI import RobotAPI
@@ -181,6 +187,7 @@ class RobotAdapter:
         self.name = name
         self.execution = None
         self.teleoperation = None
+        self.wait_until = None
         self.cmd_id = 0
         self.update_handle = None
         self.configuration = configuration
@@ -198,11 +205,16 @@ class RobotAdapter:
                 self.execution.finished()
                 self.execution = None
                 self.teleoperation = None
+                self.wait_until = None
             else:
                 activity_identifier = self.execution.identifier
 
         if self.teleoperation is not None:
             self.teleoperation.update(data)
+        if self.wait_until is not None:
+            if self.wait_until.update(data):
+                self.finish_action()
+                self.wait_until = None
 
         self.update_handle.update(state, activity_identifier)
 
@@ -272,6 +284,12 @@ class RobotAdapter:
                 self.attempt_cmd_until_success(
                     cmd=self.api.toggle_attach, args=(self.name, False, self.cmd_id)
                 )
+            case 'wait_until':
+                self.wait_until = WaitUntil(
+                    execution, self.node, description, self.update_handle)
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_teleop, args=(self.name, True)
+                )
 
     def finish_action(self):
         # This is triggered by a ModeRequest callback which allows human
@@ -283,6 +301,8 @@ class RobotAdapter:
             self.attempt_cmd_until_success(
                 cmd=self.api.toggle_teleop, args=(self.name, False)
             )
+        self.teleoperation = None
+        self.wait_until = None
 
     def perform_docking(self, destination):
         match self.api.start_activity(
@@ -378,6 +398,212 @@ class Teleoperation:
                 )
                 self.last_position = data.position
 
+class WaitUntil:
+
+    def __init__(self, execution, node, description, update_handle):
+        self.node = node
+        self.execution = execution
+        self.update_handle = update_handle
+        self.start_time = node.get_clock().now().nanoseconds / 1e9
+        self.move_off = False
+        self.alert_id = None
+        self.wait_timeout = description.get('timeout', 30)
+        self.location = description.get('location', '')
+        self.last_location = description.get('last_location', False)
+        self.checked_for_incomplete = False
+        self.override = None
+        self.last_position = None
+        self.mutex = threading.Lock()
+
+        def fleet_alert_cb(msg):
+            if self.alert_id is None:
+                return
+            if msg.id != self.alert_id:
+                return
+            if msg.response != 'success' and msg.response != 'fail':
+                self.node.get_logger().info(
+                    f'Received invalid response inside fleet alert response: '
+                    f'{msg.response}'
+                )
+                return
+
+            # If this is a response to whether we should quiet cancel, process
+            # this first
+            if self.checked_for_incomplete:
+                #TODO
+                if msg.response == 'success':
+                    # The delivery is complete, we should quiet_cancel the task
+                    node.get_logger().info(
+                        f'Robot received task complete signal, '
+                        f'quiet cancelling task...'
+                    )
+                    task_id = self.update_handle.more().current_task_id()
+                    def _on_cancel(result: bool):
+                        if result:
+                            self.node.get_logger().info(
+                                f'Found task [{task_id}], cancelling...')
+                        else:
+                            self.node.get_logger().info(
+                                f'Failed to cancel task [{task_id}]')
+                    self.update_handle.more().unstable_quiet_cancel_task(
+                        task_id,
+                        ['Quiet cancelling as the deliveries are complete'],
+                        lambda result: _on_cancel(result)
+                    )
+                else:
+                    # Do nothing if there are missed deliveries
+                    self.node.get_logger().info(
+                        f'There were missed deliveries, robot proceeding to the'
+                         f' end collection location'
+                    )
+                with self.mutex:
+                    self.move_off = True
+                return
+
+            # General alert response to decide if robot should move off
+            if msg.response == 'success':
+                # We've received a signal to move off due to completed delivery
+                # or a timeout. Either way, we mark it accordingly.
+                node.get_logger().info(
+                    f'Robot received move-off signal, delivery is complete, '
+                    f'marking action as completed.'
+                )
+            elif msg.response == 'fail':
+                # We've received a signal to move off due to completed delivery
+                # or a timeout. Either way, we mark it accordingly.
+                node.get_logger().info(
+                    f'Robot received timeout signal, delivery incomplete, '
+                    f'marking action as completed.'
+                )
+
+            with self.mutex:
+                if self.last_location:
+                    # We update the alert id to a new one to check whether all
+                    # deliveries for this task have been completed
+                    # Publish alert
+                    msg = FleetAlert()
+                    msg.id = datetime.datetime.now().strftime(
+                        # "fleet-alert-%Y-%m-%d-%H-%M-%S")
+                        "test")
+                    msg.title = f'Robot is at final location, checking if ' + \
+                                f'all items have been delivered'
+                    msg.display = False
+                    msg.tier = FleetAlert.TIER_INFO
+                    msg.responses_available = ['success', 'fail']
+                    msg.alert_parameters = []
+                    check_complete_param = FleetAlertParameter()
+                    check_complete_param.name = 'type'
+                    check_complete_param.value = 'check_all_task_location_alerts'
+                    msg.alert_parameters.append(check_complete_param)
+                    msg.task_id = self.update_handle.more().current_task_id()
+                    alert_pub.publish(msg)
+                    self.node.get_logger().info(
+                        f'Published fleet alert [{msg.id}] to check for '
+                        f'incomplete deliveries'
+                    )
+                    # Store the alert id
+                    self.alert_id = msg.id
+
+                    # After we're done publishing, raise the check for
+                    # incomplete flag
+                    self.checked_for_incomplete = True
+                else:
+                    self.move_off = True
+
+        transient_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL,
+        )
+        alert_pub = node.create_publisher(
+            FleetAlert,
+            'fleet_alert',
+            qos_profile=transient_qos
+        )
+        alert_response_sub = node.create_subscription(
+            FleetAlertResponse,
+            'fleet_alert_response',
+            fleet_alert_cb,
+            qos_profile=transient_qos
+        )
+
+        # Publish alert
+        msg = FleetAlert()
+        msg.id = datetime.datetime.now().strftime(
+            "fleet-alert-%Y-%m-%d-%H-%M-%S")
+            # "test")
+        msg.title = f'Robot has begun waiting'
+        msg.display = False
+        msg.tier = FleetAlert.TIER_INFO
+        msg.responses_available = ['success', 'fail']
+        msg.alert_parameters = []
+        location_alert_param = FleetAlertParameter()
+        location_alert_param.name = 'type'
+        location_alert_param.value = 'location_result'
+        msg.alert_parameters.append(location_alert_param)
+        location_name_param = FleetAlertParameter()
+        location_name_param.name = 'location_name'
+        location_name_param.value = self.location
+        msg.alert_parameters.append(location_name_param)
+        msg.task_id = self.update_handle.more().current_task_id()
+        alert_pub.publish(msg)
+        self.node.get_logger().info(
+            f'Published fleet alert [{msg.id}] to report location'
+        )
+        # Store the alert id
+        self.alert_id = msg.id
+
+    def update(self, data: RobotUpdateData):
+        # Update first
+        if self.last_position is None:
+            print(
+                'about to override schedule with '
+                f'{data.map}: {[data.position]}'
+            )
+            self.override = self.execution.override_schedule(
+                data.map, [data.position], 30.0
+            )
+            self.last_position = data.position
+        else:
+            dx = self.last_position[0] - data.position[0]
+            dy = self.last_position[1] - data.position[1]
+            dist = math.sqrt(dx * dx + dy * dy)
+            if dist > 0.1:
+                print('about to replace override schedule')
+                self.override = self.execution.override_schedule(
+                    data.map, [data.position], 30.0
+                )
+                self.last_position = data.position
+
+        with self.mutex:
+            # Check if we've received a move-off signal
+            if self.move_off:
+                self.node.get_logger().info(
+                    f'Robot received move-off signal, marking action as '
+                    f'completed.'
+                )
+                return True
+
+            # Check if the timeout has passed
+            now = self.node.get_clock().now().nanoseconds / 1e9
+            if now > self.start_time + self.wait_timeout:
+                self.node.get_logger().info(
+                    f'Robot has completed waiting for '
+                    f'{self.wait_timeout} seconds without move-off signal, '
+                    f'ending action and marking delivery as incomplete.'
+                )
+                return True
+
+            # Log the robot waiting every 5 minutes
+            if (now - self.start_time)%60 == 0:
+                min_passed = round((now - self.start_time)/60)
+                self.node.get_logger().info(
+                    f'{min_passed} minutes have passed since robot '
+                    f'started its waiting action.'
+                )
+            return False
+
 
 # Parallel processing solution derived from
 # https://stackoverflow.com/a/59385935
@@ -441,7 +667,8 @@ def ros_connections(node, robots, fleet_handle):
             closed_lanes.add(lane_idx)
 
         for lane_idx in msg.open_lanes:
-            closed_lanes.remove(lane_idx)
+            if lane_idx in closed_lanes:
+                closed_lanes.remove(lane_idx)
 
         state_msg = ClosedLanes()
         state_msg.fleet_name = fleet_name
