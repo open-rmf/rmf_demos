@@ -48,6 +48,7 @@ foreach(path ${traffic_editor_paths})
 
   ##############################################################################
   # generate the navmesh and required files for crowd simulation for gz
+  ##############################################################################
   set(crowd_sim_config_resource ${output_dir}/config_resource/)
 
   add_custom_command(
@@ -59,40 +60,6 @@ foreach(path ${traffic_editor_paths})
   # This will initiate both custom commands: ${output_world_path} and ${world_name}_crowdsim
   add_custom_target(generate_${world_name}_crowdsim ALL
     DEPENDS ${world_name}_crowdsim
-  )
-
-  ##############################################################################
-  ## Ign worlds
-  ##############################################################################
-
-  # generate Ignition simulation world
-  set(ign_output_dir ${CMAKE_CURRENT_BINARY_DIR}/maps/${output_world_name}_ign)
-  set(ign_output_world_path ${ign_output_dir}/${output_world_name}.world)
-  set(ign_output_model_dir ${ign_output_dir}/models)
-
-  add_custom_command(
-    OUTPUT ${ign_output_world_path}
-    COMMAND ros2 run rmf_building_map_tools building_map_generator ignition ${map_path} ${ign_output_world_path} ${ign_output_model_dir}
-    DEPENDS ${map_path}
-  )
-
-
-  ##############################################################################
-  # generate the navmesh and required files for crowd simulation for ign
-  add_custom_command(
-    OUTPUT ${world_name}_crowdsim_ign
-    COMMAND ros2 run rmf_building_map_tools building_crowdsim ${map_path} ${crowd_sim_config_resource} ${ign_output_world_path}
-    DEPENDS ${ign_output_world_path}
-  )
-
-  # This will initiate both custom commands: ${ign_output_world_path} and  ${world_name}_crowdsim_ign
-  add_custom_target(generate_${world_name}_crowdsim_ign ALL
-    DEPENDS ${world_name}_crowdsim_ign
-  )
-
-  install(
-    DIRECTORY ${ign_output_dir}
-    DESTINATION share/${PROJECT_NAME}/maps
   )
 
   ##############################################################################
