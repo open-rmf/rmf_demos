@@ -169,6 +169,7 @@ def main(argv=sys.argv):
 
     # Connect to the extra ROS2 topics that are relevant for the adapter
     connections = ros_connections(node, robots, fleet_handle)
+    connections  # Avoid unused variable warning
 
     # Create executor for the command handle node
     rclpy_executor = rclpy.executors.SingleThreadedExecutor()
