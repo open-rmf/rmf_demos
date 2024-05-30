@@ -101,7 +101,7 @@ class TaskRequester(Node):
 
         # Construct task
         msg = ApiRequest()
-        msg.request_id = "task_" + str(uuid.uuid4())
+        msg.request_id = 'task_' + str(uuid.uuid4())
         payload = {}
 
         if self.args.robot and self.args.fleet:
