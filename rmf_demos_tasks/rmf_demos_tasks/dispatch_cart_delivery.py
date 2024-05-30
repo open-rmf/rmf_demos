@@ -39,9 +39,6 @@ class TaskRequester(Node):
     def __init__(self, argv=sys.argv):
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument('-g', '--go_to', required=True,
-                            type=str,
-                            help="Go to start waypoint")
         parser.add_argument('-p', '--pickup', required=True,
                             type=str,
                             help="Pickup waypoint name")
@@ -126,7 +123,7 @@ class TaskRequester(Node):
         # Add each phase
         activities.append({
             "category": "go_to_place",
-            "description": self.args.go_to})
+            "description": self.args.pickup})
         activities.append({
             "category": "perform_action",
             "description": __create_perform_action("delivery_pickup")})
