@@ -280,9 +280,10 @@ class RobotAdapter:
         if self.execution is not None:
             self.execution.finished()
             self.execution = None
-            self.attempt_cmd_until_success(
-                cmd=self.api.toggle_teleop, args=(self.name, False)
-            )
+            if self.teleoperation:
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_teleop, args=(self.name, False)
+                )
 
     def perform_docking(self, destination):
         match self.api.start_activity(
