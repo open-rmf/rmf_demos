@@ -266,11 +266,13 @@ class RobotAdapter:
                 )
             case 'delivery_pickup':
                 self.attempt_cmd_until_success(
-                    cmd=self.api.toggle_attach, args=(self.name, True, self.cmd_id)
+                    cmd=self.api.toggle_attach, args=(
+                        self.name, True, self.cmd_id)
                 )
             case 'delivery_dropoff':
                 self.attempt_cmd_until_success(
-                    cmd=self.api.toggle_attach, args=(self.name, False, self.cmd_id)
+                    cmd=self.api.toggle_attach, args=(
+                        self.name, False, self.cmd_id)
                 )
 
     def finish_action(self):
