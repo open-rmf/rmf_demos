@@ -278,11 +278,13 @@ class RobotAdapter:
                 )
             case 'delivery_pickup':
                 self.attempt_cmd_until_success(
-                    cmd=self.api.toggle_attach, args=(self.name, True, self.cmd_id)
+                    cmd=self.api.toggle_attach, args=(
+                        self.name, True, self.cmd_id)
                 )
             case 'delivery_dropoff':
                 self.attempt_cmd_until_success(
-                    cmd=self.api.toggle_attach, args=(self.name, False, self.cmd_id)
+                    cmd=self.api.toggle_attach, args=(
+                        self.name, False, self.cmd_id)
                 )
             case 'wait_until':
                 self.wait_until = WaitUntil(
@@ -298,11 +300,12 @@ class RobotAdapter:
         if self.execution is not None:
             self.execution.finished()
             self.execution = None
-            self.attempt_cmd_until_success(
-                cmd=self.api.toggle_teleop, args=(self.name, False)
-            )
-        self.teleoperation = None
-        self.wait_until = None
+            if self.teleoperation:
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_teleop, args=(self.name, False)
+                )
+            self.teleoperation = None
+            self.wait_until = None
 
     def perform_docking(self, destination):
         match self.api.start_activity(
