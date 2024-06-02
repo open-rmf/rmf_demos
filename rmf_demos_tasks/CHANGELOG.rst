@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.0 (2024-06-03)
+------------------
 * Port to harmonic (`#206 <https://github.com/open-rmf/rmf_demos/pull/206>`_)
 * Add script for sending any API request, read from a .json file (`#222 <https://github.com/open-rmf/rmf_demos/pull/222>`_)
 * Add a script for dispatching tasks from a json description (`#215 <https://github.com/open-rmf/rmf_demos/pull/215>`_)

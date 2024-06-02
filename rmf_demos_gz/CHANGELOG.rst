@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.0 (2024-06-03)
+------------------
 * Port to harmonic (`#206 <https://github.com/open-rmf/rmf_demos/pull/206>`_)
 * Moved rmf_demos to use ros_gz_bridge instead of ros_ign_bridge (`#173 <https://github.com/open-rmf/rmf_demos/pull/173>`_)
 * Contributors: Arjo Chakravarty, Luca Della Vedova, Michael X. Grey, Yadunund

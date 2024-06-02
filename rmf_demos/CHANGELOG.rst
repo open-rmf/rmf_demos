@@ -2,8 +2,8 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.0 (2024-06-03)
+------------------
 * Adding server_uri for dispatcher node (`#230 <https://github.com/open-rmf/rmf_demos/pull/230>`_)
 * Add task reassignment trigger in update loop (`#228 <https://github.com/open-rmf/rmf_demos/pull/228>`_)
 * Use unique hex strings for new task IDs (`#205 <https://github.com/open-rmf/rmf_demos/pull/205>`_)
