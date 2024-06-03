@@ -41,6 +41,7 @@ from .RobotClientAPI import RobotAPI
 from .RobotClientAPI import RobotAPIResult
 from .RobotClientAPI import RobotUpdateData
 
+from std_msgs.msg import String as StringMsg
 
 # ------------------------------------------------------------------------------
 # Main
@@ -454,6 +455,21 @@ def ros_connections(node, robots, fleet_handle):
                 return
             robot.finish_action()
 
+    def replan_request_cb(msg):
+        robot = robots.get(msg.data)
+        if robot is None:
+            return
+
+        if robot.update_handle is None:
+            return
+
+        more = robot.update_handle.more()
+        if more is None:
+            return
+
+        print('Replanning for {msg.data} due to an external replan request')
+        more.replan()
+
     lane_request_sub = node.create_subscription(
         LaneRequest,
         'lane_closure_requests',
@@ -468,9 +484,17 @@ def ros_connections(node, robots, fleet_handle):
         qos_profile=qos_profile_system_default,
     )
 
+    replan_request_sub = node.create_subscription(
+        StringMsg,
+        'replan_request',
+        replan_request_cb,
+        qos_profile=qos_profile_system_default,
+    )
+
     return [
         lane_request_sub,
         action_execution_notice_sub,
+        replan_request_sub,
     ]
 
 
