@@ -9,7 +9,7 @@ site_pkgs_path = 'lib/python' + py_version + '/site-packages/rmf_demos_panel'
 
 setup(
     name=package_name,
-    version='2.3.0',
+    version='2.2.3',
     packages=[package_name],
     data_files=[
         (
