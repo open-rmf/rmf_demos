@@ -2,17 +2,6 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.3.0 (2024-06-03)
-------------------
-* Port to harmonic (`#206 <https://github.com/open-rmf/rmf_demos/pull/206>`_)
-* Add script for sending any API request, read from a .json file (`#222 <https://github.com/open-rmf/rmf_demos/pull/222>`_)
-* Add a script for dispatching tasks from a json description (`#215 <https://github.com/open-rmf/rmf_demos/pull/215>`_)
-* Add all exec deps for rmf_demos_fleet_adapter (`#211 <https://github.com/open-rmf/rmf_demos/pull/211>`_)
-* Support one_of for go_to_place (`#200 <https://github.com/open-rmf/rmf_demos/pull/200>`_)
-* Update CI to rolling on main (`#208 <https://github.com/open-rmf/rmf_demos/pull/208>`_)
-* Support fleet-level task (`#201 <https://github.com/open-rmf/rmf_demos/pull/201>`_)
-* Contributors: Grey, Luca Della Vedova, Yadunund, cwrx777
-
 2.2.3 (2023-12-20)
 ------------------
 

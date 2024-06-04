@@ -2,11 +2,6 @@
 Changelog for package rmf_demos_dashboard_resources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.3.0 (2024-06-03)
-------------------
-* Update CI to rolling on main (`#208 <https://github.com/open-rmf/rmf_demos/pull/208>`_)
-* Contributors: Yadunund
-
 2.2.3 (2023-12-20)
 ------------------
 * Adding scale for icons (`#196 <https://github.com/open-rmf/rmf_demos/pull/196>`_)
