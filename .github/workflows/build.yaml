@@ -18,6 +18,5 @@ jobs:
         rmf_demos_fleet_adapter
         rmf_demos_gz
         rmf_demos_maps
-        rmf_demos_panel
         rmf_demos_tasks
       dist-matrix: '[{"ros_distribution": "rolling", "ubuntu_distribution": "noble"}]'

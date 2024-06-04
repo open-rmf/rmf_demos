@@ -5,11 +5,9 @@
   <arg name="use_sim_time" default="false" description="Use the /clock topic for time to sync with simulation"/>
   <arg name="viz_config_file" default="$(find-pkg-share rmf_visualization_schedule)/config/rmf.rviz"/>
   <arg name="config_file" description="Building description file required by rmf_building_map_tools"/>
-  <arg name="dashboard_config_file" default="" description="Path to dashboard config for web rmf panel file"/>
   <arg name="initial_map" default="L1" description="Initial map name for the visualizer"/>
   <arg name="headless" default="false" description="do not launch rviz; launch gazebo in headless mode"/>
   <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
-  <arg name="use_rmf_panel" default="true" description="launch web and api server for rmf_demos_panel"/>
   <arg name="use_unique_hex_string_with_task_id" default="true" description="Appends a unique hex string to the task ID"/>
   <arg name="server_uri" default="ws://localhost:8000/_internal" description="The URI of the api server to transmit state and task information"/>
 
@@ -63,12 +61,4 @@
       <param name="server_uri" value="$(var server_uri)"/>
     </node>
   </group>
-
-  <group if="$(var use_rmf_panel)">
-    <include file="$(find-pkg-share rmf_demos)/dashboard.launch.xml">
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="dashboard_config_file" value ="$(var dashboard_config_file)"/>
-    </include>
-  </group>
-
 </launch>
