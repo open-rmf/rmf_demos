@@ -2,12 +2,6 @@
 Changelog for package rmf_demos_bridges
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.3.0 (2024-06-03)
-------------------
-* Add all exec deps for rmf_demos_fleet_adapter (`#211 <https://github.com/open-rmf/rmf_demos/pull/211>`_)
-* Update CI to rolling on main (`#208 <https://github.com/open-rmf/rmf_demos/pull/208>`_)
-* Contributors: Yadunund
-
 2.2.3 (2023-12-20)
 ------------------
 

@@ -2,15 +2,6 @@
 Changelog for package rmf_demos_maps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.3.0 (2024-06-03)
-------------------
-* Port to harmonic (`#206 <https://github.com/open-rmf/rmf_demos/pull/206>`_)
-* Add a script for opening and closing lanes (`#216 <https://github.com/open-rmf/rmf_demos/pull/216>`_)
-* Fix office dispenser height to be on top of furniture (`#218 <https://github.com/open-rmf/rmf_demos/pull/218>`_)
-* Remove a few assets from the office world (`#209 <https://github.com/open-rmf/rmf_demos/pull/209>`_)
-* Update Office visuals and add aligned laser scan layer (`#202 <https://github.com/open-rmf/rmf_demos/pull/202>`_)
-* Contributors: Grey, Luca Della Vedova, Yadunund
-
 2.2.3 (2023-12-20)
 ------------------
 
