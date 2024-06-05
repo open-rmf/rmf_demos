@@ -1,0 +1,30 @@
+{
+    "dispensers":{},
+    "robots":{
+        "cleanerBotA":{
+            "icons":{
+                "cleanerBotA":"/icons/cleanerBotA.png"
+            },
+            "scale": 0.003
+        },
+        "deliveryRobot":{
+            "icons":{
+                "deliveryRobot":"/icons/deliveryRobot.png"
+            },
+            "scale": 0.004
+        },
+        "tinyRobot":{
+            "icons":{
+                "tinyRobot":"/icons/tinyRobot.png"
+            },
+            "scale": 0.00123
+        }
+    },
+    "logos":{
+        "headerLogo":{
+            "icons":{
+                "headerLogo":"/icons/headerLogo.png"
+            }
+        }
+    }
+}

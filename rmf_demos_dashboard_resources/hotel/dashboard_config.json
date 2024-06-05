@@ -1,0 +1,34 @@
+{ 
+  "world_name" : "Hotel World",
+  "valid_task" : ["Loop", "Clean"],
+  "task": {
+    "Delivery": {},
+    "Loop": {
+      "places": [
+        "restaurant",
+        "kitchen",
+        "shop",
+        "deliverybot_charger",
+        "tinybot_charger",
+        "cleanerbot_charger1",
+        "cleanerbot_charger2",
+        "L2_room1",
+        "L2_room15",
+        "L2_master_suite",
+        "L3_room1",
+        "L3_room15",
+        "L3_master_suite"
+      ]
+    },
+    "Clean": {
+      "option": [
+        "clean_waiting_area",
+        "clean_lobby",
+        "clean_restaurant"
+      ]
+    },
+    "Station": {},
+    "Patrol": {},
+    "Charging": {}
+  }
+}

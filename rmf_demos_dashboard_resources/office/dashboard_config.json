@@ -1,0 +1,35 @@
+{
+  "world_name" : "Office World",  
+  "valid_task": ["Delivery", "Loop"],
+  "task": {
+    "Delivery": {
+      "option": {
+        "coke": {
+          "pickup_place_name": "pantry",
+          "pickup_dispenser": "coke_dispenser",
+          "dropoff_place_name": "hardware_2",
+          "dropoff_ingestor": "coke_ingestor"
+        }
+      }
+    },
+    "Loop": {
+      "places": [
+        "coe",
+        "pantry",
+        "lounge",
+        "supplies",
+        "hardware_2",
+        "tinyRobot1_charger",
+        "tinyRobot2_charger"
+      ]
+    },
+    "Clean": {
+    },
+    "Station": {
+    },
+    "Patrol": {
+    },
+    "Charging": {
+    }
+  }
+}
