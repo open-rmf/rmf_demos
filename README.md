@@ -49,6 +49,7 @@ By specifying `server_uri`, the fleetadapter will update `rmf-web` `api-server` 
 
 * [Hotel World](#Hotel-World)
 * [Office World](#Office-World)
+* [Home World](#Home-World)
 * [Airport Terminal World](#Airport-Terminal-World)
 * [Clinic World](#Clinic-World)
 * [Campus World](#Campus-World)
@@ -154,7 +155,32 @@ To run a scenario with multiple task requests, load [office_tasks.json](https://
 The office demo can be run in secure mode using ROS 2 DDS-Security integration. Click [here](docs/secure_office_world.md) to learn more.
 
 ---
+### Home World
+This demo world shows robot inside a home environment where the robot is configured to serve beverages to multiple drop points and also perform looping tasks.
 
+
+```bash
+source ~/rmf_demos_ws/install/setup.bash
+ros2 launch rmf_demos_gz home.launch.xml
+```
+2 types of Tasks are defined: **Delivery** and **Loop**
+
+To send task requests, open rmf_demos web panel: https://open-rmf.github.io/rmf-panel-js/
+
+![](../media/home_world.gif?raw=true)
+
+To submit a delivery task, select ```Delivery``` from the ```Select a request type``` dropdown list. Next, select ```your desired coke delivery location``` from the ```Select delivery task``` list. Choose a desired start time for task and click submit.
+
+Or, submit a task via CLI:
+
+```bash
+ros2 run rmf_demos_tasks dispatch_patrol -p kitchen dining_table -n 2 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_delivery -p kitchen -ph coke_dispenser -d bedroom_1 -dh coke_ingestor_bedroom_1 --use_sim_time
+```
+
+To submit a **loop task**, select ```Loop``` from the ```Select a request type``` dropdown list. Choose desired start and end locations and click submit.
+
+---
 ### Airport Terminal World
 
 This demo world shows robot interaction on a much larger map, with a lot more lanes, destinations, robots and possible interactions between robots from different fleets, robots and infrastructure, as well as robots and users. In the illustrations below, from top to bottom we have how the world looks like in `traffic_editor`, the schedule visualizer in `rviz`, and the full simulation in `gazebo`,
