@@ -3,7 +3,7 @@ crowd_sim:
   agent_groups:
     - {agents_name: [tinyRobot1, tinyRobot2], agents_number: 2, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
   agent_profiles:
-    - {ORCA_tau: 1, ORCA_tauObst: 0.4, class: 1, max_accel: 0, max_angle_vel: 0, max_neighbors: 10, max_speed: 0, name: external_agent, neighbor_dist: 5, obstacle_set: 1, pref_speed: 0, r: 0.25}
+    - {ORCA_tau: 1, ORCA_tauObst: 0.40000000000000002, class: 1, max_accel: 0, max_angle_vel: 0, max_neighbors: 10, max_speed: 0, name: external_agent, neighbor_dist: 5, obstacle_set: 1, pref_speed: 0, r: 0.25}
   enable: 0
   goal_sets: []
   model_types: []
@@ -11,11 +11,25 @@ crowd_sim:
   states:
     - {final: 1, goal_set: -1, name: external_static, navmesh_file_name: ""}
   transitions: []
-  update_time_step: 0.1
+  update_time_step: 0.10000000000000001
 graphs:
   {}
 levels:
   L1:
+    constraints:
+      - {ids: ["{6f0220ba-b283-41c9-b8a4-86fede28d5d0}", "{d49c8fba-68ad-48bd-bf6a-c2109638ccf3}"]}
+      - {ids: ["{844460e1-af5d-4250-8d41-446513692ffa}", "{408fa383-49e0-4095-bcd3-51819004e3e1}"]}
+      - {ids: ["{865b9319-b742-4cca-920a-9bd12f19b360}", "{e115c6bd-b457-4d18-a725-c465da2262d0}"]}
+      - {ids: ["{ab9f38f4-dd89-4a12-90bc-74b7fc8413fa}", "{e3618f91-56f5-4839-8309-67a21cbea49b}"]}
+      - {ids: ["{c0d424cc-0758-49db-a027-66ea337ac06a}", "{f1b40475-decb-4906-b7fd-63372eba2468}"]}
+      - {ids: ["{2908bd90-c304-4521-bec2-5a0bd83a9b4c}", "{e71feb28-4a54-46ac-9b7e-eded602789a1}"]}
+      - {ids: ["{35c2e940-d1b4-416b-9269-8df3e3a6500f}", "{844460e1-af5d-4250-8d41-446513692ffa}"]}
+      - {ids: ["{8be3d1e8-a3f0-409d-b0f9-a7fd41d34da8}", "{e115c6bd-b457-4d18-a725-c465da2262d0}"]}
+      - {ids: ["{0d82361f-259c-48ae-bbbc-0d60ad276554}", "{e71feb28-4a54-46ac-9b7e-eded602789a1}"]}
+      - {ids: ["{9f5edf7f-4922-4653-a9d6-c901e8e302c0}", "{f1b40475-decb-4906-b7fd-63372eba2468}"]}
+      - {ids: ["{e303c869-a30c-4218-9ce5-c204a6ee9eb6}", "{360e4cb1-cf4c-4ee9-9309-34ce6e4926b5}"]}
+      - {ids: ["{e303c869-a30c-4218-9ce5-c204a6ee9eb6}", "{6a83a4e9-1966-4f69-bb7b-5e5c04474308}"]}
+      - {ids: ["{6aa3ed92-e5ea-420f-a4d2-4ab9855749c5}", "{8132c192-fd43-440e-96b7-5218f14d8cb4}"]}
     doors:
       - [31, 13, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, main_door], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, double_hinged]}]
       - [35, 37, {motion_axis: [1, start], motion_degrees: [3, 90], motion_direction: [2, 1], name: [1, coe_door], plugin: [1, normal], right_left_ratio: [3, 1], type: [1, hinged]}]
@@ -23,213 +37,274 @@ levels:
     drawing:
       filename: office.png
     elevation: 0
+    features:
+      - {id: "{d49c8fba-68ad-48bd-bf6a-c2109638ccf3}", name: "", x: 2297.8440000000001, y: 1274.268}
+      - {id: "{844460e1-af5d-4250-8d41-446513692ffa}", name: "", x: 2131.29, y: 545.20100000000002}
+      - {id: "{e115c6bd-b457-4d18-a725-c465da2262d0}", name: "", x: 2296.5, y: 724.024}
+      - {id: "{e3618f91-56f5-4839-8309-67a21cbea49b}", name: "", x: 1250.971, y: 559.85900000000004}
+      - {id: "{f1b40475-decb-4906-b7fd-63372eba2468}", name: "", x: 1832.5139999999999, y: 726.98299999999995}
+      - {id: "{e71feb28-4a54-46ac-9b7e-eded602789a1}", name: "", x: 983.28300000000002, y: 634.46900000000005}
+      - {id: "{69fab527-6ed1-4f8f-a604-212e2109a797}", name: "", x: 615.54700000000003, y: 446.40899999999999}
+      - {id: "{e303c869-a30c-4218-9ce5-c204a6ee9eb6}", name: "", x: 773.20000000000005, y: 135.44300000000001}
+      - {id: "{8132c192-fd43-440e-96b7-5218f14d8cb4}", name: "", x: 658.71600000000001, y: 1277.7639999999999}
     floors:
-      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum], indoor: [2, 0], texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
-        vertices: [27, 28, 29, 30, 31, 13, 14, 15, 21, 20, 19, 22, 23, 24, 38, 25, 26, 36]
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum_high_contrast], indoor: [2, 0], texture_name: [1, blue_linoleum_high_contrast], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [27, 36, 33, 6, 7, 8, 9, 16, 15, 14, 13, 31, 30, 29, 28]
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, concrete2], indoor: [2, 0], texture_name: [1, concrete2], texture_rotation: [3, 0], texture_scale: [3, 10]}
+        vertices: [6, 68, 69, 9, 8, 7]
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, blue_linoleum_high_contrast], indoor: [2, 0], texture_name: [1, blue_linoleum_high_contrast], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [36, 34, 37, 38, 25, 26]
+      - parameters: {ceiling_scale: [3, 1], ceiling_texture: [1, black_concrete], indoor: [2, 0], texture_name: [1, black_concrete], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [6, 33, 34, 35, 37, 38, 24, 23, 22, 19, 20, 21, 15, 16, 9, 69, 68]
     lanes:
-      - [39, 40, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [43, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [43, 44, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [48, 40, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [40, 49, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [49, 41, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [49, 51, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [55, 46, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [51, 56, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [56, 57, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [39, 58, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [59, 48, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [59, 47, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [41, 42, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [41, 60, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [60, 61, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [61, 43, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [54, 62, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [53, 63, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [49, 64, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [64, 52, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [45, 46, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [55, 65, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [46, 66, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [66, 50, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [57, 54, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [54, 53, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [53, 65, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [59, 67, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
-      - [59, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [39, 40, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [43, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [43, 44, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [48, 40, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [40, 49, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [49, 41, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [49, 51, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [55, 46, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [51, 56, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [56, 57, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [39, 58, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [59, 48, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [59, 47, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [41, 42, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [41, 60, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [60, 61, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [61, 43, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [54, 62, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [53, 63, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [49, 64, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [64, 52, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [45, 46, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [55, 65, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [46, 66, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [66, 50, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [57, 54, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [54, 53, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [53, 65, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [59, 67, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [59, 45, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
     layers:
-      {}
+      office_laserscan:
+        color: [0.20799999999999999, 0.51800000000000002, 0.89400000000000002, 0.5]
+        features:
+          - {id: "{0d82361f-259c-48ae-bbbc-0d60ad276554}", name: "", x: 90.046000000000006, y: 313.48599999999999}
+          - {id: "{c93f3624-e338-42a1-be08-fa2c9967abe2}", name: "", x: 37.334000000000003, y: 360.92899999999997}
+          - {id: "{8be3d1e8-a3f0-409d-b0f9-a7fd41d34da8}", name: "", x: 179.19399999999999, y: 114.93000000000001}
+          - {id: "{35c2e940-d1b4-416b-9269-8df3e3a6500f}", name: "", x: 137.31100000000001, y: 126.934}
+          - {id: "{9f5edf7f-4922-4653-a9d6-c901e8e302c0}", name: "", x: 157.876, y: 188.31100000000001}
+          - {id: "{360e4cb1-cf4c-4ee9-9309-34ce6e4926b5}", name: "", x: 1.4390000000000001, y: 310.25400000000002}
+          - {id: "{6aa3ed92-e5ea-420f-a4d2-4ab9855749c5}", name: "", x: 169.17099999999999, y: 408.33100000000002}
+        filename: office_scan.png
+        transform:
+          scale: 0.050642399999999997
+          translation_x: 21.530999999999999
+          translation_y: -4.5170000000000003
+          yaw: -1.20343942583513
+        visible: true
     measurements:
-      - [1, 0, {distance: [3, 9.315]}]
-      - [5, 4, {distance: [3, 8.409000000000001]}]
-      - [2, 3, {distance: [3, 20.089]}]
+      - [1, 0, {distance: [3, 9.3149999999999995]}]
+      - [5, 4, {distance: [3, 8.4090000000000007]}]
+      - [2, 3, {distance: [3, 20.088999999999999]}]
     models:
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 775.16, y: 794.006, yaw: 4.2503, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 737, y: 884, yaw: 4.2239, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 680.226, y: 975.778, yaw: 4.247, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 637.397, y: 1066.178, yaw: 4.2458, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 457.405, y: 976.296, yaw: 1.0926, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 503.457, y: 884.746, yaw: 1.1213, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 549.605, y: 797.635, yaw: 1.0613, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 592.124, y: 715.71, yaw: 1.0779, z: 0}
-      - {model_name: OpenRobotics/Fridge, name: Fridge, static: true, x: 1888.625, y: 679.327, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 1683.984, y: 655.241, yaw: 0.0166, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 1392.53, y: 706.367, yaw: 3.1613, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 991.717, y: 514.345, yaw: 1.099, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 1682.699, y: 701.847, yaw: 3.1594, z: 0}
-      - {model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1207.952, y: 1007.22, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1202.918, y: 1168.317, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1631.416, y: 1161.315, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1109.385, y: 1009.033, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1106.837, y: 1168.293, yaw: 4.7124, z: 0}
-      - {model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1529.036, y: 1160.878, yaw: 4.7124, z: 0}
-      - {model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1530.348, y: 1000.746, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1631.416, y: 999.433, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 795.487, y: 1142.915, yaw: 1.0878, z: 0}
-      - {model_name: OpenRobotics/Drawer, name: Drawer, static: true, x: 721.897, y: 1247.935, yaw: 1.1104, z: 0}
-      - {model_name: OpenRobotics/BigCubicle, name: BigCubicle, static: true, x: 2045.916, y: 985.492, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/BigCubicle, name: BigCubicle, static: true, x: 2049.535, y: 1147.682, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/BigCubicle, name: BigCubicle, static: true, x: 1946.8, y: 1149.375, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/BigCubicle, name: BigCubicle, static: true, x: 1947.365, y: 990.194, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 2607.625, y: 1219.095, yaw: 4.6088, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 2644, y: 896, yaw: 4.5816, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 2355.87, y: 1021.154, yaw: 1.5864, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 2354.629, y: 849.779, yaw: 1.5733, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 883, y: 457, yaw: 4.2286, z: 0}
-      - {model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 1536.41, y: 657.461, yaw: 1.5914, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2544.666, y: 466.974, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2648.309, y: 466.974, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2681.089, y: 531.5700000000001, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2643.97, y: 594.72, yaw: 3.1416, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2537.917, y: 593.756, yaw: 3.1416, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2475.249, y: 532.534, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 1678.061, y: 1006.211, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2598, y: 888, yaw: 1.419, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2567.058, y: 1215.851, yaw: 1.4599, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1047.543, y: 989.277, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1045.85, y: 1155.797, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1264.301, y: 1004.518, yaw: 4.7124, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1263.737, y: 1165.958, yaw: 4.7124, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1471.463, y: 1000.567, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1690.479, y: 1161.442, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1892.611, y: 1154.456, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1894.869, y: 996.403, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 2103.16, y: 1009.386, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 2106.547, y: 1148.811, yaw: -1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 1464.125, y: 1147.33, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 1398.96, y: 657.332, yaw: 0.016, z: 0}
-      - {model_name: OpenRobotics/Drawer, name: Drawer, static: true, x: 2119.682, y: 936.998, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/Drawer, name: Drawer, static: true, x: 2625.448, y: 1094.713, yaw: 4.6217, z: 0}
-      - {model_name: OpenRobotics/ConfTable, name: ConfTable, static: true, x: 620, y: 872, yaw: 1.1017, z: 0}
-      - {model_name: OpenRobotics/RecTable, name: RecTable, static: true, x: 2584.195, y: 527.713, yaw: 0, z: 0}
-      - {model_name: OpenRobotics/WhiteCabinet, name: WhiteCabinet, static: true, x: 1779.929, y: 344.234, yaw: -0.0292, z: 0}
-      - {model_name: OpenRobotics/SquareShelf, name: SquareShelf, static: true, x: 938.97, y: 352.118, yaw: 2.664, z: 0}
-      - {model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser, static: true, x: 2091.359, y: 624.821, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser_2, static: true, x: 2091.589, y: 664.457, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/Coke, name: Coke, static: false, x: 2091.359, y: 625.071, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/Coke, name: Coke, static: false, x: 2092.668, y: 664.996, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/TeleportIngestor, name: coke_ingestor, static: true, x: 2662.887, y: 898.996, yaw: 1.5708, z: 0.805}
-      - {model_name: OpenRobotics/TeleportIngestor, name: coke_ingestor_2, static: true, x: 668.759, y: 703.864, yaw: 1.5708, z: 0.8}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 775.15999999999997, y: 794.00599999999997, yaw: 4.2503000000000002, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 737, y: 884, yaw: 4.2239000000000004, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 680.226, y: 975.77800000000002, yaw: 4.2469999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 637.39700000000005, y: 1066.1780000000001, yaw: 4.2458, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 457.40499999999997, y: 976.29600000000005, yaw: 1.0926, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 503.45699999999999, y: 884.74599999999998, yaw: 1.1213, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 549.60500000000002, y: 797.63499999999999, yaw: 1.0612999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 592.12400000000002, y: 715.71000000000004, yaw: 1.0779000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Fridge, name: Fridge, static: true, x: 1878.9069999999999, y: 679.64499999999998, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 1683.9839999999999, y: 655.24099999999999, yaw: 0.0166, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 1392.53, y: 706.36699999999996, yaw: 3.1613000000000002, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 991.71699999999998, y: 514.34500000000003, yaw: 1.099, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 1682.6990000000001, y: 701.84699999999998, yaw: 3.1594000000000002, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1207.952, y: 1007.22, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1202.9179999999999, y: 1168.317, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1631.4159999999999, y: 1161.3150000000001, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1109.385, y: 1009.033, yaw: -1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1106.837, y: 1168.2929999999999, yaw: 4.7123999999999997, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1529.0360000000001, y: 1160.8779999999999, yaw: 4.7123999999999997, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1530.348, y: 1000.746, yaw: -1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SmallCubicle, name: SmallCubicle, static: true, x: 1631.4159999999999, y: 999.43299999999999, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 795.48699999999997, y: 1142.915, yaw: 1.0878000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: Drawer, static: true, x: 728.37800000000004, y: 1246.6489999999999, yaw: 1.1104000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/BigCubicle, name: BigCubicle, static: true, x: 2055.9659999999999, y: 956.08900000000006, yaw: 1.6278999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/BigCubicle, name: BigCubicle, static: true, x: 2052.4989999999998, y: 1128.2829999999999, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/BigCubicle, name: BigCubicle, static: true, x: 1948.54, y: 1131.8119999999999, yaw: -1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/BigCubicle, name: BigCubicle, static: true, x: 1950.675, y: 961.06899999999996, yaw: 1.6108, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 2607.625, y: 1219.095, yaw: 4.6087999999999996, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 2644, y: 896, yaw: 4.5815999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 2354.6289999999999, y: 849.779, yaw: 1.5732999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 883, y: 457, yaw: 4.2286000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: AdjTable, static: true, x: 1536.4100000000001, y: 657.46100000000001, yaw: 1.5913999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2676.4400000000001, y: 406.87200000000001, yaw: 1.8623000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2648.7919999999999, y: 545.11199999999997, yaw: 1.4218999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 1678.0609999999999, y: 1006.211, yaw: -1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2598, y: 888, yaw: 1.419, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 2567.058, y: 1215.8510000000001, yaw: 1.4599, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1048.6659999999999, y: 1020.254, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1045.8499999999999, y: 1155.797, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1264.3009999999999, y: 1004.518, yaw: 4.7123999999999997, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1263.7370000000001, y: 1165.9580000000001, yaw: 4.7123999999999997, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1471.463, y: 1000.567, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1690.479, y: 1161.442, yaw: -1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1892.6110000000001, y: 1154.4559999999999, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 1894.8689999999999, y: 996.40300000000002, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 2103.1599999999999, y: 1009.386, yaw: -1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OfficeChairBlue, static: true, x: 2106.547, y: 1148.8109999999999, yaw: -1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlack, name: OfficeChairBlack, static: true, x: 1464.125, y: 1147.3299999999999, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairGrey, name: OfficeChairGrey, static: true, x: 1398.96, y: 657.33199999999999, yaw: 0.016, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: Drawer, static: true, x: 2119.6819999999998, y: 936.99800000000005, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: Drawer, static: true, x: 2625.4479999999999, y: 1094.713, yaw: 4.6216999999999997, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/ConfTable, name: ConfTable, static: true, x: 620, y: 872, yaw: 1.1016999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/WhiteCabinet, name: WhiteCabinet, static: true, x: 1775.8789999999999, y: 344.82299999999998, yaw: -0.035700000000000003, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SquareShelf, name: SquareShelf, static: true, x: 938.97000000000003, y: 352.11799999999999, yaw: 2.6640000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser, static: true, x: 2097.3649999999998, y: 649.80899999999997, yaw: 1.5708, z: 1.0800000000000001}
+      - {dispensable: false, model_name: OpenRobotics/TeleportDispenser, name: coke_dispenser_2, static: true, x: 2095.2669999999998, y: 689.745, yaw: 1.5708, z: 0.63}
+      - {dispensable: false, model_name: OpenRobotics/Coke, name: Coke, static: false, x: 2098.6509999999998, y: 650.52300000000002, yaw: 1.5708, z: 1.0800000000000001}
+      - {dispensable: false, model_name: OpenRobotics/TeleportIngestor, name: coke_ingestor, static: true, x: 2662.8870000000002, y: 898.99599999999998, yaw: 1.5708, z: 0.80500000000000005}
+      - {dispensable: false, model_name: OpenRobotics/TeleportIngestor, name: coke_ingestor_2, static: true, x: 668.75900000000001, y: 703.86400000000003, yaw: 1.5708, z: 0.80000000000000004}
+      - {dispensable: false, model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 1946.0540000000001, y: 1238.8910000000001, yaw: 0.0092999999999999992, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 2053.6880000000001, y: 1237.701, yaw: 0.0172, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/RecTable, name: OpenRobotics/RecTable, static: true, x: 899.73800000000006, y: 967.89999999999998, yaw: 1.0973999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SquareShelf, name: OpenRobotics/SquareShelf, static: true, x: 2450.9459999999999, y: 362.63799999999998, yaw: -0.0083000000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Fridge, name: OpenRobotics/Fridge, static: true, x: 1875.9770000000001, y: 604.197, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1471.6030000000001, y: 1374.8610000000001, yaw: 3.1000000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1522.318, y: 1375.692, yaw: 3.0893000000000002, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1571.0940000000001, y: 1377.078, yaw: 3.1097000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1679.73, y: 1373.4749999999999, yaw: -3.0832999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/AdjTable, name: OpenRobotics/AdjTable, static: true, x: 2699.48, y: 546.64800000000002, yaw: -1.7435, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 2732.7600000000002, y: 394.072, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1031.5450000000001, y: 397.61099999999999, yaw: 1.1779999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/SquareShelf, name: OpenRobotics/SquareShelf, static: true, x: 2660.7089999999998, y: 672.20100000000002, yaw: 0.0286, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/TrashBin, name: OpenRobotics/TrashBin, static: true, x: 1511.2360000000001, y: 901.80999999999995, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/TrashBin, name: OpenRobotics/TrashBin, static: true, x: 1557.943, y: 901.80999999999995, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/TrashBin, name: OpenRobotics/TrashBin, static: true, x: 1604.6489999999999, y: 902.35299999999995, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/WhiteCabinet, name: OpenRobotics/WhiteCabinet, static: true, x: 2094.0799999999999, y: 607.09699999999998, yaw: -1.5640000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 2096.3449999999998, y: 686.04700000000003, yaw: -1.5750999999999999, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/MetalCabinetYellow, name: OpenRobotics/MetalCabinetYellow, static: true, x: 2562.2370000000001, y: 408.46100000000001, yaw: -0.043499999999999997, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 758.96900000000005, y: 470.916, yaw: 2.6833999999999998, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 696.33399999999995, y: 371.52800000000002, yaw: 1.1071, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/MiR100, name: OpenRobotics/MiR100, static: true, x: 968.74300000000005, y: 827.98800000000006, yaw: -0.51590000000000003, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1243.4269999999999, y: 1282.3009999999999, yaw: 1.6649, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 1182.452, y: 1288.9069999999999, yaw: -1.512, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/OfficeChairBlue, name: OpenRobotics/OfficeChairBlue, static: true, x: 842.88199999999995, y: 1178.6559999999999, yaw: -2.0863, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 2463.2600000000002, y: 758.13, yaw: -0.014500000000000001, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/MetalCabinet, name: OpenRobotics/MetalCabinet, static: true, x: 2561.8960000000002, y: 759.04300000000001, yaw: -0.024400000000000002, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 2339.9650000000001, y: 1065.9090000000001, yaw: 1.5708, z: 0}
+      - {dispensable: false, model_name: OpenRobotics/Drawer, name: OpenRobotics/Drawer, static: true, x: 2339.9650000000001, y: 1116.1400000000001, yaw: 1.5708, z: 0}
     vertices:
-      - [80.27, 1024.974, 0, ""]
-      - [580.795, 43.396, 0, ""]
-      - [258.725, 1426.884, 0, ""]
-      - [2624.464, 1625.219, 0, ""]
-      - [2809.312, 1349.93, 0, ""]
-      - [2951.32, 368.569, 0, ""]
-      - [1249.786, 556.5700000000001, 0, ""]
-      - [1829.797, 547.502, 0, ""]
-      - [2132.04, 543.808, 0, ""]
-      - [2132.544, 719.297, 0, ""]
-      - [2056.869, 723.0650000000001, 0, ""]
-      - [1914.314, 725.241, 0, ""]
-      - [1832.337, 726.329, 0, ""]
-      - [1663.159, 302.319, 0, ""]
-      - [2797.635, 340.467, 0, ""]
-      - [2734.609, 712.544, 0, ""]
-      - [2295.082, 722.495, 0, ""]
-      - [2297.846, 1166.445, 0, ""]
-      - [2297.293, 1271.489, 0, ""]
-      - [2298.952, 1363.264, 0, ""]
-      - [2657.208, 1331.751, 0, ""]
-      - [2690.932, 1025.465, 0, ""]
+      - [80.269999999999996, 1024.9739999999999, 0, ""]
+      - [580.79499999999996, 43.396000000000001, 0, ""]
+      - [258.72500000000002, 1426.884, 0, ""]
+      - [2624.4639999999999, 1625.2190000000001, 0, ""]
+      - [2809.3119999999999, 1349.9300000000001, 0, ""]
+      - [2951.3200000000002, 368.56900000000002, 0, ""]
+      - [1249.7860000000001, 556.57000000000005, 0, ""]
+      - [1829.797, 547.50199999999995, 0, ""]
+      - [2134.6350000000002, 542.00599999999997, 0, ""]
+      - [2139.4810000000002, 720.91700000000003, 0, ""]
+      - [2056.8690000000001, 723.06500000000005, 0, ""]
+      - [1914.3140000000001, 725.24099999999999, 0, ""]
+      - [1832.337, 726.32899999999995, 0, ""]
+      - [1663.1590000000001, 302.31900000000002, 0, ""]
+      - [2797.6350000000002, 340.46699999999998, 0, ""]
+      - [2734.6089999999999, 712.54399999999998, 0, ""]
+      - [2295.0819999999999, 722.495, 0, ""]
+      - [2297.846, 1166.4449999999999, 0, ""]
+      - [2297.2930000000001, 1271.489, 0, ""]
+      - [2298.9520000000002, 1363.2639999999999, 0, ""]
+      - [2657.2080000000001, 1331.751, 0, ""]
+      - [2690.9319999999998, 1025.4649999999999, 0, ""]
       - [1619.482, 1417.998, 0, ""]
-      - [1274.496, 1411.916, 0, ""]
-      - [931.72, 1359.394, 0, ""]
-      - [591.037, 1263.173, 0, ""]
-      - [269.05, 1125.229, 0, ""]
-      - [771.683, 135.085, 0, ""]
-      - [1002.591, 229.438, 0, ""]
-      - [1195.809, 279.98, 0, ""]
-      - [1395.345, 308.146, 0, ""]
-      - [1439.306, 307.093, 0, ""]
-      - [1003.149, 357.463, 0, ""]
-      - [887.884, 583.51, 0, ""]
-      - [984.898, 632.497, 0, ""]
-      - [975.293, 648.826, 0, ""]
-      - [612.9690000000001, 445.59, 0, ""]
-      - [933.086, 744.676, 0, ""]
-      - [655.919, 1280.411, 0, ""]
-      - [814.828, 239.25, 0, "", {is_parking_spot: [4, false]}]
-      - [1210.544, 365.254, 0, patrol_D2]
-      - [1191.442, 824.457, 0, patrol_A1]
-      - [1232.421, 658.567, 0, tinyRobot1_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot1], spawn_robot_type: [1, TinyRobot]}]
-      - [1991.121, 812.872, 0, patrol_D1]
-      - [1990, 638.364, 0, pantry, {is_holding_point: [4, true], is_parking_spot: [4, false], pickup_dispenser: [1, coke_dispenser]}]
+      - [1274.4960000000001, 1411.9159999999999, 0, ""]
+      - [931.72000000000003, 1359.394, 0, ""]
+      - [591.03700000000003, 1263.173, 0, ""]
+      - [269.05000000000001, 1125.229, 0, ""]
+      - [771.68299999999999, 135.08500000000001, 0, ""]
+      - [1002.591, 229.43799999999999, 0, ""]
+      - [1195.809, 279.98000000000002, 0, ""]
+      - [1395.345, 308.14600000000002, 0, ""]
+      - [1439.306, 307.09300000000002, 0, ""]
+      - [1003.149, 357.46300000000002, 0, ""]
+      - [887.88400000000001, 583.50999999999999, 0, ""]
+      - [984.89800000000002, 632.49699999999996, 0, ""]
+      - [975.29300000000001, 648.82600000000002, 0, ""]
+      - [612.96900000000005, 445.58999999999997, 0, ""]
+      - [933.08600000000001, 744.67600000000004, 0, ""]
+      - [657.60599999999999, 1282.1559999999999, 0, ""]
+      - [830.92200000000003, 249.364, 0, presupplies, {is_parking_spot: [4, false]}]
+      - [1210.5440000000001, 365.25400000000002, 0, patrol_D2]
+      - [1191.442, 824.45699999999999, 0, patrol_A1]
+      - [1232.421, 658.56700000000001, 0, tinyRobot1_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot1], spawn_robot_type: [1, TinyRobot]}]
+      - [1991.1210000000001, 812.87199999999996, 0, patrol_D1]
+      - [1990, 638.36400000000003, 0, pantry, {is_holding_point: [4, true], is_parking_spot: [4, false], pickup_dispenser: [1, coke_dispenser]}]
       - [2213.636, 812, 0, "", {is_parking_spot: [4, false]}]
-      - [2220.121, 1225.257, 0, ""]
-      - [2350.211, 402.475, 0, lounge, {is_holding_point: [4, true], is_parking_spot: [4, false]}]
-      - [1551.069, 468.349, 0, ""]
-      - [1052.727, 730.182, 0, ""]
-      - [2474.545, 885.636, 0, hardware_2, {dropoff_ingestor: [1, coke_ingestor], is_holding_point: [4, true], is_parking_spot: [4, false]}]
-      - [934.9299999999999, 935.429, 0, "", {is_parking_spot: [4, false]}]
-      - [631.562, 587.894, 0, coe, {dropoff_ingestor: [1, coke_ingestor_2], is_holding_point: [4, true], is_parking_spot: [4, false]}]
-      - [1790.467, 1326.218, 0, ""]
-      - [1364.76, 1336.717, 0, ""]
+      - [2220.1210000000001, 1225.2570000000001, 0, ""]
+      - [2438.386, 471.24299999999999, 0, lounge, {is_holding_point: [4, true], is_parking_spot: [4, false]}]
+      - [1551.069, 468.34899999999999, 0, ""]
+      - [1052.7270000000001, 730.18200000000002, 0, ""]
+      - [2474.5450000000001, 885.63599999999997, 0, hardware_2, {dropoff_ingestor: [1, coke_ingestor], is_holding_point: [4, true], is_parking_spot: [4, false]}]
+      - [934.92999999999995, 935.42899999999997, 0, "", {is_parking_spot: [4, false]}]
+      - [631.56200000000001, 587.89400000000001, 0, coe, {dropoff_ingestor: [1, coke_ingestor_2], is_holding_point: [4, true], is_parking_spot: [4, false]}]
+      - [1790.4670000000001, 1326.2180000000001, 0, ""]
+      - [1364.76, 1336.7170000000001, 0, ""]
       - [2222.415, 1308.722, 0, patrol_C]
-      - [943.631, 1273.435, 0, patrol_B]
+      - [943.63099999999997, 1273.4349999999999, 0, patrol_B]
       - [1107.614, 1316.271, 0, ""]
-      - [739.949, 415.296, 0, supplies, {is_parking_spot: [4, true]}]
-      - [2212.395, 460.219, 0, patrol_A2]
-      - [1366.239, 826.509, 0, ""]
-      - [1807.172, 818.48, 0, ""]
-      - [1365.109, 1120.363, 0, ""]
-      - [1791.093, 1110.805, 0, ""]
-      - [769.867, 618.148, 0, ""]
-      - [2016.125, 1310.955, 0, ""]
+      - [770.875, 383.43400000000003, 0, supplies, {is_parking_spot: [4, true]}]
+      - [2238.471, 477.12299999999999, 0, patrol_A2]
+      - [1366.239, 826.50900000000001, 0, ""]
+      - [1807.172, 818.48000000000002, 0, ""]
+      - [1365.1089999999999, 1120.3630000000001, 0, ""]
+      - [1791.0930000000001, 1110.8050000000001, 0, ""]
+      - [769.86699999999996, 618.14800000000002, 0, ""]
+      - [2016.125, 1310.9549999999999, 0, ""]
       - [2468.096, 1217.693, 0, ""]
-      - [2412.581, 627.5, 0, tinyRobot2_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot2], spawn_robot_type: [1, TinyRobot]}]
+      - [2412.5810000000001, 627.5, 0, tinyRobot2_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot2], spawn_robot_type: [1, TinyRobot]}]
+      - [1255.0239999999999, 824.40300000000002, 0, ""]
+      - [2141.6390000000001, 799.18499999999995, 0, ""]
+      - [1252.1369999999999, 556.17600000000004, 0, ""]
+      - [1830.4449999999999, 546.74699999999996, 0, ""]
+      - [2135.799, 541.26700000000005, 0, ""]
     walls:
-      - [6, 7, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [7, 12, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [12, 11, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [7, 8, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [8, 9, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [9, 10, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [14, 13, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [14, 15, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [15, 16, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [16, 17, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [20, 21, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [15, 21, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [18, 19, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [19, 20, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [22, 19, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [24, 23, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [23, 22, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [26, 25, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [31, 30, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [30, 29, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [29, 28, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [28, 27, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [35, 34, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [34, 33, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [33, 32, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [36, 33, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [27, 36, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [26, 36, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [25, 38, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [38, 24, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
-      - [37, 38, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, default], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [6, 7, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [7, 12, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [12, 11, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [7, 8, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [8, 9, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [9, 10, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [14, 13, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [14, 15, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [15, 16, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [16, 17, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [20, 21, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [15, 21, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [18, 19, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [19, 20, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [22, 19, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [24, 23, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [23, 22, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [26, 25, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [31, 30, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [30, 29, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [29, 28, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [28, 27, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [35, 34, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [34, 33, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [33, 32, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [36, 33, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [27, 36, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [26, 36, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [25, 38, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [38, 24, {alpha: [3, 0.5], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [37, 38, {alpha: [3, 0.80000000000000004], texture_height: [3, 2.5], texture_name: [1, wall_white], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [70, 71, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, blue_linoleum_high_contrast], texture_scale: [3, 1], texture_width: [3, 1]}]
+      - [71, 72, {alpha: [3, 1], texture_height: [3, 2.5], texture_name: [1, blue_linoleum_high_contrast], texture_scale: [3, 1], texture_width: [3, 1]}]
 lifts: {}
 name: building

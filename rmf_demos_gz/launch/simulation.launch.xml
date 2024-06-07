@@ -4,45 +4,29 @@
   <arg name="map_package" default="rmf_demos_maps" description="Name of the map package" />
   <arg name="map_name" description="Name of the rmf_demos map to simulate" />
   <arg name="use_crowdsim" default='0'/>
-  <arg name="use_tpe" default='0'/>
-  <arg name="ignition_version" default='6'/>
+  <arg name="gazebo_version" default='8'/>
 
-  <let name="world_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)_ign/$(var map_name).world" />
-  <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/models:$(find-pkg-share $(var map_package))/maps/$(var map_name)_ign/models:$(find-pkg-share rmf_demos_assets)/models:$(env HOME)/.gazebo/models" />
+  <let name="world_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/$(var map_name).world" />
+  <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/models:$(find-pkg-share $(var map_package))/maps/$(var map_name)/models:$(find-pkg-share rmf_demos_assets)/models:$(env HOME)/.gazebo/models" />
   <let name="plugin_path" value="$(find-pkg-prefix rmf_robot_sim_gz_plugins)/lib/rmf_robot_sim_gz_plugins:$(find-pkg-prefix rmf_building_sim_gz_plugins)/lib/rmf_building_sim_gz_plugins" />
-  <!-- Use TPE if` use_tpe` is set to true-->
-  <!-- TODO use the variable below and remove code duplication (second ign gazebo command) when substitution in XML with ignition gazebo works -->
-  <let name="tpe_engine" value="\-\-physics-engine ignition-physics-tpe-plugin" />
-  <let name="tpe_engine" unless="$(var use_tpe)" value="" />
 
   <!-- Use crowd sim if `use_crowdsim` is true-->
   <let name="menge_resource_path" if="$(var use_crowdsim)" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/config_resource"/>
   <let name="menge_resource_path" unless="$(var use_crowdsim)" value="" />
 
-  <let name="ign_headless" if="$(var headless)" value="-s"/>
-  <let name="ign_headless" unless="$(var headless)" value="" />
+  <let name="gz_headless" if="$(var headless)" value="-s"/>
+  <let name="gz_headless" unless="$(var headless)" value="" />
 
-  <group unless="$(var use_tpe)">
-    <executable cmd="ign gazebo --force-version $(var ignition_version) $(var ign_headless) $(var tpe_engine) -r -v 4 $(var world_path)" output="both">
-      <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
-      <env name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
-      <env name="IGN_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
-      <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
-    </executable>
-  </group>
+  <executable cmd="gz sim --force-version $(var gazebo_version) $(var gz_headless) -r -v 3 $(var world_path)" output="both">
+    <env name="GZ_SIM_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
+    <env name="GZ_SIM_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
+    <env name="GZ_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
+    <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
+  </executable>
 
-  <group if ="$(var use_tpe)">
-    <executable cmd="ign gazebo $(var ign_headless) --physics-engine ignition-physics-tpe-plugin -r -v 4 $(var world_path)" output="both">
-      <env name="IGN_GAZEBO_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
-      <env name="IGN_GAZEBO_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
-      <env name="IGN_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
-      <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
-    </executable>
-  </group>
-
-  <!-- ros_ign bridge for simulation clock -->
-  <node pkg="ros_ign_bridge" exec="parameter_bridge"
-    args="/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock"
+  <!-- ros_gz bridge for simulation clock -->
+  <node pkg="ros_gz_bridge" exec="parameter_bridge"
+    args="/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"
     />
 
 </launch>
