@@ -2,6 +2,17 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.3.0 (2024-06-12)
+------------------
+* Port to harmonic (`#206 <https://github.com/open-rmf/rmf_demos/pull/206>`_)
+* Add task reassignment trigger in update loop (`#228 <https://github.com/open-rmf/rmf_demos/pull/228>`_)
+* Add a script for opening and closing lanes (`#216 <https://github.com/open-rmf/rmf_demos/pull/216>`_)
+* Corrected the way open_lanes and close_lanes functions are called (`#220 <https://github.com/open-rmf/rmf_demos/pull/220>`_)
+* Add all exec deps for rmf_demos_fleet_adapter (`#211 <https://github.com/open-rmf/rmf_demos/pull/211>`_)
+* Remove easy_fleet param from launch (`#194 <https://github.com/open-rmf/rmf_demos/pull/194>`_)
+* Update CI to rolling on main (`#208 <https://github.com/open-rmf/rmf_demos/pull/208>`_)
+* Contributors: Luca Della Vedova, Michael X. Grey, Xiyu, Yadunund, suchetanrs
+
 2.2.3 (2023-12-20)
 ------------------
 
