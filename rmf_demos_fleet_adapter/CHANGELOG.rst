@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.0 (2024-06-12)
+------------------
 * Port to harmonic (`#206 <https://github.com/open-rmf/rmf_demos/pull/206>`_)
 * Add task reassignment trigger in update loop (`#228 <https://github.com/open-rmf/rmf_demos/pull/228>`_)
 * Add a script for opening and closing lanes (`#216 <https://github.com/open-rmf/rmf_demos/pull/216>`_)

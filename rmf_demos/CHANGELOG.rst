@@ -2,8 +2,8 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.0 (2024-06-12)
+------------------
 * Remove rmf_demos_panel (`#235 <https://github.com/open-rmf/rmf_demos/pull/235>`_)
 * Use same empty string default value as fleet adapter launches (`#237 <https://github.com/open-rmf/rmf_demos/pull/237>`_)
 * Adding server_uri for dispatcher node (`#230 <https://github.com/open-rmf/rmf_demos/pull/230>`_)
