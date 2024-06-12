@@ -2,6 +2,9 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.0 (2024-06-12)
+------------------
+
 2.3.0 (2024-06-12)
 ------------------
 * Remove rmf_demos_panel (`#235 <https://github.com/open-rmf/rmf_demos/pull/235>`_)

@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.0 (2024-06-12)
+------------------
+
 2.3.0 (2024-06-12)
 ------------------
 * Port to harmonic (`#206 <https://github.com/open-rmf/rmf_demos/issues/206>`_)
