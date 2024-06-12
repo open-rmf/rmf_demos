@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_bridges
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.0 (2024-06-12)
+------------------
+
 2.3.0 (2024-06-12)
 ------------------
 * Add all exec deps for rmf_demos_fleet_adapter (`#211 <https://github.com/open-rmf/rmf_demos/pull/211>`_)
