@@ -1,46 +1,46 @@
 {
   "format_version": "0.1",
   "anchors": {
-    "1119": {
+    "1122": {
       "Translate2D": [
         20.941864,
         -17.434502
       ]
     },
-    "1120": {
+    "1123": {
       "Translate2D": [
         20.940397,
         -20.134502
       ]
     },
-    "1125": {
+    "1128": {
       "Translate2D": [
         18.17826,
         -22.678429
       ]
     },
-    "1126": {
+    "1129": {
       "Translate2D": [
         18.176794,
         -25.37843
       ]
     },
-    "1130": {
+    "1133": {
+      "Translate2D": [
+        15.18607,
+        -16.789923
+      ]
+    },
+    "1135": {
       "Translate2D": [
         21.138416,
         -20.326607
       ]
     },
-    "1132": {
+    "1137": {
       "Translate2D": [
         15.222197,
         -25.956656
-      ]
-    },
-    "1134": {
-      "Translate2D": [
-        15.18607,
-        -16.789923
       ]
     }
   },
@@ -51,24 +51,7 @@
     "0": {
       "properties": {
         "name": "L1",
-        "elevation": 0.0,
-        "camera_poses": {
-          "default": {
-            "trans": [
-              7.473421,
-              -35.36474,
-              10.0
-            ],
-            "rot": {
-              "quat": [
-                0.42470825,
-                -0.17591988,
-                -0.33985108,
-                0.82047325
-              ]
-            }
-          }
-        }
+        "elevation": 0.0
       },
       "anchors": {
         "1": {
@@ -2458,740 +2441,744 @@
         "drawings": [
           130
         ]
-      }
-    },
-    "386": {
-      "properties": {
-        "name": "L2",
-        "elevation": 8.0,
-        "camera_poses": {
-          "default": {
+      },
+      "user_camera_poses": {
+        "270": {
+          "pose": {
             "trans": [
-              6.430666,
-              -36.625996,
+              7.473421,
+              -35.36474,
               10.0
             ],
             "rot": {
               "quat": [
-                0.4247082,
-                -0.17591989,
-                -0.33985114,
+                0.42470825,
+                -0.17591988,
+                -0.33985108,
                 0.82047325
               ]
             }
-          }
+          },
+          "name": "default",
+          "marker": null
         }
+      }
+    },
+    "387": {
+      "properties": {
+        "name": "L2",
+        "elevation": 8.0
       },
       "anchors": {
-        "387": {
+        "388": {
           "Translate2D": [
             32.72486,
             -40.236485
           ]
         },
-        "388": {
+        "389": {
           "Translate2D": [
             32.720493,
             -26.010473
           ]
         },
-        "389": {
+        "390": {
           "Translate2D": [
             21.153933,
             -25.999916
           ]
         },
-        "390": {
+        "391": {
           "Translate2D": [
             21.125057,
             -7.0492635
           ]
         },
-        "391": {
+        "392": {
           "Translate2D": [
             7.537827,
             -7.134876
           ]
         },
-        "392": {
+        "393": {
           "Translate2D": [
             7.055919,
             -7.448261
           ]
         },
-        "393": {
+        "394": {
           "Translate2D": [
             6.7428226,
             -8.026738
           ]
         },
-        "394": {
+        "395": {
           "Translate2D": [
             6.749802,
             -30.83663
           ]
         },
-        "395": {
+        "396": {
           "Translate2D": [
             2.1972823,
             -32.23918
           ]
         },
-        "396": {
+        "397": {
           "Translate2D": [
             2.1994517,
             -40.220444
           ]
         },
-        "397": {
+        "398": {
           "Translate2D": [
             12.95996,
             -7.446656
           ]
         },
-        "398": {
+        "399": {
           "Translate2D": [
             12.977345,
             -7.074255
           ]
         },
-        "399": {
+        "400": {
           "Translate2D": [
             15.031957,
             -7.074922
           ]
         },
-        "400": {
+        "401": {
           "Translate2D": [
             15.036742,
             -7.4680333
           ]
         },
-        "401": {
+        "402": {
           "Translate2D": [
             15.024745,
             -12.298773
           ]
         },
-        "402": {
+        "403": {
           "Translate2D": [
             15.033807,
             -13.878906
           ]
         },
-        "403": {
+        "404": {
           "Translate2D": [
             15.043237,
             -16.814636
           ]
         },
-        "404": {
+        "405": {
           "Translate2D": [
             15.040249,
             -20.371418
           ]
         },
-        "405": {
+        "406": {
           "Translate2D": [
             15.016295,
             -9.075073
           ]
         },
-        "406": {
+        "407": {
           "Translate2D": [
             15.000923,
             -11.936909
           ]
         },
-        "407": {
+        "408": {
           "Translate2D": [
             21.138136,
             -22.589157
           ]
         },
-        "408": {
+        "409": {
           "Translate2D": [
             21.122316,
             -20.316582
           ]
         },
-        "409": {
+        "410": {
           "Translate2D": [
             21.107603,
             -16.798841
           ]
         },
-        "410": {
+        "411": {
           "Translate2D": [
             21.15011,
             -11.93546
           ]
         },
-        "411": {
+        "412": {
           "Translate2D": [
             15.132891,
             -22.531425
           ]
         },
-        "412": {
+        "413": {
           "Translate2D": [
             15.143459,
             -25.967802
           ]
         },
-        "413": {
+        "414": {
           "Translate2D": [
             18.989494,
             -25.97639
           ]
         },
-        "414": {
+        "415": {
           "Translate2D": [
             18.950363,
             -22.555893
           ]
         },
-        "415": {
+        "416": {
           "Translate2D": [
             12.960393,
             -9.03715
           ]
         },
-        "416": {
+        "417": {
           "Translate2D": [
             12.90302,
             -11.860516
           ]
         },
-        "417": {
+        "418": {
           "Translate2D": [
             12.869271,
             -12.266279
           ]
         },
-        "418": {
+        "419": {
           "Translate2D": [
             12.89155,
             -13.712197
           ]
         },
-        "419": {
+        "420": {
           "Translate2D": [
             12.914205,
             -16.538214
           ]
         },
-        "420": {
+        "421": {
           "Translate2D": [
             12.892426,
             -16.932558
           ]
         },
-        "421": {
+        "422": {
           "Translate2D": [
             12.914687,
             -18.312706
           ]
         },
-        "422": {
+        "423": {
           "Translate2D": [
             12.950576,
             -21.274046
           ]
         },
-        "423": {
+        "424": {
           "Translate2D": [
             12.950734,
             -21.856113
           ]
         },
-        "424": {
+        "425": {
           "Translate2D": [
             12.936187,
             -23.244013
           ]
         },
-        "425": {
+        "426": {
           "Translate2D": [
             12.909584,
             -25.96841
           ]
         },
-        "426": {
+        "427": {
           "Translate2D": [
             12.909731,
             -26.510603
           ]
         },
-        "427": {
+        "428": {
           "Translate2D": [
             12.907636,
             -28.019735
           ]
         },
-        "428": {
+        "429": {
           "Translate2D": [
             12.904109,
             -30.822481
           ]
         },
-        "429": {
+        "430": {
           "Translate2D": [
             15.143967,
             -27.833014
           ]
         },
-        "430": {
+        "431": {
           "Translate2D": [
             15.1013975,
             -30.82595
           ]
         },
-        "431": {
+        "432": {
           "Translate2D": [
             21.15168,
             -30.82681
           ]
         },
-        "432": {
+        "433": {
           "Translate2D": [
             21.730186,
             -30.835285
           ]
         },
-        "433": {
+        "434": {
           "Translate2D": [
             23.017342,
             -30.840895
           ]
         },
-        "434": {
+        "435": {
           "Translate2D": [
             29.107601,
             -30.817354
           ]
         },
-        "435": {
+        "436": {
           "Translate2D": [
             29.06247,
             -26.019653
           ]
         },
-        "436": {
+        "437": {
           "Translate2D": [
             6.7020335,
             -33.75205
           ]
         },
-        "437": {
+        "438": {
           "Translate2D": [
             8.877707,
             -33.92905
           ]
         },
-        "438": {
+        "439": {
           "Translate2D": [
             2.176126,
             -34.1044
           ]
         },
-        "439": {
+        "440": {
           "Translate2D": [
             6.7014217,
             -31.502579
           ]
         },
-        "440": {
+        "441": {
           "Translate2D": [
             8.939658,
             -40.16838
           ]
         },
-        "441": {
+        "442": {
           "Translate2D": [
             13.694207,
             -40.152275
           ]
         },
-        "442": {
+        "443": {
           "Translate2D": [
             13.620502,
             -33.90699
           ]
         },
-        "443": {
+        "444": {
           "Translate2D": [
             14.005986,
             -33.906883
           ]
         },
-        "444": {
+        "445": {
           "Translate2D": [
             10.466027,
             -33.922993
           ]
         },
-        "445": {
+        "446": {
           "Translate2D": [
             9.231222,
             -33.92333
           ]
         },
-        "446": {
+        "447": {
           "Translate2D": [
             18.400537,
             -40.17266
           ]
         },
-        "447": {
+        "448": {
           "Translate2D": [
             23.193634,
             -40.193077
           ]
         },
-        "448": {
+        "449": {
           "Translate2D": [
             27.921696,
             -40.256836
           ]
         },
-        "449": {
+        "450": {
           "Translate2D": [
             27.939178,
             -33.888115
           ]
         },
-        "450": {
+        "451": {
           "Translate2D": [
             28.282896,
             -33.896877
           ]
         },
-        "451": {
+        "452": {
           "Translate2D": [
             29.569498,
             -33.914124
           ]
         },
-        "452": {
+        "453": {
           "Translate2D": [
             32.689117,
             -33.913277
           ]
         },
-        "453": {
+        "454": {
           "Translate2D": [
             24.846018,
             -33.90661
           ]
         },
-        "454": {
+        "455": {
           "Translate2D": [
             23.136406,
             -33.915874
           ]
         },
-        "455": {
+        "456": {
           "Translate2D": [
             23.568222,
             -33.915756
           ]
         },
-        "456": {
+        "457": {
           "Translate2D": [
             20.148998,
             -33.934338
           ]
         },
-        "457": {
+        "458": {
           "Translate2D": [
             18.724178,
             -33.926373
           ]
         },
-        "458": {
+        "459": {
           "Translate2D": [
             18.377121,
             -33.926468
           ]
         },
-        "459": {
+        "460": {
           "Translate2D": [
             15.31937,
             -33.913654
           ]
         },
-        "460": {
+        "461": {
           "Translate2D": [
             15.935715,
             -22.541788
           ]
         },
-        "461": {
+        "462": {
           "Translate2D": [
             17.79057,
             -22.547186
           ]
         },
-        "462": {
+        "463": {
           "Translate2D": [
             16.113722,
             -20.371126
           ]
         },
-        "463": {
+        "464": {
           "Translate2D": [
             17.406258,
             -20.305006
           ]
         },
-        "464": {
+        "465": {
           "Translate2D": [
             18.830355,
             -20.317316
           ]
         },
-        "465": {
+        "466": {
           "Translate2D": [
             20.45137,
             -20.32612
           ]
         },
-        "466": {
+        "467": {
           "Translate2D": [
             15.143542,
             -26.271421
           ]
         },
-        "467": {
+        "468": {
           "Translate2D": [
             6.767971,
             -11.834171
           ]
         },
-        "468": {
+        "469": {
           "Translate2D": [
             6.8056107,
             -16.523056
           ]
         },
-        "469": {
+        "470": {
           "Translate2D": [
             6.8231483,
             -21.218575
           ]
         },
-        "470": {
+        "471": {
           "Translate2D": [
             6.834685,
             -25.962654
           ]
         },
-        "471": {
+        "472": {
           "Translate2D": [
             32.722294,
             -30.79443
           ]
         },
-        "472": {
+        "473": {
           "Translate2D": [
             8.813433,
             -36.770237
           ]
         },
-        "473": {
+        "474": {
           "Translate2D": [
             6.6630898,
             -36.764194
           ]
         },
-        "474": {
+        "475": {
           "Translate2D": [
             6.6531544,
             -35.246155
           ]
         },
-        "477": {
+        "478": {
           "Translate2D": [
             16.915781,
             -21.462313
           ]
         },
-        "478": {
+        "479": {
           "Translate2D": [
             19.662998,
             -21.443579
           ]
         },
-        "479": {
+        "480": {
           "Translate2D": [
             13.977492,
             -21.482325
           ]
         },
-        "480": {
+        "481": {
           "Translate2D": [
             14.001713,
             -17.572296
           ]
         },
-        "481": {
+        "482": {
           "Translate2D": [
             14.029986,
             -13.003962
           ]
         },
-        "482": {
+        "483": {
           "Translate2D": [
             14.059543,
             -8.235423
           ]
         },
-        "484": {
+        "485": {
           "Translate2D": [
             13.942336,
             -27.1566
           ]
         },
-        "485": {
+        "486": {
           "Translate2D": [
             13.90912,
             -32.59503
           ]
         },
-        "486": {
+        "487": {
           "Translate2D": [
             9.968081,
             -32.603844
           ]
         },
-        "487": {
+        "488": {
           "Translate2D": [
             7.8249254,
             -32.6086
           ]
         },
-        "488": {
+        "489": {
           "Translate2D": [
             4.4703727,
             -32.682354
           ]
         },
-        "489": {
+        "490": {
           "Translate2D": [
             4.437919,
             -36.21431
           ]
         },
-        "491": {
+        "492": {
           "Translate2D": [
             6.6654997,
             -33.95137
           ]
         },
-        "492": {
+        "493": {
           "Translate2D": [
             19.43948,
             -32.58272
           ]
         },
-        "493": {
+        "494": {
           "Translate2D": [
             22.501514,
             -32.57593
           ]
         },
-        "494": {
+        "495": {
           "Translate2D": [
             28.951532,
             -32.56154
           ]
         },
-        "496": {
+        "497": {
           "Translate2D": [
             13.66468,
             -36.420803
           ]
         },
-        "497": {
+        "498": {
           "Translate2D": [
             11.418441,
             -36.421413
           ]
         },
-        "498": {
+        "499": {
           "Translate2D": [
             11.41811,
             -35.203873
           ]
         },
-        "499": {
+        "500": {
           "Translate2D": [
             18.38799,
             -36.41952
           ]
         },
-        "500": {
+        "501": {
           "Translate2D": [
             16.267721,
             -36.420097
           ]
         },
-        "501": {
+        "502": {
           "Translate2D": [
             16.267397,
             -35.22355
           ]
         },
-        "502": {
+        "503": {
           "Translate2D": [
             23.174171,
             -35.998375
           ]
         },
-        "503": {
+        "504": {
           "Translate2D": [
             21.074903,
             -36.01994
           ]
         },
-        "504": {
+        "505": {
           "Translate2D": [
             21.095602,
             -34.928307
           ]
         },
-        "505": {
+        "506": {
           "Translate2D": [
             27.981468,
             -36.018063
           ]
         },
-        "506": {
+        "507": {
           "Translate2D": [
             25.75628,
             -36.01867
           ]
         },
-        "507": {
+        "508": {
           "Translate2D": [
             25.756023,
             -35.074005
           ]
         },
-        "508": {
+        "509": {
           "Translate2D": [
             32.683807,
             -36.100765
           ]
         },
-        "509": {
+        "510": {
           "Translate2D": [
             30.521605,
             -36.101353
           ]
         },
-        "510": {
+        "511": {
           "Translate2D": [
             30.500307,
             -34.988735
@@ -3199,10 +3186,10 @@
         }
       },
       "doors": {
-        "511": {
+        "512": {
           "anchors": [
-            439,
-            436
+            440,
+            437
           ],
           "name": "L2_door2",
           "kind": {
@@ -3216,10 +3203,10 @@
             }
           }
         },
-        "512": {
+        "513": {
           "anchors": [
-            457,
-            456
+            458,
+            457
           ],
           "name": "L2_door5",
           "kind": {
@@ -3233,10 +3220,10 @@
             }
           }
         },
-        "513": {
+        "514": {
           "anchors": [
-            420,
-            421
+            421,
+            422
           ],
           "name": "L2_door9",
           "kind": {
@@ -3250,10 +3237,10 @@
             }
           }
         },
-        "514": {
+        "515": {
           "anchors": [
-            397,
-            415
+            398,
+            416
           ],
           "name": "L2_door11",
           "kind": {
@@ -3267,10 +3254,10 @@
             }
           }
         },
-        "515": {
+        "516": {
           "anchors": [
-            466,
-            429
+            467,
+            430
           ],
           "name": "L2_door12",
           "kind": {
@@ -3284,10 +3271,10 @@
             }
           }
         },
-        "516": {
+        "517": {
           "anchors": [
-            432,
-            433
+            433,
+            434
           ],
           "name": "L2_door14",
           "kind": {
@@ -3301,10 +3288,10 @@
             }
           }
         },
-        "517": {
+        "518": {
           "anchors": [
-            450,
-            451
+            451,
+            452
           ],
           "name": "L2_door15",
           "kind": {
@@ -3320,7 +3307,7 @@
         }
       },
       "drawings": {
-        "518": {
+        "519": {
           "properties": {
             "name": "hotel_L2",
             "source": {
@@ -3341,31 +3328,31 @@
             "pixels_per_meter": 17.956682
           },
           "anchors": {
-            "475": {
+            "476": {
               "Translate2D": [
                 393.469,
                 -355.3
               ]
             },
-            "476": {
+            "477": {
               "Translate2D": [
                 393.469,
                 -416.614
               ]
             },
-            "519": {
+            "520": {
               "Translate2D": [
                 267.782,
                 -249.95
               ]
             },
-            "521": {
+            "522": {
               "Translate2D": [
                 374.242,
                 -313.697
               ]
             },
-            "523": {
+            "524": {
               "Translate2D": [
                 268.411,
                 -414.958
@@ -3373,24 +3360,24 @@
             }
           },
           "fiducials": {
-            "520": {
-              "anchor": 519,
+            "521": {
+              "anchor": 520,
               "affiliation": 135
             },
-            "522": {
-              "anchor": 521,
+            "523": {
+              "anchor": 522,
               "affiliation": 138
             },
-            "524": {
-              "anchor": 523,
+            "525": {
+              "anchor": 524,
               "affiliation": 132
             }
           },
           "measurements": {
-            "525": {
+            "526": {
               "anchors": [
-                475,
-                476
+                476,
+                477
               ],
               "distance": 3.4
             }
@@ -3398,72 +3385,72 @@
         }
       },
       "floors": {
-        "527": {
-          "anchors": [
-            398,
-            399,
-            404,
-            408,
-            407,
-            411,
-            430,
-            434,
-            471,
-            452,
-            491,
-            394,
-            428
-          ],
-          "texture": 526
-        },
-        "529": {
+        "528": {
           "anchors": [
             399,
-            403,
+            400,
+            405,
             409,
-            390
+            408,
+            412,
+            431,
+            435,
+            472,
+            453,
+            492,
+            395,
+            429
           ],
-          "texture": 528
+          "texture": 527
         },
         "530": {
           "anchors": [
-            398,
-            391,
-            392,
-            393,
-            394,
-            428
+            400,
+            404,
+            410,
+            391
           ],
-          "texture": 528
+          "texture": 529
         },
         "531": {
           "anchors": [
-            438,
-            396,
-            387,
-            452,
-            491,
+            399,
+            392,
+            393,
             394,
-            395
+            395,
+            429
           ],
-          "texture": 528
+          "texture": 529
         },
         "532": {
           "anchors": [
-            412,
-            430,
-            434,
-            435,
-            389,
-            407,
-            414,
-            413
+            439,
+            397,
+            388,
+            453,
+            492,
+            395,
+            396
           ],
-          "texture": 528
+          "texture": 529
+        },
+        "533": {
+          "anchors": [
+            413,
+            431,
+            435,
+            436,
+            390,
+            408,
+            415,
+            414
+          ],
+          "texture": 529
         }
       },
       "models": {
-        "533": {
+        "534": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3482,7 +3469,7 @@
           },
           "is_static": true
         },
-        "534": {
+        "535": {
           "name": "OpenRobotics/Shower",
           "source": {
             "Search": "OpenRobotics/Shower"
@@ -3501,7 +3488,7 @@
           },
           "is_static": true
         },
-        "535": {
+        "536": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -3520,7 +3507,7 @@
           },
           "is_static": true
         },
-        "536": {
+        "537": {
           "name": "OpenRobotics/BathroomSink",
           "source": {
             "Search": "OpenRobotics/BathroomSink"
@@ -3539,7 +3526,7 @@
           },
           "is_static": true
         },
-        "537": {
+        "538": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3558,7 +3545,7 @@
           },
           "is_static": true
         },
-        "538": {
+        "539": {
           "name": "OpenRobotics/BedsideTable",
           "source": {
             "Search": "OpenRobotics/BedsideTable"
@@ -3577,7 +3564,7 @@
           },
           "is_static": true
         },
-        "539": {
+        "540": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -3596,7 +3583,7 @@
           },
           "is_static": true
         },
-        "540": {
+        "541": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -3615,7 +3602,7 @@
           },
           "is_static": true
         },
-        "541": {
+        "542": {
           "name": "OpenRobotics/WoodenChair",
           "source": {
             "Search": "OpenRobotics/WoodenChair"
@@ -3634,7 +3621,7 @@
           },
           "is_static": true
         },
-        "542": {
+        "543": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -3653,7 +3640,7 @@
           },
           "is_static": true
         },
-        "543": {
+        "544": {
           "name": "OpenRobotics/TrashBin",
           "source": {
             "Search": "OpenRobotics/TrashBin"
@@ -3672,7 +3659,7 @@
           },
           "is_static": true
         },
-        "544": {
+        "545": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3691,7 +3678,7 @@
           },
           "is_static": true
         },
-        "545": {
+        "546": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3710,7 +3697,7 @@
           },
           "is_static": true
         },
-        "546": {
+        "547": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3729,7 +3716,7 @@
           },
           "is_static": true
         },
-        "547": {
+        "548": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3748,7 +3735,7 @@
           },
           "is_static": true
         },
-        "548": {
+        "549": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3767,7 +3754,7 @@
           },
           "is_static": true
         },
-        "549": {
+        "550": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3786,7 +3773,7 @@
           },
           "is_static": true
         },
-        "550": {
+        "551": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3805,7 +3792,7 @@
           },
           "is_static": true
         },
-        "551": {
+        "552": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3824,7 +3811,7 @@
           },
           "is_static": true
         },
-        "552": {
+        "553": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3843,7 +3830,7 @@
           },
           "is_static": true
         },
-        "553": {
+        "554": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -3862,7 +3849,7 @@
           },
           "is_static": true
         },
-        "554": {
+        "555": {
           "name": "OpenRobotics/WoodenChair",
           "source": {
             "Search": "OpenRobotics/WoodenChair"
@@ -3881,7 +3868,7 @@
           },
           "is_static": true
         },
-        "555": {
+        "556": {
           "name": "OpenRobotics/Fridge",
           "source": {
             "Search": "OpenRobotics/Fridge"
@@ -3900,7 +3887,7 @@
           },
           "is_static": true
         },
-        "556": {
+        "557": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -3919,7 +3906,7 @@
           },
           "is_static": true
         },
-        "557": {
+        "558": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -3938,7 +3925,7 @@
           },
           "is_static": true
         },
-        "558": {
+        "559": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -3957,7 +3944,7 @@
           },
           "is_static": true
         },
-        "559": {
+        "560": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -3976,7 +3963,7 @@
           },
           "is_static": true
         },
-        "560": {
+        "561": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -3995,7 +3982,7 @@
           },
           "is_static": true
         },
-        "561": {
+        "562": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -4014,7 +4001,7 @@
           },
           "is_static": true
         },
-        "562": {
+        "563": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -4033,7 +4020,7 @@
           },
           "is_static": true
         },
-        "563": {
+        "564": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -4052,7 +4039,7 @@
           },
           "is_static": true
         },
-        "564": {
+        "565": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -4071,7 +4058,7 @@
           },
           "is_static": true
         },
-        "565": {
+        "566": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -4090,7 +4077,7 @@
           },
           "is_static": true
         },
-        "566": {
+        "567": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -4109,7 +4096,7 @@
           },
           "is_static": true
         },
-        "567": {
+        "568": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -4128,7 +4115,7 @@
           },
           "is_static": true
         },
-        "568": {
+        "569": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -4147,7 +4134,7 @@
           },
           "is_static": true
         },
-        "569": {
+        "570": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -4166,7 +4153,7 @@
           },
           "is_static": true
         },
-        "570": {
+        "571": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -4185,7 +4172,7 @@
           },
           "is_static": true
         },
-        "571": {
+        "572": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -4204,7 +4191,7 @@
           },
           "is_static": true
         },
-        "572": {
+        "573": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -4223,7 +4210,7 @@
           },
           "is_static": true
         },
-        "573": {
+        "574": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -4242,7 +4229,7 @@
           },
           "is_static": true
         },
-        "574": {
+        "575": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -4261,7 +4248,7 @@
           },
           "is_static": true
         },
-        "575": {
+        "576": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -4280,7 +4267,7 @@
           },
           "is_static": true
         },
-        "576": {
+        "577": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -4299,7 +4286,7 @@
           },
           "is_static": true
         },
-        "577": {
+        "578": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -4318,7 +4305,7 @@
           },
           "is_static": true
         },
-        "578": {
+        "579": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -4337,7 +4324,7 @@
           },
           "is_static": true
         },
-        "579": {
+        "580": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -4356,7 +4343,7 @@
           },
           "is_static": true
         },
-        "580": {
+        "581": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -4375,7 +4362,7 @@
           },
           "is_static": true
         },
-        "581": {
+        "582": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -4394,7 +4381,7 @@
           },
           "is_static": true
         },
-        "582": {
+        "583": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -4413,7 +4400,7 @@
           },
           "is_static": true
         },
-        "583": {
+        "584": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -4432,7 +4419,7 @@
           },
           "is_static": true
         },
-        "584": {
+        "585": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -4451,7 +4438,7 @@
           },
           "is_static": true
         },
-        "585": {
+        "586": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -4470,7 +4457,7 @@
           },
           "is_static": true
         },
-        "586": {
+        "587": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -4489,7 +4476,7 @@
           },
           "is_static": true
         },
-        "587": {
+        "588": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -4508,7 +4495,7 @@
           },
           "is_static": true
         },
-        "588": {
+        "589": {
           "name": "OpenRobotics/BathroomSink",
           "source": {
             "Search": "OpenRobotics/BathroomSink"
@@ -4527,7 +4514,7 @@
           },
           "is_static": true
         },
-        "589": {
+        "590": {
           "name": "OpenRobotics/BathroomSink",
           "source": {
             "Search": "OpenRobotics/BathroomSink"
@@ -4546,7 +4533,7 @@
           },
           "is_static": true
         },
-        "590": {
+        "591": {
           "name": "OpenRobotics/BathroomSink",
           "source": {
             "Search": "OpenRobotics/BathroomSink"
@@ -4565,7 +4552,7 @@
           },
           "is_static": true
         },
-        "591": {
+        "592": {
           "name": "OpenRobotics/BathroomSink",
           "source": {
             "Search": "OpenRobotics/BathroomSink"
@@ -4586,13 +4573,6 @@
         }
       },
       "walls": {
-        "592": {
-          "anchors": [
-            391,
-            392
-          ],
-          "texture": 208
-        },
         "593": {
           "anchors": [
             392,
@@ -4602,43 +4582,43 @@
         },
         "594": {
           "anchors": [
-            397,
-            398
+            393,
+            394
           ],
           "texture": 208
         },
         "595": {
           "anchors": [
-            390,
+            398,
             399
           ],
           "texture": 208
         },
         "596": {
           "anchors": [
-            399,
-            398
+            391,
+            400
           ],
           "texture": 208
         },
         "597": {
           "anchors": [
-            398,
-            391
+            400,
+            399
           ],
           "texture": 208
         },
         "598": {
           "anchors": [
             399,
-            400
+            392
           ],
           "texture": 208
         },
         "599": {
           "anchors": [
-            402,
-            403
+            400,
+            401
           ],
           "texture": 208
         },
@@ -4651,38 +4631,38 @@
         },
         "601": {
           "anchors": [
-            405,
-            406
+            404,
+            405
           ],
           "texture": 208
         },
         "602": {
           "anchors": [
             406,
-            401
+            407
           ],
           "texture": 208
         },
         "603": {
           "anchors": [
-            389,
-            407
+            407,
+            402
           ],
           "texture": 208
         },
         "604": {
           "anchors": [
-            407,
+            390,
             408
           ],
-          "texture": 218
+          "texture": 208
         },
         "605": {
           "anchors": [
             408,
             409
           ],
-          "texture": 208
+          "texture": 218
         },
         "606": {
           "anchors": [
@@ -4694,28 +4674,28 @@
         "607": {
           "anchors": [
             410,
-            390
+            411
           ],
           "texture": 208
         },
         "608": {
           "anchors": [
-            403,
-            409
+            411,
+            391
           ],
           "texture": 208
         },
         "609": {
           "anchors": [
-            406,
+            404,
             410
           ],
           "texture": 208
         },
         "610": {
           "anchors": [
-            411,
-            412
+            407,
+            411
           ],
           "texture": 208
         },
@@ -4736,16 +4716,16 @@
         "613": {
           "anchors": [
             414,
-            407
+            415
           ],
-          "texture": 218
+          "texture": 208
         },
         "614": {
           "anchors": [
             415,
-            416
+            408
           ],
-          "texture": 208
+          "texture": 218
         },
         "615": {
           "anchors": [
@@ -4756,8 +4736,8 @@
         },
         "616": {
           "anchors": [
-            418,
-            419
+            417,
+            418
           ],
           "texture": 208
         },
@@ -4770,8 +4750,8 @@
         },
         "618": {
           "anchors": [
-            421,
-            422
+            420,
+            421
           ],
           "texture": 208
         },
@@ -4784,8 +4764,8 @@
         },
         "620": {
           "anchors": [
-            424,
-            425
+            423,
+            424
           ],
           "texture": 208
         },
@@ -4798,22 +4778,22 @@
         },
         "622": {
           "anchors": [
-            427,
-            428
+            426,
+            427
           ],
           "texture": 208
         },
         "623": {
           "anchors": [
             428,
-            394
+            429
           ],
           "texture": 208
         },
         "624": {
           "anchors": [
             429,
-            430
+            395
           ],
           "texture": 208
         },
@@ -4827,28 +4807,28 @@
         "626": {
           "anchors": [
             431,
-            389
+            432
           ],
           "texture": 208
         },
         "627": {
           "anchors": [
-            389,
-            413
+            432,
+            390
           ],
           "texture": 208
         },
         "628": {
           "anchors": [
-            431,
-            432
+            390,
+            414
           ],
           "texture": 208
         },
         "629": {
           "anchors": [
-            433,
-            434
+            432,
+            433
           ],
           "texture": 208
         },
@@ -4861,50 +4841,50 @@
         },
         "631": {
           "anchors": [
-            389,
-            435
+            435,
+            436
           ],
           "texture": 208
         },
         "632": {
           "anchors": [
-            435,
-            388
+            390,
+            436
           ],
           "texture": 208
         },
         "633": {
           "anchors": [
-            395,
-            438
+            436,
+            389
           ],
           "texture": 208
         },
         "634": {
           "anchors": [
-            438,
-            396
+            396,
+            439
           ],
           "texture": 208
         },
         "635": {
           "anchors": [
-            396,
-            440
+            439,
+            397
           ],
           "texture": 208
         },
         "636": {
           "anchors": [
-            440,
-            437
+            397,
+            441
           ],
           "texture": 208
         },
         "637": {
           "anchors": [
-            440,
-            441
+            441,
+            438
           ],
           "texture": 208
         },
@@ -4924,28 +4904,28 @@
         },
         "640": {
           "anchors": [
-            442,
+            443,
             444
           ],
           "texture": 208
         },
         "641": {
           "anchors": [
-            437,
+            443,
             445
           ],
           "texture": 208
         },
         "642": {
           "anchors": [
-            441,
+            438,
             446
           ],
           "texture": 208
         },
         "643": {
           "anchors": [
-            446,
+            442,
             447
           ],
           "texture": 208
@@ -4960,139 +4940,139 @@
         "645": {
           "anchors": [
             448,
-            387
+            449
           ],
           "texture": 208
         },
         "646": {
           "anchors": [
             449,
-            448
+            388
           ],
           "texture": 208
         },
         "647": {
           "anchors": [
-            449,
-            450
+            450,
+            449
           ],
           "texture": 208
         },
         "648": {
           "anchors": [
-            451,
-            452
+            450,
+            451
           ],
           "texture": 208
         },
         "649": {
           "anchors": [
             452,
-            387
+            453
           ],
           "texture": 208
         },
         "650": {
           "anchors": [
             453,
-            449
+            388
           ],
           "texture": 208
         },
         "651": {
           "anchors": [
             454,
-            455
+            450
           ],
           "texture": 208
         },
         "652": {
           "anchors": [
-            454,
-            447
+            455,
+            456
           ],
           "texture": 208
         },
         "653": {
           "anchors": [
-            454,
-            456
+            455,
+            448
           ],
           "texture": 208
         },
         "654": {
           "anchors": [
-            457,
-            458
+            455,
+            457
           ],
           "texture": 208
         },
         "655": {
           "anchors": [
             458,
-            446
+            459
           ],
           "texture": 208
         },
         "656": {
           "anchors": [
-            458,
-            459
+            459,
+            447
           ],
           "texture": 208
         },
         "657": {
           "anchors": [
-            411,
+            459,
             460
           ],
-          "texture": 218
+          "texture": 208
         },
         "658": {
           "anchors": [
-            461,
-            414
+            412,
+            461
           ],
           "texture": 218
         },
         "659": {
           "anchors": [
-            404,
-            462
+            462,
+            415
           ],
           "texture": 218
         },
         "660": {
           "anchors": [
-            463,
-            464
+            405,
+            463
           ],
           "texture": 218
         },
         "661": {
           "anchors": [
-            465,
-            408
+            464,
+            465
           ],
           "texture": 218
         },
         "662": {
           "anchors": [
             466,
-            412
+            409
           ],
-          "texture": 208
+          "texture": 218
         },
         "663": {
           "anchors": [
-            393,
-            467
+            467,
+            413
           ],
           "texture": 208
         },
         "664": {
           "anchors": [
-            467,
+            394,
             468
           ],
           "texture": 208
@@ -5113,57 +5093,57 @@
         },
         "667": {
           "anchors": [
-            425,
-            470
+            470,
+            471
           ],
           "texture": 208
         },
         "668": {
           "anchors": [
-            470,
-            394
+            426,
+            471
           ],
           "texture": 208
         },
         "669": {
           "anchors": [
-            469,
-            422
+            471,
+            395
           ],
           "texture": 208
         },
         "670": {
           "anchors": [
-            468,
-            419
+            470,
+            423
           ],
           "texture": 208
         },
         "671": {
           "anchors": [
-            467,
-            416
+            469,
+            420
           ],
           "texture": 208
         },
         "672": {
           "anchors": [
-            388,
-            471
+            468,
+            417
           ],
           "texture": 208
         },
         "673": {
           "anchors": [
-            471,
-            452
+            389,
+            472
           ],
           "texture": 208
         },
         "674": {
           "anchors": [
             472,
-            473
+            453
           ],
           "texture": 208
         },
@@ -5176,45 +5156,45 @@
         },
         "676": {
           "anchors": [
-            436,
-            491
+            474,
+            475
           ],
           "texture": 208
         },
         "677": {
           "anchors": [
-            491,
-            437
+            437,
+            492
           ],
           "texture": 208
         },
         "678": {
           "anchors": [
-            395,
-            394
+            492,
+            438
           ],
           "texture": 208
         },
         "679": {
           "anchors": [
-            394,
-            439
+            396,
+            395
           ],
           "texture": 208
         },
         "680": {
           "anchors": [
-            462,
-            463
+            395,
+            440
           ],
-          "texture": 265
+          "texture": 208
         },
         "681": {
           "anchors": [
-            496,
-            497
+            463,
+            464
           ],
-          "texture": 208
+          "texture": 265
         },
         "682": {
           "anchors": [
@@ -5225,8 +5205,8 @@
         },
         "683": {
           "anchors": [
-            499,
-            500
+            498,
+            499
           ],
           "texture": 208
         },
@@ -5239,8 +5219,8 @@
         },
         "685": {
           "anchors": [
-            502,
-            503
+            501,
+            502
           ],
           "texture": 208
         },
@@ -5253,8 +5233,8 @@
         },
         "687": {
           "anchors": [
-            505,
-            506
+            504,
+            505
           ],
           "texture": 208
         },
@@ -5267,8 +5247,8 @@
         },
         "689": {
           "anchors": [
-            508,
-            509
+            507,
+            508
           ],
           "texture": 208
         },
@@ -5278,30 +5258,33 @@
             510
           ],
           "texture": 208
+        },
+        "691": {
+          "anchors": [
+            510,
+            511
+          ],
+          "texture": 208
         }
       },
       "rankings": {
         "floors": [
-          527,
-          529,
+          528,
           530,
           531,
-          532
+          532,
+          533
         ],
         "drawings": [
-          518
+          519
         ]
-      }
-    },
-    "755": {
-      "properties": {
-        "name": "L3",
-        "elevation": 16.0,
-        "camera_poses": {
-          "default": {
+      },
+      "user_camera_poses": {
+        "692": {
+          "pose": {
             "trans": [
-              6.430525,
-              -36.62594,
+              6.430666,
+              -36.625996,
               10.0
             ],
             "rot": {
@@ -5312,719 +5295,727 @@
                 0.82047325
               ]
             }
-          }
+          },
+          "name": "default",
+          "marker": null
         }
+      }
+    },
+    "757": {
+      "properties": {
+        "name": "L3",
+        "elevation": 16.0
       },
       "anchors": {
-        "756": {
+        "758": {
           "Translate2D": [
             32.72486,
             -40.236485
           ]
         },
-        "757": {
+        "759": {
           "Translate2D": [
             32.720493,
             -26.010473
           ]
         },
-        "758": {
+        "760": {
           "Translate2D": [
             21.153933,
             -25.999916
           ]
         },
-        "759": {
+        "761": {
           "Translate2D": [
             21.125057,
             -7.0492635
           ]
         },
-        "760": {
+        "762": {
           "Translate2D": [
             7.537827,
             -7.134876
           ]
         },
-        "761": {
+        "763": {
           "Translate2D": [
             7.055919,
             -7.448261
           ]
         },
-        "762": {
+        "764": {
           "Translate2D": [
             6.7428226,
             -8.026738
           ]
         },
-        "763": {
+        "765": {
           "Translate2D": [
             6.749802,
             -30.83663
           ]
         },
-        "764": {
+        "766": {
           "Translate2D": [
             2.1972823,
             -32.23918
           ]
         },
-        "765": {
+        "767": {
           "Translate2D": [
             2.1994517,
             -40.220444
           ]
         },
-        "766": {
+        "768": {
           "Translate2D": [
             12.95996,
             -7.446656
           ]
         },
-        "767": {
+        "769": {
           "Translate2D": [
             12.977345,
             -7.074255
           ]
         },
-        "768": {
+        "770": {
           "Translate2D": [
             15.031957,
             -7.074922
           ]
         },
-        "769": {
+        "771": {
           "Translate2D": [
             15.036742,
             -7.4680333
           ]
         },
-        "770": {
+        "772": {
           "Translate2D": [
             15.024745,
             -12.298773
           ]
         },
-        "771": {
+        "773": {
           "Translate2D": [
             15.033807,
             -13.878906
           ]
         },
-        "772": {
+        "774": {
           "Translate2D": [
             15.043237,
             -16.814636
           ]
         },
-        "773": {
+        "775": {
           "Translate2D": [
             15.040249,
             -20.371418
           ]
         },
-        "774": {
+        "776": {
           "Translate2D": [
             15.016295,
             -9.075073
           ]
         },
-        "775": {
+        "777": {
           "Translate2D": [
             15.000923,
             -11.936909
           ]
         },
-        "776": {
+        "778": {
           "Translate2D": [
             21.138136,
             -22.589157
           ]
         },
-        "777": {
+        "779": {
           "Translate2D": [
             21.122316,
             -20.316582
           ]
         },
-        "778": {
+        "780": {
           "Translate2D": [
             21.107603,
             -16.798841
           ]
         },
-        "779": {
+        "781": {
           "Translate2D": [
             21.15011,
             -11.93546
           ]
         },
-        "780": {
+        "782": {
           "Translate2D": [
             15.132891,
             -22.531425
           ]
         },
-        "781": {
+        "783": {
           "Translate2D": [
             15.143459,
             -25.967802
           ]
         },
-        "782": {
+        "784": {
           "Translate2D": [
             18.989494,
             -25.97639
           ]
         },
-        "783": {
+        "785": {
           "Translate2D": [
             18.950363,
             -22.555893
           ]
         },
-        "784": {
+        "786": {
           "Translate2D": [
             12.960393,
             -9.03715
           ]
         },
-        "785": {
+        "787": {
           "Translate2D": [
             12.90302,
             -11.860516
           ]
         },
-        "786": {
+        "788": {
           "Translate2D": [
             12.869271,
             -12.266279
           ]
         },
-        "787": {
+        "789": {
           "Translate2D": [
             12.89155,
             -13.712197
           ]
         },
-        "788": {
+        "790": {
           "Translate2D": [
             12.914205,
             -16.538214
           ]
         },
-        "789": {
+        "791": {
           "Translate2D": [
             12.892426,
             -16.932558
           ]
         },
-        "790": {
+        "792": {
           "Translate2D": [
             12.914687,
             -18.312706
           ]
         },
-        "791": {
+        "793": {
           "Translate2D": [
             12.950576,
             -21.274046
           ]
         },
-        "792": {
+        "794": {
           "Translate2D": [
             12.950734,
             -21.856113
           ]
         },
-        "793": {
+        "795": {
           "Translate2D": [
             12.936187,
             -23.244013
           ]
         },
-        "794": {
+        "796": {
           "Translate2D": [
             12.909584,
             -25.96841
           ]
         },
-        "795": {
+        "797": {
           "Translate2D": [
             12.909731,
             -26.510603
           ]
         },
-        "796": {
+        "798": {
           "Translate2D": [
             12.907636,
             -28.019735
           ]
         },
-        "797": {
+        "799": {
           "Translate2D": [
             12.904109,
             -30.822481
           ]
         },
-        "798": {
+        "800": {
           "Translate2D": [
             15.143967,
             -27.833014
           ]
         },
-        "799": {
+        "801": {
           "Translate2D": [
             15.1013975,
             -30.82595
           ]
         },
-        "800": {
+        "802": {
           "Translate2D": [
             21.15168,
             -30.82681
           ]
         },
-        "801": {
+        "803": {
           "Translate2D": [
             21.730186,
             -30.835285
           ]
         },
-        "802": {
+        "804": {
           "Translate2D": [
             23.017342,
             -30.840895
           ]
         },
-        "803": {
+        "805": {
           "Translate2D": [
             29.107601,
             -30.817354
           ]
         },
-        "804": {
+        "806": {
           "Translate2D": [
             29.06247,
             -26.019653
           ]
         },
-        "805": {
+        "807": {
           "Translate2D": [
             6.7020335,
             -33.75205
           ]
         },
-        "806": {
+        "808": {
           "Translate2D": [
             8.877707,
             -33.92905
           ]
         },
-        "807": {
+        "809": {
           "Translate2D": [
             2.176126,
             -34.1044
           ]
         },
-        "808": {
+        "810": {
           "Translate2D": [
             6.7014217,
             -31.502579
           ]
         },
-        "809": {
+        "811": {
           "Translate2D": [
             8.939658,
             -40.16838
           ]
         },
-        "810": {
+        "812": {
           "Translate2D": [
             13.694207,
             -40.152275
           ]
         },
-        "811": {
+        "813": {
           "Translate2D": [
             13.620502,
             -33.90699
           ]
         },
-        "812": {
+        "814": {
           "Translate2D": [
             14.005986,
             -33.906883
           ]
         },
-        "813": {
+        "815": {
           "Translate2D": [
             10.466027,
             -33.922993
           ]
         },
-        "814": {
+        "816": {
           "Translate2D": [
             9.231222,
             -33.92333
           ]
         },
-        "815": {
+        "817": {
           "Translate2D": [
             18.400537,
             -40.17266
           ]
         },
-        "816": {
+        "818": {
           "Translate2D": [
             23.193634,
             -40.193077
           ]
         },
-        "817": {
+        "819": {
           "Translate2D": [
             27.921696,
             -40.256836
           ]
         },
-        "818": {
+        "820": {
           "Translate2D": [
             27.939178,
             -33.888115
           ]
         },
-        "819": {
+        "821": {
           "Translate2D": [
             28.282896,
             -33.896877
           ]
         },
-        "820": {
+        "822": {
           "Translate2D": [
             29.569498,
             -33.914124
           ]
         },
-        "821": {
+        "823": {
           "Translate2D": [
             32.689117,
             -33.913277
           ]
         },
-        "822": {
+        "824": {
           "Translate2D": [
             24.846018,
             -33.90661
           ]
         },
-        "823": {
+        "825": {
           "Translate2D": [
             23.136406,
             -33.915874
           ]
         },
-        "824": {
+        "826": {
           "Translate2D": [
             23.568222,
             -33.915756
           ]
         },
-        "825": {
+        "827": {
           "Translate2D": [
             20.148998,
             -33.934338
           ]
         },
-        "826": {
+        "828": {
           "Translate2D": [
             18.724178,
             -33.926373
           ]
         },
-        "827": {
+        "829": {
           "Translate2D": [
             18.377121,
             -33.926468
           ]
         },
-        "828": {
+        "830": {
           "Translate2D": [
             15.31937,
             -33.913654
           ]
         },
-        "829": {
+        "831": {
           "Translate2D": [
             15.935715,
             -22.541788
           ]
         },
-        "830": {
+        "832": {
           "Translate2D": [
             17.79057,
             -22.547186
           ]
         },
-        "831": {
+        "833": {
           "Translate2D": [
             16.113722,
             -20.371126
           ]
         },
-        "832": {
+        "834": {
           "Translate2D": [
             17.406258,
             -20.305006
           ]
         },
-        "833": {
+        "835": {
           "Translate2D": [
             18.830355,
             -20.317316
           ]
         },
-        "834": {
+        "836": {
           "Translate2D": [
             20.45137,
             -20.32612
           ]
         },
-        "835": {
+        "837": {
           "Translate2D": [
             15.143542,
             -26.271421
           ]
         },
-        "836": {
+        "838": {
           "Translate2D": [
             6.767971,
             -11.834171
           ]
         },
-        "837": {
+        "839": {
           "Translate2D": [
             6.8056107,
             -16.523056
           ]
         },
-        "838": {
+        "840": {
           "Translate2D": [
             6.8231483,
             -21.218575
           ]
         },
-        "839": {
+        "841": {
           "Translate2D": [
             6.834685,
             -25.962654
           ]
         },
-        "840": {
+        "842": {
           "Translate2D": [
             32.722294,
             -30.79443
           ]
         },
-        "841": {
+        "843": {
           "Translate2D": [
             8.813433,
             -36.770237
           ]
         },
-        "842": {
+        "844": {
           "Translate2D": [
             6.6630898,
             -36.764194
           ]
         },
-        "843": {
+        "845": {
           "Translate2D": [
             6.6531544,
             -35.246155
           ]
         },
-        "846": {
+        "848": {
           "Translate2D": [
             16.916338,
             -21.460308
           ]
         },
-        "847": {
+        "849": {
           "Translate2D": [
             19.662998,
             -21.443579
           ]
         },
-        "848": {
+        "850": {
           "Translate2D": [
             14.030118,
             -21.477856
           ]
         },
-        "849": {
+        "851": {
           "Translate2D": [
             13.983502,
             -17.572191
           ]
         },
-        "850": {
+        "852": {
           "Translate2D": [
             13.999914,
             -13.003803
           ]
         },
-        "851": {
+        "853": {
           "Translate2D": [
             14.059543,
             -8.235423
           ]
         },
-        "853": {
+        "855": {
           "Translate2D": [
             13.920672,
             -27.156439
           ]
         },
-        "854": {
+        "856": {
           "Translate2D": [
             13.90912,
             -32.59503
           ]
         },
-        "855": {
+        "857": {
           "Translate2D": [
             9.968081,
             -32.603844
           ]
         },
-        "856": {
+        "858": {
           "Translate2D": [
             7.8249254,
             -32.6086
           ]
         },
-        "857": {
+        "859": {
           "Translate2D": [
             4.4703727,
             -32.682354
           ]
         },
-        "858": {
+        "860": {
           "Translate2D": [
             4.437919,
             -36.21431
           ]
         },
-        "860": {
+        "862": {
           "Translate2D": [
             6.6654997,
             -33.95137
           ]
         },
-        "861": {
+        "863": {
           "Translate2D": [
             19.43948,
             -32.58272
           ]
         },
-        "862": {
+        "864": {
           "Translate2D": [
             22.501514,
             -32.57593
           ]
         },
-        "863": {
+        "865": {
           "Translate2D": [
             28.951532,
             -32.56154
           ]
         },
-        "865": {
+        "867": {
           "Translate2D": [
             13.66468,
             -36.420803
           ]
         },
-        "866": {
+        "868": {
           "Translate2D": [
             11.418441,
             -36.421413
           ]
         },
-        "867": {
+        "869": {
           "Translate2D": [
             11.41811,
             -35.203873
           ]
         },
-        "868": {
+        "870": {
           "Translate2D": [
             18.38799,
             -36.41952
           ]
         },
-        "869": {
+        "871": {
           "Translate2D": [
             16.267721,
             -36.420097
           ]
         },
-        "870": {
+        "872": {
           "Translate2D": [
             16.267397,
             -35.22355
           ]
         },
-        "871": {
+        "873": {
           "Translate2D": [
             23.174171,
             -35.998375
           ]
         },
-        "872": {
+        "874": {
           "Translate2D": [
             21.074903,
             -36.01994
           ]
         },
-        "873": {
+        "875": {
           "Translate2D": [
             21.095602,
             -34.928307
           ]
         },
-        "874": {
+        "876": {
           "Translate2D": [
             27.981468,
             -36.018063
           ]
         },
-        "875": {
+        "877": {
           "Translate2D": [
             25.75628,
             -36.01867
           ]
         },
-        "876": {
+        "878": {
           "Translate2D": [
             25.756023,
             -35.074005
           ]
         },
-        "877": {
+        "879": {
           "Translate2D": [
             32.683807,
             -36.100765
           ]
         },
-        "878": {
+        "880": {
           "Translate2D": [
             30.521605,
             -36.101353
           ]
         },
-        "879": {
+        "881": {
           "Translate2D": [
             30.500307,
             -34.988735
@@ -6032,10 +6023,10 @@
         }
       },
       "doors": {
-        "880": {
+        "882": {
           "anchors": [
-            808,
-            805
+            810,
+            807
           ],
           "name": "L3_door2",
           "kind": {
@@ -6049,10 +6040,10 @@
             }
           }
         },
-        "881": {
+        "883": {
           "anchors": [
-            826,
-            825
+            828,
+            827
           ],
           "name": "L3_door5",
           "kind": {
@@ -6066,10 +6057,10 @@
             }
           }
         },
-        "882": {
+        "884": {
           "anchors": [
-            789,
-            790
+            791,
+            792
           ],
           "name": "L3_door9",
           "kind": {
@@ -6083,10 +6074,10 @@
             }
           }
         },
-        "883": {
+        "885": {
           "anchors": [
-            766,
-            784
+            768,
+            786
           ],
           "name": "L3_door11",
           "kind": {
@@ -6100,10 +6091,10 @@
             }
           }
         },
-        "884": {
+        "886": {
           "anchors": [
-            835,
-            798
+            837,
+            800
           ],
           "name": "L3_door12",
           "kind": {
@@ -6117,10 +6108,10 @@
             }
           }
         },
-        "885": {
+        "887": {
           "anchors": [
-            801,
-            802
+            803,
+            804
           ],
           "name": "L3_door14",
           "kind": {
@@ -6134,10 +6125,10 @@
             }
           }
         },
-        "886": {
+        "888": {
           "anchors": [
-            819,
-            820
+            821,
+            822
           ],
           "name": "L3_door15",
           "kind": {
@@ -6153,7 +6144,7 @@
         }
       },
       "drawings": {
-        "887": {
+        "889": {
           "properties": {
             "name": "hotel_L3",
             "source": {
@@ -6174,31 +6165,31 @@
             "pixels_per_meter": 17.956682
           },
           "anchors": {
-            "844": {
+            "846": {
               "Translate2D": [
                 393.469,
                 -355.3
               ]
             },
-            "845": {
+            "847": {
               "Translate2D": [
                 393.469,
                 -416.614
               ]
             },
-            "888": {
+            "890": {
               "Translate2D": [
                 267.782,
                 -249.95
               ]
             },
-            "890": {
+            "892": {
               "Translate2D": [
                 374.242,
                 -313.697
               ]
             },
-            "892": {
+            "894": {
               "Translate2D": [
                 268.411,
                 -414.958
@@ -6206,24 +6197,24 @@
             }
           },
           "fiducials": {
-            "889": {
-              "anchor": 888,
-              "affiliation": 135
-            },
             "891": {
               "anchor": 890,
-              "affiliation": 138
+              "affiliation": 135
             },
             "893": {
               "anchor": 892,
+              "affiliation": 138
+            },
+            "895": {
+              "anchor": 894,
               "affiliation": 132
             }
           },
           "measurements": {
-            "894": {
+            "896": {
               "anchors": [
-                844,
-                845
+                846,
+                847
               ],
               "distance": 3.4
             }
@@ -6231,72 +6222,72 @@
         }
       },
       "floors": {
-        "895": {
-          "anchors": [
-            767,
-            768,
-            773,
-            777,
-            776,
-            780,
-            799,
-            803,
-            840,
-            821,
-            860,
-            763,
-            797
-          ],
-          "texture": 526
-        },
-        "896": {
-          "anchors": [
-            768,
-            772,
-            778,
-            759
-          ],
-          "texture": 528
-        },
         "897": {
           "anchors": [
-            767,
-            760,
-            761,
-            762,
-            763,
-            797
+            769,
+            770,
+            775,
+            779,
+            778,
+            782,
+            801,
+            805,
+            842,
+            823,
+            862,
+            765,
+            799
           ],
-          "texture": 528
+          "texture": 527
         },
         "898": {
           "anchors": [
-            807,
-            765,
-            756,
-            821,
-            860,
-            763,
-            764
+            770,
+            774,
+            780,
+            761
           ],
-          "texture": 528
+          "texture": 529
         },
         "899": {
           "anchors": [
-            781,
-            799,
-            803,
-            804,
-            758,
-            776,
-            783,
-            782
+            769,
+            762,
+            763,
+            764,
+            765,
+            799
           ],
-          "texture": 528
+          "texture": 529
+        },
+        "900": {
+          "anchors": [
+            809,
+            767,
+            758,
+            823,
+            862,
+            765,
+            766
+          ],
+          "texture": 529
+        },
+        "901": {
+          "anchors": [
+            783,
+            801,
+            805,
+            806,
+            760,
+            778,
+            785,
+            784
+          ],
+          "texture": 529
         }
       },
       "models": {
-        "900": {
+        "902": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6315,7 +6306,7 @@
           },
           "is_static": true
         },
-        "901": {
+        "903": {
           "name": "OpenRobotics/Shower",
           "source": {
             "Search": "OpenRobotics/Shower"
@@ -6334,7 +6325,7 @@
           },
           "is_static": true
         },
-        "902": {
+        "904": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -6353,7 +6344,7 @@
           },
           "is_static": true
         },
-        "903": {
+        "905": {
           "name": "OpenRobotics/BathroomSink",
           "source": {
             "Search": "OpenRobotics/BathroomSink"
@@ -6372,7 +6363,7 @@
           },
           "is_static": true
         },
-        "904": {
+        "906": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6391,7 +6382,7 @@
           },
           "is_static": true
         },
-        "905": {
+        "907": {
           "name": "OpenRobotics/BedsideTable",
           "source": {
             "Search": "OpenRobotics/BedsideTable"
@@ -6410,7 +6401,7 @@
           },
           "is_static": true
         },
-        "906": {
+        "908": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6429,7 +6420,7 @@
           },
           "is_static": true
         },
-        "907": {
+        "909": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -6448,7 +6439,7 @@
           },
           "is_static": true
         },
-        "908": {
+        "910": {
           "name": "OpenRobotics/WoodenChair",
           "source": {
             "Search": "OpenRobotics/WoodenChair"
@@ -6467,7 +6458,7 @@
           },
           "is_static": true
         },
-        "909": {
+        "911": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -6486,7 +6477,7 @@
           },
           "is_static": true
         },
-        "910": {
+        "912": {
           "name": "OpenRobotics/TrashBin",
           "source": {
             "Search": "OpenRobotics/TrashBin"
@@ -6505,7 +6496,7 @@
           },
           "is_static": true
         },
-        "911": {
+        "913": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6524,7 +6515,7 @@
           },
           "is_static": true
         },
-        "912": {
+        "914": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6543,7 +6534,7 @@
           },
           "is_static": true
         },
-        "913": {
+        "915": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6562,7 +6553,7 @@
           },
           "is_static": true
         },
-        "914": {
+        "916": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6581,7 +6572,7 @@
           },
           "is_static": true
         },
-        "915": {
+        "917": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6600,7 +6591,7 @@
           },
           "is_static": true
         },
-        "916": {
+        "918": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6619,7 +6610,7 @@
           },
           "is_static": true
         },
-        "917": {
+        "919": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6638,7 +6629,7 @@
           },
           "is_static": true
         },
-        "918": {
+        "920": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6657,7 +6648,7 @@
           },
           "is_static": true
         },
-        "919": {
+        "921": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6676,7 +6667,7 @@
           },
           "is_static": true
         },
-        "920": {
+        "922": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -6695,7 +6686,7 @@
           },
           "is_static": true
         },
-        "921": {
+        "923": {
           "name": "OpenRobotics/WoodenChair",
           "source": {
             "Search": "OpenRobotics/WoodenChair"
@@ -6714,7 +6705,7 @@
           },
           "is_static": true
         },
-        "922": {
+        "924": {
           "name": "OpenRobotics/Fridge",
           "source": {
             "Search": "OpenRobotics/Fridge"
@@ -6733,7 +6724,7 @@
           },
           "is_static": true
         },
-        "923": {
+        "925": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6752,7 +6743,7 @@
           },
           "is_static": true
         },
-        "924": {
+        "926": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6771,7 +6762,7 @@
           },
           "is_static": true
         },
-        "925": {
+        "927": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6790,7 +6781,7 @@
           },
           "is_static": true
         },
-        "926": {
+        "928": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6809,7 +6800,7 @@
           },
           "is_static": true
         },
-        "927": {
+        "929": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6828,7 +6819,7 @@
           },
           "is_static": true
         },
-        "928": {
+        "930": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6847,7 +6838,7 @@
           },
           "is_static": true
         },
-        "929": {
+        "931": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6866,7 +6857,7 @@
           },
           "is_static": true
         },
-        "930": {
+        "932": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6885,7 +6876,7 @@
           },
           "is_static": true
         },
-        "931": {
+        "933": {
           "name": "OpenRobotics/Desk",
           "source": {
             "Search": "OpenRobotics/Desk"
@@ -6904,7 +6895,7 @@
           },
           "is_static": true
         },
-        "932": {
+        "934": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -6923,7 +6914,7 @@
           },
           "is_static": true
         },
-        "933": {
+        "935": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -6942,7 +6933,7 @@
           },
           "is_static": true
         },
-        "934": {
+        "936": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -6961,7 +6952,7 @@
           },
           "is_static": true
         },
-        "935": {
+        "937": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -6980,7 +6971,7 @@
           },
           "is_static": true
         },
-        "936": {
+        "938": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -6999,7 +6990,7 @@
           },
           "is_static": true
         },
-        "937": {
+        "939": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -7018,7 +7009,7 @@
           },
           "is_static": true
         },
-        "938": {
+        "940": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -7037,7 +7028,7 @@
           },
           "is_static": true
         },
-        "939": {
+        "941": {
           "name": "OpenRobotics/Chair",
           "source": {
             "Search": "OpenRobotics/Chair"
@@ -7056,7 +7047,7 @@
           },
           "is_static": true
         },
-        "940": {
+        "942": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -7075,7 +7066,7 @@
           },
           "is_static": true
         },
-        "941": {
+        "943": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -7094,7 +7085,7 @@
           },
           "is_static": true
         },
-        "942": {
+        "944": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -7113,7 +7104,7 @@
           },
           "is_static": true
         },
-        "943": {
+        "945": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -7132,7 +7123,7 @@
           },
           "is_static": true
         },
-        "944": {
+        "946": {
           "name": "OpenRobotics/NormalBed",
           "source": {
             "Search": "OpenRobotics/NormalBed"
@@ -7151,7 +7142,7 @@
           },
           "is_static": true
         },
-        "945": {
+        "947": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -7170,7 +7161,7 @@
           },
           "is_static": true
         },
-        "946": {
+        "948": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -7189,7 +7180,7 @@
           },
           "is_static": true
         },
-        "947": {
+        "949": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -7208,7 +7199,7 @@
           },
           "is_static": true
         },
-        "948": {
+        "950": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -7227,7 +7218,7 @@
           },
           "is_static": true
         },
-        "949": {
+        "951": {
           "name": "OpenRobotics/Toilet",
           "source": {
             "Search": "OpenRobotics/Toilet"
@@ -7246,7 +7237,7 @@
           },
           "is_static": true
         },
-        "950": {
+        "952": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -7265,7 +7256,7 @@
           },
           "is_static": true
         },
-        "951": {
+        "953": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -7284,7 +7275,7 @@
           },
           "is_static": true
         },
-        "952": {
+        "954": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -7303,7 +7294,7 @@
           },
           "is_static": true
         },
-        "953": {
+        "955": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -7322,7 +7313,7 @@
           },
           "is_static": true
         },
-        "954": {
+        "956": {
           "name": "OpenRobotics/CoffeeTable",
           "source": {
             "Search": "OpenRobotics/CoffeeTable"
@@ -7343,100 +7334,86 @@
         }
       },
       "walls": {
-        "955": {
-          "anchors": [
-            760,
-            761
-          ],
-          "texture": 208
-        },
-        "956": {
-          "anchors": [
-            761,
-            762
-          ],
-          "texture": 208
-        },
         "957": {
           "anchors": [
-            766,
-            767
+            762,
+            763
           ],
           "texture": 208
         },
         "958": {
           "anchors": [
-            759,
-            768
+            763,
+            764
           ],
           "texture": 208
         },
         "959": {
           "anchors": [
             768,
-            767
+            769
           ],
           "texture": 208
         },
         "960": {
           "anchors": [
-            767,
-            760
+            761,
+            770
           ],
           "texture": 208
         },
         "961": {
           "anchors": [
-            768,
+            770,
             769
           ],
           "texture": 208
         },
         "962": {
           "anchors": [
-            771,
-            772
+            769,
+            762
           ],
           "texture": 208
         },
         "963": {
           "anchors": [
-            772,
-            773
+            770,
+            771
           ],
           "texture": 208
         },
         "964": {
+          "anchors": [
+            773,
+            774
+          ],
+          "texture": 208
+        },
+        "965": {
           "anchors": [
             774,
             775
           ],
           "texture": 208
         },
-        "965": {
-          "anchors": [
-            775,
-            770
-          ],
-          "texture": 208
-        },
         "966": {
           "anchors": [
-            758,
-            776
+            776,
+            777
           ],
           "texture": 208
         },
         "967": {
           "anchors": [
-            776,
-            777
+            777,
+            772
           ],
-          "texture": 218
+          "texture": 208
         },
         "968": {
           "anchors": [
-            777,
+            760,
             778
           ],
           "texture": 208
@@ -7446,40 +7423,40 @@
             778,
             779
           ],
-          "texture": 208
+          "texture": 218
         },
         "970": {
           "anchors": [
             779,
-            759
+            780
           ],
           "texture": 208
         },
         "971": {
-          "anchors": [
-            772,
-            778
-          ],
-          "texture": 208
-        },
-        "972": {
-          "anchors": [
-            775,
-            779
-          ],
-          "texture": 208
-        },
-        "973": {
           "anchors": [
             780,
             781
           ],
           "texture": 208
         },
-        "974": {
+        "972": {
           "anchors": [
             781,
-            782
+            761
+          ],
+          "texture": 208
+        },
+        "973": {
+          "anchors": [
+            774,
+            780
+          ],
+          "texture": 208
+        },
+        "974": {
+          "anchors": [
+            777,
+            781
           ],
           "texture": 208
         },
@@ -7493,9 +7470,9 @@
         "976": {
           "anchors": [
             783,
-            776
+            784
           ],
-          "texture": 218
+          "texture": 208
         },
         "977": {
           "anchors": [
@@ -7507,63 +7484,63 @@
         "978": {
           "anchors": [
             785,
-            786
+            778
+          ],
+          "texture": 218
+        },
+        "979": {
+          "anchors": [
+            786,
+            787
           ],
           "texture": 208
         },
-        "979": {
+        "980": {
           "anchors": [
             787,
             788
           ],
           "texture": 208
         },
-        "980": {
+        "981": {
           "anchors": [
-            788,
-            789
+            789,
+            790
           ],
           "texture": 208
         },
-        "981": {
+        "982": {
           "anchors": [
             790,
             791
           ],
           "texture": 208
         },
-        "982": {
+        "983": {
           "anchors": [
-            791,
-            792
+            792,
+            793
           ],
           "texture": 208
         },
-        "983": {
+        "984": {
           "anchors": [
             793,
             794
           ],
           "texture": 208
         },
-        "984": {
-          "anchors": [
-            794,
-            795
-          ],
-          "texture": 208
-        },
         "985": {
           "anchors": [
-            796,
-            797
+            795,
+            796
           ],
           "texture": 208
         },
         "986": {
           "anchors": [
-            797,
-            763
+            796,
+            797
           ],
           "texture": 208
         },
@@ -7577,76 +7554,76 @@
         "988": {
           "anchors": [
             799,
-            800
+            765
           ],
           "texture": 208
         },
         "989": {
           "anchors": [
             800,
-            758
+            801
           ],
           "texture": 208
         },
         "990": {
           "anchors": [
-            758,
-            782
+            801,
+            802
           ],
           "texture": 208
         },
         "991": {
           "anchors": [
-            800,
-            801
+            802,
+            760
           ],
           "texture": 208
         },
         "992": {
+          "anchors": [
+            760,
+            784
+          ],
+          "texture": 208
+        },
+        "993": {
           "anchors": [
             802,
             803
           ],
           "texture": 208
         },
-        "993": {
-          "anchors": [
-            803,
-            804
-          ],
-          "texture": 208
-        },
         "994": {
           "anchors": [
-            758,
-            804
+            804,
+            805
           ],
           "texture": 208
         },
         "995": {
           "anchors": [
-            804,
-            757
+            805,
+            806
           ],
           "texture": 208
         },
         "996": {
           "anchors": [
-            764,
-            807
+            760,
+            806
           ],
           "texture": 208
         },
         "997": {
           "anchors": [
-            807,
-            765
+            806,
+            759
           ],
           "texture": 208
         },
         "998": {
           "anchors": [
-            765,
+            766,
             809
           ],
           "texture": 208
@@ -7654,21 +7631,21 @@
         "999": {
           "anchors": [
             809,
-            806
+            767
           ],
           "texture": 208
         },
         "1000": {
           "anchors": [
-            809,
-            810
+            767,
+            811
           ],
           "texture": 208
         },
         "1001": {
           "anchors": [
-            810,
-            811
+            811,
+            808
           ],
           "texture": 208
         },
@@ -7681,35 +7658,35 @@
         },
         "1003": {
           "anchors": [
-            811,
+            812,
             813
           ],
           "texture": 208
         },
         "1004": {
           "anchors": [
-            806,
+            813,
             814
           ],
           "texture": 208
         },
         "1005": {
           "anchors": [
-            810,
+            813,
             815
           ],
           "texture": 208
         },
         "1006": {
           "anchors": [
-            815,
+            808,
             816
           ],
           "texture": 208
         },
         "1007": {
           "anchors": [
-            816,
+            812,
             817
           ],
           "texture": 208
@@ -7717,104 +7694,104 @@
         "1008": {
           "anchors": [
             817,
-            756
+            818
           ],
           "texture": 208
         },
         "1009": {
           "anchors": [
             818,
-            817
+            819
           ],
           "texture": 208
         },
         "1010": {
           "anchors": [
-            818,
-            819
+            819,
+            758
           ],
           "texture": 208
         },
         "1011": {
           "anchors": [
             820,
-            821
+            819
           ],
           "texture": 208
         },
         "1012": {
           "anchors": [
-            821,
-            756
+            820,
+            821
           ],
           "texture": 208
         },
         "1013": {
           "anchors": [
             822,
-            818
+            823
           ],
           "texture": 208
         },
         "1014": {
           "anchors": [
             823,
-            824
+            758
           ],
           "texture": 208
         },
         "1015": {
           "anchors": [
-            823,
-            816
+            824,
+            820
           ],
           "texture": 208
         },
         "1016": {
           "anchors": [
-            823,
-            825
+            825,
+            826
           ],
           "texture": 208
         },
         "1017": {
           "anchors": [
-            826,
-            827
+            825,
+            818
           ],
           "texture": 208
         },
         "1018": {
           "anchors": [
-            827,
-            815
+            825,
+            827
           ],
           "texture": 208
         },
         "1019": {
           "anchors": [
-            827,
-            828
+            828,
+            829
           ],
           "texture": 208
         },
         "1020": {
           "anchors": [
-            780,
-            829
+            829,
+            817
           ],
-          "texture": 218
+          "texture": 208
         },
         "1021": {
           "anchors": [
-            830,
-            783
+            829,
+            830
           ],
-          "texture": 218
+          "texture": 208
         },
         "1022": {
           "anchors": [
-            773,
+            782,
             831
           ],
           "texture": 218
@@ -7822,41 +7799,41 @@
         "1023": {
           "anchors": [
             832,
-            833
+            785
           ],
           "texture": 218
         },
         "1024": {
           "anchors": [
-            834,
-            777
+            775,
+            833
           ],
           "texture": 218
         },
         "1025": {
           "anchors": [
-            835,
-            781
+            834,
+            835
           ],
-          "texture": 208
+          "texture": 218
         },
         "1026": {
           "anchors": [
-            762,
-            836
+            836,
+            779
           ],
-          "texture": 208
+          "texture": 218
         },
         "1027": {
           "anchors": [
-            836,
-            837
+            837,
+            783
           ],
           "texture": 208
         },
         "1028": {
           "anchors": [
-            837,
+            764,
             838
           ],
           "texture": 208
@@ -7870,56 +7847,56 @@
         },
         "1030": {
           "anchors": [
-            794,
-            839
+            839,
+            840
           ],
           "texture": 208
         },
         "1031": {
           "anchors": [
-            839,
-            763
+            840,
+            841
           ],
           "texture": 208
         },
         "1032": {
           "anchors": [
-            838,
-            791
+            796,
+            841
           ],
           "texture": 208
         },
         "1033": {
           "anchors": [
-            837,
-            788
+            841,
+            765
           ],
           "texture": 208
         },
         "1034": {
           "anchors": [
-            836,
-            785
+            840,
+            793
           ],
           "texture": 208
         },
         "1035": {
           "anchors": [
-            757,
-            840
+            839,
+            790
           ],
           "texture": 208
         },
         "1036": {
           "anchors": [
-            840,
-            821
+            838,
+            787
           ],
           "texture": 208
         },
         "1037": {
           "anchors": [
-            841,
+            759,
             842
           ],
           "texture": 208
@@ -7927,127 +7904,162 @@
         "1038": {
           "anchors": [
             842,
-            843
+            823
           ],
           "texture": 208
         },
         "1039": {
           "anchors": [
-            805,
-            860
+            843,
+            844
           ],
           "texture": 208
         },
         "1040": {
           "anchors": [
-            860,
-            806
+            844,
+            845
           ],
           "texture": 208
         },
         "1041": {
           "anchors": [
-            764,
-            763
+            807,
+            862
           ],
           "texture": 208
         },
         "1042": {
           "anchors": [
-            763,
+            862,
             808
           ],
           "texture": 208
         },
         "1043": {
           "anchors": [
-            831,
-            832
+            766,
+            765
           ],
-          "texture": 265
+          "texture": 208
         },
         "1044": {
           "anchors": [
-            865,
-            866
+            765,
+            810
           ],
           "texture": 208
         },
         "1045": {
           "anchors": [
-            866,
-            867
+            833,
+            834
+          ],
+          "texture": 265
+        },
+        "1046": {
+          "anchors": [
+            867,
+            868
           ],
           "texture": 208
         },
-        "1046": {
+        "1047": {
           "anchors": [
             868,
             869
           ],
           "texture": 208
         },
-        "1047": {
+        "1048": {
           "anchors": [
-            869,
-            870
+            870,
+            871
           ],
           "texture": 208
         },
-        "1048": {
+        "1049": {
           "anchors": [
             871,
             872
           ],
           "texture": 208
         },
-        "1049": {
+        "1050": {
           "anchors": [
-            872,
-            873
+            873,
+            874
           ],
           "texture": 208
         },
-        "1050": {
+        "1051": {
           "anchors": [
             874,
             875
           ],
           "texture": 208
         },
-        "1051": {
+        "1052": {
           "anchors": [
-            875,
-            876
+            876,
+            877
           ],
           "texture": 208
         },
-        "1052": {
+        "1053": {
           "anchors": [
             877,
             878
           ],
           "texture": 208
         },
-        "1053": {
+        "1054": {
           "anchors": [
-            878,
-            879
+            879,
+            880
+          ],
+          "texture": 208
+        },
+        "1055": {
+          "anchors": [
+            880,
+            881
           ],
           "texture": 208
         }
       },
       "rankings": {
         "floors": [
-          895,
-          896,
           897,
           898,
-          899
+          899,
+          900,
+          901
         ],
         "drawings": [
-          887
+          889
         ]
+      },
+      "user_camera_poses": {
+        "1056": {
+          "pose": {
+            "trans": [
+              6.430525,
+              -36.62594,
+              10.0
+            ],
+            "rot": {
+              "quat": [
+                0.4247082,
+                -0.17591989,
+                -0.33985114,
+                0.82047325
+              ]
+            }
+          },
+          "name": "default",
+          "marker": null
+        }
       }
     }
   },
@@ -8157,7 +8169,7 @@
         "height": 2.5
       }
     },
-    "526": {
+    "527": {
       "name": "brown_marble",
       "texture": {
         "source": {
@@ -8170,7 +8182,7 @@
         "height": 1.0
       }
     },
-    "528": {
+    "529": {
       "name": "concrete",
       "texture": {
         "source": {
@@ -8196,51 +8208,51 @@
     }
   },
   "fiducials": {
-    "1131": {
-      "anchor": 1130,
+    "1134": {
+      "anchor": 1133,
+      "affiliation": 135
+    },
+    "1136": {
+      "anchor": 1135,
       "affiliation": 138
     },
-    "1133": {
-      "anchor": 1132,
+    "1138": {
+      "anchor": 1137,
       "affiliation": 132
-    },
-    "1135": {
-      "anchor": 1134,
-      "affiliation": 135
     }
   },
   "lifts": {
-    "1118": {
+    "1121": {
       "cabin_doors": {
-        "1139": {
+        "1142": {
           "kind": {
             "DoubleSliding": {
               "left_right_ratio": 1.0
             }
           },
           "reference_anchors": [
-            1122,
-            1123
+            1125,
+            1126
           ],
           "visits": [
             0,
-            386,
-            755
+            387,
+            757
           ]
         }
       },
       "properties": {
         "name": "Lift1",
         "reference_anchors": [
-          1119,
-          1120
+          1122,
+          1123
         ],
         "cabin": {
           "Rect": {
             "width": 2.7,
             "depth": 2.7,
             "right_door": {
-              "door": 1139,
+              "door": 1142,
               "width": 1.7,
               "shifted": 0.0,
               "custom_gap": 0.14999998
@@ -8257,7 +8269,7 @@
             0.0
           ]
         },
-        "1122": {
+        "1125": {
           "CategorizedTranslate2D": {
             "General": [
               0.85,
@@ -8269,7 +8281,7 @@
             ]
           }
         },
-        "1123": {
+        "1126": {
           "CategorizedTranslate2D": {
             "General": [
               -0.85,
@@ -8283,37 +8295,37 @@
         }
       }
     },
-    "1124": {
+    "1127": {
       "cabin_doors": {
-        "1140": {
+        "1143": {
           "kind": {
             "DoubleSliding": {
               "left_right_ratio": 1.0
             }
           },
           "reference_anchors": [
-            1128,
-            1129
+            1131,
+            1132
           ],
           "visits": [
             0,
-            386,
-            755
+            387,
+            757
           ]
         }
       },
       "properties": {
         "name": "Lift2",
         "reference_anchors": [
-          1125,
-          1126
+          1128,
+          1129
         ],
         "cabin": {
           "Rect": {
             "width": 2.7,
             "depth": 2.7,
             "left_door": {
-              "door": 1140,
+              "door": 1143,
               "width": 1.7,
               "shifted": -0.0,
               "custom_gap": 0.14999998
@@ -8330,7 +8342,7 @@
             0.0
           ]
         },
-        "1128": {
+        "1131": {
           "CategorizedTranslate2D": {
             "General": [
               -0.85,
@@ -8342,7 +8354,7 @@
             ]
           }
         },
-        "1129": {
+        "1132": {
           "CategorizedTranslate2D": {
             "General": [
               0.85,
@@ -8360,7 +8372,7 @@
   "navigation": {
     "guided": {
       "graphs": {
-        "270": {
+        "271": {
           "name": "0",
           "color": [
             1.0,
@@ -8369,7 +8381,7 @@
             1.0
           ]
         },
-        "282": {
+        "283": {
           "name": "1",
           "color": [
             0.60000014,
@@ -8378,7 +8390,7 @@
             1.0
           ]
         },
-        "336": {
+        "337": {
           "name": "2",
           "color": [
             0.6,
@@ -8389,679 +8401,668 @@
         }
       },
       "ranking": [
-        270,
-        282,
-        336
+        271,
+        283,
+        337
       ],
       "lanes": {
-        "271": {
+        "272": {
           "anchors": [
             57,
             58
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "273": {
+        "274": {
           "anchors": [
             57,
             59
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "275": {
+        "276": {
           "anchors": [
             59,
             60
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "277": {
+        "278": {
           "anchors": [
             58,
             62
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "279": {
+        "280": {
           "anchors": [
             64,
             65
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "281": {
+        "282": {
           "anchors": [
             64,
             56
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "283": {
+        "284": {
           "anchors": [
             72,
             73
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "285": {
+        "286": {
           "anchors": [
             77,
             78
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "287": {
+        "288": {
           "anchors": [
             78,
             85
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "289": {
+        "290": {
           "anchors": [
             85,
             86
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "291": {
+        "292": {
           "anchors": [
             86,
             87
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "293": {
+        "294": {
           "anchors": [
             65,
             94
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "295": {
+        "296": {
           "anchors": [
             96,
             73
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "297": {
+        "298": {
           "anchors": [
             96,
             74
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "299": {
+        "300": {
           "anchors": [
             94,
             107
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "301": {
+        "302": {
           "anchors": [
             65,
             108
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "303": {
+        "304": {
           "anchors": [
             109,
             59
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "305": {
+        "306": {
           "anchors": [
             109,
             89
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "307": {
+        "308": {
           "anchors": [
             83,
             72
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "309": {
+        "310": {
           "anchors": [
             72,
             81
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "311": {
+        "312": {
           "anchors": [
             73,
             111
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "313": {
+        "314": {
           "anchors": [
             111,
             112
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "315": {
+        "316": {
           "anchors": [
             85,
             114
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "317": {
+        "318": {
           "anchors": [
             116,
             77
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "319": {
+        "320": {
           "anchors": [
             116,
             117
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "321": {
+        "322": {
           "anchors": [
             116,
             76
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "323": {
+        "324": {
           "anchors": [
             76,
             111
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "325": {
+        "326": {
           "anchors": [
             56,
             119
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "327": {
+        "328": {
           "anchors": [
             119,
             120
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "329": {
+        "330": {
           "anchors": [
             119,
             57
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "331": {
+        "332": {
           "anchors": [
             86,
             122
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "333": {
+        "334": {
           "anchors": [
             77,
             124
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "335": {
+        "336": {
           "anchors": [
             124,
             79
           ],
           "graphs": {
             "Only": [
-              282
+              283
             ]
           }
         },
-        "337": {
+        "338": {
           "anchors": [
             92,
             91
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "339": {
+        "340": {
           "anchors": [
             91,
             57
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "341": {
+        "342": {
           "anchors": [
             57,
             59
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "343": {
+        "344": {
           "anchors": [
             59,
             109
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "345": {
+        "346": {
           "anchors": [
             57,
             119
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "347": {
+        "348": {
           "anchors": [
             119,
             120
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "349": {
+        "350": {
           "anchors": [
             119,
             56
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "351": {
+        "352": {
           "anchors": [
             56,
             64
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "353": {
+        "354": {
           "anchors": [
             64,
             78
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "355": {
+        "356": {
           "anchors": [
             78,
             85
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "357": {
+        "358": {
           "anchors": [
             85,
             114
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "359": {
+        "360": {
           "anchors": [
             85,
             71
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "361": {
+        "362": {
           "anchors": [
             71,
             66
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "363": {
+        "364": {
           "anchors": [
             66,
             67
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "365": {
+        "366": {
           "anchors": [
             66,
             69
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "367": {
+        "368": {
           "anchors": [
             64,
             65
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "369": {
+        "370": {
           "anchors": [
             65,
             108
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "371": {
+        "372": {
           "anchors": [
             65,
             94
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "373": {
+        "374": {
           "anchors": [
             94,
             107
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "375": {
+        "376": {
           "anchors": [
             64,
             78
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "377": {
+        "378": {
           "anchors": [
             78,
             85
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "379": {
+        "380": {
           "anchors": [
             85,
             114
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "381": {
+        "382": {
           "anchors": [
             85,
             71
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "383": {
+        "384": {
           "anchors": [
             71,
             66
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "385": {
+        "386": {
           "anchors": [
             66,
             67
           ],
           "graphs": {
             "Only": [
-              270
-            ]
-          }
-        },
-        "692": {
-          "anchors": [
-            477,
-            478
-          ],
-          "graphs": {
-            "Only": [
-              270
+              271
             ]
           }
         },
         "694": {
           "anchors": [
-            477,
+            478,
             479
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
         "696": {
           "anchors": [
-            479,
+            478,
             480
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
@@ -9072,7 +9073,7 @@
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
@@ -9083,29 +9084,29 @@
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
         "702": {
           "anchors": [
-            479,
-            484
+            482,
+            483
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
         "704": {
           "anchors": [
-            484,
+            480,
             485
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
@@ -9116,7 +9117,7 @@
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
@@ -9127,7 +9128,7 @@
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
@@ -9138,7 +9139,7 @@
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
@@ -9149,18 +9150,18 @@
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
         "714": {
           "anchors": [
-            492,
-            493
+            489,
+            490
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
@@ -9171,139 +9172,139 @@
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
         "718": {
           "anchors": [
-            485,
-            492
+            494,
+            495
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
         "720": {
           "anchors": [
-            107,
-            478
+            486,
+            493
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
         "722": {
           "anchors": [
-            477,
-            108
+            107,
+            479
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
         "724": {
+          "anchors": [
+            478,
+            108
+          ],
+          "graphs": {
+            "Only": [
+              271
+            ]
+          }
+        },
+        "726": {
+          "anchors": [
+            483,
+            482
+          ],
+          "graphs": {
+            "Only": [
+              337
+            ]
+          }
+        },
+        "728": {
           "anchors": [
             482,
             481
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "726": {
+        "730": {
           "anchors": [
             481,
             480
           ],
           "graphs": {
             "Only": [
-              336
-            ]
-          }
-        },
-        "728": {
-          "anchors": [
-            480,
-            479
-          ],
-          "graphs": {
-            "Only": [
-              336
-            ]
-          }
-        },
-        "730": {
-          "anchors": [
-            479,
-            477
-          ],
-          "graphs": {
-            "Only": [
-              336
+              337
             ]
           }
         },
         "732": {
           "anchors": [
-            477,
+            480,
             478
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
         "734": {
           "anchors": [
             478,
-            107
+            479
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
         "736": {
           "anchors": [
-            477,
-            108
+            479,
+            107
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
         "738": {
           "anchors": [
-            479,
-            484
+            478,
+            108
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
         "740": {
           "anchors": [
-            484,
+            480,
             485
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
@@ -9314,7 +9315,7 @@
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
@@ -9325,7 +9326,7 @@
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
@@ -9336,7 +9337,7 @@
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
@@ -9347,29 +9348,29 @@
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
         "750": {
           "anchors": [
-            485,
-            492
+            489,
+            490
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
         "752": {
           "anchors": [
-            492,
+            486,
             493
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
@@ -9380,359 +9381,370 @@
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1055": {
+        "756": {
           "anchors": [
-            846,
-            847
+            494,
+            495
           ],
           "graphs": {
             "Only": [
-              270
+              337
             ]
           }
         },
-        "1057": {
-          "anchors": [
-            846,
-            848
-          ],
-          "graphs": {
-            "Only": [
-              270
-            ]
-          }
-        },
-        "1059": {
+        "1058": {
           "anchors": [
             848,
             849
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1061": {
+        "1060": {
           "anchors": [
-            849,
+            848,
             850
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1063": {
+        "1062": {
           "anchors": [
             850,
             851
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1065": {
+        "1064": {
           "anchors": [
-            848,
+            851,
+            852
+          ],
+          "graphs": {
+            "Only": [
+              271
+            ]
+          }
+        },
+        "1066": {
+          "anchors": [
+            852,
             853
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1067": {
+        "1068": {
           "anchors": [
-            853,
-            854
-          ],
-          "graphs": {
-            "Only": [
-              270
-            ]
-          }
-        },
-        "1069": {
-          "anchors": [
-            854,
+            850,
             855
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1071": {
+        "1070": {
           "anchors": [
             855,
             856
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1073": {
+        "1072": {
           "anchors": [
             856,
             857
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1075": {
+        "1074": {
           "anchors": [
             857,
             858
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1077": {
+        "1076": {
           "anchors": [
-            861,
-            862
+            858,
+            859
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1079": {
+        "1078": {
           "anchors": [
-            862,
+            859,
+            860
+          ],
+          "graphs": {
+            "Only": [
+              271
+            ]
+          }
+        },
+        "1080": {
+          "anchors": [
+            863,
+            864
+          ],
+          "graphs": {
+            "Only": [
+              271
+            ]
+          }
+        },
+        "1082": {
+          "anchors": [
+            864,
+            865
+          ],
+          "graphs": {
+            "Only": [
+              271
+            ]
+          }
+        },
+        "1084": {
+          "anchors": [
+            856,
             863
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1081": {
+        "1086": {
           "anchors": [
-            854,
-            861
-          ],
-          "graphs": {
-            "Only": [
-              270
-            ]
-          }
-        },
-        "1083": {
-          "anchors": [
-            846,
+            848,
             108
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1085": {
+        "1088": {
           "anchors": [
             107,
-            847
+            849
           ],
           "graphs": {
             "Only": [
-              270
+              271
             ]
           }
         },
-        "1087": {
+        "1090": {
+          "anchors": [
+            853,
+            852
+          ],
+          "graphs": {
+            "Only": [
+              337
+            ]
+          }
+        },
+        "1092": {
+          "anchors": [
+            852,
+            851
+          ],
+          "graphs": {
+            "Only": [
+              337
+            ]
+          }
+        },
+        "1094": {
           "anchors": [
             851,
             850
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1089": {
+        "1096": {
           "anchors": [
             850,
-            849
-          ],
-          "graphs": {
-            "Only": [
-              336
-            ]
-          }
-        },
-        "1091": {
-          "anchors": [
-            849,
             848
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1093": {
+        "1098": {
           "anchors": [
             848,
-            846
+            849
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1095": {
+        "1100": {
           "anchors": [
-            846,
-            847
-          ],
-          "graphs": {
-            "Only": [
-              336
-            ]
-          }
-        },
-        "1097": {
-          "anchors": [
-            847,
+            849,
             107
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1099": {
+        "1102": {
           "anchors": [
-            846,
+            848,
             108
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1101": {
+        "1104": {
           "anchors": [
-            848,
-            853
-          ],
-          "graphs": {
-            "Only": [
-              336
-            ]
-          }
-        },
-        "1103": {
-          "anchors": [
-            853,
-            854
-          ],
-          "graphs": {
-            "Only": [
-              336
-            ]
-          }
-        },
-        "1105": {
-          "anchors": [
-            854,
+            850,
             855
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1107": {
+        "1106": {
           "anchors": [
             855,
             856
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1109": {
+        "1108": {
           "anchors": [
             856,
             857
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1111": {
+        "1110": {
           "anchors": [
             857,
             858
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1113": {
+        "1112": {
           "anchors": [
-            854,
-            861
+            858,
+            859
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1115": {
+        "1114": {
           "anchors": [
-            861,
-            862
+            859,
+            860
           ],
           "graphs": {
             "Only": [
-              336
+              337
             ]
           }
         },
-        "1117": {
+        "1116": {
           "anchors": [
-            862,
+            856,
             863
           ],
           "graphs": {
             "Only": [
-              336
+              337
+            ]
+          }
+        },
+        "1118": {
+          "anchors": [
+            863,
+            864
+          ],
+          "graphs": {
+            "Only": [
+              337
+            ]
+          }
+        },
+        "1120": {
+          "anchors": [
+            864,
+            865
+          ],
+          "graphs": {
+            "Only": [
+              337
             ]
           }
         }
@@ -9956,38 +9968,38 @@
           "name": "",
           "graphs": "All"
         },
-        "483": {
-          "anchor": 482,
+        "484": {
+          "anchor": 483,
           "tags": [],
           "name": "L2_room1",
           "graphs": "All"
         },
-        "490": {
-          "anchor": 489,
+        "491": {
+          "anchor": 490,
           "tags": [],
           "name": "L2_master_suite",
           "graphs": "All"
         },
-        "495": {
-          "anchor": 494,
+        "496": {
+          "anchor": 495,
           "tags": [],
           "name": "L2_room15",
           "graphs": "All"
         },
-        "852": {
-          "anchor": 851,
+        "854": {
+          "anchor": 853,
           "tags": [],
           "name": "L3_room1",
           "graphs": "All"
         },
-        "859": {
-          "anchor": 858,
+        "861": {
+          "anchor": 860,
           "tags": [],
           "name": "L3_master_suite",
           "graphs": "All"
         },
-        "864": {
-          "anchor": 863,
+        "866": {
+          "anchor": 865,
           "tags": [],
           "name": "L3_room15",
           "graphs": "All"
