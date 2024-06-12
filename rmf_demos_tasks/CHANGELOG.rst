@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 2.3.0 (2024-06-12)
 ------------------
 * Port to harmonic (`#206 <https://github.com/open-rmf/rmf_demos/pull/206>`_)
