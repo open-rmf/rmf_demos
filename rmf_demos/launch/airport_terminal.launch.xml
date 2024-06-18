@@ -9,7 +9,6 @@
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="viz_config_file" value ="$(find-pkg-share rmf_demos)/include/airport_terminal/airport_terminal.rviz"/>
     <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/airport_terminal/airport_terminal.building.yaml"/>
-    <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/airport_terminal/dashboard_config.json"/>
   </include>
 
   <!-- TinyRobot fleet adapter -->
