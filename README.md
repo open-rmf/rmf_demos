@@ -54,29 +54,6 @@ By specifying `server_uri`, the fleetadapter will update `rmf-web` `api-server` 
 * [Campus World](#Campus-World)
 * [Manufacturing & Logistics World](#Manufacturing-&-Logistics-World)
 
-**RMF Panel**
-![](../media/RMF_Panel.png?raw=true)
-
-Click this link: https://open-rmf.github.io/rmf-panel-js/
-
-> For a full-proof web application of Open-RMF, please refer to [rmf-web](https://github.com/open-rmf/rmf-web).
-
-The [RMF panel](https://github.com/open-rmf/rmf-panel-js) is a web based dashboard for interacting with rmf_demos. It allows users to send task requests to RMF and monitor the status of robots and submitted tasks. For more [details](rmf_demos_panel/README.md).
-
-There are two main modes of submitting tasks to Open-RMF via the Panel:
-
-1. Submit a Task: Used to submit a single task.
-2. Submit a List of Tasks: Used to submit a batch of tasks. A `.json` file containing a list of tasks may be loaded via the `Choose file` button. Some example files are found in `rmf_demos_panel/task_lists`.
-
-**LATEST UPDATE: Display Task States**
-
-`task_state_uptates` are now published via websocket. To display task states on `rmf-panel`, specify `server_uri:="ws://localhost:7878"` during ros2 launch. Example:
-```
-ros2 launch rmf_demos_gz office.launch.xml server_uri:="ws://localhost:7878"
-```
-
-This will let Open-RMF (websocket clients) to publish their states to port `7878`. In this case, rmf-panel's `api_simple_server` is the websocket server.
-
 ---
 
 ### Hotel World
@@ -98,15 +75,10 @@ ros2 launch rmf_demos_gz hotel.launch.xml
 ros2 launch rmf_demos_gz hotel.launch.xml
 ```
 
-Here, we will showcase 2 types of Tasks: **Loop** and **Clean**
-
-Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/) to submit clean or loop requests.
-To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit. Similarly for **Clean task**, select `Clean`, then choose the desired `cleaning zone` from the dropdown list.
-
-Or, dispatch robot via CLI
+Here, we will showcase 2 types of Tasks: **Loop** and **Clean**, you can dispatch them via CLI as follows:
 ```bash
-ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
 ros2 run rmf_demos_tasks dispatch_patrol -p restaurant  L3_master_suite -n 1 --use_sim_time
+ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
 ```
 
 Robots running Clean and Loop Task:
@@ -116,8 +88,6 @@ Robots running Clean and Loop Task:
 
 To submit a list of scheduled tasks via rmf web panel, load [hotel_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/hotel_tasks.json),
 or paste the json list to the _Submit a List of Tasks_ section. Next, click on submit.
-
-> Tip: To speedup simulation on gazebo, user can run `gz physics -s 0.01` on a separate terminal after launching the world. Use with care!
 
 ---
 
@@ -134,20 +104,17 @@ ros2 launch rmf_demos_gz office.launch.xml
 
 Now we will showcase 2 types of Tasks: **Delivery** and **Loop**
 
-To send task requests, open rmf_demos web panel: https://open-rmf.github.io/rmf-panel-js/
-
 ![](../media/delivery_request.gif?raw=true)
 
-To submit a **delivery task**, select `Delivery` from the `Select a request type` dropdown list. Next, select `coke` from the `Select delivery task` list. Choose an desired start time for task and click submit.
-
-Or, submit a task via CLI:
+You can request the robot to deliver a can of coke from `pantry` to `hardware_2` through the following:
 ```bash
-ros2 run rmf_demos_tasks dispatch_patrol -p coe lounge -n 3 --use_sim_time
 ros2 run rmf_demos_tasks dispatch_delivery -p pantry -ph coke_dispenser -d hardware_2 -dh coke_ingestor --use_sim_time
 ```
 
-To submit a **loop task**, select `Loop` from the `Select a request type` dropdown list. Choose desired start and end locations and click submit.
-To run a scenario with multiple task requests, load [office_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/office_tasks.json) from `rmf_demos_panel/task_lists` in the `Submit a list of tasks` section. This should populate the preview window with a list of tasks. Click submit and watch the demonstration unfold.
+You can also request the robot to move back and forth between `coe` and `lounge` through the following:
+```bash
+ros2 run rmf_demos_tasks dispatch_patrol -p coe lounge -n 3 --use_sim_time
+```
 
 ![](../media/loop_request.gif)
 
@@ -170,9 +137,7 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz airport_terminal.launch.xml
 ```
 
-Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [airport_terminal_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/airport_terminal_tasks.json) list and click submit to begin a collection of loop, delivery and cleaning tasks.
-
-Or, submit `loop`, `delivery` or `clean` task via CLI:
+You can submit `loop`, `delivery` or `clean` task via CLI:
 ```bash
 ros2 run rmf_demos_tasks dispatch_patrol -p s07 n12 -n 3 --use_sim_time
 ros2 run rmf_demos_tasks dispatch_delivery -p mopcart_pickup -ph mopcart_dispenser -d spill -dh mopcart_collector --use_sim_time
@@ -198,8 +163,6 @@ ros2 launch rmf_demos_gz airport_terminal_caddy.launch.xml
 
 ![](../media/caddy.gif)
 
-> Tip: To speedup simulation on gazebo, user can run `gz physics -ps 0.01` on a separate terminal after launching the world. Use with care!
-
 ---
 
 ### Clinic World
@@ -216,9 +179,7 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz clinic.launch.xml
 ```
 
-Open [RMF Panel](https://open-rmf.github.io/rmf-panel-js/). Load the [clinic_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/clinic_tasks.json) list and click submit to begin a collection of loop and delivery tasks.
-
-Or, submit a task via CLI:
+You can submit tasks via CLI:
 ```bash
 ros2 run rmf_demos_tasks dispatch_patrol -p L1_left_nurse_center L2_right_nurse_center -n 5 --use_sim_time
 ros2 run rmf_demos_tasks dispatch_patrol -p L2_north_counter L1_right_nurse_center -n 5 --use_sim_time
