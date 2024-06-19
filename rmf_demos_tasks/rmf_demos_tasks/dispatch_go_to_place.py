@@ -85,6 +85,12 @@ class TaskRequester(Node):
             action='store_true',
             help='Use sim time, default: false',
         )
+        parser.add_argument(
+            '--requester',
+            help='Entity that is requesting this task',
+            type=str,
+            default='rmf_demos_tasks'
+        )
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -154,7 +160,9 @@ class TaskRequester(Node):
                 'category': 'go_to_place',
                 'phases': [{'activity': go_to_activity}],
             },
+            'unix_millis_request_time': start_time,
             'unix_millis_earliest_start_time': start_time,
+            'requester': self.args.requester,
         }
 
         if self.args.fleet:

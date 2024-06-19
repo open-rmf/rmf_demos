@@ -117,6 +117,12 @@ class TaskRequester(Node):
             action='store_true',
             help='Use sim time, default: false',
         )
+        parser.add_argument(
+            '--requester',
+            help='Entity that is requesting this task',
+            type=str,
+            default='rmf_demos_tasks'
+        )
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -166,11 +172,13 @@ class TaskRequester(Node):
             payload['type'] = 'dispatch_task_request'
         request = {}
 
-        # Set task request start time
+        # Set task request request time, start time and requester
         now = self.get_clock().now().to_msg()
         now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec / 10**6)
+        request['unix_millis_request_time'] = start_time
         request['unix_millis_earliest_start_time'] = start_time
+        request['requester'] = self.args.requester
 
         if self.args.fleet:
             request['fleet_name'] = self.args.fleet
