@@ -10,6 +10,7 @@
   <arg name="headless" default="false" description="do not launch rviz; launch gazebo in headless mode"/>
   <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
   <arg name="use_rmf_panel" default="true" description="launch web and api server for rmf_demos_panel"/>
+  <arg name="server_uri" default="" description="The URI of the api server to transmit state and task information."/>
 
   <!-- Traffic Schedule  -->
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_primary">
@@ -57,6 +58,7 @@
     <node pkg="rmf_task_ros2" exec="rmf_task_dispatcher"  output="screen">
       <param name="use_sim_time" value="$(var use_sim_time)"/>
       <param name="bidding_time_window" value="$(var bidding_time_window)"/>
+      <param name="server_uri" value="$(var server_uri)"/>
     </node>
   </group>
 
