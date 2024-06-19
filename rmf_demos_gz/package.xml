@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>rmf_demos_gz</name>
-  <version>2.2.3</version>
+  <version>2.4.0</version>
   <description>Launch files for RMF demos using the Gazebo simulator</description>
   <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
   <maintainer email="luca@openrobotics.org">Luca Della Vedova</maintainer>
@@ -17,7 +17,8 @@
 
   <exec_depend>teleop_twist_keyboard</exec_depend>
   <exec_depend>launch_xml</exec_depend>
-  <exec_depend>ignition-fortress</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>gz_sim_vendor</exec_depend>
 
   <exec_depend>ros_gz_bridge</exec_depend>
 

@@ -144,6 +144,9 @@ def main(argv=sys.argv):
         )
 
     def update_loop():
+        reassign_task_interval = config_yaml['rmf_fleet'].get(
+            'reassign_task_interval', 60)  # seconds
+        last_task_replan = node.get_clock().now()
         asyncio.set_event_loop(asyncio.new_event_loop())
         while rclpy.ok():
             now = node.get_clock().now()
@@ -157,6 +160,12 @@ def main(argv=sys.argv):
                 asyncio.wait(update_jobs)
             )
 
+            interval_sec = (now.nanoseconds -
+                            last_task_replan.nanoseconds) / 1e9
+            if interval_sec > reassign_task_interval:
+                fleet_handle.more().reassign_dispatched_tasks()
+                last_task_replan = now
+
             next_wakeup = now + Duration(nanoseconds=update_period * 1e9)
             while node.get_clock().now() < next_wakeup:
                 time.sleep(0.001)
@@ -166,6 +175,7 @@ def main(argv=sys.argv):
 
     # Connect to the extra ROS2 topics that are relevant for the adapter
     connections = ros_connections(node, robots, fleet_handle)
+    connections  # Avoid unused variable warning
 
     # Create executor for the command handle node
     rclpy_executor = rclpy.executors.SingleThreadedExecutor()

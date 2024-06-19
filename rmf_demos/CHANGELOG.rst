@@ -2,6 +2,19 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.0 (2024-06-12)
+------------------
+
+2.3.0 (2024-06-12)
+------------------
+* Remove rmf_demos_panel (`#235 <https://github.com/open-rmf/rmf_demos/pull/235>`_)
+* Use same empty string default value as fleet adapter launches (`#237 <https://github.com/open-rmf/rmf_demos/pull/237>`_)
+* Adding server_uri for dispatcher node (`#230 <https://github.com/open-rmf/rmf_demos/pull/230>`_)
+* Add task reassignment trigger in update loop (`#228 <https://github.com/open-rmf/rmf_demos/pull/228>`_)
+* Use unique hex strings for new task IDs (`#205 <https://github.com/open-rmf/rmf_demos/pull/205>`_)
+* Fix airport terminal demo (`#204 <https://github.com/open-rmf/rmf_demos/pull/204>`_)
+* Contributors: Aaron Chong, Luca Della Vedova, Xiyu, Yadunund
+
 2.2.3 (2023-12-20)
 ------------------
 
