@@ -401,8 +401,8 @@ class Teleoperation:
                 )
                 self.last_position = data.position
 
-class WaitUntil:
 
+class WaitUntil:
     def __init__(self, execution, node, description, update_handle):
         self.node = node
         self.execution = execution
@@ -433,7 +433,7 @@ class WaitUntil:
             # If this is a response to whether we should quiet cancel, process
             # this first
             if self.checked_for_incomplete:
-                #TODO
+                # TODO
                 if msg.response == 'success':
                     # The delivery is complete, we should quiet_cancel the task
                     node.get_logger().info(
@@ -441,6 +441,7 @@ class WaitUntil:
                         f'quiet cancelling task...'
                     )
                     task_id = self.update_handle.more().current_task_id()
+
                     def _on_cancel(result: bool):
                         if result:
                             self.node.get_logger().info(
@@ -448,6 +449,7 @@ class WaitUntil:
                         else:
                             self.node.get_logger().info(
                                 f'Failed to cancel task [{task_id}]')
+
                     self.update_handle.more().unstable_quiet_cancel_task(
                         task_id,
                         ['Quiet cancelling as the deliveries are complete'],
@@ -456,8 +458,8 @@ class WaitUntil:
                 else:
                     # Do nothing if there are missed deliveries
                     self.node.get_logger().info(
-                        f'There were missed deliveries, robot proceeding to the'
-                         f' end collection location'
+                        'There were missed deliveries, robot proceeding to '
+                        'the end collection location'
                     )
                 with self.mutex:
                     self.move_off = True
@@ -496,7 +498,8 @@ class WaitUntil:
                     msg.alert_parameters = []
                     check_complete_param = AlertParameter()
                     check_complete_param.name = 'type'
-                    check_complete_param.value = 'check_all_task_location_alerts'
+                    check_complete_param.value = \
+                        'check_all_task_location_alerts'
                     msg.alert_parameters.append(check_complete_param)
                     msg.task_id = self.update_handle.more().current_task_id()
                     alert_pub.publish(msg)
@@ -535,7 +538,6 @@ class WaitUntil:
         msg = Alert()
         msg.id = datetime.datetime.now().strftime(
             "alert-%Y-%m-%d-%H-%M-%S")
-            # "test")
         msg.title = f'Robot has begun waiting'
         msg.display = False
         msg.tier = Alert.TIER_INFO
@@ -599,7 +601,7 @@ class WaitUntil:
                 return True
 
             # Log the robot waiting every 5 minutes
-            if (now - self.start_time)%60 == 0:
+            if (now - self.start_time) % 60 == 0:
                 min_passed = round((now - self.start_time)/60)
                 self.node.get_logger().info(
                     f'{min_passed} minutes have passed since robot '
