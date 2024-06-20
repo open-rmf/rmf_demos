@@ -38,9 +38,9 @@ from rmf_fleet_msgs.msg import ClosedLanes
 from rmf_fleet_msgs.msg import LaneRequest
 from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import RobotMode
-from rmf_fleet_msgs.msg import FleetAlert
-from rmf_fleet_msgs.msg import FleetAlertParameter
-from rmf_fleet_msgs.msg import FleetAlertResponse
+from rmf_task_msgs.msg import Alert
+from rmf_task_msgs.msg import AlertParameter
+from rmf_task_msgs.msg import AlertResponse
 import yaml
 
 from .RobotClientAPI import RobotAPI
@@ -418,14 +418,14 @@ class WaitUntil:
         self.last_position = None
         self.mutex = threading.Lock()
 
-        def fleet_alert_cb(msg):
+        def alert_cb(msg):
             if self.alert_id is None:
                 return
             if msg.id != self.alert_id:
                 return
             if msg.response != 'success' and msg.response != 'fail':
                 self.node.get_logger().info(
-                    f'Received invalid response inside fleet alert response: '
+                    f'Received invalid response inside alert response: '
                     f'{msg.response}'
                 )
                 return
@@ -484,24 +484,24 @@ class WaitUntil:
                     # We update the alert id to a new one to check whether all
                     # deliveries for this task have been completed
                     # Publish alert
-                    msg = FleetAlert()
+                    msg = Alert()
                     msg.id = datetime.datetime.now().strftime(
-                        # "fleet-alert-%Y-%m-%d-%H-%M-%S")
+                        # "alert-%Y-%m-%d-%H-%M-%S")
                         "test")
                     msg.title = f'Robot is at final location, checking if ' + \
                                 f'all items have been delivered'
                     msg.display = False
-                    msg.tier = FleetAlert.TIER_INFO
+                    msg.tier = Alert.TIER_INFO
                     msg.responses_available = ['success', 'fail']
                     msg.alert_parameters = []
-                    check_complete_param = FleetAlertParameter()
+                    check_complete_param = AlertParameter()
                     check_complete_param.name = 'type'
                     check_complete_param.value = 'check_all_task_location_alerts'
                     msg.alert_parameters.append(check_complete_param)
                     msg.task_id = self.update_handle.more().current_task_id()
                     alert_pub.publish(msg)
                     self.node.get_logger().info(
-                        f'Published fleet alert [{msg.id}] to check for '
+                        f'Published alert [{msg.id}] to check for '
                         f'incomplete deliveries'
                     )
                     # Store the alert id
@@ -520,39 +520,39 @@ class WaitUntil:
             durability=Durability.TRANSIENT_LOCAL,
         )
         alert_pub = node.create_publisher(
-            FleetAlert,
-            'fleet_alert',
+            Alert,
+            'alert',
             qos_profile=transient_qos
         )
         alert_response_sub = node.create_subscription(
-            FleetAlertResponse,
-            'fleet_alert_response',
-            fleet_alert_cb,
+            AlertResponse,
+            'alert_response',
+            alert_cb,
             qos_profile=transient_qos
         )
 
         # Publish alert
-        msg = FleetAlert()
+        msg = Alert()
         msg.id = datetime.datetime.now().strftime(
-            "fleet-alert-%Y-%m-%d-%H-%M-%S")
+            "alert-%Y-%m-%d-%H-%M-%S")
             # "test")
         msg.title = f'Robot has begun waiting'
         msg.display = False
-        msg.tier = FleetAlert.TIER_INFO
+        msg.tier = Alert.TIER_INFO
         msg.responses_available = ['success', 'fail']
         msg.alert_parameters = []
-        location_alert_param = FleetAlertParameter()
+        location_alert_param = AlertParameter()
         location_alert_param.name = 'type'
         location_alert_param.value = 'location_result'
         msg.alert_parameters.append(location_alert_param)
-        location_name_param = FleetAlertParameter()
+        location_name_param = AlertParameter()
         location_name_param.name = 'location_name'
         location_name_param.value = self.location
         msg.alert_parameters.append(location_name_param)
         msg.task_id = self.update_handle.more().current_task_id()
         alert_pub.publish(msg)
         self.node.get_logger().info(
-            f'Published fleet alert [{msg.id}] to report location'
+            f'Published alert [{msg.id}] to report location'
         )
         # Store the alert id
         self.alert_id = msg.id
