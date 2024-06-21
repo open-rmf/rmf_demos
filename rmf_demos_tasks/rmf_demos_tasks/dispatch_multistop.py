@@ -31,6 +31,9 @@ from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_task_msgs.msg import ApiRequest, ApiResponse
 
+def list_of_labels(arg):
+    return list(arg.split(','))
+
 
 ###############################################################################
 
@@ -55,8 +58,12 @@ class TaskRequester(Node):
         parser.add_argument('-pt', '--priority',
                             help='Priority value for this request',
                             type=int, default=0)
+        parser.add_argument('-L', '--labels', required=False, default=[],
+                            type=list_of_labels, help='labels to pass to the web server')
         parser.add_argument("--use_sim_time", action="store_true",
                             help='Use sim time, default: false')
+
+
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -179,6 +186,8 @@ class TaskRequester(Node):
 
         # Consolidate
         request["description"] = description
+        if self.args.labels != []:
+            request["labels"] = self.args.labels
         payload["request"] = request
         msg.json_msg = json.dumps(payload)
 
