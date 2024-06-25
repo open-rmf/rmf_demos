@@ -69,6 +69,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                  start,
                  position,
                  charger_waypoint,
+                 parking_waypoint,
                  update_frequency,
                  lane_merge_distance,
                  adapter,
@@ -87,6 +88,11 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         assert waypoint, f"Charger waypoint {charger_waypoint} \
           does not exist in the navigation graph"
         self.charger_waypoint_index = waypoint.index
+        # Get the index of the parking spot waypoint
+        waypoint = self.graph.find_waypoint(parking_waypoint)
+        assert waypoint, f"Parking waypoint {parking_waypoint} \
+          does not exist in the navigation graph"
+        self.parking_waypoint_index = waypoint.index
         self.update_frequency = update_frequency
         self.lane_merge_distance = lane_merge_distance
         self.update_handle = None  # RobotUpdateHandle
