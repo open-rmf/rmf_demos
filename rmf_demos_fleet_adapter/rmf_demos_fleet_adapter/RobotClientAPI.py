@@ -175,6 +175,30 @@ class RobotAPI:
             print(f'Other error {robot_name} in toggle_teleop: {err}')
         return False
 
+    def toggle_attach(self, robot_name: str, attach: bool, cmd_id: int):
+        """
+        Request to attach or detach robot to/from cart.
+
+        Return True if the attach request is successful
+        """
+        url = (
+            self.prefix
+            + f'/open-rmf/rmf_demos_fm/toggle_attach?robot_name={robot_name}'
+            f'&cmd_id={cmd_id}'
+        )
+        data = {'toggle': attach}
+        try:
+            response = requests.post(url, timeout=self.timeout, json=data)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()['success']
+        except HTTPError as http_err:
+            print(f'HTTP error for {robot_name} in toggle_attach: {http_err}')
+        except Exception as err:
+            print(f'Other error {robot_name} in toggle_attach: {err}')
+        return False
+
     def get_data(self, robot_name: str | None = None):
         """
         Return a RobotUpdateData for one robot if a name is given.
