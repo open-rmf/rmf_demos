@@ -202,6 +202,12 @@ class FleetManager(Node):
             'robot_mode_requests',
             qos_profile=publisher_qos)
 
+        self.action_completed_pub = self.create_publisher(
+            ModeRequest,
+            'action_execution_notice',
+            qos_profile=qos_profile_system_default,
+        )
+
         @app.get('/open-rmf/rmf_demos_fm/status/', response_model=Response)
         async def status(robot_name: Optional[str] = None):
             response = {'data': {}, 'success': False, 'msg': ''}
@@ -390,6 +396,30 @@ class FleetManager(Node):
             response['success'] = True
             return response
 
+        @app.post(
+            '/open-rmf/rmf_demos_fm/toggle_attach/', response_model=Response
+        )
+        async def toggle_attach(robot_name: str, cmd_id: int, mode: Request):
+            response = {'success': False, 'msg': ''}
+            if robot_name not in self.robots:
+                return response
+            # Toggle action mode
+            if mode.toggle:
+                # Use robot mode publisher to set it to "attaching cart mode"
+                self.get_logger().info(f'Publishing attaching mode...')
+                msg = self._make_mode_request(robot_name, cmd_id,
+                                              RobotMode.MODE_PERFORMING_ACTION,
+                                              'attach_cart')
+            else:
+                # Use robot mode publisher to set it to "detaching cart mode"
+                self.get_logger().info(f'Publishing detaching mode...')
+                msg = self._make_mode_request(robot_name, cmd_id,
+                                              RobotMode.MODE_PERFORMING_ACTION,
+                                              'detach_cart')
+            self.mode_pub.publish(msg)
+            response['success'] = True
+            return response
+
     def _make_mode_request(self, robot_name, cmd_id, mode, action=''):
         mode_msg = ModeRequest()
         mode_msg.fleet_name = self.fleet_name
@@ -503,6 +533,16 @@ class FleetManager(Node):
             data['replan'] = True
         else:
             data['replan'] = False
+        if (robot.state.mode.mode == RobotMode.MODE_ACTION_COMPLETED):
+            self.get_logger().info(
+                f'Robot [{robot_name} completed performing its action')
+            completed_cmd_id = 0
+            msg = self._make_mode_request(robot_name, completed_cmd_id,
+                                          RobotMode.MODE_IDLE)
+            # Mark action execution as finished
+            self.action_completed_pub.publish(msg)
+            # # Request for robot idle
+            self.mode_pub.publish(msg)
 
         return data
 
