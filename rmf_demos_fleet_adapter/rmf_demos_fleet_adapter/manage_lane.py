@@ -12,21 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import argparse
-import asyncio
-import sys
-
 import rclpy
+from rclpy.duration import Duration
 import rclpy.node
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 import rmf_adapter
-import rmf_adapter.geometry as geometry
 import rmf_adapter.vehicletraits as traits
+import rmf_adapter.geometry as geometry
 
 from rmf_fleet_msgs.msg import LaneRequest
+
+import argparse
+import threading
+import sys
+import asyncio
 
 
 def main(argv=sys.argv):
@@ -123,7 +125,7 @@ def main(argv=sys.argv):
         request.close_lanes = lane_indices
     request.fleet_name = args.fleet
 
-    node = rclpy.node.Node('manage_lane')
+    node = rclpy.node.Node(f'manage_lane')
 
     transient_qos = QoSProfile(
         history=History.KEEP_LAST,
