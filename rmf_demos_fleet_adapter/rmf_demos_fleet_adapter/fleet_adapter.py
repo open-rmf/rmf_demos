@@ -427,14 +427,14 @@ class WaitUntil:
         self.last_position = None
         self.mutex = threading.Lock()
 
-        def fleet_alert_cb(msg):
+        def alert_cb(msg):
             if self.alert_id is None:
                 return
             if msg.id != self.alert_id:
                 return
             if msg.response != 'success' and msg.response != 'fail':
                 self.node.get_logger().info(
-                    f'Received invalid response inside fleet alert response: '
+                    f'Received invalid response inside alert response: '
                     f'{msg.response}'
                 )
                 return
@@ -510,7 +510,7 @@ class WaitUntil:
                     msg.task_id = self.update_handle.more().current_task_id()
                     alert_pub.publish(msg)
                     self.node.get_logger().info(
-                        f'Published fleet alert [{msg.id}] to check for '
+                        f'Published alert [{msg.id}] to check for '
                         f'incomplete deliveries'
                     )
                     # Store the alert id
@@ -530,20 +530,20 @@ class WaitUntil:
         )
         alert_pub = node.create_publisher(
             Alert,
-            'fleet_alert',
+            'alert',
             qos_profile=transient_qos
         )
         alert_response_sub = node.create_subscription(
             AlertResponse,
-            'fleet_alert_response',
-            fleet_alert_cb,
+            'alert_response',
+            alert_cb,
             qos_profile=transient_qos
         )
 
         # Publish alert
         msg = Alert()
         msg.id = datetime.datetime.now().strftime(
-            "fleet-alert-%Y-%m-%d-%H-%M-%S")
+            "alert-%Y-%m-%d-%H-%M-%S")
             # "test")
         msg.title = f'Robot has begun waiting'
         msg.display = False
@@ -561,7 +561,7 @@ class WaitUntil:
         msg.task_id = self.update_handle.more().current_task_id()
         alert_pub.publish(msg)
         self.node.get_logger().info(
-            f'Published fleet alert [{msg.id}] to report location'
+            f'Published alert [{msg.id}] to report location'
         )
         # Store the alert id
         self.alert_id = msg.id
