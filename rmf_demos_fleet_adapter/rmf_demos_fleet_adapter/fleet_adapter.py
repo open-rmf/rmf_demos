@@ -19,6 +19,7 @@ import sys
 import threading
 import time
 import datetime
+import uuid
 
 from icecream import ic
 
@@ -494,9 +495,7 @@ class WaitUntil:
                     # deliveries for this task have been completed
                     # Publish alert
                     msg = Alert()
-                    msg.id = datetime.datetime.now().strftime(
-                        # "fleet-alert-%Y-%m-%d-%H-%M-%S")
-                        "test")
+                    msg.id = f"final-location-check-{uuid.uuid4().hex}"
                     msg.title = f'Robot is at final location, checking if ' + \
                                 f'all items have been delivered'
                     msg.display = False
