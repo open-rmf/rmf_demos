@@ -32,7 +32,18 @@ from rclpy.qos import QoSReliabilityPolicy as Reliability
 from rmf_task_msgs.msg import ApiRequest, ApiResponse
 
 def list_of_labels(arg):
-    return list(arg.split(','))
+    final_kvs = []
+    temp_kvs = []
+    for p in arg.split(","):
+        if "=" in p:
+            final_kvs.append(",".join(temp_kvs))
+            temp_kvs.clear()
+            temp_kvs.append(p)
+        else:
+            temp_kvs.append(p)
+    final_kvs.append(",".join(temp_kvs))
+    temp_kvs.clear()
+    return final_kvs[1:]
 
 
 ###############################################################################
