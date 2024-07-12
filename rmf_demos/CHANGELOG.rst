@@ -2,6 +2,13 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Port dispatcher (`#243 <https://github.com/open-rmf/rmf_demos/issues/243>`_)
+* Use same empty string default value as fleet adapter launches (`#237 <https://github.com/open-rmf/rmf_demos/issues/237>`_)
+* Adding server_uri for dispatcher node (`#230 <https://github.com/open-rmf/rmf_demos/issues/230>`_)
+* Contributors: Aaron Chong
+
 2.1.2 (2023-09-20)
 ------------------
 * EasyFullControl integration with rmf_demos (`#195 <https://github.com/open-rmf/rmf_demos/pull/195>`_)

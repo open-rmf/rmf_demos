@@ -2,6 +2,11 @@
 Changelog for package rmf_demos_bridges
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Support fleet-level task (`#210 <https://github.com/open-rmf/rmf_demos/issues/210>`_)
+* Contributors: cwrx777, Yadunund
+
 2.1.2 (2023-09-20)
 ------------------
 
