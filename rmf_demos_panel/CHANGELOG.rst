@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_panel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.1.3 (2024-07-11)
+------------------
 * Support fleet-level task (`#210 <https://github.com/open-rmf/rmf_demos/issues/210>`_)
 * Contributors: cwrx777, Yadunund
 
