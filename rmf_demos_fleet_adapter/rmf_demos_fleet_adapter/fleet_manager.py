@@ -325,6 +325,9 @@ class FleetManager(Node):
             ):
                 return response
 
+            # Invalid request
+            if robot_name not in self.robots:
+                return response
             robot = self.robots[robot_name]
 
             path_request = PathRequest()
