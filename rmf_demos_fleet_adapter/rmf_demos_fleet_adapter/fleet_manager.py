@@ -39,6 +39,7 @@ import rmf_adapter.geometry as geometry
 import rmf_adapter.vehicletraits as traits
 from rmf_fleet_msgs.msg import DockSummary
 from rmf_fleet_msgs.msg import Location
+from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import PathRequest
 from rmf_fleet_msgs.msg import RobotMode
 from rmf_fleet_msgs.msg import RobotState
@@ -374,6 +375,39 @@ class FleetManager(Node):
             self.robots[robot_name].mode_teleop = mode.toggle
             response['success'] = True
             return response
+
+        @app.post(
+            '/open-rmf/rmf_demos_fm/toggle_attach/', response_model=Response
+        )
+        async def toggle_attach(robot_name: str, cmd_id: int, mode: Request):
+            response = {'success': False, 'msg': ''}
+            if robot_name not in self.robots:
+                return response
+            # Toggle action mode
+            if mode.toggle:
+                # Use robot mode publisher to set it to "attaching cart mode"
+                self.get_logger().info('Publishing attaching mode...')
+                msg = self._make_mode_request(robot_name, cmd_id,
+                                              RobotMode.MODE_PERFORMING_ACTION,
+                                              'attach_cart')
+            else:
+                # Use robot mode publisher to set it to "detaching cart mode"
+                self.get_logger().info('Publishing detaching mode...')
+                msg = self._make_mode_request(robot_name, cmd_id,
+                                              RobotMode.MODE_PERFORMING_ACTION,
+                                              'detach_cart')
+            self.mode_pub.publish(msg)
+            response['success'] = True
+            return response
+
+    def _make_mode_request(self, robot_name, cmd_id, mode, action=''):
+        mode_msg = ModeRequest()
+        mode_msg.fleet_name = self.fleet_name
+        mode_msg.robot_name = robot_name
+        mode_msg.mode.mode = mode
+        mode_msg.mode.mode_request_id = cmd_id
+        mode_msg.mode.performing_action = action
+        return mode_msg
 
     def robot_state_cb(self, msg):
         if msg.name in self.robots:
