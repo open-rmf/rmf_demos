@@ -39,10 +39,10 @@ import rmf_adapter.geometry as geometry
 import rmf_adapter.vehicletraits as traits
 from rmf_fleet_msgs.msg import DockSummary
 from rmf_fleet_msgs.msg import Location
+from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import PathRequest
 from rmf_fleet_msgs.msg import RobotMode
 from rmf_fleet_msgs.msg import RobotState
-from rmf_fleet_msgs.msg import ModeRequest
 import socketio
 import uvicorn
 import yaml
@@ -406,13 +406,13 @@ class FleetManager(Node):
             # Toggle action mode
             if mode.toggle:
                 # Use robot mode publisher to set it to "attaching cart mode"
-                self.get_logger().info(f'Publishing attaching mode...')
+                self.get_logger().info('Publishing attaching mode...')
                 msg = self._make_mode_request(robot_name, cmd_id,
                                               RobotMode.MODE_PERFORMING_ACTION,
                                               'attach_cart')
             else:
                 # Use robot mode publisher to set it to "detaching cart mode"
-                self.get_logger().info(f'Publishing detaching mode...')
+                self.get_logger().info('Publishing detaching mode...')
                 msg = self._make_mode_request(robot_name, cmd_id,
                                               RobotMode.MODE_PERFORMING_ACTION,
                                               'detach_cart')
