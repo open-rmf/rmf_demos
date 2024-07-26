@@ -169,7 +169,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
     def next_cmd_id(self):
         self.current_cmd_id = self.current_cmd_id + 1
         if self.debug:
-            print(f'Issuing cmd_id for {self.name}: {self.current_cmd_id}')
+            self.node.get_logger().info(f'Issuing cmd_id for {self.name}: {self.current_cmd_id}')
         return self.current_cmd_id
 
     def sleep_for(self, seconds):
@@ -194,7 +194,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
     def interrupt(self):
         if self.debug:
-            print(
+            self.node.get_logger().info(
                 f'Interrupting {self.name} '
                 f'(latest cmd_id is {self.current_cmd_id})'
             )
@@ -217,7 +217,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
     def stop(self):
         if self.debug:
             plan_id = self.update_handle.unstable_current_plan_id()
-            print(f'stop for {self.name} with PlanId {plan_id}')
+            self.node.get_logger().info(f'stop for {self.name} with PlanId {plan_id}')
 
         self.interrupt()
         # Stop the robot. Tracking variables should remain unchanged.
@@ -256,7 +256,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
             path_finished_callback):
         if self.debug:
             plan_id = self.update_handle.unstable_current_plan_id()
-            print(f'follow_new_path for {self.name} with PlanId {plan_id}')
+            self.node.get_logger().info(f'follow_new_path for {self.name} with PlanId {plan_id}')
         self.interrupt()
         with self._lock:
             self._follow_path_thread = None
