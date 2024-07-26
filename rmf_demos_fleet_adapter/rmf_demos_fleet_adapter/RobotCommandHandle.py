@@ -721,8 +721,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
                     self.docks[dock.start] = dock.path
 
     def mode_request_cb(self, msg):
-        if msg.fleet_name is None or msg.fleet_name != self.fleet_name or\
-                msg.robot_name is None:
+        if not msg.fleet_name or msg.fleet_name != self.fleet_name or\
+                not msg.robot_name:
             return
         if msg.mode.mode == RobotState.IDLE:
             self.complete_robot_action()
