@@ -36,6 +36,9 @@ rmf_fleet:
   robots:
     tinyRobot1:
         charger: "tinyRobot1_charger"
+        finishing_request: # Optionally define any robot-specific finishing request. Overrides the fleet-wide setting.
+          type: "park" # [park, charge, nothing]
+          parking_spot: "supplies" # This is a required field if the finishing_request type is "park"
         responsive_wait: False # Should responsive wait be on/off for this specific robot? Overrides the fleet-wide setting.
     tinyRobot2:
         charger: "tinyRobot2_charger"
