@@ -1,0 +1,28 @@
+{
+  "rmfServerUrl": "http://localhost:8000",
+  "trajectoryServerUrl": "ws://localhost:8006",
+  "auth": {
+    "provider": "stub"
+  },
+  "helpLink": "https://osrf.github.io/ros2multirobotbook/rmf-core.html",
+  "reportIssue": "https://github.com/open-rmf/rmf-web/issues",
+  "pickupZones": [],
+  "defaultZoom": 20,
+  "defaultRobotZoom": 6,
+  "attributionPrefix": "OSRC-SG",
+  "defaultMapLevel": "L1",
+  "allowedTasks": [
+    {
+      "taskDefinitionId": "patrol"
+    }
+  ],
+  "resources": {
+    "default": {
+      "fleets": {},
+      "logos": {
+        "header": "/resources/defaultLogo.png"
+      }
+    }
+  },
+  "cartIds": []
+}
