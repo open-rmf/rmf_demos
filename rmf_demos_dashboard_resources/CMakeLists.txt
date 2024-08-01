@@ -7,8 +7,8 @@ find_package(ament_cmake REQUIRED)
 ament_package()
 
 set(outputs
-  ${CMAKE_CURRENT_SOURCE_DIR}/airport_terminal/main.json
-  ${CMAKE_CURRENT_SOURCE_DIR}/office/main.json
+  ${CMAKE_CURRENT_SOURCE_DIR}/airport_terminal/app-config.json
+  ${CMAKE_CURRENT_SOURCE_DIR}/office/app-config.json
 )
 
 if(${CMAKE_VERSION} VERSION_GREATER_EQUAL 3.12)
@@ -17,7 +17,7 @@ else()
   file(GLOB_RECURSE deps *.json)
 endif()
 
-list(FILTER deps EXCLUDE REGEX main.json$)
+list(FILTER deps EXCLUDE REGEX app-config.json$)
 
 add_custom_command(OUTPUT ${outputs}
   COMMAND python3 build_configuration.py

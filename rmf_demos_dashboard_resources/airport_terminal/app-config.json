@@ -1,0 +1,55 @@
+{
+  "rmfServerUrl": "http://localhost:8000",
+  "trajectoryServerUrl": "ws://localhost:8006",
+  "auth": {
+    "provider": "stub"
+  },
+  "helpLink": "https://osrf.github.io/ros2multirobotbook/rmf-core.html",
+  "reportIssue": "https://github.com/open-rmf/rmf-web/issues",
+  "pickupZones": [],
+  "defaultZoom": 20,
+  "defaultRobotZoom": 6,
+  "attributionPrefix": "OSRC-SG",
+  "defaultMapLevel": "L1",
+  "allowedTasks": [
+    {
+      "taskDefinitionId": "patrol"
+    },
+    {
+      "taskDefinitionId": "delivery"
+    },
+    {
+      "taskDefinitionId": "compose-clean"
+    }
+  ],
+  "resources": {
+    "default": {
+      "fleets": {
+        "cleanerBotA": {
+          "icon": "https://raw.githubusercontent.com/open-rmf/rmf_demos/rmf-web-dashboard-resources/rmf_demos_dashboard_resources/airport_terminal/icons/cleanerBotA.png",
+          "scale": 0.003
+        },
+        "cleanerBotE": {
+          "icon": "https://raw.githubusercontent.com/open-rmf/rmf_demos/rmf-web-dashboard-resources/rmf_demos_dashboard_resources/airport_terminal/icons/cleanerBotE.png",
+          "scale": 0.003
+        },
+        "caddy": {
+          "icon": "https://raw.githubusercontent.com/open-rmf/rmf_demos/rmf-web-dashboard-resources/rmf_demos_dashboard_resources/airport_terminal/icons/caddy.png",
+          "scale": 0.003
+        },
+        "deliveryRobot": {
+          "icon": "https://raw.githubusercontent.com/open-rmf/rmf_demos/rmf-web-dashboard-resources/rmf_demos_dashboard_resources/airport_terminal/icons/deliveryRobot.png",
+          "scale": 0.004
+        },
+        "tinyRobot": {
+          "icon": "https://raw.githubusercontent.com/open-rmf/rmf_demos/rmf-web-dashboard-resources/rmf_demos_dashboard_resources/airport_terminal/icons/tinyRobot.png",
+          "scale": 0.00123
+        }
+      },
+      "logos": {
+        "header": "https://raw.githubusercontent.com/open-rmf/rmf_demos/rmf-web-dashboard-resources/rmf_demos_dashboard_resources/airport_terminal/icons/headerLogo.png"
+      }
+    }
+  },
+  "cartIds": []
+}
