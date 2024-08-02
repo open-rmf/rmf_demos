@@ -61,4 +61,10 @@
       <param name="server_uri" value="$(var server_uri)"/>
     </node>
   </group>
+
+  <!-- Proto-Reservation system-->
+  <group>
+    <node pkg="rmf_chope_node" exec="queue_manager"></node>
+  </group>
+
 </launch>
