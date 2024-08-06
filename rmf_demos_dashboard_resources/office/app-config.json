@@ -1,9 +1,8 @@
 {
+  "$schema": "./app-config.schema.json",
   "rmfServerUrl": "http://localhost:8000",
   "trajectoryServerUrl": "ws://localhost:8006",
-  "auth": {
-    "provider": "stub"
-  },
+  "authConfig": {},
   "helpLink": "https://osrf.github.io/ros2multirobotbook/rmf-core.html",
   "reportIssue": "https://github.com/open-rmf/rmf-web/issues",
   "pickupZones": [],
@@ -40,5 +39,11 @@
       }
     }
   },
-  "cartIds": []
+  "cartIds": [],
+  "buildConfig": {
+    "baseUrl": "/",
+    "authProvider": "stub",
+    "customTabs": false,
+    "adminTab": false
+  }
 }
