@@ -1,5 +1,5 @@
 {
-  "$schema": "./app-config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/open-rmf/rmf-web/main/packages/dashboard/app-config.schema.json",
   "rmfServerUrl": "http://localhost:8000",
   "trajectoryServerUrl": "ws://localhost:8006",
   "authConfig": {},
