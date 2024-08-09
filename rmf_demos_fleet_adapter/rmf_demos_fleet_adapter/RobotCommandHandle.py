@@ -722,7 +722,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
 
     def mode_request_cb(self, msg):
         if not msg.fleet_name or msg.fleet_name != self.fleet_name or\
-                not msg.robot_name:
+                not msg.robot_name or msg.robot_name != self.name:
             return
         if msg.mode.mode == RobotState.IDLE:
             self.complete_robot_action()
