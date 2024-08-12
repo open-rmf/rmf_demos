@@ -33,7 +33,7 @@ jobs:
     - name: workspace
       run: |
         cd rmf_demos_ws
-        wget https://raw.githubusercontent.com/open-rmf/rmf/main/rmf.repos
+        wget https://raw.githubusercontent.com/open-rmf/rmf/humble/rmf.repos
         vcs import src < rmf.repos --skip-existing
     - name: ros-deps
       run: |
