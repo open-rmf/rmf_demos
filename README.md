@@ -33,9 +33,33 @@ Answers to frequently asked questions can be found [here](docs/faq.md).
 
 A near-term roadmap of the Open-RMF project can be found in the user manual [here](https://osrf.github.io/ros2multirobotbook/roadmap.html).
 
-## RMF-Web
+## RMF-Web quick start
 
 Full web application of Open-RMF: [rmf-web](https://github.com/open-rmf/rmf-web).
+
+Start the backend API server via `docker` with host network access, using the default configuration. The API server will be accessible at `localhost:8000` by default.
+
+```bash
+docker run \
+  --network host \
+  -it \
+  -e ROS_DOMAIN_ID=<ROS_DOMAIN_ID> \
+  -e RMW_IMPLEMENTATION=<RMW_IMPLEMENTATION> \
+  ghcr.io/open-rmf/rmf-web/api-server:latest
+```
+
+> Note: The API server is also configurable by mounting the configuration file and setting the environment variable `RMF_API_SERVER_CONFIG`. In the default configuration, the API serer will use an internal non-persistent database.
+
+Start the frontend dashboard via `docker` with host network access, using the default configuration. The dashboard will be accessible at `localhost:3000` by default.
+
+```bash
+docker run \
+  --network host \
+  -it \
+  ghcr.io/open-rmf/rmf-web/dashboard:latest
+```
+
+> Note: The dashboard via `docker` is not runtime-configurable and is best used for quick integrations and testing. To configure the dashboard, check out [rmf-web-dashboard-resources](https://github.com/open-rmf/rmf_demos/tree/rmf-web-dashboard-resources/rmf_demos_dashboard_resources) and the [dashboard configuration section](https://github.com/open-rmf/rmf-web/tree/main/packages/dashboard#configuration).
 
 In order to interact with the default configuration of the web application, the `server_uri` launch parameter will need to be changed to `ws://localhost:8000/_internal`, for example,
 
@@ -84,10 +108,6 @@ ros2 run rmf_demos_tasks dispatch_clean -cs clean_lobby --use_sim_time
 Robots running Clean and Loop Task:
 
 ![](../media/hotel_scenarios.gif)
-
-
-To submit a list of scheduled tasks via rmf web panel, load [hotel_tasks.json](https://github.com/open-rmf/rmf_demos/blob/main/rmf_demos_panel/task_lists/hotel_tasks.json),
-or paste the json list to the _Submit a List of Tasks_ section. Next, click on submit.
 
 ---
 
