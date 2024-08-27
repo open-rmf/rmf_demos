@@ -28,13 +28,14 @@ from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 from rmf_fleet_msgs.msg import FleetState
+from rmf_building_map_msgs.msg import Graph
 import time
 
 """
 This is a tool that should be used only for testing purpose! Do not ever, ever, ever
 use it in production.
 """
-class TaskObserver(Node):
+class RobotStateObserver(Node):
     def __init__(self, parser):
         super().__init__("TaskObserver")
 
@@ -47,13 +48,41 @@ class TaskObserver(Node):
             self.state_watcher,
             10)
 
+        nav_graph_qos = QoSProfile(
+            history=History.KEEP_LAST, depth=10, durability=Durability.TRANSIENT_LOCAL, reliability=Reliability.RELIABLE)
+
+        self.nav_graph_subscription = self.create_subscription(
+            Graph,
+            '/nav_graphs',
+            self.nav_graph_watcher,
+            nav_graph_qos)
+
+        self.nav_graph = None
+
     def state_watcher(self, fleet_state: FleetState):
+
+        if self.nav_graph is None:
+            print ("Grapoh not found")
+            return
+
         if fleet_state.name != self.parser.fleet:
             return
         for robot_state in fleet_state.robots:
-            if robot_state.name == self.parser.robot and robot_state.task_id == "":
-                self.response.set_result(robot_state)
-                return
+            if robot_state.name == self.parser.robot:
+                for graph_node in self.nav_graph.vertices:
+                    dist = (graph_node.x - robot_state.location.x) ** 2 + (graph_node.y - robot_state.location.y) ** 2
+                    if dist < 0.5:
+                        if self.parser.block_until_reaches == "":
+                            self.response.set_result(graph_node.name)
+                        elif self.parser.block_until_reaches == graph_node.name:
+                            self.response.set_result(graph_node.name)
+                        return
+
+
+    def nav_graph_watcher(self, navgraph: Graph):
+        print ("Got graph")
+        if navgraph.name == self.parser.fleet:
+            self.nav_graph = navgraph
 
 def create_parser():
     parser = argparse.ArgumentParser()
@@ -78,6 +107,13 @@ def create_parser():
         type=int,
         help='Timeout seconds',
     )
+
+    parser.add_argument(
+        '--block-until-reaches',
+        '-B',
+        type=str,
+        help='Block until this waypoint is reached. If empty, then the command does not block.'
+    )
     return parser
 
 def main(argv=sys.argv):
@@ -85,7 +121,7 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
     arg_parser = create_parser()
     arguments = arg_parser.parse_args(args_without_ros[1:])
-    task_requester = TaskObserver(arguments)
+    task_requester = RobotStateObserver(arguments)
     start_time = time.time()
     rclpy.spin_until_future_complete(
         task_requester, task_requester.response, timeout_sec=arguments.timeout
