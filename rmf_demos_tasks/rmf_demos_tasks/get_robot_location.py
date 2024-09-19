@@ -32,10 +32,12 @@ from rmf_building_map_msgs.msg import Graph
 import time
 
 """
-This is a tool that should be used only for testing purpose! Do not ever, ever, ever
+This is a tool that should be used only for testing purpose! Do not
 use it in production.
 """
 class RobotStateObserver(Node):
+
+
     def __init__(self, parser):
         super().__init__("TaskObserver")
 
@@ -49,7 +51,10 @@ class RobotStateObserver(Node):
             10)
 
         nav_graph_qos = QoSProfile(
-            history=History.KEEP_LAST, depth=10, durability=Durability.TRANSIENT_LOCAL, reliability=Reliability.RELIABLE)
+            history=History.KEEP_LAST,
+            depth=10,
+            durability=Durability.TRANSIENT_LOCAL,
+            reliability=Reliability.RELIABLE)
 
         self.nav_graph_subscription = self.create_subscription(
             Graph,
@@ -62,7 +67,7 @@ class RobotStateObserver(Node):
     def state_watcher(self, fleet_state: FleetState):
 
         if self.nav_graph is None:
-            print ("Grapoh not found")
+            print("Nav graph not found")
             return
 
         if fleet_state.name != self.parser.fleet:
@@ -70,7 +75,8 @@ class RobotStateObserver(Node):
         for robot_state in fleet_state.robots:
             if robot_state.name == self.parser.robot:
                 for graph_node in self.nav_graph.vertices:
-                    dist = (graph_node.x - robot_state.location.x) ** 2 + (graph_node.y - robot_state.location.y) ** 2
+                    dist = (graph_node.x - robot_state.location.x) ** 2
+                    dist += (graph_node.y - robot_state.location.y) ** 2
                     if dist < 0.5:
                         if self.parser.block_until_reaches == "":
                             self.response.set_result(graph_node.name)
@@ -112,7 +118,8 @@ def create_parser():
         '--block-until-reaches',
         '-B',
         type=str,
-        help='Block until this waypoint is reached. If empty, then the command does not block.'
+        help='Block until this waypoint is reached. If empty,' + \
+        ' then the command does not block.'
     )
     return parser
 
