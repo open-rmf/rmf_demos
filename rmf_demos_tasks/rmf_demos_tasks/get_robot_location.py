@@ -85,10 +85,10 @@ class RobotStateObserver(Node):
                             self.response.set_result(name)
                         return
 
-
     def nav_graph_watcher(self, navgraph: Graph):
         if navgraph.name == self.parser.fleet:
             self.nav_graph = navgraph
+
 
 def create_parser():
     parser = argparse.ArgumentParser()
@@ -107,7 +107,6 @@ def create_parser():
         help='fleet name',
     )
 
-
     parser.add_argument(
         '--timeout',
         type=int,
@@ -118,10 +117,11 @@ def create_parser():
         '--block-until-reaches',
         '-B',
         type=str,
-        help='Block until this waypoint is reached. If empty,' + \
+        help='Block until this waypoint is reached. If empty,' +
         ' then the command does not block.'
     )
     return parser
+
 
 def main(argv=sys.argv):
     rclpy.init(args=sys.argv)
