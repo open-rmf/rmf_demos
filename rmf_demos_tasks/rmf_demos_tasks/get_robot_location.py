@@ -31,12 +31,12 @@ from rmf_fleet_msgs.msg import FleetState
 from rmf_building_map_msgs.msg import Graph
 import time
 
-"""
-This is a tool that should be used only for testing purpose! Do not
-use it in production.
-"""
-class RobotStateObserver(Node):
 
+class RobotStateObserver(Node):
+    """
+    This is a tool that should be used only for testing purpose! Do not
+    use it in production.
+    """
 
     def __init__(self, parser):
         super().__init__("TaskObserver")
@@ -77,16 +77,16 @@ class RobotStateObserver(Node):
                 for graph_node in self.nav_graph.vertices:
                     dist = (graph_node.x - robot_state.location.x) ** 2
                     dist += (graph_node.y - robot_state.location.y) ** 2
+                    name = graph_node.name
                     if dist < 0.5:
                         if self.parser.block_until_reaches == "":
-                            self.response.set_result(graph_node.name)
-                        elif self.parser.block_until_reaches == graph_node.name:
-                            self.response.set_result(graph_node.name)
+                            self.response.set_result(name)
+                        elif self.parser.block_until_reaches == name:
+                            self.response.set_result(name)
                         return
 
 
     def nav_graph_watcher(self, navgraph: Graph):
-        print ("Got graph")
         if navgraph.name == self.parser.fleet:
             self.nav_graph = navgraph
 
