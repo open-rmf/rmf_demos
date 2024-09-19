@@ -30,11 +30,12 @@ from rclpy.qos import QoSReliabilityPolicy as Reliability
 from rmf_fleet_msgs.msg import FleetState
 import time
 
-"""
-This is a tool that should be used only for testing purpose! Do not ever, ever, ever
-use it in production.
-"""
+
 class TaskObserver(Node):
+    """
+    This is a tool that should be used only for testing purpose! Do not
+    use it in production.
+    """
     def __init__(self, parser):
         super().__init__("TaskObserver")
 
@@ -51,9 +52,11 @@ class TaskObserver(Node):
         if fleet_state.name != self.parser.fleet:
             return
         for robot_state in fleet_state.robots:
-            if robot_state.name == self.parser.robot and robot_state.task_id == "":
+            if robot_state.name == self.parser.robot \
+                and robot_state.task_id == "":
                 self.response.set_result(robot_state)
                 return
+
 
 def create_parser():
     parser = argparse.ArgumentParser()
@@ -72,13 +75,13 @@ def create_parser():
         help='fleet name',
     )
 
-
     parser.add_argument(
         '--timeout',
         type=int,
         help='Timeout seconds',
     )
     return parser
+
 
 def main(argv=sys.argv):
     rclpy.init(args=sys.argv)
