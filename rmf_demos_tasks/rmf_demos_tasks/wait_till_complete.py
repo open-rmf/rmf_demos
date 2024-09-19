@@ -53,7 +53,7 @@ class TaskObserver(Node):
             return
         for robot_state in fleet_state.robots:
             if robot_state.name == self.parser.robot \
-                and robot_state.task_id == "":
+            and robot_state.task_id == "":
                 self.response.set_result(robot_state)
                 return
 
