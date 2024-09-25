@@ -6,7 +6,7 @@
   <arg name="use_traffic_light" default="false"/>
 
   <!-- Common launch -->
-  <include file="$(find-pkg-share rmf_demos)/office_chope_node.launch.xml">
+  <include file="$(find-pkg-share rmf_demos)/office_reservation_node.launch.xml">
     <arg name="use_traffic_light" value="$(var use_traffic_light)"/>
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
   </include>

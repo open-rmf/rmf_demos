@@ -10,7 +10,7 @@
   <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
   <arg name="use_unique_hex_string_with_task_id" default="true" description="Appends a unique hex string to the task ID"/>
   <arg name="server_uri" default="" description="The URI of the api server to transmit state and task information."/>
-  <arg name="use_chope_node" default="false" description="Enable the chope node for parking spot de-confliction"/>
+  <arg name="use_reservation_node" default="false" description="Enable the reservation node for parking spot de-confliction"/>
 
   <!-- Traffic Schedule  -->
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_primary">
@@ -64,8 +64,8 @@
   </group>
 
   <!-- Proto-Reservation system-->
-  <group  if="$(var use_chope_node)">
-    <node pkg="rmf_chope_node" exec="queue_manager"></node>
+  <group  if="$(var use_reservation_node)">
+    <node pkg="rmf_reservation_node" exec="queue_manager"></node>
   </group>
 
 </launch>
