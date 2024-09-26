@@ -14,6 +14,7 @@
 
 import argparse
 import asyncio
+import faulthandler
 import math
 import sys
 import threading
@@ -46,6 +47,7 @@ from .RobotClientAPI import RobotUpdateData
 # Main
 # ------------------------------------------------------------------------------
 def main(argv=sys.argv):
+    faulthandler.enable()
     # Init rclpy and adapter
     rclpy.init(args=argv)
     rmf_adapter.init_rclcpp()
