@@ -96,7 +96,7 @@ class State:
 
 class FleetManager(Node):
 
-    def __init__(self, config, nav_path):
+    def __init__(self, config):
         self.debug = False
         self.config = config
         self.fleet_name = self.config['rmf_fleet']['name']
@@ -570,20 +570,13 @@ def main(argv=sys.argv):
         required=True,
         help='Path to the config.yaml file',
     )
-    parser.add_argument(
-        '-n',
-        '--nav_graph',
-        type=str,
-        required=True,
-        help='Path to the nav_graph for this fleet adapter',
-    )
     args = parser.parse_args(args_without_ros[1:])
     print('Starting fleet manager...')
 
     with open(args.config_file, 'r') as f:
         config = yaml.safe_load(f)
 
-    fleet_manager = FleetManager(config, args.nav_graph)
+    fleet_manager = FleetManager(config)
 
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()
