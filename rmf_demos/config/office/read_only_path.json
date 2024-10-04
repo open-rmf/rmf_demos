@@ -3,12 +3,33 @@
         {
             "name": "deliveryBot_1",
             "position": {
-                "x": 7.0264,
-                "y": -2.1079,
-                "yaw": 0.0,
+                "x": 8.2369,
+                "y": -6.8824,
+                "yaw": -0.5159,
                 "map": "L1"
             },
             "waypoints": [
+                {
+                    "name": "deliveryBot_spot",
+                    "x": 8.2369,
+                    "y": -6.8824,
+                    "yaw": -0.5159,
+                    "map": "L1"
+                },
+                {
+                    "name": "no_waypoint_name_0",
+                    "x": 8.9057,
+                    "y": -6.1798,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "patrol_D2",
+                    "x": 10.2432,
+                    "y": -3.0899,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
                 {
                     "name": "presupplies",
                     "x": 7.0264,
@@ -73,17 +94,10 @@
                     "map": "L1"
                 },
                 {
-                    "name": "patrol_D2",
-                    "x": 10.2432,
-                    "y": -3.0899,
-                    "yaw": 0.0,
-                    "map": "L1"
-                },
-                {
-                    "name": "presupplies",
-                    "x": 7.0264,
-                    "y": -2.1079,
-                    "yaw": 0.0,
+                    "name": "deliveryBot_spot",
+                    "x": 8.2369,
+                    "y": -6.8824,
+                    "yaw": -0.5159,
                     "map": "L1"
                 }
             ]

@@ -111,7 +111,7 @@ class ReadOnlyPublisher(Node):
         state to read_only_driver
         '''
         if len(self.waypoints) < 2:
-            self.waypoints = deepcopy(self.waypoints)
+            self.waypoints = deepcopy(self.waypoints_copy)
             return
 
         data = self.get_data()
@@ -133,8 +133,8 @@ class ReadOnlyPublisher(Node):
 
         current_state = {
             'robots': [{
-                'name': 1,
-                'battery_soc': 1,
+                'name': data.robot_name,
+                'battery_soc': 1,  # assume full battery
                 'position': {
                     'x': data.position[0],
                     'y': data.position[1],
