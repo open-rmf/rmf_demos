@@ -1,0 +1,92 @@
+{
+    "robots": [
+        {
+            "name": "deliveryBot_1",
+            "position": {
+                "x": 7.0264,
+                "y": -2.1079,
+                "yaw": 0.0,
+                "map": "L1"
+            },
+            "waypoints": [
+                {
+                    "name": "presupplies",
+                    "x": 7.0264,
+                    "y": -2.1079,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "patrol_D2",
+                    "x": 10.2432,
+                    "y": -3.0899,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "no_waypoint_name_0",
+                    "x": 8.9057,
+                    "y": -6.1798,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "patrol_A1",
+                    "x": 10.0824,
+                    "y": -6.9756,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "no_waypoint_name_1",
+                    "x": 18.7341,
+                    "y": -6.8740,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "no_waypoint_name_2",
+                    "x": 18.7934,
+                    "y": -10.3702,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "no_waypoint_name_1",
+                    "x": 18.7341,
+                    "y": -6.8740,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "patrol_A1",
+                    "x": 10.0824,
+                    "y": -6.9756,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "no_waypoint_name_0",
+                    "x": 8.9057,
+                    "y": -6.1798,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "patrol_D2",
+                    "x": 10.2432,
+                    "y": -3.0899,
+                    "yaw": 0.0,
+                    "map": "L1"
+                },
+                {
+                    "name": "presupplies",
+                    "x": 7.0264,
+                    "y": -2.1079,
+                    "yaw": 0.0,
+                    "map": "L1"
+                }
+            ]
+        }
+    ]
+}

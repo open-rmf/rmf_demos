@@ -1,0 +1,93 @@
+<?xml version='1.0' ?>
+
+<launch>
+
+  <arg name="use_sim_time" default="true" description="Use the /clock topic for time to sync with simulation"/>
+  <arg name="config_file" description="The config file that provides important parameters for setting up the read only fleet"/>
+  <arg name="read_only_path" description="The json file that provides the path taken by the read-only robot"/>
+  <arg name="output" default="screen"/>
+
+  <!-- Read-only fleet driver -->
+  <group if="$(var use_sim_time)">
+    <node pkg="rmf_demos_fleet_adapter"
+          exec="read_only_fleet_driver"
+          args="-c $(var config_file) -sim"
+          output="both">
+
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
+  </group>
+
+  <group unless="$(var use_sim_time)">
+    <node pkg="rmf_demos_fleet_adapter"
+          exec="read_only_fleet_driver"
+          args="-c $(var config_file)"
+          output="both">
+
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
+  </group>
+
+  <!-- Read-only fleet adapter -->
+  <group>
+    <include file="$(find-pkg-share rmf_fleet_adapter)/fleet_adapter.launch.xml">
+
+      <arg name="fleet_name" value="read_only_bots"/>
+      <arg name="control_type" value="read_only"/>
+
+      <arg name="linear_velocity" value="0.7"/>
+      <arg name="angular_velocity" value="0.6"/>
+
+      <arg name="linear_acceleration" value="0.75"/>
+      <arg name="angular_acceleration" value="2.0"/>
+
+      <arg name="footprint_radius" value="0.6"/>
+      <arg name="vicinity_radius" value="0.8"/>
+
+      <arg name="battery_voltage" value="12.0"/>
+      <arg name="battery_capacity" value="24.0"/>
+      <arg name="battery_charging_current" value="5.0"/>
+      <arg name="mass" value="20.0"/>
+      <arg name="inertia" value="10.0"/>
+      <arg name="friction_coefficient" value="0.22"/>
+      <arg name="ambient_power_drain" value="20.0"/>
+      <arg name="tool_power_drain" value="0.0"/>
+      <arg name="server_uri" value=""/>
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+
+      <arg name="delay_threshold" value="5.0"/>
+
+    </include>
+  </group>
+
+  <!-- Read-only publisher -->
+  <group if="$(var use_sim_time)">
+    <node pkg="rmf_demos_fleet_adapter"
+          exec="read_only_publisher"
+          args="-c $(var config_file) -r $(var read_only_path) -sim"
+          output="both">
+
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
+  </group>
+
+  <group unless="$(var use_sim_time)">
+    <node pkg="rmf_demos_fleet_adapter"
+          exec="read_only_publisher"
+          args="-c $(var config_file) -r $(var read_only_path)"
+          output="both">
+
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
+  </group>
+
+  <!-- Read-only fleet manager -->
+  <node pkg="rmf_demos_fleet_adapter"
+        exec="fleet_manager"
+        args="--config_file $(var config_file) --nav_graph this_path_is_not_used"
+        output="both">
+
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+  </node>
+
+</launch>

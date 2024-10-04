@@ -2,6 +2,7 @@
 
 <launch>
   <arg name="use_sim_time" default="false"/>
+  <arg name="read_only" default="false"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -16,6 +17,15 @@
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/office/nav_graphs/0.yaml" />
       <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/office/tinyRobot_config.yaml"/>
+    </include>
+  </group>
+
+  <!-- Read-only fleet adapter -->
+  <group if="$(var read_only)">
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/read_only.launch.xml">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/office/read_only_config.yaml"/>
+      <arg name="read_only_path" value="$(find-pkg-share rmf_demos)/config/office/read_only_path.json"/>
     </include>
   </group>
 

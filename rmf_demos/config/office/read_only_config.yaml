@@ -1,0 +1,45 @@
+rmf_fleet:
+  name: read_only_bots
+  limits:
+    linear: [0.7, 0.75] # velocity, acceleration
+    angular: [0.6, 2.0] # velocity, acceleration
+  profile: # Robot profile is modelled as a circle
+    footprint: 0.6 # radius in m
+    vicinity: 0.8 # radius in m
+  reversible: True # whether robots in this fleet can reverse
+  robots:
+    deliveryBot_1:
+      charger: None # not used
+
+conversions:
+  reference_coordinates:
+    L1:
+      # Sample transformation, for RMF there is no difference between RMF and
+      # robot frames so these are the same sets of coords
+      rmf: [[0, 0],
+            [0, 10.0],
+            [10.0, 10.0],
+            [10.0, 0]]
+
+      read_only_bots: [[0, 0],
+            [0, 10.0],
+            [10.0, 10.0],
+            [10.0, 0]]
+
+  map:
+    L1: "L1"
+
+mqtt:
+  connect:
+    # Optional to add user and password fields here if
+    # your MQTT setup requires credentials
+    server_url: "localhost"
+  topic:
+    fleet_manager: "rmf/read_only_state"
+
+fleet_manager:
+  ip: "127.0.0.1"
+  port: 22012
+  user: "some_user"
+  password: "some_password"
+  robot_state_update_frequency: 10.0
