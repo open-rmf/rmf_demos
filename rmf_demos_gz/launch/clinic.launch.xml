@@ -4,6 +4,7 @@
   <arg name="use_sim_time" default="true"/>
   <arg name="failover_mode" default="false"/>
   <arg name="gazebo_version" default='8'/>
+  <arg name="update_rate" default='1000'/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/clinic.launch.xml">
@@ -15,6 +16,7 @@
   <include file="$(find-pkg-share rmf_demos_gz)/simulation.launch.xml">
     <arg name="map_name" value="clinic" />
     <arg name="gazebo_version" value="$(var gazebo_version)" />
+    <arg name="update_rate" value="$(var update_rate)"/>
   </include>
 
 </launch>
