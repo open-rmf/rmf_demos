@@ -4,6 +4,7 @@
   <arg name="use_sim_time" default="true"/>
   <arg name="failover_mode" default="false"/>
   <arg name="gazebo_version" default='8'/>
+  <arg name="sim_update_rate" default='100'/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/hotel.launch.xml">
@@ -15,5 +16,6 @@
   <include file="$(find-pkg-share rmf_demos_gz)/simulation.launch.xml">
     <arg name="map_name" value="hotel" />
     <arg name="gazebo_version" value="$(var gazebo_version)" />
+    <arg name="sim_update_rate" value="$(var sim_update_rate)"/>
   </include>
 </launch>

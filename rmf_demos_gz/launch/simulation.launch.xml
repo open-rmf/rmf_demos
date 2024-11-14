@@ -5,10 +5,10 @@
   <arg name="map_name" description="Name of the rmf_demos map to simulate" />
   <arg name="use_crowdsim" default='0'/>
   <arg name="gazebo_version" default='8'/>
+  <arg name="sim_update_rate" default='100'/>
 
   <let name="world_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/$(var map_name).world" />
-  <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/models:$(find-pkg-share $(var map_package))/maps/$(var map_name)/models:$(find-pkg-share rmf_demos_assets)/models:$(env HOME)/.gazebo/models" />
-  <let name="plugin_path" value="$(find-pkg-prefix rmf_robot_sim_gz_plugins)/lib/rmf_robot_sim_gz_plugins:$(find-pkg-prefix rmf_building_sim_gz_plugins)/lib/rmf_building_sim_gz_plugins" />
+  <let name="model_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/models:$(env HOME)/.gazebo/models" />
 
   <!-- Use crowd sim if `use_crowdsim` is true-->
   <let name="menge_resource_path" if="$(var use_crowdsim)" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/config_resource"/>
@@ -17,10 +17,9 @@
   <let name="gz_headless" if="$(var headless)" value="-s"/>
   <let name="gz_headless" unless="$(var headless)" value="" />
 
-  <executable cmd="gz sim --force-version $(var gazebo_version) $(var gz_headless) -r -v 3 $(var world_path)" output="both">
-    <env name="GZ_SIM_RESOURCE_PATH" value="$(var model_path):$(var world_path)" />
-    <env name="GZ_SIM_SYSTEM_PLUGIN_PATH" value="$(var plugin_path)"/>
-    <env name="GZ_GUI_PLUGIN_PATH" value="$(var plugin_path)"/>
+  <!-- TODO(luca) Remove the manual concatenation of GZ_SIM_RESOURCE_PATH and just use environment hooks -->
+  <executable cmd="gz sim --force-version $(var gazebo_version) $(var gz_headless) -r -v 3 $(var world_path) -z $(var sim_update_rate)" output="both">
+    <env name="GZ_SIM_RESOURCE_PATH" value="$(env GZ_SIM_RESOURCE_PATH):$(var model_path)" />
     <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
   </executable>
 
