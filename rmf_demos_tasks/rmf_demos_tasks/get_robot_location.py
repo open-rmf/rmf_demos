@@ -16,20 +16,17 @@
 
 import argparse
 import asyncio
-import json
 import sys
-import uuid
+import time
 
 import rclpy
 from rclpy.node import Node
-from rclpy.parameter import Parameter
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-from rmf_fleet_msgs.msg import FleetState
 from rmf_building_map_msgs.msg import Graph
-import time
+from rmf_fleet_msgs.msg import FleetState
 
 
 class RobotStateObserver(Node):
@@ -134,7 +131,7 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=arguments.timeout
     )
     if task_requester.response.done():
-        print(f'Got response:\n{task_requester.response.result()}')
+        print(f'Got response: \n{task_requester.response.result()}')
         end_time = time.time()
         elapsed = end_time - start_time
         print(f"elapsed time: {elapsed}")

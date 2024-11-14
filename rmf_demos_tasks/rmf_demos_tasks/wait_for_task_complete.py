@@ -94,7 +94,7 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=arguments.timeout
     )
     if task_requester.response.done():
-        print(f'Got response:\n{task_requester.response.result()}')
+        print(f'Got response: \n{task_requester.response.result()}')
         end_time = time.time()
         elapsed = end_time - start_time
         print(f"elapsed time: {elapsed}")

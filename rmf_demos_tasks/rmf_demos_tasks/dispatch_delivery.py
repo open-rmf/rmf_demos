@@ -286,7 +286,7 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=5.0
     )
     if task_requester.response.done():
-        print(f'Got response:\n{task_requester.response.result()}')
+        print(f'Got response: \n{task_requester.response.result()}')
     else:
         print('Did not get a response')
     rclpy.shutdown()
