@@ -13,31 +13,29 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Wait for a task to be completed."""
 
 import argparse
 import asyncio
-import json
 import sys
-import uuid
+import time
 
 import rclpy
 from rclpy.node import Node
-from rclpy.parameter import Parameter
-from rclpy.qos import QoSDurabilityPolicy as Durability
-from rclpy.qos import QoSHistoryPolicy as History
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSReliabilityPolicy as Reliability
+
 from rmf_fleet_msgs.msg import FleetState
-import time
 
 
 class TaskObserver(Node):
     """
-    This is a tool that should be used only for testing purpose! Do not
-    use it in production.
+    This is a tool that should be used only for testing purpose.
+
+    Do not use it in production!
     """
+
     def __init__(self, parser):
-        super().__init__("TaskObserver")
+        """Initialize the TaskObserver."""
+        super().__init__('TaskObserver')
 
         self.parser = parser
         self.response = asyncio.Future()
@@ -49,16 +47,18 @@ class TaskObserver(Node):
             10)
 
     def state_watcher(self, fleet_state: FleetState):
+        """Watch the fleet state."""
         if fleet_state.name != self.parser.fleet:
             return
         for robot_state in fleet_state.robots:
             if robot_state.name == self.parser.robot:
-                if robot_state.task_id == "":
+                if robot_state.task_id == '':
                     self.response.set_result(robot_state)
                     return
 
 
 def create_parser():
+    """Create the parser for the script."""
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
@@ -84,6 +84,7 @@ def create_parser():
 
 
 def main(argv=sys.argv):
+    """Wait for a task to be complete."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
     arg_parser = create_parser()
@@ -97,7 +98,7 @@ def main(argv=sys.argv):
         print(f'Got response: \n{task_requester.response.result()}')
         end_time = time.time()
         elapsed = end_time - start_time
-        print(f"elapsed time: {elapsed}")
+        print(f'elapsed time: {elapsed}')
     else:
         print('Timed out')
         sys.exit(-1)

@@ -1,3 +1,4 @@
+"""A set of scripts to issue tasks to Open-RMF from the command line."""
 from setuptools import setup
 
 package_name = 'rmf_demos_tasks'
