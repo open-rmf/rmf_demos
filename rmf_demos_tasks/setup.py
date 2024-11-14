@@ -41,7 +41,7 @@ setup(
             'teleop_robot = rmf_demos_tasks.teleop_robot:main',
             'dispatch_json = rmf_demos_tasks.dispatch_json:main',
             'api_request = rmf_demos_tasks.api_request:main',
-            'wait_for_task_complete = rmf_demos_tasks.wait_till_complete:main'
+            'wait_for_task_complete = rmf_demos_tasks.wait_for_task_complete:main'
         ],
     },
 )
