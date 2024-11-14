@@ -62,7 +62,6 @@ class RobotStateObserver(Node):
         self.nav_graph = None
 
     def state_watcher(self, fleet_state: FleetState):
-
         if self.nav_graph is None:
             print("Nav graph not found")
             return
@@ -76,7 +75,7 @@ class RobotStateObserver(Node):
                     dist += (graph_node.y - robot_state.location.y) ** 2
                     name = graph_node.name
                     if dist < 0.5:
-                        if self.parser.block_until_reaches == "":
+                        if not self.parser.block_until_reaches:
                             self.response.set_result(name)
                         elif self.parser.block_until_reaches == name:
                             self.response.set_result(name)
