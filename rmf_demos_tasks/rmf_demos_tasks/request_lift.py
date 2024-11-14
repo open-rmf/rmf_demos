@@ -14,8 +14,8 @@
 """Request a lift to move somewhere."""
 
 import sys
-import uuid
 from time import sleep
+import uuid
 
 import rclpy
 
