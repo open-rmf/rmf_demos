@@ -11,14 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Find flake8 errors."""
 
 from ament_flake8.main import main_with_errors
+
 import pytest
 
 
 @pytest.mark.flake8
 @pytest.mark.linter
 def test_flake8():
+    """Find flake8 errors."""
     rc, errors = main_with_errors(argv=[])
     assert rc == 0, 'Found %d code style errors / warnings:\n' % len(
         errors

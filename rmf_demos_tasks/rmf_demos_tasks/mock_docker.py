@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Mock docker."""
 
 import argparse
 import math
@@ -23,6 +24,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
+
 from rmf_fleet_msgs.msg import Dock
 from rmf_fleet_msgs.msg import DockParameter
 from rmf_fleet_msgs.msg import DockSummary
@@ -31,10 +33,12 @@ from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import PathRequest
 from rmf_fleet_msgs.msg import RobotMode
 from rmf_fleet_msgs.msg import RobotState
+
 import yaml
 
 
 def make_location(p, level_name):
+    """Make location."""
     location = Location()
     location.x = p[0]
     location.y = p[1]
@@ -44,6 +48,7 @@ def make_location(p, level_name):
 
 
 def close(l0: Location, l1: Location):
+    """Are the locations close."""
     x_2 = (l1.x - l0.x) ** 2
     y_2 = (l1.y - l0.y) ** 2
     dist = math.sqrt(x_2 + y_2)
@@ -71,6 +76,7 @@ class MockDocker(Node):
     """
 
     def __init__(self, config_yaml):
+        """Initialize the mock docker."""
         super().__init__('mock_docker')
         self.get_logger().info('Greetings, I am mock docker')
         self.config_yaml = config_yaml
@@ -131,6 +137,7 @@ class MockDocker(Node):
         self.dock_summary_publisher.publish(dock_summary)
 
     def mode_request_cb(self, msg: ModeRequest):
+        """React to a mode request."""
         if msg.mode.mode != RobotMode.MODE_DOCKING:
             return
 
@@ -173,6 +180,7 @@ class MockDocker(Node):
         self.path_request_publisher.publish(path_request)
 
     def robot_state_cb(self, msg: RobotState):
+        """React to a new robot state."""
         robot_name = msg.name
         if robot_name not in self.watching:
             return
@@ -201,6 +209,7 @@ class MockDocker(Node):
 
 
 def main(argv=sys.argv):
+    """Mock docker."""
     rclpy.init(args=argv)
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
     parser = argparse.ArgumentParser(

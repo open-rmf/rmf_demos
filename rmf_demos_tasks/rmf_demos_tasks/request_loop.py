@@ -13,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Request a loop."""
 
 import argparse
 import sys
@@ -20,12 +21,15 @@ import time
 import uuid
 
 import rclpy
+
 from rmf_task_msgs.msg import Loop
 
 
 class LoopRequester:
+    """Request a loop."""
 
     def __init__(self, argv=sys.argv):
+        """Request a loop."""
         parser = argparse.ArgumentParser()
         parser.add_argument('-s', '--start', help='Start waypoint')
         parser.add_argument('-f', '--finish', help='Finish waypoint')
@@ -59,6 +63,7 @@ class LoopRequester:
         self.publisher = self.node.create_publisher(Loop, 'loop_requests', 10)
 
     def main(self):
+        """Request a loop."""
         request = Loop()
         request.robot_type = self.robot_type
         request.start_name = self.start_wp
@@ -80,6 +85,7 @@ class LoopRequester:
 
 
 def main(argv=sys.argv):
+    """Request a loop."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
