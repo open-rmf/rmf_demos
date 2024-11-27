@@ -13,12 +13,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Dispatch a loop task."""
 
 import argparse
 import sys
 
 import rclpy
 from rclpy.parameter import Parameter
+
 from rmf_task_msgs.msg import Loop
 from rmf_task_msgs.msg import TaskType
 from rmf_task_msgs.srv import SubmitTask
@@ -27,8 +29,10 @@ from rmf_task_msgs.srv import SubmitTask
 
 
 class TaskRequester:
+    """Task requester."""
 
     def __init__(self, argv=sys.argv):
+        """Initialize a task requester."""
         parser = argparse.ArgumentParser()
         parser.add_argument(
             '-s', '--start', required=True, type=str, help='Start waypoint'
@@ -80,6 +84,7 @@ class TaskRequester:
             self.node.set_parameters([param])
 
     def generate_task_req_msg(self):
+        """Generate a task request message."""
         req_msg = SubmitTask.Request()
         req_msg.description.task_type.type = TaskType.TYPE_LOOP
 
@@ -97,6 +102,7 @@ class TaskRequester:
         return req_msg
 
     def main(self):
+        """Dispatch a loop task."""
         if not self.submit_task_srv.wait_for_service(timeout_sec=3.0):
             self.node.get_logger().error('Dispatcher Node is not available')
             return
@@ -131,6 +137,7 @@ class TaskRequester:
 
 
 def main(argv=sys.argv):
+    """Dispatch a loop task."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 

@@ -1,3 +1,4 @@
+"""A set of scripts to issue tasks to Open-RMF from the command line."""
 from setuptools import setup
 
 package_name = 'rmf_demos_tasks'
@@ -36,10 +37,13 @@ setup(
             'dispatch_clean = rmf_demos_tasks.dispatch_clean:main',
             'dispatch_go_to_place = rmf_demos_tasks.dispatch_go_to_place:main',
             'dispatch_teleop = rmf_demos_tasks.dispatch_teleop:main',
+            'get_robot_location = rmf_demos_tasks.get_robot_location:main',
             'mock_docker = rmf_demos_tasks.mock_docker:main',
             'teleop_robot = rmf_demos_tasks.teleop_robot:main',
             'dispatch_json = rmf_demos_tasks.dispatch_json:main',
             'api_request = rmf_demos_tasks.api_request:main',
+            'wait_for_task_complete = \
+                rmf_demos_tasks.wait_for_task_complete:main'
         ],
     },
 )

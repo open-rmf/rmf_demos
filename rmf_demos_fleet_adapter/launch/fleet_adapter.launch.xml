@@ -11,7 +11,7 @@
   <!-- Fleet manager -->
   <node pkg="rmf_demos_fleet_adapter"
         exec="fleet_manager"
-        args="--config_file $(var config_file) --nav_graph $(var nav_graph_file)"
+        args="--config_file $(var config_file)"
         output="both">
 
     <param name="use_sim_time" value="$(var use_sim_time)"/>

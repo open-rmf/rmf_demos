@@ -8,6 +8,7 @@
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="viz_config_file" value ="$(find-pkg-share rmf_demos)/include/office/office.rviz"/>
     <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/office/office.building.yaml"/>
+    <arg name="use_reservation_node" value="true"/>
   </include>
 
   <!-- TinyRobot fleet adapter -->

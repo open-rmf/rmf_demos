@@ -11,16 +11,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Request a lift to move somewhere."""
 
 import sys
 from time import sleep
 import uuid
 
 import rclpy
+
 from rmf_lift_msgs.msg import LiftRequest
 
 
 def print_instructions():
+    """Print instructions."""
     print(
         'Invalid number of arguments, please pass in lift_name, desired ',
         'level and door state after the script in that order, only supports',
@@ -34,6 +37,7 @@ def print_instructions():
 
 
 def main(argv=sys.argv):
+    """Request a lift to move somewhere."""
     rclpy.init(args=argv)
 
     if len(argv) != 4:
