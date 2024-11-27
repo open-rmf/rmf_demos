@@ -2,6 +2,14 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.5.0 (2024-11-27)
+------------------
+* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
+* Fix existing style issues (`#252 <https://github.com/open-rmf/rmf_demos/issues/252>`_)
+* Add attach cart action (`#225 <https://github.com/open-rmf/rmf_demos/issues/225>`_)
+* Adding requester and request time for dispatch scripts (`#240 <https://github.com/open-rmf/rmf_demos/issues/240>`_)
+* Contributors: Aaron Chong, Arjo Chakravarty, Luca Della Vedova, Xiyu
+
 2.4.0 (2024-06-12)
 ------------------
 

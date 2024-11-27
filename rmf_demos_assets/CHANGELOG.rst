@@ -2,6 +2,11 @@
 Changelog for package rmf_demos_assets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.5.0 (2024-11-27)
+------------------
+* Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_)
+* Contributors: Luca Della Vedova
+
 2.4.0 (2024-06-12)
 ------------------
 

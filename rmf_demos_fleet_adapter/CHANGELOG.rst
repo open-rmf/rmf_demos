@@ -2,6 +2,15 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.5.0 (2024-11-27)
+------------------
+* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
+* Remove nav graph for fleet manager and update Office world (`#263 <https://github.com/open-rmf/rmf_demos/issues/263>`_)
+* Fix existing style issues (`#252 <https://github.com/open-rmf/rmf_demos/issues/252>`_)
+* Fixes undefined variable in `FleetManager` (`#251 <https://github.com/open-rmf/rmf_demos/issues/251>`_)
+* Add attach cart action (`#225 <https://github.com/open-rmf/rmf_demos/issues/225>`_)
+* Contributors: Arjo Chakravarty, Luca Della Vedova, Xiyu
+
 2.4.0 (2024-06-12)
 ------------------
 

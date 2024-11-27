@@ -2,6 +2,13 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.5.0 (2024-11-27)
+------------------
+* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
+* Adds the ability to set the update rate of the simulation (`#264 <https://github.com/open-rmf/rmf_demos/issues/264>`_)
+* Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_)
+* Contributors: Arjo Chakravarty, Luca Della Vedova
+
 2.4.0 (2024-06-12)
 ------------------
 
