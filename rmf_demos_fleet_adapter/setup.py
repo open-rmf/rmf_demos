@@ -8,7 +8,7 @@ package_name = 'rmf_demos_fleet_adapter'
 
 setup(
     name=package_name,
-    version='2.4.0',
+    version='2.5.0',
     packages=find_packages(),
     data_files=[
         (

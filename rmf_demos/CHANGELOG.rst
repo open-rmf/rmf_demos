@@ -2,8 +2,8 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.5.0 (2024-11-27)
+------------------
 * Provide example for robot-specific finishing request (`#255 <https://github.com/open-rmf/rmf_demos/issues/255>`_)
 * Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
 * Contributors: Arjo Chakravarty, Xiyu
