@@ -19,7 +19,6 @@
 
   <exec_depend>rmf_visualization</exec_depend>
 
-  <exec_depend>rmf_demos_assets</exec_depend>
   <exec_depend>rmf_demos_tasks</exec_depend>
   <exec_depend>rmf_demos_fleet_adapter</exec_depend>
   <exec_depend>rviz2</exec_depend>

@@ -727,8 +727,8 @@ levels:
       - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 306.031, y: 612.471, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Construction Cone, name: Construction Cone, static: true, x: 329.259, y: 609.5069999999999, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/MopCart3, name: MopCart3, static: false, x: 283.704, y: 443.583, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/TeleportDispenser, name: mopcart_dispenser, static: true, x: 284.29, y: 443.7, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/TeleportIngestor, name: mopcart_collector, static: true, x: 317.372, y: 589.088, yaw: 1.5708, z: 0}
+      - {model_name: Open-RMF/TeleportDispenser, name: mopcart_dispenser, static: true, x: 284.29, y: 443.7, yaw: 1.5708, z: 0}
+      - {model_name: Open-RMF/TeleportIngestor, name: mopcart_collector, static: true, x: 317.372, y: 589.088, yaw: 1.5708, z: 0}
     vertices:
       - [1911.731, 141.469, 0, ""]
       - [1911.342, 177.998, 0, ""]

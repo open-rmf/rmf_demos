@@ -12,7 +12,6 @@ jobs:
     with:
       packages: |
         rmf_demos
-        rmf_demos_assets
         rmf_demos_bridges
         rmf_demos_fleet_adapter
         rmf_demos_gz
