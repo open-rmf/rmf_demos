@@ -134,6 +134,10 @@ This quality declaration has not been externally peer-reviewed and is not regist
 
 `rmf_visualization` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_visualization/blob/main/rmf_visualization/QUALITY_DECLARATION.md).
 
+#### rmf_demos_assets
+
+`rmf_demos_assets` is at [**Quality Level 4**](../rmf_demos_assets/QUALITY_DECLARATION.md).
+
 #### rmf_demos_tasks
 
 `rmf_demos_tasks` is at [**Quality Level 4**](../rmf_demos_tasks/QUALITY_DECLARATION.md).

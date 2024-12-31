@@ -1,0 +1,382 @@
+<?xml version="1.0"?>
+
+<sdf version="1.6">
+  <model name='DeliveryRobot'>
+
+    <!-- TODO(MXG): Find actual physical properties for DeliveryRobot -->
+    <plugin name="slotcar" filename="libslotcar.so">
+
+      <!-- Forward / Backward -->
+      <nominal_drive_speed>0.7</nominal_drive_speed>
+      <nominal_drive_acceleration>0.5</nominal_drive_acceleration>
+      <!-- Theoretical no-slip limit with current suspension: 0.8 -->
+      <max_drive_acceleration>0.75</max_drive_acceleration>
+
+      <!-- Turning -->
+      <nominal_turn_speed>0.6</nominal_turn_speed>
+      <!-- Note: The official maximum turn acceleration value is 0.25, but that
+           seems to be too small for the simulated DeliveryRobot to do course
+           corrections while driving, so it ends up swaying erratically. Using
+           this larger value helps keep DeliveryRobot's course stable. -->
+      <nominal_turn_acceleration>1.5</nominal_turn_acceleration>
+      <!-- Theoretical no-slip limit with current suspension: 2.166666... -->
+      <max_turn_acceleration>2.0</max_turn_acceleration>
+
+      <stop_distance>0.75</stop_distance>
+      <stop_radius>0.75</stop_radius>
+
+      <!-- Can the robot drive backwards -->
+      <reversible>true</reversible>
+
+      <!-- Battery params -->
+      <nominal_voltage>24.0</nominal_voltage>
+      <nominal_capacity>40.0</nominal_capacity>
+      <charging_current>8.8</charging_current>
+
+      <!-- Physical params -->
+      <mass>70.0</mass>
+      <inertia>40.0</inertia>
+      <friction_coefficient>0.22</friction_coefficient>
+
+      <!-- Power systems -->
+      <nominal_power>20.0</nominal_power>
+
+    </plugin>
+
+    <link name="body">
+      <pose>0 0 0 0 0 -1.57</pose>
+
+      <inertial>
+        <pose>0 0 0.201 0 0 0</pose>
+        <mass>70</mass>
+        <inertia>
+          <ixx>5.1526</ixx>
+          <iyy>2.4944</iyy>
+          <izz>6.2829</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="body_visual">
+        <geometry>
+          <mesh><uri>model://DeliveryRobot/meshes/body.obj</uri></mesh>
+        </geometry>
+      </visual>
+      <collision name="body_collision">
+        <geometry>
+          <mesh><uri>model://DeliveryRobot/meshes/body.obj</uri></mesh>
+        </geometry>
+      </collision>
+
+      <visual name="WheelLeftFront">
+        <pose>-0.220 -0.262 0.061 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://DeliveryRobot/meshes/WheelMain.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="front_caster_left">
+        <pose>-.25 -.27 0.05 0 0 0</pose>
+        <geometry>
+          <sphere><radius>0.05</radius></sphere>
+        </geometry>
+        <surface>
+          <friction>
+            <torsional>
+              <coefficient>0.0</coefficient>
+            </torsional>
+            <ode>
+              <mu>0.0</mu>
+              <mu2>0.0</mu2>
+            </ode>
+            <bullet>
+              <friction>0.0</friction>
+              <friction2>0.0</friction2>
+              <rolling_friction>0.0</rolling_friction>
+            </bullet>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="WheelLeftBack">
+        <pose>-0.220 0.334 0.061 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://DeliveryRobot/meshes/WheelMain.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="back_caster_left">
+        <pose>-.25 .34 0.05 0 0 0</pose>
+        <geometry>
+          <sphere><radius>0.05</radius></sphere>
+        </geometry>
+        <surface>
+          <friction>
+            <torsional>
+              <coefficient>0.0</coefficient>
+            </torsional>
+            <ode>
+              <mu>0.0</mu>
+              <mu2>0.0</mu2>
+            </ode>
+            <bullet>
+              <friction>0.0</friction>
+              <friction2>0.0</friction2>
+              <rolling_friction>0.0</rolling_friction>
+            </bullet>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="WheelRightFront">
+        <pose>0.217 -0.262 0.061 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://DeliveryRobot/meshes/WheelMain.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="front_caster_right">
+        <pose>.25 -.27 0.05 0 0 0</pose>
+        <geometry>
+          <sphere><radius>0.05</radius></sphere>
+        </geometry>
+        <surface>
+          <friction>
+            <torsional>
+              <coefficient>0.0</coefficient>
+            </torsional>
+            <ode>
+              <mu>0.0</mu>
+              <mu2>0.0</mu2>
+            </ode>
+            <bullet>
+              <friction>0.0</friction>
+              <friction2>0.0</friction2>
+              <rolling_friction>0.0</rolling_friction>
+            </bullet>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="WheelRightBack">
+        <pose>0.217 0.334 0.061 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://DeliveryRobot/meshes/WheelMain.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="back_caster_right">
+        <pose>.25 .34 0.05 0 0 0</pose>
+        <geometry>
+          <sphere><radius>0.05</radius></sphere>
+        </geometry>
+        <surface>
+          <friction>
+            <torsional>
+              <coefficient>0.0</coefficient>
+            </torsional>
+            <ode>
+              <mu>0.0</mu>
+              <mu2>0.0</mu2>
+            </ode>
+            <bullet>
+              <friction>0.0</friction>
+              <friction2>0.0</friction2>
+              <rolling_friction>0.0</rolling_friction>
+            </bullet>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+
+    <link name="suspension_tire_left">
+      <!-- This is a dummy link that's used to connect a suspension (prismatic
+           joint) to the tire axis (revolute joint) -->
+      <pose>0 0.26 0.10 0 0 0</pose>
+      <inertial>
+        <mass>1.00</mass>
+        <inertia>
+          <ixx>1.00</ixx>
+          <iyy>1.00</iyy>
+          <izz>1.00</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="joint_suspension_tire_left" type="prismatic">
+      <parent>body</parent>
+      <child>suspension_tire_left</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>500</damping>
+          <spring_reference>-0.09</spring_reference>
+          <spring_stiffness>2000</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>true</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+
+    <link name="tire_left">
+      <pose>0 0.26 0.10 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>5.0</mass>
+        <!--<mass>2.60595111</mass>-->
+        <!-- Note: These calculated MOI values seem to be too small for ODE's
+                   numerical precision and make the robot slip. So instead we 
+                   use some higher values (x10) which seem to get better 
+                   behavior-->
+        <!--inertia>
+          <ixx>0.00757897446874</ixx>
+          <iyy>0.01302975553365</iyy>
+          <izz>0.00757897446874</izz>
+        </inertia-->
+        <!--
+        <inertia>
+          <ixx>0.1302975553365</ixx>
+          <iyy>0.0757897446874</iyy>
+          <izz>0.0757897446874</izz>
+        </inertia>
+        -->
+        <inertia>
+          <ixx>0.757897446874</ixx>
+          <iyy>1.302975553365</iyy>
+          <izz>0.757897446874</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="WheelSideLeft">
+        <pose>0 0.0 0.0 0 0 -1.57</pose>
+        <geometry>
+          <mesh>
+            <uri>model://DeliveryRobot/meshes/WheelSide.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="tire_left">
+        <geometry>
+          <sphere><radius>0.06137</radius></sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>10000000.0</kp>
+              <kd>1.0</kd>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name="joint_tire_left" type="revolute">
+      <parent>suspension_tire_left</parent>
+      <child>tire_left</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name="suspension_tire_right">
+      <!-- This is a dummy link that's used to connect a suspension (prismatic
+           joint) to the tire axis (revolute joint) -->
+      <pose>0 -0.26 0.10 0 0 0</pose>
+      <inertial>
+        <mass>1.00</mass>
+        <inertia>
+          <ixx>1.00</ixx>
+          <iyy>1.00</iyy>
+          <izz>1.00</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="joint_suspension_tire_right" type="prismatic">
+      <parent>body</parent>
+      <child>suspension_tire_right</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>500</damping>
+          <spring_reference>-0.09</spring_reference>
+          <spring_stiffness>2000</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>true</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+
+    <link name="tire_right">
+      <pose>0 -0.26 0.10 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <!--<mass>2.60595111</mass>-->
+        <mass>5.0</mass>
+        <!-- Note: These calculated MOI values seem to be too small for ODE's
+                   numerical precision and make the robot slip. So instead we 
+                   use some higher values (x10) which seem to get better 
+                   behavior-->
+        <!--inertia>
+          <ixx>0.00757897446874</ixx>
+          <iyy>0.01302975553365</iyy>
+          <izz>0.00757897446874</izz>
+        </inertia-->
+        <!--
+        <inertia>
+          <ixx>0.1302975553365</ixx>
+          <iyy>0.0757897446874</iyy>
+          <izz>0.0757897446874</izz>
+        </inertia>
+        -->
+        <inertia>
+          <ixx>0.757897446874</ixx>
+          <iyy>1.302975553365</iyy>
+          <izz>0.757897446874</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="WheelSideRight">
+        <pose>0 0.0 0.0 0 0 -1.57</pose>
+        <geometry>
+          <mesh>
+            <uri>model://DeliveryRobot/meshes/WheelSide.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="tire_right">
+        <geometry>
+          <sphere><radius>0.06137</radius></sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>10000000.0</kp>
+              <kd>1.0</kd>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name="joint_tire_right" type="revolute">
+      <parent>suspension_tire_right</parent>
+      <child>tire_right</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+  </model>
+</sdf>

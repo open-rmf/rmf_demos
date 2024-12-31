@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<sdf version="1.6">
+  <model name="TeleportDispenser">
+    <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+    <static>true</static>
+    
+    <link name="visual_link">
+      <pose>0.0 0.0 0.05 0.0 0.0 0.0</pose>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 0.1</ambient>
+          <diffuse>0.8 0.8 0.8 0.1</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <plugin name="teleport_dispenser" filename="libteleport_dispenser.so">
+    </plugin>
+
+  </model>
+</sdf>
