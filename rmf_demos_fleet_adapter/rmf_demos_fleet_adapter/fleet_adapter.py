@@ -456,7 +456,8 @@ def ros_connections(node, robots, fleet_handle):
             closed_lanes.add(lane_idx)
 
         for lane_idx in msg.open_lanes:
-            closed_lanes.remove(lane_idx)
+            if lane_idx in closed_lanes:
+                closed_lanes.remove(lane_idx)
 
         state_msg = ClosedLanes()
         state_msg.fleet_name = fleet_name
