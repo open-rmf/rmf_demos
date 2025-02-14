@@ -105,6 +105,12 @@ The new task system allows users to construct and submit their own tasks in a mo
   ros2 run rmf_demos_tasks  dispatch_go_to_place -p lounge -o 105 --use_sim_time
   ```
 
+- **wait_for_task_complete**
+  This is a tool meant only for creating test scenarios. Essentially it blocks until a specified robot is free of any tasks. This allows us to do integration tests. Example in office world:
+  ```
+  ros2 run rmf_demos_tasks wait_for_task_complete -F tinyRobot -R tinyRobot1
+  ```
+
 ## Quality Declaration
 
 This package claims to be in the **Quality Level 4** category, see the [Quality Declaration](./QUALITY_DECLARATION.md) for more details.

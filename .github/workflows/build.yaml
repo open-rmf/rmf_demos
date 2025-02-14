@@ -1,53 +1,21 @@
 name: build
 on:
   pull_request:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        docker_image: ['ros:humble-ros-base']
-    container:
-      image: ${{ matrix.docker_image }}
-    steps:
-    - name: non-ros-deps
-      run: |
-        sudo apt update
-        sudo apt install -y wget
-        sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
-        wget https://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
-        sudo apt update && sudo apt install \
-          git cmake python3-vcstool curl \
-          clang clang-tools lld \
-          python3-shapely python3-yaml python3-requests \
-          python3-pip -y
-        pip3 install flask-socketio fastapi uvicorn
-    - name: create-ws
-      run: |
-        mkdir -p rmf_demos_ws/src
-    - name: checkout # This will check out the current rmf_demos branch for build tests
-      uses: actions/checkout@v2
-      with:
-        path: rmf_demos_ws/src/demonstrations/rmf_demos/
-    - name: workspace
-      run: |
-        cd rmf_demos_ws
-        wget https://raw.githubusercontent.com/open-rmf/rmf/main/rmf.repos
-        vcs import src < rmf.repos --skip-existing
-    - name: ros-deps
-      run: |
-        export DEBIAN_FRONTEND=noninteractive
-        colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
-        colcon mixin update default
-        cd rmf_demos_ws
-        rosdep update
-        rosdep install --from-paths src --ignore-src --rosdistro humble -yr
-    - name: build
-      shell: bash
-      run: |
-        cd rmf_demos_ws
-        source /opt/ros/humble/setup.bash
-        export CXX=clang++
-        export CX=clang
-        colcon build --mixin lld --cmake-args -DNO_DOWNLOAD_MODELS=True
+  build_and_test:
+    name: rmf_demos
+    uses: open-rmf/rmf_ci_templates/.github/workflows/reusable_build.yaml@main
+    with:
+      packages: |
+        rmf_demos
+        rmf_demos_assets
+        rmf_demos_bridges
+        rmf_demos_fleet_adapter
+        rmf_demos_gz
+        rmf_demos_maps
+        rmf_demos_tasks
+      dist-matrix: '[{"ros_distribution": "rolling", "ubuntu_distribution": "noble"}]'

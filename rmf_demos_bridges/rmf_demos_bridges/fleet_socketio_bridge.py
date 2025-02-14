@@ -13,29 +13,32 @@
 # limitations under the License.
 
 
+import argparse
+from collections import OrderedDict
+import copy
+import json
+import logging
+import sys
+import threading
+
+from flask import Flask
+from flask import jsonify
+from flask import request
 from flask_cors import CORS
-from flask import Flask, request, jsonify
+from flask_socketio import disconnect
+from flask_socketio import emit
+from flask_socketio import SocketIO
+from pyproj import Transformer
 import rclpy
 import rclpy.executors
-import threading
-import sys
-import json
-import copy
-import argparse
-import logging
-from collections import OrderedDict
-from rosidl_runtime_py import message_to_ordereddict
-from pyproj import Transformer
-
 from rclpy.node import Node
-from flask_socketio import SocketIO, emit, disconnect
-
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-
-from rmf_fleet_msgs.msg import FleetState, RobotState
+from rmf_fleet_msgs.msg import FleetState
+from rmf_fleet_msgs.msg import RobotState
+from rosidl_runtime_py import message_to_ordereddict
 
 log = logging.getLogger('werkzeug')
 log.disabled = True
@@ -44,61 +47,80 @@ SUPPORTED_GPS_FRAMES = ['svy21']
 
 # Temporary Message definition for GPS messages
 GPS_MESSAGE_DEFINITION = {
-    "timestamp": -1,     # Unix time
-    "robot_id": "",      # String
-    "lat": -1,           # Float32
-    "lon": -1,           # Float32
-    "alt": -1,           # Float32
-    "heading": 0,        # Uint
-
-    "x": 0,              # 2D robot x position
-    "y": 0,              # 2D robot y position
-    "angle": 0,          # 2D robot angle
-
-    "battery": 100.0,    # Battery percentage
+    'timestamp': -1,  # Unix time
+    'robot_id': '',  # String
+    'lat': -1,  # Float32
+    'lon': -1,  # Float32
+    'alt': -1,  # Float32
+    'heading': 0,  # Uint
+    'x': 0,  # 2D robot x position
+    'y': 0,  # 2D robot y position
+    'angle': 0,  # 2D robot angle
+    'battery': 100.0,  # Battery percentage
 }
 
 
 class FleetSocketIOBridge(Node):
     def __init__(self, argv=sys.argv):
         parser = argparse.ArgumentParser()
-        parser.add_argument('-t', '--robot_state_topic',
-                            required=False,
-                            type=str,
-                            default='/robot_state',
-                            help='Topic to listen on for Robot States')
-        parser.add_argument('-f', '--filter_fleet',
-                            required=False,
-                            type=str,
-                            help='Only listen to this fleet.')
-        parser.add_argument('-g', '--gps_state_topic',
-                            required=False,
-                            type=str,
-                            help='SocketIO topic to publish GPS.')
-        parser.add_argument('-x', '--offset_x',
-                            required=False,
-                            type=float,
-                            default=0.0,
-                            help='X offset for simulations.')
-        parser.add_argument('-y', '--offset_y',
-                            required=False,
-                            type=float,
-                            default=0.0,
-                            help='Y offset for simulations.')
-        parser.add_argument('-i', '--listening_interfaces',
-                            required=False,
-                            type=str,
-                            default='0.0.0.0',
-                            help='Interfaces for SocketIO to serve on')
-        parser.add_argument('-p', '--listening_port',
-                            required=False,
-                            type=str,
-                            default='8080',
-                            help='Port for SocketIO to serve on')
+        parser.add_argument(
+            '-t',
+            '--robot_state_topic',
+            required=False,
+            type=str,
+            default='/robot_state',
+            help='Topic to listen on for Robot States',
+        )
+        parser.add_argument(
+            '-f',
+            '--filter_fleet',
+            required=False,
+            type=str,
+            help='Only listen to this fleet.',
+        )
+        parser.add_argument(
+            '-g',
+            '--gps_state_topic',
+            required=False,
+            type=str,
+            help='SocketIO topic to publish GPS.',
+        )
+        parser.add_argument(
+            '-x',
+            '--offset_x',
+            required=False,
+            type=float,
+            default=0.0,
+            help='X offset for simulations.',
+        )
+        parser.add_argument(
+            '-y',
+            '--offset_y',
+            required=False,
+            type=float,
+            default=0.0,
+            help='Y offset for simulations.',
+        )
+        parser.add_argument(
+            '-i',
+            '--listening_interfaces',
+            required=False,
+            type=str,
+            default='0.0.0.0',
+            help='Interfaces for SocketIO to serve on',
+        )
+        parser.add_argument(
+            '-p',
+            '--listening_port',
+            required=False,
+            type=str,
+            default='8080',
+            help='Port for SocketIO to serve on',
+        )
 
         self.args = parser.parse_args(argv[1:])
 
-        super().__init__(f"fleet_socketio_bridge")
+        super().__init__(f'fleet_socketio_bridge')
 
         self._init_pubsub()
         self._init_webserver()
@@ -112,13 +134,13 @@ class FleetSocketIOBridge(Node):
                 if self.args.filter_fleet not in msg.name:
                     return
 
-            self._sio.emit(self.args.robot_state_topic,
-                           message_to_ordereddict(msg))
+            self._sio.emit(
+                self.args.robot_state_topic, message_to_ordereddict(msg)
+            )
 
             if self.args.gps_state_topic:
                 robot_state_json = self._robot_state_to_gps_json(msg)
-                self._sio.emit(self.args.gps_state_topic,
-                               robot_state_json)
+                self._sio.emit(self.args.gps_state_topic, robot_state_json)
         except Exception as e:
             print(e)
 
@@ -127,71 +149,73 @@ class FleetSocketIOBridge(Node):
 
     def spin_background(self):
         def spin():
-            self.get_logger().info("start spinning rclpy node")
+            self.get_logger().info('start spinning rclpy node')
             rclpy.spin_until_future_complete(self, self._finish_spin)
-            self.get_logger().info("Finished spinning")
+            self.get_logger().info('Finished spinning')
+
         self._spin_thread = threading.Thread(target=spin)
         self._spin_thread.start()
 
     def _init_webserver(self):
         self._finish_spin = rclpy.executors.Future()
         self._finish_gc = self.create_guard_condition(
-            lambda: self._finish_spin.set_result(None))
+            lambda: self._finish_spin.set_result(None)
+        )
 
         self._app = Flask(__name__)
-        CORS(self._app, origins=r"/*")
+        CORS(self._app, origins=r'/*')
 
         self._sio = SocketIO(self._app, async_mode='threading')
-        self._sio.init_app(self._app, cors_allowed_origins="*")
+        self._sio.init_app(self._app, cors_allowed_origins='*')
 
     def _init_pubsub(self):
         self.robot_state_sub = self.create_subscription(
             RobotState,
             self.args.robot_state_topic,
             self.robot_state_callback,
-            10)
+            10,
+        )
 
     def _init_gps_conversion_tools(self, frame: str):
         assert frame in SUPPORTED_GPS_FRAMES
 
         if frame == 'svy21':
             self._wgs_transformer = Transformer.from_crs(
-                'EPSG:3414', 'EPSG:4326')
+                'EPSG:3414', 'EPSG:4326'
+            )
             return
 
-        raise Exception("This should not happen")
+        raise Exception('This should not happen')
 
     def _robot_state_to_gps_json(self, robot_state: RobotState):
         resp = copy.deepcopy(GPS_MESSAGE_DEFINITION)
 
         svy21_xy = self._remove_offsets(
-            robot_state.location.x,
-            robot_state.location.y
+            robot_state.location.x, robot_state.location.y
         )
         wgs84_xy = self._wgs_transformer.transform(
-            svy21_xy[1], svy21_xy[0])  # inputs are y,x
-        resp["timestamp"] = robot_state.location.t.sec
-        resp["robot_id"] = robot_state.name
-        resp["lat"] = wgs84_xy[0]
-        resp["lon"] = wgs84_xy[1]
-        resp["alt"] = 0         # BH(WARN): Hardcoded
-        resp["heading"] = robot_state.location.yaw
+            svy21_xy[1], svy21_xy[0]
+        )  # inputs are y,x
+        resp['timestamp'] = robot_state.location.t.sec
+        resp['robot_id'] = robot_state.name
+        resp['lat'] = wgs84_xy[0]
+        resp['lon'] = wgs84_xy[1]
+        resp['alt'] = 0  # BH(WARN): Hardcoded
+        resp['heading'] = robot_state.location.yaw
 
-        resp["x"] = robot_state.location.x
-        resp["y"] = robot_state.location.y
-        resp["angle"] = robot_state.location.yaw
+        resp['x'] = robot_state.location.x
+        resp['y'] = robot_state.location.y
+        resp['angle'] = robot_state.location.yaw
 
-        resp["battery"] = robot_state.battery_percent
+        resp['battery'] = robot_state.battery_percent
 
         return json.dumps(resp)
 
     def _remove_offsets(self, x: float, y: float):
-        return (x + self.args.offset_x,
-                y + self.args.offset_y)
+        return (x + self.args.offset_x, y + self.args.offset_y)
 
     def _apply_offsets(self, x: float, y: float):
-        return (x - self.args.offset_x,
-                y - self.args.offset_y)
+        return (x - self.args.offset_x, y - self.args.offset_y)
 
 
 def main(argv=sys.argv):
@@ -205,13 +229,12 @@ def main(argv=sys.argv):
     except KeyboardInterrupt:
         pass
     except OSError:
-        node.get_logger().error(
-            "Check if target port is already in use.")
+        node.get_logger().error('Check if target port is already in use.')
     finally:
         node.get_logger().info('shutting down...')
         node.destroy_node()
         rclpy.shutdown()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main(sys.argv)

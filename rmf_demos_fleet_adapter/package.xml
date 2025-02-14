@@ -2,16 +2,32 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>rmf_demos_fleet_adapter</name>
-  <version>1.4.0</version>
+  <version>2.5.0</version>
   <description>Fleet adapters for interfacing with RMF Demos robots with a fleet manager via REST API</description>
   <maintainer email="xiyu@openrobotics.org">Xi Yu Oh</maintainer>
+  <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
   <license>Apache License 2.0</license>
 
-  <exec_depend>rmf_fleet_adapter_python</exec_depend>
+  <exec_depend>launch_xml</exec_depend>
 
-  <depend>rclpy</depend>
-  <depend>rmf_fleet_msgs</depend>
-  <depend>rmf_task_msgs</depend>
+  <exec_depend>python3-fastapi</exec_depend>
+  <exec_depend>python3-flask-socketio</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-pydantic</exec_depend>
+  <exec_depend>python3-pyproj</exec_depend>
+  <exec_depend>python3-requests</exec_depend>
+  <exec_depend>python3-uvicorn</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+
+  <exec_depend>rclpy</exec_depend>
+
+  <exec_depend>rmf_fleet_adapter_python</exec_depend>
+  <exec_depend>rmf_fleet_msgs</exec_depend>
+  <exec_depend>rmf_task_msgs</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
 
   <export>
     <build_type>ament_python</build_type>
