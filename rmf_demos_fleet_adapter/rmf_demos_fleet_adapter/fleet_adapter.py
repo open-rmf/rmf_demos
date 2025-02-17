@@ -34,9 +34,9 @@ from rmf_adapter import Adapter
 import rmf_adapter.easy_full_control as rmf_easy
 from rmf_fleet_msgs.msg import ClosedLanes
 from rmf_fleet_msgs.msg import LaneRequest
-from rmf_fleet_msgs.msg import SpeedLimitRequest
 from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import RobotMode
+from rmf_fleet_msgs.msg import SpeedLimitRequest
 import yaml
 
 from .RobotClientAPI import RobotAPI
