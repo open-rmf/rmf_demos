@@ -28,6 +28,7 @@ setup(
             'request_loop = rmf_demos_tasks.request_loop:main',
             'request_lift = rmf_demos_tasks.request_lift:main',
             'cancel_task = rmf_demos_tasks.cancel_task:main',
+            'cancel_robot_task = rmf_demos_tasks.cancel_robot_task:main',
             'dispatch_loop = rmf_demos_tasks.dispatch_loop:main',
             'dispatch_action = rmf_demos_tasks.dispatch_action:main',
             'dispatch_patrol = rmf_demos_tasks.dispatch_patrol:main',
@@ -43,7 +44,7 @@ setup(
             'dispatch_json = rmf_demos_tasks.dispatch_json:main',
             'api_request = rmf_demos_tasks.api_request:main',
             'wait_for_task_complete = \
-                rmf_demos_tasks.wait_for_task_complete:main'
+                rmf_demos_tasks.wait_for_task_complete:main',
         ],
     },
 )
