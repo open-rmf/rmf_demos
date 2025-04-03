@@ -29,7 +29,8 @@ from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
-from rmf_fleet_msgs.msg import FleetState, ApiRequest
+from rmf_fleet_msgs.msg import FleetState
+from rmf_task_msgs.msg import ApiRequest
 
 
 class TaskObserver(Node):
