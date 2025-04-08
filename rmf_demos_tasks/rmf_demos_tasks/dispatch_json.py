@@ -80,6 +80,16 @@ class TaskRequester(Node):
             action='store_true',
             help='Use sim time, default: false'
         )
+        parser.add_argument(
+            '-e',
+            '--estimate',
+            action='store_true',
+            help= (
+                'Request an estimate instead of dispatching a task. '
+                'You must specify both the fleet and robot names for this '
+                'setting.'
+            ),
+        )
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -108,13 +118,22 @@ class TaskRequester(Node):
         payload = {}
 
         if self.args.robot and self.args.fleet:
-            self.get_logger().info("Using 'robot_task_request'")
-            payload['type'] = 'robot_task_request'
+            if self.args.estimate:
+                payload['type'] = 'estimate_robot_task_request'
+            else:
+                payload['type'] = 'robot_task_request'
             payload['robot'] = self.args.robot
             payload['fleet'] = self.args.fleet
         else:
+            if self.args.estimate:
+                raise RuntimeError(
+                    'Cannot use --estimate without specifying names for both '
+                    'fleet and robot'
+                )
             self.get_logger().info("Using 'dispatch_task_request'")
             payload['type'] = 'dispatch_task_request'
+
+        self.get_logger().info(f"Using '{payload['type']}'")
 
         request = {}
 
