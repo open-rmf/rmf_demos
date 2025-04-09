@@ -57,8 +57,8 @@ class EmergencySignalPublisher(Node):
         )
 
         parser.add_argument(
-            '-f',
-            '--fleet',
+            '-F',
+            '--fleets',
             type=str,
             help='Fleets to trigger',
             nargs='+',
