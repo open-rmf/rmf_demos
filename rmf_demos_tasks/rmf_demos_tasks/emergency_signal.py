@@ -68,8 +68,8 @@ class EmergencySignalPublisher(Node):
         self.msg = EmergencySignal()
         self.msg.is_emergency = self.args.is_emergency
         self.get_logger().info('Publishing emergency signal: %s' % self.msg.is_emergency)
-        if self.args.fleet is not None:
-            self.msg.fleet_names = self.args.fleet
+        if self.args.fleets is not None:
+            self.msg.fleet_names = self.args.fleets
             self.get_logger().info('Fleets: %s' % self.msg.fleet_names)
         else:
             self.get_logger().info('No fleets specified, sending to all fleets')
