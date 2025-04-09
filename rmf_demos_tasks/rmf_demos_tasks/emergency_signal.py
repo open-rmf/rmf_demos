@@ -21,6 +21,7 @@ import sys
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
@@ -41,8 +42,9 @@ class EmergencySignalPublisher(Node):
         """Initialize the emergency signal publisher."""
         super().__init__('emergency_signal_publisher')
         qos_profile = QoSProfile(
-            depth=10,
-            durability=Durability.VOLATILE,
+            history=History.KEEP_LAST,
+            depth=100,
+            durability=Durability.TRANSIENT_LOCAL,
             reliability=Reliability.RELIABLE
         )
         self.publisher = self.create_publisher(EmergencySignal, 'emergency_signal', qos_profile)
@@ -63,15 +65,21 @@ class EmergencySignalPublisher(Node):
         )
 
         self.args = parser.parse_args(argv[1:])
-        msg = EmergencySignal()
-        msg.is_emergency = self.args.is_emergency
-        self.get_logger().info('Publishing emergency signal: %s' % msg.is_emergency)
+        self.msg = EmergencySignal()
+        self.msg.is_emergency = self.args.is_emergency
+        self.get_logger().info('Publishing emergency signal: %s' % self.msg.is_emergency)
         if self.args.fleet is not None:
-            msg.fleet_names = self.args.fleet
-            self.get_logger().info('Fleets: %s' % msg.fleet_names)
+            self.msg.fleet_names = self.args.fleet
+            self.get_logger().info('Fleets: %s' % self.msg.fleet_names)
         else:
             self.get_logger().info('No fleets specified, sending to all fleets')
-        self.publisher.publish(msg)
+        
+        timer_period = 1.0  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+
+    def timer_callback(self):
+        self.publisher.publish(self.msg)
+        self.get_logger().info('Publishing emergency signal')
 
 ###############################################################################
 
@@ -81,6 +89,8 @@ def main(argv=sys.argv):
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
     signal_publisher = EmergencySignalPublisher(args_without_ros)
+
+    rclpy.spin(signal_publisher)
     signal_publisher.destroy_node()
     rclpy.shutdown()
 
