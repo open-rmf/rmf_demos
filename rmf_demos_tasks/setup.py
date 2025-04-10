@@ -43,7 +43,8 @@ setup(
             'dispatch_json = rmf_demos_tasks.dispatch_json:main',
             'api_request = rmf_demos_tasks.api_request:main',
             'wait_for_task_complete = \
-                rmf_demos_tasks.wait_for_task_complete:main'
+                rmf_demos_tasks.wait_for_task_complete:main',
+            'emergency_signal = rmf_demos_tasks.emergency_signal:main'
         ],
     },
 )
