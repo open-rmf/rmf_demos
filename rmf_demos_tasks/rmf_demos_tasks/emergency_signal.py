@@ -29,6 +29,7 @@ from rmf_fleet_msgs.msg import EmergencySignal
 
 
 def str2bool(v):
+    """Convert a string to a boolean."""
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
@@ -47,7 +48,8 @@ class EmergencySignalPublisher(Node):
             durability=Durability.TRANSIENT_LOCAL,
             reliability=Reliability.RELIABLE
         )
-        self.publisher = self.create_publisher(EmergencySignal, 'emergency_signal', qos_profile)
+        self.publisher = self.create_publisher(EmergencySignal,
+                                               'emergency_signal', qos_profile)
 
         parser = argparse.ArgumentParser()
         parser.add_argument(
@@ -67,12 +69,14 @@ class EmergencySignalPublisher(Node):
         self.args = parser.parse_args(argv[1:])
         self.msg = EmergencySignal()
         self.msg.is_emergency = self.args.is_emergency
-        self.get_logger().info('Publishing emergency signal: %s' % self.msg.is_emergency)
+        self.get_logger().info('Publishing emergency signal: %s' %
+                               self.msg.is_emergency)
         if self.args.fleets is not None:
             self.msg.fleet_names = self.args.fleets
             self.get_logger().info('Fleets: %s' % self.msg.fleet_names)
         else:
-            self.get_logger().info('No fleets specified, sending to all fleets')
+            self.get_logger().info('No fleets specified, '
+                                   'sending to all fleets')
 
         timer_period = 1.0  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
