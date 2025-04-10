@@ -27,13 +27,13 @@ from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import EmergencySignal
 
-###############################################################################
 
 def str2bool(v):
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
         return False
+
 
 class EmergencySignalPublisher(Node):
     """Emergency signal publisher."""
@@ -48,7 +48,7 @@ class EmergencySignalPublisher(Node):
             reliability=Reliability.RELIABLE
         )
         self.publisher = self.create_publisher(EmergencySignal, 'emergency_signal', qos_profile)
-        
+
         parser = argparse.ArgumentParser()
         parser.add_argument(
             'is_emergency',
@@ -73,7 +73,7 @@ class EmergencySignalPublisher(Node):
             self.get_logger().info('Fleets: %s' % self.msg.fleet_names)
         else:
             self.get_logger().info('No fleets specified, sending to all fleets')
-        
+
         timer_period = 1.0  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
