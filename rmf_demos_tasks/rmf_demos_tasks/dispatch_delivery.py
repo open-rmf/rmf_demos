@@ -131,7 +131,7 @@ class TaskRequester(Node):
             '-e',
             '--estimate',
             action='store_true',
-            help= (
+            help=(
                 'Request an estimate instead of dispatching a task. '
                 'You must specify both the fleet and robot names for this '
                 'setting.'
