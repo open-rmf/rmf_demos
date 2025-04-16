@@ -29,6 +29,7 @@ setup(
             'request_lift = rmf_demos_tasks.request_lift:main',
             'cancel_task = rmf_demos_tasks.cancel_task:main',
             'dispatch_dynamic_event = rmf_demos_tasks.dispatch_dynamic_event:main',
+            'dynamic_event_cancel_event = rmf_demos_tasks.dynamic_event_cancel_event:main',
             'dynamic_event_go_to_place = rmf_demos_tasks.dynamic_event_go_to_place:main',
             'dispatch_loop = rmf_demos_tasks.dispatch_loop:main',
             'dispatch_action = rmf_demos_tasks.dispatch_action:main',
