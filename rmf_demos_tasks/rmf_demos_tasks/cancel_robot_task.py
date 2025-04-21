@@ -70,7 +70,7 @@ class TaskObserver(Node):
         for robot_state in fleet_state.robots:
             if robot_state.name == self.parser.robot:
                 if robot_state.task_id == '':
-                    print("Robot not found")
+                    print("Robot not performing a task")
                     self.response.set_result(robot_state)
                     return
                 else:
