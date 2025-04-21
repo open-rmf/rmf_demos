@@ -63,7 +63,6 @@ class TaskObserver(Node):
             ApiRequest, 'task_api_requests', transient_qos
         )
 
-
     def state_watcher(self, fleet_state: FleetState):
         """Watch the fleet state."""
         if fleet_state.name != self.parser.fleet:
