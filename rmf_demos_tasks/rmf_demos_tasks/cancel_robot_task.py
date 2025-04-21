@@ -17,10 +17,10 @@
 
 import argparse
 import asyncio
+import json
 import sys
 import time
 import uuid
-import json
 
 import rclpy
 from rclpy.node import Node
@@ -70,7 +70,7 @@ class TaskObserver(Node):
         for robot_state in fleet_state.robots:
             if robot_state.name == self.parser.robot:
                 if robot_state.task_id == '':
-                    print("Robot not performing a task")
+                    print('Robot not performing a task')
                     self.response.set_result(robot_state)
                     return
                 else:
