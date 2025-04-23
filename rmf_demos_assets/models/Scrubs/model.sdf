@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<sdf version="1.6">
+  <model name='Scrubs'>
+   <static>true</static>
+    <link name="body">
+      <pose>0 0 0 0 0 0</pose>
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://Scrubs/meshes/scrubs.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://Scrubs/meshes/Scrubs_Col.obj</uri>
+          </mesh>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>
+

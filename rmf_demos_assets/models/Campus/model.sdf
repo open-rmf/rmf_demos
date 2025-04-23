@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.7">
+  <model name="Campus">
+    <static>true</static>
+    <link name="floor_1">
+      <visual name="visual">
+        <pose>0 0 -0.25 0 0 0</pose>   
+        <geometry>
+          <mesh>
+            <uri>model://Campus/meshes/Campus_world.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="collision">
+        <pose>0 0 -0.25 0 0 0</pose>   
+        <geometry>
+          <mesh>
+            <uri>model://Campus/meshes/Campus_world.obj</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>

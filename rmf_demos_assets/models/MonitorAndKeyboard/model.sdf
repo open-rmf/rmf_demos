@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<sdf version="1.6">
+  <model name='MonitorAndKeyboard'>
+    <link name="body">
+      <pose>0 0 0 0 0 0</pose>
+
+      <visual name="visual_monitor">
+        <geometry>
+          <mesh>
+            <uri>model://MonitorAndKeyboard/meshes/monitor.obj</uri>
+            <scale>0.20 0.20 0.20</scale>
+          </mesh>
+        </geometry>
+        <pose>0 0 0 0 0 0</pose>
+      </visual>
+
+      <collision name="collision_monitor">
+        <geometry>
+          <mesh>
+            <uri>model://MonitorAndKeyboard/meshes/monitor.obj</uri>
+            <scale>0.20 0.20 0.20</scale>
+          </mesh>
+        </geometry>
+        <pose>0 0 0 0 0 0</pose>
+      </collision>
+
+      <visual name="visual_keyboard">
+        <geometry>
+          <mesh>
+            <uri>model://MonitorAndKeyboard/meshes/keyboard.obj</uri>
+            <scale>0.20 0.20 0.20</scale>
+          </mesh>
+        </geometry>
+        <pose>-0.27 0 0 0 0 0</pose>
+      </visual>
+
+      <collision name="collision_keyboard">
+        <geometry>
+          <mesh>
+            <uri>model://MonitorAndKeyboard/meshes/keyboard.obj</uri>
+            <scale>0.20 0.20 0.20</scale>
+          </mesh>
+        </geometry>
+        <pose>-0.27 0 0 0 0 0</pose>
+      </collision>
+
+    </link>
+  </model>
+</sdf>
+

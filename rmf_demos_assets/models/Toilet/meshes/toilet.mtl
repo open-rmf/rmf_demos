@@ -1,0 +1,12 @@
+# Blender MTL File: 'toilet.blend'
+# Material Count: 1
+
+newmtl metalLight
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.839216 0.909804 0.870588
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2

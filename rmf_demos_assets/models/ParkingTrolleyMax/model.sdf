@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<sdf version="1.6">
+  <model name='ParkingTrolleyMax'>
+    <link name="body">
+      <pose>0 0 0 0 0 0</pose>
+
+        <visual name="visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh><uri>model://ParkingTrolleyMax/meshes/ParkingTrolleyMax.obj</uri></mesh>
+          </geometry>
+        </visual>
+
+        <collision name="collision">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh><uri>model://ParkingTrolleyMax/meshes/ParkingTrolleyMax.obj</uri></mesh>
+          </geometry>
+        </collision>
+
+    </link>
+  </model>
+</sdf>

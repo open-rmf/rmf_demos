@@ -1,0 +1,18 @@
+model {
+  file: "model.sdf"
+  file_format {
+    version {
+      major: 1
+      minor: 6
+    }
+    name: "sdf"
+  }
+}
+name: "SUV"
+description: "An SUV."
+version: 1
+authors {
+  name: "Nate Koenig"
+  email: "nate@osrfoundation.org"
+}
+
