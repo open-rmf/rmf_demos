@@ -50,6 +50,15 @@ class DynamicEventActionClient(Node):
             type=str,
             help='Place to go to',
         )
+        parser.add_argument(
+            '--stubbornness',
+            type=float,
+            default=0.0,
+            help=(
+                'How long (in seconds) the robot should report that it will '
+                'stubbornly wait where it is for the next command to arrive'
+            )
+        )
 
         self.args = parser.parse_args(argv[1:])
 
@@ -68,6 +77,7 @@ class DynamicEventActionClient(Node):
         goal_msg.description = f'{{"waypoint": "{order}"}}'
         goal_msg.id = 2
         goal_msg.dynamic_event_seq = 1
+        goal_msg.stubborn_period = self.args.stubbornness
 
         self.get_logger().info(f'Sending goal: {order}')
         self._send_goal_future = self._action_client.send_goal_async(
