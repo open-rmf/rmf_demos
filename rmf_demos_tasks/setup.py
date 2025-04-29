@@ -31,6 +31,7 @@ setup(
             'dispatch_dynamic_event = rmf_demos_tasks.dispatch_dynamic_event:main',
             'dynamic_event_cancel_event = rmf_demos_tasks.dynamic_event_cancel_event:main',
             'dynamic_event_go_to_place = rmf_demos_tasks.dynamic_event_go_to_place:main',
+            'cancel_robot_task = rmf_demos_tasks.cancel_robot_task:main',
             'dispatch_loop = rmf_demos_tasks.dispatch_loop:main',
             'dispatch_action = rmf_demos_tasks.dispatch_action:main',
             'dispatch_patrol = rmf_demos_tasks.dispatch_patrol:main',
@@ -46,7 +47,8 @@ setup(
             'dispatch_json = rmf_demos_tasks.dispatch_json:main',
             'api_request = rmf_demos_tasks.api_request:main',
             'wait_for_task_complete = \
-                rmf_demos_tasks.wait_for_task_complete:main'
+                rmf_demos_tasks.wait_for_task_complete:main',
+            'emergency_signal = rmf_demos_tasks.emergency_signal:main'
         ],
     },
 )

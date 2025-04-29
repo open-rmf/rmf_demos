@@ -299,6 +299,7 @@ class RobotAdapter:
                 self.attempt_cmd_until_success(
                     cmd=self.api.toggle_teleop, args=(self.name, False)
                 )
+                self.teleoperation = None
 
     def perform_docking(self, destination):
         match self.api.start_activity(
