@@ -4,7 +4,7 @@
   <arg name="map_package" default="rmf_demos_maps" description="Name of the map package" />
   <arg name="map_name" description="Name of the rmf_demos map to simulate" />
   <arg name="use_crowdsim" default='0'/>
-  <arg name="gazebo_version" default='8'/>
+  <arg name="gazebo_version" default='9'/>
   <arg name="sim_update_rate" default='100'/>
 
   <let name="world_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/$(var map_name).world" />
