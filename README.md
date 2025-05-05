@@ -20,10 +20,10 @@ These demos were built and tested on
 
 * [Ubuntu 24.04 LTS](https://releases.ubuntu.com/24.04/)
 
-* [ROS 2 - Jazzy](https://docs.ros.org/en/jazzy/Releases/Release-Jazzy-Jalisco.html)
+* [ROS 2 - Rolling](https://docs.ros.org/en/jazzy/Releases/Release-Rolling-Ridley.html)
 
-* [Gazebo Harmonic](https://gazebosim.org/docs/harmonic)
-> Note: RMF is fully supported on ROS 2 Humble and Iron as well, but those will require [ros_gz](https://github.com/gazebosim/ros_gz) to be built from source.
+* [Gazebo Ionic](https://gazebosim.org/docs/ionic)
+> Note: The `main` branches of the core RMF libraries are fully supported on ROS 2 Humble, Iron, and Jazzy as well, but you will need to use the distro-specific branches for `rmf_traffic_editor`, `rmf_simulation`, and `rmf_demos`.
 
 ## Installation
 Instructions can be found [here](https://github.com/open-rmf/rmf).
