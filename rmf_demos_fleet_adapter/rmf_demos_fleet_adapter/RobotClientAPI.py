@@ -129,7 +129,7 @@ class RobotAPI:
             print(f'Other error {robot_name} in start_activity: {err}')
         return RobotAPIResult.RETRY
 
-    def stop(self, robot_name: str, cmd_id: int):
+    def stop(self, robot_name: str, running_cmd_id: int, stop_cmd_id: int):
         """
         Command the robot to stop.
 
@@ -138,7 +138,8 @@ class RobotAPI:
         url = (
             self.prefix
             + f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={robot_name}'
-            f'&cmd_id={cmd_id}'
+            f'&running_cmd_id={running_cmd_id}'
+            f'&stop_cmd_id={stop_cmd_id}'
         )
         try:
             response = requests.get(url, self.timeout)
