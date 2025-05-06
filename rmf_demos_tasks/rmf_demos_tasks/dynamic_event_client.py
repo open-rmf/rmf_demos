@@ -55,9 +55,9 @@ class DynamicEventActionClient(Node):
             type=str,
             nargs='+',
             help=(
-                'Place(s) for the robot to go. If more than one is listed, the '
-                'fleet adapter will choose the closest reachable place. This '
-                'cannot be used with --file, --end, or --cancel.',
+                'Place(s) for the robot to go. If more than one is listed, '
+                'the fleet adapter will choose the closest reachable place. '
+                'This cannot be used with --file, --end, or --cancel.',
             ),
         )
         parser.add_argument(
@@ -66,9 +66,9 @@ class DynamicEventActionClient(Node):
             type=str,
             help=(
                 'File containing a json object containing at least '
-                '{{ "category": -, "description": - }}. This will be issued as '
-                'the event request. This cannot be used with --place, --end, '
-                'or --cancel.'
+                '{{ "category": -, "description": - }}. This will be issued '
+                'as the event request. This cannot be used with --place, '
+                '--end, or --cancel.'
             ),
         )
         parser.add_argument(
@@ -152,6 +152,7 @@ class DynamicEventActionClient(Node):
         )
 
         self.received_status = False
+
         def on_status_update(status):
             if self.received_status:
                 # We only need the status once
@@ -187,9 +188,9 @@ class DynamicEventActionClient(Node):
             goal_msg.event_type = DynamicEvent.Goal.EVENT_TYPE_NEXT
             goal_msg.id = self.status.id + 1
             goal_msg.category = 'go_to_place'
-            goal_msg.description = json.dumps({ 'one_of': self.args.place })
+            goal_msg.description = json.dumps({'one_of': self.args.place})
 
-            description = { 'one_of': self.args.place }
+            description = {'one_of': self.args.place}
             goal_msg.description = json.dumps(description)
 
         if self.request_file_contents:

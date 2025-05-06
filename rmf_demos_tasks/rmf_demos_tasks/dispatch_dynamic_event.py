@@ -50,9 +50,10 @@ class TaskRequester(Node):
             type=str,
             nargs='+',
             help=(
-                'Place(s) for the fleet adapter to estimate the robot will go. '
-                'If more than one is listed, the fleet adapter will choose the '
-                'closest reachable place. This cannot be used with --file.',
+                'Place(s) for the fleet adapter to estimate the robot will '
+                'go. If more than one is listed, the fleet adapter will '
+                'choose the closest reachable place. This cannot be used with '
+                '--file.',
             ),
         )
         parser.add_argument(
@@ -122,8 +123,9 @@ class TaskRequester(Node):
                 or 'description' not in request_file_contents
             ):
                 raise RuntimeError(
-                    f'The input json file {self.args.file} must have an object '
-                    'that contains both a "category" and a "description" field.'
+                    f'The input json file {self.args.file} must have an '
+                    f'object that contains both a "category" and a '
+                    '"description" field.'
                 )
 
         event_parameters = None
