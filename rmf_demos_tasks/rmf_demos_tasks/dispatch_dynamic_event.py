@@ -47,10 +47,24 @@ class TaskRequester(Node):
         parser.add_argument(
             '-p',
             '--place',
-            required=True,
             type=str,
-            help='Place to go to',
             nargs='+',
+            help=(
+                'Place(s) for the fleet adapter to estimate the robot will go. '
+                'If more than one is listed, the fleet adapter will choose the '
+                'closest reachable place. This cannot be used with --file.',
+            ),
+        )
+        parser.add_argument(
+            '-f',
+            '--file',
+            type=str,
+            help=(
+                'File containing a json object containing at least '
+                '{{ "category": -, "description": - }}. The contents of this '
+                'file will be used as the estimate of the dynamic event. This '
+                'cannot be used with --place.'
+            ),
         )
         parser.add_argument(
             '--use_sim_time',
@@ -63,8 +77,78 @@ class TaskRequester(Node):
             type=str,
             default='rmf_demos_tasks'
         )
+        parser.add_argument(
+            '-r',
+            '--required',
+            type=str,
+            nargs='+',
+            help=(
+                'Add an action capability requirement for the selected fleet. '
+                'This takes the form of a file containing '
+                '{{ "category": -, "description": - }}, similar to --file. '
+                'The fleet must be able to execute the described event. More '
+                'than one file can be specified and each one will be required.'
+            ),
+        )
+        parser.add_argument(
+            '--parameters',
+            type=str,
+            help=(
+                'File containing a json object for the parameters of the '
+                'dynamic event. These parameters will be published with the '
+                'dynamic event information when the event begins.'
+            ),
+        )
+        parser.add_argument(
+            '--detail',
+            type=str,
+            help="Human-friendly detailed description of the dynamic event.",
+        )
 
         self.args = parser.parse_args(argv[1:])
+
+        if self.args.file and self.args.place:
+            raise RuntimeError(
+                'You cannot use both --file and --place at the same time.'
+            )
+
+        request_file_contents = None
+        if self.args.file:
+            with open(self.args.file) as f:
+                request_file_contents = json.load(f)
+
+            if (
+                'category' not in request_file_contents
+                or 'description' not in request_file_contents
+            ):
+                raise RuntimeError(
+                    f'The input json file {self.args.file} must have an object '
+                    'that contains both a "category" and a "description" field.'
+                )
+
+        event_parameters = None
+        if self.args.parameters:
+            with open(self.args.parameters) as f:
+                event_parameters = json.load(f)
+
+        required = []
+        if self.args.required:
+            for req_file in self.args.required:
+                with open(req_file) as f:
+                    req_contents = json.load(f)
+
+                if (
+                    'category' not in req_contents
+                    or 'description' not in req_contents
+                ):
+                    raise RuntimeError(
+                        f'The input json file {req_file} must have an object '
+                        'that contains both a "category" and a "description" '
+                        'field.'
+                    )
+
+                required.append(req_contents)
+
         self.response = asyncio.Future()
 
         transient_qos = QoSProfile(
@@ -103,22 +187,40 @@ class TaskRequester(Node):
         start_time = now.sec * 1000 + round(now.nanosec / 10**6)
         # todo(YV): Fill priority after schema is added
 
-        # Define task request description
-        one_of = []
-        for place in self.args.place:
-            place_json = {'waypoint': place}
-            one_of.append(place_json)
+        category = None
+        estimate = None
+        if self.args.place:
+            category = 'go_to_place'
+            estimate = {
+                'category': 'go_to_place',
+                'description': {
+                    'one_of': self.args.place
+                }
+            }
 
-        go_to_description = {'one_of': one_of}
+        if request_file_contents:
+            category = request_file_contents['category']
+            estimate = request_file_contents
+
+        description = {
+            'required': required,
+        }
+
+        if category:
+            description['category'] = category
+
+        if estimate:
+            description['estimate'] = estimate
+
+        if event_parameters:
+            description['parameters'] = event_parameters
+
+        if self.args.detail:
+            description['detail'] = self.args.detail
 
         dynamic_event_activity = {
             'category': 'dynamic_event',
-            'description': {
-                'estimate': {
-                    'category': 'go_to_place',
-                    'description': go_to_description,
-                }
-            }
+            'description': description,
         }
 
         rmf_task_request = {
