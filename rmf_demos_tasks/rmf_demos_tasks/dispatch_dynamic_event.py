@@ -113,7 +113,12 @@ class TaskRequester(Node):
 
         dynamic_event_activity = {
             'category': 'dynamic_event',
-            'description': go_to_description,
+            'description': {
+                'estimate': {
+                    'category': 'go_to_place',
+                    'description': go_to_description,
+                }
+            }
         }
 
         rmf_task_request = {
