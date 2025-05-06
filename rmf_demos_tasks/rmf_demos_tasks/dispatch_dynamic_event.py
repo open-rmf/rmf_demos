@@ -103,7 +103,7 @@ class TaskRequester(Node):
         parser.add_argument(
             '--detail',
             type=str,
-            help="Human-friendly detailed description of the dynamic event.",
+            help='Human-friendly detailed description of the dynamic event.',
         )
 
         self.args = parser.parse_args(argv[1:])
