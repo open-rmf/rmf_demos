@@ -196,9 +196,7 @@ class DynamicEventActionClient(Node):
         if self.request_file_contents:
             goal_msg.event_type = DynamicEvent.Goal.EVENT_TYPE_NEXT
             goal_msg.id = self.status.id + 1
-            goal_msg.category = json.dumps(
-                self.request_file_contents['category']
-            )
+            goal_msg.category = self.request_file_contents['category']
             goal_msg.description = json.dumps(
                 self.request_file_contents['description']
             )
