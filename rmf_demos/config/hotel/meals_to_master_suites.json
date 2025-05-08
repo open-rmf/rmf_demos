@@ -1,0 +1,17 @@
+{
+    "category": "sequence",
+    "description": [
+        {
+            "category": "go_to_place",
+            "description": "kitchen"
+        },
+        {
+            "category": "go_to_place",
+            "description": "L2_master_suite"
+        },
+        {
+            "category": "go_to_place",
+            "description": "L3_master_suite"
+        }
+    ]
+}
