@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.6.0 (2025-05-09)
+------------------
 * Provide example of using reset planner cache setting (`#300 <https://github.com/open-rmf/rmf_demos/issues/300>`_)
 * Set self.teleoperation to None when finish_action (`#289 <https://github.com/open-rmf/rmf_demos/issues/289>`_)
 * Add Speed Limit Requests (`#152 <https://github.com/open-rmf/rmf_demos/issues/152>`_)
