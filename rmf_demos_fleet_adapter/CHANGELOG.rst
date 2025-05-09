@@ -2,6 +2,14 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Provide example of using reset planner cache setting (`#300 <https://github.com/open-rmf/rmf_demos/issues/300>`_)
+* Set self.teleoperation to None when finish_action (`#289 <https://github.com/open-rmf/rmf_demos/issues/289>`_)
+* Add Speed Limit Requests (`#152 <https://github.com/open-rmf/rmf_demos/issues/152>`_)
+* only remove if lane_idx exist in closed_lanes (`#276 <https://github.com/open-rmf/rmf_demos/issues/276>`_)
+* Contributors: Cheng-Wei Chen, Grey, Pranay Shirodkar, Xiyu
+
 2.5.0 (2024-11-27)
 ------------------
 * Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)

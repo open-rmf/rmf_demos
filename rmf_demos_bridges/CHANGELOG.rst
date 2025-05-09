@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_bridges
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 2.5.0 (2024-11-27)
 ------------------
 
