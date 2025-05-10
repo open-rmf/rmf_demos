@@ -291,7 +291,7 @@ class FleetManager(Node):
             return response
 
         @app.get('/open-rmf/rmf_demos_fm/stop_robot/', response_model=Response)
-        async def stop(robot_name: str, cmd_id: int):
+        async def stop(robot_name: str, running_cmd_id: int, stop_cmd_id: int):
             response = {'success': False, 'msg': ''}
             if robot_name not in self.robots:
                 return response
@@ -306,11 +306,13 @@ class FleetManager(Node):
             path_request.path.append(robot.state.location)
             path_request.path.append(robot.state.location)
 
-            path_request.task_id = str(cmd_id)
+            path_request.task_id = str(stop_cmd_id)
             self.path_pub.publish(path_request)
 
             if self.debug:
-                print(f'Sending stop request for {robot_name}: {cmd_id}')
+                print(
+                    f'Sending stop request for {robot_name}: {running_cmd_id}'
+                )
             robot.last_path_request = path_request
             robot.destination = None
 
