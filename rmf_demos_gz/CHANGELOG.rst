@@ -2,6 +2,12 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.6.0 (2025-05-09)
+------------------
+* Use 9 as default gazebo_version (`#292 <https://github.com/open-rmf/rmf_demos/issues/292>`_)
+* Remove redundant launch file (`#271 <https://github.com/open-rmf/rmf_demos/issues/271>`_)
+* Contributors: Arjo Chakravarty, Grey
+
 2.5.0 (2024-11-27)
 ------------------
 * Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)

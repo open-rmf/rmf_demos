@@ -2,6 +2,13 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.6.0 (2025-05-09)
+------------------
+* Dynamic events CLI scripts (`#296 <https://github.com/open-rmf/rmf_demos/issues/296>`_)
+  Co-authored-by: tanjunkiat <tanjunkiat@outlook.sg>
+* Add missing dep for rmf_reservation_node (`#297 <https://github.com/open-rmf/rmf_demos/issues/297>`_)
+* Contributors: Aaron Chong, Grey
+
 2.5.0 (2024-11-27)
 ------------------
 * Provide example for robot-specific finishing request (`#255 <https://github.com/open-rmf/rmf_demos/issues/255>`_)
