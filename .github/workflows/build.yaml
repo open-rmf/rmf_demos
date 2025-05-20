@@ -18,4 +18,4 @@ jobs:
         rmf_demos_gz
         rmf_demos_maps
         rmf_demos_tasks
-      dist-matrix: '[{"ros_distribution": "rolling", "ubuntu_distribution": "noble"}]'
+      dist-matrix: '[{"ros_distribution": "jazzy", "ubuntu_distribution": "noble"}]'
