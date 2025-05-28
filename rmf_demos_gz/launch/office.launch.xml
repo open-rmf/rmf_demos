@@ -3,7 +3,7 @@
 <launch>
   <arg name="use_sim_time" default="true"/>
   <arg name="failover_mode" default="false"/>
-  <arg name="gazebo_version" default='9'/>
+  <arg name="gazebo_version" default=''/>
   <arg name="sim_update_rate" default='100'/>
 
   <!-- Common launch -->

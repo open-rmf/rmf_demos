@@ -2,7 +2,7 @@
 
 <launch>
   <arg name="use_sim_time" default="true"/>
-  <arg name="gazebo_version" default='9'/>
+  <arg name="gazebo_version" default=''/>
   <arg name="use_traffic_light" default="false"/>
   <arg name="sim_update_rate" default='100'/>
 
