@@ -2,7 +2,6 @@
 
 <launch>
   <arg name="use_sim_time" default="true"/>
-  <arg name="gazebo_version" default=''/>
   <arg name="sim_update_rate" default='100'/>
 
   <!-- Common launch -->
@@ -13,7 +12,6 @@
   <!-- Simulation launch -->
   <include file="$(find-pkg-share rmf_demos_gz)/simulation.launch.xml">
     <arg name="map_name" value="triple_H" />
-    <arg name="gazebo_version" value="$(var gazebo_version)" />
     <arg name="sim_update_rate" value="$(var sim_update_rate)"/>
   </include>
 

@@ -4,7 +4,6 @@
   <arg name="map_package" default="rmf_demos_maps" description="Name of the map package" />
   <arg name="map_name" description="Name of the rmf_demos map to simulate" />
   <arg name="use_crowdsim" default='0'/>
-  <arg name="gazebo_version" default=''/>
   <arg name="sim_update_rate" default='100'/>
 
   <let name="world_path" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/$(var map_name).world" />
@@ -17,11 +16,8 @@
   <let name="gz_headless" if="$(var headless)" value="-s"/>
   <let name="gz_headless" unless="$(var headless)" value="" />
 
-  <let name="force_version" if="$(var gazebo_version)" value="--force-version $(var gazebo_version)"/>
-  <let name="force_version" unless="$(var gazebo_version)" value=""/>
-
   <!-- TODO(luca) Remove the manual concatenation of GZ_SIM_RESOURCE_PATH and just use environment hooks -->
-  <executable cmd="gz sim $(var force_version) $(var gz_headless) -r -v 3 $(var world_path) -z $(var sim_update_rate)" output="both">
+  <executable cmd="gz sim $(var gz_headless) -r -v 3 $(var world_path) -z $(var sim_update_rate)" output="both">
     <env name="GZ_SIM_RESOURCE_PATH" value="$(env GZ_SIM_RESOURCE_PATH):$(var model_path)" />
     <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
   </executable>
