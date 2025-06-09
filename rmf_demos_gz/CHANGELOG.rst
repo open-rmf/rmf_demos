@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.7.0 (2025-06-09)
+------------------
 * Remove gazebo_version argument (`#305 <https://github.com/open-rmf/rmf_demos/issues/305>`_)
   * Version independent default gazebo
   * Remove gazebo version altogether
