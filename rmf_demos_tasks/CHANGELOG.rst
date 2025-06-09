@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 2.6.0 (2025-05-09)
 ------------------
 * Dynamic events CLI scripts (`#296 <https://github.com/open-rmf/rmf_demos/issues/296>`_)
