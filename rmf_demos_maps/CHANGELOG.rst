@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_maps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.7.0 (2025-06-09)
+------------------
+
 2.6.0 (2025-05-09)
 ------------------
 * Change robot types to include a namespace (`#272 <https://github.com/open-rmf/rmf_demos/issues/272>`_)
