@@ -23,7 +23,7 @@
 
       <!-- Battery params -->
       <nominal_voltage>12.0</nominal_voltage>
-      <nominal_capacity>24.0</nominal_capacity>
+      <nominal_capacity>0.5</nominal_capacity>
       <charging_current>5.0</charging_current>
 
       <!-- Physical params -->
