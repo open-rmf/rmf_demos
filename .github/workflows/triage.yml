@@ -1,0 +1,16 @@
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+name: Ticket opened
+jobs:
+  assign:
+    name: Add ticket to inbox
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add ticket to inbox
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/open-rmf/projects/10
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
