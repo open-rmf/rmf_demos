@@ -65,7 +65,13 @@
 
   <!-- Proto-Reservation system-->
   <group  if="$(var use_reservation_node)">
-    <node pkg="rmf_reservation_node" exec="queue_manager"></node>
+    <node pkg="rmf_reservation_node" exec="queue_manager"/>
   </group>
+
+  <!-- Mutex Group Supervisor, manages the locking and unlocking of mutex groups -->
+  <group>
+    <node pkg="rmf_fleet_adapter" exec="mutex_group_supervisor"/>
+  </group>
+
 
 </launch>
