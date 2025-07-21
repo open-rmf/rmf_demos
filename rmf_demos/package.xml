@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>rmf_demos</name>
-  <version>2.5.0</version>
+  <version>2.7.0</version>
   <description>Common launch files for RMF demos</description>
   <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
   <maintainer email="marco@openrobotics.org">Marco A. Gutiérrez</maintainer>
@@ -12,6 +12,7 @@
 
   <exec_depend>rmf_demos_maps</exec_depend>
 
+  <exec_depend>rmf_reservation_node</exec_depend>
   <exec_depend>rmf_traffic_ros2</exec_depend>
   <exec_depend>rmf_task_ros2</exec_depend>
   <exec_depend>rmf_fleet_adapter</exec_depend>
