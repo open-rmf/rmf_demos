@@ -2,8 +2,8 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.8.0 (2025-07-21)
+------------------
 * Add mutex group supervisor to common launch file (`#310 <https://github.com/open-rmf/rmf_demos/issues/310>`_)
   Co-authored-by: yadunund <yadunund@intrinsic.ai>
 * Contributors: Grey
