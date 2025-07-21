@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 2.7.0 (2025-06-09)
 ------------------
 
