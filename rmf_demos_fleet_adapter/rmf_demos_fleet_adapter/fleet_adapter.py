@@ -260,8 +260,12 @@ class RobotAdapter:
         if self.execution is not None:
             if self.execution.identifier.is_same(activity):
                 self.execution = None
+                running_cmd_id = self.cmd_id
+                self.cmd_id += 1
+                stop_cmd_id = self.cmd_id
                 self.attempt_cmd_until_success(
-                    cmd=self.api.stop, args=(self.name, self.cmd_id)
+                    cmd=self.api.stop,
+                    args=(self.name, running_cmd_id, stop_cmd_id)
                 )
 
     def execute_action(self, category: str, description: dict, execution):
