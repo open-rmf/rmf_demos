@@ -5,6 +5,7 @@ Changelog for package rmf_demos_fleet_adapter
 2.8.0 (2025-07-21)
 ------------------
 * Generate new cmd_id for stop request (`#294 <https://github.com/open-rmf/rmf_demos/pull/294>`_)
+* Contributors: Cheng-Wei Chen
 
 2.7.0 (2025-06-09)
 ------------------
