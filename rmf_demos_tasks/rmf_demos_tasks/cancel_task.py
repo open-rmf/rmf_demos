@@ -28,7 +28,7 @@ from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
-from rmf_task_msgs.msg import ApiRequest
+from rmf_task_msgs.msg import ApiRequest, ApiResponse
 
 
 ###############################################################################
@@ -52,6 +52,16 @@ class TaskRequester(Node):
         self.pub = self.create_publisher(
           ApiRequest, 'task_api_requests', transient_qos)
 
+        self.response = rclpy.Future()
+
+        def receive_response(response_msg: ApiResponse):
+            if response_msg.request_id == msg.request_id:
+                self.response.set_result(json.loads(response_msg.json_msg))
+
+        self.sub = self.create_subscription(
+            ApiResponse, 'task_api_responses', receive_response, transient_qos
+        )
+
         # Construct task
         msg = ApiRequest()
         msg.request_id = "cancel_task_" + str(uuid.uuid4())
@@ -71,6 +81,13 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = TaskRequester(args_without_ros)
+    rclpy.spin_until_future_complete(
+        task_requester, task_requester.response, timeout_sec=5.0
+    )
+    if task_requester.response.done():
+        print(f'Got response: \n{task_requester.response.result()}')
+    else:
+        print('Did not get a response')
     rclpy.shutdown()
 
 
