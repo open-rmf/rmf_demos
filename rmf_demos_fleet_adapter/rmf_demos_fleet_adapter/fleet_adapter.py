@@ -195,6 +195,14 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
             cmd_handle.node.get_logger().warn(
                 "Invalid waypoint supplied for charger. "
                 "Using default nearest charger in the map")
+        if (cmd_handle.parking_waypoint_index <
+                cmd_handle.graph.num_waypoints):
+            cmd_handle.update_handle.set_parking_waypoint(
+                cmd_handle.parking_waypoint_index)
+        else:
+            cmd_handle.node.get_logger().warn(
+                "Invalid waypoint supplied for parking spot. "
+                "Using default nearest parking spot in the map")
 
     # Initialize robot API for this fleet
     prefix = 'http://' + fleet_config['fleet_manager']['ip'] + \
@@ -277,6 +285,7 @@ def initialize_fleet(config_yaml, nav_graph_path, node, use_sim_time):
                         start=starts[0],
                         position=position,
                         charger_waypoint=rmf_config['charger']['waypoint'],
+                        parking_waypoint=rmf_config['start']['waypoint'],
                         update_frequency=rmf_config.get(
                             'robot_state_update_frequency', 1),
                         lane_merge_distance=lane_merge_distance,
