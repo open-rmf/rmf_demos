@@ -13,11 +13,8 @@
   <let name="menge_resource_path" if="$(var use_crowdsim)" value="$(find-pkg-share $(var map_package))/maps/$(var map_name)/config_resource"/>
   <let name="menge_resource_path" unless="$(var use_crowdsim)" value="" />
 
-  <let name="gz_headless" if="$(var headless)" value="-s"/>
-  <let name="gz_headless" unless="$(var headless)" value="" />
-
   <!-- TODO(luca) Remove the manual concatenation of GZ_SIM_RESOURCE_PATH and just use environment hooks -->
-  <executable cmd="gz sim $(var gz_headless) -r -v 3 $(var world_path) -z $(var sim_update_rate)" output="both">
+  <executable cmd="gz sim -r -v 3 $(var world_path) -z $(var sim_update_rate)" output="both">
     <env name="GZ_SIM_RESOURCE_PATH" value="$(env GZ_SIM_RESOURCE_PATH):$(var model_path)" />
     <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
   </executable>
