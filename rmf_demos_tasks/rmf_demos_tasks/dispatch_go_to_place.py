@@ -109,9 +109,9 @@ class TaskRequester(Node):
             '--start-at-departure',
             action='store_true',
             help=(
-                'Request the robot to not start going to its destination until '
-                'the task start time has been reached, rather than trying to '
-                'arrive at the destination at the task start time.'
+                'Request the robot to not start going to its destination '
+                'until the task start time has been reached, rather than '
+                'trying to arrive at the destination at the task start time.'
             )
         )
 
