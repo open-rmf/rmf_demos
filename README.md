@@ -334,3 +334,23 @@ $ ros2 launch rmf_demos_gz office_mock_traffic_light.launch.xml
 In Open-RMF version `21.04` and above, tasks are awarded to robot fleets based on the outcome of a bidding process that is orchestrated by a Dispatcher node, `rmf_dispatcher_node`. When the Dispatcher receives a new task request from a UI, it sends out a `rmf_task_msgs/BidNotice` message to all the fleet adapters. If a fleet adapter is able to process that request, it submits a `rmf_task_msgs/BidProposal` message back to the Dispatcher with a cost to accommodate the task. An instance of `rmf_task::agv::TaskPlanner` is used by the fleet adapters to determine how best to accommodate the new request. The Dispatcher compares all the `BidProposals` received and then submits a `rmf_task_msgs/DispatchRequest` message with the fleet name of the robot that the bid is awarded to. There are a couple different ways the Dispatcher evaluates the proposals such as fastest to finish, lowest cost, etc which can be configured.
 
 Battery recharging is tightly integrated with the new task planner. `ChargeBattery` tasks are optimally injected into a robot's schedule when the robot has insufficient charge to fulfill a series of tasks. Currently we assume each robot in the map has a dedicated charging location as annotated with the `is_charger` option in the traffic editor map.
+
+
+## Plug and play Demos
+![](external_media/rosconworkshopanikm.gif)
+
+If you are interested on testing rmf without any instalation or compilation needed, these demos allow you to do just that. Its totally free to use them.
+
+### ROSCON WORKSHOP 2022 Kyoto: Simple custom adapter example
+
+In thsoo workshop , you can see an example of how you can create a custom adapter for your robots to be integrated in RMF. To use it follow these steps:
+* Click on this [ROSJECT link](https://app.theconstructsim.com/l/524a6782/) to copy the ROSject of thes ROSCON-Workshop to your Theconstruct space
+* If you don't have an account , you can signup for free.
+* Once you have signed up , you should see inyour `ROSJECT space` the following ROSject:
+
+![](external_media/rosject_show1.png)
+
+* Now hit run, and wait for the system to load everything ( maximum 10 minutes ).
+* Oonce there you can follow the instructions of the notebook:
+
+![](external_media/notebookintrsutcions.png)
