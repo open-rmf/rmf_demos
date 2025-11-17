@@ -40,9 +40,9 @@ rmf_fleet:
     # BatteryAware: Optimize throughput with battery SoC in mind
     # Custom: Use custom weights below
     weights:  # polynomial coeffs
-      finish_time: [0.0, 1.0] # task finish time cost
-      battery_penalty: [0.0, 5.0, 20.0] # battery penalty for low SoC
-      busy_penalty: [0.0, 60.0] # penalty for assigning tasks to busy robots, 2 modes:
+      finish_time: [1.0] # task finish time cost
+      battery_penalty: [5.0, 20.0] # battery penalty for low SoC
+      busy_penalty: [60.0] # penalty for assigning tasks to busy robots, 2 modes:
                                 #   Binary: penalty applied if robot is busy with any task
                                 #   Count: penalty increases with number of tasks assigned to robot
     options:
