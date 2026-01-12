@@ -44,11 +44,12 @@ Start the backend API server via `docker` with host network access, using the de
 
 ```bash
 docker run \
-  --network host \
-  -it \
+  --network host -it --rm \
   -e ROS_DOMAIN_ID=<ROS_DOMAIN_ID> \
   -e RMW_IMPLEMENTATION=<RMW_IMPLEMENTATION> \
-  ghcr.io/open-rmf/rmf-web/api-server:latest
+  ghcr.io/open-rmf/rmf-web/api-server:jazzy-nightly
+
+# Use the appropriate tag for different ROS 2 distributions
 ```
 
 > Note: The API server is also configurable by mounting the configuration file and setting the environment variable `RMF_API_SERVER_CONFIG`. In the default configuration, the API serer will use an internal non-persistent database.
@@ -57,9 +58,10 @@ Start the frontend dashboard via `docker` with host network access, using the de
 
 ```bash
 docker run \
-  --network host \
-  -it \
-  ghcr.io/open-rmf/rmf-web/dashboard:latest
+  --network host -it --rm \
+  ghcr.io/open-rmf/rmf-web/demo-dashboard:jazzy-nightly
+
+# Use the appropriate tag for different ROS 2 distributions
 ```
 
 > Note: The dashboard via `docker` is not runtime-configurable and is best used for quick integrations and testing. To configure the dashboard, check out [rmf-web-dashboard-resources](https://github.com/open-rmf/rmf_demos/tree/rmf-web-dashboard-resources/rmf_demos_dashboard_resources) and the [dashboard configuration section](https://github.com/open-rmf/rmf-web/tree/main/packages/dashboard#configuration).

@@ -11,6 +11,7 @@
   <arg name="use_unique_hex_string_with_task_id" default="true" description="Appends a unique hex string to the task ID"/>
   <arg name="server_uri" default="" description="The URI of the api server to transmit state and task information."/>
   <arg name="use_reservation_node" default="false" description="Enable the reservation node for parking spot de-confliction"/>
+  <arg name="use_site_map" default="false" description="Generate and serve site maps if True. Otherwise supports only building maps."/>
 
   <!-- Traffic Schedule  -->
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_primary">
@@ -22,11 +23,19 @@
     <param name="use_sim_time" value="$(var use_sim_time)"/>
   </node>
 
-  <!-- Building Map  -->
   <group>
-    <node pkg="rmf_building_map_tools" exec="building_map_server" args="$(var config_file)">
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-    </node>
+    <!-- Site Map Server -->
+    <group if="$(var use_site_map)">
+      <node pkg="rmf_site_map_server" exec="site_map_server" args="$(var config_file)">
+      </node>
+    </group>
+
+    <!-- Building Map -->
+    <group unless="$(var use_site_map)">
+      <node pkg="rmf_building_map_tools" exec="building_map_server" args="$(var config_file)">
+        <param name="use_sim_time" value="$(var use_sim_time)"/>
+      </node>
+    </group>
   </group>
 
   <!-- Visualizer -->
