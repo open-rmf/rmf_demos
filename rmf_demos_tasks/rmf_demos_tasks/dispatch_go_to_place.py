@@ -105,6 +105,15 @@ class TaskRequester(Node):
                 'setting.'
             ),
         )
+        parser.add_argument(
+            '--start-at-departure',
+            action='store_true',
+            help=(
+                'Request the robot to not start going to its destination '
+                'until the task start time has been reached, rather than '
+                'trying to arrive at the destination at the task start time.'
+            )
+        )
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -170,6 +179,9 @@ class TaskRequester(Node):
             go_to_description['constraints'] = [
                 {'category': 'prefer_same_map'}
             ]
+
+        if self.args.start_at_departure:
+            go_to_description['start_at_departure'] = True
 
         go_to_activity = {
             'category': 'go_to_place',
