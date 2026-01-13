@@ -17,10 +17,13 @@
   <let name="gz_headless" unless="$(var headless)" value="" />
 
   <!-- TODO(luca) Remove the manual concatenation of GZ_SIM_RESOURCE_PATH and just use environment hooks -->
-  <executable cmd="gz sim $(var gz_headless) -r -v 3 $(var world_path) -z $(var sim_update_rate)" output="both">
-    <env name="GZ_SIM_RESOURCE_PATH" value="$(env GZ_SIM_RESOURCE_PATH):$(var model_path)" />
-    <env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
-  </executable>
+  <group>
+    <set_env name="GZ_SIM_RESOURCE_PATH" value="$(env GZ_SIM_RESOURCE_PATH):$(var model_path)" />
+    <set_env name="MENGE_RESOURCE_PATH" value="$(var menge_resource_path)"/>
+    <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+      <arg name="gz_args" value="$(var gz_headless) -r -v 3 $(var world_path) -z $(var sim_update_rate)"/>
+    </include>
+  </group>
 
   <!-- ros_gz bridge for simulation clock -->
   <node pkg="ros_gz_bridge" exec="parameter_bridge"
