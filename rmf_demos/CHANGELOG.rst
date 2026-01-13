@@ -2,8 +2,8 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.8.1 (2026-01-13)
+------------------
 * Add use_site_map param (`#338 <https://github.com/open-rmf/rmf_demos/issues/338>`_)
 * Contributors: Xiyu
 

@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.8.1 (2026-01-13)
+------------------
 * Add a --start-at-departure option for dispatch_go_to_place (`#331 <https://github.com/open-rmf/rmf_demos/issues/331>`_)
 * Fix cancel task stuck indefinitely (`#320 <https://github.com/open-rmf/rmf_demos/issues/320>`_)
 * Contributors: Aaron Chong, Grey
