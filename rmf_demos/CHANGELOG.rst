@@ -2,6 +2,11 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.8.1 (2026-01-13)
+------------------
+* Add use_site_map param (`#338 <https://github.com/open-rmf/rmf_demos/issues/338>`_)
+* Contributors: Xiyu
+
 2.8.0 (2025-07-21)
 ------------------
 * Add mutex group supervisor to common launch file (`#310 <https://github.com/open-rmf/rmf_demos/issues/310>`_)

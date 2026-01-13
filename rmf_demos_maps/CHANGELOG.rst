@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_maps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.8.1 (2026-01-13)
+------------------
+
 2.8.0 (2025-07-21)
 ------------------
 * Use builtin gazebo model downloading (`#307 <https://github.com/open-rmf/rmf_demos/issues/307>`_)
