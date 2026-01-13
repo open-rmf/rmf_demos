@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.8.1 (2026-01-13)
+------------------
+
 2.8.0 (2025-07-21)
 ------------------
 * Generate new cmd_id for stop request (`#294 <https://github.com/open-rmf/rmf_demos/pull/294>`_)
