@@ -34,6 +34,19 @@ rmf_fleet:
   responsive_wait: False # Should responsive wait be on/off for the whole fleet by default? False if not specified.
   use_parking_reservations: True
   reassign_task_interval: 120 # seconds, specify how often a task reassignment should be triggered in the fleet
+  task_assignment_strategy:
+    profile: "DefaultFastest"   # [DefaultFastest, BatteryAware, Custom]
+    # DefaultFastest: Prioritize task efficiency (fastest finish time)
+    # BatteryAware: Optimize throughput with battery SoC in mind
+    # Custom: Use custom weights below
+    weights:  # Polynomial coefficients in the format [A, B, ..., N] such that cost = Ax + Bx^2 + ... + Nx^N
+      finish_time: [1.0] # task finish time cost
+      battery_penalty: [5.0, 20.0] # battery penalty for low SoC
+      busy_penalty: [60.0] # penalty for assigning tasks to busy robots, 2 modes:
+                                #   Binary: penalty applied if robot is busy with any task
+                                #   Count: penalty increases with number of tasks assigned to robot
+    options:
+      busy_mode: "Binary"   # [Binary, Count]
   robots:
     tinyRobot1:
         charger: "tinyRobot1_charger"
