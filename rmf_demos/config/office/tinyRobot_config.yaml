@@ -39,7 +39,7 @@ rmf_fleet:
     # DefaultFastest: Prioritize task efficiency (fastest finish time)
     # BatteryAware: Optimize throughput with battery SoC in mind
     # Custom: Use custom weights below
-    weights:  # polynomial coeffs
+    weights:  # Polynomial coefficients in the format [A, B, ..., N] such that cost = Ax + Bx^2 + ... + Nx^N
       finish_time: [1.0] # task finish time cost
       battery_penalty: [5.0, 20.0] # battery penalty for low SoC
       busy_penalty: [60.0] # penalty for assigning tasks to busy robots, 2 modes:
