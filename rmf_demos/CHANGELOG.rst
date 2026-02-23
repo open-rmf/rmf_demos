@@ -2,8 +2,8 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.8.2 (2026-02-23)
+------------------
 * Add task_assignment_strategy to fleet config (`#332 <https://github.com/open-rmf/rmf_demos/issues/332>`_)
 * Contributors: kj
 
