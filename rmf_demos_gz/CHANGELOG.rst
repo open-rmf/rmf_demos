@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.8.2 (2026-02-23)
+------------------
+
 2.8.1 (2026-01-13)
 ------------------
 * Switch to using ros_gz_sim to run Gazebo (`#344 <https://github.com/open-rmf/rmf_demos/issues/344>`_)

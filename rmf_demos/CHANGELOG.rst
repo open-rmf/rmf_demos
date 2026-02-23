@@ -2,6 +2,11 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.8.2 (2026-02-23)
+------------------
+* Add task_assignment_strategy to fleet config (`#332 <https://github.com/open-rmf/rmf_demos/issues/332>`_)
+* Contributors: kj
+
 2.8.1 (2026-01-13)
 ------------------
 * Add use_site_map param (`#338 <https://github.com/open-rmf/rmf_demos/issues/338>`_)

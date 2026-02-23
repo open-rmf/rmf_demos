@@ -5,7 +5,7 @@ package_name = 'rmf_demos_tasks'
 
 setup(
     name=package_name,
-    version='2.8.1',
+    version='2.8.2',
     packages=[package_name],
     data_files=[
         (
