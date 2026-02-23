@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_assets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 2.8.1 (2026-01-13)
 ------------------
 
