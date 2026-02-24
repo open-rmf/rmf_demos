@@ -105,7 +105,6 @@ levels:
       - {model_name: OpenRobotics/NurseDesk, name: OpenRobotics/NurseDesk, static: true, x: 355.556, y: 505.454, yaw: -0, z: 0}
       - {model_name: OpenRobotics/Sofa, name: OpenRobotics/Sofa, static: true, x: 141.244, y: 482.725, yaw: 0.0066, z: 0}
       - {model_name: OpenRobotics/Sofa, name: OpenRobotics/Sofa, static: true, x: 174.44, y: 516.4930000000001, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/Cafe table, name: OpenRobotics/Cafe table, static: true, x: 174.726, y: 481.294, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/HeadphonesRack1, name: OpenRobotics/HeadphonesRack1, static: true, x: 172.398, y: 565.652, yaw: 0.8903, z: 0}
       - {model_name: OpenRobotics/Bookshelf, name: OpenRobotics/Bookshelf, static: true, x: 139.11, y: 640.347, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Bookshelf, name: OpenRobotics/Bookshelf, static: true, x: 138.759, y: 621.923, yaw: 1.5708, z: 0}
