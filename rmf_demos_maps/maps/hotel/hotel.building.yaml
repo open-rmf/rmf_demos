@@ -163,6 +163,10 @@ levels:
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 512.076, y: 712.3680000000001, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 537.609, y: 712.199, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/Toilet, name: OpenRobotics/Toilet, static: true, x: 559.9299999999999, y: 712.876, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: OpenRobotics/Standing person, static: true, x: 268.87, y: 597.53700000000003, yaw: 1.5979000000000001, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: OpenRobotics/Standing person, static: true, x: 296.88099999999997, y: 565.24000000000001, yaw: -0.42659999999999998, z: 0}
+      - {model_name: OpenRobotics/Standing person, name: OpenRobotics/Standing person, static: true, x: 325.17700000000002, y: 596.39400000000001, yaw: -2.6819000000000002, z: 0}
+      - {model_name: OpenRobotics/CameraRos, name: camera1, static: true, x: 237.31299999999999, y: 717.54499999999996, yaw: 1, z: 2.2}
     vertices:
       - [127.862, 550.573, 0, ""]
       - [127.1, 350.915, 0, ""]
