@@ -45,6 +45,7 @@ class TaskObserver(Node):
         super().__init__('TaskObserver')
 
         self.parser = parser
+        asyncio.set_event_loop(asyncio.new_event_loop())
         self.response = asyncio.Future()
 
         self.subscription = self.create_subscription(

@@ -139,6 +139,7 @@ class TaskRequester(Node):
         )
 
         self.args = parser.parse_args(argv[1:])
+        asyncio.set_event_loop(asyncio.new_event_loop())
         self.response = asyncio.Future()
 
         # check user delivery arg inputs

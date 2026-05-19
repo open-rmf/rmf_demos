@@ -96,6 +96,7 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
     requester = Requester(args_without_ros)
 
+    asyncio.set_event_loop(asyncio.new_event_loop())
     timeout = asyncio.Future()
 
     def trigger_timeout():
