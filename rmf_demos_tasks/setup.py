@@ -22,7 +22,9 @@ setup(
     maintainer_email='yadunund@openrobotics.org',
     description='A package containing scripts for demos',
     license='Apache License Version 2.0',
-    tests_require=['pytest'],
+    extras_require={
+        'test'=['pytest'],
+    },
     entry_points={
         'console_scripts': [
             'request_loop = rmf_demos_tasks.request_loop:main',
