@@ -23,7 +23,7 @@ setup(
     description='A package containing scripts for demos',
     license='Apache License Version 2.0',
     extras_require={
-        'test'=['pytest'],
+        'test': ['pytest'],
     },
     entry_points={
         'console_scripts': [

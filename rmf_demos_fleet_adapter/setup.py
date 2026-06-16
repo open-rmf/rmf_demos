@@ -30,7 +30,7 @@ setup(
     'fleet manager via REST API',
     license='Apache License 2.0',
     extras_require={
-        'test'=['pytest'],
+        'test': ['pytest'],
     },
     entry_points={
         'console_scripts': [

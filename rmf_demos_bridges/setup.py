@@ -20,7 +20,7 @@ setup(
     description='TODO: Package description',
     license='TODO: License declaration',
     extras_require={
-        'test'=['pytest'],
+        'test': ['pytest'],
     },
     entry_points={
         'console_scripts': [
