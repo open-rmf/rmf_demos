@@ -2,6 +2,11 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Lyrical compatibility (`#353 <https://github.com/open-rmf/rmf_demos/issues/353>`_)
+* Contributors: Grey
+
 2.8.2 (2026-02-23)
 ------------------
 
