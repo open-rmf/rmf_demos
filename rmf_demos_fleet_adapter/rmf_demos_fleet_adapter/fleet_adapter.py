@@ -534,12 +534,6 @@ def ros_connections(
             node.get_logger().error(response.message)
             return response
 
-        robot_config = rmf_easy.RobotConfiguration(
-            compatible_chargers=cfg.get('compatible_chargers')
-        )
-        fleet_config.add_known_robot_configuration(robot_name, robot_config)
-        robot_config = fleet_config.get_known_robot_configuration(robot_name)
-
         if not api.add_robot(robot_name):
             response.success = False
             response.message = (
@@ -547,6 +541,14 @@ def ros_connections(
             )
             node.get_logger().error(response.message)
             return response
+
+        fleet_config.add_known_robot_configuration(
+            robot_name, 
+            rmf_easy.RobotConfiguration(
+                compatible_chargers=cfg.get('compatible_chargers')
+            )
+        )
+        robot_config = fleet_config.get_known_robot_configuration(robot_name)
 
         robot_adapter = RobotAdapter(
             robot_name, robot_config, node, api, fleet_handle
