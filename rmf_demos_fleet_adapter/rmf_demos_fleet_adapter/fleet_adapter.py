@@ -15,7 +15,6 @@
 import argparse
 import asyncio
 import faulthandler
-import json
 import math
 import sys
 import threading
@@ -33,12 +32,12 @@ from rclpy.qos import QoSReliabilityPolicy as Reliability
 import rmf_adapter
 from rmf_adapter import Adapter
 import rmf_adapter.easy_full_control as rmf_easy
+from rmf_demos_msgs.srv import AddRobot
 from rmf_fleet_msgs.msg import ClosedLanes
 from rmf_fleet_msgs.msg import LaneRequest
 from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import RobotMode
 from rmf_fleet_msgs.msg import SpeedLimitRequest
-from rmf_fleet_msgs.srv import AddRobot
 import yaml
 
 from .RobotClientAPI import RobotAPI
@@ -524,16 +523,6 @@ def ros_connections(
             f'Received request to add robot [{robot_name}] at runtime'
         )
 
-        try:
-            cfg = json.loads(request.robot_config)
-            if not isinstance(cfg, dict):
-                raise ValueError('robot_config must be a JSON object')
-        except (json.JSONDecodeError, ValueError) as err:
-            response.success = False
-            response.message = f'Invalid robot_config JSON: {err}'
-            node.get_logger().error(response.message)
-            return response
-
         if not api.add_robot(robot_name):
             response.success = False
             response.message = (
@@ -543,9 +532,9 @@ def ros_connections(
             return response
 
         fleet_config.add_known_robot_configuration(
-            robot_name, 
+            robot_name,
             rmf_easy.RobotConfiguration(
-                compatible_chargers=cfg.get('compatible_chargers')
+                compatible_chargers=request.robot_config.compatible_chargers
             )
         )
         robot_config = fleet_config.get_known_robot_configuration(robot_name)
