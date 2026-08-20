@@ -7,7 +7,7 @@
   <author email= "grey@openrobotics.org">Grey</author>
   <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
   <maintainer email="marco@openrobotics.org">Marco A. Gutiérrez</maintainer>
-  <license>Apache Licence 2.0</license>
+  <license>Apache License 2.0</license>
 
   <exec_depend>rmf_fleet_msgs</exec_depend>
   <exec_depend>rmf_task_msgs</exec_depend>
