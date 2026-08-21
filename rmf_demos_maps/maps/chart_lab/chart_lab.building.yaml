@@ -309,33 +309,14 @@ parameters:
 zones:
   consultation:
     depth: 4
-    level: L1
-    transition_lanes:
-      - external_vertex: consultation_zone_entry
-        internal_vertex: wait_1
-        is_entry_lane: true
-        is_exit_lane: false
-      - external_vertex: consultation_zone_entry
-        internal_vertex: wait_2
-        is_entry_lane: true
-        is_exit_lane: false
-      - external_vertex: consultation_zone_entry
-        internal_vertex: wait_3
-        is_entry_lane: true
-        is_exit_lane: false
-      - external_vertex: consultation_zone_exit
-        internal_vertex: wait_1
-        is_entry_lane: false
-        is_exit_lane: true
-      - external_vertex: consultation_zone_exit
-        internal_vertex: wait_2
-        is_entry_lane: false
-        is_exit_lane: true
-      - external_vertex: consultation_zone_exit
-        internal_vertex: wait_3
-        is_entry_lane: false
-        is_exit_lane: true
-    vertices:
+    external_vertices:
+      consultation_zone_entry:
+        is_entry_point: true
+        is_exit_point: false
+      consultation_zone_exit:
+        is_entry_point: false
+        is_exit_point: true
+    internal_vertices:
       wait_1:
         group: A
         priority: 1
@@ -351,6 +332,7 @@ zones:
         priority: 3
         x: 0
         y: 1.6000000000000001
+    level: L1
     width: 2
     x: 2387
     y: 1798
