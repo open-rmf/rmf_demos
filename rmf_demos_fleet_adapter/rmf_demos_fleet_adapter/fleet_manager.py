@@ -117,6 +117,8 @@ class FleetManager(Node):
         self.robots = {}  # Map robot name to state
         self.action_paths = {}  # Map activities to paths
 
+        self._lock = threading.Lock()
+
         for robot_name, _ in self.config['rmf_fleet']['robots'].items():
             self.robots[robot_name] = State()
         assert len(self.robots) > 0
@@ -211,21 +213,40 @@ class FleetManager(Node):
         @app.get('/open-rmf/rmf_demos_fm/status/', response_model=Response)
         async def status(robot_name: Optional[str] = None):
             response = {'data': {}, 'success': False, 'msg': ''}
-            if robot_name is None:
-                response['data']['all_robots'] = []
-                for robot_name in self.robots:
+            with self._lock:
+                if robot_name is None:
+                    response['data']['all_robots'] = []
+                    for robot_name in self.robots:
+                        state = self.robots.get(robot_name)
+                        if state is None or state.state is None:
+                            return response
+                        response['data']['all_robots'].append(
+                            self.get_robot_state(state, robot_name)
+                        )
+                else:
                     state = self.robots.get(robot_name)
                     if state is None or state.state is None:
                         return response
-                    response['data']['all_robots'].append(
-                        self.get_robot_state(state, robot_name)
-                    )
-            else:
-                state = self.robots.get(robot_name)
-                if state is None or state.state is None:
-                    return response
-                response['data'] = self.get_robot_state(state, robot_name)
+                    response['data'] = self.get_robot_state(state, robot_name)
             response['success'] = True
+            return response
+
+        @app.post('/open-rmf/rmf_demos_fm/add_robot/', response_model=Response)
+        async def add_robot(robot_name: str):
+            response = {'success': False, 'msg': ''}
+            robot_name = robot_name.strip()
+            if not robot_name:
+                response['msg'] = 'robot_name must not be empty'
+                return response
+
+            with self._lock:
+                if robot_name in self.robots:
+                    response['msg'] = f'Robot {robot_name} already exists'
+                    return response
+
+                self.robots[robot_name] = State()
+            response['success'] = True
+            response['msg'] = f'Robot {robot_name} added'
             return response
 
         @app.post('/open-rmf/rmf_demos_fm/navigate/', response_model=Response)
