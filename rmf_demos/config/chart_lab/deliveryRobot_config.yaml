@@ -32,6 +32,7 @@ rmf_fleet:
     loop: True
     delivery: True
   finishing_request: "nothing" # [park, charge, nothing]
+  use_parking_reservations: True
   robots:
     deliveryBot_1:
       charger: "d_charger"
