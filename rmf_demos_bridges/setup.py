@@ -4,7 +4,7 @@ package_name = 'rmf_demos_bridges'
 
 setup(
     name=package_name,
-    version='2.8.2',
+    version='2.9.0',
     packages=[package_name],
     data_files=[
         (
@@ -19,7 +19,9 @@ setup(
     maintainer_email='cnboonhan@openrobotics.org',
     description='TODO: Package description',
     license='TODO: License declaration',
-    tests_require=['pytest'],
+    extras_require={
+        'test': ['pytest'],
+    },
     entry_points={
         'console_scripts': [
             (

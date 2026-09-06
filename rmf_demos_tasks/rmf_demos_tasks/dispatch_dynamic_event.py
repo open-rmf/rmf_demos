@@ -151,6 +151,7 @@ class TaskRequester(Node):
 
                 required.append(req_contents)
 
+        asyncio.set_event_loop(asyncio.new_event_loop())
         self.response = asyncio.Future()
 
         transient_qos = QoSProfile(

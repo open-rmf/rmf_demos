@@ -2,7 +2,7 @@
 
 Greetings,
 
-This page aims to document frequently asked questions pertaining to the demonstrations of the Robotics Middleware Framework (also termed RoMi-H) as showcased in this repository. The `rmf_core` repository has an additional [FAQ page](https://github.com/open-rmf/rmf_ros2/blob/master/docs/faq.md) which addresses some important higher level topics.
+This page aims to document frequently asked questions pertaining to the demonstrations of the Robotics Middleware Framework (also termed RoMi-H) as showcased in this repository. The `rmf_core` repository has an additional [FAQ page](https://github.com/open-rmf/rmf_ros2/blob/main/docs/faq.md) which addresses some important higher level topics.
 
 
 #### Gazebo crashes with `No namespace found` error at launch
@@ -54,7 +54,7 @@ This is what we do when we test RMF on physical robots.
 
 
 #### How does RMF detect conflicts and replan routes for mobile robots?
-Kindly refer to the [FAQ](https://github.com/open-rmf/rmf_ros2/blob/master/docs/faq.md#how-does-rmf_traffic-avoid-mobile-robot-traffic-conflicts) in `rmf_core`
+Kindly refer to the [FAQ](https://github.com/open-rmf/rmf_ros2/blob/main/docs/faq.md#how-does-rmf_traffic-avoid-mobile-robot-traffic-conflicts) in `rmf_core`
 
 
 #### Has RMF been tested with physical robots?
