@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright 2026 Open Source Robotics Foundation, Inc.
+# Copyright 2026 Centre for Healthcare Assistive and Robotics Technology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
