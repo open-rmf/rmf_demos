@@ -20,7 +20,7 @@ These demos were built and tested on
 
 * [Ubuntu 24.04 LTS](https://releases.ubuntu.com/24.04/)
 
-* [ROS 2 - Kilted](https://docs.ros.org/en/jazzy/Releases/Release-Kilted-Kaiju.html)
+* [ROS 2 - Kilted](https://docs.ros.org/en/kilted/Releases/Release-Kilted-Kaiju.html)
 
 * [Gazebo Ionic](https://gazebosim.org/docs/ionic)
 > Note: The `main` branches of the core RMF libraries are fully supported on ROS 2 Humble, Iron, and Jazzy as well, but you will need to use the distro-specific branches for `rmf_traffic_editor` and `rmf_simulation`.
@@ -47,19 +47,19 @@ docker run \
   --network host -it --rm \
   -e ROS_DOMAIN_ID=<ROS_DOMAIN_ID> \
   -e RMW_IMPLEMENTATION=<RMW_IMPLEMENTATION> \
-  ghcr.io/open-rmf/rmf-web/api-server:jazzy-nightly
+  ghcr.io/open-rmf/rmf-web/api-server:kilted-nightly
 
 # Use the appropriate tag for different ROS 2 distributions
 ```
 
-> Note: The API server is also configurable by mounting the configuration file and setting the environment variable `RMF_API_SERVER_CONFIG`. In the default configuration, the API serer will use an internal non-persistent database.
+> Note: The API server is also configurable by mounting the configuration file and setting the environment variable `RMF_API_SERVER_CONFIG`. In the default configuration, the API server will use an internal non-persistent database.
 
 Start the frontend dashboard via `docker` with host network access, using the default configuration. The dashboard will be accessible at `localhost:3000` by default.
 
 ```bash
 docker run \
   --network host -it --rm \
-  ghcr.io/open-rmf/rmf-web/demo-dashboard:jazzy-nightly
+  ghcr.io/open-rmf/rmf-web/demo-dashboard:kilted-nightly
 
 # Use the appropriate tag for different ROS 2 distributions
 ```
@@ -101,7 +101,6 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz hotel.launch.xml
 
 # Or, run with ignition simulator
-ros2 launch rmf_demos_gz hotel.launch.xml
 ```
 
 Here, we will showcase 2 types of Tasks: **Loop** and **Clean**, you can dispatch them via CLI as follows:
@@ -124,7 +123,6 @@ source ~/rmf_demos_ws/install/setup.bash
 ros2 launch rmf_demos_gz office.launch.xml
 
 # Or, run with ignition simulator
-ros2 launch rmf_demos_gz office.launch.xml
 ```
 
 Now we will showcase 2 types of Tasks: **Delivery** and **Loop**
