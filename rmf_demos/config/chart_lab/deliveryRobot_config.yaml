@@ -35,7 +35,9 @@ rmf_fleet:
   use_parking_reservations: True
   robots:
     deliveryBot_1:
-      charger: "d_charger"
+      charger: "d_charger_1"
+    deliveryBot_2:
+      charger: "d_charger_2"
 
 fleet_manager:
   ip: "127.0.0.1"

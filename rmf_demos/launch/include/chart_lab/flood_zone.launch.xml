@@ -4,4 +4,5 @@
   <executable cmd="ros2 run rmf_demos_tasks dispatch_zone -z consultation --use_sim_time -F tinyRobot -R tinyBot_1" output="both"/>
   <executable cmd="ros2 run rmf_demos_tasks dispatch_zone -z consultation --use_sim_time -F tinyRobot -R tinyBot_2" output="both"/>
   <executable cmd="ros2 run rmf_demos_tasks dispatch_zone -z consultation --use_sim_time -F tinyRobot -R tinyBot_3" output="both"/>
+  <executable cmd="ros2 run rmf_demos_tasks dispatch_zone -z consultation --use_sim_time -F deliveryRobot -R deliveryBot_2" output="both"/>
 </launch>
