@@ -36,8 +36,11 @@ rmf_fleet:
   reassign_task_interval: 120 # seconds, specify how often a task reassignment should be triggered in the fleet
   robots:
     tinyBot_1:
-        charger: "t_charger"
-        responsive_wait: False # Should responsive wait be on/off for this specific robot? Overrides the fleet-wide setting.
+        charger: "t_charger_1"
+    tinyBot_2:
+        charger: "t_charger_2"
+    tinyBot_3:
+        charger: "t_charger_3"
 
 fleet_manager:
   ip: "127.0.0.1"
