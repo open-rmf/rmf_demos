@@ -28,7 +28,7 @@ PathGuide:        follow_path(path)                  ... once per plan
                     -> path.waypoints[i].execution.finished()   per vertex
 ```
 
-## Acknowledgement ordering
+## Acknowledgement Ordering
 
 `PathGuide` accepts `finished()` **only** for the waypoint it is currently
 tracking. An out-of-order call is rejected with a warning and the path does not
