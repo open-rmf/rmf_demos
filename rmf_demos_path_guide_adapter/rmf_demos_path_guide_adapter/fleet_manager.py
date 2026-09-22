@@ -325,8 +325,8 @@ class FleetManager(Node):
                 # to decide when each waypoint has been reached. That decision
                 # belongs on this side; the adapter measures nothing.
                 #
-                # It arrives already capped for lift cabins. Do not second-guess
-                # it here: the adapter is the only side that sees
+                # It arrives already capped for lift cabins. Do not
+                # second-guess it here: the adapter is the only side that sees
                 # `destination.inside_lift`, and dropping the value it sent
                 # reinstates the doors-closing-on-the-robot bug.
 

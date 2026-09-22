@@ -27,8 +27,9 @@ a time. See `acknowledge_reached_waypoints`.
 Tracking a whole path rather than one execution forced three divergences from
 the reference, each explained at its own definition: `stop` matches against
 every waypoint in flight (`path_owns`), teleop ends through `end_teleop`, and a
-dock is peeled off to `perform_docking`. `execute_action` additionally drops the
-path in flight and has no `clean` case. The ROS 2 topic wiring is unchanged.
+dock is peeled off to `perform_docking`. `execute_action` additionally drops
+the path in flight and has no `clean` case. The ROS 2 topic wiring is
+unchanged.
 
 The `localize` callback is a temporary diagnostic -- see its docstring.
 """
@@ -282,8 +283,8 @@ class RobotAdapter:
         # the same adapter worker, in call order (PathGuide.cpp: finish() and
         # PathRobotUpdateHandle::update both go through worker.schedule), so by
         # the time the adapter handles this update it has already advanced past
-        # the waypoints we just acknowledged and the identifier below is the one
-        # it expects. Do not reorder these two steps.
+        # the waypoints we just acknowledged and the identifier below is the
+        # one it expects. Do not reorder these two steps.
         #
         # Both steps read the same path, so they are held under one lock
         # acquisition: releasing between them would let follow_path install a
@@ -300,7 +301,8 @@ class RobotAdapter:
                 # `current_index` only ever increases, so this is safe.
                 # Reporting the *nearest* waypoint is the obvious thing to
                 # write and backtracks the moment the robot reverses. Don't.
-                activity_identifier = self.current_waypoint().execution.identifier
+                activity_identifier = (
+                    self.current_waypoint().execution.identifier)
 
         # Snapshot before testing it: follow_path nulls `self.execution` on the
         # worker thread, so checking the attribute and then dereferencing it
@@ -316,7 +318,8 @@ class RobotAdapter:
                 execution.finished()
                 # Only clear if it is still the one we just finished. A path or
                 # action arriving in between installs its own, and nulling that
-                # would strand it exactly the way this branch exists to prevent.
+                # would strand it exactly the way this branch exists to
+                # prevent.
                 if self.execution is execution:
                     self.execution = None
                     # Not a bare `self.teleoperation = None`: if that command
@@ -357,8 +360,8 @@ class RobotAdapter:
         """
         Report that a localization request arrived, then complete it.
 
-        **DIAGNOSTIC, not a real implementation**, and scheduled for removal. It
-        exists to show that a PathGuide fleet receives the post-lift
+        **DIAGNOSTIC, not a real implementation**, and scheduled for removal.
+        It exists to show that a PathGuide fleet receives the post-lift
         relocalization request at all; until 2026-08-28 it did not, and no demo
         run could reveal that because neither adapter registered a callback.
         `rmf_demos_fleet_adapter` carries the same one so the two flavours can
@@ -367,9 +370,9 @@ class RobotAdapter:
         **Registering a callback is not behaviour-neutral.** Without one,
         `RobotContext::localize` returns false and both `RequestLift` and
         `follow_new_path`'s map-mismatch branch proceed immediately. With one
-        they defer until `finished()`, behind a 300 s watchdog. So forgetting to
-        call it is worse than registering nothing: 300 s of stall per site, a
-        timeout logged, then recovery. A real integrator drives its
+        they defer until `finished()`, behind a 300 s watchdog. So forgetting
+        to call it is worse than registering nothing: 300 s of stall per site,
+        a timeout logged, then recovery. A real integrator drives its
         relocalization routine here and finishes when the robot has actually
         re-localized -- from any thread, since `finished()` schedules onto the
         RMF worker rather than running inline.
@@ -386,8 +389,8 @@ class RobotAdapter:
         """
         Return the waypoint we are still trying to reach.
 
-        Call with `path_lock` held and only while `self.path` is not None. Under
-        those conditions `current_index` is always a valid index into
+        Call with `path_lock` held and only while `self.path` is not None.
+        Under those conditions `current_index` is always a valid index into
         `waypoints`, because acknowledge_through clears the path in the same
         critical section that carries the index past the end.
         """
@@ -400,7 +403,8 @@ class RobotAdapter:
 
         The waypoint list is cached here because `path.waypoints` crosses the
         pybind boundary and deep-copies every waypoint on each access. The
-        copies share their identifiers, so caching changes nothing semantically.
+        copies share their identifiers, so caching changes nothing
+        semantically.
 
         `waypoints` lets a caller that already crossed that boundary hand the
         list in, keeping the copy out from under `path_lock`. Takes the lock
@@ -480,8 +484,8 @@ class RobotAdapter:
 
         # PathGuide delivers a dock maneuver as a single-waypoint path with the
         # dock name set, so that the integrator only has one callback shape to
-        # implement. The fleet manager still wants it as an activity rather than
-        # a path, so peel it off here.
+        # implement. The fleet manager still wants it as an activity rather
+        # than a path, so peel it off here.
         if len(waypoints) == 1 and waypoints[0].destination.dock is not None:
             # Treat it as a non-path command, exactly as the reference does:
             # hold the execution and let the manager's command id complete it
@@ -538,10 +542,10 @@ class RobotAdapter:
         reached and reports the furthest as `reached_waypoint_index`; see
         `FleetManager.advance_reached_index`.
 
-        What stays here is ordering. PathGuide accepts `finished()` only for the
-        waypoint it currently tracks, so a reported index of 7 is walked up one
-        at a time -- the manager reports a level, PathGuide's contract is in
-        edges, and `acknowledge_through` is that translation.
+        What stays here is ordering. PathGuide accepts `finished()` only for
+        the waypoint it currently tracks, so a reported index of 7 is walked up
+        one at a time -- the manager reports a level, PathGuide's contract is
+        in edges, and `acknowledge_through` is that translation.
 
         Takes `path_lock` itself so it is safe to call alone; `update` already
         holds it across this and the identifier read that follows.
@@ -555,8 +559,8 @@ class RobotAdapter:
 
         **This decision is entirely ours.** PathGuide publishes no arrival
         radius; `wp.merge_radius` is a *tolerance* -- how far off its lane RMF
-        can still localize the robot here -- and therefore an upper bound on how
-        loose we may be, not a value to use as-is. Credit a path's final
+        can still localize the robot here -- and therefore an upper bound on
+        how loose we may be, not a value to use as-is. Credit a path's final
         waypoint beyond it and the robot stops somewhere RMF cannot merge it
         back from.
 
@@ -566,8 +570,8 @@ class RobotAdapter:
         doors close and "arrived" there must mean the whole robot is in the
         cabin.
 
-        `min`, never `max`: this may only tighten. All in robot coordinates; see
-        `LIFT_ARRIVAL_RADIUS` for why the cabin geometry is not consulted.
+        `min`, never `max`: this may only tighten. All in robot coordinates;
+        see `LIFT_ARRIVAL_RADIUS` for why the cabin geometry is not consulted.
         """
         if wp.destination.inside_lift is None:
             return wp.merge_radius
@@ -697,19 +701,20 @@ class RobotAdapter:
         session's own command completing in `update`. Each must drop the
         `Teleoperation` *and* tell the fleet manager. Miss the second and the
         manager stays in `perform_action_mode`, which suppresses its
-        stale-task-id republish: a dropped `PathRequest` is never resent and the
-        robot silently stops.
+        stale-task-id republish: a dropped `PathRequest` is never resent and
+        the robot silently stops.
 
         `retry` is forced by what happens next:
 
         * `retry=True` from `finish_action` and `update`, where nothing is
           dispatched afterwards, so the retry loop survives.
-        * `retry=False` elsewhere, because the caller dispatches immediately and
+        * `retry=False` elsewhere, because the caller dispatches immediately
+        and
           would cancel its own retry. One attempt on a thread instead.
 
         Either way the in-flight `toggle_teleop(True)` is joined first:
-        cancelling only sets an event and cannot abort a POST already in flight,
-        so a stale True landing after our False would latch
+        cancelling only sets an event and cannot abort a POST already in
+        flight, so a stale True landing after our False would latch
         `perform_action_mode` back on.
 
         A failed toggle has no in-adapter recovery in the `retry=False` case.

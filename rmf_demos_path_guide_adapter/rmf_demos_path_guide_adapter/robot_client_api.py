@@ -69,8 +69,8 @@ class RobotAPI:
         are in the robot's coordinate convention.
 
         `arrival_radius` is the *integrator's* choice, not something PathGuide
-        published: the adapter picks it per waypoint, bounded by that waypoint's
-        merge_radius and tightened inside lift cabins. See
+        published: the adapter picks it per waypoint, bounded by that
+        waypoint's merge_radius and tightened inside lift cabins. See
         RobotAdapter.arrival_radius_for.
 
         This replaces the per-waypoint navigate() call of the EasyFullControl
