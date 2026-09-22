@@ -66,7 +66,7 @@ The trap is reporting the **nearest** waypoint each tick — the obvious
 implementation, and one that backtracks as soon as a robot reverses or loops
 around an obstacle.
 
-## Running it
+## Example
 
 This package ships one launch file, `launch/path_guide_adapter.launch.xml`,
 which brings up the fleet manager and the adapter for a single fleet:
