@@ -5,7 +5,7 @@ A Path Guide fleet adapter for the RMF Demos robots.
 This package is modelled on `rmf_demos_fleet_adapter` and does not modify it.
 Run either one; they are two independent demos of the same simulated robots.
 
-## What is different
+## What Is Different
 
 `rmf_demos_fleet_adapter` uses `EasyFullControl`, which hands the fleet manager
 **one destination at a time** and waits for `execution.finished()` before
