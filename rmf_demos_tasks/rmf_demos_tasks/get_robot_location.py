@@ -85,7 +85,7 @@ class RobotStateObserver(Node):
                             break
 
                     if (node_floor and
-                        node_floor != robot_state.location.level_name):
+                    node_floor != robot_state.location.level_name):
                         continue
 
                     dist = (graph_node.x - robot_state.location.x) ** 2
