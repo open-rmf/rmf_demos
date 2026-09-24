@@ -83,8 +83,9 @@ class RobotStateObserver(Node):
                         if p.name == "map_name":
                             node_floor = p.value_string
                             break
-                    
-                    if node_floor and node_floor != robot_state.location.level_name:
+
+                    if (node_floor and
+                        node_floor != robot_state.location.level_name):
                         continue
 
                     dist = (graph_node.x - robot_state.location.x) ** 2
@@ -105,8 +106,10 @@ class RobotStateObserver(Node):
             if self.parser.block_until_reaches:
                 valid_waypoints = {node.name for node in navgraph.vertices}
                 if self.parser.block_until_reaches not in valid_waypoints:
-                    err_msg = f"Error: Waypoint [{self.parser.block_until_reaches}] not "
-                    f"found in nav graph for fleet [{self.parser.fleet}]."
+                    err_msg = (
+                        f"Error: Waypoint [{self.parser.block_until_reaches}] "
+                        "not found in nav graph for "
+                        f"fleet [{self.parser.fleet}].")
                     print(err_msg)
                     if not self.response.done():
                         self.response.set_result(err_msg)
