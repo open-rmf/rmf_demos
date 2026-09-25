@@ -2,6 +2,9 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 2.9.0 (2026-06-17)
 ------------------
 * Lyrical compatibility (`#353 <https://github.com/open-rmf/rmf_demos/issues/353>`_)

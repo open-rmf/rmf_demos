@@ -2,6 +2,11 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* rmf_demos_tasks: Fix typo in license name in package.xml (`#358 <https://github.com/open-rmf/rmf_demos/issues/358>`_)
+* Contributors: Silvio Traversaro
+
 2.9.0 (2026-06-17)
 ------------------
 * Lyrical compatibility (`#353 <https://github.com/open-rmf/rmf_demos/issues/353>`_)
