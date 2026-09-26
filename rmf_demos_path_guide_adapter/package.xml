@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>rmf_demos_path_guide_adapter</name>
+  <version>0.1.0</version>
+  <description>Path Guide fleet adapter for RMF Demos robots. Hands the fleet manager an entire path in one request instead of one waypoint at a time, and acknowledges each waypoint as the robot reaches it. Modelled on rmf_demos_fleet_adapter, which it deliberately leaves untouched.</description>
+  <maintainer email="leong_teck_tey@cgh.com.sg">Leong Teck Tey</maintainer>
+  <license>Apache License 2.0</license>
+
+  <exec_depend>launch_xml</exec_depend>
+
+  <exec_depend>python3-fastapi</exec_depend>
+  <exec_depend>python3-flask-socketio</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-pydantic</exec_depend>
+  <exec_depend>python3-pyproj</exec_depend>
+  <exec_depend>python3-requests</exec_depend>
+  <exec_depend>python3-uvicorn</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+
+  <exec_depend>rclpy</exec_depend>
+
+  <exec_depend>rmf_fleet_adapter_python</exec_depend>
+  <exec_depend>rmf_fleet_msgs</exec_depend>
+  <exec_depend>rmf_task_msgs</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
