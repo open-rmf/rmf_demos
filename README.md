@@ -99,8 +99,6 @@ To launch the world and the schedule visualizer,
 ```bash
 source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz hotel.launch.xml
-
-# Or, run with ignition simulator
 ```
 
 Here, we will showcase 2 types of Tasks: **Loop** and **Clean**, you can dispatch them via CLI as follows:
@@ -121,8 +119,6 @@ An indoor office environment for robots to navigate around. It includes a bevera
 ```bash
 source ~/rmf_demos_ws/install/setup.bash
 ros2 launch rmf_demos_gz office.launch.xml
-
-# Or, run with ignition simulator
 ```
 
 Now we will showcase 2 types of Tasks: **Delivery** and **Loop**
