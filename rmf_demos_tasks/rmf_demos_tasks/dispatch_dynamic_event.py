@@ -16,7 +16,6 @@
 """Dynamic Event."""
 
 import argparse
-import asyncio
 import json
 import sys
 import uuid
@@ -151,8 +150,7 @@ class TaskRequester(Node):
 
                 required.append(req_contents)
 
-        asyncio.set_event_loop(asyncio.new_event_loop())
-        self.response = asyncio.Future()
+        self.response = rclpy.Future()
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,

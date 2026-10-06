@@ -16,7 +16,6 @@
 """Dispatch a delivery."""
 
 import argparse
-import asyncio
 import json
 import sys
 import uuid
@@ -139,8 +138,7 @@ class TaskRequester(Node):
         )
 
         self.args = parser.parse_args(argv[1:])
-        asyncio.set_event_loop(asyncio.new_event_loop())
-        self.response = asyncio.Future()
+        self.response = rclpy.Future()
 
         # check user delivery arg inputs
         if len(self.args.pickups) != len(self.args.pickup_handlers):
