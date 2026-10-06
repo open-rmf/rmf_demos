@@ -1,0 +1,7 @@
+# Name of the robot to be added
+string robot_name
+
+RobotConfiguration robot_config
+---
+bool success
+string message

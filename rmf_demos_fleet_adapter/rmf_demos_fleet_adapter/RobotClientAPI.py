@@ -55,6 +55,29 @@ class RobotAPI:
             return False
         return True
 
+    def add_robot(self, robot_name: str):
+        """
+        Request the fleet manager to add a new robot at runtime.
+
+        The robot is expected to already be spawned in map. Return True if
+        the robot is successfully added, else False.
+        """
+        url = (
+            self.prefix
+            + f'/open-rmf/rmf_demos_fm/add_robot?robot_name={robot_name}'
+        )
+        try:
+            response = requests.post(url, timeout=self.timeout)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()['success']
+        except HTTPError as http_err:
+            print(f'HTTP error for {robot_name} in add_robot: {http_err}')
+        except Exception as err:
+            print(f'Other error for {robot_name} in add_robot: {err}')
+        return False
+
     def navigate(
         self,
         robot_name: str,
