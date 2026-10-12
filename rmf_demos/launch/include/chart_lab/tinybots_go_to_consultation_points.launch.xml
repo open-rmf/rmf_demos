@@ -1,0 +1,6 @@
+<?xml version='1.0' ?>
+<launch>
+  <executable cmd="ros2 run rmf_demos_tasks dispatch_go_to_place -p wait_1 --use_sim_time -F tinyRobot -R tinyBot_1" output="both"/>
+  <executable cmd="ros2 run rmf_demos_tasks dispatch_go_to_place -p wait_2 --use_sim_time -F tinyRobot -R tinyBot_2" output="both"/>
+  <executable cmd="ros2 run rmf_demos_tasks dispatch_go_to_place -p wait_3 --use_sim_time -F tinyRobot -R tinyBot_3" output="both"/>
+</launch>

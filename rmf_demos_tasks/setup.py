@@ -37,6 +37,7 @@ setup(
             'dispatch_loop = rmf_demos_tasks.dispatch_loop:main',
             'dispatch_action = rmf_demos_tasks.dispatch_action:main',
             'dispatch_patrol = rmf_demos_tasks.dispatch_patrol:main',
+            'dispatch_zone = rmf_demos_tasks.dispatch_zone:main',
             'dispatch_delivery = rmf_demos_tasks.dispatch_delivery:main',
             'dispatch_cart_delivery = \
                 rmf_demos_tasks.dispatch_cart_delivery:main',
