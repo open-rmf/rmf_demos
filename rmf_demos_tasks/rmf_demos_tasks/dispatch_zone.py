@@ -35,6 +35,36 @@ from rmf_task_msgs.msg import ApiResponse
 ###############################################################################
 
 
+def parse_hint(text):
+    """Turn one -H argument into the hint object the zone schema takes."""
+    parts = text.split(':')
+    kind = parts[0]
+    name = ''
+    if len(parts) > 1:
+        name = parts[1]
+    hint = {}
+    if kind == 'wp':
+        hint['waypoint'] = name
+        rest = parts[2:]
+    elif kind == 'group':
+        hint['group'] = name
+        rest = parts[2:]
+    elif kind == 'any':
+        rest = parts[1:]
+    else:
+        raise argparse.ArgumentTypeError(f'unknown hint type [{kind}]')
+    if kind != 'any' and not name:
+        raise argparse.ArgumentTypeError(f'{kind} needs a name')
+    if len(rest) > 1:
+        raise argparse.ArgumentTypeError(
+            'orientations go in one comma separated list')
+    if rest and rest[0]:
+        hint['orientations'] = []
+        for angle in rest[0].split(','):
+            hint['orientations'].append(float(angle))
+    return hint
+
+
 class TaskRequester(Node):
     """Dispatch zone task requester."""
 
@@ -50,27 +80,16 @@ class TaskRequester(Node):
             help='Name of the target zone',
         )
         parser.add_argument(
-            '-g',
-            '--group',
-            type=str,
+            '-H',
+            '--hint',
+            action='append',
+            type=parse_hint,
             default=None,
-            help='Optional group hint to filter zone waypoints',
-        )
-        parser.add_argument(
-            '-o',
-            '--orientation',
-            type=float,
-            default=None,
-            help='Optional setting of robot orientation in radians at the '
-                 'selected waypoint',
-        )
-        parser.add_argument(
-            '-w',
-            '--preferred_waypoints',
-            nargs='+',
-            type=str,
-            default=None,
-            help='Optional ordered list of preferred zone waypoint names',
+            metavar='TYPE[:NAME][:ANGLE,...]',
+            help='Add a preference, most preferred first. TYPE is wp, '
+                 'group or any, and any takes no name. Orientations are '
+                 'radians. Examples: wp:wait_1:1.57,4.71  group:C:0.7  '
+                 'any:1.57',
         )
         parser.add_argument(
             '-F',
@@ -168,19 +187,8 @@ class TaskRequester(Node):
 
         description = {'zone_name': self.args.zone}
 
-        waypoint_preference = {}
-        if self.args.group is not None:
-            waypoint_preference['group'] = self.args.group
-        if self.args.orientation is not None:
-            waypoint_preference['orientation'] = self.args.orientation
-        if self.args.preferred_waypoints:
-            waypoint_preference['preferred_waypoints'] = \
-                self.args.preferred_waypoints
-
-        if waypoint_preference:
-            description['modifiers'] = {
-                'waypoint_preference': waypoint_preference,
-            }
+        if self.args.hint:
+            description['hints'] = self.args.hint
 
         request['description'] = description
         payload['request'] = request
