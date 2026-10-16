@@ -16,7 +16,6 @@
 """Wait for a task to be completed."""
 
 import argparse
-import asyncio
 import json
 import sys
 import time
@@ -45,7 +44,7 @@ class TaskObserver(Node):
         super().__init__('TaskObserver')
 
         self.parser = parser
-        self.response = asyncio.Future()
+        self.response = rclpy.Future()
 
         self.subscription = self.create_subscription(
             FleetState,

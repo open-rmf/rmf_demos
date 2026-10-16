@@ -13,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Cancel a task."""
 
 import argparse
 import json
@@ -32,8 +33,10 @@ from rmf_task_msgs.msg import ApiRequest, ApiResponse
 
 
 class TaskRequester(Node):
+    """Task requester."""
 
     def __init__(self, argv=sys.argv):
+        """Initialize a task requester."""
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument(
@@ -84,6 +87,7 @@ class TaskRequester(Node):
 
 
 def main(argv=sys.argv):
+    """Cancel a task."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
