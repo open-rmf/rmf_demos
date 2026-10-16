@@ -98,7 +98,8 @@ class RobotStateObserver(Node):
 
                     dist_sq = (graph_node.x - robot_state.location.x) ** 2
                     dist_sq += (graph_node.y - robot_state.location.y) ** 2
-                    if dist_sq <= self.tolerance_squared and dist_sq < best_dist_squared:
+                    if (dist_sq <= self.tolerance_squared and
+                            dist_sq < best_dist_squared):
                         best_dist_squared = dist_sq
                         best_waypoint = graph_node.name
 
@@ -155,8 +156,8 @@ def create_parser():
         '--block-until-reaches',
         '-B',
         type=str,
-        help='Block until this waypoint is reached. If empty,' +
-        ' then the command does not block.'
+        help='Block until this waypoint is reached. If empty,'
+             ' then the command does not block.'
     )
 
     parser.add_argument(
@@ -181,7 +182,7 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=arguments.timeout
     )
     if task_requester.response.done():
-        print(f'Got response: \n{task_requester.response.result()}')
+        print(f'Got response:\n{task_requester.response.result()}')
         end_time = time.time()
         elapsed = end_time - start_time
         print(f'elapsed time: {elapsed}')
