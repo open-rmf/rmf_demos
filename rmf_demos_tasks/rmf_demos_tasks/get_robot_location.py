@@ -16,8 +16,8 @@
 """Get the location of a robot."""
 
 import argparse
-import math
 import asyncio
+import math
 import sys
 import time
 
