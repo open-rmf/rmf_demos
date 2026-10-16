@@ -13,9 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Dispatch any json task description."""
 
 import argparse
-import asyncio
 import json
 import sys
 import uuid
@@ -34,21 +34,21 @@ from rmf_task_msgs.msg import ApiRequest, ApiResponse
 ###############################################################################
 
 class TaskRequester(Node):
+    """Task requester."""
 
     def __init__(self, argv=sys.argv):
+        """Initialize a task requester."""
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
-        parser.add_argument(
-            '-c', '--category',
-            type=str,
-            default='compose',
-            help='Set the category of the task'
-        )
         parser.add_argument(
             '-f', '--file',
             required=True,
             type=str,
-            help='File containing a task description formatted in json'
+            help=(
+                'File containing a json object containing at least '
+                '{{ "category": -, "description": - }}. The contents of this '
+                'file will be inserted into the request message.'
+            ),
         )
         parser.add_argument(
             '-F', '--fleet',
@@ -77,12 +77,31 @@ class TaskRequester(Node):
             action='store_true',
             help='Use sim time, default: false'
         )
+        parser.add_argument(
+            '-e',
+            '--estimate',
+            action='store_true',
+            help=(
+                'Request an estimate instead of dispatching a task. '
+                'You must specify both the fleet and robot names for this '
+                'setting.'
+            ),
+        )
 
         self.args = parser.parse_args(argv[1:])
-        self.response = asyncio.Future()
+        self.response = rclpy.Future()
 
         with open(self.args.file) as f:
-            description = json.load(f)
+            request_file_contents = json.load(f)
+
+        if (
+            'category' not in request_file_contents
+            or 'description' not in request_file_contents
+        ):
+            raise RuntimeError(
+                'The input json file must be an object that contains both a '
+                '"category" and a "description" field.'
+            )
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
@@ -105,13 +124,22 @@ class TaskRequester(Node):
         payload = {}
 
         if self.args.robot and self.args.fleet:
-            self.get_logger().info("Using 'robot_task_request'")
-            payload['type'] = 'robot_task_request'
+            if self.args.estimate:
+                payload['type'] = 'estimate_robot_task_request'
+            else:
+                payload['type'] = 'robot_task_request'
             payload['robot'] = self.args.robot
             payload['fleet'] = self.args.fleet
         else:
+            if self.args.estimate:
+                raise RuntimeError(
+                    'Cannot use --estimate without specifying names for both '
+                    'fleet and robot'
+                )
             self.get_logger().info("Using 'dispatch_task_request'")
             payload['type'] = 'dispatch_task_request'
+
+        self.get_logger().info(f"Using '{payload['type']}'")
 
         request = {}
 
@@ -122,11 +150,9 @@ class TaskRequester(Node):
         request['unix_millis_earliest_start_time'] = start_time
         # todo(YV): Fill priority after schema is added
 
-        # Define task request category
-        request['category'] = self.args.category
+        # Insert user-provided contents into request
+        request.update(request_file_contents)
 
-        # Define task request description
-        request['description'] = description
         payload['request'] = request
         msg.json_msg = json.dumps(payload)
 
@@ -147,6 +173,7 @@ class TaskRequester(Node):
 
 
 def main(argv=sys.argv):
+    """Dispatch any json-defined task category and description."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
@@ -154,7 +181,7 @@ def main(argv=sys.argv):
     rclpy.spin_until_future_complete(
         task_requester, task_requester.response, timeout_sec=5.0)
     if task_requester.response.done():
-        print(f'Got response:\n{task_requester.response.result()}')
+        print(f'Got response: \n{task_requester.response.result()}')
     else:
         print('Did not get a response')
     rclpy.shutdown()

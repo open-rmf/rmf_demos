@@ -13,9 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Go to place."""
 
 import argparse
-import asyncio
 import json
 import math
 import sys
@@ -28,6 +28,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
+
 from rmf_task_msgs.msg import ApiRequest
 from rmf_task_msgs.msg import ApiResponse
 
@@ -35,8 +36,10 @@ from rmf_task_msgs.msg import ApiResponse
 
 
 class TaskRequester(Node):
+    """Task requester."""
 
     def __init__(self, argv=sys.argv):
+        """Initialize a task requester."""
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument('-F', '--fleet', type=str, help='Fleet name')
@@ -91,9 +94,28 @@ class TaskRequester(Node):
             type=str,
             default='rmf_demos_tasks'
         )
+        parser.add_argument(
+            '-e',
+            '--estimate',
+            action='store_true',
+            help=(
+                'Request an estimate instead of dispatching a task. '
+                'You must specify both the fleet and robot names for this '
+                'setting.'
+            ),
+        )
+        parser.add_argument(
+            '--start-at-departure',
+            action='store_true',
+            help=(
+                'Request the robot to not start going to its destination '
+                'until the task start time has been reached, rather than '
+                'trying to arrive at the destination at the task start time.'
+            )
+        )
 
         self.args = parser.parse_args(argv[1:])
-        self.response = asyncio.Future()
+        self.response = rclpy.Future()
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
@@ -118,13 +140,21 @@ class TaskRequester(Node):
         payload = {}
 
         if self.args.robot and self.args.fleet:
-            self.get_logger().info("Using 'robot_task_request'")
-            payload['type'] = 'robot_task_request'
+            if self.args.estimate:
+                payload['type'] = 'estimate_robot_task_request'
+            else:
+                payload['type'] = 'robot_task_request'
             payload['robot'] = self.args.robot
             payload['fleet'] = self.args.fleet
         else:
-            self.get_logger().info("Using 'dispatch_task_request'")
+            if self.args.estimate:
+                raise RuntimeError(
+                    'Cannot use --estimate without specifying names for both '
+                    'fleet and robot'
+                )
             payload['type'] = 'dispatch_task_request'
+
+        self.get_logger().info(f"Using '{payload['type']}'")
 
         # Set task request start time
         now = self.get_clock().now().to_msg()
@@ -148,6 +178,9 @@ class TaskRequester(Node):
             go_to_description['constraints'] = [
                 {'category': 'prefer_same_map'}
             ]
+
+        if self.args.start_at_departure:
+            go_to_description['start_at_departure'] = True
 
         go_to_activity = {
             'category': 'go_to_place',
@@ -189,6 +222,7 @@ class TaskRequester(Node):
 
 
 def main(argv=sys.argv):
+    """Go to place."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
@@ -197,7 +231,7 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=5.0
     )
     if task_requester.response.done():
-        print(f'Got response:\n{task_requester.response.result()}')
+        print(f'Got response: \n{task_requester.response.result()}')
     else:
         print('Did not get a response')
     rclpy.shutdown()
