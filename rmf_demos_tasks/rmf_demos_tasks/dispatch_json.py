@@ -33,75 +33,117 @@ from rmf_task_msgs.msg import ApiRequest, ApiResponse
 
 ###############################################################################
 
+
+def get_args_parser():
+    """Create the argument parser."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-f', '--file',
+        required=True,
+        type=str,
+        help=(
+            'File containing a json object containing at least '
+            '{{ "category": -, "description": - }}. The contents of this '
+            'file will be inserted into the request message.'
+        ),
+    )
+    parser.add_argument(
+        '-F', '--fleet',
+        type=str,
+        help='Fleet name, should define together with robot'
+    )
+    parser.add_argument(
+        '-R', '--robot',
+        type=str,
+        help='Robot name, should define together with fleet'
+    )
+    parser.add_argument(
+        '-st', '--start_time',
+        type=int,
+        default=0,
+        help='Start time from now in secs, default: 0'
+    )
+    parser.add_argument(
+        '-pt', '--priority',
+        type=int,
+        default=0,
+        help='Priority value for this request'
+    )
+    parser.add_argument(
+        '--use_sim_time',
+        action='store_true',
+        help='Use sim time, default: false'
+    )
+    parser.add_argument(
+        '-e',
+        '--estimate',
+        action='store_true',
+        help=(
+            'Request an estimate instead of dispatching a task. '
+            'You must specify both the fleet and robot names for this '
+            'setting.'
+        ),
+    )
+    return parser
+
+
+def build_payload(args, start_time, request_file_contents):
+    """
+    Build the payload dict for a json-file task (no ROS needed).
+
+    ``request_file_contents`` is the parsed json object from ``--file``.
+    Raises ``RuntimeError`` if required fields are missing or if
+    ``--estimate`` is used without both fleet and robot names.
+    """
+    if (
+        'category' not in request_file_contents
+        or 'description' not in request_file_contents
+    ):
+        raise RuntimeError(
+            'The input json file must be an object that contains both a '
+            '"category" and a "description" field.'
+        )
+
+    payload = {}
+    if args.robot and args.fleet:
+        if args.estimate:
+            payload['type'] = 'estimate_robot_task_request'
+        else:
+            payload['type'] = 'robot_task_request'
+        payload['robot'] = args.robot
+        payload['fleet'] = args.fleet
+    else:
+        if args.estimate:
+            raise RuntimeError(
+                'Cannot use --estimate without specifying names for both '
+                'fleet and robot'
+            )
+        payload['type'] = 'dispatch_task_request'
+
+    request = {}
+
+    # Set task request start time
+    request['unix_millis_earliest_start_time'] = start_time
+    # todo(YV): Fill priority after schema is added
+
+    # Insert user-provided contents into request
+    request.update(request_file_contents)
+
+    payload['request'] = request
+    return payload
+
+
 class TaskRequester(Node):
     """Task requester."""
 
     def __init__(self, argv=sys.argv):
         """Initialize a task requester."""
         super().__init__('task_requester')
-        parser = argparse.ArgumentParser()
-        parser.add_argument(
-            '-f', '--file',
-            required=True,
-            type=str,
-            help=(
-                'File containing a json object containing at least '
-                '{{ "category": -, "description": - }}. The contents of this '
-                'file will be inserted into the request message.'
-            ),
-        )
-        parser.add_argument(
-            '-F', '--fleet',
-            type=str,
-            help='Fleet name, should define together with robot'
-        )
-        parser.add_argument(
-            '-R', '--robot',
-            type=str,
-            help='Robot name, should define together with fleet'
-        )
-        parser.add_argument(
-            '-st', '--start_time',
-            type=int,
-            default=0,
-            help='Start time from now in secs, default: 0'
-        )
-        parser.add_argument(
-            '-pt', '--priority',
-            type=int,
-            default=0,
-            help='Priority value for this request'
-        )
-        parser.add_argument(
-            '--use_sim_time',
-            action='store_true',
-            help='Use sim time, default: false'
-        )
-        parser.add_argument(
-            '-e',
-            '--estimate',
-            action='store_true',
-            help=(
-                'Request an estimate instead of dispatching a task. '
-                'You must specify both the fleet and robot names for this '
-                'setting.'
-            ),
-        )
-
-        self.args = parser.parse_args(argv[1:])
-        self.response = rclpy.Future()
-
+        self.args = get_args_parser().parse_args(argv[1:])
         with open(self.args.file) as f:
             request_file_contents = json.load(f)
 
-        if (
-            'category' not in request_file_contents
-            or 'description' not in request_file_contents
-        ):
-            raise RuntimeError(
-                'The input json file must be an object that contains both a '
-                '"category" and a "description" field.'
-            )
+        self.response = rclpy.Future()
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
@@ -109,7 +151,7 @@ class TaskRequester(Node):
             reliability=Reliability.RELIABLE,
             durability=Durability.TRANSIENT_LOCAL)
         self.pub = self.create_publisher(
-          ApiRequest, 'task_api_requests', transient_qos
+            ApiRequest, 'task_api_requests', transient_qos
         )
 
         # enable ros sim time
@@ -121,39 +163,17 @@ class TaskRequester(Node):
         # Construct task
         msg = ApiRequest()
         msg.request_id = 'task_' + str(uuid.uuid4())
-        payload = {}
 
-        if self.args.robot and self.args.fleet:
-            if self.args.estimate:
-                payload['type'] = 'estimate_robot_task_request'
-            else:
-                payload['type'] = 'robot_task_request'
-            payload['robot'] = self.args.robot
-            payload['fleet'] = self.args.fleet
-        else:
-            if self.args.estimate:
-                raise RuntimeError(
-                    'Cannot use --estimate without specifying names for both '
-                    'fleet and robot'
-                )
-            self.get_logger().info("Using 'dispatch_task_request'")
-            payload['type'] = 'dispatch_task_request'
-
-        self.get_logger().info(f"Using '{payload['type']}'")
-
-        request = {}
-
-        # Set task request start time
+        # Set task request start time (clock must come from the node)
         now = self.get_clock().now().to_msg()
         now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
-        request['unix_millis_earliest_start_time'] = start_time
-        # todo(YV): Fill priority after schema is added
 
-        # Insert user-provided contents into request
-        request.update(request_file_contents)
+        payload = build_payload(
+            self.args, start_time, request_file_contents
+        )
+        self.get_logger().info(f"Using '{payload['type']}'")
 
-        payload['request'] = request
         msg.json_msg = json.dumps(payload)
 
         def receive_response(response_msg: ApiResponse):
