@@ -16,6 +16,7 @@
 """Get the location of a robot."""
 
 import argparse
+import math
 import asyncio
 import sys
 import time
@@ -44,6 +45,8 @@ class RobotStateObserver(Node):
         super().__init__('TaskObserver')
 
         self.parser = parser
+        # squared tolerance (m^2): radius of the search window around the robot
+        self.tolerance_squared = (self.parser.tolerance) ** 2
         asyncio.set_event_loop(asyncio.new_event_loop())
         self.response = asyncio.Future()
 
@@ -77,6 +80,11 @@ class RobotStateObserver(Node):
             return
         for robot_state in fleet_state.robots:
             if robot_state.name == self.parser.robot:
+                best_waypoint = None
+                # running minimum squared distance (m^2); a vertex wins only if
+                # it is within the inclusive tolerance radius AND strictly
+                # closer than the best vertex seen so far
+                best_dist_squared = math.inf
                 for graph_node in self.nav_graph.vertices:
                     node_floor = ''
                     for p in graph_node.params:
@@ -88,15 +96,19 @@ class RobotStateObserver(Node):
                             node_floor != robot_state.location.level_name):
                         continue
 
-                    dist = (graph_node.x - robot_state.location.x) ** 2
-                    dist += (graph_node.y - robot_state.location.y) ** 2
-                    name = graph_node.name
-                    if dist < 0.5:
-                        if not self.parser.block_until_reaches:
-                            self.response.set_result(name)
-                        elif self.parser.block_until_reaches == name:
-                            self.response.set_result(name)
-                        return
+                    dist_sq = (graph_node.x - robot_state.location.x) ** 2
+                    dist_sq += (graph_node.y - robot_state.location.y) ** 2
+                    if dist_sq <= self.tolerance_squared and dist_sq < best_dist_squared:
+                        best_dist_squared = dist_sq
+                        best_waypoint = graph_node.name
+
+                if best_waypoint is None:
+                    return
+
+                if not self.parser.block_until_reaches:
+                    self.response.set_result(best_waypoint)
+                elif self.parser.block_until_reaches == best_waypoint:
+                    self.response.set_result(best_waypoint)
 
     def nav_graph_watcher(self, navgraph: Graph):
         """Watch the nav graph."""
@@ -145,6 +157,14 @@ def create_parser():
         type=str,
         help='Block until this waypoint is reached. If empty,' +
         ' then the command does not block.'
+    )
+
+    parser.add_argument(
+        '--tolerance',
+        type=float,
+        default=0.5,
+        help='Search radius in meters for matching a vertex near the '
+        'robot (squared internally as m^2) [default: 0.5]'
     )
     return parser
 
