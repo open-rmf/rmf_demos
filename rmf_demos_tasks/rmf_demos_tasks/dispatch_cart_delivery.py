@@ -16,7 +16,6 @@
 """Dispatch a cart delivery."""
 
 import argparse
-import asyncio
 import json
 import sys
 import uuid
@@ -61,8 +60,7 @@ class TaskRequester(Node):
                             help='Use sim time, default: false')
 
         self.args = parser.parse_args(argv[1:])
-        asyncio.set_event_loop(asyncio.new_event_loop())
-        self.response = asyncio.Future()
+        self.response = rclpy.Future()
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
