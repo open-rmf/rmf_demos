@@ -78,6 +78,13 @@ def main(argv=sys.argv):
         action='store_true',
         help='Use sim time, default: false',
     )
+    parser.add_argument(
+        '-p',
+        '--port',
+        type=int,
+        default=None,
+        help='Port to connect to the fleet manager server',
+    )
     args = parser.parse_args(args_without_ros[1:])
     print('Starting fleet adapter...')
 
@@ -127,8 +134,19 @@ def main(argv=sys.argv):
     update_period = 1.0 / fleet_mgr_yaml.get(
         'robot_state_update_frequency', 10.0
     )
+    node.declare_parameter('fleet_manager_port', 0)
+    override_port = (
+        node.get_parameter('fleet_manager_port')
+        .get_parameter_value()
+        .integer_value
+    )
+    port = (
+        args.port
+        if args.port is not None
+        else (override_port if override_port != 0 else fleet_mgr_yaml['port'])
+    )
     api_prefix = (
-        'http://' + fleet_mgr_yaml['ip'] + ':' + str(fleet_mgr_yaml['port'])
+        'http://' + fleet_mgr_yaml['ip'] + ':' + str(port)
     )
     api = RobotAPI(
         api_prefix, fleet_mgr_yaml['user'], fleet_mgr_yaml['password']

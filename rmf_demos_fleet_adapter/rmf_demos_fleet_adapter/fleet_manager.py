@@ -23,6 +23,11 @@ import threading
 import time
 from typing import Optional
 
+try:
+    import portpicker
+except ImportError:
+    portpicker = None
+
 from fastapi import FastAPI
 import numpy as np
 from pydantic import BaseModel
@@ -572,21 +577,48 @@ def main(argv=sys.argv):
         required=True,
         help='Path to the config.yaml file',
     )
+    parser.add_argument(
+        '-p',
+        '--port',
+        type=int,
+        default=None,
+        help='Port to run the fleet manager server on',
+    )
     args = parser.parse_args(args_without_ros[1:])
     print('Starting fleet manager...')
 
     with open(args.config_file, 'r') as f:
         config = yaml.safe_load(f)
 
+    port = args.port
+    if port is None:
+        port_cfg = config['fleet_manager'].get('port')
+        if (
+            port_cfg is None
+            or port_cfg == 0
+            or port_cfg == 'auto'
+            or config['fleet_manager'].get('use_portpicker', False)
+        ):
+            if portpicker is not None:
+                port = portpicker.pick_unused_port()
+            else:
+                raise RuntimeError(
+                    'portpicker is required to automatically select an available port'
+                )
+        else:
+            port = int(port_cfg)
+
     fleet_manager = FleetManager(config)
 
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()
 
+    fleet_manager.get_logger().info(f'Fleet manager listening on port {port}')
+
     uvicorn.run(
         app,
         host=config['fleet_manager']['ip'],
-        port=config['fleet_manager']['port'],
+        port=port,
         log_level='warning',
     )
 
