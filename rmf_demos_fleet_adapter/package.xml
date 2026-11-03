@@ -4,7 +4,7 @@
   <name>rmf_demos_fleet_adapter</name>
   <version>2.10.0</version>
   <description>Fleet adapters for interfacing with RMF Demos robots with a fleet manager via REST API</description>
-  <maintainer email="xiyu@openrobotics.org">Xi Yu Oh</maintainer>
+  <maintainer email="ohxiyu@gmail.com">Xi Yu Oh</maintainer>
   <maintainer email="yadunund@openrobotics.org">Yadunund</maintainer>
   <license>Apache License 2.0</license>
 
@@ -24,6 +24,7 @@
   <exec_depend>rmf_fleet_adapter_python</exec_depend>
   <exec_depend>rmf_fleet_msgs</exec_depend>
   <exec_depend>rmf_task_msgs</exec_depend>
+  <exec_depend>rmf_demos_msgs</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
