@@ -23,13 +23,9 @@ import threading
 import time
 from typing import Optional
 
-try:
-    import portpicker
-except ImportError:
-    portpicker = None
-
 from fastapi import FastAPI
 import numpy as np
+import portpicker
 from pydantic import BaseModel
 from pyproj import Transformer
 import rclpy
@@ -577,43 +573,19 @@ def main(argv=sys.argv):
         required=True,
         help='Path to the config.yaml file',
     )
-    parser.add_argument(
-        '-p',
-        '--port',
-        type=int,
-        default=None,
-        help='Port to run the fleet manager server on',
-    )
     args = parser.parse_args(args_without_ros[1:])
     print('Starting fleet manager...')
 
     with open(args.config_file, 'r') as f:
         config = yaml.safe_load(f)
 
-    port = args.port
-    is_deprecated_config = False
-    if port is None:
-        port_cfg = config['fleet_manager'].get('port')
-        if port_cfg is not None and port_cfg != 0 and port_cfg != 'auto':
-            port = int(port_cfg)
-            is_deprecated_config = True
-        else:
-            if portpicker is not None:
-                port = portpicker.pick_unused_port()
-            else:
-                raise RuntimeError(
-                    'portpicker is required to automatically select an '
-                    'available port'
-                )
+    port = config['fleet_manager'].get('port')
+    if port is None or port == 0 or port == 'auto':
+        port = portpicker.pick_unused_port()
+    else:
+        port = int(port)
 
     fleet_manager = FleetManager(config)
-
-    if is_deprecated_config:
-        fleet_manager.get_logger().warning(
-            'Specifying "port" in the fleet_manager config is deprecated '
-            'and will be removed in a future release. Please omit it to '
-            'allow dynamic port selection via portpicker.'
-        )
 
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()
