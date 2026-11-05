@@ -5,6 +5,38 @@ Greetings,
 This page aims to document frequently asked questions pertaining to the demonstrations of the Robotics Middleware Framework (also termed RoMi-H) as showcased in this repository. The `rmf_core` repository has an additional [FAQ page](https://github.com/open-rmf/rmf_ros2/blob/main/docs/faq.md) which addresses some important higher level topics.
 
 
+#### Gazebo runs, but robots are missing from RViz or do not respond to tasks
+
+Check the full launch output for processes that crashed, including messages
+after robot registration. Gazebo and RViz can remain open after a fleet adapter
+or fleet manager fails.
+
+For example, the log linked in [issue #207](https://github.com/open-rmf/rmf_demos/issues/207)
+contains both a Flask/Click import error and a fleet adapter segmentation fault
+(`exit code -11`). These are separate failures. A native backtrace is needed to
+establish the cause of the segmentation fault. Schedule mirror timeout messages
+can occur when robots are idle and do not by themselves identify a failure.
+
+In another terminal with the same workspace and `ROS_DOMAIN_ID`, check:
+
+```bash
+ros2 pkg prefix rmf_demos
+ros2 topic info /fleet_states --verbose
+ros2 topic echo /fleet_states --once
+ros2 topic echo /clock
+```
+
+Confirm the intended workspace is selected, robot states are arriving, and the
+simulation clock advances while Gazebo is playing. Press Ctrl+C to stop the
+clock output. If states arrive, check that their level matches the level shown
+in RViz and inspect the fleet-state and schedule display statuses.
+
+Use the demo version matching your RMF libraries, as described in the
+[installation instructions](https://github.com/open-rmf/rmf#binary-installation).
+When reporting a persistent problem, include the full launch output, package
+versions, fleet-state output, and a backtrace for a segmentation fault.
+
+
 #### Gazebo crashes with `No namespace found` error at launch
 
 This error is known to arise when launching a demo with `Gazebo 9.0.0`. This is the default version that is come with the bionic release of Ubuntu. The demos however require `Gazebo 9.12.0` or `Gazebo 9.13.0`. To update from `Gazebo 9.0.0`, first make sure your package source is up to date.
