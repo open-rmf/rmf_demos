@@ -113,6 +113,12 @@ class TaskRequester(Node):
                 'trying to arrive at the destination at the task start time.'
             )
         )
+        parser.add_argument(
+            '--timeout',
+            type=float,
+            default=5.0,
+            help='Timeout in seconds to wait for a response, default: 5.0',
+        )
 
         self.args = parser.parse_args(argv[1:])
         self.response = rclpy.Future()
@@ -228,12 +234,16 @@ def main(argv=sys.argv):
 
     task_requester = TaskRequester(args_without_ros)
     rclpy.spin_until_future_complete(
-        task_requester, task_requester.response, timeout_sec=5.0
+        task_requester,
+        task_requester.response,
+        timeout_sec=task_requester.args.timeout,
     )
     if task_requester.response.done():
         print(f'Got response: \n{task_requester.response.result()}')
     else:
         print('Did not get a response')
+        rclpy.shutdown()
+        sys.exit(1)
     rclpy.shutdown()
 
 
