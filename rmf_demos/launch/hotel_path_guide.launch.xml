@@ -1,0 +1,64 @@
+<?xml version='1.0' ?>
+
+<launch>
+  <arg name="use_sim_time" default="false"/>
+  <arg name="enable_experimental_lift_watchdog" default="false" description="experimental lift watchdog"/>
+
+  <!-- Common launch -->
+  <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+    <arg name="viz_config_file" value ="$(find-pkg-share rmf_demos)/include/hotel/hotel.rviz"/>
+    <arg name="config_file" value="$(find-pkg-share rmf_demos_maps)/hotel/hotel.building.yaml"/>
+  </include>
+
+  <!-- Experimental Lift watchdog service launch, default disable -->
+  <group if="$(var enable_experimental_lift_watchdog)" scoped="false">
+    <node pkg="rmf_fleet_adapter"
+          exec="experimental_lift_watchdog"
+          name="experimental_lift_watchdog"
+          output="both" />
+    <set_env name="EXPT_LIFT_WATCHDOG_SRV" value="experimental_lift_watchdog"/>
+  </group>
+  <group unless="$(var enable_experimental_lift_watchdog)" scoped="false">
+    <set_env name="EXPT_LIFT_WATCHDOG_SRV" value=""/>
+  </group>
+
+  <!-- cleanerBotA fleet adapter -->
+  <group>
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/1.yaml" />
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/cleanerBotA_config.yaml"/>
+    </include>
+  </group>
+
+  <!-- TinyRobot fleet adapter, on Path Guide.
+       THE ONLY SUBSTANTIVE DIFFERENCE FROM hotel.launch.xml: this fleet
+       includes rmf_demos_path_guide_adapter instead of rmf_demos_fleet_adapter.
+       Everything else - the robot, nav graph 0, tinyRobot_config.yaml, and the
+       cleanerBotA and deliveryRobot fleets on EasyFullControl - is identical,
+       so running the two in turn is a controlled A/B on the same hardware.
+       Keep it that way, or the comparison stops being a comparison.
+
+       The Path Guide fleet manager REPLACES tinyRobot's EasyFullControl one
+       rather than running beside it, so it reuses port 22011 from the same
+       config with no conflict. -->
+  <group>
+    <include file="$(find-pkg-share rmf_demos_path_guide_adapter)/launch/path_guide_adapter.launch.xml">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/tinyRobot_config.yaml"/>
+    </include>
+  </group>
+
+  <!-- DeliveryRobot fleet adapter -->
+  <group>
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/2.yaml" />
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/deliveryRobot_config.yaml"/>
+      <arg name="experimental_lift_watchdog_service" value="$(env EXPT_LIFT_WATCHDOG_SRV)"/>
+    </include>
+  </group>
+
+</launch>
