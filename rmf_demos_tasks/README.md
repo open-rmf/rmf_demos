@@ -1,4 +1,4 @@
-# rmf\_demo\_tasks
+# rmf\_demos\_tasks
 
 This package provides scripts used in the RMF demos to demonstrate the tasks that may be requested of a robot.
 
@@ -66,6 +66,20 @@ The new task system allows users to construct and submit their own tasks in a mo
   -pp coke,1 coke,1 \
   -dp coke,1 coke,1 \
   --use_sim_time
+  ```
+
+- **dispatch_zone**
+
+  This script dispatches a robot to a designated zone (such as a consultation or holding area). You specify the target zone name with `-z` / `--zone`. You can also provide waypoint preference hints with `-H` / `--hint`, specify fleet `-F` and robot `-R`, and set priority `-pt`.
+
+  Example for Chart Lab world:
+  ```bash
+  ros2 run rmf_demos_tasks dispatch_zone -z consultation -F tinyRobot -R tinyBot_1 --use_sim_time
+  ```
+
+  With preference hints:
+  ```bash
+  ros2 run rmf_demos_tasks dispatch_zone -z consultation -H wp:wait_1:1.57 -F tinyRobot -R tinyBot_1 --use_sim_time
   ```
 
 - **cancel_task**
