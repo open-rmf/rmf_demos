@@ -81,6 +81,7 @@ By specifying `server_uri`, the fleetadapter will update `rmf-web` `api-server` 
 * [Airport Terminal World](#Airport-Terminal-World)
 * [Clinic World](#Clinic-World)
 * [Campus World](#Campus-World)
+* [Chart Lab World](#Chart-Lab-World)
 * [Manufacturing & Logistics World](#Manufacturing-&-Logistics-World)
 
 ---
@@ -247,6 +248,48 @@ The json messages for the first robot can be echoed using the following example 
 
 ```bash
 mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
+```
+
+---
+### Chart Lab World
+
+This world demonstrates zone-based navigation and coordination using the GoToZone capability and reservation node. Multiple robots across two fleets (`tinyRobot` and `deliveryRobot`) navigate between waiting points and consultation zones.
+
+#### Demo Scenario
+To launch the world and schedule visualizer in Gazebo simulation:
+
+```bash
+source ~/rmf_ws/install/setup.bash
+ros2 launch rmf_demos_gz chart_lab.launch.xml
+```
+
+To run the mock visualizer without Gazebo:
+
+```bash
+ros2 launch rmf_demos chart_lab.launch.xml
+```
+
+You can submit zone dispatch tasks via CLI:
+
+```bash
+# Dispatch tinyBot_1 to consultation zone
+ros2 run rmf_demos_tasks dispatch_zone -z consultation -F tinyRobot -R tinyBot_1 --use_sim_time
+
+# Dispatch deliveryBot_1 to consultation zone
+ros2 run rmf_demos_tasks dispatch_zone -z consultation -F deliveryRobot -R deliveryBot_1 --use_sim_time
+```
+
+Or execute the included scenario launch files:
+
+```bash
+# Dispatch tinybots to consultation zone
+ros2 launch rmf_demos tinybots_to_zone.launch.xml
+
+# Dispatch tinybots to specific consultation wait points
+ros2 launch rmf_demos tinybots_go_to_consultation_points.launch.xml
+
+# Dispatch all tinybots and deliverybots to consultation zone
+ros2 launch rmf_demos flood_zone.launch.xml
 ```
 
 ---
