@@ -66,6 +66,12 @@ class TaskRequester:
             action='store_true',
             help='Use sim time, default: false',
         )
+        parser.add_argument(
+            '--timeout',
+            type=float,
+            default=5.0,
+            help='Timeout in seconds to wait for a response, default: 5.0',
+        )
 
         self.args = parser.parse_args(argv[1:])
         self.node = rclpy.create_node('task_requester')
@@ -103,9 +109,11 @@ class TaskRequester:
 
     def main(self):
         """Dispatch a loop task."""
-        if not self.submit_task_srv.wait_for_service(timeout_sec=3.0):
+        if not self.submit_task_srv.wait_for_service(
+            timeout_sec=self.args.timeout
+        ):
             self.node.get_logger().error('Dispatcher Node is not available')
-            return
+            return 1
 
         rclpy.spin_once(self.node, timeout_sec=1.0)
         req_msg = self.generate_task_req_msg()
@@ -115,22 +123,26 @@ class TaskRequester:
         try:
             future = self.submit_task_srv.call_async(req_msg)
             rclpy.spin_until_future_complete(
-                self.node, future, timeout_sec=1.0
+                self.node, future, timeout_sec=self.args.timeout
             )
             response = future.result()
             if response is None:
                 self.node.get_logger().error('/submit_task srv call failed')
+                return 1
             elif not response.success:
                 self.node.get_logger().error(
                     'Dispatcher node failed to accept task'
                 )
+                return 1
             else:
                 self.node.get_logger().info(
                     'Request was successfully submitted '
                     f'and assigned task_id: [{response.task_id}]'
                 )
+                return 0
         except Exception as e:
             self.node.get_logger().error('Error! Submit Srv failed %r' % (e,))
+            return 1
 
 
 ###############################################################################
@@ -142,8 +154,10 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = TaskRequester(args_without_ros)
-    task_requester.main()
+    rc = task_requester.main()
     rclpy.shutdown()
+    if rc != 0:
+        sys.exit(rc)
 
 
 if __name__ == '__main__':
