@@ -253,7 +253,7 @@ mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
 ---
 ### Chart Lab World
 
-This world demonstrates zone-based navigation and coordination using the GoToZone capability and reservation node. Multiple robots across two fleets (`tinyRobot` and `deliveryRobot`) navigate between waiting points and consultation zones.
+This world demonstrates zone-based navigation and coordination using the GoToZone capability and reservation node. Multiple robots across two fleets (`tinyRobot` and `deliveryRobot`) navigate between waiting points and consultation zones. The map defines a single zone, `consultation`, with wait points `wait_1`, `wait_2`, and `wait_3` belonging to groups `A`, `B`, and `C`.
 
 #### Demo Scenario
 To launch the world and schedule visualizer in Gazebo simulation:
@@ -263,10 +263,10 @@ source ~/rmf_ws/install/setup.bash
 ros2 launch rmf_demos_gz chart_lab.launch.xml
 ```
 
-To run the mock visualizer without Gazebo:
+To run in headless mode (without Gazebo GUI):
 
 ```bash
-ros2 launch rmf_demos chart_lab.launch.xml
+ros2 launch rmf_demos_gz chart_lab.launch.xml headless:=true
 ```
 
 You can submit zone dispatch tasks via CLI:
@@ -285,7 +285,7 @@ Or execute the included scenario launch files:
 # Dispatch tinybots to consultation zone
 ros2 launch rmf_demos tinybots_to_zone.launch.xml
 
-# Dispatch tinybots to specific consultation wait points
+# Dispatch tinybots to specific consultation wait points (uses dispatch_go_to_place, bypassing zone allocation)
 ros2 launch rmf_demos tinybots_go_to_consultation_points.launch.xml
 
 # Dispatch all tinybots and deliverybots to consultation zone
