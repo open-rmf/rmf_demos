@@ -1,4 +1,4 @@
-# rmf\_demo\_tasks
+# rmf\_demos\_tasks
 
 This package provides scripts used in the RMF demos to demonstrate the tasks that may be requested of a robot.
 
@@ -66,6 +66,44 @@ The new task system allows users to construct and submit their own tasks in a mo
   -pp coke,1 coke,1 \
   -dp coke,1 coke,1 \
   --use_sim_time
+  ```
+
+- **dispatch_zone**
+
+  This script dispatches a robot to a designated zone. You can specify the target zone name with `-z` / `--zone`. You can also provide waypoint preference hints with `-H` / `--hint`, specify fleet `-F` and robot `-R`.
+
+  Without hints, the robot gets the free waypoint with the best (lowest numbered) `priority` in the zone. In the Chart Lab world, that is `wait_1`, then `wait_2`, then `wait_3`.
+
+  **Preference hints** (`-H` / `--hint`) let you choose where in the zone the robot parks, and its orientation. Each hint takes the form `TYPE[:NAME][:ANGLES]`:
+
+  | Hint | Meaning |
+  |------|---------|
+  | `wp:NAME` | A specific waypoint inside the zone |
+  | `group:NAME` | Any waypoint in that group (the best priority, available one in the group) |
+  | `any` | Any free waypoint (used to set an orientation without choosing a spot) |
+
+  `ANGLES` is an optional comma-separated list of headings **in radians**. If you give several, the robot parks at whichever heading is cheapest to reach. If you omit it, any heading is accepted.
+
+  You can repeat `-H` to list hints. Zone manager will process the hints sequentially, The first hint that matches a free waypoint wins. If none match, the zone manager falls back to the default priority order.
+
+  Example for Chart Lab world:
+  ```bash
+  ros2 run rmf_demos_tasks dispatch_zone -z consultation -F tinyRobot -R tinyBot_1 --use_sim_time
+  ```
+
+  With preference hints:
+  ```bash
+  # Park at wait_2, 1.57 rad heading
+  ros2 run rmf_demos_tasks dispatch_zone -z consultation -H wp:wait_2:1.57 -F tinyRobot -R tinyBot_1 --use_sim_time
+
+  # Park anywhere in group C (wait_3), any heading
+  ros2 run rmf_demos_tasks dispatch_zone -z consultation -H group:C -F tinyRobot -R tinyBot_1 --use_sim_time
+
+  # Prefer wait_3, if it is taken, take any waypoint in group B
+  ros2 run rmf_demos_tasks dispatch_zone -z consultation -H wp:wait_3 -H group:B -F tinyRobot -R tinyBot_1 --use_sim_time
+
+  # Let the zone manager pick the spot, but park facing 0 or 3.14 rad, whichever is cheaper
+  ros2 run rmf_demos_tasks dispatch_zone -z consultation -H any:0,3.14 -F tinyRobot -R tinyBot_1 --use_sim_time
   ```
 
 - **cancel_task**
