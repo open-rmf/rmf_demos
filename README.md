@@ -255,6 +255,8 @@ mosquitto_sub -t /robot/status/00000000-0000-0000-0000-000000000001
 
 This world demonstrates zone-based navigation and coordination using the GoToZone capability and reservation node. Multiple robots across two fleets (`tinyRobot` and `deliveryRobot`) navigate between waiting points and consultation zones. The map defines a single zone, `consultation`, with wait points `wait_1`, `wait_2`, and `wait_3` belonging to groups `A`, `B`, and `C`.
 
+![](https://github.com/user-attachments/assets/7c55b29d-1218-457a-bb89-de8c1634d146)
+
 #### Demo Scenario
 To launch the world and schedule visualizer in Gazebo simulation:
 
