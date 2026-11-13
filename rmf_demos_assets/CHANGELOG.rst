@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_assets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.11.0 (2026-11-13)
+-------------------
 * bump cmake version (`#366 <https://github.com/open-rmf/rmf_demos/issues/366>`_)
 * Contributors: Aaron Chong
 
