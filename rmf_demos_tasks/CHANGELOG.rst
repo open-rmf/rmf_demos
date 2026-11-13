@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.11.0 (2026-11-13)
+-------------------
 * fix(rmf_demos_tasks): handle invalid waypoint exit code and shutdown on timeout (`#378 <https://github.com/open-rmf/rmf_demos/issues/378>`_)
 * feat(rmf_demos_tasks): add configurable timeout and non-zero exit codes (`#371 <https://github.com/open-rmf/rmf_demos/issues/371>`_)
   Fixes `#370 <https://github.com/open-rmf/rmf_demos/issues/370>`_

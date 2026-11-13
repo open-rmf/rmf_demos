@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.11.0 (2026-11-13)
+-------------------
 * Add chart_lab map, zone-related task & launch for GoToZone feature (`#350 <https://github.com/open-rmf/rmf_demos/issues/350>`_)
   Co-authored-by: Brandon Koh <brandonk10.10@gmail.com>
   Co-authored-by: kjchee <keai_jiang_chee@cgh.com.sg>
