@@ -4,6 +4,14 @@ on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
+    inputs:
+      ros_distribution:
+        description: 'ROS distribution to build (empty = default matrix; options: https://github.com/open-rmf/rmf_ci_templates/blob/main/.github/workflows/reusable_build.yaml)'
+        type: string
+      repos_branch_override:
+        description: 'Branch of open-rmf/rmf for rmf.repos (auto = match ros_distribution)'
+        type: string
+        default: 'main'
 
 jobs:
   build_and_test:
@@ -18,4 +26,7 @@ jobs:
         rmf_demos_gz
         rmf_demos_maps
         rmf_demos_tasks
-      dist-matrix: '[{"ros_distribution": "rolling", "ubuntu_distribution": "resolute"}]'
+      # Humble does not have gz_*_vendor / ros_gz_sim dependencies used by rmf_demos_gz
+      dist-matrix: '[{"ros_distribution": "jazzy"}, {"ros_distribution": "lyrical"}, {"ros_distribution": "rolling"}]'
+      ros-distribution: ${{ inputs.ros_distribution || '' }}
+      repos-branch-override: ${{ inputs.repos_branch_override || 'main' }}
