@@ -2,6 +2,26 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix(rmf_demos_tasks): handle invalid waypoint exit code and shutdown on timeout (`#378 <https://github.com/open-rmf/rmf_demos/issues/378>`_)
+* feat(rmf_demos_tasks): add configurable timeout and non-zero exit codes (`#371 <https://github.com/open-rmf/rmf_demos/issues/371>`_)
+  Fixes `#370 <https://github.com/open-rmf/rmf_demos/issues/370>`_
+  Co-authored-by: Gary Bey <beyhy94@gmail.com>
+* feat(rmf_demos_tasks): expose duration and use_tool_sink in dispatch_cart_delivery (`#375 <https://github.com/open-rmf/rmf_demos/issues/375>`_)
+  Co-authored-by: Aaron Chong <aaronchongth@gmail.com>
+* Add chart_lab map, zone-related task & launch for GoToZone feature (`#350 <https://github.com/open-rmf/rmf_demos/issues/350>`_)
+  Co-authored-by: Brandon Koh <brandonk10.10@gmail.com>
+  Co-authored-by: kjchee <keai_jiang_chee@cgh.com.sg>
+  Co-authored-by: Tey Leong Teck <leong_teck_tey@cgh.com.sg>
+  Co-authored-by: Loke Ji Xian <loke_ji_xian@cgh.com.sg>
+  Co-authored-by: Michael X. Grey <mxgrey@intrinsic.ai>
+* Fix for nav graph vertex search & safeguard against invalid waypoint name in get_robot_location (`#361 <https://github.com/open-rmf/rmf_demos/issues/361>`_)
+* Fix rmf_demos_tasks futures for rclpy spinning (`#365 <https://github.com/open-rmf/rmf_demos/issues/365>`_)
+  Co-authored-by: Aaron Chong <aaronchongth@gmail.com>
+* Fix: rmf_lift_msgs quality declaration link (`#363 <https://github.com/open-rmf/rmf_demos/issues/363>`_)
+* Contributors: Dennis Lanov, Gary Bey, Mosiwon, Muskan Kumari, chart
+
 2.10.0 (2026-09-26)
 -------------------
 * rmf_demos_tasks: Fix typo in license name in package.xml (`#358 <https://github.com/open-rmf/rmf_demos/issues/358>`_)
