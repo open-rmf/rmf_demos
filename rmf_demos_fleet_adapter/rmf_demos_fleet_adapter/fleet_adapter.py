@@ -509,11 +509,7 @@ def ros_connections(
 
     def handle_add_robot(request, response):
         robot_name = request.robot_name.strip()
-        if (
-            not robot_name
-            or robot_name in robots
-            or not request.robot_config
-        ):
+        if not robot_name or robot_name in robots:
             response.success = False
             response.message = 'Invalid request'
             node.get_logger().error(response.message)
