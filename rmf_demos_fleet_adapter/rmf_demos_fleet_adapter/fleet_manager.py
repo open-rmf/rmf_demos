@@ -240,11 +240,8 @@ class FleetManager(Node):
                 return response
 
             with self._lock:
-                if robot_name in self.robots:
-                    response['msg'] = f'Robot {robot_name} already exists'
-                    return response
-
-                self.robots[robot_name] = State()
+                if robot_name not in self.robots:
+                    self.robots[robot_name] = State()
             response['success'] = True
             response['msg'] = f'Robot {robot_name} added'
             return response
