@@ -122,7 +122,7 @@ This quality declaration has not been externally peer-reviewed and is not regist
 
 #### rmf\_lift\_msgs
 
-`rmf_lift_msgs` is [**Quality Level 3**](https://github.com/open-rmf/rmf_internal_msgs/blob/main/rmf_list_msgs/QUALITY_DECLARATION.md).
+`rmf_lift_msgs` is [**Quality Level 3**](https://github.com/open-rmf/rmf_internal_msgs/blob/main/rmf_lift_msgs/QUALITY_DECLARATION.md).
 
 #### rmf\_dispenser\_msgs
 

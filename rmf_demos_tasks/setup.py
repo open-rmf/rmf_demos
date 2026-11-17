@@ -5,7 +5,7 @@ package_name = 'rmf_demos_tasks'
 
 setup(
     name=package_name,
-    version='2.9.0',
+    version='2.11.0',
     packages=[package_name],
     data_files=[
         (
@@ -37,6 +37,7 @@ setup(
             'dispatch_loop = rmf_demos_tasks.dispatch_loop:main',
             'dispatch_action = rmf_demos_tasks.dispatch_action:main',
             'dispatch_patrol = rmf_demos_tasks.dispatch_patrol:main',
+            'dispatch_zone = rmf_demos_tasks.dispatch_zone:main',
             'dispatch_delivery = rmf_demos_tasks.dispatch_delivery:main',
             'dispatch_cart_delivery = \
                 rmf_demos_tasks.dispatch_cart_delivery:main',

@@ -16,7 +16,6 @@
 """Dispatch a delivery."""
 
 import argparse
-import asyncio
 import json
 import sys
 import uuid
@@ -137,10 +136,15 @@ class TaskRequester(Node):
                 'setting.'
             ),
         )
+        parser.add_argument(
+            '--timeout',
+            type=float,
+            default=5.0,
+            help='Timeout in seconds to wait for a response, default: 5.0',
+        )
 
         self.args = parser.parse_args(argv[1:])
-        asyncio.set_event_loop(asyncio.new_event_loop())
-        self.response = asyncio.Future()
+        self.response = rclpy.Future()
 
         # check user delivery arg inputs
         if len(self.args.pickups) != len(self.args.pickup_handlers):
@@ -308,12 +312,16 @@ def main(argv=sys.argv):
 
     task_requester = TaskRequester(args_without_ros)
     rclpy.spin_until_future_complete(
-        task_requester, task_requester.response, timeout_sec=5.0
+        task_requester,
+        task_requester.response,
+        timeout_sec=task_requester.args.timeout,
     )
     if task_requester.response.done():
         print(f'Got response: \n{task_requester.response.result()}')
     else:
         print('Did not get a response')
+        rclpy.shutdown()
+        sys.exit(1)
     rclpy.shutdown()
 
 

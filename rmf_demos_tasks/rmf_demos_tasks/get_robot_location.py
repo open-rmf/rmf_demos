@@ -16,7 +16,6 @@
 """Get the location of a robot."""
 
 import argparse
-import asyncio
 import sys
 import time
 
@@ -44,8 +43,8 @@ class RobotStateObserver(Node):
         super().__init__('TaskObserver')
 
         self.parser = parser
-        asyncio.set_event_loop(asyncio.new_event_loop())
-        self.response = asyncio.Future()
+        self.response = rclpy.Future()
+        self.failed = False
 
         self.subscription = self.create_subscription(
             FleetState,
@@ -78,6 +77,16 @@ class RobotStateObserver(Node):
         for robot_state in fleet_state.robots:
             if robot_state.name == self.parser.robot:
                 for graph_node in self.nav_graph.vertices:
+                    node_floor = ''
+                    for p in graph_node.params:
+                        if p.name == 'map_name':
+                            node_floor = p.value_string
+                            break
+
+                    if (node_floor and
+                            node_floor != robot_state.location.level_name):
+                        continue
+
                     dist = (graph_node.x - robot_state.location.x) ** 2
                     dist += (graph_node.y - robot_state.location.y) ** 2
                     name = graph_node.name
@@ -92,6 +101,18 @@ class RobotStateObserver(Node):
         """Watch the nav graph."""
         if navgraph.name == self.parser.fleet:
             self.nav_graph = navgraph
+
+            if self.parser.block_until_reaches:
+                valid_waypoints = {node.name for node in navgraph.vertices}
+                if self.parser.block_until_reaches not in valid_waypoints:
+                    err_msg = (
+                        f'Error: Waypoint [{self.parser.block_until_reaches}] '
+                        'not found in nav graph for '
+                        f'fleet [{self.parser.fleet}].')
+                    print(err_msg)
+                    self.failed = True
+                    if not self.response.done():
+                        self.response.set_result(None)
 
 
 def create_parser():
@@ -114,7 +135,7 @@ def create_parser():
 
     parser.add_argument(
         '--timeout',
-        type=int,
+        type=float,
         help='Timeout seconds',
     )
 
@@ -140,13 +161,17 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=arguments.timeout
     )
     if task_requester.response.done():
+        if task_requester.failed:
+            rclpy.shutdown()
+            sys.exit(1)
         print(f'Got response: \n{task_requester.response.result()}')
         end_time = time.time()
         elapsed = end_time - start_time
         print(f'elapsed time: {elapsed}')
     else:
         print('Timed out')
-        sys.exit(-1)
+        rclpy.shutdown()
+        sys.exit(1)
     rclpy.shutdown()
 
 
