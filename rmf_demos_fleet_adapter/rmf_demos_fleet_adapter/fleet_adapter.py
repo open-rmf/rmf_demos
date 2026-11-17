@@ -21,6 +21,7 @@ import threading
 import time
 
 import rclpy
+from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from rclpy.duration import Duration
 import rclpy.node
 from rclpy.parameter import Parameter
@@ -184,7 +185,7 @@ def main(argv=sys.argv):
     connections  # Avoid unused variable warning
 
     # Create executor for the command handle node
-    rclpy_executor = rclpy.executors.SingleThreadedExecutor()
+    rclpy_executor = rclpy.executors.MultiThreadedExecutor()
     rclpy_executor.add_node(node)
 
     # Start the fleet adapter
@@ -538,6 +539,31 @@ def ros_connections(
         robot_adapter = RobotAdapter(
             robot_name, robot_config, node, api, fleet_handle
         )
+
+        # Register here so the update loop only ever sees registered robots.
+        data = None
+        timeout = 5.0
+
+        start_time = time.time()
+        while data is None and time.time() - start_time < timeout:
+            data = api.get_data(robot_name)
+            if data is None:
+                time.sleep(0.1)
+
+        if data is not None:
+            robot_adapter.update_handle = fleet_handle.add_robot(
+                robot_name,
+                rmf_easy.RobotState(data.map, data.position, data.battery_soc),
+                robot_config,
+                robot_adapter.make_callbacks(),
+            )
+
+        if robot_adapter.update_handle is None:
+            response.success = False
+            response.message = f'Failed to register {robot_name} with RMF'
+            node.get_logger().error(response.message)
+            return response
+
         with _lock:
             robots[robot_name] = robot_adapter
 
@@ -572,7 +598,8 @@ def ros_connections(
     add_robot_srv = node.create_service(
         AddRobot,
         f'{fleet_name}/add_robot',
-        handle_add_robot
+        handle_add_robot,
+        callback_group=MutuallyExclusiveCallbackGroup(),
     )
 
     return [
