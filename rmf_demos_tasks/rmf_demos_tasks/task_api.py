@@ -19,6 +19,7 @@ import sys
 import uuid
 
 import rclpy
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.parameter import Parameter
 from rclpy.qos import QoSDurabilityPolicy as Durability
@@ -117,24 +118,42 @@ class ApiRequester(Node):
 
     @classmethod
     def run(cls, argv=sys.argv):
-        """Run a requester as a command line tool."""
+        """
+        Run a requester as a command line tool.
+
+        This must be called on a subclass whose constructor takes the command
+        line arguments (with ROS arguments removed), sets self.args with a
+        timeout field, and sends its request.
+        """
+        if cls is ApiRequester:
+            raise TypeError(
+                'ApiRequester.run() must be called on a subclass whose '
+                'constructor takes argv'
+            )
+
         rclpy.init(args=argv)
+        requester = None
+        got_response = False
         try:
             requester = cls(rclpy.utilities.remove_ros_args(argv))
-        except BaseException:
-            rclpy.shutdown()
-            raise
+            rclpy.spin_until_future_complete(
+                requester,
+                requester.response,
+                timeout_sec=requester.args.timeout,
+            )
+            got_response = requester.response.done()
+            if got_response:
+                print(f'Got response: \n{requester.response.result()}')
+            else:
+                print('Did not get a response')
+        except (KeyboardInterrupt, ExternalShutdownException):
+            pass
+        finally:
+            if requester is not None:
+                requester.destroy_node()
+            # Also destroys a node whose constructor raised part way through.
+            rclpy.try_shutdown()
 
-        rclpy.spin_until_future_complete(
-            requester, requester.response, timeout_sec=requester.args.timeout
-        )
-        got_response = requester.response.done()
-        if got_response:
-            print(f'Got response: \n{requester.response.result()}')
-        else:
-            print('Did not get a response')
-        requester.destroy_node()
-        rclpy.shutdown()
         if not got_response:
             sys.exit(1)
 
