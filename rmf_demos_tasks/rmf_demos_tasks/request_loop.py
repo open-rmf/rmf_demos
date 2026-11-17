@@ -25,32 +25,70 @@ import rclpy
 from rmf_task_msgs.msg import Loop
 
 
+def create_parser():
+    """Create command line parser for request_loop."""
+    parser = argparse.ArgumentParser(
+        description='Request a robot fleet to perform loops between waypoints.'
+    )
+    parser.add_argument(
+        '-s', '--start',
+        required=True,
+        type=str,
+        help='Start waypoint'
+    )
+    parser.add_argument(
+        '-f', '--finish',
+        required=True,
+        type=str,
+        help='Finish waypoint'
+    )
+    parser.add_argument(
+        '-n',
+        '--num',
+        help='Number of loops to perform',
+        type=int,
+        default=1,
+    )
+    parser.add_argument(
+        '-i', '--task-id',
+        help='Task ID',
+        default='',
+        type=str
+    )
+    parser.add_argument(
+        '-r', '--robot-type',
+        required=True,
+        type=str,
+        help='Fleet name'
+    )
+    parser.add_argument(
+        '--delay',
+        help='Number of secs to wait before sending out the request',
+        default=0,
+        type=int,
+    )
+    return parser
+
+
 class LoopRequester:
     """Request a loop."""
 
-    def __init__(self, argv=sys.argv):
+    def __init__(self, args_or_argv=None):
         """Request a loop."""
-        parser = argparse.ArgumentParser()
-        parser.add_argument('-s', '--start', help='Start waypoint')
-        parser.add_argument('-f', '--finish', help='Finish waypoint')
-        parser.add_argument(
-            '-n',
-            '--num',
-            help='Number of loops to perform',
-            type=int,
-            default=1,
-        )
-        parser.add_argument(
-            '-i', '--task-id', help='Task ID', default='', type=str
-        )
-        parser.add_argument('-r', '--robot-type', help='Fleet name')
-        parser.add_argument(
-            '--delay',
-            help='Number of secs to wait before sending out the request',
-            default=0,
-            type=int,
-        )
-        args = parser.parse_args(argv[1:])
+        if args_or_argv is None:
+            args_or_argv = sys.argv[1:]
+
+        if isinstance(args_or_argv, argparse.Namespace):
+            args = args_or_argv
+        elif isinstance(args_or_argv, list):
+            parser = create_parser()
+            if len(args_or_argv) > 0 and not args_or_argv[0].startswith('-'):
+                args = parser.parse_args(args_or_argv[1:])
+            else:
+                args = parser.parse_args(args_or_argv)
+        else:
+            parser = create_parser()
+            args = parser.parse_args()
 
         self.start_wp = args.start
         self.finish_wp = args.finish
@@ -73,25 +111,36 @@ class LoopRequester:
             self.task_id if self.task_id else 'loop#' + str(uuid.uuid1())
         )
 
-        time.sleep(self.num_sec_delay)
+        if self.num_sec_delay > 0:
+            time.sleep(self.num_sec_delay)
         self.publisher.publish(request)
         time.sleep(0.5)
-        rclpy.shutdown()
 
         self.node.get_logger().info(
             'Loop request between {} and {}, submitted to {} robot '
             'fleet'.format(self.start_wp, self.finish_wp, self.robot_type)
         )
+        self.node.destroy_node()
+        rclpy.shutdown()
+        return 0
 
 
 def main(argv=sys.argv):
     """Request a loop."""
-    rclpy.init(args=sys.argv)
-    args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
+    parser = create_parser()
+    args = parser.parse_args(args_without_ros[1:])
 
-    loop_requester = LoopRequester(args_without_ros)
-    loop_requester.main()
+    rclpy.init(args=argv)
+    try:
+        loop_requester = LoopRequester(args)
+        return loop_requester.main()
+    except KeyboardInterrupt:
+        return 1
+    finally:
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
