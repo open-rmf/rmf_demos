@@ -106,7 +106,7 @@ def create_parser():
 
     parser.add_argument(
         '--timeout',
-        type=int,
+        type=float,
         help='Timeout seconds',
     )
     return parser
@@ -130,7 +130,8 @@ def main(argv=sys.argv):
         print(f'elapsed time: {elapsed}')
     else:
         print('Timed out')
-        sys.exit(-1)
+        rclpy.shutdown()
+        sys.exit(1)
     rclpy.shutdown()
 
 

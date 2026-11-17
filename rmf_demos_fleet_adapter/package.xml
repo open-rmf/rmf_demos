@@ -13,6 +13,7 @@
   <exec_depend>python3-fastapi</exec_depend>
   <exec_depend>python3-flask-socketio</exec_depend>
   <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-portpicker</exec_depend>
   <exec_depend>python3-pydantic</exec_depend>
   <exec_depend>python3-pyproj</exec_depend>
   <exec_depend>python3-requests</exec_depend>
