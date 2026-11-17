@@ -85,8 +85,21 @@ class ApiRequester(Node):
         self.pub = self.create_publisher(
             ApiRequest, 'task_api_requests', transient_qos
         )
+
+        # Responders publish responses as transient local, so a response sent
+        # before discovery has matched this subscription is still delivered.
+        # Old responses are ignored because they have a different request id.
+        response_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=10,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL,
+        )
         self.sub = self.create_subscription(
-            ApiResponse, 'task_api_responses', self._receive_response, 10
+            ApiResponse,
+            'task_api_responses',
+            self._receive_response,
+            response_qos,
         )
 
     def _receive_response(self, response_msg: ApiResponse):
