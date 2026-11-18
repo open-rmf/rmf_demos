@@ -35,6 +35,8 @@ Use the demo version matching your RMF libraries, as described in the
 [installation instructions](https://github.com/open-rmf/rmf#binary-installation).
 When reporting a persistent problem, include the full launch output, package
 versions, fleet-state output, and a backtrace for a segmentation fault.
+Please upload them as [GitHub Gists](https://gist.github.com/) before sharing
+their links in the report to help keep the conversations readable.
 
 
 #### Gazebo crashes with `No namespace found` error at launch
