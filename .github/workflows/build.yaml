@@ -11,7 +11,7 @@ on:
       repos_branch_override:
         description: 'Branch of open-rmf/rmf for rmf.repos (auto = match ros_distribution)'
         type: string
-        default: 'main'
+        default: 'auto'
 
 jobs:
   build_and_test:
@@ -26,7 +26,6 @@ jobs:
         rmf_demos_gz
         rmf_demos_maps
         rmf_demos_tasks
-      # Humble does not have gz_*_vendor / ros_gz_sim dependencies used by rmf_demos_gz
-      dist-matrix: '[{"ros_distribution": "jazzy"}, {"ros_distribution": "lyrical"}, {"ros_distribution": "rolling"}]'
+      dist-matrix: '[{"ros_distribution": "jazzy"}]'
       ros-distribution: ${{ inputs.ros_distribution || '' }}
-      repos-branch-override: ${{ inputs.repos_branch_override || 'main' }}
+      repos-branch-override: ${{ inputs.repos_branch_override || 'auto' }}
