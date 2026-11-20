@@ -13,6 +13,7 @@
 # limitations under the License.
 """Request a lift to move somewhere."""
 
+import argparse
 import sys
 from time import sleep
 import uuid
@@ -22,42 +23,87 @@ import rclpy
 from rmf_lift_msgs.msg import LiftRequest
 
 
-def print_instructions():
-    """Print instructions."""
-    print(
-        'Invalid number of arguments, please pass in lift_name, desired ',
-        'level and door state after the script in that order, only supports',
-        "'open' or 'closed'.",
+def create_parser():
+    """Create command line parser for request_lift."""
+    parser = argparse.ArgumentParser(
+        description='Request a lift to move to a destination floor and '
+                    'set its door state.'
     )
-    print(
-        'For example:\n',
-        '  request_lift Lift1 L1 open\n',
-        '  request_lift Lift2 L3 closed',
+    parser.add_argument(
+        'lift_name',
+        type=str,
+        nargs='?',
+        default=None,
+        help='Name of the lift (e.g. Lift1)',
     )
+    parser.add_argument(
+        'destination_floor',
+        type=str,
+        nargs='?',
+        default=None,
+        help='Target destination floor level (e.g. L1)',
+    )
+    parser.add_argument(
+        'door_state',
+        type=str,
+        nargs='?',
+        default=None,
+        choices=['open', 'closed'],
+        help="Target door state ('open' or 'closed')",
+    )
+    parser.add_argument(
+        '-l', '--lift',
+        type=str,
+        dest='opt_lift',
+        help='Name of the lift (alternative to positional argument)',
+    )
+    parser.add_argument(
+        '-f', '--floor',
+        type=str,
+        dest='opt_floor',
+        help='Target destination floor level '
+             '(alternative to positional argument)',
+    )
+    parser.add_argument(
+        '-d', '--door',
+        type=str,
+        dest='opt_door',
+        choices=['open', 'closed'],
+        help="Target door state ('open' or 'closed')",
+    )
+    return parser
 
 
 def main(argv=sys.argv):
     """Request a lift to move somewhere."""
-    rclpy.init(args=argv)
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
+    parser = create_parser()
+    args = parser.parse_args(args_without_ros[1:])
 
-    if len(argv) != 4:
-        print_instructions()
-        return 1
+    lift_name = args.opt_lift if args.opt_lift is not None else args.lift_name
+    floor = (
+        args.opt_floor if args.opt_floor is not None
+        else args.destination_floor
+    )
+    door = args.opt_door if args.opt_door is not None else args.door_state
+
+    if lift_name is None or floor is None:
+        parser.error('Both lift name and destination floor must be specified.')
+
+    if door is None:
+        door = 'open'
 
     request = LiftRequest()
-
-    request.lift_name = argv[1]
-    request.destination_floor = argv[2]
+    request.lift_name = lift_name
+    request.destination_floor = floor
     request.session_id = 'lift_request#' + str(uuid.uuid1())
 
-    if argv[3] == 'open':
-        request.door_state = 2
-    elif argv[3] == 'closed':
-        request.door_state = 0
-    else:
-        print_instructions()
-        return 1
+    if door == 'open':
+        request.door_state = LiftRequest.DOOR_OPEN
+    elif door == 'closed':
+        request.door_state = LiftRequest.DOOR_CLOSED
 
+    rclpy.init(args=argv)
     node = rclpy.create_node('lift_request_publisher')
     publisher = node.create_publisher(LiftRequest, '/lift_requests', 10)
 
@@ -65,14 +111,16 @@ def main(argv=sys.argv):
         publisher.publish(request)
         sleep(0.5)
 
+    node.destroy_node()
     rclpy.shutdown()
 
     print(
-        f'Sent 5 messages at 2 Hz requesting lift: {argv[1]}, ',
-        f'to floor: {argv[2]}, ',
-        f'with door: {argv[3]}.',
+        f'Sent 5 messages at 2 Hz requesting lift: {lift_name}, '
+        f'to floor: {floor}, '
+        f'with door: {door}.'
     )
+    return 0
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
