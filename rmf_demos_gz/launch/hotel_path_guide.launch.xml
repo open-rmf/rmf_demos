@@ -1,0 +1,22 @@
+<?xml version='1.0' ?>
+
+<launch>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="failover_mode" default="false"/>
+  <arg name="sim_update_rate" default='100'/>
+
+  <!-- Common launch -->
+  <!-- Differs from rmf_demos_gz/launch/hotel.launch.xml by exactly this line:
+       which rmf_demos launch it includes. No fleet-adapter wiring belongs in
+       rmf_demos_gz, for any world. -->
+  <include file="$(find-pkg-share rmf_demos)/hotel_path_guide.launch.xml">
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+    <arg name="failover_mode" value="$(var failover_mode)"/>
+  </include>
+
+  <!-- Simulation launch -->
+  <include file="$(find-pkg-share rmf_demos_gz)/simulation.launch.xml">
+    <arg name="map_name" value="hotel" />
+    <arg name="sim_update_rate" value="$(var sim_update_rate)"/>
+  </include>
+</launch>
