@@ -21,6 +21,7 @@ import threading
 import time
 
 import rclpy
+from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from rclpy.duration import Duration
 import rclpy.node
 from rclpy.parameter import Parameter
@@ -32,6 +33,7 @@ from rclpy.qos import QoSReliabilityPolicy as Reliability
 import rmf_adapter
 from rmf_adapter import Adapter
 import rmf_adapter.easy_full_control as rmf_easy
+from rmf_demos_msgs.srv import AddRobot
 from rmf_fleet_msgs.msg import ClosedLanes
 from rmf_fleet_msgs.msg import LaneRequest
 from rmf_fleet_msgs.msg import ModeRequest
@@ -135,6 +137,7 @@ def main(argv=sys.argv):
     )
 
     robots = {}
+    _lock = threading.Lock()
     for robot_name in fleet_config.known_robots:
         robot_config = fleet_config.get_known_robot_configuration(robot_name)
         robots[robot_name] = RobotAdapter(
@@ -149,9 +152,13 @@ def main(argv=sys.argv):
         while rclpy.ok():
             now = node.get_clock().now()
 
+            # lock as a concurrent /add_robot may mutate it.
+            with _lock:
+                current_robots = list(robots.values())
+
             # Update all the robots in parallel using a thread pool
             update_jobs = []
-            for robot in robots.values():
+            for robot in current_robots:
                 update_jobs.append(update_robot(robot))
 
             asyncio.get_event_loop().run_until_complete(
@@ -172,11 +179,13 @@ def main(argv=sys.argv):
     update_thread.start()
 
     # Connect to the extra ROS2 topics that are relevant for the adapter
-    connections = ros_connections(node, robots, fleet_handle)
+    connections = ros_connections(
+        node, robots, _lock, fleet_config, api, fleet_handle
+    )
     connections  # Avoid unused variable warning
 
     # Create executor for the command handle node
-    rclpy_executor = rclpy.executors.SingleThreadedExecutor()
+    rclpy_executor = rclpy.executors.MultiThreadedExecutor()
     rclpy_executor.add_node(node)
 
     # Start the fleet adapter
@@ -429,7 +438,9 @@ def update_robot(robot: RobotAdapter):
     robot.update(state, data)
 
 
-def ros_connections(node, robots, fleet_handle):
+def ros_connections(
+    node, robots, _lock, fleet_config, api, fleet_handle
+):
     fleet_name = fleet_handle.more().fleet_name
 
     transient_qos = QoSProfile(
@@ -497,6 +508,72 @@ def ros_connections(node, robots, fleet_handle):
                 return
             robot.finish_action()
 
+    def handle_add_robot(request, response):
+        robot_name = request.robot_name.strip()
+        if not robot_name or robot_name in robots:
+            response.success = False
+            response.message = 'Invalid request'
+            node.get_logger().error(response.message)
+            return response
+
+        node.get_logger().info(
+            f'Received request to add robot [{robot_name}] at runtime'
+        )
+
+        if not api.add_robot(robot_name):
+            response.success = False
+            response.message = (
+                f'Fleet manager rejected registration of {robot_name}'
+            )
+            node.get_logger().error(response.message)
+            return response
+
+        fleet_config.add_known_robot_configuration(
+            robot_name,
+            rmf_easy.RobotConfiguration(
+                compatible_chargers=request.robot_config.compatible_chargers
+            )
+        )
+        robot_config = fleet_config.get_known_robot_configuration(robot_name)
+
+        robot_adapter = RobotAdapter(
+            robot_name, robot_config, node, api, fleet_handle
+        )
+
+        # Register here so the update loop only ever sees registered robots.
+        data = None
+        timeout = 5.0
+
+        start_time = time.time()
+        while data is None and time.time() - start_time < timeout:
+            data = api.get_data(robot_name)
+            if data is None:
+                time.sleep(0.1)
+
+        if data is not None:
+            robot_adapter.update_handle = fleet_handle.add_robot(
+                robot_name,
+                rmf_easy.RobotState(data.map, data.position, data.battery_soc),
+                robot_config,
+                robot_adapter.make_callbacks(),
+            )
+
+        if robot_adapter.update_handle is None:
+            response.success = False
+            response.message = f'Failed to register {robot_name} with RMF'
+            node.get_logger().error(response.message)
+            return response
+
+        with _lock:
+            robots[robot_name] = robot_adapter
+
+        response.success = True
+        response.message = (
+            f'Robot {robot_name} successfully added'
+        )
+        node.get_logger().info(response.message)
+        return response
+
     lane_request_sub = node.create_subscription(
         LaneRequest,
         'lane_closure_requests',
@@ -518,10 +595,18 @@ def ros_connections(node, robots, fleet_handle):
         qos_profile=qos_profile_system_default,
     )
 
+    add_robot_srv = node.create_service(
+        AddRobot,
+        f'{fleet_name}/add_robot',
+        handle_add_robot,
+        callback_group=MutuallyExclusiveCallbackGroup(),
+    )
+
     return [
         lane_request_sub,
         speed_limit_request_sub,
         action_execution_notice_sub,
+        add_robot_srv,
     ]
 
 

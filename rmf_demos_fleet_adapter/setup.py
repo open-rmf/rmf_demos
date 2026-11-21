@@ -25,7 +25,7 @@ setup(
     install_requires=['setuptools', 'fastapi>=0.79.0', 'uvicorn>=0.18.2'],
     zip_safe=True,
     maintainer='Xi Yu Oh',
-    maintainer_email='xiyu@openrobotics.org',
+    maintainer_email='ohxiyu@gmail.com',
     description='Fleet adapters for interfacing with RMF Demos robots with a '
     'fleet manager via REST API',
     license='Apache License 2.0',
