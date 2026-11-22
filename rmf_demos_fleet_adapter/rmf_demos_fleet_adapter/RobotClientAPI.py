@@ -22,8 +22,8 @@ you will need to make http request calls to the appropriate endpoints within
 these functions.
 """
 import enum
-from urllib.error import HTTPError
 
+from requests.exceptions import HTTPError
 import requests
 
 
@@ -51,7 +51,7 @@ class RobotAPI:
 
     def check_connection(self):
         """Return True if connection to the robot API server is successful."""
-        if self.data() is None:
+        if self.get_data() is None:
             return False
         return True
 
@@ -142,7 +142,7 @@ class RobotAPI:
             f'&stop_cmd_id={stop_cmd_id}'
         )
         try:
-            response = requests.get(url, self.timeout)
+            response = requests.get(url, timeout=self.timeout)
             response.raise_for_status()
             if self.debug:
                 print(f'Response: {response.json()}')
