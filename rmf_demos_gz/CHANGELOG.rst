@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.1 (2026-11-23)
+------------------
 * Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_) (`#304 <https://github.com/open-rmf/rmf_demos/issues/304>`_)
 * Adds the ability to set the update rate of the simulation (`#264 <https://github.com/open-rmf/rmf_demos/issues/264>`_)
   * Adds the ability to set the update rate of the simulation

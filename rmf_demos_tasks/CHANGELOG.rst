@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.1 (2026-11-23)
+------------------
 * Fixed (`#320 <https://github.com/open-rmf/rmf_demos/issues/320>`_)
 * Adds a script to cancel the currently executing task on a specific robot. (`#286 <https://github.com/open-rmf/rmf_demos/issues/286>`_)
 * created .gitignore in rmf_demos_task for ignoring __pycache_\_ files. (`#281 <https://github.com/open-rmf/rmf_demos/issues/281>`_)

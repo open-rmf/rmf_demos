@@ -2,8 +2,8 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.1 (2026-11-23)
+------------------
 * Set self.teleoperation to None when finish_action (`#289 <https://github.com/open-rmf/rmf_demos/issues/289>`_)
 * Add Speed Limit Requests (`#152 <https://github.com/open-rmf/rmf_demos/issues/152>`_)
 * only remove if lane_idx exist in closed_lanes (`#276 <https://github.com/open-rmf/rmf_demos/issues/276>`_)
