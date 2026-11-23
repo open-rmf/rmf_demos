@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""CLI utility to open or close lanes between waypoints in Open-RMF."""
+
 import argparse
-import asyncio
 import sys
 
 import rclpy
@@ -29,10 +30,8 @@ import rmf_adapter.vehicletraits as traits
 from rmf_fleet_msgs.msg import LaneRequest
 
 
-def main(argv=sys.argv):
-    rclpy.init(args=argv)
-    args_without_ros = rclpy.utilities.remove_ros_args(argv)
-
+def create_parser():
+    """Create command line argument parser for manage_lane."""
     parser = argparse.ArgumentParser(
         prog='manage_lane',
         description='Open or close a lane between two waypoints'
@@ -56,7 +55,7 @@ def main(argv=sys.argv):
         '-b',
         '--bidir',
         action='store_true',
-        help='Apply the state change in both directions (bidirectionally)'
+        help='Apply the state change in both directions (bidirectionally)',
     )
     parser.add_argument(
         '-F',
@@ -75,7 +74,22 @@ def main(argv=sys.argv):
         required=True,
         help='Path to the nav_graph that contains the lane',
     )
+    parser.add_argument(
+        '--timeout',
+        type=float,
+        default=5.0,
+        help=(
+            'Timeout in seconds to wait for request to be published '
+            '(default: 5.0)'
+        ),
+    )
+    return parser
 
+
+def main(argv=sys.argv):
+    """Open or close a lane between two waypoints."""
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
+    parser = create_parser()
     args = parser.parse_args(args_without_ros[1:])
 
     t = traits.VehicleTraits(
@@ -84,28 +98,38 @@ def main(argv=sys.argv):
         profile=traits.Profile(geometry.make_final_convex_circle(1.0)),
     )
 
-    nav_graph = rmf_adapter.graph.parse_graph(args.nav_graph, t)
+    try:
+        nav_graph = rmf_adapter.graph.parse_graph(args.nav_graph, t)
+    except Exception as err:
+        print(f'Failed to parse navigation graph: {err}', file=sys.stderr)
+        return 1
 
     from_waypoint = nav_graph.find_waypoint(args.from_waypoint)
     if from_waypoint is None:
-        raise Exception(
-            f'Unable to find waypoint [{args.from_waypoint}] in graph'
+        print(
+            f'Unable to find waypoint [{args.from_waypoint}] in graph',
+            file=sys.stderr,
         )
+        return 1
 
     to_waypoint = nav_graph.find_waypoint(args.to_waypoint)
     if to_waypoint is None:
-        raise Exception(
-            f'Unable to find waypoint [{args.to_waypoint}] in graph'
+        print(
+            f'Unable to find waypoint [{args.to_waypoint}] in graph',
+            file=sys.stderr,
         )
+        return 1
 
     lane_indices = []
 
     lane = nav_graph.lane_from(from_waypoint.index, to_waypoint.index)
     if lane is None:
-        raise Exception(
+        print(
             f'Unable to find a lane that connects [{args.from_waypoint}] '
-            f'to [{args.to_waypoint}]'
+            f'to [{args.to_waypoint}]',
+            file=sys.stderr,
         )
+        return 1
 
     lane_indices.append(lane.index)
 
@@ -123,33 +147,42 @@ def main(argv=sys.argv):
         request.close_lanes = lane_indices
     request.fleet_name = args.fleet
 
+    rclpy.init(args=argv)
     node = rclpy.node.Node('manage_lane')
 
-    transient_qos = QoSProfile(
-        history=History.KEEP_LAST,
-        depth=1,
-        reliability=Reliability.RELIABLE,
-        durability=Durability.TRANSIENT_LOCAL,
-    )
+    try:
+        transient_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL,
+        )
 
-    publisher = node.create_publisher(
-        LaneRequest,
-        'lane_closure_requests',
-        qos_profile=transient_qos,
-    )
+        publisher = node.create_publisher(
+            LaneRequest,
+            'lane_closure_requests',
+            qos_profile=transient_qos,
+        )
 
-    publisher.publish(request)
+        publisher.publish(request)
 
-    rclpy_executor = rclpy.executors.SingleThreadedExecutor()
-    rclpy_executor.add_node(node)
+        rclpy_executor = rclpy.executors.SingleThreadedExecutor()
+        rclpy_executor.add_node(node)
 
-    print(f'Sending request:\n{request}')
+        print(f'Sending request:\n{request}')
 
-    f = asyncio.Future()
-    rclpy_executor.spin_until_future_complete(f, 5.0)
-    # TODO(@mxgrey): Subscribe to lane closure topic and keep spinning until
-    # we see these lanes open/closed
+        f = node.create_future()
+        rclpy_executor.spin_until_future_complete(f, timeout_sec=args.timeout)
+        # TODO(@mxgrey): Subscribe to lane closure topic and keep
+        # spinning until we see these lanes open/closed
+        return 0
+    except KeyboardInterrupt:
+        return 1
+    finally:
+        node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
