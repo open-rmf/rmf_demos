@@ -2,6 +2,13 @@
 Changelog for package rmf_demos_assets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.1 (2026-11-23)
+------------------
+* Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_) (`#304 <https://github.com/open-rmf/rmf_demos/issues/304>`_)
+  * Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_)
+  * Build CI against jazzy
+* Contributors: Xiyu
+
 2.4.0 (2024-06-12)
 ------------------
 

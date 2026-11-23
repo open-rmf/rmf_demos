@@ -2,6 +2,15 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.1 (2026-11-23)
+------------------
+* Set self.teleoperation to None when finish_action (`#289 <https://github.com/open-rmf/rmf_demos/issues/289>`_)
+* Add Speed Limit Requests (`#152 <https://github.com/open-rmf/rmf_demos/issues/152>`_)
+* only remove if lane_idx exist in closed_lanes (`#276 <https://github.com/open-rmf/rmf_demos/issues/276>`_)
+* Fix existing style issues (`#252 <https://github.com/open-rmf/rmf_demos/issues/252>`_)
+* Addresses `#250 <https://github.com/open-rmf/rmf_demos/issues/250>`_: Fixes undefined variable in `FleetManager` (`#251 <https://github.com/open-rmf/rmf_demos/issues/251>`_)
+* Contributors: Arjo Chakravarty, Cheng-Wei Chen, Luca Della Vedova, Pranay Shirodkar
+
 2.4.0 (2024-06-12)
 ------------------
 
