@@ -2,6 +2,15 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fixed (`#320 <https://github.com/open-rmf/rmf_demos/issues/320>`_)
+* Adds a script to cancel the currently executing task on a specific robot. (`#286 <https://github.com/open-rmf/rmf_demos/issues/286>`_)
+* created .gitignore in rmf_demos_task for ignoring __pycache_\_ files. (`#281 <https://github.com/open-rmf/rmf_demos/issues/281>`_)
+* Fix existing style issues (`#252 <https://github.com/open-rmf/rmf_demos/issues/252>`_)
+* Adding requester and request time for dispatch scripts (`#240 <https://github.com/open-rmf/rmf_demos/issues/240>`_)
+* Contributors: Aaron Chong, Arjo Chakravarty, Francesco Fallica, Luca Della Vedova
+
 2.4.0 (2024-06-12)
 ------------------
 
