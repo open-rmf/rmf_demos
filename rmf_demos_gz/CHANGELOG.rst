@@ -2,6 +2,17 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.11.0 (2026-11-13)
+-------------------
+* Add chart_lab map, zone-related task & launch for GoToZone feature (`#350 <https://github.com/open-rmf/rmf_demos/issues/350>`_)
+  Co-authored-by: Brandon Koh <brandonk10.10@gmail.com>
+  Co-authored-by: kjchee <keai_jiang_chee@cgh.com.sg>
+  Co-authored-by: Tey Leong Teck <leong_teck_tey@cgh.com.sg>
+  Co-authored-by: Loke Ji Xian <loke_ji_xian@cgh.com.sg>
+  Co-authored-by: Michael X. Grey <mxgrey@intrinsic.ai>
+* bump cmake version (`#366 <https://github.com/open-rmf/rmf_demos/issues/366>`_)
+* Contributors: Aaron Chong, chart
+
 2.10.0 (2026-09-26)
 -------------------
 

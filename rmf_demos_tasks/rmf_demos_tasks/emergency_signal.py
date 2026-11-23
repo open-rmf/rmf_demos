@@ -30,74 +30,120 @@ from rmf_fleet_msgs.msg import EmergencySignal
 
 def str2bool(v):
     """Convert a string to a boolean."""
+    if isinstance(v, bool):
+        return v
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
         return False
+    raise argparse.ArgumentTypeError(
+        f"Boolean value expected, got '{v}' (use true/false, yes/no, 1/0)."
+    )
+
+
+def create_parser():
+    """Create command line parser for emergency_signal."""
+    parser = argparse.ArgumentParser(
+        description='Publish an emergency signal to robot fleets in Open-RMF.'
+    )
+    parser.add_argument(
+        'is_emergency',
+        type=str2bool,
+        help='Emergency message to publish (true or false)',
+    )
+    parser.add_argument(
+        '-F',
+        '--fleets',
+        type=str,
+        help='Fleets to trigger (default: all fleets)',
+        nargs='+',
+    )
+    parser.add_argument(
+        '--once',
+        action='store_true',
+        help='Publish the emergency signal once and exit',
+    )
+    parser.add_argument(
+        '--timeout',
+        type=float,
+        default=None,
+        help='Timeout in seconds to continue publishing before exiting',
+    )
+    return parser
 
 
 class EmergencySignalPublisher(Node):
     """Emergency signal publisher."""
 
-    def __init__(self, argv=sys.argv):
+    def __init__(self, args):
         """Initialize the emergency signal publisher."""
         super().__init__('emergency_signal_publisher')
+        self.args = args
+
         qos_profile = QoSProfile(
             history=History.KEEP_LAST,
             depth=100,
             durability=Durability.TRANSIENT_LOCAL,
-            reliability=Reliability.RELIABLE
+            reliability=Reliability.RELIABLE,
         )
-        self.publisher = self.create_publisher(EmergencySignal,
-                                               'emergency_signal', qos_profile)
-
-        parser = argparse.ArgumentParser()
-        parser.add_argument(
-            'is_emergency',
-            type=str2bool,
-            help='Emergency message to publish (true or false)',
+        self.publisher = self.create_publisher(
+            EmergencySignal, 'emergency_signal', qos_profile
         )
 
-        parser.add_argument(
-            '-F',
-            '--fleets',
-            type=str,
-            help='Fleets to trigger',
-            nargs='+',
-        )
-
-        self.args = parser.parse_args(argv[1:])
         self.msg = EmergencySignal()
         self.msg.is_emergency = self.args.is_emergency
-        self.get_logger().info('Publishing emergency signal: %s' %
-                               self.msg.is_emergency)
+        self.get_logger().info(
+            f'Publishing emergency signal: {self.msg.is_emergency}'
+        )
         if self.args.fleets is not None:
             self.msg.fleet_names = self.args.fleets
-            self.get_logger().info('Fleets: %s' % self.msg.fleet_names)
+            self.get_logger().info(f'Fleets: {self.msg.fleet_names}')
         else:
-            self.get_logger().info('No fleets specified, '
-                                   'sending to all fleets')
+            self.get_logger().info(
+                'No fleets specified, sending to all fleets'
+            )
 
-        timer_period = 1.0  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
+        if self.args.once:
+            self.publisher.publish(self.msg)
+            self.get_logger().info('Emergency signal published once.')
+        else:
+            timer_period = 1.0  # seconds
+            self.timer = self.create_timer(timer_period, self.timer_callback)
 
     def timer_callback(self):
+        """Timer callback to publish emergency signal."""
         self.publisher.publish(self.msg)
         self.get_logger().info('Publishing emergency signal')
+
 
 ###############################################################################
 
 
 def main(argv=sys.argv):
     """Publish an emergency signal."""
-    rclpy.init(args=sys.argv)
-    args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
-    signal_publisher = EmergencySignalPublisher(args_without_ros)
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
+    parser = create_parser()
+    args = parser.parse_args(args_without_ros[1:])
 
-    rclpy.spin(signal_publisher)
+    rclpy.init(args=argv)
+    signal_publisher = EmergencySignalPublisher(args)
+
+    if not args.once:
+        if args.timeout is not None and args.timeout > 0:
+            timeout_future = rclpy.Future()
+
+            def on_timeout():
+                timeout_future.set_result(True)
+
+            _ = signal_publisher.create_timer(args.timeout, on_timeout)
+            rclpy.spin_until_future_complete(signal_publisher, timeout_future)
+        else:
+            rclpy.spin(signal_publisher)
+
     signal_publisher.destroy_node()
     rclpy.shutdown()
+    return 0
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
