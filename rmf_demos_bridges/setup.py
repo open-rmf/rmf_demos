@@ -15,21 +15,19 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Boon Han',
-    maintainer_email='cnboonhan@openrobotics.org',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    maintainer='Yadunund',
+    maintainer_email='yadunund@openrobotics.org',
+    description='Nodes for bridging between different communication stacks',
+    license='Apache License 2.0',
     extras_require={
         'test': ['pytest'],
     },
     entry_points={
         'console_scripts': [
-            (
-                'fleet_socketio_bridge='
-                'rmf_demos_bridges.fleet_socketio_bridge:main',
-                'fleet_robotmanager_mqtt_bridge='
-                'rmf_demos_bridges.fleet_robotmanager_mqtt_bridge:main',
-            ),
+            'fleet_socketio_bridge='
+            'rmf_demos_bridges.fleet_socketio_bridge:main',
+            'fleet_robotmanager_mqtt_bridge='
+            'rmf_demos_bridges.fleet_robotmanager_mqtt_bridge:main',
         ],
     },
 )

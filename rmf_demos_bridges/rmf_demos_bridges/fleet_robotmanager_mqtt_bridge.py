@@ -20,17 +20,10 @@ import json
 import sys
 import threading
 
-from flask import Flask
-from flask import jsonify
-from flask import request
-from flask_cors import CORS
-from flask_socketio import disconnect
-from flask_socketio import emit
-from flask_socketio import SocketIO
 import paho.mqtt.client as mqtt
 from pyproj import Transformer
 import rclpy
-import rclpy.executors
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
@@ -115,7 +108,7 @@ class FleetRobotManagerMQTTBridge(Node):
 
         self.args = parser.parse_args(argv[1:])
 
-        super().__init__(f'fleet_robotmanager_mqtt_bridge')
+        super().__init__('fleet_robotmanager_mqtt_bridge')
 
         self._init_pubsub()
         self.mqtt_pubs = {}  # Map of robot names to their mqtt Client
@@ -204,21 +197,18 @@ class FleetRobotManagerMQTTBridge(Node):
 
 
 def main(argv=sys.argv):
-    rclpy.init(args=argv)
-
-    node = FleetRobotManagerMQTTBridge()
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
     try:
-        node.get_logger().info('calling spin()')
-        rclpy.spin(node)
-    except KeyboardInterrupt:
+        with rclpy.init(args=argv):
+            node = FleetRobotManagerMQTTBridge(argv=args_without_ros)
+            node.get_logger().info('calling spin()')
+            rclpy.spin(node)
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
     except OSError:
-        node.get_logger().error('Check if target port is already in use.')
-    finally:
-        node.get_logger().info('shutting down...')
-        node.destroy_node()
-        rclpy.shutdown()
+        print('Check if target port is already in use.', file=sys.stderr)
+    return 0
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
