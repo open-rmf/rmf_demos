@@ -19,6 +19,7 @@ import sys
 import time
 
 import rclpy
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
@@ -227,16 +228,12 @@ def main(argv=sys.argv):
         print(f"Failed to load config file '{config}': {err}", file=sys.stderr)
         return 1
 
-    rclpy.init(args=argv)
-    mock_docker = MockDocker(config_yaml)
     try:
-        rclpy.spin(mock_docker)
-    except KeyboardInterrupt:
+        with rclpy.init(args=argv):
+            mock_docker = MockDocker(config_yaml)
+            rclpy.spin(mock_docker)
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
-    finally:
-        mock_docker.destroy_node()
-        if rclpy.ok():
-            rclpy.shutdown()
     return 0
 
 
