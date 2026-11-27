@@ -20,6 +20,7 @@ import sys
 import time
 
 import rclpy
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
@@ -40,7 +41,7 @@ class RobotStateObserver(Node):
 
     def __init__(self, parser):
         """Initialize the observer."""
-        super().__init__('TaskObserver')
+        super().__init__('robot_state_observer')
 
         self.parser = parser
         self.response = rclpy.Future()
@@ -117,12 +118,15 @@ class RobotStateObserver(Node):
 
 def create_parser():
     """Create the parser."""
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description='Get the location of a specific robot.'
+    )
 
     parser.add_argument(
         '-R',
         '--robot',
         type=str,
+        required=True,
         help='Robot name, should define together with fleet',
     )
 
@@ -130,7 +134,8 @@ def create_parser():
         '-F',
         '--fleet',
         type=str,
-        help='fleet name',
+        required=True,
+        help='Fleet name',
     )
 
     parser.add_argument(
@@ -144,36 +149,43 @@ def create_parser():
         '-B',
         type=str,
         help='Block until this waypoint is reached. If empty,' +
-        ' then the command does not block.'
+        ' then the command does not block.',
     )
     return parser
 
 
 def main(argv=sys.argv):
     """Get a robot location."""
-    rclpy.init(args=sys.argv)
-    args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
     arg_parser = create_parser()
     arguments = arg_parser.parse_args(args_without_ros[1:])
-    task_requester = RobotStateObserver(arguments)
     start_time = time.time()
-    rclpy.spin_until_future_complete(
-        task_requester, task_requester.response, timeout_sec=arguments.timeout
-    )
-    if task_requester.response.done():
-        if task_requester.failed:
+    rclpy.init(args=argv)
+    task_requester = RobotStateObserver(arguments)
+    try:
+        rclpy.spin_until_future_complete(
+            task_requester,
+            task_requester.response,
+            timeout_sec=arguments.timeout,
+        )
+        if task_requester.response.done():
+            if task_requester.failed:
+                return 1
+            print(f'Got response: \n{task_requester.response.result()}')
+            end_time = time.time()
+            elapsed = end_time - start_time
+            print(f'elapsed time: {elapsed}')
+            return 0
+        else:
+            print('Timed out')
+            return 1
+    except (KeyboardInterrupt, ExternalShutdownException):
+        return 1
+    finally:
+        task_requester.destroy_node()
+        if rclpy.ok():
             rclpy.shutdown()
-            sys.exit(1)
-        print(f'Got response: \n{task_requester.response.result()}')
-        end_time = time.time()
-        elapsed = end_time - start_time
-        print(f'elapsed time: {elapsed}')
-    else:
-        print('Timed out')
-        rclpy.shutdown()
-        sys.exit(1)
-    rclpy.shutdown()
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
