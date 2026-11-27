@@ -148,39 +148,42 @@ def main(argv=sys.argv):
         request.close_lanes = lane_indices
     request.fleet_name = args.fleet
 
+    rclpy.init(args=argv)
+    node = rclpy.node.Node('manage_lane')
     try:
-        with rclpy.init(args=argv):
-            node = rclpy.node.Node('manage_lane')
+        transient_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL,
+        )
 
-            transient_qos = QoSProfile(
-                history=History.KEEP_LAST,
-                depth=1,
-                reliability=Reliability.RELIABLE,
-                durability=Durability.TRANSIENT_LOCAL,
-            )
+        publisher = node.create_publisher(
+            LaneRequest,
+            'lane_closure_requests',
+            qos_profile=transient_qos,
+        )
 
-            publisher = node.create_publisher(
-                LaneRequest,
-                'lane_closure_requests',
-                qos_profile=transient_qos,
-            )
+        publisher.publish(request)
 
-            publisher.publish(request)
+        rclpy_executor = rclpy.executors.SingleThreadedExecutor()
+        rclpy_executor.add_node(node)
 
-            rclpy_executor = rclpy.executors.SingleThreadedExecutor()
-            rclpy_executor.add_node(node)
+        print(f'Sending request:\n{request}')
 
-            print(f'Sending request:\n{request}')
-
-            f = node.create_future()
-            rclpy_executor.spin_until_future_complete(
-                f, timeout_sec=args.timeout
-            )
-            # TODO(@mxgrey): Subscribe to lane closure topic and keep
-            # spinning until we see these lanes open/closed
+        f = node.create_future()
+        rclpy_executor.spin_until_future_complete(
+            f, timeout_sec=args.timeout
+        )
+        # TODO(@mxgrey): Subscribe to lane closure topic and keep
+        # spinning until we see these lanes open/closed
+        return 0
     except (KeyboardInterrupt, ExternalShutdownException):
-        pass
-    return 0
+        return 1
+    finally:
+        node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':
