@@ -14,7 +14,6 @@
 
 
 import argparse
-from collections import OrderedDict
 import copy
 import json
 import logging
@@ -22,21 +21,13 @@ import sys
 import threading
 
 from flask import Flask
-from flask import jsonify
-from flask import request
 from flask_cors import CORS
-from flask_socketio import disconnect
-from flask_socketio import emit
 from flask_socketio import SocketIO
 from pyproj import Transformer
 import rclpy
+from rclpy.executors import ExternalShutdownException
 import rclpy.executors
 from rclpy.node import Node
-from rclpy.qos import QoSDurabilityPolicy as Durability
-from rclpy.qos import QoSHistoryPolicy as History
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSReliabilityPolicy as Reliability
-from rmf_fleet_msgs.msg import FleetState
 from rmf_fleet_msgs.msg import RobotState
 from rosidl_runtime_py import message_to_ordereddict
 
@@ -120,7 +111,7 @@ class FleetSocketIOBridge(Node):
 
         self.args = parser.parse_args(argv[1:])
 
-        super().__init__(f'fleet_socketio_bridge')
+        super().__init__('fleet_socketio_bridge')
 
         self._init_pubsub()
         self._init_webserver()
@@ -219,22 +210,30 @@ class FleetSocketIOBridge(Node):
 
 
 def main(argv=sys.argv):
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
     rclpy.init(args=argv)
-
-    node = FleetSocketIOBridge()
+    node = None
     try:
+        node = FleetSocketIOBridge(argv=args_without_ros)
         node.get_logger().info('calling spin()')
         node.spin_background()
         node.start_socketio()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
-    except OSError:
-        node.get_logger().error('Check if target port is already in use.')
+    except OSError as e:
+        if node is not None:
+            node.get_logger().error(f'Failed to start socketio server: {e}')
+        else:
+            print(f'Failed to start socketio server: {e}', file=sys.stderr)
+        return 1
     finally:
-        node.get_logger().info('shutting down...')
-        node.destroy_node()
-        rclpy.shutdown()
+        if node is not None:
+            node.get_logger().info('shutting down...')
+            node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+    return 0
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))

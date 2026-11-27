@@ -14,31 +14,16 @@
 
 
 import argparse
-from collections import OrderedDict
 import copy
 import json
 import sys
-import threading
 
-from flask import Flask
-from flask import jsonify
-from flask import request
-from flask_cors import CORS
-from flask_socketio import disconnect
-from flask_socketio import emit
-from flask_socketio import SocketIO
 import paho.mqtt.client as mqtt
 from pyproj import Transformer
 import rclpy
-import rclpy.executors
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
-from rclpy.qos import QoSDurabilityPolicy as Durability
-from rclpy.qos import QoSHistoryPolicy as History
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSReliabilityPolicy as Reliability
-from rmf_fleet_msgs.msg import FleetState
 from rmf_fleet_msgs.msg import RobotState
-from rosidl_runtime_py import message_to_ordereddict
 
 SUPPORTED_GPS_FRAMES = ['svy21']
 
@@ -115,7 +100,7 @@ class FleetRobotManagerMQTTBridge(Node):
 
         self.args = parser.parse_args(argv[1:])
 
-        super().__init__(f'fleet_robotmanager_mqtt_bridge')
+        super().__init__('fleet_robotmanager_mqtt_bridge')
 
         self._init_pubsub()
         self.mqtt_pubs = {}  # Map of robot names to their mqtt Client
@@ -204,21 +189,29 @@ class FleetRobotManagerMQTTBridge(Node):
 
 
 def main(argv=sys.argv):
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
     rclpy.init(args=argv)
-
-    node = FleetRobotManagerMQTTBridge()
+    node = None
     try:
+        node = FleetRobotManagerMQTTBridge(argv=args_without_ros)
         node.get_logger().info('calling spin()')
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
-    except OSError:
-        node.get_logger().error('Check if target port is already in use.')
+    except OSError as e:
+        if node is not None:
+            node.get_logger().error(f'Failed to run MQTT bridge: {e}')
+        else:
+            print(f'Failed to start MQTT bridge: {e}', file=sys.stderr)
+        return 1
     finally:
-        node.get_logger().info('shutting down...')
-        node.destroy_node()
-        rclpy.shutdown()
+        if node is not None:
+            node.get_logger().info('shutting down...')
+            node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+    return 0
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
