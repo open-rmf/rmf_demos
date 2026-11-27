@@ -20,6 +20,7 @@ import sys
 import rclpy
 
 from rclpy.action import ActionClient
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
@@ -239,14 +240,16 @@ class DynamicEventActionClient(Node):
 
 
 def main(argv=sys.argv):
-    """Go to place."""
-    rclpy.init(args=sys.argv)
-    args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
-
-    task_requester = DynamicEventActionClient(args_without_ros)
-
-    rclpy.spin(task_requester)
+    """Send and monitor a dynamic event for a robot."""
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
+    try:
+        with rclpy.init(args=argv):
+            task_requester = DynamicEventActionClient(args_without_ros)
+            rclpy.spin(task_requester)
+    except (KeyboardInterrupt, ExternalShutdownException):
+        pass
+    return 0
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
