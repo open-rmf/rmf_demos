@@ -25,6 +25,7 @@ from typing import Optional
 
 from fastapi import FastAPI
 import numpy as np
+import portpicker
 from pydantic import BaseModel
 from pyproj import Transformer
 import rclpy
@@ -578,15 +579,23 @@ def main(argv=sys.argv):
     with open(args.config_file, 'r') as f:
         config = yaml.safe_load(f)
 
+    port = config['fleet_manager'].get('port')
+    if port is None or port == 0 or port == 'auto':
+        port = portpicker.pick_unused_port()
+    else:
+        port = int(port)
+
     fleet_manager = FleetManager(config)
 
     spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
     spin_thread.start()
 
+    fleet_manager.get_logger().info(f'Fleet manager listening on port {port}')
+
     uvicorn.run(
         app,
         host=config['fleet_manager']['ip'],
-        port=config['fleet_manager']['port'],
+        port=port,
         log_level='warning',
     )
 

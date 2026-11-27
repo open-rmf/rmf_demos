@@ -2,6 +2,16 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.11.0 (2026-11-13)
+-------------------
+* feat(fleet_adapter): support dynamic port allocation via portpicker and cli override (`#369 <https://github.com/open-rmf/rmf_demos/issues/369>`_)
+  * feat(fleet_adapter): support dynamic port allocation via portpicker and cli override
+  Fixes `#226 <https://github.com/open-rmf/rmf_demos/issues/226>`_
+  * refactor(fleet_manager): address review comments on portpicker deprecation and linting
+  * refactor: simplify portpicker usage and restore package dependency
+  ---------
+* Contributors: Muskan Kumari
+
 2.10.0 (2026-09-26)
 -------------------
 

@@ -58,12 +58,15 @@ class TaskObserver(Node):
 
 def create_parser():
     """Create the parser for the script."""
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description='Wait for a specific robot to complete its current task.'
+    )
 
     parser.add_argument(
         '-R',
         '--robot',
         type=str,
+        required=True,
         help='Robot name, should define together with fleet',
     )
 
@@ -71,12 +74,14 @@ def create_parser():
         '-F',
         '--fleet',
         type=str,
-        help='fleet name',
+        required=True,
+        help='Fleet name',
     )
 
     parser.add_argument(
         '--timeout',
-        type=int,
+        type=float,
+        default=None,
         help='Timeout seconds',
     )
     return parser
@@ -84,25 +89,35 @@ def create_parser():
 
 def main(argv=sys.argv):
     """Wait for a task to be complete."""
-    rclpy.init(args=sys.argv)
-    args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
     arg_parser = create_parser()
     arguments = arg_parser.parse_args(args_without_ros[1:])
+
+    rclpy.init(args=argv)
     task_requester = TaskObserver(arguments)
     start_time = time.time()
-    rclpy.spin_until_future_complete(
-        task_requester, task_requester.response, timeout_sec=arguments.timeout
-    )
-    if task_requester.response.done():
-        print(f'Got response: \n{task_requester.response.result()}')
-        end_time = time.time()
-        elapsed = end_time - start_time
-        print(f'elapsed time: {elapsed}')
-    else:
-        print('Timed out')
-        sys.exit(-1)
-    rclpy.shutdown()
+    try:
+        rclpy.spin_until_future_complete(
+            task_requester,
+            task_requester.response,
+            timeout_sec=arguments.timeout
+        )
+        if task_requester.response.done():
+            print(f'Got response: \n{task_requester.response.result()}')
+            end_time = time.time()
+            elapsed = end_time - start_time
+            print(f'elapsed time: {elapsed}')
+            return 0
+        else:
+            print('Timed out')
+            return 1
+    except KeyboardInterrupt:
+        return 1
+    finally:
+        task_requester.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))

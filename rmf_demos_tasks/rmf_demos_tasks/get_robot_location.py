@@ -44,6 +44,7 @@ class RobotStateObserver(Node):
 
         self.parser = parser
         self.response = rclpy.Future()
+        self.failed = False
 
         self.subscription = self.create_subscription(
             FleetState,
@@ -109,8 +110,9 @@ class RobotStateObserver(Node):
                         'not found in nav graph for '
                         f'fleet [{self.parser.fleet}].')
                     print(err_msg)
+                    self.failed = True
                     if not self.response.done():
-                        self.response.set_result(err_msg)
+                        self.response.set_result(None)
 
 
 def create_parser():
@@ -133,7 +135,7 @@ def create_parser():
 
     parser.add_argument(
         '--timeout',
-        type=int,
+        type=float,
         help='Timeout seconds',
     )
 
@@ -159,13 +161,17 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=arguments.timeout
     )
     if task_requester.response.done():
+        if task_requester.failed:
+            rclpy.shutdown()
+            sys.exit(1)
         print(f'Got response: \n{task_requester.response.result()}')
         end_time = time.time()
         elapsed = end_time - start_time
         print(f'elapsed time: {elapsed}')
     else:
         print('Timed out')
-        sys.exit(-1)
+        rclpy.shutdown()
+        sys.exit(1)
     rclpy.shutdown()
 
 
