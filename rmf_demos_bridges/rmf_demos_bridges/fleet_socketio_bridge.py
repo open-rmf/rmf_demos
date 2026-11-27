@@ -216,16 +216,20 @@ class FleetSocketIOBridge(Node):
 
 def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
+    rclpy.init(args=argv)
+    node = FleetSocketIOBridge(argv=args_without_ros)
     try:
-        with rclpy.init(args=argv):
-            node = FleetSocketIOBridge(argv=args_without_ros)
-            node.get_logger().info('calling spin()')
-            node.spin_background()
-            node.start_socketio()
+        node.get_logger().info('calling spin()')
+        node.spin_background()
+        node.start_socketio()
     except (KeyboardInterrupt, ExternalShutdownException):
         pass
     except OSError:
         print('Check if target port is already in use.', file=sys.stderr)
+    finally:
+        node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
     return 0
 
 
