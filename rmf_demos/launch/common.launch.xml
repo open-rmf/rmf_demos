@@ -15,6 +15,7 @@
   <arg name="zone_entry_request_timeout" default="30" description="Seconds a zone request waits for reservations before it is refused"/>
   <arg name="zone_reservation_settle_time_ms" default="1000" description="Milliseconds to wait for a zone's reservations before choosing"/>
   <arg name="zone_pool_idle_timeout" default="30" description="Seconds a zone sits unwanted before its reservations are handed back"/>
+  <arg name="use_lane_closure_supervisor" default="true" description="Launch the supervisor that arbitrates lane closure requests"/>
 
   <!-- Traffic Schedule  -->
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_primary">
@@ -61,6 +62,13 @@
   <!-- Lift Supervisor -->
   <group>
     <node pkg="rmf_fleet_adapter" exec="lift_supervisor">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
+  </group>
+
+  <!-- Lane Closure Supervisor, arbitrates among lane closure requests -->
+  <group if="$(var use_lane_closure_supervisor)">
+    <node pkg="rmf_fleet_adapter" exec="lane_closure_supervisor">
       <param name="use_sim_time" value="$(var use_sim_time)"/>
     </node>
   </group>
