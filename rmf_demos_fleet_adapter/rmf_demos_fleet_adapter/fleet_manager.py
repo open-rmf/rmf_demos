@@ -557,14 +557,13 @@ class FleetManager(Node):
 # Main
 # ------------------------------------------------------------------------------
 def main(argv=sys.argv):
-    # Init rclpy and adapter
-    rclpy.init(args=argv)
-    adpt.init_rclcpp()
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
 
     parser = argparse.ArgumentParser(
-        prog='fleet_adapter',
-        description='Configure and spin up the fleet adapter',
+        prog='fleet_manager',
+        description=(
+            'Configure and start the mock robot fleet manager API server'
+        ),
     )
     parser.add_argument(
         '-c',
@@ -576,8 +575,15 @@ def main(argv=sys.argv):
     args = parser.parse_args(args_without_ros[1:])
     print('Starting fleet manager...')
 
-    with open(args.config_file, 'r') as f:
-        config = yaml.safe_load(f)
+    try:
+        with open(args.config_file, 'r') as f:
+            config = yaml.safe_load(f)
+    except Exception as err:
+        print(
+            f"Failed to load config file '{args.config_file}': {err}",
+            file=sys.stderr,
+        )
+        return 1
 
     port = config['fleet_manager'].get('port')
     if port is None or port == 0 or port == 'auto':
@@ -585,20 +591,37 @@ def main(argv=sys.argv):
     else:
         port = int(port)
 
-    fleet_manager = FleetManager(config)
+    # Init rclpy and adapter
+    rclpy.init(args=argv)
+    adpt.init_rclcpp()
+    fleet_manager = None
+    try:
+        fleet_manager = FleetManager(config)
 
-    spin_thread = threading.Thread(target=rclpy.spin, args=(fleet_manager,))
-    spin_thread.start()
+        spin_thread = threading.Thread(
+            target=rclpy.spin, args=(fleet_manager,), daemon=True
+        )
+        spin_thread.start()
 
-    fleet_manager.get_logger().info(f'Fleet manager listening on port {port}')
+        fleet_manager.get_logger().info(
+            f'Fleet manager listening on port {port}'
+        )
 
-    uvicorn.run(
-        app,
-        host=config['fleet_manager']['ip'],
-        port=port,
-        log_level='warning',
-    )
+        uvicorn.run(
+            app,
+            host=config['fleet_manager']['ip'],
+            port=port,
+            log_level='warning',
+        )
+        return 0
+    except KeyboardInterrupt:
+        return 0
+    finally:
+        if fleet_manager is not None:
+            fleet_manager.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
