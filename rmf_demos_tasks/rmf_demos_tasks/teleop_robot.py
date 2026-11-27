@@ -32,33 +32,60 @@ from rmf_fleet_msgs.msg import PathRequest
 ###############################################################################
 
 
+def parse_point(point_str):
+    """Parse and validate a comma-separated x,y,yaw coordinate point."""
+    pts = point_str.split(',')
+    if len(pts) != 3:
+        raise argparse.ArgumentTypeError(
+            f"Point '{point_str}' must have 3 comma-separated values "
+            '{x,y,yaw}'
+        )
+    try:
+        return float(pts[0]), float(pts[1]), float(pts[2])
+    except ValueError:
+        raise argparse.ArgumentTypeError(
+            f"Point '{point_str}' contains non-numeric coordinates"
+        )
+
+
+def create_parser():
+    """Create command line parser for teleop_robot."""
+    parser = argparse.ArgumentParser(
+        description='Publish a teleop path request to a robot in Open-RMF.'
+    )
+    parser.add_argument(
+        '-F', '--fleet', required=True, type=str, help='Fleet name'
+    )
+    parser.add_argument(
+        '-R', '--robot', required=True, type=str, help='Robot name'
+    )
+    parser.add_argument(
+        '-p',
+        '--points',
+        required=True,
+        nargs='+',
+        type=parse_point,
+        help='Coordinate points [x,y,yaw] for teleop (e.g. 1.0,2.0,0.0)',
+    )
+    parser.add_argument(
+        '-m', '--map', required=True, type=str, help='Map name'
+    )
+    parser.add_argument(
+        '--timeout',
+        type=float,
+        default=5.0,
+        help='Timeout in seconds to wait for publishing, default: 5.0',
+    )
+    return parser
+
+
 class Requester(Node):
     """Teleop requester."""
 
-    def __init__(self, argv=sys.argv):
+    def __init__(self, args):
         """Initialize the requester."""
         super().__init__('teleop_publisher')
-        parser = argparse.ArgumentParser()
-
-        parser.add_argument(
-            '-F', '--fleet', required=True, type=str, help='Fleet name'
-        )
-        parser.add_argument(
-            '-R', '--robot', required=True, help='Robot name', type=str
-        )
-        parser.add_argument(
-            '-p',
-            '--points',
-            required=True,
-            nargs='+',
-            help='Coordinate points [x,y,yaw] for teleop',
-            type=str,
-        )
-        parser.add_argument(
-            '-m', '--map', required=True, help='Map name', type=str
-        )
-
-        self.args = parser.parse_args(argv[1:])
+        self.args = args
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
@@ -74,13 +101,11 @@ class Requester(Node):
         msg.fleet_name = self.args.fleet
         msg.robot_name = self.args.robot
         msg.task_id = str(uuid.uuid1())
-        for p in self.args.points:
-            pts = p.split(',')
-            assert len(pts) == 3, 'each point should have 3 values {x,y,yaw}'
+        for x, y, yaw in self.args.points:
             loc = Location()
-            loc.x = float(pts[0])
-            loc.y = float(pts[1])
-            loc.yaw = float(pts[2])
+            loc.x = x
+            loc.y = y
+            loc.yaw = yaw
             loc.level_name = self.args.map
             msg.path.append(loc)
         self.pub.publish(msg)
@@ -91,20 +116,25 @@ class Requester(Node):
 
 def main(argv=sys.argv):
     """Teleop a robot."""
-    rclpy.init(args=sys.argv)
-    args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
-    requester = Requester(args_without_ros)
+    args_without_ros = rclpy.utilities.remove_ros_args(argv)
+    parser = create_parser()
+    args = parser.parse_args(args_without_ros[1:])
+
+    rclpy.init(args=argv)
+    requester = Requester(args)
 
     timeout = rclpy.Future()
 
     def trigger_timeout():
         timeout.set_result(True)
 
-    _ = requester.create_timer(5.0, trigger_timeout)
+    _ = requester.create_timer(args.timeout, trigger_timeout)
 
     rclpy.spin_until_future_complete(requester, timeout)
+    requester.destroy_node()
     rclpy.shutdown()
+    return 0
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
