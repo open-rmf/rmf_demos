@@ -19,6 +19,7 @@ import sys
 import time
 
 import rclpy
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
@@ -67,7 +68,7 @@ class MockDocker(Node):
     2) [deprecated] To coordinate the docking motion of robots in simulation
     which are controlled by the deprecated full_control fleet adapter and the
     slotcar plugin. This is achieved by listening to the deprecated ModeRequest
-    message published by the full_control adapter and publihsing the relevant
+    message published by the full_control adapter and publishing the relevant
     PathRequest with waypoints from the configuration file. The node also
     monitors whether the robot has completed docking and informs the
     full_control adapter of the same. This approach is not reflective of how
@@ -97,10 +98,10 @@ class MockDocker(Node):
         )
 
         transient_qos = QoSProfile(
-            history=History.RMW_QOS_POLICY_HISTORY_KEEP_LAST,
+            history=History.KEEP_LAST,
             depth=1,
-            reliability=Reliability.RMW_QOS_POLICY_RELIABILITY_RELIABLE,
-            durability=Durability.RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL,
         )
         self.dock_summary_publisher = self.create_publisher(
             DockSummary, 'dock_summary', qos_profile=transient_qos
@@ -156,7 +157,7 @@ class MockDocker(Node):
         fleet_name = self.dock_map.get(msg.fleet_name)
         if fleet_name is None:
             self.get_logger().warn(
-                'Unknown fleet name requested [{msg.fleet_name}].'
+                f'Unknown fleet name requested [{msg.fleet_name}].'
             )
             return
 
@@ -210,7 +211,6 @@ class MockDocker(Node):
 
 def main(argv=sys.argv):
     """Mock docker."""
-    rclpy.init(args=argv)
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
     parser = argparse.ArgumentParser(
         prog='mock_docker', description='Configure and start mock_docker node'
@@ -221,14 +221,25 @@ def main(argv=sys.argv):
     args = parser.parse_args(args_without_ros[1:])
 
     config = args.config
+    try:
+        with open(config, 'r') as f:
+            config_yaml = yaml.safe_load(f)
+    except Exception as err:
+        print(f"Failed to load config file '{config}': {err}", file=sys.stderr)
+        return 1
 
-    with open(config, 'r') as f:
-        config_yaml = yaml.safe_load(f)
-
+    rclpy.init(args=argv)
     mock_docker = MockDocker(config_yaml)
-    rclpy.spin(mock_docker)
-    rclpy.shutdown()
+    try:
+        rclpy.spin(mock_docker)
+    except (KeyboardInterrupt, ExternalShutdownException):
+        pass
+    finally:
+        mock_docker.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+    return 0
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    sys.exit(main(sys.argv))
