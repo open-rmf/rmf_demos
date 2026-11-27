@@ -228,12 +228,16 @@ def main(argv=sys.argv):
         print(f"Failed to load config file '{config}': {err}", file=sys.stderr)
         return 1
 
+    rclpy.init(args=argv)
+    mock_docker = MockDocker(config_yaml)
     try:
-        with rclpy.init(args=argv):
-            mock_docker = MockDocker(config_yaml)
-            rclpy.spin(mock_docker)
+        rclpy.spin(mock_docker)
     except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    finally:
+        mock_docker.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
     return 0
 
 
