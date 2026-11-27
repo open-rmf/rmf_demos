@@ -15,8 +15,8 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Yadunund',
-    maintainer_email='yadunund@openrobotics.org',
+    maintainer='Boon Han',
+    maintainer_email='cnboonhan@openrobotics.org',
     description='Nodes for bridging between different communication stacks',
     license='Apache License 2.0',
     extras_require={

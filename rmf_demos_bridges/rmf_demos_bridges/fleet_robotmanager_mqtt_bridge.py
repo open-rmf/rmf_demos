@@ -14,24 +14,16 @@
 
 
 import argparse
-from collections import OrderedDict
 import copy
 import json
 import sys
-import threading
 
 import paho.mqtt.client as mqtt
 from pyproj import Transformer
 import rclpy
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
-from rclpy.qos import QoSDurabilityPolicy as Durability
-from rclpy.qos import QoSHistoryPolicy as History
-from rclpy.qos import QoSProfile
-from rclpy.qos import QoSReliabilityPolicy as Reliability
-from rmf_fleet_msgs.msg import FleetState
 from rmf_fleet_msgs.msg import RobotState
-from rosidl_runtime_py import message_to_ordereddict
 
 SUPPORTED_GPS_FRAMES = ['svy21']
 
@@ -199,16 +191,23 @@ class FleetRobotManagerMQTTBridge(Node):
 def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(argv)
     rclpy.init(args=argv)
-    node = FleetRobotManagerMQTTBridge(argv=args_without_ros)
+    node = None
     try:
+        node = FleetRobotManagerMQTTBridge(argv=args_without_ros)
         node.get_logger().info('calling spin()')
         rclpy.spin(node)
     except (KeyboardInterrupt, ExternalShutdownException):
         pass
-    except OSError:
-        print('Check if target port is already in use.', file=sys.stderr)
+    except OSError as e:
+        if node is not None:
+            node.get_logger().error(f'Failed to run MQTT bridge: {e}')
+        else:
+            print(f'Failed to start MQTT bridge: {e}', file=sys.stderr)
+        return 1
     finally:
-        node.destroy_node()
+        if node is not None:
+            node.get_logger().info('shutting down...')
+            node.destroy_node()
         if rclpy.ok():
             rclpy.shutdown()
     return 0
