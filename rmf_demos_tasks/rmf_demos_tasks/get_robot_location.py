@@ -160,27 +160,31 @@ def main(argv=sys.argv):
     arg_parser = create_parser()
     arguments = arg_parser.parse_args(args_without_ros[1:])
     start_time = time.time()
+    rclpy.init(args=argv)
+    task_requester = RobotStateObserver(arguments)
     try:
-        with rclpy.init(args=argv):
-            task_requester = RobotStateObserver(arguments)
-            rclpy.spin_until_future_complete(
-                task_requester,
-                task_requester.response,
-                timeout_sec=arguments.timeout,
-            )
-            if task_requester.response.done():
-                if task_requester.failed:
-                    return 1
-                print(f'Got response: \n{task_requester.response.result()}')
-                end_time = time.time()
-                elapsed = end_time - start_time
-                print(f'elapsed time: {elapsed}')
-                return 0
-            else:
-                print('Timed out')
+        rclpy.spin_until_future_complete(
+            task_requester,
+            task_requester.response,
+            timeout_sec=arguments.timeout,
+        )
+        if task_requester.response.done():
+            if task_requester.failed:
                 return 1
+            print(f'Got response: \n{task_requester.response.result()}')
+            end_time = time.time()
+            elapsed = end_time - start_time
+            print(f'elapsed time: {elapsed}')
+            return 0
+        else:
+            print('Timed out')
+            return 1
     except (KeyboardInterrupt, ExternalShutdownException):
         return 1
+    finally:
+        task_requester.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':
