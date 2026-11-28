@@ -22,7 +22,6 @@ you will need to make http request calls to the appropriate endpoints within
 these functions.
 """
 import enum
-from urllib.error import HTTPError
 
 import requests
 
@@ -51,7 +50,7 @@ class RobotAPI:
 
     def check_connection(self):
         """Return True if connection to the robot API server is successful."""
-        if self.data() is None:
+        if self.get_data() is None:
             return False
         return True
 
@@ -86,7 +85,7 @@ class RobotAPI:
             if self.debug:
                 print(f'Response: {response.json()}')
             return response.json()['success']
-        except HTTPError as http_err:
+        except requests.exceptions.HTTPError as http_err:
             print(f'HTTP error for {robot_name} in navigate: {http_err}')
         except Exception as err:
             print(f'Other error for {robot_name} in navigate: {err}')
@@ -123,7 +122,7 @@ class RobotAPI:
 
             # If we get a response with success=False, then
             return RobotAPIResult.IMPOSSIBLE
-        except HTTPError as http_err:
+        except requests.exceptions.HTTPError as http_err:
             print(f'HTTP error for {robot_name} in start_activity: {http_err}')
         except Exception as err:
             print(f'Other error {robot_name} in start_activity: {err}')
@@ -142,12 +141,12 @@ class RobotAPI:
             f'&stop_cmd_id={stop_cmd_id}'
         )
         try:
-            response = requests.get(url, self.timeout)
+            response = requests.get(url, timeout=self.timeout)
             response.raise_for_status()
             if self.debug:
                 print(f'Response: {response.json()}')
             return response.json()['success']
-        except HTTPError as http_err:
+        except requests.exceptions.HTTPError as http_err:
             print(f'HTTP error for {robot_name} in stop: {http_err}')
         except Exception as err:
             print(f'Other error for {robot_name} in stop: {err}')
@@ -170,7 +169,7 @@ class RobotAPI:
             if self.debug:
                 print(f'Response: {response.json()}')
             return response.json()['success']
-        except HTTPError as http_err:
+        except requests.exceptions.HTTPError as http_err:
             print(f'HTTP error for {robot_name} in toggle_teleop: {http_err}')
         except Exception as err:
             print(f'Other error {robot_name} in toggle_teleop: {err}')
@@ -194,7 +193,7 @@ class RobotAPI:
             if self.debug:
                 print(f'Response: {response.json()}')
             return response.json()['success']
-        except HTTPError as http_err:
+        except requests.exceptions.HTTPError as http_err:
             print(f'HTTP error for {robot_name} in toggle_attach: {http_err}')
         except Exception as err:
             print(f'Other error {robot_name} in toggle_attach: {err}')
@@ -225,7 +224,7 @@ class RobotAPI:
                 for robot in response.json()['all_robots']:
                     all_robots.append(RobotUpdateData(robot))
                 return all_robots
-        except HTTPError as http_err:
+        except requests.exceptions.HTTPError as http_err:
             print(f'HTTP error for {robot_name} in get_data: {http_err}')
         except Exception as err:
             print(f'Other error for {robot_name} in get_data: {err}')
